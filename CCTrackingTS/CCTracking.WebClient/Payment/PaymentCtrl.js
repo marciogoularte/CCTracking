@@ -27,8 +27,8 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
             //this.busVisitCollection.push({ busVisitId:3,  centreId: 'center-a', busId: 'bus-a', driverId: 'driver-a' });
             this.backboneCollection = new Backbone.Collection(this.busVisitCollection);
             this.busVisitCollectionView = new views.BusVisitCollectionView({ collection: this.backboneCollection });
-            this.busVisitCollectionView.on("itemview:BusVisitRemoveItem", function (currentView, busVisitId) {
-                return _this.RemoveBusVisitItem(busVisitId);
+            this.busVisitCollectionView.on("itemview:BusVisitRemoveItem", function (currentView, busId, centreId, driverId) {
+                return _this.RemoveBusVisitItem(busId, centreId, driverId);
             });
             this.idCounter = 1;
         }
@@ -40,8 +40,8 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
             if (url.indexOf("id=") > -1) {
                 //alert(url.substring(url.indexOf("id=") + 3, url.length));
                 var id = (url.substring(url.indexOf("id=") + 3, url.length));
-                var deferredById = DAL.GetById(id);
-                deferredById.done(function (p) {
+                var deferred = DAL.GetById(id);
+                deferred.done(function (p) {
                     return _this.GetByIdCompleted(p);
                 });
             } else {
@@ -54,6 +54,13 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
             var model = new Backbone.Model(paymentResponse["paymentModel"]);
 
+            //booking id
+            var url = window.location.href;
+            var id = (url.substring(url.indexOf("id=") + 3, url.length));
+            if (model.get("id") === undefined || model.get("id") === 0) {
+                this.InitalizeKoBinding(model);
+            }
+            model.set("bookingId", id);
             model.set("busList", lookupResponse.bus);
             model.set("driverList", lookupResponse.driver);
             model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
@@ -82,6 +89,12 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
             });
             model.set("cashierSelected", cashier[0]);
 
+            //var centre = _.filter(lookupResponse.alkhidmatCentre, (p) => { return p.id == model.get("centreId") });
+            //model.set("alkhidmatCentreSelected", centre[0]);
+            //var driver = _.filter(lookupResponse.driver, (p) => { return p.id == model.get("driverId") });
+            //model.set("driverSelected", driver[0]);
+            //var bus = _.filter(lookupResponse.bus, (p) => { return p.id == model.get("budId") });
+            //model.set("busSelected", bus[0]);
             this.layout = app.AppLayout;
             this.paymentViewModel = new views.PaymentViewModel(model, this);
             this.paymentView = new views.PaymentView({ viewModel: this.paymentViewModel });
@@ -91,10 +104,39 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
             this.paymentView.on("PaymentSave", function (bbmodel) {
                 return _this.Save(bbmodel);
             });
+
+            this.backboneCollection = new Backbone.Collection(model.get("busVisits"));
+            this.busVisitCollectionView = new views.BusVisitCollectionView({ collection: this.backboneCollection });
+            this.busVisitCollectionView.on("itemview:BusVisitRemoveItem", function (currentView, busId, centreId, driverId) {
+                return _this.RemoveBusVisitItem(busId, centreId, driverId);
+            });
+
             app.MainRegion.show(this.paymentView);
 
             app.SubRegion.reset();
             app.SubRegion.show(this.busVisitCollectionView);
+        };
+
+        //GetBusDesc(lookupResponse, id) {
+        //    var item = _.filter(lookupResponse.bus, (p) => { return p.id == id });
+        //    return item[0].description;
+        //}
+        //GetDriverDesc(lookupResponse, id) {
+        //    var item = _.filter(lookupResponse.driver, (p) => { return p.id == id });
+        //    return item[0].description;
+        //}
+        //GetCentreDesc(lookupResponse, id) {
+        //    var item = _.filter(lookupResponse.alkhidmatCentre, (p) => { return p.id == id });
+        //    return item[0].description;
+        //}
+        PaymentCtrl.prototype.InitalizeKoBinding = function (model) {
+            model.set("amount", "");
+            model.set("busChangeReason", "");
+            model.set("receiptNo", "");
+            model.set("easyPaisaTranNo", "");
+            model.set("extraAmountCharge", "");
+            model.set("extraAmountReason", "");
+            model.set("extraAmountReceipt", "");
         };
 
         PaymentCtrl.prototype.LoadCompleted = function () {
@@ -148,8 +190,15 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
 
         PaymentCtrl.prototype.AddBusVisitItem = function (bookingId, alkhidmatCentre, driver, bus) {
             var counter = this.idCounter++;
-            var alreadyExist = this.backboneCollection.findWhere({ centreId: alkhidmatCentre.id, busId: bus.id, driverId: driver.id });
-            if (alreadyExist == undefined) {
+            var busExist = this.backboneCollection.findWhere({ busId: bus.id });
+            var driverExist = this.backboneCollection.findWhere({ driverId: driver.id });
+
+            //var alreadyExist = this.backboneCollection.findWhere({ centreId: alkhidmatCentre.id, busId: bus.id, driverId: driver.id });
+            //var alreadyExist = _.filter(this.backboneCollection, (item) => {
+            //    debugger;
+            //    return (item.busId == bus.id || item.driverId == driver.id);
+            //});
+            if (busExist == undefined && driverExist == undefined) {
                 this.backboneCollection.push(new Backbone.Model({
                     busVisitId: counter,
                     centreId: alkhidmatCentre.id, centreDesc: alkhidmatCentre.description,
@@ -165,8 +214,8 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
                 alert("Already exists!");
             }
         };
-        PaymentCtrl.prototype.RemoveBusVisitItem = function (busVisitId) {
-            this.backboneCollection.remove(this.backboneCollection.findWhere({ busVisitId: busVisitId }));
+        PaymentCtrl.prototype.RemoveBusVisitItem = function (busId, centreId, driverId) {
+            this.backboneCollection.remove(this.backboneCollection.findWhere({ busId: busId, centreId: centreId, driverId: driverId }));
         };
 
         //GetAll() {

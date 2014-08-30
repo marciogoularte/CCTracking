@@ -88,9 +88,9 @@ export class BusVisitItemView extends helper.Views.ItemView {
         };
         super(options);
     }
-    RemoveItem() {
-        
-        this.trigger("BusVisitRemoveItem", this.model.get("busVisitId"));
+    RemoveItem() {        
+        this.trigger("BusVisitRemoveItem", this.model.get("busId"), this.model.get("centreId"), this.model.get("driverId"));
+        //this.trigger("BusVisitRemoveItem", this.model.get("busVisitId"));
     }
     ShowDetail() {
         //new userCtrl.UserCtrl().ShowDetail(this.model);

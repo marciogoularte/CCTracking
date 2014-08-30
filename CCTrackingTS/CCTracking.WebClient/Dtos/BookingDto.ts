@@ -26,10 +26,10 @@ export module Models {
                 pickupTime: "",
                 returnTime: "",
                 graveyard: "",
-                busDetails: "",
-                initialReading: "",
-                finalReading: "",
-                distanceConvered: ""
+                namazEJanazaHeldIn: "",
+                namazEJanazaLocation: "",
+                masjidName: "",
+                otherDetail: ""
             }
         }
     }
@@ -56,13 +56,11 @@ export module Models {
                 pickupDate: "",
                 pickupTime: "",
                 returnTime: "",
-                graveyardId: "",
-                
-                busDetailsId: "",
-                
-                initialReading: "",
-                finalReading: "",
-                distanceConvered: ""
+                graveyard: "",
+                namazEJanazaHeldIn: "",
+                namazEJanazaLocation: "",
+                masjidName: "",
+                otherDetail: ""
             }
         }
     }

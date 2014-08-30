@@ -52,7 +52,8 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
                     extraAmountCharge: "",
                     extraAmountReason: "",
                     extraAmountReceipt: "",
-                    paymentStatus: ""
+                    paymentStatus: "",
+                    easyPaisaTranNo: ""
                 };
             };
             return PaymentResponse;

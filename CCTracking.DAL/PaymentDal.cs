@@ -38,6 +38,7 @@ namespace CCTracking.DAL
             dictionary.Add("@ExtraAmountReason", payment.ExtraAmountReason);
             dictionary.Add("@ExtraAmountReceipt", payment.ExtraAmountReceipt);
             dictionary.Add("@PaymentStatus", payment.PaymentStatus);
+            dictionary.Add("@EasyPaisaTranNo", payment.EasyPaisaTranNo);
             dictionary.Add("@CreatedBy", payment.CreatedBy);
             dictionary.Add("@ModifiedBy", payment.ModifiedBy);
             return "SavePayment";
@@ -73,6 +74,17 @@ namespace CCTracking.DAL
         {
             return null;
         }
+
+        protected override string DelByIdSql(int id, Dictionary<string, object> dictionary)
+        {
+            return string.Empty;
+        }
+
+        protected override string GetCountSql()
+        {
+            return string.Empty;
+        }      
+
         private void MapValues(Payment payment, IDataReader dr)
         {
             payment.Id = Convert.ToInt32(dr["Id"]);
@@ -86,6 +98,7 @@ namespace CCTracking.DAL
             payment.ExtraAmountReason = dr["ExtraAmountReason"].ToString();
             payment.ExtraAmountReceipt = dr["ExtraAmountReceipt"].ToString();
             payment.PaymentStatus = Convert.ToByte(dr["PaymentStatus"]);
+            payment.EasyPaisaTranNo = dr["EasyPaisaTranNo"].ToString();
             payment.CreatedBy = Convert.ToInt32(dr["CreatedBy"]);
             payment.ModifiedBy = Convert.ToInt32(dr["ModifiedBy"]);
         }

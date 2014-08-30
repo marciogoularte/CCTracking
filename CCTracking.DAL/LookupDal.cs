@@ -48,7 +48,7 @@ namespace CCTracking.DAL
             List<Lookup> alkhidmatCentre = new List<Lookup>();
             List<Lookup> driver = new List<Lookup>();
             List<Lookup> cashier = new List<Lookup>();
-            List<Lookup> paymentType = new List<Lookup>();
+            List<Lookup> paymentType = new List<Lookup>();           
 
 
             Lookup lookup = null;
@@ -104,9 +104,135 @@ namespace CCTracking.DAL
                 lookupResponse.AlkhidmatCentre = alkhidmatCentre;
                 lookupResponse.Cashier = cashier;
                 lookupResponse.PaymentType = paymentType;
+                lookupResponse.Prayers = GetPrayers();
+                lookupResponse.TimeSlot = GetTimeSlots();
 
             }
             return lookupResponse;
+        }
+
+        protected override string DelByIdSql(int id, Dictionary<string, object> dictionary)
+        {
+            return string.Empty;
+        }
+
+        protected override string GetCountSql()
+        {
+            return string.Empty;
+        }
+
+        private List<Lookup> GetPrayers() 
+        {
+            List<Lookup> prayers = new List<Lookup>();
+            prayers.Add(new Lookup { Id = 1, Description = "Fajr" });
+            prayers.Add(new Lookup { Id = 2, Description = "Dhuhr" });
+            prayers.Add(new Lookup { Id = 3, Description = "Asr" });
+            prayers.Add(new Lookup { Id = 4, Description = "Maghrib" });
+            prayers.Add(new Lookup { Id = 5, Description = "Isha'a" });
+            return prayers;
+        }
+
+        private List<Lookup> GetTimeSlots()
+        {
+            List<Lookup> timeSlot = new List<Lookup>();
+            timeSlot.Add(new Lookup { Id = 1, Description = "12:00 am" });
+            timeSlot.Add(new Lookup { Id = 2, Description = "12:15 am" });
+            timeSlot.Add(new Lookup { Id = 3, Description = "12:30 am" });
+            timeSlot.Add(new Lookup { Id = 4, Description = "12:45 am" });
+            timeSlot.Add(new Lookup { Id = 5, Description = "01:00 am" });
+            timeSlot.Add(new Lookup { Id = 6, Description = "01:15 am" });
+            timeSlot.Add(new Lookup { Id = 7, Description = "01:30 am" });
+            timeSlot.Add(new Lookup { Id = 8, Description = "01:45 am" });
+            timeSlot.Add(new Lookup { Id = 9, Description = "02:00 am" });
+            timeSlot.Add(new Lookup { Id = 10, Description = "02:15 am" });
+            timeSlot.Add(new Lookup { Id = 11, Description = "02:30 am" });
+            timeSlot.Add(new Lookup { Id = 12, Description = "02:45 am" });
+            timeSlot.Add(new Lookup { Id = 13, Description = "03:00 am" });
+            timeSlot.Add(new Lookup { Id = 14, Description = "03:15 am" });
+            timeSlot.Add(new Lookup { Id = 15, Description = "03:30 am" });
+            timeSlot.Add(new Lookup { Id = 16, Description = "03:45 am" });
+            timeSlot.Add(new Lookup { Id = 17, Description = "04:00 am" });
+            timeSlot.Add(new Lookup { Id = 18, Description = "04:15 am" });
+            timeSlot.Add(new Lookup { Id = 19, Description = "04:30 am" });
+            timeSlot.Add(new Lookup { Id = 20, Description = "04:45 am" });
+            timeSlot.Add(new Lookup { Id = 21, Description = "05:00 am" });
+            timeSlot.Add(new Lookup { Id = 22, Description = "05:15 am" });
+            timeSlot.Add(new Lookup { Id = 23, Description = "05:30 am" });
+            timeSlot.Add(new Lookup { Id = 24, Description = "05:45 am" });
+            timeSlot.Add(new Lookup { Id = 25, Description = "06:00 am" });
+            timeSlot.Add(new Lookup { Id = 26, Description = "06:15 am" });
+            timeSlot.Add(new Lookup { Id = 27, Description = "06:30 am" });
+            timeSlot.Add(new Lookup { Id = 28, Description = "06:45 am" });
+            timeSlot.Add(new Lookup { Id = 29, Description = "07:00 am" });
+            timeSlot.Add(new Lookup { Id = 30, Description = "07:15 am" });
+            timeSlot.Add(new Lookup { Id = 31, Description = "07:30 am" });
+            timeSlot.Add(new Lookup { Id = 32, Description = "07:45 am" });
+            timeSlot.Add(new Lookup { Id = 33, Description = "08:00 am" });
+            timeSlot.Add(new Lookup { Id = 34, Description = "08:15 am" });
+            timeSlot.Add(new Lookup { Id = 35, Description = "08:30 am" });
+            timeSlot.Add(new Lookup { Id = 36, Description = "08:45 am" });
+            timeSlot.Add(new Lookup { Id = 37, Description = "09:00 am" });
+            timeSlot.Add(new Lookup { Id = 38, Description = "09:15 am" });
+            timeSlot.Add(new Lookup { Id = 39, Description = "09:30 am" });
+            timeSlot.Add(new Lookup { Id = 40, Description = "09:45 am" });
+            timeSlot.Add(new Lookup { Id = 41, Description = "10:00 am" });
+            timeSlot.Add(new Lookup { Id = 42, Description = "10:15 am" });
+            timeSlot.Add(new Lookup { Id = 43, Description = "10:30 am" });
+            timeSlot.Add(new Lookup { Id = 44, Description = "10:45 am" });
+            timeSlot.Add(new Lookup { Id = 45, Description = "11:00 am" });
+            timeSlot.Add(new Lookup { Id = 46, Description = "11:15 am" });
+            timeSlot.Add(new Lookup { Id = 47, Description = "11:30 am" });
+            timeSlot.Add(new Lookup { Id = 48, Description = "11:45 am" });
+            timeSlot.Add(new Lookup { Id = 49, Description = "12:00 pm" });
+            timeSlot.Add(new Lookup { Id = 50, Description = "12:15 pm" });
+            timeSlot.Add(new Lookup { Id = 51, Description = "12:30 pm" });
+            timeSlot.Add(new Lookup { Id = 52, Description = "12:45 pm" });
+            timeSlot.Add(new Lookup { Id = 53, Description = "01:00 pm" });
+            timeSlot.Add(new Lookup { Id = 54, Description = "01:15 pm" });
+            timeSlot.Add(new Lookup { Id = 55, Description = "01:30 pm" });
+            timeSlot.Add(new Lookup { Id = 56, Description = "01:45 pm" });
+            timeSlot.Add(new Lookup { Id = 57, Description = "02:00 pm" });
+            timeSlot.Add(new Lookup { Id = 58, Description = "02:15 pm" });
+            timeSlot.Add(new Lookup { Id = 59, Description = "02:30 pm" });
+            timeSlot.Add(new Lookup { Id = 60, Description = "02:45 pm" });
+            timeSlot.Add(new Lookup { Id = 61, Description = "03:00 pm" });
+            timeSlot.Add(new Lookup { Id = 62, Description = "03:15 pm" });
+            timeSlot.Add(new Lookup { Id = 63, Description = "03:30 pm" });
+            timeSlot.Add(new Lookup { Id = 64, Description = "03:45 pm" });
+            timeSlot.Add(new Lookup { Id = 65, Description = "04:00 pm" });
+            timeSlot.Add(new Lookup { Id = 66, Description = "04:15 pm" });
+            timeSlot.Add(new Lookup { Id = 67, Description = "04:30 pm" });
+            timeSlot.Add(new Lookup { Id = 68, Description = "04:45 pm" });
+            timeSlot.Add(new Lookup { Id = 69, Description = "05:00 pm" });
+            timeSlot.Add(new Lookup { Id = 70, Description = "05:15 pm" });
+            timeSlot.Add(new Lookup { Id = 71, Description = "05:30 pm" });
+            timeSlot.Add(new Lookup { Id = 72, Description = "05:45 pm" });
+            timeSlot.Add(new Lookup { Id = 73, Description = "06:00 pm" });
+            timeSlot.Add(new Lookup { Id = 74, Description = "06:15 pm" });
+            timeSlot.Add(new Lookup { Id = 75, Description = "06:30 pm" });
+            timeSlot.Add(new Lookup { Id = 76, Description = "06:45 pm" });
+            timeSlot.Add(new Lookup { Id = 77, Description = "07:00 pm" });
+            timeSlot.Add(new Lookup { Id = 78, Description = "07:15 pm" });
+            timeSlot.Add(new Lookup { Id = 79, Description = "07:30 pm" });
+            timeSlot.Add(new Lookup { Id = 80, Description = "07:45 pm" });
+            timeSlot.Add(new Lookup { Id = 81, Description = "08:00 pm" });
+            timeSlot.Add(new Lookup { Id = 82, Description = "08:15 pm" });
+            timeSlot.Add(new Lookup { Id = 83, Description = "08:30 pm" });
+            timeSlot.Add(new Lookup { Id = 84, Description = "08:45 pm" });
+            timeSlot.Add(new Lookup { Id = 85, Description = "09:00 pm" });
+            timeSlot.Add(new Lookup { Id = 86, Description = "09:15 pm" });
+            timeSlot.Add(new Lookup { Id = 87, Description = "09:30 pm" });
+            timeSlot.Add(new Lookup { Id = 88, Description = "09:45 pm" });
+            timeSlot.Add(new Lookup { Id = 89, Description = "09:45 pm" });
+            timeSlot.Add(new Lookup { Id = 90, Description = "10:00 pm" });
+            timeSlot.Add(new Lookup { Id = 91, Description = "10:15 pm" });
+            timeSlot.Add(new Lookup { Id = 92, Description = "10:30 pm" });
+            timeSlot.Add(new Lookup { Id = 93, Description = "10:45 pm" });
+            timeSlot.Add(new Lookup { Id = 94, Description = "11:00 pm" });
+            timeSlot.Add(new Lookup { Id = 95, Description = "11:15 pm" });
+            timeSlot.Add(new Lookup { Id = 96, Description = "11:30 pm" });
+            timeSlot.Add(new Lookup { Id = 97, Description = "11:45 pm" });
+            return timeSlot;
         }
         
     }

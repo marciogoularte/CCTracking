@@ -16,6 +16,8 @@ namespace CCTracking.DAL
         protected abstract BaseModelResponse ConvertToList(IDataReader dr);
         protected abstract BaseModelResponse ConvertToList(DataSet ds);
         protected abstract string GetByIdSql(int id, Dictionary<string, object> dictionary);
+        protected abstract string DelByIdSql(int id, Dictionary<string, object> dictionary);
+        protected abstract string GetCountSql();
         protected abstract string GetAllSql();
         protected abstract string GetByCriteriaSql(BaseModel baseModel, Dictionary<string, object> dictionary);
         protected virtual string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary) 
@@ -129,7 +131,7 @@ namespace CCTracking.DAL
                 {
                     dbManager.AddParameter(item.Key, item.Value);
                 }
-                dr = dbManager.ExecuteReader(sql, CommandType.Text);
+                dr = dbManager.ExecuteReader(sql, CommandType.StoredProcedure);
                 baseModelResponse = ConvertToList(dr);
 
             }
@@ -218,6 +220,69 @@ namespace CCTracking.DAL
             }
             return baseModelResponse;
         }
+
+        public bool DeleteById(int id)
+        {
+            bool deleteFlag = false;
+            Dictionary<string, object> arrParam = new Dictionary<string, object>();
+            String sql = DelByIdSql(id, arrParam);
+            BaseModelResponse baseModelResponse = new BaseModelResponse();
+            DBManager dbManager = new DBManager();
+            dbManager.ConnectionString = this.ConnectionString;
+            IDataReader dr = null;
+            try
+            {
+                dbManager.OpenConnection(dbManager.ConnectionString);
+                foreach (System.Collections.Generic.KeyValuePair<string, object> item in arrParam)
+                {
+                    dbManager.AddParameter(item.Key, item.Value);
+                }
+                dr = dbManager.ExecuteReader(sql, CommandType.StoredProcedure);
+                //baseModelResponse = ConvertToModel(dr);
+                deleteFlag = true;
+            }
+            catch (Exception e)
+            {
+                deleteFlag = false;
+                baseModelResponse.ErrorMessage = e.Message;
+            }
+            finally
+            {
+                if (dr != null && !dr.IsClosed)
+                    dr.Close();
+                dbManager.CloseConnection();
+            }
+            return deleteFlag;
+        }
+
+        public int GetCount()
+        {
+            Object resultCount = 0;
+            String sql = GetCountSql();
+            BaseModelResponse baseModelResponse = new BaseModelResponse();
+            DBManager dbManager = new DBManager();
+            dbManager.ConnectionString = this.ConnectionString;
+            //IDataReader dr = null;
+            try
+            {
+                dbManager.OpenConnection(dbManager.ConnectionString);
+                //foreach (System.Collections.Generic.KeyValuePair<string, object> item in arrParam)
+                //{
+                //    dbManager.AddParameter(item.Key, item.Value);
+                //}
+                resultCount = dbManager.ExecuteScalar(sql, CommandType.StoredProcedure);                
+                
+            }
+            catch (Exception e)
+            {
+                baseModelResponse.ErrorMessage = e.Message;
+            }
+            finally
+            {
+                dbManager.CloseConnection();
+            }
+            return (int)resultCount;
+        }       
 
         protected virtual void MapValues(BaseModel basemodel, IDataReader dr)
         {

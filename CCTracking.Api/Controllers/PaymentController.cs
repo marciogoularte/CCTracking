@@ -14,24 +14,34 @@ namespace CCTracking.Api.Controllers
         [HttpPost]
         public CCTracking.Dto.Payment SaveBooking(CCTracking.Dto.Payment payment)
         {
-            
             if (payment != null)
             {
-                //booking.Id = rowCounter++;
-                DBFacade facade = new CCTracking.DAL.PaymentDal();
-                BaseModelResponse paymentResponse = facade.Execute(payment);
-                //var a = facade.Execute(booking);
+                if (payment.Id <= 0)
+                {
+                    payment.CreatedDate = payment.ModifiedDate = DateTime.Today;
+                    payment.CreatedBy = payment.ModifiedBy;
+                }
+                else
+                {
+                    payment.ModifiedDate = DateTime.Today;
+                }
+                DalService service = new DalService();
+                BaseModelResponse paymentResponse = service.SavePayment(payment);
                 payment = ((PaymentResponse)paymentResponse).PaymentModel;
-                //bookings.Add(booking);
+
             }
             return payment;
         }
         [HttpGet]
         public PaymentResponse GetById(int id)
         {
-            DBFacade facade = new CCTracking.DAL.PaymentDal();
-            BaseModelResponse baseModelResponse = facade.GetById(id);
-            PaymentResponse paymentResponse = (PaymentResponse)baseModelResponse;
+            PaymentResponse paymentResponse = null;
+            if (id > 0)
+            {                
+                DalService service = new DalService();
+                BaseModelResponse baseModelResponse = service.GetPaymentById(id);
+                paymentResponse = (PaymentResponse)baseModelResponse;
+            }
             return paymentResponse;
         }
     }

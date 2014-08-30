@@ -25,13 +25,17 @@ namespace CCTracking.DAL
         protected override string GetByCriteriaSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
             BusVisit busVisit = baseModel as BusVisit;
-            dictionary.Add("@CentreId", busVisit.CentreId);
-            dictionary.Add("@BusId", busVisit.BusId);
+
+            //dictionary.Add("@CentreId", busVisit.CentreId);
+            //dictionary.Add("@BusId", busVisit.BusId);
+            //dictionary.Add("@BookingId", busVisit.BookingId);
+            //dictionary.Add("@VisitTypeId", busVisit.VisitTypeId);
+            //dictionary.Add("@DriverId", busVisit.DriverId);
+            //dictionary.Add("@IsAvailableForBooking", busVisit.IsAvailableForBooking);
+            //dictionary.Add("@IsAvailableForFutureBooking", busVisit.IsAvailableForFutureBooking);
+            //return "GetBusVisitByCriteria";
+
             dictionary.Add("@BookingId", busVisit.BookingId);
-            dictionary.Add("@VisitTypeId", busVisit.VisitTypeId);
-            dictionary.Add("@DriverId", busVisit.DriverId);
-            dictionary.Add("@IsAvailableForBooking", busVisit.IsAvailableForBooking);
-            dictionary.Add("@IsAvailableForFutureBooking", busVisit.IsAvailableForFutureBooking);
             return "GetBusVisitByCriteria";
         }
 
@@ -84,6 +88,17 @@ namespace CCTracking.DAL
             return null;
         }
 
+        protected override string DelByIdSql(int id, Dictionary<string, object> dictionary)
+        {
+            dictionary.Add("@Id", id);
+            return "DelBusVisitById";
+        }
+
+        protected override string GetCountSql()
+        {
+            return "GetBusVisitCount";
+        }
+
         protected override void MapValues(BaseModel baseModel, IDataReader dr)
         {
             base.MapValues(baseModel, dr);
@@ -107,6 +122,13 @@ namespace CCTracking.DAL
                 busVisit.InitialReading = dr.GetInt64(dr.GetOrdinal("InitialReading"));
             if (!dr.IsDBNull(dr.GetOrdinal("FinalReading")))
                 busVisit.FinalReading = dr.GetInt64(dr.GetOrdinal("FinalReading"));
+
+            if (!dr.IsDBNull(dr.GetOrdinal("busDesc")))
+                busVisit.BusDesc = dr.GetString(dr.GetOrdinal("busDesc"));
+            if (!dr.IsDBNull(dr.GetOrdinal("driverDesc")))
+                busVisit.DriverDesc = dr.GetString(dr.GetOrdinal("driverDesc"));
+            if (!dr.IsDBNull(dr.GetOrdinal("centreDesc")))
+                busVisit.CentreDesc = dr.GetString(dr.GetOrdinal("centreDesc"));
         }
     }
 }

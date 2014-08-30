@@ -18,19 +18,18 @@ namespace CCTracking.Dto
         public byte CauseOfDeath { get; set; }
         public string Address { get; set; }
 
-        public string BusPoint { get; set; }
+        public int BusPoint { get; set; }
         public int LandmarkId { get; set; }
         public int UnionCouncilId { get; set; }
         public int TownId { get; set; }
         public DateTime PickupDate { get; set; }
 
-        public int PickupTime { get; set; }
-        public int ReturnTime { get; set; }
-        public int GraveyardId { get; set; }
-        public int BusDetailId { get; set; }
-        public long InitialReading { get; set; }
-        public long FinalReading { get; set; }
-        //Approx. Distance
-        public string DistanceConvered { get; set; }
+        public byte PickupTime { get; set; }
+        public byte ReturnTime { get; set; }
+        public byte GraveyardId { get; set; }
+        public byte NamazEJanazaHeldIn  { get; set; }
+        public string NamazEJanazaLocation { get; set; }
+        public string MasjidName{ get; set; }        
+        public string OtherDetail { get; set; }
     }
 }

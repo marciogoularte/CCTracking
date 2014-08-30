@@ -18,7 +18,7 @@ namespace CCTracking.Dto.Response
         public List<Lookup> Driver { get; set; }
         public List<Lookup> Cashier { get; set; }
         public List<Lookup> PaymentType { get; set; }
-
-
+        public List<Lookup> TimeSlot { get; set; }
+        public List<Lookup> Prayers { get; set; }
     }
 }

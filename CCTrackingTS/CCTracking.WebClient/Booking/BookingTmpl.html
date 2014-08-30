@@ -111,13 +111,19 @@
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Pick-up Time</td>
                         <td class="col-sm-8 col-md-8">
-                            <input type="text" title="Pick-up Time"  pattern="[0-2][0-9]:[0-5][0-9] ((am)|(pm))"  id="PickupTime" class="form-control input-sm"  />
+                            <!--<input type="text" title="Pick-up Time"  pattern="[0-2][0-9]:[0-5][0-9] ((am)|(pm))"  id="PickupTime" class="form-control input-sm"  />-->
+                            <select id="ddlPickupTime" class="form-control input-sm"
+                                data-bind="options: model.pickupTimeSlotList, optionsText:'description', value:model.pickupTimeSlotSelected">
+                            </select>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Return Time</td>
                         <td class="col-sm-8 col-md-8">
-                            <select id="ddlReturnTime" class="form-control input-sm">
+                             <select id="ddlReturnTime" class="form-control input-sm"
+                                data-bind="options: model.returnTimeSlotList, optionsText:'description', value:model.returnTimeSlotSelected">
+                            </select>
+                            <!--<select id="ddlReturnTime" class="form-control input-sm">
                                 <option>12:00 am</option>
                                 <option>12:15 am</option>
                                 <option>12:30 am</option>
@@ -215,7 +221,7 @@
                                 <option>11:15 pm</option>
                                 <option>11:30 pm</option>
                                 <option>11:45 pm</option>
-                            </select>
+                            </select>-->
                         </td>
                     </tr>
                     <tr>
@@ -224,6 +230,26 @@
                             <select id="ddlGraveyard" class="form-control input-sm"
                                 data-bind="options: model.graveyardList, optionsText:'description', value:model.graveyardIdSelected">
                             </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-4 col-md-4 input-sm">Funeral Prayer</td>
+                        <td class="col-sm-8 col-md-8">
+                            <select id="Select2" class="form-control input-sm"
+                                data-bind="options: model.prayersList, optionsText:'description', value:model.prayersSelected">
+                            </select>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td class="col-sm-4 col-md-4 input-sm">Funeral Location</td>
+                        <td class="col-sm-8 col-md-8">
+                            <input type="text" id="Text1" class="form-control input-sm" placeholder="Funeral Location" data-bind="value: model.namazEJanazaLocation" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-4 col-md-4 input-sm">Masjid Name</td>
+                        <td class="col-sm-8 col-md-8">
+                            <input type="text" id="Text2" class="form-control input-sm" placeholder="Masjid Name" data-bind="value: model.masjidName" />
                         </td>
                     </tr>
                    <!-- 
@@ -259,6 +285,12 @@
                         </td>
                     </tr>
                     -->
+                     <tr>
+                        <td class="col-sm-4 col-md-4 input-sm">Other Details</td>
+                        <td class="col-sm-8 col-md-8">
+                            <textarea id="txtOtherDetails" class="form-control input-sm" placeholder="set place holder" data-bind="value: model.otherDetail" ></textarea>                            
+                        </td>
+                    </tr>
                     <tr>
                         <td class="col-sm-4 col-md-4"></td>
                         <td class="col-sm-8 col-md-8">
@@ -297,203 +329,5 @@
             });
         });
     </script>
-
-    <!--<table class="table table-condensed ">
-        <tbody>
-            <tr class="sub-header-bg">
-                <td colspan="2">
-                    <span><u>BOOKING REQUEST FORM</u></span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="sub-heading">CONTACT DETAILS</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>
-                    <input type="text" id="txtName" size="50" data-bind="value: model.name" /></td>
-            </tr>
-            <tr>
-                <td>Mobile</td>
-                <td>
-                    <input type="text" placeholder="Mobile" id="txtMobile" size="50" /></td>
-            </tr>
-            <tr>
-                <td>Nic</td>
-                <td>
-                    <input type="text" placeholder="Mobile" id="Text1" size="50" /></td>
-            </tr>
-            <tr>
-                <td colspan="2" class="sub-heading">DECEASED INFO</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>
-                    <input type="text" data-bind="value: model.areaName" size="50" /></td>
-            </tr>
-            <tr>
-                <td>Place of Death</td>
-                <td>
-                    <select id="ddlPlaceOfDeath" style="width: 200px;">
-                        <option value="1">Home</option>
-                        <option value="2">Hospital</option>
-                        <option value="2">Illness</option>
-                        <option value="2">Accident</option>
-                        <option value="2">Murder</option>
-                    </select></td>
-            </tr>
-
-            <tr class="btn-success">
-                <td>Area</td>
-                <td>         
-                 <select id="ddlArea" data-bind="options: availableCountries, selectedOptions: chosenCountries"></select>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Union Council</td>
-                <td>
-                    <select id="ddlUC" style="width: 200px;">
-                        <option value="1">Ibraheem Hyderi Uc-01</option>
-                        <option value="2">Rehri Uc-02</option>
-                        <option value="3">Cattle Colony Uc-03</option>
-                        <option value="4">Quaidabad Uc-04 </option>
-                        <option value="5">Landhi Uc-05</option>
-                        <option value="6">Gulshan-E-Hadeed Uc-06</option>
-                        <option value="7">Gaghar-07</option>
-
-                        <option value="8">Azizabad Uc-01</option>
-                        <option value="9">Karimabad Uc-02 </option>
-                        <option value="10">Aisha Manzil Uc-03 </option>
-                        <option value="11">Ancholi Uc-04 </option>
-                        <option value="12">Nasirabad Uc-05 </option>
-                        <option value="13">Yaseenabad Uc-06</option>
-                        <option value="14">Water Pump Uc-07 </option>
-                        <option value="15">Shafeeque Mill Colony Uc-08</option>
-
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Town</td>
-                <td>
-                    <select id="ddlTown" style="width: 200px;">
-                        <option value="1">Bin Qaism</option>
-                        <option value="2">Gadap</option>
-                        <option value="3">Malir</option>
-                        <option value="4">Gulberg </option>
-                        <option value="5">Liaquatabad  </option>
-                        <option value="6">North Karachi  </option>
-                        <option value="7">North Nazimabad</option>
-                        <option value="8">Lyari </option>
-                        <option value="9">Saddar  </option>
-                        <option value="10">Baldia  </option>
-                        <option value="11">Kemari </option>
-                        <option value="12">Orangi</option>
-                        <option value="13">Site </option>
-                        <option value="14">Jamshed Town</option>
-                        <option value="15">Gulshan </option>
-                        <option value="16">Korangi </option>
-                        <option value="17">Landhi </option>
-                        <option value="18">Shah Faisal</option>
-                    </select></td>
-            </tr>
-            <tr>
-                <td>Age</td>
-                <td>
-                    <input type="text" placeholder="Age" /></td>
-            </tr>
-            <tr>
-                <td>Gender</td>
-                <td>
-                    <input type="radio" name="rbGender" />Male
-                <input type="radio" name="rbGender" />Female
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="sub-heading">BUS RENTAL BOOKING REQUIEST</td>
-            </tr>
-            <tr>
-                <td>Pick-up Date</td>
-                <td>
-                    <input type="date" style="width: 200px;" /></td>
-            </tr>
-            <tr>
-                <td>Pick-up Time</td>
-                <td>
-                    <input type="time" placeholder="Pick-up Time" style="width: 200px;" /></td>
-            </tr>
-            <tr>
-                <td>Return Time</td>
-                <td>
-                    <input type="time" placeholder="Return Time" style="width: 200px;" /></td>
-            </tr>
-            <tr>
-                <td>Alkhidmat/Co-Partners</td>
-                <td>
-                    <select id="ddlCentre" style="width: 200px;">
-                        <option value="1">Tariq Rd</option>
-                        <option value="2">Nomayiesh</option>
-                        <option value="3">North</option>
-                        <option value="0">------------</option>
-                        <option value="4">Abdul Sattar Edhi</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Graveyard</td>
-                <td>
-                    <select id="ddlGraveyard" style="width: 200px;">
-                        <option value="1">Saqi Hasan</option>
-                        <option value="2">Tariq Rd</option>
-                        <option value="3">Gora Qabristan</option>
-                    </select></td>
-            </tr>
-            <tr>
-                <td>Bus Detail</td>
-                <td>
-                    <select id="ddlBusDetail" multiple style="width: 200px;">
-                        <option value="1">Reg-abc-123</option>
-                        <option value="2">Reg-def-345</option>
-                        <option value="3">Reg-ghi-678</option>
-                    </select><br />
-                    <a href="#">Expected return time: 2 hours from now</a> [Display in case no record found]
-
-                </td>
-            </tr>
-            <tr>
-                <td>Pricing</td>
-                <td>
-                    <input type="radio" name="rbPricing" />Fixed
-                <input type="radio" name="rbPricing" />Calculated
-                </td>
-            </tr>
-            <tr>
-                <td>Amount</td>
-                <td>
-                    <input type="text" value="1500" style="width: 200px;" /></td>
-            </tr>
-            <tr>
-                <td>Payment Status</td>
-                <td>
-                    <input type="text" value="Unpaid" disabled style="width: 200px;" /></td>
-            </tr>
-            <tr>
-                <td colspan="2" class="info">Payment has been received from mobile/nic at 10/10/2014.
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <button title="Save" class="btn btn-primary">Save</button>&nbsp;
-                    <button type="reset" class="btn btn-primary" title="Cancel">Cancel</button>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">@*<div id="googleMap" style="width: 500px; height: 380px;"></div>
-                    *@
-                </td>
-            </tr>
-        </tbody>
-    </table>-->
+    
 </div>

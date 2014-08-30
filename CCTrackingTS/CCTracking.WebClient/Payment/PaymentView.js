@@ -94,7 +94,8 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
             _super.call(this, options);
         }
         BusVisitItemView.prototype.RemoveItem = function () {
-            this.trigger("BusVisitRemoveItem", this.model.get("busVisitId"));
+            this.trigger("BusVisitRemoveItem", this.model.get("busId"), this.model.get("centreId"), this.model.get("driverId"));
+            //this.trigger("BusVisitRemoveItem", this.model.get("busVisitId"));
         };
         BusVisitItemView.prototype.ShowDetail = function () {
             //new userCtrl.UserCtrl().ShowDetail(this.model);

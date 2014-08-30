@@ -19,6 +19,7 @@ namespace CCTracking.Dto
         public string ExtraAmountReason { get; set; }
         public string ExtraAmountReceipt { get; set; }
         public byte PaymentStatus { get; set; }
+        public string EasyPaisaTranNo { get; set; }
         public List<BusVisit> BusVisits { get; set; }
     }
 }

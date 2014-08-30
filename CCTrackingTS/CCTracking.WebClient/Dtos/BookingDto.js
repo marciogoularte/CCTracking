@@ -35,10 +35,10 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
                     pickupTime: "",
                     returnTime: "",
                     graveyard: "",
-                    busDetails: "",
-                    initialReading: "",
-                    finalReading: "",
-                    distanceConvered: ""
+                    namazEJanazaHeldIn: "",
+                    namazEJanazaLocation: "",
+                    masjidName: "",
+                    otherDetail: ""
                 };
             };
             return BookingRequest;
@@ -68,11 +68,11 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
                     pickupDate: "",
                     pickupTime: "",
                     returnTime: "",
-                    graveyardId: "",
-                    busDetailsId: "",
-                    initialReading: "",
-                    finalReading: "",
-                    distanceConvered: ""
+                    graveyard: "",
+                    namazEJanazaHeldIn: "",
+                    namazEJanazaLocation: "",
+                    masjidName: "",
+                    otherDetail: ""
                 };
             };
             return BookingResponse;

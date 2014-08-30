@@ -45,6 +45,7 @@
     <Compile Include="CentreDal.cs" />
     <Compile Include="BusVisitDal.cs" />
     <Compile Include="CauseofDeathDal.cs" />
+    <Compile Include="DalService.cs" />
     <Compile Include="PaymentTypeDal.cs" />
     <Compile Include="UnionCouncilDal.cs" />
     <Compile Include="VisitTypeDal.cs" />

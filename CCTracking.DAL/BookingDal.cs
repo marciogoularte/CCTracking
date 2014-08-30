@@ -17,7 +17,6 @@ namespace CCTracking.DAL
         }
         protected override string GetAllSql()
         {
-
             return "GetAllBooking";
         }
         protected override string GetByCriteriaSql(BaseModel baseModel, Dictionary<string, object> dictionary)
@@ -44,14 +43,14 @@ namespace CCTracking.DAL
             dictionary.Add("LandmarkId", booking.LandmarkId);
             dictionary.Add("UnionCouncilId", booking.UnionCouncilId);
             dictionary.Add("TownId", booking.TownId);
-            //dictionary.Add("PickupDate", booking.PickupDate);
+            dictionary.Add("PickupDate", DateTime.Now);
             dictionary.Add("PickupTime", booking.PickupTime);
             dictionary.Add("ReturnTime", booking.ReturnTime);
             dictionary.Add("GraveyardId", booking.GraveyardId);
-            dictionary.Add("BusDetailId", booking.BusDetailId);
-            dictionary.Add("InitialReading", booking.InitialReading);
-            dictionary.Add("FinalReading", booking.FinalReading);
-            dictionary.Add("DistanceConvered", booking.DistanceConvered);
+            dictionary.Add("NamazEJanazaHeldIn", booking.NamazEJanazaHeldIn);
+            dictionary.Add("NamazEJanazaLocation", booking.NamazEJanazaLocation);
+            dictionary.Add("MasjidName", booking.MasjidName);
+            dictionary.Add("OtherDetail", booking.OtherDetail);
 
             //insert/update query and return updated boject
             //return "update Booking set ContactName=@ContactName where Id=@Id";
@@ -88,6 +87,16 @@ namespace CCTracking.DAL
         {
             return null;
         }
+
+        protected override string DelByIdSql(int id, Dictionary<string, object> dictionary)
+        {
+            return string.Empty;
+        }
+
+        protected override string GetCountSql()
+        {
+            return string.Empty;
+        }
         private void MapValues(Booking booking, IDataReader dr)
         {
             booking.Id = Convert.ToInt32(dr["Id"]);
@@ -99,19 +108,18 @@ namespace CCTracking.DAL
             booking.DeseasedGender = Convert.ToByte(dr["DeseasedGender"]);
             booking.CauseOfDeath = Convert.ToByte(dr["CauseOfDeath"]);
             booking.Address = dr["Address"].ToString();
-            booking.BusPoint = dr["BusPoint"].ToString();
+            booking.BusPoint = dr["BusPoint"] == DBNull.Value ? 0 : Convert.ToInt32(dr["BusPoint"]);
             booking.LandmarkId = dr["LandmarkId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["LandmarkId"]);
             booking.UnionCouncilId = dr["UnionCouncilId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["UnionCouncilId"]);
             booking.TownId = dr["TownId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["TownId"]);
             booking.PickupDate = dr["PickupDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr["PickupDate"]);
-            booking.PickupTime = dr["PickupTime"] == DBNull.Value ? 0 : Convert.ToInt32(dr["PickupTime"]);
-            booking.ReturnTime = dr["ReturnTime"] == DBNull.Value ? 0 : Convert.ToInt32(dr["ReturnTime"]);
-            booking.GraveyardId = dr["GraveyardId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["GraveyardId"]);
-            booking.BusDetailId = dr["BusDetailId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["BusDetailId"]);
-            booking.BusDetailId = dr["BusDetailId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["BusDetailId"]);
-            booking.InitialReading = dr["InitialReading"] == DBNull.Value ? 0 : Convert.ToInt64(dr["InitialReading"]);
-            booking.FinalReading = dr["FinalReading"] == DBNull.Value ? 0 : Convert.ToInt64(dr["FinalReading"]);
-            booking.DistanceConvered = dr["DistanceConvered"].ToString();
+            booking.PickupTime = dr["PickupTime"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dr["PickupTime"]);
+            booking.ReturnTime = dr["ReturnTime"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dr["ReturnTime"]);
+            booking.GraveyardId = dr["GraveyardId"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dr["GraveyardId"]);
+            booking.NamazEJanazaHeldIn = dr["NamazEJanazaHeldIn"] == DBNull.Value ?Convert.ToByte(0) : Convert.ToByte(dr["NamazEJanazaHeldIn"]);
+            booking.NamazEJanazaLocation = dr["NamazEJanazaLocation"] == DBNull.Value ? "" : dr["NamazEJanazaLocation"].ToString();
+            booking.MasjidName = dr["MasjidName"] == DBNull.Value ? "" : dr["MasjidName"].ToString();            
+            booking.OtherDetail = dr["OtherDetail"].ToString();
 
         }
     }

@@ -61,6 +61,9 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             model.set("townList", lookupResponse.town);
             model.set("graveyardList", lookupResponse.graveyard);
             model.set("busDetailsList", lookupResponse.bus);
+            model.set("pickupTimeSlotList", lookupResponse.timeSlot);
+            model.set("returnTimeSlotList", lookupResponse.timeSlot);
+            model.set("prayersList", lookupResponse.prayers);
 
             var causeOfDeath = _.filter(lookupResponse.causeOfDeath, function (p) {
                 return p.id == model.get("causeOfDeath");
@@ -84,6 +87,16 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
                 return p.id == model.get("busDetailId");
             });
 
+            var pickupTime = _.filter(lookupResponse.timeSlot, function (p) {
+                return p.id == model.get("pickupTime");
+            });
+            var returnTime = _.filter(lookupResponse.timeSlot, function (p) {
+                return p.id == model.get("returnTime");
+            });
+            var prayer = _.filter(lookupResponse.prayers, function (p) {
+                return p.id == model.get("namazEJanazaHeldIn");
+            });
+
             model.set("causeOfDeathSelected", causeOfDeath[0]); //model.get("causeOfDeath")
             model.set("landmarkIdSelected", landmark[0]);
             model.set("busPointSelected", busPoint[0]);
@@ -92,6 +105,10 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             model.set("graveyardIdSelected", graveyard[0]);
             model.set("busDetailIdSelected", busDetail[0]);
             model.set("deseasedGender", model.get("deseasedGender").toString());
+
+            model.set("pickupTimeSlotSelected", pickupTime[0]);
+            model.set("returnTimeSlotSelected", returnTime[0]);
+            model.set("prayersSelected", prayer[0]);
 
             this.bookingViewModel = new views.BookingViewModel(model, this);
             this.bookingView = new views.BookingView({ viewModel: this.bookingViewModel });
@@ -130,12 +147,24 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             model.set("returnTime", "");
             model.set("graveyardList", lookupResponse.graveyard);
             model.set("graveyardIdSelected", "");
-            model.set("busDetailsList", lookupResponse.bus);
-            model.set("busDetailIdSelected", "");
-            model.set("initialReading", "");
-            model.set("finalReading", "");
-            model.set("distanceConvered", "");
 
+            model.set("pickupTimeSlotList", lookupResponse.timeSlot);
+            model.set("pickupTimeSlotSelected", "");
+            model.set("returnTimeSlotList", lookupResponse.timeSlot);
+            model.set("returnTimeSlotSelected", "");
+            model.set("prayersList", lookupResponse.prayers);
+            model.set("prayersSelected", "");
+
+            model.set("namazEJanazaHeldIn", "");
+            model.set("namazEJanazaLocation", "");
+            model.set("masjidName", "");
+            model.set("otherDetail", "");
+
+            //model.set("busDetailsList", lookupResponse.bus);
+            //model.set("busDetailIdSelected", "");
+            //model.set("initialReading", "");
+            //model.set("finalReading", "");
+            //model.set("distanceConvered", "");
             //var c = ko.computed(function () {
             //    alert(model.get("address"));
             //});
@@ -161,8 +190,12 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             booking.set("unionCouncilId", booking.get("unionCouncilIdSelected").id);
             booking.set("townId", booking.get("townIdSelected").id);
             booking.set("graveyardId", booking.get("graveyardIdSelected").id);
-            booking.set("busDetailId", booking.get("busDetailIdSelected").id);
 
+            booking.set("pickupTime", booking.get("pickupTimeSlotSelected").id);
+            booking.set("returnTime", booking.get("returnTimeSlotSelected").id);
+            booking.set("namazEJanazaHeldIn", booking.get("prayersSelected").id);
+
+            //booking.set("busDetailId", booking.get("busDetailIdSelected").id);
             var deferred = DAL.Save(booking);
 
             //TODO: call controller from here...

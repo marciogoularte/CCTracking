@@ -72,6 +72,17 @@ namespace CCTracking.DAL
             return null;
         }
 
+        protected override string DelByIdSql(int id, Dictionary<string, object> dictionary)
+        {
+            return string.Empty;
+        }
+
+        protected override string GetCountSql()
+        {
+            return string.Empty;
+        }
+
+
         protected override void MapValues(BaseModel baseModel, IDataReader dr)
         {
             base.MapValues(baseModel, dr);

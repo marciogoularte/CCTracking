@@ -8,15 +8,18 @@ namespace CCTracking.Dto
 {
     public class BusVisit :  BaseModel
     {
-        public int CentreId { get; set; }
+        public int CentreId { get; set; }        
+        public string CentreDesc { get; set; }
         public int BusId { get; set; }
+        public string BusDesc { get; set; }
         public int DriverId { get; set; }
+        public string DriverDesc { get; set; }
         public int VisitTypeId { get; set; }
         public int BookingId { get; set; }
         public bool IsAvailableForBooking { get; set; }
         public bool IsAvailableForFutureBooking { get; set; }
         public long InitialReading { get; set; }
         public long FinalReading { get; set; }
-        
     }
+    
 }

@@ -37,7 +37,8 @@ export module Models {
                 extraAmountCharge: "",
                 extraAmountReason: "",
                 extraAmountReceipt: "",
-                paymentStatus: ""
+                paymentStatus: "",
+                easyPaisaTranNo: ""
             }
         }
     }
