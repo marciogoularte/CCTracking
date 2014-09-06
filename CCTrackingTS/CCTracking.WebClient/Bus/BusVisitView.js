@@ -42,7 +42,8 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
         }
         BusVisitView.prototype.close = function () {
             //alert("closeing this view");
-            //this.off("SaveAlkhidmatCentre");
+            this.off("Event:SaveForm");
+            this.off("Event:CancelForm");
         };
         BusVisitView.prototype.Cancel = function () {
             this.trigger("Event:CancelForm");
@@ -61,8 +62,19 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
             options.itemView = BusVisitItemView;
             options.template = templateGrid.getOuterHTML("#gridTemplate");
             options.itemViewContainer = "tbody";
+            options.events = {
+                "click .jsSearchVisit": "SearchVisit"
+            };
             _super.call(this, options);
         }
+        BusVisitCollectionView.prototype.SearchVisit = function (e) {
+            e.preventDefault();
+            this.trigger("Event:SearchVisit", this.model.get("busSelected").id);
+        };
+
+        BusVisitCollectionView.prototype.setOptionDisable = function (option, item) {
+            alert("dddddd");
+        };
         return BusVisitCollectionView;
     })(helper.Views.CompositeView);
     exports.BusVisitCollectionView = BusVisitCollectionView;

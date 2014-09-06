@@ -54,8 +54,8 @@ export class PaymentCtrl extends helper.Controller {
         }
     }
 
-    GetByIdCompleted(paymentResponse: dto.Models.PaymentResponse) {        
-        var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'))
+    GetByIdCompleted(paymentResponse: dto.Models.PaymentResponse) {
+        var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
         var model = new Backbone.Model(paymentResponse["paymentModel"]);
         
         //booking id

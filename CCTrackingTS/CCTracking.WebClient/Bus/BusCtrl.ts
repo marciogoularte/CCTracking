@@ -8,7 +8,7 @@
 import application = require("../App");
 import helper = require("../Helper");
 import views = require("./BusView");
-import dto = require("CCTracking.WebClient/Dtos/BusDto");
+import dto = require("../Dtos/BusDto");
 import DAL = require("../DAL/Bus");
 
 var app;
@@ -20,7 +20,7 @@ export class BusCtrl extends helper.Controller {
         super();
     }
     Show() {
-        var model = new dto.Models.BusResponse();
+        var model = new dto.Models.BusDto();
         this.busViewModel = new views.BusViewModel(model, this);
         this.busView = new views.BusView({ viewModel: this.busViewModel });
         app.AppLayout.DetailRegion.close();

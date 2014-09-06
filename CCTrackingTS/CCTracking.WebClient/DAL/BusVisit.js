@@ -34,9 +34,9 @@ define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "CCTrackin
     }
     exports.Save = Save;
 
-    function GetAll() {
+    function GetAll(id) {
         var o = new BusVisitDal();
-        return o.doAjaxRequest(null, "GET", "BusVisit?a=a");
+        return o.doAjaxRequest(null, "GET", "BusVisit?idAll=" + id);
     }
     exports.GetAll = GetAll;
     function GetById(id) {

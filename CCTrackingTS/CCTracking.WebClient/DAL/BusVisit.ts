@@ -27,9 +27,9 @@ export function Save(stationDto: busVisitDto.Models.BusVisitDto) {
     return o.doAjaxRequest(stationDto, "POST", "BusVisit");
 }
 
-export function GetAll() {
+export function GetAll(id:number) {
     var o: baseDAL.BaseDto = new BusVisitDal();
-    return o.doAjaxRequest(null, "GET", "BusVisit?a=a");
+    return o.doAjaxRequest(null, "GET", "BusVisit?idAll=" + id);
 }
 export function GetById(id) {
     var o: baseDAL.BaseDto = new BusVisitDal();

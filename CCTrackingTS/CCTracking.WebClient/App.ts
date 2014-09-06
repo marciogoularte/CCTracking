@@ -17,6 +17,7 @@ import paymentController = require("./Payment/PaymentCtrl");
 import stationController = require("./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl");
 import refundBookingController = require("./RefundBooking/RefundBookingCtrl");
 import busVisitController = require("./Bus/BusVisitCtrl");
+import adminBusController = require("./Admin/Bus/BusCtrl");
 
 var datatablesBootstrap = require("datatablesBootstrap");
 
@@ -108,7 +109,10 @@ export class Application extends Marionette.Application {
                 'viewAlkhidmatCentre': 'goViewStation',
                 'cancel': 'goCancel',
                 'busVisit': 'gobusVisit',
+                'editBusVisit': 'goEditBusVisit',
                 'viewBusVisit': 'goViewBusVisit',
+                'adminBus': 'goAdminBus',
+                'viewAdminBus': 'goViewAdminBus',
                 '*other': 'defaultRoute'
             },
             goUser() {
@@ -141,10 +145,19 @@ export class Application extends Marionette.Application {
                 new refundBookingController.CancelBookingCtrl().Show();
             },
             goViewBusVisit() {
-                new busVisitController.BusVisitCtrl().GetAll();
+                new busVisitController.BusVisitCtrl().SimpleLoad();
             },
             gobusVisit() {
                 new busVisitController.BusVisitCtrl().Show();
+            },
+            goEditBusVisit() {
+                new busVisitController.BusVisitCtrl().Show();
+            },
+            goAdminBus(){
+                new adminBusController.BusCtrl().Show();
+            },
+            goViewAdminBus() {
+                new adminBusController.BusCtrl().GetAll();
             },
             defaultRoute() {
                 //layout.MainRegion.close();

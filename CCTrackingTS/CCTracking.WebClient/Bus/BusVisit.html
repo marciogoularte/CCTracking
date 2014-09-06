@@ -11,291 +11,82 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Alkhidmat/Co-Partners</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <select id="ddlCentre" class="form-control input-sm">
-                                        <option value="1">Tariq Rd</option>
-                                        <option value="2">Nomayiesh</option>
-                                        <option value="3">North</option>
-                                        <option value="0">------------</option>
-                                        <option value="4">Abdul Sattar Edhi</option>
+                                    <select id="ddlCentre" class="form-control input-sm"
+                                            data-bind="options: model.alkhidmatCentreList, optionsText:'description', value:model.alkhidmatCentreSelected">
                                     </select></td>
                             </tr>
-                            <tr>
-                                <td class="col-sm-4 col-md-4 input-sm">Bus Reg. No</td>
+                             <tr>
+                                <td class="col-sm-4 col-md-4 input-sm">Driver</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <select id="ddlBusDetails"  class="form-control input-sm" >
-                                        <option value="1">Reg-abc-123</option>
-                                        <option value="2" disabled>Reg-def-345 - Maintenance</option>
-                                        <option value="3">Reg-ghi-678</option>
-                                        <option value="3">Reg-ghi-678</option>
-                                        <option value="3" disabled>Reg-ghi-901 - Puncture</option>
-                                        <option value="3">Reg-ghi-121</option>
-                                        <option value="3">Reg-ghi-141</option>
+                                    <select id="Select1" class="form-control input-sm"
+                                        data-bind="options: model.driverList, optionsText:'description', value:model.driverSelected">
                                     </select>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="col-sm-4 col-md-4 input-sm">Driver</td>
+                                <td class="col-sm-4 col-md-4 input-sm">Vehicle No</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <select id="Select1" class="form-control input-sm">
-                                        <option value="1">Driver-1</option>
-                                        <option value="1">Driver-1</option>
-                                        <option value="1">Driver-1</option>
+                                   <select id="ddlBusDetails" class="form-control input-sm"
+                                        data-bind="options: model.busList, optionsText:'description', value:model.busSelected">
                                     </select>
                                 </td>
                             </tr>
                              <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Incharge Name</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" class="form-control input-sm" placeholder="Incharge Name" />                                    
+                                    <input type="text" class="form-control input-sm" placeholder="Incharge Name" data-bind="value:model.inchargeName" />   
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Visit Date</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="date" id="PickupDate" class="form-control input-sm" />
+                                    <input type="date" id="PickupDate" class="form-control input-sm" data-bind="value:model.visitDate" />   
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Out Time</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <select id="ddlReturnTime" class="form-control input-sm">
-                                        <option>12:00 am</option>
-                                        <option>12:15 am</option>
-                                        <option>12:30 am</option>
-                                        <option>12:45 am</option>
-                                        <option>01:00 am</option>
-                                        <option>01:15 am</option>
-                                        <option>01:30 am</option>
-                                        <option>01:45 am</option>
-                                        <option>02:00 am</option>
-                                        <option>02:15 am</option>
-                                        <option>02:30 am</option>
-                                        <option>02:45 am</option>
-                                        <option>03:00 am</option>
-                                        <option>03:15 am</option>
-                                        <option>03:30 am</option>
-                                        <option>03:45 am</option>
-                                        <option>04:00 am</option>
-                                        <option>04:15 am</option>
-                                        <option>04:30 am</option>
-                                        <option>04:45 am</option>
-                                        <option>05:00 am</option>
-                                        <option>05:15 am</option>
-                                        <option>05:30 am</option>
-                                        <option>05:45 am</option>
-                                        <option>06:00 am</option>
-                                        <option>06:15 am</option>
-                                        <option>06:30 am</option>
-                                        <option>06:45 am</option>
-                                        <option>07:00 am</option>
-                                        <option>07:15 am</option>
-                                        <option>07:30 am</option>
-                                        <option>07:45 am</option>
-                                        <option>08:00 am</option>
-                                        <option>08:15 am</option>
-                                        <option>08:30 am</option>
-                                        <option>08:45 am</option>
-                                        <option>09:00 am</option>
-                                        <option>09:15 am</option>
-                                        <option>09:30 am</option>
-                                        <option>09:45 am</option>
-                                        <option>10:00 am</option>
-                                        <option>10:15 am</option>
-                                        <option>10:30 am</option>
-                                        <option>10:45 am</option>
-                                        <option>11:00 am</option>
-                                        <option>11:15 am</option>
-                                        <option>11:30 am</option>
-                                        <option>11:45 am</option>
-                                        <option>12:00 pm</option>
-                                        <option>12:15 pm</option>
-                                        <option>12:30 pm</option>
-                                        <option>12:45 pm</option>
-
-                                        <option>01:00 pm</option>
-                                        <option>01:15 pm</option>
-                                        <option>01:30 pm</option>
-                                        <option>01:45 pm</option>
-                                        <option>02:00 pm</option>
-                                        <option>02:15 pm</option>
-                                        <option>02:30 pm</option>
-                                        <option>02:45 pm</option>
-                                        <option>03:00 pm</option>
-                                        <option>03:15 pm</option>
-                                        <option>03:30 pm</option>
-                                        <option>03:45 pm</option>
-                                        <option>04:00 pm</option>
-                                        <option>04:15 pm</option>
-                                        <option>04:30 pm</option>
-                                        <option>04:45 pm</option>
-                                        <option>05:00 pm</option>
-                                        <option>05:15 pm</option>
-                                        <option>05:30 pm</option>
-                                        <option>05:45 pm</option>
-                                        <option>06:00 pm</option>
-                                        <option>06:15 pm</option>
-                                        <option>06:30 pm</option>
-                                        <option>06:45 pm</option>
-                                        <option>07:00 pm</option>
-                                        <option>07:15 pm</option>
-                                        <option>07:30 pm</option>
-                                        <option>07:45 pm</option>
-                                        <option>08:00 pm</option>
-                                        <option>08:15 pm</option>
-                                        <option>08:30 pm</option>
-                                        <option>08:45 pm</option>
-                                        <option>09:00 pm</option>
-                                        <option>09:15 pm</option>
-                                        <option>09:30 pm</option>
-                                        <option>09:45 pm</option>
-                                        <option>10:00 pm</option>
-                                        <option>10:15 pm</option>
-                                        <option>10:30 pm</option>
-                                        <option>10:45 pm</option>
-                                        <option>11:00 pm</option>
-                                        <option>11:15 pm</option>
-                                        <option>11:30 pm</option>
-                                        <option>11:45 pm</option>
-                                    </select>
+                                     <select id="ddlReturnTime" class="form-control input-sm"
+                                data-bind="options: model.outTimeSlotList, optionsText:'description', value:model.outTimeSlotSelected">
+                            </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Return Time</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <select id="Select2" class="form-control input-sm">
-                                        <option>12:00 am</option>
-                                        <option>12:15 am</option>
-                                        <option>12:30 am</option>
-                                        <option>12:45 am</option>
-                                        <option>01:00 am</option>
-                                        <option>01:15 am</option>
-                                        <option>01:30 am</option>
-                                        <option>01:45 am</option>
-                                        <option>02:00 am</option>
-                                        <option>02:15 am</option>
-                                        <option>02:30 am</option>
-                                        <option>02:45 am</option>
-                                        <option>03:00 am</option>
-                                        <option>03:15 am</option>
-                                        <option>03:30 am</option>
-                                        <option>03:45 am</option>
-                                        <option>04:00 am</option>
-                                        <option>04:15 am</option>
-                                        <option>04:30 am</option>
-                                        <option>04:45 am</option>
-                                        <option>05:00 am</option>
-                                        <option>05:15 am</option>
-                                        <option>05:30 am</option>
-                                        <option>05:45 am</option>
-                                        <option>06:00 am</option>
-                                        <option>06:15 am</option>
-                                        <option>06:30 am</option>
-                                        <option>06:45 am</option>
-                                        <option>07:00 am</option>
-                                        <option>07:15 am</option>
-                                        <option>07:30 am</option>
-                                        <option>07:45 am</option>
-                                        <option>08:00 am</option>
-                                        <option>08:15 am</option>
-                                        <option>08:30 am</option>
-                                        <option>08:45 am</option>
-                                        <option>09:00 am</option>
-                                        <option>09:15 am</option>
-                                        <option>09:30 am</option>
-                                        <option>09:45 am</option>
-                                        <option>10:00 am</option>
-                                        <option>10:15 am</option>
-                                        <option>10:30 am</option>
-                                        <option>10:45 am</option>
-                                        <option>11:00 am</option>
-                                        <option>11:15 am</option>
-                                        <option>11:30 am</option>
-                                        <option>11:45 am</option>
-                                        <option>12:00 pm</option>
-                                        <option>12:15 pm</option>
-                                        <option>12:30 pm</option>
-                                        <option>12:45 pm</option>
-
-                                        <option>01:00 pm</option>
-                                        <option>01:15 pm</option>
-                                        <option>01:30 pm</option>
-                                        <option>01:45 pm</option>
-                                        <option>02:00 pm</option>
-                                        <option>02:15 pm</option>
-                                        <option>02:30 pm</option>
-                                        <option>02:45 pm</option>
-                                        <option>03:00 pm</option>
-                                        <option>03:15 pm</option>
-                                        <option>03:30 pm</option>
-                                        <option>03:45 pm</option>
-                                        <option>04:00 pm</option>
-                                        <option>04:15 pm</option>
-                                        <option>04:30 pm</option>
-                                        <option>04:45 pm</option>
-                                        <option>05:00 pm</option>
-                                        <option>05:15 pm</option>
-                                        <option>05:30 pm</option>
-                                        <option>05:45 pm</option>
-                                        <option>06:00 pm</option>
-                                        <option>06:15 pm</option>
-                                        <option>06:30 pm</option>
-                                        <option>06:45 pm</option>
-                                        <option>07:00 pm</option>
-                                        <option>07:15 pm</option>
-                                        <option>07:30 pm</option>
-                                        <option>07:45 pm</option>
-                                        <option>08:00 pm</option>
-                                        <option>08:15 pm</option>
-                                        <option>08:30 pm</option>
-                                        <option>08:45 pm</option>
-                                        <option>09:00 pm</option>
-                                        <option>09:15 pm</option>
-                                        <option>09:30 pm</option>
-                                        <option>09:45 pm</option>
-                                        <option>10:00 pm</option>
-                                        <option>10:15 pm</option>
-                                        <option>10:30 pm</option>
-                                        <option>10:45 pm</option>
-                                        <option>11:00 pm</option>
-                                        <option>11:15 pm</option>
-                                        <option>11:30 pm</option>
-                                        <option>11:45 pm</option>
-                                    </select>
+                                     <select id="Select2" class="form-control input-sm"
+                                data-bind="options: model.reutrnTimeSlotList, optionsText:'description', value:model.returnTimeSlotSelected">
+                            </select>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Reading When Filling</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" class="form-control input-sm" placeholder="Reading at the time of filling" disabled />                                    
+                                    <input type="text" class="form-control input-sm" placeholder="Reading at the time of filling" data-bind="value:model.readingWhenFilling" />   
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Initial Reading</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" class="form-control input-sm" placeholder="Bus Initial Reading" disabled /><br />
-                                    auto fill from last visit
+                                    <input type="text" class="form-control input-sm" placeholder="Bus Initial Reading" disabled data-bind="value:model.initialReading" />   
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Final Reading</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" class="form-control input-sm" placeholder="Bus Final Reading" />
+                                    <input type="text" class="form-control input-sm" placeholder="Bus Final Reading" data-bind="value:model.finalReading" />   
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Bus Visits</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <select id="ddlOtherTravelling" class="form-control input-sm">
-                                        <option value="1">Patrol Pump</option>
-                                        <option value="2" disabled>Booking</option>
-                                        <option value="3">Maintenance</option>
-                                        <option value="4">Other</option>
-                                    </select>
+                                    <select id="ddlOtherTravelling" class="form-control input-sm" data-bind="options: model.visitTypeList, optionsText:'description', value:model.visitTypeSelected"> </select>
                                 </td>
                             </tr>
                              <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Pump Location</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <textarea id="txtPumpLocation" placeholder="Location" class="form-control input-sm"></textarea>
+                                    <textarea id="txtPumpLocation" placeholder="Location" class="form-control input-sm" data-bind="value:model.pumpLocation" >   
+                                    </textarea>
                                 </td>
                             </tr>
 
@@ -312,33 +103,28 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">CNG/Diesel Rate</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" placeholder="Rate" class="form-control input-sm" /></td>
+                                    <input type="text" placeholder="Rate" class="form-control input-sm" data-bind="value:model.fuelRate" />   </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">CNG/Diesel Amount</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" placeholder="Total Amount"  class="form-control input-sm"/></td>
+                                    <input type="text" placeholder="Total Amount"  class="form-control input-sm" data-bind="value:model.fuelAmount" />   </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Description</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <textarea id="txtDescription" placeholder="Description" class="form-control input-sm"></textarea>
+                                    <textarea id="txtDescription" placeholder="Description" class="form-control input-sm" data-bind="value:model.description" >   </textarea>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="col-sm-4 col-md-4 input-sm">Avialable for Current Booking</td>
+                                <td class="col-sm-4 col-md-4 input-sm">Booking Completed</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="radio" id="rbCurrentBooking" name="rbCurrentBooking" />Yes
-                    <input type="radio" id="Radio1" name="rbCurrentBooking" />No
+                                    <input type="radio" id="rbCurrentBooking" name="rbCurrentBooking" data-bind="value:model.isBookingCompleted" />Yes
+                                    <input type="radio" id="Radio1" name="rbCurrentBooking" data-bind="value:model.isBookingCompleted" />No
+                                    <br/>auto manage
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="col-sm-4 col-md-4 input-sm">Avialable for Future Booking</td>
-                                <td class="col-sm-8 col-md-8">
-                                    <input type="radio" id="rbFutureBooking" name="rbFutureBooking" />Yes
-                    <input type="radio" id="Radio2" name="rbFutureBooking" />No
-                                </td>
-                            </tr>
+                           
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm"></td>
                                 <td class="col-sm-8 col-md-8"><a href="#" data-toggle="modal" data-target="#busDetailsModal" class="form-control input-sm">View Bus Details</a></td>

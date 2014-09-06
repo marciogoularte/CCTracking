@@ -25,17 +25,28 @@ namespace CCTracking.DAL
         protected override string GetByCriteriaSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
             Bus bus = baseModel as Bus;
-            dictionary.Add("@RegistrationNo", bus.RegistrationNo);
+            dictionary.Add("@VehicleNo", bus.VehicleNo);
             return "GetBusByCriteria";
         }
 
-        protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary) 
+        protected override string GetCountSql()
         {
-            Bus bus = baseModel as Bus;           
+            throw new NotImplementedException();
+        }
+
+        protected override string DelByIdSql(int id, Dictionary<string, object> dictionary)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary)
+        {
+            Bus bus = baseModel as Bus;
             dictionary.Add("@CentreId", bus.CentreId);
-            dictionary.Add("@RegistrationNo", bus.RegistrationNo);
+            dictionary.Add("@VehicleNo", bus.VehicleNo);
             dictionary.Add("@TrackingDeviceId", bus.TrackingDeviceId);
-            dictionary.Add("@Model", bus.Model);
+            dictionary.Add("@ModelNo", bus.ModelNo);
+            dictionary.Add("@No", bus.No);
             dictionary.Add("@Description", bus.Description);
             base.ExecuteSql(bus, dictionary);
             return "dbo.SaveBus";
@@ -74,28 +85,22 @@ namespace CCTracking.DAL
             return null;
         }
 
-        protected override string DelByIdSql(int id, Dictionary<string, object> dictionary)
-        {
-            return string.Empty;
-        }
-
-        protected override string GetCountSql()
-        {
-            return string.Empty;
-        }
-
         protected override void MapValues(BaseModel baseModel, IDataReader dr)
         {
             base.MapValues(baseModel, dr);
             Bus bus = baseModel as Bus;
 
             bus.CentreId = dr.GetInt32(dr.GetOrdinal("CentreId"));
-            if (!dr.IsDBNull(dr.GetOrdinal("RegistrationNo")))
-                bus.RegistrationNo = dr.GetString(dr.GetOrdinal("RegistrationNo"));
+            if (!dr.IsDBNull(dr.GetOrdinal("CentreDesc")))
+                bus.CentreDesc = dr.GetString(dr.GetOrdinal("CentreDesc"));
+            if (!dr.IsDBNull(dr.GetOrdinal("VehicleNo")))
+                bus.VehicleNo = dr.GetString(dr.GetOrdinal("VehicleNo"));
             if (!dr.IsDBNull(dr.GetOrdinal("TrackingDeviceId")))
-                bus.TrackingDeviceId = dr.GetInt32(dr.GetOrdinal("TrackingDeviceId"));
-            if (!dr.IsDBNull(dr.GetOrdinal("Model")))
-                bus.Model = dr.GetString(dr.GetOrdinal("Model"));
+                bus.TrackingDeviceId = dr.GetString(dr.GetOrdinal("TrackingDeviceId"));
+            if (!dr.IsDBNull(dr.GetOrdinal("ModelNo")))
+                bus.ModelNo = dr.GetString(dr.GetOrdinal("ModelNo"));
+            if (!dr.IsDBNull(dr.GetOrdinal("No")))
+                bus.No = dr.GetString(dr.GetOrdinal("No"));
             if (!dr.IsDBNull(dr.GetOrdinal("Description")))
                 bus.Description = dr.GetString(dr.GetOrdinal("Description"));
         }

@@ -1,29 +1,32 @@
-﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
-/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+﻿/// <reference path="../../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../../Scripts/typings/marionette/marionette.d.ts" />
 
 /// <amd-dependency path="marionette"/>
 /// <amd-dependency path="jquery"/>
 /// <amd-dependency path="knockout"/>
-/// <amd-dependency path="text!./BusVisit.html"/>
-/// <amd-dependency path="text!./BusVisitGrid.html"/>
+/// <amd-dependency path="text!./BusTmpl.html"/>
+/// <amd-dependency path="text!./BusGrid.html"/>
 
 var _ = require('underscore');
-import helper = require("../Helper");
-var templateView = require("text!./BusVisit.html");
-var templateGrid = require("text!./BusVisitGrid.html");
-import application = require("../App");
+import helper = require("../../Helper");
+var templateView = require("text!./BusTmpl.html");
+var templateGrid = require("text!./BusGrid.html");
+
+import application = require("../../App");
 var app;
 
+
+
 // View Model
-export class BusVisitViewModel extends helper.ViewModel {
+export class BusViewModel extends helper.ViewModel {
     constructor(model: any, controller: any) {
         super(model, controller);
     }
 }
 
 // View
-export class BusVisitView extends helper.Views.MvvmView {
-    constructor(options?) {
+export class BusView extends helper.Views.MvvmView {
+    constructor(options?) {        
         this.template = templateView;
         this.events = {
             "submit": "Save",
@@ -31,43 +34,35 @@ export class BusVisitView extends helper.Views.MvvmView {
 
         }
         super(options);
+        //this.listenTo(this, "TestEvent", () => this.TestFunction());
     }
     close() {
         //alert("closeing this view");
-        this.off("Event:SaveForm");
-        this.off("Event:CancelForm");
+        //this.off("SaveBus");
     }
     Cancel() {
-        this.trigger("Event:CancelForm");
+        this.trigger("CancelForm");
+    }
+    TestFunction() {
+        alert("test function");
     }
     Save(e) {
         e.preventDefault();
-        this.trigger("Event:SaveForm");
+        this.trigger("SaveBus");
+        //this.trigger("TestEvent");
+        //new busCtrl.BusCtrl().Save(this.viewModel.bbModel);
     }
 }
 
-export class BusVisitCollectionView extends helper.Views.CompositeView {
+export class BusCollectionView extends helper.Views.CompositeView {
     dataTable: any;
     constructor(options?: any) {
-        options.itemView = BusVisitItemView;
+        options.itemView = BusItemView;
         options.template = templateGrid.getOuterHTML("#gridTemplate");
         options.itemViewContainer = "tbody";
-        options.events = {
-            "click .jsSearchVisit": "SearchVisit"
-        };
         super(options);
     }
-    SearchVisit(e) {
-        e.preventDefault();
-        this.trigger("Event:SearchVisit", this.model.get("busSelected").id);
-    }
-
-    setOptionDisable(option, item) {
-        alert("dddddd");
-
-    }
-
-//onShow() {
+    //onShow() {
 
     //    this.dataTable = this.$el.find("#tblBooking").dataTable({
     //        "autoWidth": false,
@@ -95,7 +90,7 @@ export class BusVisitCollectionView extends helper.Views.CompositeView {
     //}
 }
 
-export class BusVisitItemView extends helper.Views.ItemView {
+export class BusItemView extends helper.Views.ItemView {
     constructor(options?: any) {
         if (!options) options = {};
         options.template = templateGrid.getOuterHTML("#rowTemplate");

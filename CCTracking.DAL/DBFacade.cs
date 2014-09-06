@@ -20,7 +20,7 @@ namespace CCTracking.DAL
         protected abstract string GetCountSql();
         protected abstract string GetAllSql();
         protected abstract string GetByCriteriaSql(BaseModel baseModel, Dictionary<string, object> dictionary);
-        protected virtual string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary) 
+        protected virtual string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
             dictionary.Add("@Id", baseModel.Id);
             dictionary.Add("@IsActive", baseModel.IsActive);
@@ -80,7 +80,7 @@ namespace CCTracking.DAL
         /// 
         /// </summary>
         /// <returns></returns>
-        public BaseModelResponse GetAll()
+        public BaseModelResponse GetAll(int id = 0)
         {
             Dictionary<string, object> arrParam = new Dictionary<string, object>();
             String sql = GetAllSql();
@@ -90,12 +90,16 @@ namespace CCTracking.DAL
             IDataReader dr = null;
             try
             {
+                if (id != 0)
+                {
+                    arrParam.Add("@Id", id);
+                }
                 dbManager.OpenConnection(dbManager.ConnectionString);
                 foreach (System.Collections.Generic.KeyValuePair<string, object> item in arrParam)
                 {
                     dbManager.AddParameter(item.Key, item.Value);
                 }
-                dr = dbManager.ExecuteReader(sql, CommandType.Text);
+                dr = dbManager.ExecuteReader(sql, CommandType.StoredProcedure);
                 baseModelResponse = ConvertToList(dr);
 
             }
@@ -270,8 +274,8 @@ namespace CCTracking.DAL
                 //{
                 //    dbManager.AddParameter(item.Key, item.Value);
                 //}
-                resultCount = dbManager.ExecuteScalar(sql, CommandType.StoredProcedure);                
-                
+                resultCount = dbManager.ExecuteScalar(sql, CommandType.StoredProcedure);
+
             }
             catch (Exception e)
             {
@@ -282,7 +286,7 @@ namespace CCTracking.DAL
                 dbManager.CloseConnection();
             }
             return (int)resultCount;
-        }       
+        }
 
         protected virtual void MapValues(BaseModel basemodel, IDataReader dr)
         {

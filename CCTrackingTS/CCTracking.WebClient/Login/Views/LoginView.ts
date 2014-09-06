@@ -15,7 +15,7 @@ import appObjectDto = require("../../Dtos/AppObjectDto");
 
 import menu = require("../../Common/Views/HeaderView");
 import summary = require("../../Booking/Views/BookingLeftView");
-//import bookingRight = require("../../Booking/Views/BookingRightView");
+import bookingRight = require("../../Booking/Views/BookingRightView");
 import bookingCtrl = require("../../Booking/BookingCtrl");
 import uc = require("../../User/UserCtrl");
 
@@ -115,6 +115,7 @@ export class LoginItemView extends Marionette.ItemView {
             else {
                 //app.AppLayout.LeftRegion.show(new summary.BookingSummaryItemView());
                 app.LeftRegion.show(new summary.BookingSummaryItemView());
+                app.RightRegion.show(new bookingRight.BusQuickSearchItemView());
                 var ctrlBooking = new bookingCtrl.BookingCtrl();
                 ctrlBooking.Show();
             }

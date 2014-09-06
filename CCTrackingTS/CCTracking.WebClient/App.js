@@ -8,7 +8,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../CCTracking.WebClient/Login/Views/LoginView", "./ModalHelper", "./Bus/BusCtrl", "./User/UserCtrl", "./Booking/BookingCtrl", "./Payment/PaymentCtrl", "./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl", "./RefundBooking/RefundBookingCtrl", "./Bus/BusVisitCtrl", "marionette", "datatablesBootstrap"], function(require, exports, login, modalHelper, busController, userController, bookingController, paymentController, stationController, refundBookingController, busVisitController) {
+define(["require", "exports", "../CCTracking.WebClient/Login/Views/LoginView", "./ModalHelper", "./Bus/BusCtrl", "./User/UserCtrl", "./Booking/BookingCtrl", "./Payment/PaymentCtrl", "./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl", "./RefundBooking/RefundBookingCtrl", "./Bus/BusVisitCtrl", "./Admin/Bus/BusCtrl", "marionette", "datatablesBootstrap"], function(require, exports, login, modalHelper, busController, userController, bookingController, paymentController, stationController, refundBookingController, busVisitController, adminBusController) {
     var datatablesBootstrap = require("datatablesBootstrap");
 
     var Application = (function (_super) {
@@ -75,7 +75,10 @@ define(["require", "exports", "../CCTracking.WebClient/Login/Views/LoginView", "
                     'viewAlkhidmatCentre': 'goViewStation',
                     'cancel': 'goCancel',
                     'busVisit': 'gobusVisit',
+                    'editBusVisit': 'goEditBusVisit',
                     'viewBusVisit': 'goViewBusVisit',
+                    'adminBus': 'goAdminBus',
+                    'viewAdminBus': 'goViewAdminBus',
                     '*other': 'defaultRoute'
                 },
                 goUser: function () {
@@ -106,10 +109,19 @@ define(["require", "exports", "../CCTracking.WebClient/Login/Views/LoginView", "
                     new refundBookingController.CancelBookingCtrl().Show();
                 },
                 goViewBusVisit: function () {
-                    new busVisitController.BusVisitCtrl().GetAll();
+                    new busVisitController.BusVisitCtrl().SimpleLoad();
                 },
                 gobusVisit: function () {
                     new busVisitController.BusVisitCtrl().Show();
+                },
+                goEditBusVisit: function () {
+                    new busVisitController.BusVisitCtrl().Show();
+                },
+                goAdminBus: function () {
+                    new adminBusController.BusCtrl().Show();
+                },
+                goViewAdminBus: function () {
+                    new adminBusController.BusCtrl().GetAll();
                 },
                 defaultRoute: function () {
                     //layout.MainRegion.close();

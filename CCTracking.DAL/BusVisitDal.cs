@@ -13,13 +13,13 @@ namespace CCTracking.DAL
     {
         protected override string GetByIdSql(int id, Dictionary<string, object> dictionary)
         {
-            dictionary.Add("@BookingId", id);
+            dictionary.Add("@Id", id);
             return "GetBusVisitById";
         }
 
         protected override string GetAllSql()
         {
-            return "";
+            return "GetAllBusVisit";
         }
 
         protected override string GetByCriteriaSql(BaseModel baseModel, Dictionary<string, object> dictionary)
@@ -44,13 +44,21 @@ namespace CCTracking.DAL
             BusVisit busVisit = baseModel as BusVisit;
             dictionary.Add("@CentreId", busVisit.CentreId);
             dictionary.Add("@BusId", busVisit.BusId);
-            dictionary.Add("@BookingId", busVisit.BookingId);
-            dictionary.Add("@VisitTypeId", busVisit.VisitTypeId);
             dictionary.Add("@DriverId", busVisit.DriverId);
-            dictionary.Add("@IsAvailableForBooking", busVisit.IsAvailableForBooking);
-            dictionary.Add("@IsAvailableForFutureBooking", busVisit.IsAvailableForFutureBooking);
+            dictionary.Add("@VisitTypeId", busVisit.VisitTypeId);
+            dictionary.Add("@BookingId", busVisit.BookingId);
+            dictionary.Add("@InchargeName", busVisit.InchargeName);
+            dictionary.Add("@VisitDate", DateTime.Now);// busVisit.VisitDate);
+            dictionary.Add("@OutTime", busVisit.OutTime);
+            dictionary.Add("@ReturnTime", busVisit.ReturnTime);
+            dictionary.Add("@ReadingWhenFilling", busVisit.ReadingWhenFilling);
+            dictionary.Add("@PumpLocation", busVisit.PumpLocation);
+            dictionary.Add("@FuelRate", busVisit.FuelRate);
+            dictionary.Add("@FuelAmount", busVisit.FuelAmount);
+            dictionary.Add("@IsBookingCompleted", busVisit.IsBookingCompleted);
             dictionary.Add("@InitialReading", busVisit.InitialReading);
             dictionary.Add("@FinalReading", busVisit.FinalReading);
+            dictionary.Add("@Description", busVisit.Description);
             base.ExecuteSql(busVisit, dictionary);
             return "dbo.SaveBusVisit";
         }
@@ -110,19 +118,36 @@ namespace CCTracking.DAL
                 busVisit.BusId = dr.GetInt32(dr.GetOrdinal("BusId"));
             if (!dr.IsDBNull(dr.GetOrdinal("DriverId")))
                 busVisit.DriverId = dr.GetInt32(dr.GetOrdinal("DriverId"));
-            if (!dr.IsDBNull(dr.GetOrdinal("BookingId")))
-                busVisit.VisitTypeId = dr.GetInt32(dr.GetOrdinal("CentreId"));
+            if (!dr.IsDBNull(dr.GetOrdinal("VisitTypeId")))
+                busVisit.VisitTypeId = dr.GetInt32(dr.GetOrdinal("VisitTypeId"));
             if (!dr.IsDBNull(dr.GetOrdinal("BookingId")))
                 busVisit.BookingId = dr.GetInt32(dr.GetOrdinal("BookingId"));
-            if (!dr.IsDBNull(dr.GetOrdinal("IsAvailableForBooking")))
-                busVisit.IsAvailableForBooking = dr.GetBoolean(dr.GetOrdinal("IsAvailableForBooking"));
-            if (!dr.IsDBNull(dr.GetOrdinal("IsAvailableForFutureBooking")))
-                busVisit.IsAvailableForFutureBooking = dr.GetBoolean(dr.GetOrdinal("IsAvailableForFutureBooking"));
+            if (!dr.IsDBNull(dr.GetOrdinal("InchargeName")))
+                busVisit.InchargeName = dr.GetString(dr.GetOrdinal("InchargeName"));
+            if (!dr.IsDBNull(dr.GetOrdinal("VisitDate")))
+                busVisit.VisitDate = dr.GetDateTime(dr.GetOrdinal("VisitDate"));
+            if (!dr.IsDBNull(dr.GetOrdinal("OutTime")))
+                busVisit.OutTime = dr.GetByte(dr.GetOrdinal("OutTime"));
+            if (!dr.IsDBNull(dr.GetOrdinal("ReturnTime")))
+                busVisit.ReturnTime = dr.GetByte(dr.GetOrdinal("ReturnTime"));
+            if (!dr.IsDBNull(dr.GetOrdinal("ReadingWhenFilling")))
+                busVisit.ReadingWhenFilling = dr.GetInt64(dr.GetOrdinal("ReadingWhenFilling"));
+            if (!dr.IsDBNull(dr.GetOrdinal("PumpLocation")))
+                busVisit.PumpLocation = dr.GetString(dr.GetOrdinal("PumpLocation"));
+            if (!dr.IsDBNull(dr.GetOrdinal("FuelRate")))
+                busVisit.FuelRate = dr.GetDecimal(dr.GetOrdinal("FuelRate"));
+            if (!dr.IsDBNull(dr.GetOrdinal("FuelAmount")))
+                busVisit.FuelAmount = dr.GetDecimal(dr.GetOrdinal("FuelAmount"));
+            if (!dr.IsDBNull(dr.GetOrdinal("IsBookingCompleted")))
+                busVisit.IsBookingCompleted = dr.GetBoolean(dr.GetOrdinal("IsBookingCompleted"));
             if (!dr.IsDBNull(dr.GetOrdinal("InitialReading")))
                 busVisit.InitialReading = dr.GetInt64(dr.GetOrdinal("InitialReading"));
             if (!dr.IsDBNull(dr.GetOrdinal("FinalReading")))
                 busVisit.FinalReading = dr.GetInt64(dr.GetOrdinal("FinalReading"));
-
+            if (!dr.IsDBNull(dr.GetOrdinal("Description")))
+                busVisit.Description = dr.GetString(dr.GetOrdinal("Description"));
+            if (!dr.IsDBNull(dr.GetOrdinal("visitType")))
+                busVisit.VisitTypeDesc = dr.GetString(dr.GetOrdinal("visitType"));
             if (!dr.IsDBNull(dr.GetOrdinal("busDesc")))
                 busVisit.BusDesc = dr.GetString(dr.GetOrdinal("busDesc"));
             if (!dr.IsDBNull(dr.GetOrdinal("driverDesc")))

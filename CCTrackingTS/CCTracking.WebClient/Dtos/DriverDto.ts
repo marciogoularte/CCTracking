@@ -4,27 +4,27 @@
 /// <amd-dependency path="backbone"/>
 
 export module Models {
-    export class BusDto extends Backbone.Model {
+    export class DriverDto extends Backbone.Model {
         default() {
             return {
                 id: "",
                 stationId: "",
-                trackingDeviceId: "",
-                vehicleNo: "",
-                no: "",
-                modelNo: "",
-                description: "",
+                firstName: "",
+                lastName: "",
+                cnic: "",
+                address: "",
+                city: "",
                 isActive: "",
                 createdBy: "",
                 createdDate: "",
                 modifiedBy: "",
-                modifiedDate: ""
+                modifiedDate: "" 
             };
         }
     }
     export class BusCollection extends Backbone.Collection {
         constructor(options?: any) {
-            this.model = BusDto;
+            this.model = DriverDto;
             super(options);
         }
     }

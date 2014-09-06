@@ -23,6 +23,14 @@
     <Content Include="CCTracking.WebClient\Admin\AlkhidmatCentre\AlkhidmatCentreGridRow.html" />
     <Content Include="CCTracking.WebClient\Admin\AlkhidmatCentre\AlkhidmatCentreTmpl.html" />
     <Content Include="CCTracking.WebClient\Admin\AlkhidmatCentre\AlkhidmatCentreView.ts" />
+    <Content Include="CCTracking.WebClient\Admin\Bus\BusCtrl.ts" />
+    <Content Include="CCTracking.WebClient\Admin\Bus\BusGrid.html" />
+    <Content Include="CCTracking.WebClient\Admin\Bus\BusTmpl.html" />
+    <Content Include="CCTracking.WebClient\Admin\Bus\BusView.ts" />
+    <Content Include="CCTracking.WebClient\Admin\Driver\DriverCtrl.ts" />
+    <Content Include="CCTracking.WebClient\Admin\Driver\DriverGrid.html" />
+    <Content Include="CCTracking.WebClient\Admin\Driver\DriverTmpl.html" />
+    <Content Include="CCTracking.WebClient\Admin\Driver\DriverView.ts" />
     <Content Include="CCTracking.WebClient\Booking\BokingGridRow.html" />
     <Content Include="CCTracking.WebClient\Booking\BookingCtrl.ts" />
     <Content Include="CCTracking.WebClient\Booking\BookingGrid.html" />
@@ -34,6 +42,8 @@
     <TypeScriptCompile Include="CCTracking.WebClient\Bus\BusVisitCtrl.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\DAL\BusVisit.ts" />
     <Content Include="CCTracking.WebClient\Bus\BusVisitGrid.html" />
+    <Content Include="CCTracking.WebClient\DAL\Driver.ts" />
+    <Content Include="CCTracking.WebClient\Dtos\DriverDto.ts" />
     <Content Include="CCTracking.WebClient\RefundBooking\RefundBookingTmpl.html" />
     <Content Include="CCTracking.WebClient\Booking\Templates\BookingLeft.html" />
     <Content Include="CCTracking.WebClient\Booking\Templates\BookingRight.html" />

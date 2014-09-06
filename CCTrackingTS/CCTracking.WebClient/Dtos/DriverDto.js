@@ -10,20 +10,20 @@ var __extends = this.__extends || function (d, b) {
 };
 define(["require", "exports", "backbone"], function(require, exports) {
     (function (Models) {
-        var BusDto = (function (_super) {
-            __extends(BusDto, _super);
-            function BusDto() {
+        var DriverDto = (function (_super) {
+            __extends(DriverDto, _super);
+            function DriverDto() {
                 _super.apply(this, arguments);
             }
-            BusDto.prototype.default = function () {
+            DriverDto.prototype.default = function () {
                 return {
                     id: "",
                     stationId: "",
-                    trackingDeviceId: "",
-                    vehicleNo: "",
-                    no: "",
-                    modelNo: "",
-                    description: "",
+                    firstName: "",
+                    lastName: "",
+                    cnic: "",
+                    address: "",
+                    city: "",
                     isActive: "",
                     createdBy: "",
                     createdDate: "",
@@ -31,13 +31,13 @@ define(["require", "exports", "backbone"], function(require, exports) {
                     modifiedDate: ""
                 };
             };
-            return BusDto;
+            return DriverDto;
         })(Backbone.Model);
-        Models.BusDto = BusDto;
+        Models.DriverDto = DriverDto;
         var BusCollection = (function (_super) {
             __extends(BusCollection, _super);
             function BusCollection(options) {
-                this.model = BusDto;
+                this.model = DriverDto;
                 _super.call(this, options);
             }
             return BusCollection;
@@ -46,4 +46,3 @@ define(["require", "exports", "backbone"], function(require, exports) {
     })(exports.Models || (exports.Models = {}));
     var Models = exports.Models;
 });
-//# sourceMappingURL=BusDto.js.map

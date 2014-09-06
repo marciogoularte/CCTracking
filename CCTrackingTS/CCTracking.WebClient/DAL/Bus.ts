@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
 /// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
 import baseDAL = require("CCTracking.WebClient/DAL/AjaxRequest");
-import busDto = require("CCTracking.WebClient/Dtos/BusDto");
+import busDto = require("../Dtos/BusDto");
 
 
 export class BusDal extends baseDAL.BaseDto implements baseDAL.IBaseDto {
@@ -9,18 +9,29 @@ export class BusDal extends baseDAL.BaseDto implements baseDAL.IBaseDto {
         super(this);
     }
     public getResponse() {
-        return new busDto.Models.BusResponse();
+        return new busDto.Models.BusDto();
     }
 }
 
-export function Save(busRequest: busDto.Models.BusRequest) {
+
+export function Load() {
     var o: baseDAL.BaseDto = new BusDal();
-    return o.doAjaxRequest(busRequest, "POST", "Bus");
+    return o.doAjaxRequest(null, "GET", "Bus");
+}
+
+export function Save(busDto: busDto.Models.BusDto) {
+    var o: baseDAL.BaseDto = new BusDal();
+    return o.doAjaxRequest(busDto, "POST", "Bus");
 }
 
 export function GetAll() {
     var o: baseDAL.BaseDto = new BusDal();
-    return o.doAjaxRequest(null, "GET", "Bus");
+    return o.doAjaxRequest(null, "GET", "Bus?a=a");
+}
+
+export function GetById(id) {
+    var o: baseDAL.BaseDto = new BusDal();
+    return o.doAjaxRequest(null, "GET", "Bus?id=" + id);
 }
 
 //aaa

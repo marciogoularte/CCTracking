@@ -48,7 +48,8 @@ namespace CCTracking.DAL
             List<Lookup> alkhidmatCentre = new List<Lookup>();
             List<Lookup> driver = new List<Lookup>();
             List<Lookup> cashier = new List<Lookup>();
-            List<Lookup> paymentType = new List<Lookup>();           
+            List<Lookup> paymentType = new List<Lookup>();
+            List<Lookup> visitType = new List<Lookup>();           
 
 
             Lookup lookup = null;
@@ -94,6 +95,10 @@ namespace CCTracking.DAL
                 {
                     paymentType.Add(new Lookup { Id = Convert.ToInt32(item["id"]), Description = item["description"].ToString() });
                 }
+                foreach (DataRow item in ds.Tables[10].Rows)
+                {
+                    visitType.Add(new Lookup { Id = Convert.ToInt32(item["id"]), Description = item["description"].ToString() });
+                }
                 lookupResponse.CauseOfDeath = causeOfDeath;
                 lookupResponse.Town = town;
                 lookupResponse.UnionCouncil = unionCouncil;
@@ -106,6 +111,8 @@ namespace CCTracking.DAL
                 lookupResponse.PaymentType = paymentType;
                 lookupResponse.Prayers = GetPrayers();
                 lookupResponse.TimeSlot = GetTimeSlots();
+                lookupResponse.VisitType = visitType;
+                lookupResponse.BusModel = GetBusModel();
 
             }
             return lookupResponse;
@@ -125,10 +132,12 @@ namespace CCTracking.DAL
         {
             List<Lookup> prayers = new List<Lookup>();
             prayers.Add(new Lookup { Id = 1, Description = "Fajr" });
-            prayers.Add(new Lookup { Id = 2, Description = "Dhuhr" });
-            prayers.Add(new Lookup { Id = 3, Description = "Asr" });
-            prayers.Add(new Lookup { Id = 4, Description = "Maghrib" });
-            prayers.Add(new Lookup { Id = 5, Description = "Isha'a" });
+            prayers.Add(new Lookup { Id = 2, Description = "Before Dhuhr" });
+            prayers.Add(new Lookup { Id = 3, Description = "Dhuhr/Juma'ah" });
+            prayers.Add(new Lookup { Id = 4, Description = "Asr" });
+            prayers.Add(new Lookup { Id = 5, Description = "Maghrib" });
+            prayers.Add(new Lookup { Id = 6, Description = "Isha'a" });
+            prayers.Add(new Lookup { Id = 7, Description = "After Isha'a" });
             return prayers;
         }
 
@@ -234,6 +243,17 @@ namespace CCTracking.DAL
             timeSlot.Add(new Lookup { Id = 97, Description = "11:45 pm" });
             return timeSlot;
         }
-        
+
+        private List<Lookup> GetBusModel()
+        {
+            List<Lookup> busSlot = new List<Lookup>();
+
+            for (int year = DateTime.Now.Year; year > 1985; year--)
+            {
+                busSlot.Add(new Lookup { Id = year, Description = year.ToString() });
+            }
+
+            return busSlot;
+        }
     }
 }

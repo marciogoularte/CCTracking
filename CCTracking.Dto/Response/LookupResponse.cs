@@ -20,5 +20,7 @@ namespace CCTracking.Dto.Response
         public List<Lookup> PaymentType { get; set; }
         public List<Lookup> TimeSlot { get; set; }
         public List<Lookup> Prayers { get; set; }
+        public List<Lookup> VisitType { get; set; }
+        public List<Lookup> BusModel { get; set; }
     }
 }
