@@ -15,7 +15,7 @@ import appObjectDto = require("../../Dtos/AppObjectDto");
 
 import menu = require("../../Common/Views/HeaderView");
 import summary = require("../../Booking/Views/BookingLeftView");
-import bookingRight = require("../../Booking/Views/BookingRightView");
+import busAvailabilityCtrl = require("../../Bus/BusAvailabilityCtrl");
 import bookingCtrl = require("../../Booking/BookingCtrl");
 import uc = require("../../User/UserCtrl");
 
@@ -96,7 +96,7 @@ export class LoginItemView extends Marionette.ItemView {
 
             //app.AppLayout.HeaderRegion.show(headerView);
             app.HeaderRegion.show(headerView);
-
+            
             if (loginResponse["isAdmin"]) {
                 //admin view
                 //app.AppLayout.LeftRegion.show(new adminLeft.AdminLeftItemView());
@@ -115,7 +115,7 @@ export class LoginItemView extends Marionette.ItemView {
             else {
                 //app.AppLayout.LeftRegion.show(new summary.BookingSummaryItemView());
                 app.LeftRegion.show(new summary.BookingSummaryItemView());
-                app.RightRegion.show(new bookingRight.BusQuickSearchItemView());
+                new busAvailabilityCtrl.BusAvailabilityCtrl().Show();
                 var ctrlBooking = new bookingCtrl.BookingCtrl();
                 ctrlBooking.Show();
             }

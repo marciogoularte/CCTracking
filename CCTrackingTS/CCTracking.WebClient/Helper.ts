@@ -1,6 +1,8 @@
 ﻿/// <reference path="../Scripts/typings/require/require.d.ts" />
 /// <reference path="../Scripts/typings/marionette/marionette.d.ts" />
 /// <amd-dependency path="text!./Common/Templates/ModalPopup.html"/>
+/// <amd-dependency path="text!./Common/Templates/BusDetailModalPopup.html"/>
+
 
 /// <amd-dependency path="underscore"/>
 /// <amd-dependency path="jquery"/>
@@ -15,14 +17,8 @@ var $ = require("jquery");
 var ko = require("knockout");
 var kb = require("knockback");
 
-
-
-
 //var Marionette = require("marionette");
 //var Backbone = require("backbone");
-
-
-
 
 String.prototype["getOuterHTML"] = function (selector) {
     return $(this.toString()).find(selector)[0].outerHTML;
@@ -142,10 +138,57 @@ export module Views {
 
 export class ModalPopupView extends Views.ItemView {
     constructor(options?) {
+        //debugger;
         var modalPopupView = require("text!./Common/Templates/ModalPopup.html");
         this.template = modalPopupView.getOuterHTML("#Modal");
         super(options);
+        //this.model = options.model;
     }
+}
+
+export class BusDetailModalPopupCollectionView extends Views.CompositeView {
+    constructor(options?) {
+        this.itemView = BusDetailModalPopupView;
+        var girdTemplate = require("text!./Common/Templates/BusDetailModalPopup.html");
+        this.template = girdTemplate.getOuterHTML("#ModalGrid");
+        this.itemViewContainer = "#ItemContainer";
+        super(options);
+    }
+}
+
+export class BusDetailModalPopupView extends Views.ItemView {
+    constructor(options?) {
+        var modalPopupView = require("text!./Common/Templates/BusDetailModalPopup.html");
+        this.template = modalPopupView.getOuterHTML("#Modal");
+        this.tagName = "table";
+        super(options);
+        //this.model = options.model;
+    }
+}
+
+/*
+type value can be:
+1- default
+2- primary
+3- success
+4- info
+5- warning
+6- danger
+*/
+export function ShowModalPopup(type, title, message) {
+    var alertModel = new Backbone.Model({ type: 'btn-' + type, title: title, message: message });
+    var view = new this.ModalPopupView({ model: alertModel });
+    var app = APP.Application.getInstance();
+    app.ModalRegion.show(view);
+}
+//export function ShowBusDetailModalPopup(busDetialDto, type, title, message) {
+export function ShowBusDetailModalPopup(busDetialDto, busDetailCollection) {
+    //var alertModel = new Backbone.Model({ type: 'btn-' + type, title: title, message: message });
+    //var view = new this.BusDetailModalPopupView({ model: busDetialDto});
+    
+    var view = new this.BusDetailModalPopupCollectionView({ collection: busDetailCollection, model: busDetialDto});
+    var app = APP.Application.getInstance();
+    app.ModalRegion.show(view);
 }
 
 //export class ModalRegion extends Marionette.Region.extend{

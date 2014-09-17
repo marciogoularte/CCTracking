@@ -57,15 +57,7 @@ export class BookingView extends helper.Views.MvvmView {
         new bookingCtrl.BookingCtrl().Save(this.viewModel.bbModel);
     }
 
-    SaveCompleted(bookingResponse: bookingDto.Models.BookingResponse) {
-        //console.log(loginResponse);
-        if (bookingResponse == undefined) {
-            alert("Booking have not been saved successfully!");
-        }
-        else {            
-            alert("Record has been saved successfully with Booking ID : " + bookingResponse["id"]);
-        }        
-    }
+    
 
     GetAllCompleted(bookingResponse: bookingDto.Models.BookingResponseCollection) {
         var a = templateGrid;

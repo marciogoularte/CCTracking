@@ -1,20 +1,19 @@
 ﻿<div>
-<div id="Modal" >
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header btn-danger">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title" id="myModalLabel">CC Tracking Info</h4>
-            </div>
-            <div class="modal-body modalBody" id="ModalBody">
-                <strong>BUS DETAILS - Reg-abc-123</strong>
-                
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+    <script type="text/html" id="Modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header <%=type%>">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="myModalLabel"><%=title%></h4>
+                </div>
+                <div class="modal-body modalBody" id="ModalBody">
+                    <strong><%=message%></strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn <%=type%>" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+
+    </script>
 </div>

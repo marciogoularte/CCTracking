@@ -37,7 +37,6 @@ export class UserCtrl extends helper.Controller {
         //this.layout = app.AppLayout;
         app.AppLayout.MainRegion.show(this.userView);
         //app.MainRegion.show(this.userView);
-
     }
 
     Get() {

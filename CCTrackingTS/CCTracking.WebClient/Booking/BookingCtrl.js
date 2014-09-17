@@ -183,6 +183,7 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
 
         //Add(booking: dto.Models.BookingRequest) {
         BookingCtrl.prototype.Save = function (booking) {
+            var _this = this;
             //reset actual id - match with DAL object's properties
             booking.set("causeOfDeath", booking.get("causeOfDeathSelected").id);
             booking.set("landmarkId", booking.get("landmarkIdSelected").id);
@@ -200,8 +201,16 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
 
             //TODO: call controller from here...
             deferred.done(function (p) {
-                return new views.BookingView().SaveCompleted(p);
+                return _this.SaveCompleted(p);
             });
+        };
+
+        BookingCtrl.prototype.SaveCompleted = function (bookingResponse) {
+            if (bookingResponse == undefined) {
+                helper.ShowModalPopup("danger", "Booking", "Booking have not been saved successfully!");
+            } else {
+                helper.ShowModalPopup("success", "Booking", "Record has been saved successfully with Booking ID : " + bookingResponse["id"]);
+            }
         };
         return BookingCtrl;
     })(helper.Controller);

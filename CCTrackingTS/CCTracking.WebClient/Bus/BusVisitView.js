@@ -13,6 +13,7 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
     /// <amd-dependency path="text!./BusVisit.html"/>
     /// <amd-dependency path="text!./BusVisitGrid.html"/>
     var _ = require('underscore');
+    var ko = require("knockout");
 
     var templateView = require("text!./BusVisit.html");
     var templateGrid = require("text!./BusVisitGrid.html");
@@ -73,7 +74,10 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
         };
 
         BusVisitCollectionView.prototype.setOptionDisable = function (option, item) {
-            alert("dddddd");
+            if (item.id == 1) {
+                //debugger;
+                ko.applyBindingsToNode(option, { disable: true, text: item.description + ' - Maintenance' }, item);
+            }
         };
         return BusVisitCollectionView;
     })(helper.Views.CompositeView);
@@ -98,5 +102,10 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
         return BusVisitItemView;
     })(helper.Views.ItemView);
     exports.BusVisitItemView = BusVisitItemView;
+
+    function setOptionDisable(option, item) {
+        alert("dddddd");
+    }
+    exports.setOptionDisable = setOptionDisable;
 });
 //# sourceMappingURL=BusVisitView.js.map

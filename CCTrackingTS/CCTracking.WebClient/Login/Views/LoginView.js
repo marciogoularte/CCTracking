@@ -9,7 +9,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../../DAL/Login", "../../App", "../../Dtos/AppObjectDto", "../../Common/Views/HeaderView", "../../Booking/Views/BookingLeftView", "../../Booking/Views/BookingRightView", "../../Booking/BookingCtrl", "../../User/UserCtrl", "../../Common/Views/AdminLeftView", "text!CCTracking.WebClient/Login/Templates/Login.html", "marionette", "jquery"], function(require, exports, DAL, APP, appObjectDto, menu, summary, bookingRight, bookingCtrl, uc, adminLeft) {
+define(["require", "exports", "../../DAL/Login", "../../App", "../../Dtos/AppObjectDto", "../../Common/Views/HeaderView", "../../Booking/Views/BookingLeftView", "../../Bus/BusAvailabilityCtrl", "../../Booking/BookingCtrl", "../../User/UserCtrl", "../../Common/Views/AdminLeftView", "text!CCTracking.WebClient/Login/Templates/Login.html", "marionette", "jquery"], function(require, exports, DAL, APP, appObjectDto, menu, summary, busAvailabilityCtrl, bookingCtrl, uc, adminLeft) {
     //var Marionette = require("marionette");
     var templateView = require("text!CCTracking.WebClient/Login/Templates/Login.html");
 
@@ -106,7 +106,7 @@ define(["require", "exports", "../../DAL/Login", "../../App", "../../Dtos/AppObj
                 } else {
                     //app.AppLayout.LeftRegion.show(new summary.BookingSummaryItemView());
                     app.LeftRegion.show(new summary.BookingSummaryItemView());
-                    app.RightRegion.show(new bookingRight.BusQuickSearchItemView());
+                    new busAvailabilityCtrl.BusAvailabilityCtrl().Show();
                     var ctrlBooking = new bookingCtrl.BookingCtrl();
                     ctrlBooking.Show();
                 }

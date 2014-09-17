@@ -17,7 +17,7 @@ define(["require", "exports", "text!CCTracking.WebClient/Booking/Templates/Booki
         function BusQuickSearchItemView(options) {
             if (!options)
                 options = {};
-            options.template = templateView;
+            options.template = templateView.getOuterHTML("#BookingRightPane");
             _super.call(this, options);
         }
         return BusQuickSearchItemView;

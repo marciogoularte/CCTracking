@@ -1,13 +1,14 @@
 ﻿/// <reference path="../Scripts/typings/require/require.d.ts" />
 /// <reference path="../Scripts/typings/marionette/marionette.d.ts" />
 /// <amd-dependency path="text!./Common/Templates/ModalPopup.html"/>
+/// <amd-dependency path="text!./Common/Templates/BusDetailModalPopup.html"/>
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "./App", "text!./Common/Templates/ModalPopup.html", "underscore", "jquery", "knockout", "knockback", "marionette", "backbone"], function(require, exports, APP) {
+define(["require", "exports", "./App", "text!./Common/Templates/ModalPopup.html", "text!./Common/Templates/BusDetailModalPopup.html", "underscore", "jquery", "knockout", "knockback", "marionette", "backbone"], function(require, exports, APP) {
     var $ = require("jquery");
     var ko = require("knockout");
     var kb = require("knockback");
@@ -133,13 +134,68 @@ define(["require", "exports", "./App", "text!./Common/Templates/ModalPopup.html"
     var ModalPopupView = (function (_super) {
         __extends(ModalPopupView, _super);
         function ModalPopupView(options) {
+            //debugger;
             var modalPopupView = require("text!./Common/Templates/ModalPopup.html");
             this.template = modalPopupView.getOuterHTML("#Modal");
             _super.call(this, options);
+            //this.model = options.model;
         }
         return ModalPopupView;
     })(Views.ItemView);
     exports.ModalPopupView = ModalPopupView;
+
+    var BusDetailModalPopupCollectionView = (function (_super) {
+        __extends(BusDetailModalPopupCollectionView, _super);
+        function BusDetailModalPopupCollectionView(options) {
+            this.itemView = BusDetailModalPopupView;
+            var girdTemplate = require("text!./Common/Templates/BusDetailModalPopup.html");
+            this.template = girdTemplate.getOuterHTML("#ModalGrid");
+            this.itemViewContainer = "#ItemContainer";
+            _super.call(this, options);
+        }
+        return BusDetailModalPopupCollectionView;
+    })(Views.CompositeView);
+    exports.BusDetailModalPopupCollectionView = BusDetailModalPopupCollectionView;
+
+    var BusDetailModalPopupView = (function (_super) {
+        __extends(BusDetailModalPopupView, _super);
+        function BusDetailModalPopupView(options) {
+            var modalPopupView = require("text!./Common/Templates/BusDetailModalPopup.html");
+            this.template = modalPopupView.getOuterHTML("#Modal");
+            this.tagName = "table";
+            _super.call(this, options);
+            //this.model = options.model;
+        }
+        return BusDetailModalPopupView;
+    })(Views.ItemView);
+    exports.BusDetailModalPopupView = BusDetailModalPopupView;
+
+    /*
+    type value can be:
+    1- default
+    2- primary
+    3- success
+    4- info
+    5- warning
+    6- danger
+    */
+    function ShowModalPopup(type, title, message) {
+        var alertModel = new Backbone.Model({ type: 'btn-' + type, title: title, message: message });
+        var view = new this.ModalPopupView({ model: alertModel });
+        var app = APP.Application.getInstance();
+        app.ModalRegion.show(view);
+    }
+    exports.ShowModalPopup = ShowModalPopup;
+
+    //export function ShowBusDetailModalPopup(busDetialDto, type, title, message) {
+    function ShowBusDetailModalPopup(busDetialDto, busDetailCollection) {
+        //var alertModel = new Backbone.Model({ type: 'btn-' + type, title: title, message: message });
+        //var view = new this.BusDetailModalPopupView({ model: busDetialDto});
+        var view = new this.BusDetailModalPopupCollectionView({ collection: busDetailCollection, model: busDetialDto });
+        var app = APP.Application.getInstance();
+        app.ModalRegion.show(view);
+    }
+    exports.ShowBusDetailModalPopup = ShowBusDetailModalPopup;
 
     //export class ModalRegion extends Marionette.Region.extend{
     //    constructor(options?) {

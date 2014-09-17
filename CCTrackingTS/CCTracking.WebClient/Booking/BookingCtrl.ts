@@ -196,6 +196,15 @@ export class BookingCtrl extends helper.Controller {
         
         var deferred = DAL.Save(booking);        
         //TODO: call controller from here...
-        deferred.done(p=> new views.BookingView().SaveCompleted(p));
+        deferred.done(p=> this.SaveCompleted(p));
+    }
+
+    SaveCompleted(bookingResponse: dto.Models.BookingResponse) {
+        if (bookingResponse == undefined) {
+            helper.ShowModalPopup("danger", "Booking", "Booking have not been saved successfully!");
+        }
+        else {
+            helper.ShowModalPopup("success", "Booking", "Record has been saved successfully with Booking ID : " + bookingResponse["id"]);
+        }
     }
 }

@@ -16,9 +16,11 @@
                         <div class="form-group">
                             Vehicle No  
                             <select id="ddlBusDetails" class="form-control input-sm"
-                                    data-bind="options: busList, optionsText:'description', value:busSelected">
+                                    data-bind="options: busList, optionsText:'description', value:busSelected, optionsAfterRender:setOptionDisable">
                             </select>
-                            <!--,optionsAfterRender: setOptionDisable-->
+                            <!--,optionsAfterRender: setOptionDisable
+                                function(a,b){ alert(a);}
+                                -->
                         </div>
                             <button type="button" class="jsSearchVisit btn btn-primary">Search</button>
                         </form>
@@ -52,5 +54,3 @@
         <td class="input-sm"><%=finalReading%></td>
     </script>
 </div>
-
-

@@ -8,6 +8,7 @@
 /// <amd-dependency path="text!./BusVisitGrid.html"/>
 
 var _ = require('underscore');
+var ko = require("knockout");
 import helper = require("../Helper");
 var templateView = require("text!./BusVisit.html");
 var templateGrid = require("text!./BusVisitGrid.html");
@@ -63,8 +64,10 @@ export class BusVisitCollectionView extends helper.Views.CompositeView {
     }
 
     setOptionDisable(option, item) {
-        alert("dddddd");
-
+        if (item.id == 1) {
+            //debugger;
+            ko.applyBindingsToNode(option, { disable: true, text: item.description + ' - Maintenance' }, item);
+        }
     }
 
 //onShow() {
@@ -111,3 +114,6 @@ export class BusVisitItemView extends helper.Views.ItemView {
     }
 }
 
+export function setOptionDisable(option, item) {
+    alert("dddddd");
+}

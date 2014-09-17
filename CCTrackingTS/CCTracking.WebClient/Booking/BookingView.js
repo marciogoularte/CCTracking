@@ -64,15 +64,6 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto
             new bookingCtrl.BookingCtrl().Save(this.viewModel.bbModel);
         };
 
-        BookingView.prototype.SaveCompleted = function (bookingResponse) {
-            //console.log(loginResponse);
-            if (bookingResponse == undefined) {
-                alert("Booking have not been saved successfully!");
-            } else {
-                alert("Record has been saved successfully with Booking ID : " + bookingResponse["id"]);
-            }
-        };
-
         BookingView.prototype.GetAllCompleted = function (bookingResponse) {
             var a = templateGrid;
             app = application.Application.getInstance();

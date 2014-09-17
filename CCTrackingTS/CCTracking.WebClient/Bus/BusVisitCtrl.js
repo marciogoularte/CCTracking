@@ -60,11 +60,15 @@ define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/
             this.app.MainRegion.show(this.collectionView);
 
             var vm = kb.viewModel(this.compositeModel);
+            vm.setOptionDisable = this.collectionView.setOptionDisable;
             var element = $('#ddlBusDetails')[0];
             ko.cleanNode(element);
             ko.applyBindings(vm, element);
         };
 
+        //setOptionDisable(option, item) {
+        //    alert("dddddd");
+        //}
         BusVisitCtrl.prototype.Load = function () {
             var _this = this;
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
@@ -242,9 +246,9 @@ define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/
 
             //console.log(loginResponse);
             if (dto == undefined) {
-                alert("Alkhidmat Centre have not been saved successfully!");
+                helper.ShowModalPopup("danger", "Bus Visit", "Bus visit have not been saved successfully!");
             } else {
-                alert("Record has been saved successfully with Alkhidmat Centre ID : " + dto["id"]);
+                helper.ShowModalPopup("success", "Bus Visit", "Record has been saved successfully with Bus Visit ID : " + dto["id"]);
 
                 //this.UIBinding(model);
                 this.Cancel();
