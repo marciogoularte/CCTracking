@@ -21,6 +21,7 @@ namespace CCTracking.DAL
         }
         protected override string GetByCriteriaSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
+            
             Booking booking = (Booking)baseModel;
             dictionary.Add("@ContactName", booking.ContactName);
             //multiple criteria..

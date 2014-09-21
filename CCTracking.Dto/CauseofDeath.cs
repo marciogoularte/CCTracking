@@ -8,6 +8,6 @@ namespace CCTracking.Dto
 {
     public class CauseofDeath :BaseModel
     {
-        public string Description { get; set; }
+        public string Name { get; set; }
     }
 }

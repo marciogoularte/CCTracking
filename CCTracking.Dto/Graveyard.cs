@@ -10,6 +10,7 @@ namespace CCTracking.Dto
     {
 
         public int LandmarkId { get; set; }
+        public string LandmarkDesc { get; set; }
         public string Name { get; set; }
     }
 }

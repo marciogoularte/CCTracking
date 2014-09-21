@@ -79,6 +79,7 @@
     <Compile Include="Response\PaymentResponse.cs" />
     <Compile Include="Response\UserResponse.cs" />
     <Compile Include="Role.cs" />
+    <Compile Include="SearchCriteria.cs" />
     <Compile Include="Town.cs" />
     <Compile Include="TrackingDevice.cs" />
     <Compile Include="UnionCouncil.cs" />

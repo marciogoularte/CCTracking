@@ -88,6 +88,8 @@ namespace CCTracking.DAL
             UnionCouncil unionCouncil = baseModel as UnionCouncil;
             if (!dr.IsDBNull(dr.GetOrdinal("TownId")))
                 unionCouncil.TownId = dr.GetInt32(dr.GetOrdinal("TownId"));
+            if (!dr.IsDBNull(dr.GetOrdinal("TownDesc")))
+                unionCouncil.TownDesc = dr.GetString(dr.GetOrdinal("TownDesc"));
             if (!dr.IsDBNull(dr.GetOrdinal("Name")))
                 unionCouncil.Name = dr.GetString(dr.GetOrdinal("Name"));
         }

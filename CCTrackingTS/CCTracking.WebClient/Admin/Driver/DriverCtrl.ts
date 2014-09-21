@@ -59,7 +59,7 @@ export class DriverCtrl extends helper.Controller {
         var model = this.backboneModel;
         this.driverViewModel.bbModel = model;
         this.driverViewModel.model = kb.viewModel(model);
-       // debugger;
+        // debugger;
         model.set("firstName", "");
         model.set("lastName", "");
         model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
@@ -67,6 +67,7 @@ export class DriverCtrl extends helper.Controller {
         model.set("cnic", "");
         model.set("address", "");
         model.set("city", "");
+         model.set("mobile", "");
         model.set("isActive", "");
 
         this.driverViewModel = new views.DriverViewModel(model, this);
@@ -117,7 +118,7 @@ export class DriverCtrl extends helper.Controller {
 
     GetAllCompleted(driver: dto.Models.DriverDto) {
         //app = application.Application.getInstance();
-      //  debugger;
+       //  debugger;
         this.collection.reset(driver["driverList"]);
         this.collectionView = new views.DriverCollectionView({ collection: this.collection });
         this.collectionView.on("itemview:ShowDetail", (view) => this.GetByIdCompleted(view.model));
@@ -143,21 +144,18 @@ export class DriverCtrl extends helper.Controller {
     }
 
     UIBinding(model: any) {
+
         var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
-        model.set("landmarkList", lookupResponse.landmark);
-        var landmark = _.filter(lookupResponse.landmark, (p) => { return p.id == model.get("landmarkId"); });
-        model.set("landmarkIdSelected", landmark[0]);
+
+        model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
+        var centre = _.filter(lookupResponse.alkhidmatCentre, (p) => { return p.id == model.get("centreId"); });
+        model.set("alkhidmatCentreSelected", centre[0]);
+
         model.set("isActive", model.get("isActive") ? "1" : "0");
-        model.set("isCoPartner", model.get("isCoPartner") ? "1" : "0");
 
         this.driverViewModel.bbModel = model;
         this.driverViewModel.model = kb.viewModel(model);
         ko.cleanNode($(this.driverView.el)[0]);
         ko.applyBindings(this.driverViewModel, this.driverView.el);
-
-        //this.driverView = new views.DriverView({ viewModel: this.driverViewModel });
-        //this.driverView.on("SaveDriver", () => this.Save(this.driverViewModel.bbModel));
     }
-
-
 }

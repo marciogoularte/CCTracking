@@ -8,7 +8,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../CCTracking.WebClient/Login/Views/LoginView", "./ModalHelper", "./Bus/BusCtrl", "./User/UserCtrl", "./Booking/BookingCtrl", "./Payment/PaymentCtrl", "./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl", "./RefundBooking/RefundBookingCtrl", "./Bus/BusVisitCtrl", "./Admin/Bus/BusCtrl", "marionette", "datatablesBootstrap"], function(require, exports, login, modalHelper, busController, userController, bookingController, paymentController, stationController, refundBookingController, busVisitController, adminBusController) {
+define(["require", "exports", "../CCTracking.WebClient/Login/Views/LoginView", "./ModalHelper", "./Bus/BusCtrl", "./User/UserCtrl", "./Booking/BookingCtrl", "./Payment/PaymentCtrl", "./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl", "./RefundBooking/RefundBookingCtrl", "./Admin/Bus/BusCtrl", "./Admin/Driver/DriverCtrl", "./Admin/Graveyard/GraveyardCtrl", "./Admin/Town/TownCtrl", "./Admin/UnionCouncil/UnionCouncilCtrl", "./Admin/Landmark/LandmarkCtrl", "./Admin/PaymentType/PaymentTypeCtrl", "./Admin/RefundType/RefundTypeCtrl", "./Admin/VisitType/VisitTypeCtrl", "./Admin/CauseOfDeath/CauseOfDeathCtrl", "./Admin/TrackingDevice/TrackingDeviceCtrl", "marionette", "datatablesBootstrap"], function(require, exports, login, modalHelper, busController, userController, bookingController, paymentController, stationController, refundBookingController, adminBusController, driverController, graveyardController, townController, unionCouncilController, landmarkController, paymentTypeController, refundTypeController, visitTypeController, causeOfDeathController, trackingDeviceController) {
     var datatablesBootstrap = require("datatablesBootstrap");
 
     var Application = (function (_super) {
@@ -79,6 +79,27 @@ define(["require", "exports", "../CCTracking.WebClient/Login/Views/LoginView", "
                     'viewBusVisit': 'goViewBusVisit',
                     'adminBus': 'goAdminBus',
                     'viewAdminBus': 'goViewAdminBus',
+                    'searchBooking': 'goSearchBooking',
+                    'driver': 'goDriver',
+                    'viewDriver': 'goViewDriver',
+                    'graveyard': 'goGraveyard',
+                    'viewGraveyard': 'goViewGraveyard',
+                    'town': 'goTown',
+                    'viewTown': 'goViewTown',
+                    'unionCouncil': 'goUnionCouncil',
+                    'viewUnionCouncil': 'goViewUnionCouncil',
+                    'landmark': 'goLandmark',
+                    'viewLandmark': 'goViewLandmark',
+                    'paymentType': 'goPaymentType',
+                    'viewPaymentType': 'goViewPaymentType',
+                    'refundType': 'goRefundType',
+                    'viewRefundType': 'goViewRefundType',
+                    'visitType': 'goVisitType',
+                    'viewVisitType': 'goViewVisitType',
+                    'causeOfDeath': 'goCauseOfDeath',
+                    'viewCauseOfDeath': 'goViewCauseOfDeath',
+                    'trackingDevice': 'goTrackingDevice',
+                    'viewTrackingDevice': 'goViewTrackingDevice',
                     '*other': 'defaultRoute'
                 },
                 goUser: function () {
@@ -109,19 +130,90 @@ define(["require", "exports", "../CCTracking.WebClient/Login/Views/LoginView", "
                     new refundBookingController.CancelBookingCtrl().Show();
                 },
                 goViewBusVisit: function () {
-                    new busVisitController.BusVisitCtrl().SimpleLoad();
+                    require(['./Bus/BusVisitCtrl'], function (p) {
+                        new p.BusVisitCtrl().SimpleLoad();
+                    });
                 },
                 gobusVisit: function () {
-                    new busVisitController.BusVisitCtrl().Show();
+                    require(['./Bus/BusVisitCtrl'], function (p) {
+                        new p.BusVisitCtrl().Show();
+                    });
                 },
                 goEditBusVisit: function () {
-                    new busVisitController.BusVisitCtrl().Show();
+                    require(['./Bus/BusVisitCtrl'], function (p) {
+                        new p.BusVisitCtrl().Show();
+                    });
                 },
                 goAdminBus: function () {
                     new adminBusController.BusCtrl().Show();
                 },
                 goViewAdminBus: function () {
                     new adminBusController.BusCtrl().GetAll();
+                },
+                goSearchBooking: function () {
+                    require(['./Search/SearchCtrl'], function (p) {
+                        new p.SearchCtrl().Show();
+                    });
+                },
+                goDriver: function () {
+                    new driverController.DriverCtrl().Show();
+                },
+                goViewDriver: function () {
+                    new driverController.DriverCtrl().GetAll();
+                },
+                goGraveyard: function () {
+                    new graveyardController.GraveyardCtrl().Show();
+                },
+                goViewGraveyard: function () {
+                    new graveyardController.GraveyardCtrl().GetAll();
+                },
+                goTown: function () {
+                    new townController.TownCtrl().Show();
+                },
+                goViewTown: function () {
+                    new townController.TownCtrl().GetAll();
+                },
+                goUnionCouncil: function () {
+                    new unionCouncilController.UnionCouncilCtrl().Show();
+                },
+                goViewUnionCouncil: function () {
+                    new unionCouncilController.UnionCouncilCtrl().GetAll();
+                },
+                goLandmark: function () {
+                    new landmarkController.LandmarkCtrl().Show();
+                },
+                goViewLandmark: function () {
+                    new landmarkController.LandmarkCtrl().GetAll();
+                },
+                goPaymentType: function () {
+                    new paymentTypeController.PaymentTypeCtrl().Show();
+                },
+                goViewPaymentType: function () {
+                    new paymentTypeController.PaymentTypeCtrl().GetAll();
+                },
+                goRefundType: function () {
+                    new refundTypeController.RefundTypeCtrl().Show();
+                },
+                goViewRefundType: function () {
+                    new refundTypeController.RefundTypeCtrl().GetAll();
+                },
+                goVisitType: function () {
+                    new visitTypeController.VisitTypeCtrl().Show();
+                },
+                goViewVisitType: function () {
+                    new visitTypeController.VisitTypeCtrl().GetAll();
+                },
+                goCauseOfDeath: function () {
+                    new causeOfDeathController.CauseOfDeathCtrl().Show();
+                },
+                goViewCauseOfDeath: function () {
+                    new causeOfDeathController.CauseOfDeathCtrl().GetAll();
+                },
+                goTrackingDevice: function () {
+                    new trackingDeviceController.TrackingDeviceCtrl().Show();
+                },
+                goViewTrackingDevice: function () {
+                    new trackingDeviceController.TrackingDeviceCtrl().GetAll();
                 },
                 defaultRoute: function () {
                     //layout.MainRegion.close();

@@ -16,8 +16,22 @@ import bookingController = require("./Booking/BookingCtrl");
 import paymentController = require("./Payment/PaymentCtrl");
 import stationController = require("./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl");
 import refundBookingController = require("./RefundBooking/RefundBookingCtrl");
-import busVisitController = require("./Bus/BusVisitCtrl");
+//import busVisitController = require("./Bus/BusVisitCtrl");
 import adminBusController = require("./Admin/Bus/BusCtrl");
+//import searchController = require("./Search/SearchCtrl");
+
+import driverController = require("./Admin/Driver/DriverCtrl");
+import graveyardController = require("./Admin/Graveyard/GraveyardCtrl");
+import townController = require("./Admin/Town/TownCtrl");
+import unionCouncilController = require("./Admin/UnionCouncil/UnionCouncilCtrl");
+import landmarkController = require("./Admin/Landmark/LandmarkCtrl");
+import paymentTypeController = require("./Admin/PaymentType/PaymentTypeCtrl");
+import refundTypeController = require("./Admin/RefundType/RefundTypeCtrl");
+import visitTypeController = require("./Admin/VisitType/VisitTypeCtrl");
+import causeOfDeathController = require("./Admin/CauseOfDeath/CauseOfDeathCtrl");
+import trackingDeviceController = require("./Admin/TrackingDevice/TrackingDeviceCtrl");
+
+
 
 var datatablesBootstrap = require("datatablesBootstrap");
 
@@ -113,6 +127,36 @@ export class Application extends Marionette.Application {
                 'viewBusVisit': 'goViewBusVisit',
                 'adminBus': 'goAdminBus',
                 'viewAdminBus': 'goViewAdminBus',
+                'searchBooking': 'goSearchBooking',
+                'driver': 'goDriver',
+                'viewDriver': 'goViewDriver',
+
+                'graveyard': 'goGraveyard',
+                'viewGraveyard': 'goViewGraveyard',
+
+                'town': 'goTown',
+                'viewTown': 'goViewTown',
+
+                'unionCouncil': 'goUnionCouncil',
+                'viewUnionCouncil': 'goViewUnionCouncil',
+
+                'landmark': 'goLandmark',
+                'viewLandmark': 'goViewLandmark',
+
+                'paymentType': 'goPaymentType',
+                'viewPaymentType': 'goViewPaymentType',
+
+                'refundType': 'goRefundType',
+                'viewRefundType': 'goViewRefundType',
+
+                'visitType': 'goVisitType',
+                'viewVisitType': 'goViewVisitType',
+
+                'causeOfDeath': 'goCauseOfDeath',
+                'viewCauseOfDeath': 'goViewCauseOfDeath',
+
+                'trackingDevice': 'goTrackingDevice',
+                'viewTrackingDevice': 'goViewTrackingDevice',
                 '*other': 'defaultRoute'
             },
             goUser() {
@@ -145,19 +189,84 @@ export class Application extends Marionette.Application {
                 new refundBookingController.CancelBookingCtrl().Show();
             },
             goViewBusVisit() {
-                new busVisitController.BusVisitCtrl().SimpleLoad();
+                require(['./Bus/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().SimpleLoad(); });
+
             },
             gobusVisit() {
-                new busVisitController.BusVisitCtrl().Show();
+                require(['./Bus/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().Show(); });
+
             },
             goEditBusVisit() {
-                new busVisitController.BusVisitCtrl().Show();
+                require(['./Bus/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().Show(); });
             },
             goAdminBus(){
                 new adminBusController.BusCtrl().Show();
             },
             goViewAdminBus() {
                 new adminBusController.BusCtrl().GetAll();
+            },
+            goSearchBooking() {
+                require(['./Search/SearchCtrl'], (p) => { new p.SearchCtrl().Show(); });
+            },
+            goDriver() {
+                new driverController.DriverCtrl().Show();
+            },
+            goViewDriver() {
+                new driverController.DriverCtrl().GetAll();
+            },
+            goGraveyard() {
+                new graveyardController.GraveyardCtrl().Show();
+            },
+            goViewGraveyard() {
+                new graveyardController.GraveyardCtrl().GetAll();
+            },
+            goTown() {
+                new townController.TownCtrl().Show();
+            },
+            goViewTown() {
+                new townController.TownCtrl().GetAll();
+            },
+            goUnionCouncil() {
+                new unionCouncilController.UnionCouncilCtrl().Show();
+            },
+            goViewUnionCouncil() {
+                new unionCouncilController.UnionCouncilCtrl().GetAll();
+            },
+            goLandmark() {
+                new landmarkController.LandmarkCtrl().Show();
+            },
+            goViewLandmark() {
+                new landmarkController.LandmarkCtrl().GetAll();
+            },
+            goPaymentType() {
+                new paymentTypeController.PaymentTypeCtrl().Show();
+            },
+            goViewPaymentType() {
+                new paymentTypeController.PaymentTypeCtrl().GetAll();
+            },
+            goRefundType() {
+                new refundTypeController.RefundTypeCtrl().Show();
+            },
+            goViewRefundType() {
+                new refundTypeController.RefundTypeCtrl().GetAll();
+            },
+            goVisitType() {
+                new visitTypeController.VisitTypeCtrl().Show();
+            },
+            goViewVisitType() {
+                new visitTypeController.VisitTypeCtrl().GetAll();
+            },
+            goCauseOfDeath() {
+                new causeOfDeathController.CauseOfDeathCtrl().Show();
+            },
+            goViewCauseOfDeath() {
+                new causeOfDeathController.CauseOfDeathCtrl().GetAll();
+            },
+            goTrackingDevice() {
+                new trackingDeviceController.TrackingDeviceCtrl().Show();
+            },
+            goViewTrackingDevice() {
+                new trackingDeviceController.TrackingDeviceCtrl().GetAll();
             },
             defaultRoute() {
                 //layout.MainRegion.close();

@@ -55,20 +55,20 @@ define(["require", "exports", "../../DAL/Login", "../../App", "../../Dtos/AppObj
                 alert("User name or password is wrong..");
             }
 
-            if (loginResponse["authenticationErrorMessage"] !== null) {
-                alert(loginResponse.get("authenticationErrorMessage"));
+            if (loginResponse["errorMessage"] !== null) {
+                alert(loginResponse.get("errorMessage"));
             } else {
-                alert("You are authencated.." + loginResponse["userName"] + " Authenticaiton id is: " + loginResponse["authenticationToken"]);
+                alert("You are authencated.." + loginResponse.loginModel["userName"] + " Authenticaiton id is: " + loginResponse.loginModel["authenticationToken"]);
                 var app = APP.Application.getInstance();
 
                 //Setting global object which can be accissible from other pages.
                 var appObject = new appObjectDto.Models.AppObject();
 
-                appObject.set("Id", loginResponse["id"]);
-                appObject.set("FirstName", loginResponse["firstName"]);
-                appObject.set("LastName", loginResponse["lastName"]);
-                appObject.set("UserName", loginResponse["userName"]);
-                appObject.set("AuthenticationToken", loginResponse["authenticationToken"]);
+                appObject.set("Id", loginResponse.loginModel["id"]);
+                appObject.set("FirstName", loginResponse.loginModel["firstName"]);
+                appObject.set("LastName", loginResponse.loginModel["lastName"]);
+                appObject.set("UserName", loginResponse.loginModel["userName"]);
+                appObject.set("AuthenticationToken", loginResponse.loginModel["authenticationToken"]);
 
                 this.App.reqres.setHandler("AppGlobalSetting", function () {
                     return appObject;

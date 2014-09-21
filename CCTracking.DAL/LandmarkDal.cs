@@ -88,6 +88,8 @@ namespace CCTracking.DAL
             Landmark landmark = baseModel as Landmark;
             if (!dr.IsDBNull(dr.GetOrdinal("UcId")))
                 landmark.UcId = dr.GetInt32(dr.GetOrdinal("UcId"));
+            if (!dr.IsDBNull(dr.GetOrdinal("UcDesc")))
+                landmark.UcDesc = dr.GetString(dr.GetOrdinal("UcDesc"));
             if (!dr.IsDBNull(dr.GetOrdinal("Name")))
                 landmark.Name = dr.GetString(dr.GetOrdinal("Name"));
         }

@@ -62,32 +62,6 @@ export class DriverCollectionView extends helper.Views.CompositeView {
         options.itemViewContainer = "tbody";
         super(options);
     }
-    //onShow() {
-
-    //    this.dataTable = this.$el.find("#tblBooking").dataTable({
-    //        "autoWidth": false,
-    //        "info": true,
-    //        "processing": true,
-    //        //"scrollY": "500px",
-    //        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-    //        "language": {
-    //            "paginate": {
-    //                "next": "Next",
-    //                "previous": "Prev"
-    //            },
-    //            "emptyTable": "No record found!",
-    //            //"info": "Dispalying page _PAGE_ of _PAGES_",
-    //            "infoEmpty": "No record found!",
-    //            "zeroRecords": "kuch nahi milla"
-    //        }
-    //        //"pageLength": 50,
-
-    //        //"lengthChange": false
-
-    //        //"lengthMenu": [[5, 10, 15, 20], [5, 10, 15, 20]]
-
-    //    });
-    //}
 }
 
 export class DriverItemView extends helper.Views.ItemView {

@@ -42,7 +42,7 @@ export class LoginItemView extends Marionette.ItemView {
     //    //loginResponse: DAL.Models.LoginResponse
     //    alert('global handler');
     //}
-    Login(e) {        
+    Login(e) {
         e.preventDefault();
         //this.trigger("login:clicked");
         var User = new DAL.Models.LoginRequest();
@@ -61,23 +61,23 @@ export class LoginItemView extends Marionette.ItemView {
         if (loginResponse == undefined) {
             alert("User name or password is wrong..");
         }
-
-        if (loginResponse["authenticationErrorMessage"] !== null) {
-            alert(loginResponse.get("authenticationErrorMessage"));
+        
+        if (loginResponse["errorMessage"] !== null) {
+            alert(loginResponse.get("errorMessage"));
         }
         else {
 
-            alert("You are authencated.." + loginResponse["userName"] + " Authenticaiton id is: " + loginResponse["authenticationToken"]);
+            alert("You are authencated.." + loginResponse.loginModel["userName"] + " Authenticaiton id is: " + loginResponse.loginModel["authenticationToken"]);
             var app = APP.Application.getInstance();
 
             //Setting global object which can be accissible from other pages.
             var appObject = new appObjectDto.Models.AppObject();
 
-            appObject.set("Id", loginResponse["id"]);
-            appObject.set("FirstName", loginResponse["firstName"]);
-            appObject.set("LastName", loginResponse["lastName"]);
-            appObject.set("UserName", loginResponse["userName"]);
-            appObject.set("AuthenticationToken", loginResponse["authenticationToken"]);
+            appObject.set("Id", loginResponse.loginModel["id"]);
+            appObject.set("FirstName", loginResponse.loginModel["firstName"]);
+            appObject.set("LastName", loginResponse.loginModel["lastName"]);
+            appObject.set("UserName", loginResponse.loginModel["userName"]);
+            appObject.set("AuthenticationToken", loginResponse.loginModel["authenticationToken"]);
 
             this.App.reqres.setHandler("AppGlobalSetting", () => appObject, this);
 
@@ -96,7 +96,7 @@ export class LoginItemView extends Marionette.ItemView {
 
             //app.AppLayout.HeaderRegion.show(headerView);
             app.HeaderRegion.show(headerView);
-            
+
             if (loginResponse["isAdmin"]) {
                 //admin view
                 //app.AppLayout.LeftRegion.show(new adminLeft.AdminLeftItemView());
@@ -123,4 +123,3 @@ export class LoginItemView extends Marionette.ItemView {
         }
     }
 }
- 

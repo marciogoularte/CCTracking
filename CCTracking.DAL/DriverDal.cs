@@ -35,9 +35,10 @@ namespace CCTracking.DAL
             dictionary.Add("@CentreId", driver.CentreId);
             dictionary.Add("@FirstName", driver.FirstName);
             dictionary.Add("@LastName", driver.LastName);
-            dictionary.Add("@CNIC", driver.CNIC);
+            dictionary.Add("@CNIC", driver.Cnic);
             dictionary.Add("@Mobile", driver.Mobile);
             dictionary.Add("@Address", driver.Address);
+            dictionary.Add("@City", driver.City);
             base.ExecuteSql(driver, dictionary);
             return "dbo.SaveDriver";
         }
@@ -89,6 +90,9 @@ namespace CCTracking.DAL
         {
             base.MapValues(baseModel, dr);
             Driver driver = baseModel as Driver;
+            driver.CentreId = dr.GetInt32(dr.GetOrdinal("CentreId"));
+            if (!dr.IsDBNull(dr.GetOrdinal("CentreDesc")))
+                driver.CentreDesc = dr.GetString(dr.GetOrdinal("CentreDesc"));
             driver.FirstName = dr.GetString(dr.GetOrdinal("FirstName"));
             if (!dr.IsDBNull(dr.GetOrdinal("LastName")))
                 driver.LastName = dr.GetString(dr.GetOrdinal("LastName"));
@@ -99,7 +103,7 @@ namespace CCTracking.DAL
             if (!dr.IsDBNull(dr.GetOrdinal("Mobile")))
                 driver.Mobile = dr.GetString(dr.GetOrdinal("Mobile"));
             if (!dr.IsDBNull(dr.GetOrdinal("CNIC")))
-                driver.CNIC = dr.GetString(dr.GetOrdinal("CNIC"));
+                driver.Cnic = dr.GetString(dr.GetOrdinal("CNIC"));
         }
     }
 }

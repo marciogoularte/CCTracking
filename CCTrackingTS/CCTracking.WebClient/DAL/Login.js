@@ -56,7 +56,7 @@ define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "jquery"],
                     password: "",
                     isAdmin: false,
                     authenticationToken: "",
-                    authenticationErrorMessage: ""
+                    errorMessage: ""
                 };
             };
             return LoginResponse;
@@ -104,7 +104,7 @@ define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "jquery"],
             }
         }).fail(function (e) {
             var response = _this.ajaxRequest.getResponse();
-            response.AuthenticationErrorMessage = e.responseText.toString();
+            response.errorMessage = e.responseText.toString();
             deferred.reject(response);
         });
 

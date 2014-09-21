@@ -22,6 +22,7 @@ define(["require", "exports", "backbone"], function(require, exports) {
                     firstName: "",
                     lastName: "",
                     cnic: "",
+                    mobile: "",
                     address: "",
                     city: "",
                     isActive: "",
@@ -34,15 +35,16 @@ define(["require", "exports", "backbone"], function(require, exports) {
             return DriverDto;
         })(Backbone.Model);
         Models.DriverDto = DriverDto;
-        var BusCollection = (function (_super) {
-            __extends(BusCollection, _super);
-            function BusCollection(options) {
+        var DriverCollection = (function (_super) {
+            __extends(DriverCollection, _super);
+            function DriverCollection(options) {
                 this.model = DriverDto;
                 _super.call(this, options);
             }
-            return BusCollection;
+            return DriverCollection;
         })(Backbone.Collection);
-        Models.BusCollection = BusCollection;
+        Models.DriverCollection = DriverCollection;
     })(exports.Models || (exports.Models = {}));
     var Models = exports.Models;
 });
+//# sourceMappingURL=DriverDto.js.map

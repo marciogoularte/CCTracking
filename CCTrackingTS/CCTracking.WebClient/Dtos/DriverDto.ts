@@ -12,6 +12,7 @@ export module Models {
                 firstName: "",
                 lastName: "",
                 cnic: "",
+                mobile:"",
                 address: "",
                 city: "",
                 isActive: "",
@@ -22,7 +23,7 @@ export module Models {
             };
         }
     }
-    export class BusCollection extends Backbone.Collection {
+    export class DriverCollection extends Backbone.Collection {
         constructor(options?: any) {
             this.model = DriverDto;
             super(options);

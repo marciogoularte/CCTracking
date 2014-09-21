@@ -44,7 +44,7 @@ export module Models {
                 password: "",
                 isAdmin: false,
                 authenticationToken: "",
-                authenticationErrorMessage: ""
+                errorMessage: ""
             }
         }
 
@@ -91,7 +91,7 @@ export function Login1(loginRequest: Models.LoginRequest) {
         })
         .fail(e=>{
             var response = this.ajaxRequest.getResponse();
-            response.AuthenticationErrorMessage = e.responseText.toString();
+            response.errorMessage = e.responseText.toString();
             deferred.reject(response);
         })
 

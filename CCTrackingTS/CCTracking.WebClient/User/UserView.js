@@ -61,11 +61,8 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/UserDto", 
         }
         UserView.prototype.ShowModal = function () {
             app = application.Application.getInstance();
-
-            //var alertModel = new Backbone.Model({ type:"btn-danger", title: "some title", message: "body goes here" });
-            //var view = new helper.ModalPopupView({ model: alertModel });
-            //app.ModalRegion.show(view);
-            helper.ShowModalPopup("warning", "Test Title", "Test Message");
+            app.ModalRegion.show(new helper.ModalPopupView());
+            //app.LeftRegion.show(new SuccessModalView());
         };
 
         //TODO: must remove this method if knockout binding works

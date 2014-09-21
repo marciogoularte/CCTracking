@@ -88,6 +88,8 @@ namespace CCTracking.DAL
             Graveyard graveyard = baseModel as Graveyard;
             if (!dr.IsDBNull(dr.GetOrdinal("LandmarkId")))
                 graveyard.LandmarkId = dr.GetInt32(dr.GetOrdinal("LandmarkId"));
+            if (!dr.IsDBNull(dr.GetOrdinal("LandmarkDesc")))
+                graveyard.LandmarkDesc = dr.GetString(dr.GetOrdinal("LandmarkDesc"));
             if (!dr.IsDBNull(dr.GetOrdinal("Name")))
                 graveyard.Name = dr.GetString(dr.GetOrdinal("Name"));
         }

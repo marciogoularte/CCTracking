@@ -25,14 +25,14 @@ namespace CCTracking.DAL
         protected override string GetByCriteriaSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
             CauseofDeath causeofDeath = baseModel as CauseofDeath;
-            dictionary.Add("@Description", causeofDeath.Description);
+            dictionary.Add("@Name", causeofDeath.Name);
             return "GetCauseofDeathByCriteria";
         }
 
         protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary) 
         {
             CauseofDeath causeofDeath = baseModel as CauseofDeath;
-            dictionary.Add("@Description", causeofDeath.Description);
+            dictionary.Add("@Name", causeofDeath.Name);
             base.ExecuteSql(causeofDeath, dictionary);
             return "dbo.SaveCauseofDeath";
         }
@@ -85,8 +85,8 @@ namespace CCTracking.DAL
             base.MapValues(baseModel, dr);
             CauseofDeath causeofDeath = baseModel as CauseofDeath;
 
-            if (!dr.IsDBNull(dr.GetOrdinal("Description")))
-                causeofDeath.Description = dr.GetString(dr.GetOrdinal("Description"));
+            if (!dr.IsDBNull(dr.GetOrdinal("Name")))
+                causeofDeath.Name = dr.GetString(dr.GetOrdinal("Name"));
         }
     }
 }

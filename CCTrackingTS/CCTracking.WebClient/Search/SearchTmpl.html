@@ -1,0 +1,62 @@
+﻿<div id="BookingMainPane">
+    <div class="panel panel-default">
+        <div class="panel-heading header-bold"><span class="glyphicon glyphicon-time"></span>SEARCH FORM</div>
+        <div class="panel-body">
+            <form id="form1">
+                <table class="table table-condensed table-hover form-group">
+                    <tr>
+                        <td class="col-sm-6 col-md-6">
+                            <input type="text" id="txtName" class="form-control input-sm" placeholder="Contact Info: Name, Mobile or Nic" />
+                        </td>
+                        <td class="col-sm-6 col-md-6">
+                            <input type="text" id="Text1" class="form-control input-sm" placeholder="Deseased Info: Name or Address" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-6 col-md-6">
+                            <input name="rbGender" type="radio" title="Male" value="1" />Male 
+                            <input name="rbGender" type="radio" title="Female" value="2" />Female
+                        </td>
+                        <td class="col-sm-6 col-md-6">
+                            <input name="rbStatus" type="radio" title="Paid" value="1" />Paid
+                            <input name="rbStatus" type="radio" title="UnPaid" value="2" />UnpPaid 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-6 col-md-6">
+                            <input type="date" id="Text2" class="form-control input-sm" placeholder="Booking Date" />
+                        </td>
+                        <td class="col-sm-6 col-md-6">
+                             <select id="ddlGraveyard" class="form-control input-sm"
+                                data-bind="options: model.graveyardList, optionsText:'description', value:model.graveyardIdSelected">
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-6 col-md-6">
+                             <select id="ddlCentre" class="form-control input-sm"
+                                        data-bind="options: model.alkhidmatCentreList, optionsText:'description', value:model.alkhidmatCentreSelected">
+                             </select>
+                        </td>
+                        <td class="col-sm-6 col-md-6">
+                             <select id="ddlBusDetails" class="form-control input-sm"
+                                        data-bind="options: model.busList, optionsText:'description', value:model.busSelected">
+                             </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-6 col-md-6">
+                            &nbsp;
+                        </td>
+                        <td class="col-sm-6 col-md-6 ">
+                            <span class="pull-right">
+                            <button title="Save" class="btn btn-primary">Search</button>&nbsp;&nbsp;
+                            <button type="reset" class="btn btn-primary" title="Cancel">Cancel</button>
+                                </span>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

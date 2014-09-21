@@ -54,9 +54,8 @@ export class BookingCtrl extends helper.Controller {
         }
     }
 
-    GetByIdCompleted(bookingResponse: dto.Models.BookingResponse)
-    {
-        var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'))
+    GetByIdCompleted(bookingResponse: dto.Models.BookingResponse) {
+        var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
         var model = new Backbone.Model(bookingResponse["bookingModel"]);
 
         model.set("causeOfDeathList", lookupResponse.causeOfDeath);

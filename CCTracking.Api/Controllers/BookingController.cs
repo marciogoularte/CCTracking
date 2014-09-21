@@ -1,14 +1,6 @@
-﻿using CCTracking.Api.Models;
-using CCTracking.DAL;
+﻿using CCTracking.DAL;
 using CCTracking.Dto;
 using CCTracking.Dto.Response;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace CCTracking.Api.Controllers
@@ -59,6 +51,7 @@ namespace CCTracking.Api.Controllers
             BookingResponse bookingResponse = (BookingResponse)baseModelResponse;
             return bookingResponse;
         }
+       
 
 
     }
