@@ -18,6 +18,46 @@ define(["require", "exports", "./App", "text!./Common/Templates/ModalPopup.html"
     String.prototype["getOuterHTML"] = function (selector) {
         return $(this.toString()).find(selector)[0].outerHTML;
     };
+
+    ko.bindingHandlers.customDateBinding = {
+        init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+            //alert(element.id);
+            //init logic
+            //var unwrap = ko.utils.unwrapObservable;
+            if (valueAccessor()._latestValue != "" && valueAccessor()._latestValue != '1/1/0001 12:00:00 AM') {
+                var storedDate = new Date(valueAccessor()._latestValue);
+                element.value = (storedDate.getMonth() + 1) + "/" + storedDate.getDate() + "/" + storedDate.getFullYear();
+            }
+
+            //alert(element.value);
+            ko.utils.registerEventHandler(element, "change", function () {
+                if (element.value != "" && element.value != '1/1/0001 12:00:00 AM') {
+                    var value = valueAccessor();
+
+                    //set our observable to the parsed date from the input
+                    var aDate = new Date(element.value);
+
+                    //value(new Date(element.value));
+                    value((aDate.getMonth() + 1) + "/" + aDate.getDate() + "/" + aDate.getFullYear());
+                }
+                //alert(element.value);
+            });
+        },
+        update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+            //update logic
+            if (element.value != "" && element.value != '1/1/0001 12:00:00 AM') {
+                var value = valueAccessor();
+                var valueUnwrapped = ko.utils.unwrapObservable(value);
+                if (valueUnwrapped) {
+                    var inputDate = new Date(valueUnwrapped);
+                    var shortDate = (inputDate.getMonth() + 1) + "/" + inputDate.getDate() + "/" + inputDate.getFullYear();
+                    element.value = shortDate;
+                }
+            }
+            //alert(element.value);
+        }
+    };
+
     var Controller = (function () {
         function Controller() {
         }

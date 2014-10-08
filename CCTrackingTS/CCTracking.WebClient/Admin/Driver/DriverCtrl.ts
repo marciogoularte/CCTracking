@@ -67,7 +67,7 @@ export class DriverCtrl extends helper.Controller {
         model.set("cnic", "");
         model.set("address", "");
         model.set("city", "");
-         model.set("mobile", "");
+        model.set("mobile", "");
         model.set("isActive", "");
 
         this.driverViewModel = new views.DriverViewModel(model, this);
@@ -118,7 +118,7 @@ export class DriverCtrl extends helper.Controller {
 
     GetAllCompleted(driver: dto.Models.DriverDto) {
         //app = application.Application.getInstance();
-       //  debugger;
+        //  debugger;
         this.collection.reset(driver["driverList"]);
         this.collectionView = new views.DriverCollectionView({ collection: this.collection });
         this.collectionView.on("itemview:ShowDetail", (view) => this.GetByIdCompleted(view.model));

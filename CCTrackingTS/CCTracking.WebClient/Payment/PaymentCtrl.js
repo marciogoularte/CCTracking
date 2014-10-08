@@ -225,6 +225,10 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
         //Add(booking: dto.Models.BookingRequest) {
         PaymentCtrl.prototype.Save = function (payment) {
             //reset actual id - match with DAL object's properties
+            if (this.backboneCollection.length < 1) {
+                alert("Please add bus details");
+                return;
+            }
             payment.set("bus", payment.get("busSelected").id);
             payment.set("driver", payment.get("driverSelected").id);
             payment.set("alkhidmatCentre", payment.get("alkhidmatCentreSelected").id);

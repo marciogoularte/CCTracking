@@ -1,116 +1,68 @@
-﻿var __extends = this.__extends || function (d, b) {
+﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "jquery"], function(require, exports, baseDAL) {
-    /// <reference path="../../Scripts/typings/require/require.d.ts" />
-    /// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
-    /// <amd-dependency path="jquery"/>
-    var $ = require("jquery");
+define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "CCTracking.WebClient/Dtos/LoginDto"], function(require, exports, baseDAL, loginDto) {
+    var LoginDal = (function (_super) {
+        __extends(LoginDal, _super);
+        function LoginDal() {
+            _super.call(this, this);
+        }
+        LoginDal.prototype.getResponse = function () {
+            return new loginDto.Models.LoginDto();
+        };
+        return LoginDal;
+    })(baseDAL.BaseDto);
+    exports.LoginDal = LoginDal;
 
-    (function (Models) {
-        var LoginRequest = (function (_super) {
-            __extends(LoginRequest, _super);
-            function LoginRequest() {
-                _super.apply(this, arguments);
-            }
-            LoginRequest.prototype.default = function () {
-                return {
-                    userName: "",
-                    password: ""
-                };
-            };
-            return LoginRequest;
-        })(Backbone.Model);
-        Models.LoginRequest = LoginRequest;
-        var LoginResponse = (function (_super) {
-            __extends(LoginResponse, _super);
-            function LoginResponse() {
-                _super.call(this, this);
-            }
-            LoginResponse.prototype.getResponse = function () {
-                return new Models.LoginResponse();
-                //return this;
-            };
-
-            //public setServerResponse(response) {
-            //    var loginResponse = new Models.LoginResponse();
-            //    loginResponse = response;
-            //    //loginResponse.id = response.Id;
-            //    //loginResponse.userName = response.UserName;
-            //    //loginResponse.password = response.Password;
-            //    //loginResponse.authenticationToken = response.AuthenticationToken;
-            //    return loginResponse;
-            //}
-            LoginResponse.prototype.default = function () {
-                return {
-                    id: "",
-                    firstName: "",
-                    lastName: "",
-                    email: "",
-                    mobile: "",
-                    nic: "",
-                    userName: "",
-                    password: "",
-                    isAdmin: false,
-                    authenticationToken: "",
-                    errorMessage: ""
-                };
-            };
-            return LoginResponse;
-        })(baseDAL.BaseDto);
-        Models.LoginResponse = LoginResponse;
-    })(exports.Models || (exports.Models = {}));
-    var Models = exports.Models;
-
-    function Login(loginRequest) {
-        var o = new Models.LoginResponse();
-        return o.doAjaxRequest(loginRequest, "GET", "User");
+    function Login(loginDto) {
+        var o = new LoginDal();
+        return o.doAjaxRequest(loginDto, "GET", "User");
     }
     exports.Login = Login;
-    function Login1(loginRequest) {
-        var _this = this;
-        var deferred = $.Deferred();
-
-        //setTimeout(function () {
-        //    console.log('counter..');
-        //    deferred.reject("show message....");
-        //}, 5000);
-        var request, requestType, actionUrl;
-        request = loginRequest;
-        requestType = 'GET';
-        actionUrl = 'User';
-        var webApiUrl = 'http://localhost/CCTracking.Api/api/' + actionUrl;
-        var postData = null;
-        if (request != null) {
-            postData = request.toJSON();
-        }
-        $.ajax({
-            type: requestType,
-            datatype: 'json',
-            url: webApiUrl,
-            //data: { userName: loginRequest.get("userName"), password: loginRequest.get("password") }
-            data: postData
-        }).done(function (loginResponse) {
-            var response = loginResponse;
-            if (loginResponse == undefined) {
-                deferred.reject(null);
-            } else {
-                response = _this.ajaxRequest.getResponse();
-                response = loginResponse;
-                deferred.resolve(response);
-            }
-        }).fail(function (e) {
-            var response = _this.ajaxRequest.getResponse();
-            response.errorMessage = e.responseText.toString();
-            deferred.reject(response);
-        });
-
-        return deferred.promise();
-    }
-    exports.Login1 = Login1;
 });
+//export function Login1(loginRequest: loginDto.Models.LoginDto) {
+//    var deferred = $.Deferred();
+//    //setTimeout(function () {
+//    //    console.log('counter..');
+//    //    deferred.reject("show message....");
+//    //}, 5000);
+//    var request: any, requestType: string, actionUrl: string
+//    request = loginRequest;
+//    requestType = 'GET';
+//    actionUrl = 'User';
+//    var webApiUrl = 'http://localhost/CCTracking.Api/api/' + actionUrl;
+//    var postData = null;
+//    if (request != null) {
+//        postData = request.toJSON();
+//    }
+//    $.ajax({
+//        type: requestType,
+//        datatype: 'json',
+//        url: webApiUrl,
+//        //data: { userName: loginRequest.get("userName"), password: loginRequest.get("password") }
+//        data: postData
+//    }).done(loginDto=> {
+//            var response = loginDto;
+//        if (loginDto == undefined) {
+//                deferred.reject(null);
+//            }
+//            else {
+//                response = this.ajaxRequest.getResponse();
+//                response = loginDto;
+//                deferred.resolve(response);
+//            }
+//        })
+//        .fail(e=>{
+//            var response = this.ajaxRequest.getResponse();
+//            response.errorMessage = e.responseText.toString();
+//            deferred.reject(response);
+//        })
+//    return deferred.promise();
+//}
 //aaa
 //# sourceMappingURL=Login.js.map

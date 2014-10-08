@@ -36,7 +36,8 @@ namespace CCTracking.DAL
             facade = new CCTracking.DAL.PaymentDal();
             BaseModelResponse baseModelResponse = facade.GetById(id);
             PaymentResponse paymentResponse = (PaymentResponse)baseModelResponse;
-            paymentResponse.PaymentModel.BusVisits = GetBusVisit(paymentResponse.PaymentModel.BookingId);
+            if (paymentResponse.PaymentModel != null)
+                paymentResponse.PaymentModel.BusVisits = GetBusVisit(paymentResponse.PaymentModel.BookingId);
             return baseModelResponse;
         }
 

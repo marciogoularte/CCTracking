@@ -1,21 +1,20 @@
 ﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
 /// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+/// <amd-dependency path="marionette"/>
+/// <amd-dependency path="jquery"/>
+/// <amd-dependency path="datepicker"/>
+/// <amd-dependency path="knockout"/>
+/// <amd-dependency path="text!./SearchTmpl.html"/>
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "text!./SearchTmpl.html", "text!./SearchGrid.html"], function(require, exports, helper) {
-    /// <amd-dependency path="marionette"/>
-    /// <amd-dependency path="jquery"/>
-    /// <amd-dependency path="knockout"/>
-    /// <amd-dependency path="text!./SearchTmpl.html"/>
-    /// <amd-dependency path="text!./SearchGrid.html"/>
+define(["require", "exports", "../Helper", "marionette", "jquery", "datepicker", "knockout", "text!./SearchTmpl.html"], function(require, exports, helper) {
     var _ = require('underscore');
 
     var templateView = require("text!./SearchTmpl.html");
-    var templateGrid = require("text!./SearchGrid.html");
 
     var app;
 
@@ -31,21 +30,14 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
     var SearchView = (function (_super) {
         __extends(SearchView, _super);
         function SearchView(options) {
-            this.template = templateView;
-            this.events = {
-                "submit": "Save",
-                "click .jsCancel": "Cancel"
-            };
+            this.template = templateView; //templateView.getOuterHTML("#searchFilter");
+
+            //this.events = {
+            //    "click .jsSearch": "Search",
+            //    "click .jsCancel": "Cancel"
+            //}
             _super.call(this, options);
         }
-        SearchView.prototype.Cancel = function () {
-            this.trigger("CancelForm");
-        };
-
-        SearchView.prototype.Save = function (e) {
-            e.preventDefault();
-            this.trigger("SearchBooking");
-        };
         return SearchView;
     })(helper.Views.MvvmView);
     exports.SearchView = SearchView;
@@ -54,12 +46,30 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
         __extends(SearchCollectionView, _super);
         function SearchCollectionView(options) {
             options.itemView = SearchItemView;
-            options.template = templateGrid.getOuterHTML("#gridTemplate");
-            options.itemViewContainer = "tbody";
+            options.template = templateView.getOuterHTML("#gridTemplate");
+            options.itemViewContainer = "#tblSearch tbody";
+            this.events = {
+                "click .jsSearch": "Search",
+                "click .jsCancel": "Cancel"
+            };
             _super.call(this, options);
         }
+        SearchCollectionView.prototype.Search = function (e) {
+            e.preventDefault();
+            this.trigger("SearchBooking");
+        };
+
+        //initialize() {
+        //    alert('initialize..');
+        //    $("#txtBookingDate").datepicker();
+        //}
+        SearchCollectionView.prototype.onDomRefresh = function () {
+            //alert('onDomRefresh');
+            //$("#txtBookingDate").datepicker();
+            //this.$el.find("#txtBookingDate").datepicker();
+        };
         return SearchCollectionView;
-    })(helper.Views.CollectionView);
+    })(helper.Views.CompositeView);
     exports.SearchCollectionView = SearchCollectionView;
 
     var SearchItemView = (function (_super) {
@@ -67,7 +77,7 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
         function SearchItemView(options) {
             if (!options)
                 options = {};
-            options.template = templateGrid.getOuterHTML("#rowTemplate");
+            options.template = templateView.getOuterHTML("#rowTemplate");
             options.tagName = "tr";
             options.className = "jsRowClick";
             options.events = {

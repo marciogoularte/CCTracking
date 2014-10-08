@@ -14,5 +14,6 @@ namespace CCTracking.Dto
         public int ModifiedBy { get; set; }
         public DateTime ModifiedDate { get; set; }
         public bool IsActive { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

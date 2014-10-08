@@ -15,7 +15,7 @@ namespace CCTracking.Api.Controllers
     {
         //UserStore _userStore = new UserStore();
         static List<User> users = new List<User>();
-        static int rowCounter=10;
+        static int rowCounter = 10;
         [HttpGet]
         public User Get(int id)
         {
@@ -34,13 +34,13 @@ namespace CCTracking.Api.Controllers
             BaseModelResponse baseModelResponse = facade.GetAll();
             UserResponse userResponse = baseModelResponse as UserResponse;
             return userResponse.UserList;
-        
+
         }
-        private bool IsValidAuthenticationToken() 
+        private bool IsValidAuthenticationToken()
         {
             IEnumerable<string> headerList = Request.Headers.GetValues("AuthenticationToken");
             string authenticationToken = headerList.FirstOrDefault();
-            Guid authenticationGuid= Guid.Empty;
+            Guid authenticationGuid = Guid.Empty;
             try
             {
                 if (Guid.TryParse(Security.Decrypt(authenticationToken), out authenticationGuid))
@@ -88,10 +88,10 @@ namespace CCTracking.Api.Controllers
         //}
 
         [HttpGet]
-        public LoginResponse Post(string UserName, string Password)
+        public Login Post(string UserName, string Password)
         {
             Login login = null;
-            LoginResponse loginResponse = null;
+            //LoginResponse loginResponse = null;
 
             User user = new Dto.User { UserName = UserName, Password = Password };
 
@@ -103,7 +103,7 @@ namespace CCTracking.Api.Controllers
             // User u = _userStore.GetAllUsers().Find(f => f.UserName.ToLower() == userName.ToLower() && f.Password == password);
             if (userResponse.UserList != null && userResponse.UserList.Count > 0)
             {
-                loginResponse = new LoginResponse();
+                //loginResponse = new LoginResponse();
                 login = new Login();
 
                 user = userResponse.UserList.Find(u => u.UserName == UserName);
@@ -115,10 +115,10 @@ namespace CCTracking.Api.Controllers
                 login.Mobile = user.Mobile;
                 login.Email = user.Email;
                 login.Address = user.Address;
-                login.CNIC = user.CNIC;
+                login.CNIC = user.Cnic;
                 login.AuthenticationToken = Security.Encrypt(Guid.NewGuid().ToString());
                 login.IsAdmin = (Roles)user.RoleId == Roles.Admin;
-                loginResponse.LoginModel = login;
+                //loginResponse.LoginModel = login;
 
                 //u.AuthenticationToken = Security.Encrypt(Guid.NewGuid().ToString());
                 //u.UserName = userName;
@@ -134,16 +134,16 @@ namespace CCTracking.Api.Controllers
             }
             else if (!string.IsNullOrEmpty(userResponse.ErrorMessage))
             {
-                loginResponse = new LoginResponse();
+                //loginResponse = new LoginResponse();
                 login = new Login();
 
                 login.ErrorMessage = userResponse.ErrorMessage;
-                loginResponse.LoginModel = login;
+                //loginResponse.LoginModel = login;
                 //HttpContext.Current.Session.Remove("AuthenticationToken");
             }
             //return Json(u, JsonRequestBehavior.AllowGet);
             //return JsonConvert.SerializeObject(u);
-            return loginResponse;
+            return login;
         }
 
 
@@ -151,32 +151,30 @@ namespace CCTracking.Api.Controllers
         [HttpPost]
         public User SaveUser(User user)
         {
-            //TODO: if authenticaiton token is invalid then return
-            //TODO: apply server side validation
-            //TODO: save data in the db
-            //if (user != null)
-            //{
-            //    if (user.Id <= 0)
-            //    {
-            //        user.Id = rowCounter++;
-            //        users.Add(user);
-            //    }
-            //    else
-            //    {
-            //        //List<User> existingUser = users.Where(u => u.Id == user.Id).ToList();
-            //        //existingUser.ForEach(u=>u=user);
-            //        //existingUser = user;
-            //        //User eu = users.Find(u => u.Id == user.Id);
-            //        int i = 0;
-            //        for (i = 0; i < users.Count; i++)
-            //        {
-            //            if (users[i].Id == user.Id)
-            //                break;
-            //        }
-            //        users[i] = user;
-            //    }
-            //}
-            return null;
+            if (user != null)
+            {
+                //booking.Id = rowCounter++;
+                DBFacade facade = new UserDal();
+                if (user.Id <= 0)
+                {
+                    user.Password = "123456";
+                    user.CreatedDate = user.ModifiedDate = DateTime.Today;
+                    user.CreatedBy = user.ModifiedBy;
+                }
+                else
+                {
+                    user.ModifiedDate = DateTime.Today;
+                }
+                user.FromDate = user.ToDate = DateTime.Today;
+                BaseModelResponse userResponse = facade.Execute(user);
+                if (userResponse is UserResponse)
+                { user = ((UserResponse)userResponse).UserModel; }
+                else
+                {
+                    user.ErrorMessage = userResponse.ErrorMessage;
+                }
+            }
+            return user;
         }
 
     }

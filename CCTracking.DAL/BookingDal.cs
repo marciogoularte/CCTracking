@@ -21,11 +21,19 @@ namespace CCTracking.DAL
         }
         protected override string GetByCriteriaSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
-            
-            Booking booking = (Booking)baseModel;
-            dictionary.Add("@ContactName", booking.ContactName);
-            //multiple criteria..
-            return "select * from Booking where ContactName =@ContactName";
+
+            SearchCriteria searchCriteria = (SearchCriteria)baseModel;
+            var contactInfo = string.IsNullOrEmpty(searchCriteria.ContactInfo) ? null : searchCriteria.ContactInfo;
+            var deseasedInfo = string.IsNullOrEmpty(searchCriteria.DeseasedInfo) ? null : searchCriteria.DeseasedInfo;
+            //var genderId = searchCriteria.GenderId == 0 ? null : searchCriteria.GenderId;
+            dictionary.Add("@ContactInfo", "%" + contactInfo + "%");
+            dictionary.Add("@DeseasedInfo", "%" + deseasedInfo + "%");
+            dictionary.Add("@GenderId", searchCriteria.GenderId);
+            dictionary.Add("@PaymentStatusId", searchCriteria.PaymentStatusId);
+            dictionary.Add("@GreveyardId", searchCriteria.GreveyardId);
+            dictionary.Add("@CentreId", searchCriteria.CentreId);
+            dictionary.Add("@BusId", searchCriteria.BusId);
+            return "GetBookingByCriteria";
         }
         protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
@@ -117,9 +125,9 @@ namespace CCTracking.DAL
             booking.PickupTime = dr["PickupTime"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dr["PickupTime"]);
             booking.ReturnTime = dr["ReturnTime"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dr["ReturnTime"]);
             booking.GraveyardId = dr["GraveyardId"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dr["GraveyardId"]);
-            booking.NamazEJanazaHeldIn = dr["NamazEJanazaHeldIn"] == DBNull.Value ?Convert.ToByte(0) : Convert.ToByte(dr["NamazEJanazaHeldIn"]);
+            booking.NamazEJanazaHeldIn = dr["NamazEJanazaHeldIn"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dr["NamazEJanazaHeldIn"]);
             booking.NamazEJanazaLocation = dr["NamazEJanazaLocation"] == DBNull.Value ? "" : dr["NamazEJanazaLocation"].ToString();
-            booking.MasjidName = dr["MasjidName"] == DBNull.Value ? "" : dr["MasjidName"].ToString();            
+            booking.MasjidName = dr["MasjidName"] == DBNull.Value ? "" : dr["MasjidName"].ToString();
             booking.OtherDetail = dr["OtherDetail"].ToString();
 
         }

@@ -10,46 +10,30 @@ var __extends = this.__extends || function (d, b) {
 };
 define(["require", "exports", "backbone"], function(require, exports) {
     (function (Models) {
-        var UserDto = (function (_super) {
-            __extends(UserDto, _super);
-            function UserDto() {
+        var LoginDto = (function (_super) {
+            __extends(LoginDto, _super);
+            function LoginDto() {
                 _super.apply(this, arguments);
             }
-            UserDto.prototype.default = function () {
+            LoginDto.prototype.default = function () {
                 return {
                     id: "",
                     firstName: "",
                     lastName: "",
                     email: "",
                     mobile: "",
-                    cnic: "",
-                    address: "",
-                    city: "",
+                    nic: "",
                     userName: "",
                     password: "",
-                    centreId: "",
-                    centreDesc: "",
-                    roleId: "",
-                    roleDesc: "",
                     isAdmin: false,
                     authenticationToken: "",
-                    authenticationErrorMessage: ""
+                    errorMessage: ""
                 };
             };
-            return UserDto;
+            return LoginDto;
         })(Backbone.Model);
-        Models.UserDto = UserDto;
-        var UserCollection = (function (_super) {
-            __extends(UserCollection, _super);
-            function UserCollection(options) {
-                this.model = UserDto;
-                _super.call(this, options);
-            }
-            return UserCollection;
-        })(Backbone.Collection);
-        Models.UserCollection = UserCollection;
+        Models.LoginDto = LoginDto;
     })(exports.Models || (exports.Models = {}));
     var Models = exports.Models;
 });
-//aaa
-//# sourceMappingURL=UserDto.js.map
+//# sourceMappingURL=LoginDto.js.map

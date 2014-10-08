@@ -8,7 +8,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../CCTracking.WebClient/Login/Views/LoginView", "./ModalHelper", "./Bus/BusCtrl", "./User/UserCtrl", "./Booking/BookingCtrl", "./Payment/PaymentCtrl", "./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl", "./RefundBooking/RefundBookingCtrl", "./Admin/Bus/BusCtrl", "./Admin/Driver/DriverCtrl", "./Admin/Graveyard/GraveyardCtrl", "./Admin/Town/TownCtrl", "./Admin/UnionCouncil/UnionCouncilCtrl", "./Admin/Landmark/LandmarkCtrl", "./Admin/PaymentType/PaymentTypeCtrl", "./Admin/RefundType/RefundTypeCtrl", "./Admin/VisitType/VisitTypeCtrl", "./Admin/CauseOfDeath/CauseOfDeathCtrl", "./Admin/TrackingDevice/TrackingDeviceCtrl", "marionette", "datatablesBootstrap"], function(require, exports, login, modalHelper, busController, userController, bookingController, paymentController, stationController, refundBookingController, adminBusController, driverController, graveyardController, townController, unionCouncilController, landmarkController, paymentTypeController, refundTypeController, visitTypeController, causeOfDeathController, trackingDeviceController) {
+define(["require", "exports", "./Login/LoginCtrl", "./ModalHelper", "./Bus/BusCtrl", "./User/UserCtrl", "./Booking/BookingCtrl", "./Payment/PaymentCtrl", "./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl", "./RefundBooking/RefundBookingCtrl", "./Admin/Bus/BusCtrl", "./Admin/Driver/DriverCtrl", "./Admin/Graveyard/GraveyardCtrl", "./Admin/Town/TownCtrl", "./Admin/UnionCouncil/UnionCouncilCtrl", "./Admin/Landmark/LandmarkCtrl", "./Admin/PaymentType/PaymentTypeCtrl", "./Admin/RefundType/RefundTypeCtrl", "./Admin/VisitType/VisitTypeCtrl", "./Admin/CauseOfDeath/CauseOfDeathCtrl", "./Admin/TrackingDevice/TrackingDeviceCtrl", "marionette", "datatablesBootstrap"], function(require, exports, loginController, modalHelper, busController, userController, bookingController, paymentController, stationController, refundBookingController, adminBusController, driverController, graveyardController, townController, unionCouncilController, landmarkController, paymentTypeController, refundTypeController, visitTypeController, causeOfDeathController, trackingDeviceController) {
     var datatablesBootstrap = require("datatablesBootstrap");
 
     var Application = (function (_super) {
@@ -57,15 +57,18 @@ define(["require", "exports", "../CCTracking.WebClient/Login/Views/LoginView", "
         }
         Application.prototype.initializeAfter = function () {
             //console.log('Initalize after called..');
-            var loginView = new login.LoginItemView();
+            //var loginView = new login.LoginItemView();
             var layout = this.AppLayout;
             this.ContainerRegion.show(layout);
-            this.LoginRegion.show(loginView);
+            var loginCtrl = new loginController.LoginCtrl();
+            loginCtrl.Load();
 
+            //this.LoginRegion.show(loginView);
             var self = this;
             var routes = Backbone.Router.extend({
                 routes: {
                     'user': 'goUser',
+                    'viewUser': 'goViewUser',
                     'bus': 'goBus',
                     'addBooking': 'goAddBooking',
                     'editBooking': 'goEditBooking',
@@ -104,6 +107,9 @@ define(["require", "exports", "../CCTracking.WebClient/Login/Views/LoginView", "
                 },
                 goUser: function () {
                     new userController.UserCtrl().Show();
+                },
+                goViewUser: function () {
+                    new userController.UserCtrl().GetAll();
                 },
                 goBus: function () {
                     new busController.BusCtrl().Show();
@@ -220,7 +226,9 @@ define(["require", "exports", "../CCTracking.WebClient/Login/Views/LoginView", "
                     //layout.DetailRegion.close();
                     self.ContainerRegion.reset();
                     self.ContainerRegion.show(layout);
-                    this.LoginRegion.show(loginView);
+
+                    // this.LoginRegion.show(loginView);
+                    loginCtrl.Load();
                 }
             });
             this.AppRoutes = new routes();

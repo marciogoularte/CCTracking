@@ -7,7 +7,8 @@
 //import summary = require("CCTracking.WebClient/Booking/views/BookingLeftView");
 //import main = require("CCTracking.WebClient/Booking/views/BookingMainView");
 
-import login = require("../CCTracking.WebClient/Login/Views/LoginView");
+//import login = require("../CCTracking.WebClient/Login/Views/LoginView");
+import loginController = require("./Login/LoginCtrl");
 import adminLeft = require("../CCTracking.WebClient/Common/Views/AdminLeftView");
 import modalHelper = require("./ModalHelper");
 import busController = require("./Bus/BusCtrl");
@@ -105,15 +106,19 @@ export class Application extends Marionette.Application {
 
     initializeAfter() {
         //console.log('Initalize after called..');
-        var loginView = new login.LoginItemView();
+
+        //var loginView = new login.LoginItemView();
         var layout = this.AppLayout;
         this.ContainerRegion.show(layout);
-        this.LoginRegion.show(loginView);
+        var loginCtrl = new loginController.LoginCtrl();
+        loginCtrl.Load();
+        //this.LoginRegion.show(loginView);
 
         var self = this;
         var routes = Backbone.Router.extend({
             routes: {
                 'user': 'goUser',
+                'viewUser': 'goViewUser',
                 'bus': 'goBus',
                 'addBooking': 'goAddBooking',
                 'editBooking': 'goEditBooking',
@@ -162,6 +167,9 @@ export class Application extends Marionette.Application {
             goUser() {
                 new userController.UserCtrl().Show();
             },
+            goViewUser() {
+                new userController.UserCtrl().GetAll();
+            },
             goBus() {
                 new busController.BusCtrl().Show();
             },
@@ -199,7 +207,7 @@ export class Application extends Marionette.Application {
             goEditBusVisit() {
                 require(['./Bus/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().Show(); });
             },
-            goAdminBus(){
+            goAdminBus() {
                 new adminBusController.BusCtrl().Show();
             },
             goViewAdminBus() {
@@ -273,7 +281,8 @@ export class Application extends Marionette.Application {
                 //layout.DetailRegion.close();
                 self.ContainerRegion.reset();
                 self.ContainerRegion.show(layout);
-                this.LoginRegion.show(loginView);
+                // this.LoginRegion.show(loginView);
+                loginCtrl.Load();
             }
         });
         this.AppRoutes = new routes();

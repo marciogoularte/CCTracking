@@ -133,12 +133,15 @@
     <TypeScriptCompile Include="CCTracking.WebClient\Dtos\SearchDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\GraveyardDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\LandmarkDto.ts" />
+    <Content Include="CCTracking.WebClient\Dtos\LoginDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\PaymentTypeDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\RefundTypeDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\TownDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\TrackingDeviceDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\UnionCouncilDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\VisitTypeDto.ts" />
+    <Content Include="CCTracking.WebClient\Login\LoginCtrl.ts" />
+    <Content Include="CCTracking.WebClient\Login\LoginView.ts" />
     <Content Include="CCTracking.WebClient\RefundBooking\RefundBookingTmpl.html" />
     <Content Include="CCTracking.WebClient\Booking\Templates\BookingLeft.html" />
     <Content Include="CCTracking.WebClient\Booking\Templates\BookingRight.html" />
@@ -173,9 +176,8 @@
     <TypeScriptCompile Include="CCTracking.WebClient\Dtos\RefundBookingDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\UserDto.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Helper.ts" />
-    <Content Include="CCTracking.WebClient\Login\Templates\Login.html" />
+    <Content Include="CCTracking.WebClient\Login\Login.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\Main.ts" />
-    <TypeScriptCompile Include="CCTracking.WebClient\Login\Views\LoginView.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\ModalHelper.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Payment\PaymentCtrl.ts" />
     <Content Include="CCTracking.WebClient\Payment\PaymentGrid.html" />
@@ -187,11 +189,11 @@
     <TypeScriptCompile Include="CCTracking.WebClient\Search\SearchView.ts" />
     <Content Include="CCTracking.WebClient\User\HtmlPage1.html" />
     <Content Include="CCTracking.WebClient\User\SuccessModal.html" />
-    <Content Include="CCTracking.WebClient\User\User.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\User\UserCtrl.ts" />
     <Content Include="CCTracking.WebClient\User\UserGrid.html" />
     <Content Include="CCTracking.WebClient\User\UserGridRow.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\User\UserView.ts" />
+    <Content Include="CCTracking.WebClient\User\UserTmpl.html" />
     <Content Include="Content\App.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -299,7 +301,9 @@
     <Content Include="Content\DataTables-1.10.0\media\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables-1.10.0\swf\copy_csv_xls.swf" />
     <Content Include="Content\DataTables-1.10.0\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="Content\datepicker.css" />
     <Content Include="Content\Images\bus.jpg" />
+    <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\Themes\amelia\bootstrap.min.css" />
     <Content Include="Content\Themes\cerulean\bootstrap.min.css" />
     <Content Include="Content\Themes\cosmo\bootstrap.min.css" />
@@ -359,6 +363,7 @@
     <Content Include="CCTracking.WebClient\Admin\VisitType\VisitTypeCtrl.js.map" />
     <Content Include="CCTracking.WebClient\Admin\VisitType\VisitTypeView.js.map" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-popover.js" />
     <Content Include="Scripts\bootstrap-tooltip.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -387,6 +392,7 @@
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />

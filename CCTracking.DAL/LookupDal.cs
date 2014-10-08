@@ -20,7 +20,7 @@ namespace CCTracking.DAL
             return "select * from Booking";
         }
         protected override string GetByCriteriaSql(BaseModel baseModel, Dictionary<string, object> dictionary)
-        {            
+        {
             return "";
         }
         protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary)
@@ -49,7 +49,8 @@ namespace CCTracking.DAL
             List<Lookup> driver = new List<Lookup>();
             List<Lookup> cashier = new List<Lookup>();
             List<Lookup> paymentType = new List<Lookup>();
-            List<Lookup> visitType = new List<Lookup>();           
+            List<Lookup> visitType = new List<Lookup>();
+            List<Lookup> role = new List<Lookup>();
 
 
             Lookup lookup = null;
@@ -99,6 +100,10 @@ namespace CCTracking.DAL
                 {
                     visitType.Add(new Lookup { Id = Convert.ToInt32(item["id"]), Description = item["description"].ToString() });
                 }
+                foreach (DataRow item in ds.Tables[11].Rows)
+                {
+                    role.Add(new Lookup { Id = Convert.ToInt32(item["id"]), Description = item["description"].ToString() });
+                }
                 lookupResponse.CauseOfDeath = causeOfDeath;
                 lookupResponse.Town = town;
                 lookupResponse.UnionCouncil = unionCouncil;
@@ -113,6 +118,7 @@ namespace CCTracking.DAL
                 lookupResponse.TimeSlot = GetTimeSlots();
                 lookupResponse.VisitType = visitType;
                 lookupResponse.BusModel = GetBusModel();
+                lookupResponse.Role = role;
 
             }
             return lookupResponse;
@@ -128,7 +134,7 @@ namespace CCTracking.DAL
             return string.Empty;
         }
 
-        private List<Lookup> GetPrayers() 
+        private List<Lookup> GetPrayers()
         {
             List<Lookup> prayers = new List<Lookup>();
             prayers.Add(new Lookup { Id = 1, Description = "Fajr" });

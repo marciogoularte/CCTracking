@@ -32,15 +32,17 @@ namespace CCTracking.DAL
 
         protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
-            User user = baseModel as User;           
+            User user = baseModel as User;
             dictionary.Add("@CentreId", user.CentreId);
             dictionary.Add("@RoleId", user.RoleId);
             dictionary.Add("@UserName", user.UserName);
             dictionary.Add("@FirstName", user.FirstName);
             dictionary.Add("@LastName", user.LastName);
-            dictionary.Add("@CNIC", user.CNIC);
+            dictionary.Add("@CNIC", user.Cnic);
             dictionary.Add("@Mobile", user.Mobile);
+            dictionary.Add("@Email", user.Email);
             dictionary.Add("@Address", user.Address);
+            dictionary.Add("@City", user.City);
             dictionary.Add("@FromDate", user.FromDate);
             dictionary.Add("@ToDate", user.ToDate);
             base.ExecuteSql(baseModel, dictionary);
@@ -108,8 +110,13 @@ namespace CCTracking.DAL
             if (!dr.IsDBNull(dr.GetOrdinal("Email")))
                 user.Email = dr.GetString(dr.GetOrdinal("Email"));
             if (!dr.IsDBNull(dr.GetOrdinal("CNIC")))
-                user.CNIC = dr.GetString(dr.GetOrdinal("CNIC"));
+                user.Cnic = dr.GetString(dr.GetOrdinal("CNIC"));
             user.RoleId = dr.GetInt32(dr.GetOrdinal("RoleId"));
+            if (!dr.IsDBNull(dr.GetOrdinal("RoleDesc")))
+                user.RoleDesc = dr.GetString(dr.GetOrdinal("RoleDesc"));
+            user.CentreId = dr.GetInt32(dr.GetOrdinal("CentreId"));
+            if (!dr.IsDBNull(dr.GetOrdinal("CenterDesc")))
+                user.CenterDesc = dr.GetString(dr.GetOrdinal("CenterDesc"));
         }
     }
 }

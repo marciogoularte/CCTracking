@@ -1,6 +1,7 @@
 ﻿/// <reference path="../Scripts/typings/require/require.d.ts" />
 // Set the require.js configuration
 require.config({
+    enforceDefine: false,
     //By default load  any module IDs from js/lib
     baseUrl: './',
     //urlArgs: "bust=" + "V3",
@@ -15,6 +16,7 @@ require.config({
         // JavaScript folders
         // Libraries
         jquery: "Scripts/jquery-2.1.1",
+        "jquery-ui": "Scripts/jquery-ui",
         underscore: "Scripts/underscore",
         backbone: "Scripts/backbone",
         //router: "Vendor/gladstone/backbonerouter",
@@ -22,6 +24,7 @@ require.config({
         bootstrap: "Scripts/bootstrap",
         bootstrapPopover: "Scripts/bootstrap-popover",
         bootstrapTooltip: "Scripts/bootstrap-tooltip",
+        datepicker: "Scripts/bootstrap-datepicker",
         knockout: "Scripts/knockout-3.1.0",
         //knockoutvalidation: "Scripts/knockout.validation",
         knockback: "Scripts/knockback.min",
@@ -54,6 +57,7 @@ require.config({
         "bootstrap": ["jquery"],
         "bootstrapPopover": ["jquery", "bootstrap"],
         "bootstrapTooltip": ["jquery", "bootstrap"],
+        "datepicker": ["jquery", "bootstrap"],
         "knockout": {
             exports: "ko"
         },
@@ -67,6 +71,11 @@ require.config({
         //"knockoutvalidation": {
         //    deps: ["knockout"]
         //},
+        //"jquery-ui": ["jquery","bootstrap"],
+        "jquery-ui": {
+            exports: "$",
+            deps: ["jquery", "bootstrap"]
+        },
         "jqueryValidate": ["jquery"],
         "jqueryUnobtrusive": ["jquery", "jqueryValidate"],
         "jqueryUnobtrusiveAjax": ["jquery"]
@@ -74,13 +83,14 @@ require.config({
 });
 
 require([
-    "jquery",
+    "jquery-ui",
     "backbone",
     "underscore",
     "marionette",
     "bootstrap",
     "bootstrapPopover",
     "bootstrapTooltip",
+    "datepicker",
     "CCTracking.WebClient/App"
 ], function ($, Backbone, _, Marionette) {
     //console.log('ddddd');

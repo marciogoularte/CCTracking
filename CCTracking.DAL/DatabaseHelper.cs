@@ -376,9 +376,10 @@ namespace CCTracking.DAL
 
             }
 
-            catch(Exception e)
+            catch (Exception e)
             {
-                string a = e.Message;
+                throw;
+                //string a = e.Message;
             }
 
             finally

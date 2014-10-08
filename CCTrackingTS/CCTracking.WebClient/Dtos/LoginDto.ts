@@ -3,8 +3,10 @@
 /// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
 /// <amd-dependency path="backbone"/>
 
+
+
 export module Models {
-    export class UserDto extends Backbone.Model {
+    export class LoginDto extends Backbone.Model {
         default() {
             return {
                 id: "",
@@ -12,26 +14,14 @@ export module Models {
                 lastName: "",
                 email: "",
                 mobile: "",
-                cnic: "",
-                address: "",
-                city: "",
+                nic: "",
                 userName: "",
                 password: "",
-                centreId: "",
-                centreDesc: "",
-                roleId: "",
-                roleDesc: "",
                 isAdmin: false,
                 authenticationToken: "",
-                authenticationErrorMessage: ""
-            }
+                errorMessage: ""
+            };
         }
-    }
-    export class UserCollection extends Backbone.Collection {
-        constructor(options?: any) {
-            this.model = UserDto;
-            super(options);
-        }
-    }
+    }    
 }
-//aaa
+

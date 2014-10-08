@@ -182,7 +182,8 @@ namespace CCTracking.DAL
             }
             finally
             {
-                dr.Close();
+                if (dr != null && !dr.IsClosed)
+                    dr.Close();
                 dbManager.CloseConnection();
             }
             return baseModelResponse;
