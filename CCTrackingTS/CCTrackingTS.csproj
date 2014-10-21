@@ -187,6 +187,9 @@
     <Content Include="CCTracking.WebClient\Search\SearchGrid.html" />
     <Content Include="CCTracking.WebClient\Search\SearchTmpl.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\Search\SearchView.ts" />
+    <TypeScriptCompile Include="CCTracking.WebClient\Tests\KoBindingCtrl.ts" />
+    <Content Include="CCTracking.WebClient\Tests\KoBindingTmpl.html" />
+    <TypeScriptCompile Include="CCTracking.WebClient\Tests\KoBindingView.ts" />
     <Content Include="CCTracking.WebClient\User\HtmlPage1.html" />
     <Content Include="CCTracking.WebClient\User\SuccessModal.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\User\UserCtrl.ts" />

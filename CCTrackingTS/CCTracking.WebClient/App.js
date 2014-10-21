@@ -8,7 +8,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "./Login/LoginCtrl", "./ModalHelper", "./Bus/BusCtrl", "./User/UserCtrl", "./Booking/BookingCtrl", "./Payment/PaymentCtrl", "./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl", "./RefundBooking/RefundBookingCtrl", "./Admin/Bus/BusCtrl", "./Admin/Driver/DriverCtrl", "./Admin/Graveyard/GraveyardCtrl", "./Admin/Town/TownCtrl", "./Admin/UnionCouncil/UnionCouncilCtrl", "./Admin/Landmark/LandmarkCtrl", "./Admin/PaymentType/PaymentTypeCtrl", "./Admin/RefundType/RefundTypeCtrl", "./Admin/VisitType/VisitTypeCtrl", "./Admin/CauseOfDeath/CauseOfDeathCtrl", "./Admin/TrackingDevice/TrackingDeviceCtrl", "marionette", "datatablesBootstrap"], function(require, exports, loginController, modalHelper, busController, userController, bookingController, paymentController, stationController, refundBookingController, adminBusController, driverController, graveyardController, townController, unionCouncilController, landmarkController, paymentTypeController, refundTypeController, visitTypeController, causeOfDeathController, trackingDeviceController) {
+define(["require", "exports", "./Login/LoginCtrl", "./ModalHelper", "./Bus/BusCtrl", "./User/UserCtrl", "./Booking/BookingCtrl", "./Payment/PaymentCtrl", "./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl", "./RefundBooking/RefundBookingCtrl", "./Admin/Bus/BusCtrl", "./Admin/Driver/DriverCtrl", "./Admin/Graveyard/GraveyardCtrl", "./Admin/Town/TownCtrl", "./Admin/UnionCouncil/UnionCouncilCtrl", "./Admin/Landmark/LandmarkCtrl", "./Admin/PaymentType/PaymentTypeCtrl", "./Admin/RefundType/RefundTypeCtrl", "./Admin/VisitType/VisitTypeCtrl", "./Admin/CauseOfDeath/CauseOfDeathCtrl", "./Admin/TrackingDevice/TrackingDeviceCtrl", "./Tests/KoBindingCtrl", "marionette", "datatablesBootstrap"], function(require, exports, loginController, modalHelper, busController, userController, bookingController, paymentController, stationController, refundBookingController, adminBusController, driverController, graveyardController, townController, unionCouncilController, landmarkController, paymentTypeController, refundTypeController, visitTypeController, causeOfDeathController, trackingDeviceController, koBindingController) {
     var datatablesBootstrap = require("datatablesBootstrap");
 
     var Application = (function (_super) {
@@ -101,6 +101,7 @@ define(["require", "exports", "./Login/LoginCtrl", "./ModalHelper", "./Bus/BusCt
                     'viewVisitType': 'goViewVisitType',
                     'causeOfDeath': 'goCauseOfDeath',
                     'viewCauseOfDeath': 'goViewCauseOfDeath',
+                    'viewTest': 'goViewTest',
                     'trackingDevice': 'goTrackingDevice',
                     'viewTrackingDevice': 'goViewTrackingDevice',
                     '*other': 'defaultRoute'
@@ -214,6 +215,9 @@ define(["require", "exports", "./Login/LoginCtrl", "./ModalHelper", "./Bus/BusCt
                 },
                 goViewCauseOfDeath: function () {
                     new causeOfDeathController.CauseOfDeathCtrl().GetAll();
+                },
+                goViewTest: function () {
+                    new koBindingController.KoBindingCtrl().Show();
                 },
                 goTrackingDevice: function () {
                     new trackingDeviceController.TrackingDeviceCtrl().Show();

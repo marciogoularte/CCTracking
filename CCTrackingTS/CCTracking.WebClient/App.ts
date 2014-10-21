@@ -31,6 +31,9 @@ import refundTypeController = require("./Admin/RefundType/RefundTypeCtrl");
 import visitTypeController = require("./Admin/VisitType/VisitTypeCtrl");
 import causeOfDeathController = require("./Admin/CauseOfDeath/CauseOfDeathCtrl");
 import trackingDeviceController = require("./Admin/TrackingDevice/TrackingDeviceCtrl");
+import koBindingController = require("./Tests/KoBindingCtrl");
+
+
 
 
 
@@ -159,6 +162,7 @@ export class Application extends Marionette.Application {
 
                 'causeOfDeath': 'goCauseOfDeath',
                 'viewCauseOfDeath': 'goViewCauseOfDeath',
+                'viewTest': 'goViewTest',
 
                 'trackingDevice': 'goTrackingDevice',
                 'viewTrackingDevice': 'goViewTrackingDevice',
@@ -269,6 +273,9 @@ export class Application extends Marionette.Application {
             },
             goViewCauseOfDeath() {
                 new causeOfDeathController.CauseOfDeathCtrl().GetAll();
+            },
+            goViewTest() {
+            new koBindingController.KoBindingCtrl().Show();
             },
             goTrackingDevice() {
                 new trackingDeviceController.TrackingDeviceCtrl().Show();

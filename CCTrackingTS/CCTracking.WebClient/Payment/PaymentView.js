@@ -22,7 +22,16 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
     var PaymentViewModel = (function (_super) {
         __extends(PaymentViewModel, _super);
         function PaymentViewModel(model, controller) {
+            var _this = this;
             _super.call(this, model, controller);
+            this.model.paymentTypeSelected.subscribe(function () {
+                debugger;
+                if (_this.model.paymentTypeSelected().id == 1) {
+                    _this.model.isCash = true;
+                } else {
+                    _this.model.isCash = false;
+                }
+            });
         }
         return PaymentViewModel;
     })(helper.ViewModel);

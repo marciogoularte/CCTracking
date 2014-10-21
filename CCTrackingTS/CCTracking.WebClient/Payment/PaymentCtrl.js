@@ -13,6 +13,7 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
     /// <amd-dependency path="text!./PaymentTmpl.html"/>
     var _ = require("underscore");
     var ko = require("knockout");
+    var kb = require("knockback");
 
     var app;
 
@@ -30,6 +31,8 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
             this.busVisitCollectionView.on("itemview:BusVisitRemoveItem", function (currentView, busId, centreId, driverId) {
                 return _this.RemoveBusVisitItem(busId, centreId, driverId);
             });
+
+            //this.paymentViewModel = new views.PaymentViewModel(new Backbone.Model(), this);
             this.idCounter = 1;
         }
         PaymentCtrl.prototype.Show = function () {
@@ -54,6 +57,7 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
             var model = new Backbone.Model(paymentResponse["paymentModel"]);
 
+            //this.paymentViewModel.model= kb.viewModel(model);
             //booking id
             var url = window.location.href;
             var id = (url.substring(url.indexOf("id=") + 3, url.length));
@@ -71,6 +75,7 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
             model.set("busSelected", "");
             model.set("driverSelected", "");
             model.set("alkhidmatCentreSelected", "");
+            model.set("isCash", false);
 
             //debugger;
             //model.set("causeOfDeathList", lookupResponse.causeOfDeath);
@@ -95,6 +100,20 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
             //model.set("driverSelected", driver[0]);
             //var bus = _.filter(lookupResponse.bus, (p) => { return p.id == model.get("budId") });
             //model.set("busSelected", bus[0]);
+            //if (model.get("paymentTypeSelected").id == 1)
+            //    model.set("isCash", true);
+            //else {
+            //    model.set("isCash", false);
+            //}
+            //debugger;
+            //var vm = kb.viewModel(model);
+            //vm.isCash = ko.computed(() => {
+            //    if (vm.paymentType() == 1) {
+            //        return true;
+            //    } else {
+            //        return false;
+            //    }
+            //}, vm);
             this.layout = app.AppLayout;
             this.paymentViewModel = new views.PaymentViewModel(model, this);
             this.paymentView = new views.PaymentView({ viewModel: this.paymentViewModel });
@@ -115,6 +134,12 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
 
             app.SubRegion.reset();
             app.SubRegion.show(this.busVisitCollectionView);
+            //var trnNo = $('#txtEasyPaisaTranNo')[0];
+            //ko.cleanNode(trnNo);
+            //ko.applyBindings(vm, trnNo);
+            //ko.clear();
+            //ko.applyBindings(vm);
+            //var b = vm;
         };
 
         //GetBusDesc(lookupResponse, id) {

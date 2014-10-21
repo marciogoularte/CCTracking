@@ -8,6 +8,7 @@
 
 var _ = require("underscore");
 var ko = require("knockout");
+var kb = require("knockback");
 import application = require("../App");
 import helper = require("../Helper");
 import views = require("./PaymentView");
@@ -35,7 +36,8 @@ export class PaymentCtrl extends helper.Controller {
         //this.busVisitCollection.push({ busVisitId:3,  centreId: 'center-a', busId: 'bus-a', driverId: 'driver-a' });
         this.backboneCollection= new Backbone.Collection(this.busVisitCollection);
         this.busVisitCollectionView = new views.BusVisitCollectionView({ collection: this.backboneCollection });        
-        this.busVisitCollectionView.on("itemview:BusVisitRemoveItem", (currentView, busId,centreId,driverId) => this.RemoveBusVisitItem(busId,centreId,driverId));
+        this.busVisitCollectionView.on("itemview:BusVisitRemoveItem", (currentView, busId, centreId, driverId) => this.RemoveBusVisitItem(busId, centreId, driverId));
+        //this.paymentViewModel = new views.PaymentViewModel(new Backbone.Model(), this);
         this.idCounter = 1;
     }
     Show() {
@@ -57,6 +59,7 @@ export class PaymentCtrl extends helper.Controller {
     GetByIdCompleted(paymentResponse: dto.Models.PaymentResponse) {
         var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
         var model = new Backbone.Model(paymentResponse["paymentModel"]);
+        //this.paymentViewModel.model= kb.viewModel(model);
         
         //booking id
         var url = window.location.href;
@@ -75,6 +78,8 @@ export class PaymentCtrl extends helper.Controller {
         model.set("busSelected", "");
         model.set("driverSelected", "");
         model.set("alkhidmatCentreSelected", "");
+        model.set("isCash", false);
+        
 
         //debugger;
         //model.set("causeOfDeathList", lookupResponse.causeOfDeath);
@@ -94,6 +99,23 @@ export class PaymentCtrl extends helper.Controller {
         //var bus = _.filter(lookupResponse.bus, (p) => { return p.id == model.get("budId") });
         //model.set("busSelected", bus[0]);
 
+
+        //if (model.get("paymentTypeSelected").id == 1)
+        //    model.set("isCash", true);
+        //else {
+        //    model.set("isCash", false);
+        //}
+        //debugger;
+
+        //var vm = kb.viewModel(model);
+        //vm.isCash = ko.computed(() => {
+        //    if (vm.paymentType() == 1) {
+        //        return true;
+        //    } else {
+        //        return false;
+        //    }
+        //}, vm);
+
        
         this.layout = app.AppLayout;
         this.paymentViewModel = new views.PaymentViewModel(model, this);
@@ -109,6 +131,19 @@ export class PaymentCtrl extends helper.Controller {
 
         app.SubRegion.reset();
         app.SubRegion.show(this.busVisitCollectionView);
+
+        
+        
+        
+
+        //var trnNo = $('#txtEasyPaisaTranNo')[0];
+        //ko.cleanNode(trnNo);
+        //ko.applyBindings(vm, trnNo);
+
+        //ko.clear();
+        //ko.applyBindings(vm);
+        
+        //var b = vm;
 
     }
     //GetBusDesc(lookupResponse, id) {

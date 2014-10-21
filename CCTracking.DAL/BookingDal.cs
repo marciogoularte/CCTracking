@@ -52,7 +52,7 @@ namespace CCTracking.DAL
             dictionary.Add("LandmarkId", booking.LandmarkId);
             dictionary.Add("UnionCouncilId", booking.UnionCouncilId);
             dictionary.Add("TownId", booking.TownId);
-            dictionary.Add("PickupDate", DateTime.Now);
+            dictionary.Add("PickupDate", booking.PickupDate);
             dictionary.Add("PickupTime", booking.PickupTime);
             dictionary.Add("ReturnTime", booking.ReturnTime);
             dictionary.Add("GraveyardId", booking.GraveyardId);

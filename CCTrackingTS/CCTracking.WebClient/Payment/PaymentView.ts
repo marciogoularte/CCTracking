@@ -22,7 +22,16 @@ var app;
 export class PaymentViewModel extends helper.ViewModel {
     constructor(model: any, controller: any) {
         super(model, controller);
+        this.model.paymentTypeSelected.subscribe(() => {
+            debugger;
+            if (this.model.paymentTypeSelected().id == 1) {
+                this.model.isCash = true;
+            } else {
+                this.model.isCash = false;
+            }
+        });
     }
+
 }
 
 export class PaymentView extends helper.Views.MvvmView {

@@ -84,7 +84,7 @@ export class BookingCtrl extends helper.Controller {
         var prayer = _.filter(lookupResponse.prayers, (p) => { return p.id == model.get("namazEJanazaHeldIn") });
 
         model.set("causeOfDeathSelected", causeOfDeath[0]);//model.get("causeOfDeath")
-        model.set("landmarkIdSelected", landmark[0]);
+        //model.set("landmarkIdSelected", landmark[0]);
         model.set("busPointSelected", busPoint[0]);
         model.set("unionCouncilIdSelected", unionCouncil[0]);
         model.set("townIdSelected", town[0]);
@@ -180,7 +180,7 @@ export class BookingCtrl extends helper.Controller {
         
         //reset actual id - match with DAL object's properties
         booking.set("causeOfDeath", booking.get("causeOfDeathSelected").id);
-        booking.set("landmarkId", booking.get("landmarkIdSelected").id);
+        //booking.set("landmarkId", booking.get("landmarkIdSelected").id);
         booking.set("busPoint", booking.get("busPointSelected").id);
         booking.set("unionCouncilId", booking.get("unionCouncilIdSelected").id);
         booking.set("townId", booking.get("townIdSelected").id);
@@ -192,7 +192,6 @@ export class BookingCtrl extends helper.Controller {
 
         //booking.set("busDetailId", booking.get("busDetailIdSelected").id);
 
-        
         var deferred = DAL.Save(booking);        
         //TODO: call controller from here...
         deferred.done(p=> this.SaveCompleted(p));
@@ -204,6 +203,7 @@ export class BookingCtrl extends helper.Controller {
         }
         else {
             helper.ShowModalPopup("success", "Booking", "Record has been saved successfully with Booking ID : " + bookingResponse["id"]);
+            location.href = "#payment?id=" + bookingResponse["id"];
         }
     }
 }

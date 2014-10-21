@@ -98,7 +98,8 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             });
 
             model.set("causeOfDeathSelected", causeOfDeath[0]); //model.get("causeOfDeath")
-            model.set("landmarkIdSelected", landmark[0]);
+
+            //model.set("landmarkIdSelected", landmark[0]);
             model.set("busPointSelected", busPoint[0]);
             model.set("unionCouncilIdSelected", unionCouncil[0]);
             model.set("townIdSelected", town[0]);
@@ -186,7 +187,8 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             var _this = this;
             //reset actual id - match with DAL object's properties
             booking.set("causeOfDeath", booking.get("causeOfDeathSelected").id);
-            booking.set("landmarkId", booking.get("landmarkIdSelected").id);
+
+            //booking.set("landmarkId", booking.get("landmarkIdSelected").id);
             booking.set("busPoint", booking.get("busPointSelected").id);
             booking.set("unionCouncilId", booking.get("unionCouncilIdSelected").id);
             booking.set("townId", booking.get("townIdSelected").id);
@@ -210,6 +212,7 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
                 helper.ShowModalPopup("danger", "Booking", "Booking have not been saved successfully!");
             } else {
                 helper.ShowModalPopup("success", "Booking", "Record has been saved successfully with Booking ID : " + bookingResponse["id"]);
+                location.href = "#payment?id=" + bookingResponse["id"];
             }
         };
         return BookingCtrl;
