@@ -1,10 +1,7 @@
 ﻿using CCTracking.DAL;
+using CCTracking.Dto;
 using CCTracking.Dto.Response;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace CCTracking.Api.Controllers
@@ -12,7 +9,7 @@ namespace CCTracking.Api.Controllers
     public class PaymentController : ApiController
     {
         [HttpPost]
-        public CCTracking.Dto.Payment SaveBooking(CCTracking.Dto.Payment payment)
+        public Payment SaveBooking(Payment payment)
         {
             if (payment != null)
             {
@@ -20,11 +17,32 @@ namespace CCTracking.Api.Controllers
                 {
                     payment.CreatedDate = payment.ModifiedDate = DateTime.Today;
                     payment.CreatedBy = payment.ModifiedBy;
+                    
+                    //for new record, payment through easyPaisa is unpaid
+                    if ((PaymentTypes)payment.PaymentType == PaymentTypes.EasyPaisa)
+                    {
+                        payment.PaymentStatus = 0;
+                    }
+                    else
+                    {
+                        payment.PaymentStatus = 1;
+                        payment.EasyPaisaTranNo = string.Empty;
+                    }
                 }
-                else
+                else //edit
                 {
+                    if ((PaymentTypes)payment.PaymentType == PaymentTypes.EasyPaisa && !string.IsNullOrEmpty(payment.EasyPaisaTranNo))
+                    {
+                        payment.PaymentStatus = 1;
+                    }
+                    else
+                    {
+                        payment.EasyPaisaTranNo = string.Empty;
+                        
+                    }
                     payment.ModifiedDate = DateTime.Today;
                 }
+
                 DalService service = new DalService();
                 BaseModelResponse paymentResponse = service.SavePayment(payment);
                 payment = ((PaymentResponse)paymentResponse).PaymentModel;

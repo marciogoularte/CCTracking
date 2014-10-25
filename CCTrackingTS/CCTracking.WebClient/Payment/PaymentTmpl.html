@@ -16,29 +16,29 @@
                                 <td class="col-sm-4 col-md-4 input-sm">Alkhidmat/Co-Partners</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlCentre" class="form-control input-sm"
-                                        data-bind="options: model.alkhidmatCentreList, optionsText:'description', value:model.alkhidmatCentreSelected">
+                                        data-bind="options: alkhidmatCentreList, optionsText:'description', value:alkhidmatCentreSelected">
                                     </select></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Driver</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="Select1" class="form-control input-sm"
-                                        data-bind="options: model.driverList, optionsText:'description', value:model.driverSelected">
+                                        data-bind="options: driverList, optionsText:'description', value:driverSelected">
                                     </select></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Vehicle No</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlBusDetails" class="form-control input-sm"
-                                        data-bind="options: model.busList, optionsText:'description', value:model.busSelected">
+                                        data-bind="options: busList, optionsText:'description', value:busSelected">
                                     </select>
                                 </td>
                             </tr>
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Reason for Bus Change</td>
                             <td class="col-sm-8 col-md-8">
-                                <input id="Text2" type="text" value="1500" class="form-control input-sm" data-bind="value:model.busChangeReason" />
-                                <a href="javascript:void(0);" class="jsAddMore pull-right input-sm" title="Add More Items"><i class="glyphicon glyphicon-plus"></i>Add More</a>
+                                <input id="Text2" type="text" class="form-control input-sm" data-bind="busChangeReason" />
+                                <a href="javascript:void(0);" class="jsAddMore pull-right input-sm" title="Add More Items" data-bind="visible: !isPaid()"><i class="glyphicon glyphicon-plus"></i>Add More</a>
                             </td>
                         </tr>
                             <tr>
@@ -58,7 +58,7 @@
                                 <td class="col-sm-4 col-md-4 input-sm">Payment Type</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlPaymentType" class="form-control input-sm"
-                                         data-bind="options: model.paymentTypeList, optionsText:'description', value:model.paymentTypeSelected">                                        
+                                         data-bind="options: paymentTypeList, optionsText:'description', value:paymentTypeSelected, disable:isPaid">                                        
                                     </select></td>
                             </tr>
 
@@ -72,13 +72,15 @@
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Amount</td>
                             <td class="col-sm-8 col-md-8">
-                                <input id="txtAmount" type="text" value="1500" class="form-control input-sm" data-bind="value:model.amount" /></td>
+                                <input id="txtAmount" type="text" class="form-control input-sm" data-bind="value: amount, disable:isPaid" 
+                                    required="required" data-role="validate" title="Amount" data-content="Amount is required"
+                                    /></td>
                         </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Office/Payment Location</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlOfficeLocation" class="form-control input-sm"
-                                        data-bind="options: model.paymentLocationList, optionsText:'description', value:model.paymentLocationSelected">
+                                        data-bind="options: paymentLocationList, optionsText:'description', value: paymentLocationSelected, disable:isPaid">
                                     </select></td>
                             </tr>
 
@@ -86,46 +88,49 @@
                                 <td class="col-sm-4 col-md-4 input-sm">Officer/Cashier</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlOfficerName" class="form-control input-sm"
-                                        data-bind="options: model.cashierList, optionsText:'description', value:model.cashierSelected">
+                                        data-bind="options: cashierList, optionsText:'description', value:cashierSelected, disable:isPaid">
                                     </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Receipt</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" id="txtReceipt" class="form-control input-sm" data-bind="value:model.receiptNo" />
+                                    <input type="text" id="txtReceipt" class="form-control input-sm" data-bind="value:receiptNo, disable:isPaid" />
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">EasyPaisa Transaction No.</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" id="txtEasyPaisaTranNo" class="form-control input-sm" data-bind="value:model.easyPaisaTranNo" />
-                                    <span data-bind="text:model.isCash"></span> here...
+                                    <input type="text" id="txtEasyPaisaTranNo" class="form-control input-sm" data-bind="value:easyPaisaTranNo, enable:isEasyPaisa" />
+                                    <span data-bind="text:isPaid"></span> 
                                 </td>
                             </tr>
 
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Extra Chareges</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" id="txtExtraAmount" class="form-control input-sm" data-bind="value: model.extraAmountCharge"/></td>
+                                    <input type="text" id="txtExtraAmount" class="form-control input-sm" data-bind="value: extraAmountCharge"/></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Reason for Extra Charges</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" id="txtReasonExtraAmount" class="form-control input-sm"  data-bind="value: model.extraAmountReason"/>
+                                    <input type="text" id="txtReasonExtraAmount" class="form-control input-sm"  data-bind="value: extraAmountReason"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Receipt for Extra Charges</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" id="txtExtraAmountReceipt" class="form-control input-sm" data-bind="value: model.extraAmountReceipt"/></td>
+                                    <input type="text" id="txtExtraAmountReceipt" class="form-control input-sm" data-bind="value: extraAmountReceipt"/></td>
                             </tr>
 
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Payment Status</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="radio" id="rbPaymentStatus" name="rbPaymentStatus" disabled data-bind="checked: model.paymentStatus" />Paid
-                        <input type="radio" id="Radio1" name="rbPaymentStatus" disabled data-bind="checked: model.paymentStatus" />UnPaid
+                                    <span data-bind="visible:isPaid">Paid</span>
+                                    <span data-bind="visible:!isPaid()">Unpaid</span>
+                                    
+                                    <!--<input type="radio" id="rbPaymentStatus" name="rbPaymentStatus" value="1"  data-bind="checked: paymentStatus" />Paid
+                                    <input type="radio" id="Radio1" name="rbPaymentStatus" value="0"  data-bind="checked: paymentStatus" />UnPaid-->
                                 </td>
                             </tr>
                             <tr>

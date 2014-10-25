@@ -39,7 +39,7 @@ namespace CCTracking.DAL
         {
             Booking booking = (Booking)baseModel;
             //if (booking.Id == null) dictionary.Add("Id", 0);
-            dictionary.Add("Id", booking.Id);
+            //dictionary.Add("Id", booking.Id);
             dictionary.Add("ContactName", booking.ContactName);
             dictionary.Add("ContactMobile", booking.ContactMobile);
             dictionary.Add("ContactNic", booking.ContactNic);
@@ -60,6 +60,8 @@ namespace CCTracking.DAL
             dictionary.Add("NamazEJanazaLocation", booking.NamazEJanazaLocation);
             dictionary.Add("MasjidName", booking.MasjidName);
             dictionary.Add("OtherDetail", booking.OtherDetail);
+            base.ExecuteSql(booking, dictionary);
+
 
             //insert/update query and return updated boject
             //return "update Booking set ContactName=@ContactName where Id=@Id";

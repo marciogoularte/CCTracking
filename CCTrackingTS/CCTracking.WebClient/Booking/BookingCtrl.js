@@ -185,6 +185,9 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
         //Add(booking: dto.Models.BookingRequest) {
         BookingCtrl.prototype.Save = function (booking) {
             var _this = this;
+            var appObj = app.request("AppGlobalSetting");
+            booking.set("modifiedBy", appObj.get("Id"));
+
             //reset actual id - match with DAL object's properties
             booking.set("causeOfDeath", booking.get("causeOfDeathSelected").id);
 

@@ -13,6 +13,7 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
     /// <amd-dependency path="text!./PaymentTmpl.html"/>
     /// <amd-dependency path="text!./PaymentGrid.html"/>
     var _ = require('underscore');
+    var ko = require("knockout");
 
     var templateView = require("text!./PaymentTmpl.html");
     var templateGrid = require("text!./PaymentGrid.html");
@@ -42,6 +43,8 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
         function PaymentView(options) {
             app = application.Application.getInstance();
             this.template = templateView;
+            this.viewModel = new ViewModel(options);
+            this.bbModel = new Backbone.Model();
             this.events = {
                 "submit": "Save",
                 "click .jsAddMore": "AddMore"
@@ -50,13 +53,34 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
         }
         PaymentView.prototype.AddMore = function () {
             //var a = this.$el.find("#ddlCentre")
-            this.trigger("BusVisitAddItem", this.viewModel.bbModel.get("bookingId"), this.viewModel.bbModel.get("alkhidmatCentreSelected"), this.viewModel.bbModel.get("driverSelected"), this.viewModel.bbModel.get("busSelected"));
+            this.trigger("BusVisitAddItem", this.viewModel.bookingId(), this.viewModel.alkhidmatCentreSelected(), this.viewModel.driverSelected(), this.viewModel.busSelected());
             ////app.vent.trigger("BusVisitItem:Add", this.busVisitCollection);
         };
 
         PaymentView.prototype.Save = function (e) {
             e.preventDefault();
-            this.trigger("PaymentSave", this.viewModel.bbModel);
+
+            this.bbModel.set("id", this.viewModel.Id());
+            this.bbModel.set("bookingId", this.viewModel.bookingId());
+            this.bbModel.set("paymentType", this.viewModel.paymentType());
+            this.bbModel.set("pricing", this.viewModel.pricing());
+            this.bbModel.set("amount", this.viewModel.amount());
+            this.bbModel.set("paymentLocation", this.viewModel.paymentLocation());
+            this.bbModel.set("officerId", this.viewModel.officerId());
+            this.bbModel.set("receiptNo", this.viewModel.receiptNo());
+            this.bbModel.set("extraAmountCharge", this.viewModel.extraAmountCharge());
+            this.bbModel.set("extraAmountReason", this.viewModel.extraAmountReason());
+            this.bbModel.set("extraAmountReceipt", this.viewModel.extraAmountReceipt());
+            this.bbModel.set("easyPaisaTranNo", this.viewModel.easyPaisaTranNo());
+
+            this.bbModel.set("bus", this.viewModel.busSelected().id);
+            this.bbModel.set("driver", this.viewModel.driverSelected().id);
+            this.bbModel.set("alkhidmatCentre", this.viewModel.alkhidmatCentreSelected().id);
+            this.bbModel.set("paymentLocation", this.viewModel.paymentLocationSelected().id);
+            this.bbModel.set("officerId", this.viewModel.cashierSelected().id);
+            this.bbModel.set("paymentType", this.viewModel.paymentTypeSelected().id);
+
+            this.trigger("PaymentSave", this.bbModel);
         };
 
         PaymentView.prototype.SaveCompleted = function (paymentResponse) {
@@ -65,11 +89,144 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                 alert("Payment have not been saved successfully!");
             } else {
                 alert("Record has been saved successfully with Payment ID : " + paymentResponse["id"]);
+                location.href = "#viewBooking";
             }
         };
+        PaymentView.prototype.onShow = function () {
+            ko.applyBindings(this.viewModel, this.el);
+        };
         return PaymentView;
-    })(helper.Views.MvvmView);
+    })(helper.Views.ItemView);
     exports.PaymentView = PaymentView;
+
+    var ViewModel = (function () {
+        function ViewModel(model) {
+            var _this = this;
+            if (model == undefined) {
+                this.Id = ko.observable();
+                this.bookingId = ko.observable();
+                this.paymentType = ko.observable();
+                this.pricing = ko.observable();
+                this.amount = ko.observable();
+                this.paymentLocation = ko.observable();
+                this.officerId = ko.observable();
+                this.receiptNo = ko.observable();
+                this.extraAmountCharge = ko.observable();
+                this.extraAmountReason = ko.observable();
+                this.extraAmountReceipt = ko.observable();
+                this.paymentStatus = ko.observable();
+                this.easyPaisaTranNo = ko.observable();
+
+                var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
+
+                this.busList = ko.observableArray(lookupResponse.bus);
+                this.busSelected = ko.observable();
+                this.driverList = ko.observableArray(lookupResponse.driver);
+                this.driverSelected = ko.observable();
+                this.alkhidmatCentreList = ko.observableArray(lookupResponse.alkhidmatCentre);
+                this.alkhidmatCentreSelected = ko.observable();
+                this.paymentLocationList = ko.observableArray(lookupResponse.alkhidmatCentre);
+                this.paymentLocationSelected = ko.observable();
+                this.cashierList = ko.observableArray(lookupResponse.cashier);
+                this.cashierSelected = ko.observable();
+                this.paymentTypeList = ko.observableArray(lookupResponse.paymentType);
+                this.paymentTypeSelected = ko.observable();
+                this.isEasyPaisa = ko.computed({
+                    owner: this,
+                    read: function () {
+                        if (_this.paymentTypeSelected() != undefined && _this.paymentTypeSelected().id === 2 && _this.easyPaisaTranNo().trim() == "") {
+                            //this.paymentStatus("0");
+                            return true;
+                        } else {
+                            //this.paymentStatus("1");
+                            return false;
+                        }
+                    }
+                });
+                this.isPaid = ko.computed({
+                    owner: this,
+                    read: function () {
+                        //if paid
+                        if (_this.paymentStatus() == "1") {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                });
+            } else {
+                this.Id = ko.observable(model.get("id"));
+                this.bookingId = ko.observable(model.get("bookingId"));
+                this.paymentType = ko.observable();
+                this.pricing = ko.observable();
+                this.amount = ko.observable(model.get("amount"));
+                this.paymentLocation = ko.observable();
+                this.officerId = ko.observable();
+                this.receiptNo = ko.observable(model.get("receiptNo"));
+                this.extraAmountCharge = ko.observable(model.get("extraAmountCharge"));
+                this.extraAmountReason = ko.observable(model.get("extraAmountReason"));
+                this.extraAmountReceipt = ko.observable(model.get("extraAmountReceipt"));
+                this.paymentStatus = ko.observable(model.get("paymentStatus"));
+                this.easyPaisaTranNo = ko.observable(model.get("easyPaisaTranNo"));
+
+                var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
+
+                this.busList = ko.observableArray(lookupResponse.bus);
+                this.busSelected = ko.observable();
+                this.driverList = ko.observableArray(lookupResponse.driver);
+                this.driverSelected = ko.observable();
+                this.alkhidmatCentreList = ko.observableArray(lookupResponse.alkhidmatCentre);
+                this.alkhidmatCentreSelected = ko.observable();
+                this.paymentLocationList = ko.observableArray(lookupResponse.alkhidmatCentre);
+
+                var paymentLocation = _.filter(lookupResponse.alkhidmatCentre, function (p) {
+                    return p.id == model.get("paymentLocation");
+                });
+
+                //model.set("paymentLocationSelected", paymentLocation[0]);
+                var paymentType = _.filter(lookupResponse.paymentType, function (p) {
+                    return p.id == model.get("paymentType");
+                });
+
+                //model.set("paymentTypeSelected", paymentType[0]);
+                var cashier = _.filter(lookupResponse.cashier, function (p) {
+                    return p.id == model.get("officerId");
+                });
+
+                //model.set("cashierSelected", cashier[0]);
+                this.paymentLocationSelected = ko.observable(paymentLocation[0]);
+                this.cashierList = ko.observableArray(lookupResponse.cashier);
+                this.cashierSelected = ko.observable(cashier[0]);
+                this.paymentTypeList = ko.observableArray(lookupResponse.paymentType);
+                this.paymentTypeSelected = ko.observable(paymentType[0]);
+                this.isEasyPaisa = ko.computed({
+                    owner: this,
+                    read: function () {
+                        if (_this.paymentTypeSelected() != undefined && _this.paymentTypeSelected().id === 2 && _this.easyPaisaTranNo().trim() == "") {
+                            //this.paymentStatus("0");
+                            return true;
+                        } else {
+                            //this.paymentStatus("1");
+                            return false;
+                        }
+                    }
+                });
+                this.isPaid = ko.computed({
+                    owner: this,
+                    read: function () {
+                        //if paid
+                        if (_this.paymentStatus() == "1") {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                });
+            }
+        }
+        return ViewModel;
+    })();
+    exports.ViewModel = ViewModel;
 
     var BusVisitCollectionView = (function (_super) {
         __extends(BusVisitCollectionView, _super);

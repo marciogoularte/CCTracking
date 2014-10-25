@@ -45,6 +45,7 @@
     <Compile Include="Bus.cs" />
     <Compile Include="BusVisit.cs" />
     <Compile Include="CauseofDeath.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="PaymentType.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="Graveyard.cs" />

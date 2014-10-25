@@ -177,7 +177,8 @@ export class BookingCtrl extends helper.Controller {
     }
     //Add(booking: dto.Models.BookingRequest) {
     Save(booking: any) {
-        
+        var appObj = app.request("AppGlobalSetting");
+        booking.set("modifiedBy", appObj.get("Id"));
         //reset actual id - match with DAL object's properties
         booking.set("causeOfDeath", booking.get("causeOfDeathSelected").id);
         //booking.set("landmarkId", booking.get("landmarkIdSelected").id);

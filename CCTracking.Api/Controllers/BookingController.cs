@@ -1,4 +1,5 @@
-﻿using CCTracking.DAL;
+﻿using System;
+using CCTracking.DAL;
 using CCTracking.Dto;
 using CCTracking.Dto.Response;
 using System.Web.Http;
@@ -17,6 +18,16 @@ namespace CCTracking.Api.Controllers
         {
             if (booking != null)
             {
+                if (booking.Id <= 0)
+                {
+                    booking.CreatedDate = booking.ModifiedDate = DateTime.Today;
+                    booking.CreatedBy = booking.ModifiedBy;
+                }
+                else
+                {
+                    booking.ModifiedDate = DateTime.Today;
+
+                }
                 //booking.Id = rowCounter++;
                 DBFacade facade = new CCTracking.DAL.BookingDal();
                 BaseModelResponse bookingResponse = facade.Execute(booking);
