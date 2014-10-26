@@ -118,11 +118,10 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "../DAL/Pa
             app.SubRegion.show(this.busVisitCollectionView);
         };
 
-        PaymentCtrl.prototype.BindWithVM = function (vm) {
-            this.paymentView.viewModel.extraAmountReason("heheheheheh");
-            this.paymentView.viewModel.paymentLocationList(paymentLocation[0]);
-        };
-
+        //BindWithVM(vm) {
+        //    this.paymentView.viewModel.extraAmountReason("heheheheheh");
+        //    this.paymentView.viewModel.paymentLocationList(paymentLocation[0]);
+        //}
         PaymentCtrl.prototype.InitalizeKoBinding = function (model) {
             model.set("amount", "");
             model.set("busChangeReason", "");
@@ -228,7 +227,12 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "../DAL/Pa
                 return;
             }
 
-            debugger;
+            //payment.set("bus", payment.get("busSelected").id);
+            //payment.set("driver", payment.get("driverSelected").id);
+            //payment.set("alkhidmatCentre", payment.get("alkhidmatCentreSelected").id);
+            //payment.set("paymentLocation", payment.get("paymentLocationSelected").id);
+            //payment.set("officerId", payment.get("cashierSelected").id);
+            //payment.set("paymentType", payment.get("paymentTypeSelected").id);
             payment.set("busVisits", this.backboneCollection.toJSON());
             var deferred = DAL.Save(payment);
 

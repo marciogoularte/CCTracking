@@ -1,4 +1,5 @@
 ﻿using CCTracking.DAL;
+using CCTracking.Dto;
 using CCTracking.Dto.Response;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,15 @@ namespace CCTracking.Api.Controllers
                 else
                 {
                     busVisit.ModifiedDate = DateTime.Today;
+                }
+                if ((VisitTypes)busVisit.VisitTypeId == VisitTypes.PatrolPump)
+                {
+                    busVisit.PumpLocation = string.Empty;
+                    busVisit.FuelAmount = busVisit.FuelRate = 0;
+                }
+                if ((VisitTypes)busVisit.VisitTypeId != VisitTypes.Booking)
+                {
+                    busVisit.IsBookingCompleted = false;
                 }
                 BaseModelResponse response = facade.Execute(busVisit);
                 busVisit = ((BusVisitResponse)response).BusVisitModel;

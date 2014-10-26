@@ -2,7 +2,7 @@
 /// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
 /// <amd-dependency path="marionette"/>
 /// <amd-dependency path="jquery"/>
-/// <amd-dependency path="datepicker"/>
+/// <amd-dependency path="jqueryUI"/>
 /// <amd-dependency path="knockout"/>
 /// <amd-dependency path="text!./SearchTmpl.html"/>
 var __extends = this.__extends || function (d, b) {
@@ -11,7 +11,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../Helper", "marionette", "jquery", "datepicker", "knockout", "text!./SearchTmpl.html"], function(require, exports, helper) {
+define(["require", "exports", "../Helper", "marionette", "jquery", "jqueryUI", "knockout", "text!./SearchTmpl.html"], function(require, exports, helper) {
     var _ = require('underscore');
 
     var templateView = require("text!./SearchTmpl.html");
@@ -38,6 +38,11 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "datepicker",
             //}
             _super.call(this, options);
         }
+        SearchView.prototype.onDomRefresh = function () {
+            //alert("ddd");
+            //debugger;
+            //this.$el.find("#txtBookingDate").datepicker();
+        };
         return SearchView;
     })(helper.Views.MvvmView);
     exports.SearchView = SearchView;
@@ -58,14 +63,9 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "datepicker",
             e.preventDefault();
             this.trigger("SearchBooking");
         };
-
-        //initialize() {
-        //    alert('initialize..');
-        //    $("#txtBookingDate").datepicker();
-        //}
         SearchCollectionView.prototype.onDomRefresh = function () {
-            //alert('onDomRefresh');
-            //$("#txtBookingDate").datepicker();
+            //alert("ddd");
+            //debugger;
             //this.$el.find("#txtBookingDate").datepicker();
         };
         return SearchCollectionView;

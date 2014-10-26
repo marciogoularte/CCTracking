@@ -35,6 +35,8 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
         __extends(BusVisitView, _super);
         function BusVisitView(options) {
             this.template = templateView;
+            this.viewModel = new ViewModel(options);
+            this.bbModel = new Backbone.Model();
             this.events = {
                 "submit": "Save",
                 "click .jsCancel": "Cancel"
@@ -51,11 +53,208 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
         };
         BusVisitView.prototype.Save = function (e) {
             e.preventDefault();
-            this.trigger("Event:SaveForm");
+
+            this.bbModel.set("id", this.viewModel.id());
+            this.bbModel.set("isActive", this.viewModel.isActive() == "1" ? true : false);
+
+            //this.bbModel.set("centreId", this.viewModel.centreId());
+            //this.bbModel.set("busId", this.viewModel.busId());
+            //this.bbModel.set("driverId", this.viewModel.driverId());
+            //this.bbModel.set("visitTypeId", this.viewModel.visitTypeId());
+            this.bbModel.set("bookingId", this.viewModel.bookingId());
+            this.bbModel.set("inchargeName", this.viewModel.inchargeName());
+            this.bbModel.set("visitDate", this.viewModel.visitDate());
+
+            //this.bbModel.set("outTime", this.viewModel.outTime());
+            //this.bbModel.set("returnTime", this.viewModel.returnTime());
+            this.bbModel.set("readingWhenFilling", this.viewModel.readingWhenFilling());
+            this.bbModel.set("pumpLocation", this.viewModel.pumpLocation());
+            this.bbModel.set("fuelRate", this.viewModel.fuelRate());
+            this.bbModel.set("fuelAmount", this.viewModel.fuelAmount());
+            this.bbModel.set("isBookingCompleted", this.viewModel.isBookingCompleted());
+            this.bbModel.set("description", this.viewModel.description());
+            this.bbModel.set("initialReading", this.viewModel.initialReading());
+            this.bbModel.set("finalReading", this.viewModel.finalReading());
+            this.bbModel.set("busDesc", this.viewModel.busDesc());
+            this.bbModel.set("centreDesc", this.viewModel.centreDesc());
+            this.bbModel.set("driverDesc", this.viewModel.driverDesc());
+            this.bbModel.set("visitTypeDesc", this.viewModel.visitTypeDesc());
+
+            this.bbModel.set("centreId", this.viewModel.alkhidmatCentreSelected().id);
+            this.bbModel.set("driverId", this.viewModel.driverSelected().id);
+            this.bbModel.set("busId", this.viewModel.busSelected().id);
+            this.bbModel.set("outTime", this.viewModel.outTimeSlotSelected().id);
+            this.bbModel.set("returnTime", this.viewModel.returnTimeSlotSelected().id);
+            this.bbModel.set("visitTypeId", this.viewModel.visitTypeSelected().id);
+
+            this.trigger("Event:SaveForm", this.bbModel);
+        };
+        BusVisitView.prototype.onShow = function () {
+            ko.applyBindings(this.viewModel, this.el);
         };
         return BusVisitView;
-    })(helper.Views.MvvmView);
+    })(helper.Views.ItemView);
     exports.BusVisitView = BusVisitView;
+
+    var ViewModel = (function () {
+        function ViewModel(model) {
+            var _this = this;
+            var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
+            this.outTimeSlotList = ko.observableArray(lookupResponse.timeSlot);
+            this.reutrnTimeSlotList = ko.observableArray(lookupResponse.timeSlot);
+            this.busList = ko.observableArray(lookupResponse.bus);
+            this.driverList = ko.observableArray(lookupResponse.driver);
+            this.alkhidmatCentreList = ko.observableArray(lookupResponse.alkhidmatCentre);
+            this.visitTypeList = ko.observableArray(lookupResponse.visitType);
+
+            if (model == undefined) {
+                this.id = ko.observable();
+                this.isActive = ko.observable("1");
+                this.centreId = ko.observable();
+                this.busId = ko.observable();
+                this.driverId = ko.observable();
+                this.visitTypeId = ko.observable();
+                this.bookingId = ko.observable();
+                this.inchargeName = ko.observable();
+                this.visitDate = ko.observable();
+                this.outTime = ko.observable();
+                this.returnTime = ko.observable();
+                this.readingWhenFilling = ko.observable();
+
+                //only for fueling
+                this.pumpLocation = ko.observable();
+                this.fuelRate = ko.observable();
+                this.fuelAmount = ko.observable();
+
+                //for booking only
+                this.isBookingCompleted = ko.observable();
+
+                this.description = ko.observable();
+                this.initialReading = ko.observable();
+                this.finalReading = ko.observable();
+                this.busDesc = ko.observable();
+                this.centreDesc = ko.observable();
+                this.driverDesc = ko.observable();
+                this.visitTypeDesc = ko.observable();
+
+                this.outTimeSlotSelected = ko.observable();
+                this.returnTimeSlotSelected = ko.observable();
+                this.busSelected = ko.observable();
+                this.driverSelected = ko.observable();
+                this.alkhidmatCentreSelected = ko.observable();
+                this.visitTypeSelected = ko.observable();
+
+                this.isPatrolPump = ko.computed({
+                    owner: this,
+                    read: function () {
+                        if (_this.visitTypeSelected() != undefined && helper.VisitTypes[_this.visitTypeSelected().id] == helper.VisitTypes[1 /* PatrolPump */]) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                });
+                this.isBooking = ko.computed({
+                    owner: this,
+                    read: function () {
+                        if (_this.visitTypeSelected() != undefined && helper.VisitTypes[_this.visitTypeSelected().id] == helper.VisitTypes[2 /* Booking */]) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                });
+            } else {
+                this.id = ko.observable(model.get("id"));
+                this.isActive = ko.observable(model.get("isActive"));
+                this.centreId = ko.observable(model.get("centreId"));
+                this.busId = ko.observable(model.get("busId"));
+                this.driverId = ko.observable(model.get("drvierId"));
+                this.visitTypeId = ko.observable(model.get("visitTypeId"));
+                this.bookingId = ko.observable(model.get("bookingId"));
+                this.inchargeName = ko.observable(model.get("inchargeName"));
+                this.visitDate = ko.observable(model.get("visitDate"));
+                this.outTime = ko.observable(model.get("outTime"));
+                this.returnTime = ko.observable(model.get("returnTime"));
+                this.readingWhenFilling = ko.observable(model.get("readingWhenFilling"));
+
+                //only for fueling
+                if (model.get("pumpLocation") != undefined && model.get("pumpLocation").trim() == "")
+                    this.pumpLocation = ko.observable();
+                else
+                    this.pumpLocation = ko.observable(model.get("pumpLocation"));
+
+                if (model.get("fuelRate") != undefined && model.get("fuelRate") == "0")
+                    this.fuelRate = ko.observable();
+                else
+                    this.fuelRate = ko.observable(model.get("fuelRate"));
+                if (model.get("fuelAmount") != undefined && model.get("fuelAmount") == "0")
+                    this.fuelAmount = ko.observable();
+                else
+                    this.fuelAmount = ko.observable(model.get("fuelAmount"));
+
+                //for booking only
+                this.isBookingCompleted = ko.observable(model.get("isBookingCompleted"));
+
+                this.description = ko.observable(model.get("description"));
+                this.initialReading = ko.observable(model.get("initialReading"));
+                this.finalReading = ko.observable(model.get("finalReading"));
+                this.busDesc = ko.observable(model.get("busDesc"));
+                this.centreDesc = ko.observable(model.get("centreDesc"));
+                this.driverDesc = ko.observable(model.get("driverDesc"));
+                this.visitTypeDesc = ko.observable(model.get("visitTypeDesc"));
+
+                var outTime = _.filter(lookupResponse.timeSlot, function (p) {
+                    return p.id == model.get("outTime");
+                });
+                var inTime = _.filter(lookupResponse.timeSlot, function (p) {
+                    return p.id == model.get("returnTime");
+                });
+                var bus = _.filter(lookupResponse.bus, function (p) {
+                    return p.id == model.get("busId");
+                });
+                var driver = _.filter(lookupResponse.driver, function (p) {
+                    return p.id == model.get("driverId");
+                });
+                var centre = _.filter(lookupResponse.alkhidmatCentre, function (p) {
+                    return p.id == model.get("centreId");
+                });
+                var visitType = _.filter(lookupResponse.visitType, function (p) {
+                    return p.id == model.get("visitTypeId");
+                });
+
+                this.outTimeSlotSelected = ko.observable(outTime[0]);
+                this.returnTimeSlotSelected = ko.observable(inTime[0]);
+                this.busSelected = ko.observable(bus[0]);
+                this.driverSelected = ko.observable(driver[0]);
+                this.alkhidmatCentreSelected = ko.observable(centre[0]);
+                this.visitTypeSelected = ko.observable(visitType[0]);
+
+                this.isPatrolPump = ko.computed({
+                    owner: this,
+                    read: function () {
+                        if (_this.visitTypeSelected() != undefined && helper.VisitTypes[_this.visitTypeSelected().id] == helper.VisitTypes[1 /* PatrolPump */]) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                });
+                this.isBooking = ko.computed({
+                    owner: this,
+                    read: function () {
+                        if (_this.visitTypeSelected() != undefined && helper.VisitTypes[_this.visitTypeSelected().id] == helper.VisitTypes[2 /* Booking */]) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                });
+            }
+        }
+        return ViewModel;
+    })();
+    exports.ViewModel = ViewModel;
 
     var BusVisitCollectionView = (function (_super) {
         __extends(BusVisitCollectionView, _super);

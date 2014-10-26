@@ -111,6 +111,7 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             model.set("returnTimeSlotSelected", returnTime[0]);
             model.set("prayersSelected", prayer[0]);
 
+            model.set("pickupDate", helper.FormatDateString(model.get("pickupDate")));
             this.bookingViewModel = new views.BookingViewModel(model, this);
             this.bookingView = new views.BookingView({ viewModel: this.bookingViewModel });
             this.layout = app.AppLayout;
@@ -211,11 +212,12 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
         };
 
         BookingCtrl.prototype.SaveCompleted = function (bookingResponse) {
-            if (bookingResponse == undefined) {
-                helper.ShowModalPopup("danger", "Booking", "Booking have not been saved successfully!");
+            var result = new Backbone.Model(bookingResponse);
+            if (result.get("errorMessage") != undefined && result.get("errorMessage").trim() != "") {
+                helper.ShowModalPopup("danger", "Booking", "Due to some technical reason booking have not been saved successfully!<br> Pelase try later");
             } else {
                 helper.ShowModalPopup("success", "Booking", "Record has been saved successfully with Booking ID : " + bookingResponse["id"]);
-                location.href = "#payment?id=" + bookingResponse["id"];
+                location.href = "#payment?id=" + result.get("id");
             }
         };
         return BookingCtrl;

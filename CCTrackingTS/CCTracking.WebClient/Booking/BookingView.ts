@@ -3,6 +3,7 @@
 
 /// <amd-dependency path="marionette"/>
 /// <amd-dependency path="jquery"/>
+/// <amd-dependency path="jqueryUI"/>
 /// <amd-dependency path="knockout"/>
 /// <amd-dependency path="text!./BookingTmpl.html"/>
 /// <amd-dependency path="text!./BookingGrid.html"/>
@@ -49,6 +50,15 @@ export class BookingView extends helper.Views.MvvmView {
     Cancel() {
         this.trigger("CancelForm");
     }
+    onDomRefresh() {
+        //alert("ddd");
+        //this.$el.find("#PickupDate").datepicker();
+    }
+    //onShow() {
+    //    alert('dddd');
+    //    //debugger;
+    //    //this.$el.find("#PickupDate").datepicker();
+    //}
 
     Save(e) {
         e.preventDefault();

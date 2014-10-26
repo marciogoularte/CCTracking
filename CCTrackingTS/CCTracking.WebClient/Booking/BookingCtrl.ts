@@ -97,7 +97,7 @@ export class BookingCtrl extends helper.Controller {
         model.set("returnTimeSlotSelected", returnTime[0]);
         model.set("prayersSelected", prayer[0]);
 
-
+        model.set("pickupDate", helper.FormatDateString(model.get("pickupDate")));
         this.bookingViewModel = new views.BookingViewModel(model, this);
         this.bookingView = new views.BookingView({ viewModel: this.bookingViewModel });
         this.layout = app.AppLayout;
@@ -192,19 +192,19 @@ export class BookingCtrl extends helper.Controller {
         booking.set("namazEJanazaHeldIn", booking.get("prayersSelected").id);
 
         //booking.set("busDetailId", booking.get("busDetailIdSelected").id);
-
         var deferred = DAL.Save(booking);        
         //TODO: call controller from here...
         deferred.done(p=> this.SaveCompleted(p));
     }
 
-    SaveCompleted(bookingResponse: dto.Models.BookingResponse) {
-        if (bookingResponse == undefined) {
-            helper.ShowModalPopup("danger", "Booking", "Booking have not been saved successfully!");
+    SaveCompleted(bookingResponse: any) {
+        var result = new Backbone.Model(bookingResponse);
+        if (result.get("errorMessage") !=undefined && result.get("errorMessage").trim() != "") {
+            helper.ShowModalPopup("danger", "Booking", "Due to some technical reason booking have not been saved successfully!<br> Pelase try later");
         }
         else {
             helper.ShowModalPopup("success", "Booking", "Record has been saved successfully with Booking ID : " + bookingResponse["id"]);
-            location.href = "#payment?id=" + bookingResponse["id"];
+            location.href = "#payment?id=" + result.get("id");
         }
     }
 }

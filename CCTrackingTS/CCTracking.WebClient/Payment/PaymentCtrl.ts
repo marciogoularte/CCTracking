@@ -125,12 +125,12 @@ export class PaymentCtrl extends helper.Controller {
         app.SubRegion.show(this.busVisitCollectionView);
     }
 
-    BindWithVM(vm) {
+    //BindWithVM(vm) {
         
-        this.paymentView.viewModel.extraAmountReason("heheheheheh");
-        this.paymentView.viewModel.paymentLocationList(paymentLocation[0]);
+    //    this.paymentView.viewModel.extraAmountReason("heheheheheh");
+    //    this.paymentView.viewModel.paymentLocationList(paymentLocation[0]);
 
-    }
+    //}
 
 
     InitalizeKoBinding(model) {
@@ -248,7 +248,6 @@ export class PaymentCtrl extends helper.Controller {
         //payment.set("paymentLocation", payment.get("paymentLocationSelected").id);
         //payment.set("officerId", payment.get("cashierSelected").id);
         //payment.set("paymentType", payment.get("paymentTypeSelected").id);
-        debugger;
         payment.set("busVisits", this.backboneCollection.toJSON());
         var deferred = DAL.Save(payment);
         

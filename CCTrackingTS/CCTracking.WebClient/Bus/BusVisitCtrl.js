@@ -22,9 +22,9 @@ define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/
             //alert("constructor");
             this.app = application.Application.getInstance();
             this.backboneModel = new dto.Models.BusVisitDto();
-            this.viewModel = new views.BusVisitViewModel(this.backboneModel, this);
-            this.view = new views.BusVisitView({ viewModel: this.viewModel });
 
+            //this.viewModel = new views.BusVisitViewModel(this.backboneModel, this);
+            //this.view = new views.BusVisitView({ viewModel: this.viewModel });
             //this.stationView.on("Event:SaveForm", () => this.Save(this.stationView.model));
             //this.collection = new dto.Models.BusVisitCollection({});
             this.collection = new dto.Models.BusVisitCollection({ id: "", busDesc: "", visitTypeDesc: "", initialReading: "", finalReading: "" });
@@ -71,49 +71,47 @@ define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/
         //}
         BusVisitCtrl.prototype.Load = function () {
             var _this = this;
-            var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
-
+            //var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
             //var model = new dto.Models.StationDto();
             var model = this.backboneModel;
-            this.viewModel.bbModel = model;
-            this.viewModel.model = kb.viewModel(model);
 
-            model.set("outTimeSlotList", lookupResponse.timeSlot);
-            model.set("outTimeSlotSelected", "");
-            model.set("reutrnTimeSlotList", lookupResponse.timeSlot);
-            model.set("returnTimeSlotSelected", "");
+            //this.viewModel.bbModel = model;
+            //this.viewModel.model = kb.viewModel(model);
+            //model.set("outTimeSlotList", lookupResponse.timeSlot);
+            //model.set("outTimeSlotSelected", "");
+            //model.set("reutrnTimeSlotList", lookupResponse.timeSlot);
+            //model.set("returnTimeSlotSelected", "");
+            //model.set("busList", lookupResponse.bus);
+            //model.set("busSelected", "");
+            //model.set("driverList", lookupResponse.driver);
+            //model.set("driverSelected", "");
+            //model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
+            //model.set("alkhidmatCentreSelected", "");
+            //model.set("visitTypeList", lookupResponse.visitType);
+            //model.set("visitTypeSelected", "");
+            //model.set("centreId", "");
+            //model.set("busId", "");
+            //model.set("driverId", "");
+            //model.set("visitTypeId", lookupResponse.landmark);
+            //model.set("bookingId", "");
+            //model.set("inchargeName", "");
+            //model.set("visitDate", "");
+            //model.set("readingWhenFilling", "");
+            //model.set("pumpLocation", "");
+            //model.set("fuelRate", "");
+            //model.set("fuelAmount", "");
+            //model.set("isBookingCompleted", "");
+            //model.set("description", "");
+            //model.set("initialReading", "");
+            //model.set("finalReading", "");
+            //model.set("isActive", "");
+            //model.set("modifiedBy", "");
+            //this.viewModel = new views.BusVisitViewModel(model, this);
+            //this.view = new views.BusVisitView({ viewModel: this.viewModel });
+            this.view = new views.BusVisitView();
 
-            model.set("busList", lookupResponse.bus);
-            model.set("busSelected", "");
-            model.set("driverList", lookupResponse.driver);
-            model.set("driverSelected", "");
-            model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
-            model.set("alkhidmatCentreSelected", "");
-            model.set("visitTypeList", lookupResponse.visitType);
-            model.set("visitTypeSelected", "");
-
-            model.set("centreId", "");
-            model.set("busId", "");
-            model.set("driverId", "");
-            model.set("visitTypeId", lookupResponse.landmark);
-            model.set("bookingId", "");
-            model.set("inchargeName", "");
-            model.set("visitDate", "");
-            model.set("readingWhenFilling", "");
-            model.set("pumpLocation", "");
-            model.set("fuelRate", "");
-            model.set("fuelAmount", "");
-            model.set("isBookingCompleted", "");
-            model.set("description", "");
-            model.set("initialReading", "");
-            model.set("finalReading", "");
-            model.set("isActive", "");
-            model.set("modifiedBy", "");
-
-            this.viewModel = new views.BusVisitViewModel(model, this);
-            this.view = new views.BusVisitView({ viewModel: this.viewModel });
-            this.view.on("Event:SaveForm", function () {
-                return _this.Save(_this.viewModel.bbModel);
+            this.view.on("Event:SaveForm", function (busVisitModel) {
+                return _this.Save(busVisitModel);
             });
             this.view.on("Event:CancelForm", function () {
                 return _this.Cancel();
@@ -130,52 +128,39 @@ define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/
         };
 
         BusVisitCtrl.prototype.GetByIdCompleted = function (dto) {
-            var _this = this;
             //alert("GetByIdCompleted..");
+            //debugger;
+            var _this = this;
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
             this.backboneModel = new Backbone.Model(dto["busVisitModel"]);
             var model = this.backboneModel;
 
-            model.set("outTimeSlotList", lookupResponse.timeSlot);
-            var outTime = _.filter(lookupResponse.timeSlot, function (p) {
-                return p.id == model.get("outTime");
-            });
-            model.set("outTimeSlotSelected", outTime[0]);
+            //model.set("outTimeSlotList", lookupResponse.timeSlot);
+            //var outTime = _.filter(lookupResponse.timeSlot, (p) => { return p.id == model.get("outTime"); });
+            //model.set("outTimeSlotSelected", outTime[0]);
+            //model.set("reutrnTimeSlotList", lookupResponse.timeSlot);
+            //var inTime = _.filter(lookupResponse.timeSlot, (p) => { return p.id == model.get("returnTime"); });
+            //model.set("returnTimeSlotSelected", inTime[0]);
+            //model.set("busList", lookupResponse.bus);
+            //var bus = _.filter(lookupResponse.bus, (p) => { return p.id == model.get("busId"); });
+            //model.set("busSelected", bus[0]);
+            //model.set("driverList", lookupResponse.driver);
+            //var driver = _.filter(lookupResponse.driver, (p) => { return p.id == model.get("driverId"); });
+            //model.set("driverSelected", driver[0]);
+            //model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
+            //var centre = _.filter(lookupResponse.alkhidmatCentre, (p) => { return p.id == model.get("centreId"); });
+            //model.set("alkhidmatCentreSelected", centre[0]);
+            //model.set("visitTypeList", lookupResponse.visitType);
+            //var visitType = _.filter(lookupResponse.visitType, (p) => { return p.id == model.get("visitTypeId"); });
+            //model.set("visitTypeSelected", visitType[0]);
+            if (model.get("visitDate").trim() != "")
+                model.set("visitDate", helper.FormatDateString(model.get("visitDate")));
 
-            model.set("reutrnTimeSlotList", lookupResponse.timeSlot);
-            var inTime = _.filter(lookupResponse.timeSlot, function (p) {
-                return p.id == model.get("returnTime");
-            });
-            model.set("returnTimeSlotSelected", inTime[0]);
-
-            model.set("busList", lookupResponse.bus);
-            var bus = _.filter(lookupResponse.bus, function (p) {
-                return p.id == model.get("busId");
-            });
-            model.set("busSelected", bus[0]);
-
-            model.set("driverList", lookupResponse.driver);
-            var driver = _.filter(lookupResponse.driver, function (p) {
-                return p.id == model.get("driverId");
-            });
-            model.set("driverSelected", driver[0]);
-
-            model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
-            var centre = _.filter(lookupResponse.alkhidmatCentre, function (p) {
-                return p.id == model.get("centreId");
-            });
-            model.set("alkhidmatCentreSelected", centre[0]);
-
-            model.set("visitTypeList", lookupResponse.visitType);
-            var visitType = _.filter(lookupResponse.visitType, function (p) {
-                return p.id == model.get("visitTypeId");
-            });
-            model.set("visitTypeSelected", visitType[0]);
-
-            this.viewModel = new views.BusVisitViewModel(model, this);
-            this.view = new views.BusVisitView({ viewModel: this.viewModel });
-            this.view.on("Event:SaveForm", function () {
-                return _this.Save(_this.viewModel.bbModel);
+            //this.viewModel = new views.BusVisitViewModel(model, this);
+            //this.view = new views.BusVisitView({ viewModel: this.viewModel });
+            this.view = new views.BusVisitView(model);
+            this.view.on("Event:SaveForm", function (busVisitModel) {
+                return _this.Save(busVisitModel);
             });
             this.view.on("Event:CancelForm", function () {
                 return _this.Cancel();
@@ -189,14 +174,14 @@ define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/
             var _this = this;
             var appObj = this.app.request("AppGlobalSetting");
             model.set("modifiedBy", appObj.get("Id"));
-            model.set("centreId", model.get("alkhidmatCentreSelected").id);
-            model.set("driverId", model.get("driverSelected").id);
-            model.set("busId", model.get("busSelected").id);
-            model.set("outTime", model.get("outTimeSlotSelected").id);
-            model.set("returnTime", model.get("returnTimeSlotSelected").id);
-            model.set("visitTypeId", model.get("visitTypeSelected").id);
 
-            model.set("isActive", model.get("isActive") == "1" ? true : false);
+            //model.set("centreId", model.get("alkhidmatCentreSelected").id);
+            //model.set("driverId", model.get("driverSelected").id);
+            //model.set("busId", model.get("busSelected").id);
+            //model.set("outTime", model.get("outTimeSlotSelected").id);
+            //model.set("returnTime", model.get("returnTimeSlotSelected").id);
+            //model.set("visitTypeId", model.get("visitTypeSelected").id);
+            //model.set("isActive", model.get("isActive") == "1" ? true : false);
             var deferred = DAL.Save(model);
             deferred.done(function (p) {
                 return _this.SaveCompleted(p);

@@ -48,7 +48,7 @@ namespace CCTracking.DAL
             dictionary.Add("@VisitTypeId", busVisit.VisitTypeId);
             dictionary.Add("@BookingId", busVisit.BookingId);
             dictionary.Add("@InchargeName", busVisit.InchargeName);
-            dictionary.Add("@VisitDate", DateTime.Now);// busVisit.VisitDate);
+            dictionary.Add("@VisitDate", busVisit.VisitDate);
             dictionary.Add("@OutTime", busVisit.OutTime);
             dictionary.Add("@ReturnTime", busVisit.ReturnTime);
             dictionary.Add("@ReadingWhenFilling", busVisit.ReadingWhenFilling);

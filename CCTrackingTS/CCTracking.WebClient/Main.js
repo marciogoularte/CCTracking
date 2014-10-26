@@ -16,7 +16,7 @@ require.config({
         // JavaScript folders
         // Libraries
         jquery: "Scripts/jquery-2.1.1",
-        "jquery-ui": "Scripts/jquery-ui",
+        jqueryUI: "Scripts/jquery-ui",
         underscore: "Scripts/underscore",
         backbone: "Scripts/backbone",
         //router: "Vendor/gladstone/backbonerouter",
@@ -24,7 +24,7 @@ require.config({
         bootstrap: "Scripts/bootstrap",
         bootstrapPopover: "Scripts/bootstrap-popover",
         bootstrapTooltip: "Scripts/bootstrap-tooltip",
-        datepicker: "Scripts/bootstrap-datepicker",
+        //datepicker: "Scripts/bootstrap-datepicker",
         knockout: "Scripts/knockout-3.1.0",
         //knockoutvalidation: "Scripts/knockout.validation",
         knockback: "Scripts/knockback.min",
@@ -35,7 +35,10 @@ require.config({
         datatablesBootstrap: "Scripts/DataTables/dataTables.bootstrap",
         jqueryValidate: "Scripts/jquery.validate",
         jqueryUnobtrusive: "Scripts/jquery.validate.unobtrusive",
-        jqueryUnobtrusiveAjax: "Scripts/jquery.unobtrusive-ajax"
+        jqueryUnobtrusiveAjax: "Scripts/jquery.unobtrusive-ajax",
+        //knockoutJqueryuiUtils: 'Scripts/KnockoutJqueryUI/utils',
+        //knockoutJqueryuiHandler: 'Scripts/KnockoutJqueryUI/bindingHandler',
+        knockoutJqueryuiDatepicker: 'Scripts/KnockoutJqueryUI/datepicker'
     },
     // Configure the dependencies and exports for older, traditional "browser globals"
     // scripts that do not use define() to declare the dependencies and set a module value.
@@ -57,7 +60,7 @@ require.config({
         "bootstrap": ["jquery"],
         "bootstrapPopover": ["jquery", "bootstrap"],
         "bootstrapTooltip": ["jquery", "bootstrap"],
-        "datepicker": ["jquery", "bootstrap"],
+        //"datepicker": ["jquery", "bootstrap"],
         "knockout": {
             exports: "ko"
         },
@@ -72,28 +75,29 @@ require.config({
         //    deps: ["knockout"]
         //},
         //"jquery-ui": ["jquery","bootstrap"],
-        "jquery-ui": {
-            exports: "$",
-            deps: ["jquery", "bootstrap"]
-        },
+        "jqueryUI": ["jquery"],
         "jqueryValidate": ["jquery"],
         "jqueryUnobtrusive": ["jquery", "jqueryValidate"],
-        "jqueryUnobtrusiveAjax": ["jquery"]
+        "jqueryUnobtrusiveAjax": ["jquery"],
+        "knockoutJqueryuiDatepicker": {
+            depts: ["jquery", "knockout", "jqueryUI"]
+        }
     }
 });
 
 require([
-    "jquery-ui",
+    "jquery",
     "backbone",
     "underscore",
     "marionette",
     "bootstrap",
-    "bootstrapPopover",
-    "bootstrapTooltip",
-    "datepicker",
+    "jqueryUI",
+    "knockoutJqueryuiDatepicker",
     "CCTracking.WebClient/App"
-], function ($, Backbone, _, Marionette) {
-    //console.log('ddddd');
+], //function ($, Backbone, _, Marionette) {
+//    //console.log('ddddd');
+//}
+function () {
 });
 //aaa
 //# sourceMappingURL=Main.js.map

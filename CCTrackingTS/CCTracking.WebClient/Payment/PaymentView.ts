@@ -1,4 +1,5 @@
-﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
+﻿/// <reference path="../../Scripts/typings/knockout/knockout.d.ts" />
+/// <reference path="../../Scripts/typings/require/require.d.ts" />
 /// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
 
 /// <amd-dependency path="marionette"/>
@@ -104,19 +105,19 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
 }
 
 export class ViewModel {
-    Id: number;
-    bookingId: number;
-    paymentType: number;
-    pricing: number;
-    amount: number;
-    paymentLocation: string;
-    officerId: number;
-    receiptNo:string;
-    extraAmountCharge: number;
-    extraAmountReason: string;
-    extraAmountReceipt:number;
-    paymentStatus: number;
-    easyPaisaTranNo: string;
+    Id: any;
+    bookingId: any;
+    paymentType: any;
+    pricing: any;
+    amount: any;
+    paymentLocation: any;
+    officerId: any;
+    receiptNo:any;
+    extraAmountCharge: any;
+    extraAmountReason: any;
+    extraAmountReceipt:any;
+    paymentStatus: any;
+    easyPaisaTranNo: any;
 
     busList: any;
     busSelected: any;
@@ -131,7 +132,8 @@ export class ViewModel {
     paymentTypeList: any;
     paymentTypeSelected: any;
     isPaid:boolean;
-    isCash:any;
+    isCash: any;
+    isEasyPaisa:any;
 
 
     constructor(model) {

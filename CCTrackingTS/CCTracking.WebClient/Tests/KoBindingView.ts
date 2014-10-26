@@ -61,9 +61,9 @@ export class KoBindingView extends helper.Views.ItemView {
 
 export class ViewModell {
     //model: Backbone.Model;
-    one: number;
-    two: number;
-    sum:number;
+    one: any;
+    two: any;
+    sum:any;
     //one: KnockoutObservable<string>;
     //two: KnockoutObservable<string>;
     //sum: KnockoutComputed<string>;

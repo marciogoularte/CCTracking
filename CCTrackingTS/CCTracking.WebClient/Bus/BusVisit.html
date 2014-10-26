@@ -12,14 +12,14 @@
                                 <td class="col-sm-4 col-md-4 input-sm">Alkhidmat/Co-Partners</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlCentre" class="form-control input-sm"
-                                            data-bind="options: model.alkhidmatCentreList, optionsText:'description', value:model.alkhidmatCentreSelected">
+                                            data-bind="options: alkhidmatCentreList, optionsText:'description', value:alkhidmatCentreSelected">
                                     </select></td>
                             </tr>
                              <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Driver</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="Select1" class="form-control input-sm"
-                                        data-bind="options: model.driverList, optionsText:'description', value:model.driverSelected">
+                                        data-bind="options: driverList, optionsText:'description', value:driverSelected">
                                     </select>
                                 </td>
                             </tr>
@@ -27,27 +27,33 @@
                                 <td class="col-sm-4 col-md-4 input-sm">Vehicle No</td>
                                 <td class="col-sm-8 col-md-8">
                                    <select id="ddlBusDetails" class="form-control input-sm"
-                                        data-bind="options: model.busList, optionsText:'description', value:model.busSelected">
+                                        data-bind="options: busList, optionsText:'description', value:busSelected">
                                     </select>
                                 </td>
                             </tr>
                              <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Incharge Name</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" class="form-control input-sm" placeholder="Incharge Name" data-bind="value:model.inchargeName" />   
+                                    <input type="text" class="form-control input-sm" placeholder="Incharge Name" data-bind="value:inchargeName" />   
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Visit Date</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="date" id="PickupDate" class="form-control input-sm" data-bind="value:model.visitDate" />   
+                                    <input type="text" id="PickupDate" class="form-control input-sm" placeholder="mm/dd/yyyy" data-bind="datepicker:{}, value:visitDate" />   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-4 col-md-4 input-sm">Bus Visit Type</td>
+                                <td class="col-sm-8 col-md-8">
+                                    <select id="ddlOtherTravelling" class="form-control input-sm" data-bind="options: visitTypeList, optionsText:'description', value:visitTypeSelected"> </select>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Out Time</td>
                                 <td class="col-sm-8 col-md-8">
                                      <select id="ddlReturnTime" class="form-control input-sm"
-                                data-bind="options: model.outTimeSlotList, optionsText:'description', value:model.outTimeSlotSelected">
+                                data-bind="options: outTimeSlotList, optionsText:'description', value:outTimeSlotSelected">
                             </select>
                                 </td>
                             </tr>
@@ -55,37 +61,32 @@
                                 <td class="col-sm-4 col-md-4 input-sm">Return Time</td>
                                 <td class="col-sm-8 col-md-8">
                                      <select id="Select2" class="form-control input-sm"
-                                data-bind="options: model.reutrnTimeSlotList, optionsText:'description', value:model.returnTimeSlotSelected">
+                                data-bind="options: reutrnTimeSlotList, optionsText:'description', value:returnTimeSlotSelected">
                             </select>
                             </tr>
                             <tr>
-                                <td class="col-sm-4 col-md-4 input-sm">Reading When Filling</td>
+                                <td class="col-sm-4 col-md-4 input-sm">Current Reading</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" class="form-control input-sm" placeholder="Reading at the time of filling" data-bind="value:model.readingWhenFilling" />   
+                                    <input type="text" class="form-control input-sm" placeholder="Reading at the time of filling" data-bind="value:readingWhenFilling" />   
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Initial Reading</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" class="form-control input-sm" placeholder="Bus Initial Reading" disabled data-bind="value:model.initialReading" />   
+                                    <input type="text" class="form-control input-sm" placeholder="Bus Initial Reading" disabled data-bind="value:initialReading" />   
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Final Reading</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" class="form-control input-sm" placeholder="Bus Final Reading" data-bind="value:model.finalReading" />   
+                                    <input type="text" class="form-control input-sm" placeholder="Bus Final Reading" data-bind="value:finalReading" />   
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="col-sm-4 col-md-4 input-sm">Bus Visits</td>
-                                <td class="col-sm-8 col-md-8">
-                                    <select id="ddlOtherTravelling" class="form-control input-sm" data-bind="options: model.visitTypeList, optionsText:'description', value:model.visitTypeSelected"> </select>
-                                </td>
-                            </tr>
+                            
                              <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Pump Location</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <textarea id="txtPumpLocation" placeholder="Location" class="form-control input-sm" data-bind="value:model.pumpLocation" >   
+                                    <textarea id="txtPumpLocation" placeholder="Location" class="form-control input-sm" data-bind="value:pumpLocation, enable:isPatrolPump()" >   
                                     </textarea>
                                 </td>
                             </tr>
@@ -103,32 +104,31 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">CNG/Diesel Rate</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" placeholder="Rate" class="form-control input-sm" data-bind="value:model.fuelRate" />   </td>
+                                    <input type="text" placeholder="Rate" class="form-control input-sm" data-bind="value:fuelRate, enable:isPatrolPump()" />   </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">CNG/Diesel Amount</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" placeholder="Total Amount"  class="form-control input-sm" data-bind="value:model.fuelAmount" />   </td>
+                                    <input type="text" placeholder="Total Amount"  class="form-control input-sm" data-bind="value:fuelAmount, enable:isPatrolPump()" />   </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Description</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <textarea id="txtDescription" placeholder="Description" class="form-control input-sm" data-bind="value:model.description" >   </textarea>
+                                    <textarea id="txtDescription" placeholder="Description" class="form-control input-sm" data-bind="value:description" >   </textarea>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Booking Completed</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="radio" id="rbCurrentBooking" name="rbCurrentBooking" data-bind="value:model.isBookingCompleted" />Yes
-                                    <input type="radio" id="Radio1" name="rbCurrentBooking" data-bind="value:model.isBookingCompleted" />No
-                                    <br/>auto manage
+                                    <input type="radio" id="rbCurrentBooking" name="rbCurrentBooking" data-bind="value:isBookingCompleted, enable:isBooking()" />Yes
+                                    <input type="radio" id="Radio1" name="rbCurrentBooking" data-bind="value:isBookingCompleted, enable:isBooking()" />No
                                 </td>
                             </tr>
                            
-                            <tr>
+                            <!--<tr>
                                 <td class="col-sm-4 col-md-4 input-sm"></td>
                                 <td class="col-sm-8 col-md-8"><a href="#" data-toggle="modal" data-target="#busDetailsModal" class="form-control input-sm">View Bus Details</a></td>
-                            </tr>
+                            </tr>-->
                             <tr>
                                 <td class="col-sm-4 col-md-4"></td>
                                 <td class="col-sm-8 col-md-8">

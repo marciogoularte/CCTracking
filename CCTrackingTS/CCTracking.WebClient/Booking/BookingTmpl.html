@@ -105,7 +105,8 @@
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Pick-up Date</td>
                         <td class="col-sm-8 col-md-8">
-                            <input type="text" id="PickupDate" placeholder="mm/dd/yyyy" class="form-control input-sm" data-bind="customDateBinding: model.pickupDate" />
+                            <input type="text" id="PickupDate" placeholder="mm/dd/yyyy" class="form-control input-sm" data-bind="datepicker: {}, value: model.pickupDate" 
+                                required="required" data-role="validate" title="Pick-up Date" data-content="Pickup Date is required" />
                         </td>
                     </tr>
                     <tr>

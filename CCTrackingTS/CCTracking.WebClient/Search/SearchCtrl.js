@@ -48,7 +48,7 @@ define(["require", "exports", "../App", "../Helper", "./SearchView", "CCTracking
             model.set("contactInfo", "");
             model.set("deseasedInfo", "");
             model.set("paymentStatusId", "");
-            model.set("bookingDate", "10/10/2000");
+            model.set("bookingDate", "");
             this.compositeModel = model;
 
             //this.searchViewModel = new views.SearchViewModel(this.compositeModel, this);
@@ -123,7 +123,9 @@ define(["require", "exports", "../App", "../Helper", "./SearchView", "CCTracking
             var _this = this;
             searchDto.set("genderId", searchDto.get("genderId").toString());
             searchDto.set("paymentStatusId", searchDto.get("paymentStatusId").toString());
-            searchDto.set("bookingDate", Date.now());
+            if (searchDto.get("bookingDate").trim() != "") {
+                searchDto.set("bookingDate", helper.FormatDateString(searchDto.get("bookingDate")));
+            }
             searchDto.set("greveyardId", searchDto.get("graveyardIdSelected").id);
             searchDto.set("centreId", searchDto.get("alkhidmatCentreSelected").id);
             searchDto.set("busId", searchDto.get("busSelected").id);

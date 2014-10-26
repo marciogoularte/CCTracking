@@ -2,7 +2,7 @@
 /// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
 /// <amd-dependency path="marionette"/>
 /// <amd-dependency path="jquery"/>
-/// <amd-dependency path="datepicker"/>
+/// <amd-dependency path="jqueryUI"/>
 /// <amd-dependency path="knockout"/>
 /// <amd-dependency path="text!./SearchTmpl.html"/>
 
@@ -33,6 +33,12 @@ export class SearchView extends helper.Views.MvvmView {
         //}
         super(options);
     }
+    onDomRefresh() {
+        //alert("ddd");
+        //debugger;
+        //this.$el.find("#txtBookingDate").datepicker();
+    }
+    
 }
 
 export class SearchCollectionView extends helper.Views.CompositeView {
@@ -51,18 +57,12 @@ export class SearchCollectionView extends helper.Views.CompositeView {
         e.preventDefault();
         this.trigger("SearchBooking");
     }
-
-    //initialize() {
-    //    alert('initialize..');
-    //    $("#txtBookingDate").datepicker();
-    //}
-
     onDomRefresh() {
-        //alert('onDomRefresh');
-        //$("#txtBookingDate").datepicker();
+        //alert("ddd");
+        //debugger;
         //this.$el.find("#txtBookingDate").datepicker();
-
     }
+    
 }
 
 export class SearchItemView extends helper.Views.ItemView {

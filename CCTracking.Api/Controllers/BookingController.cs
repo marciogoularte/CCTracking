@@ -14,7 +14,7 @@ namespace CCTracking.Api.Controllers
 
 
         [HttpPost]
-        public CCTracking.Dto.Booking SaveBooking(CCTracking.Dto.Booking booking)
+        public Booking SaveBooking(Booking booking)
         {
             if (booking != null)
             {
@@ -28,12 +28,16 @@ namespace CCTracking.Api.Controllers
                     booking.ModifiedDate = DateTime.Today;
 
                 }
-                //booking.Id = rowCounter++;
-                DBFacade facade = new CCTracking.DAL.BookingDal();
+                DBFacade facade = new BookingDal();
                 BaseModelResponse bookingResponse = facade.Execute(booking);
-                //var a = facade.Execute(booking);
-                booking = ((BookingResponse)bookingResponse).BookingModel;
-                //bookings.Add(booking);
+                if (!string.IsNullOrEmpty(bookingResponse.ErrorMessage))
+                {
+                    booking.ErrorMessage = bookingResponse.ErrorMessage;
+                }
+                else
+                {
+                    booking = ((BookingResponse)bookingResponse).BookingModel;
+                }
             }
             return booking;
         }
