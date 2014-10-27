@@ -51,10 +51,10 @@ namespace CCTracking.Api.Controllers
             return lookupResponse;
         }
         [HttpGet]
-        public BookingResponse GetAll(string a)
+        public BookingResponse GetAll(int a)
         {
             DBFacade facade = new CCTracking.DAL.BookingDal();
-            BaseModelResponse baseModelResponse = facade.GetAll();
+            BaseModelResponse baseModelResponse = facade.GetAll(a);
             BookingResponse bookingResponse = (BookingResponse)baseModelResponse;
             return bookingResponse;
         }
@@ -66,7 +66,7 @@ namespace CCTracking.Api.Controllers
             BookingResponse bookingResponse = (BookingResponse)baseModelResponse;
             return bookingResponse;
         }
-       
+
 
 
     }

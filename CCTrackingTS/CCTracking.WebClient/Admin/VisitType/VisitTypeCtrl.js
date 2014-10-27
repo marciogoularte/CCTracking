@@ -132,11 +132,11 @@ define(["require", "exports", "../../App", "../../Helper", "./VisitTypeView", ".
 
             //console.log(loginResponse);
             if (visitTypeDto == undefined) {
-                alert("VisitType Detail have not been saved successfully!");
+                //alert("VisitType Detail have not been saved successfully!");
+                helper.ShowModalPopup("danger", "Visit Type", "VisitType Detail have not been saved successfully!");
             } else {
-                alert("Record has been saved successfully with VisitType ID : " + visitTypeDto["id"]);
-
-                //this.UIBinding(model);
+                //alert("Record has been saved successfully with VisitType ID : " + visitTypeDto["id"]);
+                helper.ShowModalPopup("success", "Visit Type", "Record has been saved successfully with VisitType ID : " + visitTypeDto["id"]);
                 this.Cancel();
             }
         };
@@ -157,4 +157,3 @@ define(["require", "exports", "../../App", "../../Helper", "./VisitTypeView", ".
     })(helper.Controller);
     exports.VisitTypeCtrl = VisitTypeCtrl;
 });
-//# sourceMappingURL=VisitTypeCtrl.js.map

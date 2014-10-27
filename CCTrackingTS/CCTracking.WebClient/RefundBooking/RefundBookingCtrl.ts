@@ -15,7 +15,7 @@ import views = require("./RefundBookingView");
 import dto = require("../Dtos/RefundBookingDto");
 import DAL = require("../DAL/RefundBooking");
 
-export class CancelBookingCtrl extends helper.Controller {
+export class RefundBookingCtrl extends helper.Controller {
     app: any;
     viewModel: views.RefundBookingViewModel;
     view: views.RefundBookingView;
@@ -77,7 +77,7 @@ export class CancelBookingCtrl extends helper.Controller {
 
     GetByIdCompleted(refundDto: dto.Models.RefundBookingDto) {
         //alert("GetByIdCompleted..");
-        this.backboneModel = new Backbone.Model(refundDto["cancelBookingModel"]);
+        this.backboneModel = new Backbone.Model(refundDto["refundBookingModel"]);
         var refundModel = this.backboneModel;
 
         this.UIBinding(refundModel);
@@ -98,9 +98,10 @@ export class CancelBookingCtrl extends helper.Controller {
     Save(refund: any) {
         var appObj = this.app.request("AppGlobalSetting");
         refund.set("modifiedBy", appObj.get("Id"));
-        refund.set("landmarkId", refund.get("landmarkIdSelected").id);
+        refund.set("refundTypeId", refund.get("refundTypeSelected").id);
+        refund.set("refundOfficeLocation", refund.get("alkhidmatCentreSelected").id);
+        refund.set("refundOfficer", refund.get("cashierSelected").id);
         refund.set("isActive", refund.get("isActive") == "1" ? true : false);
-        refund.set("isCoPartner", refund.get("isCoPartner") == "1" ? true : false);
         var deferred = DAL.Save(refund);
         deferred.done(p=> this.SaveCompleted(p));
     }
@@ -118,11 +119,12 @@ export class CancelBookingCtrl extends helper.Controller {
         var refundModel = this.backboneModel;
         //console.log(loginResponse);        
         if (refundDto == undefined) {
-            alert("Booking has been cancelled successfully!");
+            //alert("Booking has not been cancelled successfully!");
+            helper.ShowModalPopup("danger", "Booking", "Booking has not been cancelled successfully!");
         }
         else {
-            alert("Record has been saved successfully with ID : " + refundDto["id"]);
-            //this.UIBinding(model);
+            //alert("Record has been saved successfully with ID : " + refundDto["id"]);
+            helper.ShowModalPopup("success", "Booking", "Record has been saved successfully with ID : " + refundDto["id"]);
             this.Cancel();
         }
     }
@@ -136,12 +138,16 @@ export class CancelBookingCtrl extends helper.Controller {
         var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
         refundModel.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
         refundModel.set("cashierList", lookupResponse.cashier);
-        
-        var centre = _.filter(lookupResponse.alkhidmatCentre, (p) => { return p.id == refundModel.get("alkhidmatCentreId"); });
+        refundModel.set("refundTypeList", lookupResponse.refundType);
+
+        var centre = _.filter(lookupResponse.alkhidmatCentre, (p) => { return p.id == refundModel.get("refundOfficeLocation"); });
         refundModel.set("alkhidmatCentreSelected", centre[0]);
 
-        var cashier = _.filter(lookupResponse.cashier, (p) => { return p.id == refundModel.get("officerId") });
+        var cashier = _.filter(lookupResponse.cashier, (p) => { return p.id == refundModel.get("refundOfficer") });
         refundModel.set("cashierSelected", cashier[0]);
+
+        var refundType = _.filter(lookupResponse.refundType, (p) => { return p.id == refundModel.get("refundTypeId") });
+        refundModel.set("refundTypeSelected", refundType[0]);
 
         this.viewModel.bbModel = refundModel;
         this.viewModel.model = kb.viewModel(refundModel);

@@ -132,10 +132,12 @@ export class BusCtrl extends helper.Controller {
         var model = this.backboneModel;
         //console.log(loginResponse);        
         if (busDto == undefined) {
-            alert("Bus Detail have not been saved successfully!");
+           // alert("Bus Detail have not been saved successfully!");
+            helper.ShowModalPopup("danger", "Bus", "Bus Details have not been saved successfully!");
         }
         else {
-            alert("Record has been saved successfully with Bus ID : " + busDto["id"]);
+            //alert("Record has been saved successfully with Bus ID : " + busDto["id"]);
+            helper.ShowModalPopup("success", "Bus", "Record has been saved successfully with Bus ID : " + busDto["id"]);
             //this.UIBinding(model);
             this.Cancel();
         }

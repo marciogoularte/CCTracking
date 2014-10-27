@@ -124,14 +124,15 @@ export class StationCtrl extends helper.Controller {
 
     SaveCompleted(stationDto: dto.Models.StationDto) {
         this.backboneModel = new Backbone.Model(stationDto);
-        var model = this.backboneModel;
-        //console.log(loginResponse);        
+        var model = this.backboneModel;    
         if (stationDto == undefined) {
-            alert("Alkhidmat Centre have not been saved successfully!");
+            //alert("Alkhidmat Centre have not been saved successfully!");
+            helper.ShowModalPopup("danger", "Alkhidmat Centre", "Alkhidmat Centre have not been saved successfully!");
         }
         else {
-            alert("Record has been saved successfully with Alkhidmat Centre ID : " + stationDto["id"]);
-            //this.UIBinding(model);
+
+            helper.ShowModalPopup("success", "Alkhidmat Centre", "Record has been saved successfully with Alkhidmat Centre ID : " + stationDto["id"]);
+            //alert("Record has been saved successfully with Alkhidmat Centre ID : " + stationDto["id"]);
             this.Cancel();
         }
     }
@@ -157,16 +158,5 @@ export class StationCtrl extends helper.Controller {
         //this.stationView.on("SaveAlkhidmatCentre", () => this.Save(this.stationViewModel.bbModel));
     }
 
-    //GetAllCompletedNew(station: dto.Models.StationCollection) {
-    //    //this.collection = new dto.Models.StationCollection(station["centreList"]);
-    //    //this.collection.collection = station["centreList"];
-    //    //this.collection.reset(station);
-    //    this.collectionView.collection = this.collection;
-    //    this.collectionView.on("itemview:ShowDetail", (view) => this.GetByIdCompleted(view.model));
-    //    app.MainRegion.show(this.collectionView);
-
-    //}
-
     
-  
 }

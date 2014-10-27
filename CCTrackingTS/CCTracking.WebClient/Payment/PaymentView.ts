@@ -38,9 +38,9 @@ export class PaymentViewModel extends helper.ViewModel {
 
 export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView {    
     viewModel: ViewModel;
-    bbModel:Backbone.Model;
+    bbModel: Backbone.Model;
     constructor(options?) {
-        
+
         app = application.Application.getInstance();
         this.template = templateView;
         this.viewModel = new ViewModel(options);
@@ -51,8 +51,8 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
         }
         super(options);
     }
-    
-    AddMore() {        
+
+    AddMore() {
         //var a = this.$el.find("#ddlCentre")        
         this.trigger("BusVisitAddItem",
             this.viewModel.bookingId(),
@@ -65,7 +65,7 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
 
     Save(e) {
         e.preventDefault();
-        
+
         this.bbModel.set("id", this.viewModel.Id());
         this.bbModel.set("bookingId", this.viewModel.bookingId());
         this.bbModel.set("paymentType", this.viewModel.paymentType());
@@ -112,10 +112,10 @@ export class ViewModel {
     amount: any;
     paymentLocation: any;
     officerId: any;
-    receiptNo:any;
+    receiptNo: any;
     extraAmountCharge: any;
     extraAmountReason: any;
-    extraAmountReceipt:any;
+    extraAmountReceipt: any;
     paymentStatus: any;
     easyPaisaTranNo: any;
 
@@ -131,13 +131,13 @@ export class ViewModel {
     cashierSelected: any;
     paymentTypeList: any;
     paymentTypeSelected: any;
-    isPaid:boolean;
+    isPaid: boolean;
     isCash: any;
-    isEasyPaisa:any;
+    isEasyPaisa: any;
 
 
     constructor(model) {
-        
+
         if (model == undefined) {
             this.Id = ko.observable();
             this.bookingId = ko.observable();
@@ -231,7 +231,7 @@ export class ViewModel {
             this.isEasyPaisa = ko.computed({
                 owner: this,
                 read: () => {
-                    if (this.paymentTypeSelected() != undefined && this.paymentTypeSelected().id === 2 && this.easyPaisaTranNo().trim()=="") {
+                    if (this.paymentTypeSelected() != undefined && this.paymentTypeSelected().id === 2 && this.easyPaisaTranNo().trim() == "") {
                         //this.paymentStatus("0");
                         return true;
                     } else {
@@ -255,7 +255,7 @@ export class ViewModel {
 
         }
     }
-    
+
 }
 
 export class BusVisitCollectionView extends helper.Views.CompositeView {
@@ -278,11 +278,11 @@ export class BusVisitItemView extends helper.Views.ItemView {
         options.events = {
             "mouseover .jsShowDetail": "ShowDetail",
             "click .jsShowDetail": "ShowDetail",
-            "click .jsRemoveItem": ()=> this.RemoveItem()
+            "click .jsRemoveItem": () => this.RemoveItem()
         };
         super(options);
     }
-    RemoveItem() {        
+    RemoveItem() {
         this.trigger("BusVisitRemoveItem", this.model.get("busId"), this.model.get("centreId"), this.model.get("driverId"));
         //this.trigger("BusVisitRemoveItem", this.model.get("busVisitId"));
     }
@@ -290,4 +290,3 @@ export class BusVisitItemView extends helper.Views.ItemView {
         //new userCtrl.UserCtrl().ShowDetail(this.model);
     }
 }
-

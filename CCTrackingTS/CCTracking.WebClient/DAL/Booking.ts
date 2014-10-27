@@ -27,9 +27,9 @@ export function Save(bookingRequest: bookingDto.Models.BookingRequest) {
     return o.doAjaxRequest(bookingRequest, "POST", "Booking");
 }
 
-export function GetAll() {
+export function GetAll(bookingFilterType) {
     var o: baseDAL.BaseDto = new BookingDal();
-    return o.doAjaxRequest(null, "GET", "Booking?a=a");
+    return o.doAjaxRequest(null, "GET", "Booking?a=" + bookingFilterType);
 }
 export function GetById(id) {
     var o: baseDAL.BaseDto = new BookingDal();

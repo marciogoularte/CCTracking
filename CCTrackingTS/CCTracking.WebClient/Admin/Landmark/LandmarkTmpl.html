@@ -1,4 +1,4 @@
-﻿<div>
+﻿ <div>
     <div class="panel panel-default">
         <div class="panel-heading header-bold"><span class="glyphicon glyphicon-briefcase"></span>&nbsp;Landmark Information</div>
         <div class="panel-body">
@@ -11,14 +11,14 @@
                                 <td class="col-sm-4 col-md-4 input-sm">Union Council</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlLandmark" class="form-control input-sm"
-                                        data-bind="options: model.unionCouncilList, optionsText:'description', value:model.unionCouncilIdSelected">
+                                        data-bind="options: model.unionCouncilList, optionsText:'description', value:model.unionCouncilIdSelected" required="required">
                                     </select></td>
                             </tr>
 
                            <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Landmark</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtLandmark" type="text" class="form-control input-sm" data-bind="value: model.name" /></td>
+                                    <input id="txtLandmark" type="text" class="form-control input-sm" data-bind="value: model.name" required="required"/></td>
                             </tr>
                           
                             <tr>

@@ -6,7 +6,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../App", "../Helper", "./LoginView", "../Dtos/LoginDto", "../DAL/Login", "../Common/Views/HeaderView", "../Dtos/AppObjectDto", "../Common/Views/AdminLeftView", "../Booking/Views/BookingLeftView", "../Bus/BusAvailabilityCtrl", "../Booking/BookingCtrl", "../User/UserCtrl", "marionette", "jquery", "knockout", "text!./Login.html"], function(require, exports, application, helper, views, dto, DAL, menu, appObjectDto, adminLeft, summary, busAvailabilityCtrl, bookingCtrl, uc) {
+define(["require", "exports", "../App", "../Helper", "./LoginView", "../Dtos/LoginDto", "../DAL/Login", "../Common/Views/HeaderView", "../Dtos/AppObjectDto", "../Common/Views/AdminLeftView", "../Booking/BookingLeft/BookingLeftCtrl", "../Bus/BusAvailabilityCtrl", "../Booking/BookingCtrl", "../User/UserCtrl", "marionette", "jquery", "knockout", "text!./Login.html"], function(require, exports, application, helper, views, dto, DAL, menu, appObjectDto, adminLeft, bookingLeftCtrl, busAvailabilityCtrl, bookingCtrl, uc) {
     /// <amd-dependency path="marionette"/>
     /// <amd-dependency path="jquery"/>
     /// <amd-dependency path="knockout"/>
@@ -41,28 +41,56 @@ define(["require", "exports", "../App", "../Helper", "./LoginView", "../Dtos/Log
         LoginCtrl.prototype.Login = function (login) {
             var _this = this;
             //debugger;
+            this.ShowOverlay();
             var appObj = this.app.request("AppGlobalSetting");
 
             login.set("userName", $("#txtUserName").val());
             login.set("password", $("#txtPassword").val());
             var promise = DAL.Login(login);
+
             promise.done(function (p) {
                 return _this.Authenticated(p);
             });
         };
 
+        LoginCtrl.prototype.ShowOverlay = function () {
+            var ov = $("#Overlay");
+
+            //var pos = $(_btn).offset();
+            var doc = $(document);
+            ov.css({
+                left: 0,
+                top: 0,
+                width: 0,
+                height: 0
+            }).show().animate({
+                left: 0,
+                top: 0,
+                width: '90%',
+                height: '90%'
+            }, "slow");
+        };
+
+        LoginCtrl.prototype.HideOvrlay = function () {
+            $("#Overlay").hide("slow");
+        };
+
         //TODO: this method should be inside controller
         LoginCtrl.prototype.Authenticated = function (loginDto) {
             //console.log(loginResponse);
+            var lblLoginMessage = $("#lblLoginMessage");
             if (loginDto == undefined) {
                 alert("User name or password is wrong..");
+                //lblLoginMessage.text('User name or password is wrong..');
             }
 
             if (loginDto["errorMessage"] !== null) {
                 alert(loginDto.get("errorMessage"));
+                // lblLoginMessage.text('User name or password is wrong..');
             } else {
                 alert("You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
 
+                // lblLoginMessage.text("You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
                 // var app = this.app.Application.getInstance();
                 //Setting global object which can be accissible from other pages.
                 var appObject = new appObjectDto.Models.AppObject();
@@ -107,8 +135,9 @@ define(["require", "exports", "../App", "../Helper", "./LoginView", "../Dtos/Log
                     //knockout binding syntax
                     // vm.FirstName("value set from another place...")
                 } else {
-                    //app.AppLayout.LeftRegion.show(new summary.BookingSummaryItemView());
-                    this.app.LeftRegion.show(new summary.BookingSummaryItemView());
+                    new bookingLeftCtrl.BookingLeftCtrl().Show();
+
+                    //this.app.LeftRegion.show(bookingLeftView);
                     new busAvailabilityCtrl.BusAvailabilityCtrl().Show();
                     var ctrlBooking = new bookingCtrl.BookingCtrl();
                     ctrlBooking.Show();

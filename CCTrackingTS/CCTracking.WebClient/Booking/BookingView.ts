@@ -23,12 +23,12 @@ var app;
 export class BookingViewModel extends helper.ViewModel {
     constructor(model: any, controller: any) {
         super(model, controller);
-        this.model.busPointSelected.subscribe(() => {            
+        this.model.busPointSelected.subscribe(() => {
             var list = GetUcList(this.model.busPointSelected().id);
             this.model.unionCouncilList(list);
         });
 
-        this.model.unionCouncilIdSelected.subscribe(() => {            
+        this.model.unionCouncilIdSelected.subscribe(() => {
             var list = GetTownList(this.model.unionCouncilIdSelected().id);
             this.model.townList(list);
         });
@@ -44,7 +44,7 @@ export class BookingView extends helper.Views.MvvmView {
         this.events = {
             "submit": "Save",
             "click .jsCancel": "Cancel"
-        }        
+        }
         super(options);
     }
     Cancel() {
@@ -67,15 +67,15 @@ export class BookingView extends helper.Views.MvvmView {
         new bookingCtrl.BookingCtrl().Save(this.viewModel.bbModel);
     }
 
-    
+
 
     GetAllCompleted(bookingResponse: bookingDto.Models.BookingResponseCollection) {
         var a = templateGrid;
-        app = application.Application.getInstance();        
+        app = application.Application.getInstance();
         var bookingCollection = new bookingDto.Models.BookingResponseCollection(bookingResponse["bookingList"]);
         var collectionView: BookingCollectionView = new BookingCollectionView({ collection: bookingCollection });
 
-        var bookingGrid = collectionView.$("#tblBooking");         
+        var bookingGrid = collectionView.$("#tblBooking");
         app.MainRegion.show(collectionView);
     }
 }
@@ -83,13 +83,13 @@ export class BookingView extends helper.Views.MvvmView {
 export class BookingCollectionView extends helper.Views.CompositeView {
     dataTable: any;
     constructor(options?: any) {
-        options.itemView = BookingItemView;        
+        options.itemView = BookingItemView;
         options.template = templateGrid.getOuterHTML("#gridTemplate");
         options.itemViewContainer = "tbody";
         super(options);
     }
     //onShow() {
-       
+
     //    this.dataTable = this.$el.find("#tblBooking").dataTable({
     //        "autoWidth": false,
     //        "info": true,
@@ -120,7 +120,7 @@ export class BookingCollectionView extends helper.Views.CompositeView {
 
 export class BookingItemView extends helper.Views.ItemView {
     constructor(options?: any) {
-        if (!options) options = {};        
+        if (!options) options = {};
         options.template = templateRow.getOuterHTML("#rowTemplate");
         options.tagName = "tr";
         options.className = "jsRowClick";
@@ -130,7 +130,7 @@ export class BookingItemView extends helper.Views.ItemView {
         };
         super(options);
     }
-    ShowDetail() {        
+    ShowDetail() {
         //new userCtrl.UserCtrl().ShowDetail(this.model);
     }
 }
@@ -147,8 +147,3 @@ function GetTownList(ucId) {
     var townList = _.filter(lookupResponse.town, (item) => { return item.id == ucId });
     return townList;
 }
-
-
-
-
-

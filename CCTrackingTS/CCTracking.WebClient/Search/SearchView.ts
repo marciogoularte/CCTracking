@@ -19,7 +19,7 @@ var app;
 
 
 export class SearchViewModel extends helper.ViewModel {
-    constructor(model:any, controller:any) {
+    constructor(model: any, controller: any) {
         super(model, controller);
     }
 }
@@ -38,11 +38,11 @@ export class SearchView extends helper.Views.MvvmView {
         //debugger;
         //this.$el.find("#txtBookingDate").datepicker();
     }
-    
+
 }
 
 export class SearchCollectionView extends helper.Views.CompositeView {
-    datatable:any;
+    datatable: any;
     constructor(options?) {
         options.itemView = SearchItemView;
         options.template = templateView.getOuterHTML("#gridTemplate");
@@ -62,7 +62,7 @@ export class SearchCollectionView extends helper.Views.CompositeView {
         //debugger;
         //this.$el.find("#txtBookingDate").datepicker();
     }
-    
+
 }
 
 export class SearchItemView extends helper.Views.ItemView {

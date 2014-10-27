@@ -32,7 +32,7 @@ export class SearchCtrl extends helper.Controller {
         this.searchViewModel = new views.SearchViewModel(this.backboneModel, this);
         //this.searchView = new views.SearchView({ viewModel: this.searchViewModel });
         this.compositeModel = new Backbone.Model();
-        this.collection = new dto.Models.SearchCollection({id:"", contactName: "", contactMobile: "", contactNic: "", deseasedName: "", address: "", status: "" });
+        this.collection = new dto.Models.SearchCollection({ id: "", contactName: "", contactMobile: "", contactNic: "", deseasedName: "", address: "", status: "" });
         this.collectionView = new views.SearchCollectionView({ collection: this.collection, model: this.compositeModel });
 
     }
@@ -54,7 +54,7 @@ export class SearchCtrl extends helper.Controller {
         model.set("contactInfo", "");
         model.set("deseasedInfo", "");
         model.set("paymentStatusId", "");
-        model.set("bookingDate",  "");
+        model.set("bookingDate", "");
         this.compositeModel = model;
 
         //this.searchViewModel = new views.SearchViewModel(this.compositeModel, this);
@@ -77,7 +77,7 @@ export class SearchCtrl extends helper.Controller {
         var centre = $('#ddlCentre')[0];
         ko.cleanNode(centre);
         ko.applyBindings(vm, centre);
-        var bus  = $('#ddlBusDetails')[0];
+        var bus = $('#ddlBusDetails')[0];
         ko.cleanNode(bus);
         ko.applyBindings(vm, bus);
 
@@ -107,7 +107,7 @@ export class SearchCtrl extends helper.Controller {
         ko.cleanNode(bookingDate);
         ko.applyBindings(vm, bookingDate);
 
-        
+
 
         //this.searchView = new views.SearchView({ viewModel: this.searchViewModel });
         //this.searchView.on("SearchBooking", () => this.GetByCriteria(this.searchViewModel.bbModel));
@@ -129,7 +129,7 @@ export class SearchCtrl extends helper.Controller {
         //searchRequest.set("centre", searchDto.get("alkhidmatCentreSelected").id);
         //searchRequest.set("bus", searchDto.get("busSelected").id);
 
-        
+
         searchDto.set("genderId", searchDto.get("genderId").toString());
         searchDto.set("paymentStatusId", searchDto.get("paymentStatusId").toString());
         if (searchDto.get("bookingDate").trim() != "") {

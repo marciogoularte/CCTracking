@@ -126,10 +126,11 @@ export class LandmarkCtrl extends helper.Controller {
         var model = this.backboneModel;
         //console.log(loginResponse);        
         if (landmarkDto == undefined) {
-            alert("Landmark Detail have not been saved successfully!");
+           // alert("Landmark Detail have not been saved successfully!");
+            helper.ShowModalPopup("danger", "Landmark", "Landmark Detail have not been saved successfully!");
         }
         else {
-            alert("Record has been saved successfully with Landmark ID : " + landmarkDto["id"]);
+            helper.ShowModalPopup("success", "Landmark", "Record has been saved successfully with Landmark ID : " + landmarkDto["id"]);
             //this.UIBinding(model);
             this.Cancel();
         }

@@ -127,6 +127,8 @@
     <Compile Include="Controllers\BusController.cs" />
     <Compile Include="Controllers\BusVisitController.cs" />
     <Compile Include="Controllers\CauseOfDeathController.cs" />
+    <Compile Include="Controllers\BookingLeftController.cs" />
+    <Compile Include="Controllers\BookingSummaryController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\GraveyardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

@@ -21,7 +21,7 @@ export class BusVisitCtrl extends helper.Controller {
     backboneModel: Backbone.Model;
     collection: dto.Models.BusVisitCollection;
     collectionView: views.BusVisitCollectionView;
-    compositeModel : Backbone.Model;
+    compositeModel: Backbone.Model;
 
     constructor() {
         super();
@@ -40,9 +40,9 @@ export class BusVisitCtrl extends helper.Controller {
     }
 
     Show() {
-        
+
         var url = window.location.href;
-        if (url.indexOf("id=") > -1) {            
+        if (url.indexOf("id=") > -1) {
             var id = (url.substring(url.indexOf("id=") + 3, url.length));
             var deferredById = DAL.GetById(id);
             deferredById.done(p=> this.GetByIdCompleted(p));
@@ -114,7 +114,7 @@ export class BusVisitCtrl extends helper.Controller {
         //model.set("finalReading", "");
         //model.set("isActive", "");
         //model.set("modifiedBy", "");
-        
+
 
         //this.viewModel = new views.BusVisitViewModel(model, this);
         //this.view = new views.BusVisitView({ viewModel: this.viewModel });
@@ -123,7 +123,7 @@ export class BusVisitCtrl extends helper.Controller {
         this.view.on("Event:SaveForm", (busVisitModel) => this.Save(busVisitModel));
         this.view.on("Event:CancelForm", () => this.Cancel());
         this.app.MainRegion.show(this.view);
-        
+
     }
 
     GetAll() {
@@ -139,7 +139,7 @@ export class BusVisitCtrl extends helper.Controller {
         var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
         this.backboneModel = new Backbone.Model(dto["busVisitModel"]);
         var model = this.backboneModel;
-        
+
         //model.set("outTimeSlotList", lookupResponse.timeSlot);
         //var outTime = _.filter(lookupResponse.timeSlot, (p) => { return p.id == model.get("outTime"); });
         //model.set("outTimeSlotSelected", outTime[0]);
@@ -204,7 +204,7 @@ export class BusVisitCtrl extends helper.Controller {
         this.compositeModel.set("busList", lookupResponse.bus);
         this.compositeModel.set("busSelected", "");
         this.collection = new Backbone.Collection(model["busVisitList"]);
-        
+
         this.collectionView = new views.BusVisitCollectionView({ collection: this.collection, model: this.compositeModel });
         this.collectionView.on("itemview:ShowDetail", (view) => this.GetByIdCompleted(view.model));
         this.collectionView.listenTo(this.collectionView, "Event:SearchVisit", (busId) => this.SearchVisit(busId));

@@ -13,7 +13,10 @@ namespace CCTracking.Dto
         public int RefundOfficeLocation { get; set; }
         public int RefundTypeId { get; set; }
         public decimal RefundAmount { get; set; }
+        public decimal AmountDeducted { get; set; }
         public string RefundReason { get; set; }
+        public string  RefundReceipt { get; set; }
+        public int RefundOfficer { get; set; }
 
     }
 }

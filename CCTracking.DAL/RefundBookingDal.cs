@@ -35,11 +35,13 @@ namespace CCTracking.DAL
         {
             RefundBooking refundBooking = baseModel as RefundBooking;
             dictionary.Add("@BookingId", refundBooking.BookingId);
+            dictionary.Add("@RefundTypeId", refundBooking.RefundTypeId);
+            dictionary.Add("@RefundReason", refundBooking.RefundReason);
+            dictionary.Add("@ActualBookingAmount", refundBooking.ActualBookingAmount);
+            dictionary.Add("@RefundAmount", refundBooking.RefundAmount);
+            dictionary.Add("@RefundReceipt", refundBooking.RefundReceipt);
             dictionary.Add("@RefundOfficeLocation", refundBooking.RefundOfficeLocation);
-            dictionary.Add("@BookingId", refundBooking.ActualBookingAmount);
-            dictionary.Add("@RefundOfficeLocation", refundBooking.RefundAmount);
-            dictionary.Add("@BookingId", refundBooking.RefundReason);
-            dictionary.Add("@RefundOfficeLocation", refundBooking.RefundTypeId);
+            dictionary.Add("@RefundOfficer", refundBooking.RefundOfficer);
             
             base.ExecuteSql(refundBooking, dictionary);
             return "dbo.SaveRefundBooking";
@@ -98,12 +100,18 @@ namespace CCTracking.DAL
                 refundBooking.ActualBookingAmount = dr.GetDecimal(dr.GetOrdinal("ActualBookingAmount"));
             if (!dr.IsDBNull(dr.GetOrdinal("RefundAmount")))
                 refundBooking.RefundAmount = dr.GetDecimal(dr.GetOrdinal("RefundAmount"));
+            if (!dr.IsDBNull(dr.GetOrdinal("AmountDeducted")))
+                refundBooking.AmountDeducted = dr.GetDecimal(dr.GetOrdinal("AmountDeducted"));
             if (!dr.IsDBNull(dr.GetOrdinal("RefundOfficeLocation")))
                 refundBooking.RefundOfficeLocation = dr.GetInt32(dr.GetOrdinal("RefundOfficeLocation"));
             if (!dr.IsDBNull(dr.GetOrdinal("RefundReason")))
                 refundBooking.RefundReason = dr.GetString(dr.GetOrdinal("RefundReason"));
+            if (!dr.IsDBNull(dr.GetOrdinal("RefundReceipt")))
+                refundBooking.RefundReceipt = dr.GetString(dr.GetOrdinal("RefundReceipt"));
             if (!dr.IsDBNull(dr.GetOrdinal("RefundTypeId")))
-                refundBooking.RefundTypeId = dr.GetInt16(dr.GetOrdinal("RefundTypeId"));
+                refundBooking.RefundTypeId = dr.GetInt32(dr.GetOrdinal("RefundTypeId"));
+            if (!dr.IsDBNull(dr.GetOrdinal("RefundOfficer")))
+                refundBooking.RefundOfficer = dr.GetInt32(dr.GetOrdinal("RefundOfficer"));
 
         }
     }

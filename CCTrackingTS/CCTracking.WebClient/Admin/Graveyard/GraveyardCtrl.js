@@ -138,9 +138,11 @@ define(["require", "exports", "../../App", "../../Helper", "./GraveyardView", ".
 
             //console.log(loginResponse);
             if (graveyardDto == undefined) {
-                alert("Graveyard Detail have not been saved successfully!");
+                helper.ShowModalPopup("danger", "Graveyard", "Booking have not been saved successfully!");
+                //alert("Graveyard Detail have not been saved successfully!");
             } else {
-                alert("Record has been saved successfully with Graveyard ID : " + graveyardDto["id"]);
+                // alert("Record has been saved successfully with Graveyard ID : " + graveyardDto["id"]);
+                helper.ShowModalPopup("success", "Graveyard", "Record has been saved successfully with Graveyard ID : " + graveyardDto["id"]);
 
                 //this.UIBinding(model);
                 this.Cancel();
@@ -171,4 +173,3 @@ define(["require", "exports", "../../App", "../../Helper", "./GraveyardView", ".
     })(helper.Controller);
     exports.GraveyardCtrl = GraveyardCtrl;
 });
-//# sourceMappingURL=GraveyardCtrl.js.map

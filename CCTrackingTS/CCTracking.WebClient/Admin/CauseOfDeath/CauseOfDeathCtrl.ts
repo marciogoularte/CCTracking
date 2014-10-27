@@ -121,11 +121,12 @@ export class CauseOfDeathCtrl extends helper.Controller {
         var model = this.backboneModel;
         //console.log(loginResponse);        
         if (causeOfDeathDto == undefined) {
-            alert("CauseOfDeath Detail have not been saved successfully!");
+            //alert("CauseOfDeath Detail have not been saved successfully!");
+            helper.ShowModalPopup("danger", "Cause Of Death", "CauseOfDeath Detail have not been saved successfully!");
         }
         else {
-            alert("Record has been saved successfully with CauseOfDeath ID : " + causeOfDeathDto["id"]);
-            //this.UIBinding(model);
+            //alert("Record has been saved successfully with CauseOfDeath ID : " + causeOfDeathDto["id"]);
+            helper.ShowModalPopup("success", "Cause Of Death", "Record has been saved successfully with CauseOfDeath ID : " + causeOfDeathDto["id"]);
             this.Cancel();
         }
     }

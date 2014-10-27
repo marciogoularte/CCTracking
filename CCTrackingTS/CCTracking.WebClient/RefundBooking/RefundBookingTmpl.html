@@ -7,35 +7,40 @@
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Reason for Cancellation</td>
                         <td class="col-sm-8 col-md-8">
-                            <select id="ddlReasonForCancelation" class="form-control input-sm">
-                                <option>Funeral Pospond</option>
-                                <option>Hire Other Service</option>
-                                <option>Other</option>
+                            <select id="ddlReasonForCancelation" class="form-control input-sm" 
+                                data-bind="options: model.refundTypeList, optionsText:'description', value:model.refundTypeSelected">
+                               
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Cancellation Details</td>
                         <td class="col-sm-8 col-md-8">
-                            <textarea rows="5" class="form-control input-sm"></textarea>
+                            <textarea rows="5" class="form-control input-sm" data-bind="value:model.refundReason"></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Booking Amount</td>
                         <td class="col-sm-8 col-md-8">
-                            <input type="text" placeholder="Booking Amount" class="form-control input-sm">
+                            <input type="text" placeholder="Booking Amount" disabled class="form-control input-sm" data-bind="value:model.actualBookingAmount">
                         </td>
                     </tr>
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Amount Refund</td>
                         <td class="col-sm-8 col-md-8">
-                            <input type="text" placeholder="Amount Refund" class="form-control input-sm">
+                            <input type="text" placeholder="Amount Refund" class="form-control input-sm" data-bind="value:model.refundAmount">
                         </td>
                     </tr>
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Amount Deducted</td>
                         <td class="col-sm-8 col-md-8">
-                            <input type="text" placeholder="Automatically calculate" disabled class="form-control input-sm">
+                            <input type="text" placeholder="Automatically calculate" disabled class="form-control input-sm" data-bind="value:model.amountDeducted">
+                        </td>
+                    </tr>
+                     <tr>
+                        <td class="col-sm-4 col-md-4 input-sm">Refund Receipt</td>
+                        <td class="col-sm-8 col-md-8">
+                            <input type="text" placeholder="Refund Receipt" class="form-control input-sm" data-bind="value:model.refundReceipt">
                         </td>
                     </tr>
                     <!--<tr>

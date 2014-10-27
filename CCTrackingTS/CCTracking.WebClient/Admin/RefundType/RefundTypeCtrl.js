@@ -132,11 +132,11 @@ define(["require", "exports", "../../App", "../../Helper", "./RefundTypeView", "
 
             //console.log(loginResponse);
             if (refundTypeDto == undefined) {
-                alert("RefundType Detail have not been saved successfully!");
+                //alert("RefundType Detail have not been saved successfully!");
+                helper.ShowModalPopup("danger", "Refund Type", "RefundType Detail have not been saved successfully!");
             } else {
-                alert("Record has been saved successfully with RefundType ID : " + refundTypeDto["id"]);
-
-                //this.UIBinding(model);
+                // alert("Record has been saved successfully with RefundType ID : " + refundTypeDto["id"]);
+                helper.ShowModalPopup("success", "Refund Type", "Record has been saved successfully with RefundType ID : " + refundTypeDto["id"]);
                 this.Cancel();
             }
         };
@@ -157,4 +157,3 @@ define(["require", "exports", "../../App", "../../Helper", "./RefundTypeView", "
     })(helper.Controller);
     exports.RefundTypeCtrl = RefundTypeCtrl;
 });
-//# sourceMappingURL=RefundTypeCtrl.js.map

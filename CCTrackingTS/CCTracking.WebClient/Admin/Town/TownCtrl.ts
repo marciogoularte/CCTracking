@@ -121,11 +121,12 @@ export class TownCtrl extends helper.Controller {
         var model = this.backboneModel;
         //console.log(loginResponse);        
         if (townDto == undefined) {
-            alert("Town Detail have not been saved successfully!");
+            //alert("Town Detail have not been saved successfully!");
+            helper.ShowModalPopup("danger", "Town", "Town Detail have not been saved successfully!");
         }
         else {
-            alert("Record has been saved successfully with Town ID : " + townDto["id"]);
-            //this.UIBinding(model);
+            //alert("Record has been saved successfully with Town ID : " + townDto["id"]);
+            helper.ShowModalPopup("success", "Town", "Record has been saved successfully with Town ID : " + townDto["id"]);
             this.Cancel();
         }
     }

@@ -133,9 +133,11 @@ define(["require", "exports", "../App", "../Helper", "./UserView", "../Dtos/User
 
             //console.log(loginResponse);
             if (userDto == undefined) {
-                alert("User Detail have not been saved successfully!");
+                //alert("User Detail have not been saved successfully!");
+                helper.ShowModalPopup("danger", "User Detail", "User Detail have not been saved successfully!");
             } else {
-                alert("Record has been saved successfully with User ID : " + userDto["id"]);
+                // alert("Record has been saved successfully with User ID : " + userDto["id"]);
+                helper.ShowModalPopup("success", "User Detail", "Record has been saved successfully with User ID : " + userDto["id"]);
 
                 //this.UIBinding(model);
                 this.Cancel();

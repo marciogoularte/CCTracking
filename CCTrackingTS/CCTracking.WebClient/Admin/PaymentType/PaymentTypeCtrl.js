@@ -132,11 +132,12 @@ define(["require", "exports", "../../App", "../../Helper", "./PaymentTypeView", 
 
             //console.log(loginResponse);
             if (paymentTypeDto == undefined) {
-                alert("PaymentType Detail have not been saved successfully!");
+                //alert("PaymentType Detail have not been saved successfully!");
+                helper.ShowModalPopup("danger", "Payment Type", "PaymentType Detail have not been saved successfully!");
             } else {
-                alert("Record has been saved successfully with PaymentType ID : " + paymentTypeDto["id"]);
+                //alert("Record has been saved successfully with PaymentType ID : " + paymentTypeDto["id"]);
+                helper.ShowModalPopup("success", "Payment Type", "Record has been saved successfully with PaymentType ID : " + paymentTypeDto["id"]);
 
-                //this.UIBinding(model);
                 this.Cancel();
             }
         };
@@ -157,4 +158,3 @@ define(["require", "exports", "../../App", "../../Helper", "./PaymentTypeView", 
     })(helper.Controller);
     exports.PaymentTypeCtrl = PaymentTypeCtrl;
 });
-//# sourceMappingURL=PaymentTypeCtrl.js.map

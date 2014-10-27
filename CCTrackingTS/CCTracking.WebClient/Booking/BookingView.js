@@ -6,10 +6,9 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto", "./BookingCtrl", "../App", "marionette", "jquery", "jqueryUI", "knockout", "text!./BookingTmpl.html", "text!./BookingGrid.html", "text!./BokingGridRow.html"], function(require, exports, helper, bookingDto, bookingCtrl, application) {
+define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto", "./BookingCtrl", "../App", "marionette", "jquery", "knockout", "text!./BookingTmpl.html", "text!./BookingGrid.html", "text!./BokingGridRow.html"], function(require, exports, helper, bookingDto, bookingCtrl, application) {
     /// <amd-dependency path="marionette"/>
     /// <amd-dependency path="jquery"/>
-    /// <amd-dependency path="jqueryUI"/>
     /// <amd-dependency path="knockout"/>
     /// <amd-dependency path="text!./BookingTmpl.html"/>
     /// <amd-dependency path="text!./BookingGrid.html"/>
@@ -56,16 +55,7 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto
         BookingView.prototype.Cancel = function () {
             this.trigger("CancelForm");
         };
-        BookingView.prototype.onDomRefresh = function () {
-            //alert("ddd");
-            //this.$el.find("#PickupDate").datepicker();
-        };
 
-        //onShow() {
-        //    alert('dddd');
-        //    //debugger;
-        //    //this.$el.find("#PickupDate").datepicker();
-        //}
         BookingView.prototype.Save = function (e) {
             e.preventDefault();
 

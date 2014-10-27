@@ -143,11 +143,11 @@ define(["require", "exports", "../../App", "../../Helper", "./DriverView", "../.
 
             //console.log(loginResponse);
             if (driverDto == undefined) {
-                alert("Driver Detail have not been saved successfully!");
+                //alert("Driver Detail have not been saved successfully!");
+                helper.ShowModalPopup("danger", "Driver", "Driver have not been saved successfully!");
             } else {
-                alert("Record has been saved successfully with Driver ID : " + driverDto["id"]);
-
-                //this.UIBinding(model);
+                //alert("Record has been saved successfully with Driver ID : " + driverDto["id"]);
+                helper.ShowModalPopup("success", "Driver", "Record has been saved successfully with Driver ID : " + driverDto["id"]);
                 this.Cancel();
             }
         };
@@ -176,4 +176,3 @@ define(["require", "exports", "../../App", "../../Helper", "./DriverView", "../.
     })(helper.Controller);
     exports.DriverCtrl = DriverCtrl;
 });
-//# sourceMappingURL=DriverCtrl.js.map

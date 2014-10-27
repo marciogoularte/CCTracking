@@ -176,8 +176,11 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             app.MainRegion.show(this.bookingView);
         };
 
-        BookingCtrl.prototype.GetAll = function () {
-            var deferred = DAL.GetAll();
+        BookingCtrl.prototype.GetAll = function (bookingFilterType) {
+            if (typeof bookingFilterType === "undefined") { bookingFilterType = 1; }
+            if (bookingFilterType == undefined)
+                bookingFilterType = 1; //  allbooking
+            var deferred = DAL.GetAll(bookingFilterType);
             deferred.done(function (p) {
                 return new views.BookingView().GetAllCompleted(p);
             });
@@ -224,4 +227,3 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
     })(helper.Controller);
     exports.BookingCtrl = BookingCtrl;
 });
-//# sourceMappingURL=BookingCtrl.js.map

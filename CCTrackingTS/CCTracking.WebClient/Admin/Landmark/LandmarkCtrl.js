@@ -138,9 +138,10 @@ define(["require", "exports", "../../App", "../../Helper", "./LandmarkView", "..
 
             //console.log(loginResponse);
             if (landmarkDto == undefined) {
-                alert("Landmark Detail have not been saved successfully!");
+                // alert("Landmark Detail have not been saved successfully!");
+                helper.ShowModalPopup("danger", "Landmark", "Landmark Detail have not been saved successfully!");
             } else {
-                alert("Record has been saved successfully with Landmark ID : " + landmarkDto["id"]);
+                helper.ShowModalPopup("success", "Landmark", "Record has been saved successfully with Landmark ID : " + landmarkDto["id"]);
 
                 //this.UIBinding(model);
                 this.Cancel();
@@ -171,4 +172,3 @@ define(["require", "exports", "../../App", "../../Helper", "./LandmarkView", "..
     })(helper.Controller);
     exports.LandmarkCtrl = LandmarkCtrl;
 });
-//# sourceMappingURL=LandmarkCtrl.js.map

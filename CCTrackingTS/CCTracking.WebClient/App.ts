@@ -8,34 +8,30 @@
 //import main = require("CCTracking.WebClient/Booking/views/BookingMainView");
 
 //import login = require("../CCTracking.WebClient/Login/Views/LoginView");
-import loginController = require("./Login/LoginCtrl");
+//import loginController = require("./Login/LoginCtrl");
 import adminLeft = require("../CCTracking.WebClient/Common/Views/AdminLeftView");
 import modalHelper = require("./ModalHelper");
-import busController = require("./Bus/BusCtrl");
-import userController = require("./User/UserCtrl");
-import bookingController = require("./Booking/BookingCtrl");
-import paymentController = require("./Payment/PaymentCtrl");
-import stationController = require("./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl");
-import refundBookingController = require("./RefundBooking/RefundBookingCtrl");
+//import busController = require("./Bus/BusCtrl");
+//import userController = require("./User/UserCtrl");
+//import bookingController = require("./Booking/BookingCtrl");
+//import paymentController = require("./Payment/PaymentCtrl");
+//import stationController = require("./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl");
+///import refundBookingController = require("./RefundBooking/RefundBookingCtrl");
 //import busVisitController = require("./Bus/BusVisitCtrl");
-import adminBusController = require("./Admin/Bus/BusCtrl");
+//import adminBusController = require("./Admin/Bus/BusCtrl");
 //import searchController = require("./Search/SearchCtrl");
 
-import driverController = require("./Admin/Driver/DriverCtrl");
-import graveyardController = require("./Admin/Graveyard/GraveyardCtrl");
-import townController = require("./Admin/Town/TownCtrl");
-import unionCouncilController = require("./Admin/UnionCouncil/UnionCouncilCtrl");
-import landmarkController = require("./Admin/Landmark/LandmarkCtrl");
-import paymentTypeController = require("./Admin/PaymentType/PaymentTypeCtrl");
-import refundTypeController = require("./Admin/RefundType/RefundTypeCtrl");
-import visitTypeController = require("./Admin/VisitType/VisitTypeCtrl");
-import causeOfDeathController = require("./Admin/CauseOfDeath/CauseOfDeathCtrl");
-import trackingDeviceController = require("./Admin/TrackingDevice/TrackingDeviceCtrl");
-import koBindingController = require("./Tests/KoBindingCtrl");
-
-
-
-
+//import driverController = require("./Admin/Driver/DriverCtrl");
+//import graveyardController = require("./Admin/Graveyard/GraveyardCtrl");
+//import townController = require("./Admin/Town/TownCtrl");
+//import unionCouncilController = require("./Admin/UnionCouncil/UnionCouncilCtrl");
+//import landmarkController = require("./Admin/Landmark/LandmarkCtrl");
+//import paymentTypeController = require("./Admin/PaymentType/PaymentTypeCtrl");
+//import refundTypeController = require("./Admin/RefundType/RefundTypeCtrl");
+//import visitTypeController = require("./Admin/VisitType/VisitTypeCtrl");
+//import causeOfDeathController = require("./Admin/CauseOfDeath/CauseOfDeathCtrl");
+//import trackingDeviceController = require("./Admin/TrackingDevice/TrackingDeviceCtrl");
+//import koBindingController = require("./Tests/KoBindingCtrl");
 
 var datatablesBootstrap = require("datatablesBootstrap");
 
@@ -52,7 +48,6 @@ export class Application extends Marionette.Application {
     ModalRegion: Marionette.Region;
     SubRegion: Marionette.Region;
 
-
     private static _instance: Application = null;
 
     constructor() {
@@ -61,17 +56,13 @@ export class Application extends Marionette.Application {
             throw new Error("Error: Creating Application object.");
         }
         Application._instance = this;
-
-
-
-
+        
         this.on('initialize:after', this.initializeAfter);
 
         this.addRegions({
             ContainerRegion: '#ContainerRegion',
             ModalRegion: '#ModalPopup'
         });
-
 
         //alert('constructor');
         var layout = Marionette.Layout.extend({
@@ -88,8 +79,6 @@ export class Application extends Marionette.Application {
         });
         this.AppLayout = new layout();
 
-
-
         this.LoginRegion = this.AppLayout.LoginRegion;
         this.HeaderRegion = this.AppLayout.HeaderRegion;
         this.LeftRegion = this.AppLayout.LeftRegion;
@@ -102,9 +91,6 @@ export class Application extends Marionette.Application {
         if (Backbone.history) {
             Backbone.history.start();
         }
-
-
-
     }
 
     initializeAfter() {
@@ -113,8 +99,9 @@ export class Application extends Marionette.Application {
         //var loginView = new login.LoginItemView();
         var layout = this.AppLayout;
         this.ContainerRegion.show(layout);
-        var loginCtrl = new loginController.LoginCtrl();
-        loginCtrl.Load();
+        //var loginCtrl = new loginController.LoginCtrl();
+        //loginCtrl.Load();
+        require(['./Login/LoginCtrl'], (p) => { new p.LoginCtrl().Load(); });
         //this.LoginRegion.show(loginView);
 
         var self = this;
@@ -136,6 +123,7 @@ export class Application extends Marionette.Application {
                 'adminBus': 'goAdminBus',
                 'viewAdminBus': 'goViewAdminBus',
                 'searchBooking': 'goSearchBooking',
+                'adminSearchBooking': 'goAdminSearchBooking',
                 'driver': 'goDriver',
                 'viewDriver': 'goViewDriver',
 
@@ -169,119 +157,153 @@ export class Application extends Marionette.Application {
                 '*other': 'defaultRoute'
             },
             goUser() {
-                new userController.UserCtrl().Show();
+                require(['./User/UserCtrl'], (p) => { new p.UserCtrl().Show(); });
+                //new userController.UserCtrl().Show();
             },
             goViewUser() {
-                new userController.UserCtrl().GetAll();
+                require(['./User/UserCtrl'], (p) => { new p.UserCtrl().GetAll(); });
+                //new userController.UserCtrl().GetAll();
             },
             goBus() {
-                new busController.BusCtrl().Show();
+                require(['./Bus/BusCtrl'], (p) => { new p.BusCtrl().Show(); });
+               // new busController.BusCtrl().Show();
             },
             goAddBooking() {
-                new bookingController.BookingCtrl().Show();
+            require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().Show(); });
+                //new bookingController.BookingCtrl().Show();
             },
             goEditBooking() {
-                new bookingController.BookingCtrl().Show();
+            require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().Show(); });
+                //new bookingController.BookingCtrl().Show();
             },
             goViewBooking() {
-                new bookingController.BookingCtrl().GetAll();
+            require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });
+               // new bookingController.BookingCtrl().GetAll(1);
             },
             goPayment() {
-                new paymentController.PaymentCtrl().Show();
+                require(['./Payment/PaymentCtrl'], (p) => { new p.PaymentCtrl().Show(); });
+                //new paymentController.PaymentCtrl().Show();
             },
             goStation()
             {
-                new stationController.StationCtrl().Show();
+                require(['./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl'], (p) => { new p.StationCtrl().Show(); });
+                //new stationController.StationCtrl().Show();
             },
             goViewStation()
             {
-                new stationController.StationCtrl().GetAll();
+                require(['./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl'], (p) => { new p.StationCtrl().GetAll(); });
+                //new stationController.StationCtrl().GetAll();
             },
             goCancel() {
-                new refundBookingController.CancelBookingCtrl().Show();
+            require(['./Admin/RefundType/RefundTypeCtrl'], (p) => { new p.RefundBookingCtrl().GetAll(); });
+               // new refundBookingController.RefundBookingCtrl().Show();
             },
             goViewBusVisit() {
                 require(['./Bus/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().SimpleLoad(); });
-
             },
             gobusVisit() {
                 require(['./Bus/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().Show(); });
-
             },
             goEditBusVisit() {
                 require(['./Bus/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().Show(); });
             },
             goAdminBus() {
-                new adminBusController.BusCtrl().Show();
+                require(['./Admin/Bus/BusCtrl'], (p) => { new p.BusCtrl().Show(); });
+               // new adminBusController.BusCtrl().Show();
             },
             goViewAdminBus() {
-                new adminBusController.BusCtrl().GetAll();
+                require(['./Admin/Bus/BusCtrl'], (p) => { new p.BusCtrl().GetAll(); });
+               // new adminBusController.BusCtrl().GetAll();
             },
             goSearchBooking() {
                 require(['./Search/SearchCtrl'], (p) => { new p.SearchCtrl().Show(); });
             },
+            
+            goAdminSearchBooking() {
+                require(['.Admin/AdminSearch/AdminSearchBookingCtrl'], (p) => { new p.AdminSearchBookingCtrl().Show(); });
+            },
             goDriver() {
-                new driverController.DriverCtrl().Show();
+                require(['./Admin/Driver/DriverCtrl'], (p) => { new p.DriverCtrl().Show(); });
+                //new driverController.DriverCtrl().Show();
             },
             goViewDriver() {
-                new driverController.DriverCtrl().GetAll();
+                require(['./Admin/Driver/DriverCtrl'], (p) => { new p.DriverCtrl().GetAll(); });                
+                //new driverController.DriverCtrl().GetAll();
             },
             goGraveyard() {
-                new graveyardController.GraveyardCtrl().Show();
+                require(['./Admin/Graveyard/GraveyardCtrl'], (p) => { new p.GraveyardCtrl().Show(); });
+                //new graveyardController.GraveyardCtrl().Show();
             },
             goViewGraveyard() {
-                new graveyardController.GraveyardCtrl().GetAll();
+                require(['./Admin/Graveyard/GraveyardCtrl'], (p) => { new p.GraveyardCtrl().GetAll(); });
+                //new graveyardController.GraveyardCtrl().GetAll();
             },
             goTown() {
-                new townController.TownCtrl().Show();
+                require(['./Admin/Town/TownCtrl'], (p) => { new p.TownCtrl().Show(); });
+                //new townController.TownCtrl().Show();
             },
             goViewTown() {
-                new townController.TownCtrl().GetAll();
+                require(['./Admin/Town/TownCtrl'], (p) => { new p.TownCtrl().GetAll(); });
+                //new townController.TownCtrl().GetAll();
             },
             goUnionCouncil() {
-                new unionCouncilController.UnionCouncilCtrl().Show();
+                require(['./Admin/UnionCouncil/UnionCouncilCtrl'], (p) => { new p.UnionCouncilCtrl().Show(); });
+                //new unionCouncilController.UnionCouncilCtrl().Show();
             },
             goViewUnionCouncil() {
-                new unionCouncilController.UnionCouncilCtrl().GetAll();
+                require(['./Admin/UnionCouncil/UnionCouncilCtrl'], (p) => { new p.UnionCouncilCtrl().GetAll(); });
+                //new unionCouncilController.UnionCouncilCtrl().GetAll();
             },
             goLandmark() {
-                new landmarkController.LandmarkCtrl().Show();
+                require(['./Admin/Landmark/LandmarkCtrl'], (p) => { new p.LandmarkCtrl().Show(); });
+                //new landmarkController.LandmarkCtrl().Show();
             },
             goViewLandmark() {
-                new landmarkController.LandmarkCtrl().GetAll();
+                require(['./Admin/Landmark/LandmarkCtrl'], (p) => { new p.LandmarkCtrl().GetAll(); });
+                //new landmarkController.LandmarkCtrl().GetAll();
             },
             goPaymentType() {
-                new paymentTypeController.PaymentTypeCtrl().Show();
+                require(['./Admin/PaymentType/PaymentTypeCtrl'], (p) => { new p.PaymentTypeCtrl().Show(); });
+                //new paymentTypeController.PaymentTypeCtrl().Show();
             },
             goViewPaymentType() {
-                new paymentTypeController.PaymentTypeCtrl().GetAll();
+                require(['./Admin/PaymentType/PaymentTypeCtrl'], (p) => { new p.PaymentTypeCtrl().GetAll(); });
+                //new paymentTypeController.PaymentTypeCtrl().GetAll();
             },
             goRefundType() {
-                new refundTypeController.RefundTypeCtrl().Show();
+            require(['./Admin/RefundType/RefundTypeCtrl'], (p) => { new p.RefundTypeCtrl().Show(); });
+                //new refundTypeController.RefundTypeCtrl().Show();
             },
             goViewRefundType() {
-                new refundTypeController.RefundTypeCtrl().GetAll();
+                require(['./Admin/RefundType/RefundTypeCtrl'], (p) => { new p.RefundTypeCtrl().GetAll(); });
+                //new refundTypeController.RefundTypeCtrl().GetAll();
             },
             goVisitType() {
-                new visitTypeController.VisitTypeCtrl().Show();
+                require(['./Admin/VisitType/VisitTypeCtrl'], (p) => { new p.VisitTypeCtrl().Show(); });
+                //new visitTypeController.VisitTypeCtrl().Show();
             },
             goViewVisitType() {
-                new visitTypeController.VisitTypeCtrl().GetAll();
+                require(['./Admin/VisitType/VisitTypeCtrl'], (p) => { new p.VisitTypeCtrl().GetAll(); });
+                //new visitTypeController.VisitTypeCtrl().GetAll();
             },
             goCauseOfDeath() {
-                new causeOfDeathController.CauseOfDeathCtrl().Show();
+                require(['./Admin/PaymentType/PaymentTypeCtrl'], (p) => { new p.PaymentTypeCtrl().Show(); });
+                //new causeOfDeathController.CauseOfDeathCtrl().Show();
             },
             goViewCauseOfDeath() {
-                new causeOfDeathController.CauseOfDeathCtrl().GetAll();
+                require(['./Admin/CauseOfDeath/CauseOfDeathCtrl'], (p) => { new p.PaymentTypeCtrl().GetAll(); });
+               // new causeOfDeathController.CauseOfDeathCtrl().GetAll();
             },
             goViewTest() {
-            new koBindingController.KoBindingCtrl().Show();
+           // new koBindingController.KoBindingCtrl().Show();
             },
             goTrackingDevice() {
-                new trackingDeviceController.TrackingDeviceCtrl().Show();
+                require(['./Admin/TrackingDevice/TrackingDeviceCtrl'], (p) => { new p.TrackingDeviceCtrl().Show(); });
+               // new trackingDeviceController.TrackingDeviceCtrl().Show();
             },
             goViewTrackingDevice() {
-                new trackingDeviceController.TrackingDeviceCtrl().GetAll();
+                require(['./Admin/TrackingDevice/TrackingDeviceCtrl'], (p) => { new p.TrackingDeviceCtrl().GetAll(); });
+               // new trackingDeviceController.TrackingDeviceCtrl().GetAll();
             },
             defaultRoute() {
                 //layout.MainRegion.close();
@@ -289,12 +311,12 @@ export class Application extends Marionette.Application {
                 self.ContainerRegion.reset();
                 self.ContainerRegion.show(layout);
                 // this.LoginRegion.show(loginView);
-                loginCtrl.Load();
+                //loginCtrl.Load();
+            require(['./Login/LoginCtrl'], (p) => { new p.LoginCtrl().Load(); });
             }
         });
         this.AppRoutes = new routes();
     }
-
 
     public static getInstance(): Application {
 
@@ -305,8 +327,6 @@ export class Application extends Marionette.Application {
         return Application._instance;
     }
 }
-
-
 
 //on load call initialize application
 $(function () {

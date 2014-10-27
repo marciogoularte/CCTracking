@@ -121,10 +121,12 @@ export class TrackingDeviceCtrl extends helper.Controller {
         var model = this.backboneModel;
         //console.log(loginResponse);        
         if (trackingDeviceDto == undefined) {
-            alert("TrackingDevice Detail have not been saved successfully!");
+           // alert("TrackingDevice Detail have not been saved successfully!");
+            helper.ShowModalPopup("danger", "Tracking Device", "TrackingDevice Detail have not been saved successfully!");
         }
         else {
-            alert("Record has been saved successfully with TrackingDevice ID : " + trackingDeviceDto["id"]);
+            //alert("Record has been saved successfully with TrackingDevice ID : " + trackingDeviceDto["id"]);
+            helper.ShowModalPopup("success", "Tracking Device", "Record has been saved successfully with TrackingDevice ID : " + trackingDeviceDto["id"]);
             //this.UIBinding(model);
             this.Cancel();
         }

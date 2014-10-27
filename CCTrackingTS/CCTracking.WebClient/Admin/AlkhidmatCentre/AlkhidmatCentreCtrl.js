@@ -137,14 +137,13 @@ define(["require", "exports", "../../App", "../../Helper", "./AlkhidmatCentreVie
         StationCtrl.prototype.SaveCompleted = function (stationDto) {
             this.backboneModel = new Backbone.Model(stationDto);
             var model = this.backboneModel;
-
-            //console.log(loginResponse);
             if (stationDto == undefined) {
-                alert("Alkhidmat Centre have not been saved successfully!");
+                //alert("Alkhidmat Centre have not been saved successfully!");
+                helper.ShowModalPopup("danger", "Alkhidmat Centre", "Alkhidmat Centre have not been saved successfully!");
             } else {
-                alert("Record has been saved successfully with Alkhidmat Centre ID : " + stationDto["id"]);
+                helper.ShowModalPopup("success", "Alkhidmat Centre", "Record has been saved successfully with Alkhidmat Centre ID : " + stationDto["id"]);
 
-                //this.UIBinding(model);
+                //alert("Record has been saved successfully with Alkhidmat Centre ID : " + stationDto["id"]);
                 this.Cancel();
             }
         };
@@ -174,4 +173,3 @@ define(["require", "exports", "../../App", "../../Helper", "./AlkhidmatCentreVie
     })(helper.Controller);
     exports.StationCtrl = StationCtrl;
 });
-//# sourceMappingURL=AlkhidmatCentreCtrl.js.map

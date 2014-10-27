@@ -12,7 +12,7 @@
                                 <td class="col-sm-4 col-md-4 input-sm">Landmark</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlPaymentType" class="form-control input-sm"
-                                        data-bind="options: model.landmarkList, optionsText:'description', value:model.landmarkIdSelected">
+                                        data-bind="options: model.landmarkList, optionsText:'description', value:model.landmarkIdSelected" required="required">
                                     </select></td>
                             </tr>
 
@@ -26,17 +26,17 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Centre Name</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtCentre" type="text" class="form-control input-sm" data-bind="value: model.name" /></td>
+                                    <input id="txtCentre" type="text" class="form-control input-sm" data-bind="value: model.name" required="required"/></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Address</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtAddress" type="text" class="form-control input-sm" data-bind="value: model.address" /></td>
+                                    <input id="txtAddress" type="text" class="form-control input-sm" data-bind="value: model.address" required="required"/></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Phone 1</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtPhone1" type="text" class="form-control input-sm" data-bind="value: model.contactNo1" /></td>
+                                    <input id="txtPhone1" type="text" class="form-control input-sm" data-bind="value: model.contactNo1" required="required"/></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Phone 2</td>

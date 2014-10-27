@@ -28,14 +28,14 @@ export class BookingCtrl extends helper.Controller {
         //TODO: model fill from server..        
         //if localStorage is empty then call from db        
         //var a = localStorage.getItem('lookupResponse');
-        
+
         var url = window.location.href;
         //update booking
         if (url.indexOf("id=") > -1) {
             //alert(url.substring(url.indexOf("id=") + 3, url.length));
-            var id= (url.substring(url.indexOf("id=") + 3, url.length));
+            var id = (url.substring(url.indexOf("id=") + 3, url.length));
             var deferredById = DAL.GetById(id);
-            deferredById.done(p=>this.GetByIdCompleted(p));
+            deferredById.done(p=> this.GetByIdCompleted(p));
 
         }
         //add booking
@@ -68,9 +68,9 @@ export class BookingCtrl extends helper.Controller {
         model.set("pickupTimeSlotList", lookupResponse.timeSlot);
         model.set("returnTimeSlotList", lookupResponse.timeSlot);
         model.set("prayersList", lookupResponse.prayers);
-        
-        
-        
+
+
+
         var causeOfDeath = _.filter(lookupResponse.causeOfDeath, (p) => { return p.id == model.get("causeOfDeath") });
         var landmark = _.filter(lookupResponse.landmark, (p) => { return p.id == model.get("landmarkId") });
         var busPoint = _.filter(lookupResponse.landmark, (p) => { return p.id == model.get("busPoint") });
@@ -92,7 +92,7 @@ export class BookingCtrl extends helper.Controller {
         model.set("busDetailIdSelected", busDetail[0]);
         model.set("deseasedGender", model.get("deseasedGender").toString());
 
-        
+
         model.set("pickupTimeSlotSelected", pickupTime[0]);
         model.set("returnTimeSlotSelected", returnTime[0]);
         model.set("prayersSelected", prayer[0]);
@@ -152,7 +152,7 @@ export class BookingCtrl extends helper.Controller {
         model.set("namazEJanazaLocation", "");
         model.set("masjidName", "");
         model.set("otherDetail", "");
-        
+
 
         //model.set("busDetailsList", lookupResponse.bus);
         //model.set("busDetailIdSelected", "");
@@ -171,10 +171,13 @@ export class BookingCtrl extends helper.Controller {
 
     }
 
-    GetAll() {
-        var deferred = DAL.GetAll();
+    GetAll(bookingFilterType= 1) {
+        if (bookingFilterType == undefined)
+            bookingFilterType = 1; //  allbooking
+        var deferred = DAL.GetAll(bookingFilterType);
         deferred.done(p=> new views.BookingView().GetAllCompleted(p));
     }
+
     //Add(booking: dto.Models.BookingRequest) {
     Save(booking: any) {
         var appObj = app.request("AppGlobalSetting");
@@ -192,14 +195,14 @@ export class BookingCtrl extends helper.Controller {
         booking.set("namazEJanazaHeldIn", booking.get("prayersSelected").id);
 
         //booking.set("busDetailId", booking.get("busDetailIdSelected").id);
-        var deferred = DAL.Save(booking);        
+        var deferred = DAL.Save(booking);
         //TODO: call controller from here...
         deferred.done(p=> this.SaveCompleted(p));
     }
 
     SaveCompleted(bookingResponse: any) {
         var result = new Backbone.Model(bookingResponse);
-        if (result.get("errorMessage") !=undefined && result.get("errorMessage").trim() != "") {
+        if (result.get("errorMessage") != undefined && result.get("errorMessage").trim() != "") {
             helper.ShowModalPopup("danger", "Booking", "Due to some technical reason booking have not been saved successfully!<br> Pelase try later");
         }
         else {

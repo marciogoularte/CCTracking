@@ -14,9 +14,9 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
     var ko = require("knockout");
     var kb = require("knockback");
 
-    var CancelBookingCtrl = (function (_super) {
-        __extends(CancelBookingCtrl, _super);
-        function CancelBookingCtrl() {
+    var RefundBookingCtrl = (function (_super) {
+        __extends(RefundBookingCtrl, _super);
+        function RefundBookingCtrl() {
             _super.call(this);
 
             //alert("constructor");
@@ -25,7 +25,7 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
             this.viewModel = new views.RefundBookingViewModel(this.backboneModel, this);
             this.view = new views.RefundBookingView({ viewModel: this.viewModel });
         }
-        CancelBookingCtrl.prototype.Show = function () {
+        RefundBookingCtrl.prototype.Show = function () {
             var _this = this;
             var url = window.location.href;
             if (url.indexOf("id=") > -1) {
@@ -40,7 +40,7 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
             }
         };
 
-        CancelBookingCtrl.prototype.Load = function () {
+        RefundBookingCtrl.prototype.Load = function () {
             var _this = this;
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
 
@@ -76,10 +76,10 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
         //    var deferred = DAL.GetAll();
         //    deferred.done(p=> this.GetAllCompleted(p));
         //}
-        CancelBookingCtrl.prototype.GetByIdCompleted = function (refundDto) {
+        RefundBookingCtrl.prototype.GetByIdCompleted = function (refundDto) {
             var _this = this;
             //alert("GetByIdCompleted..");
-            this.backboneModel = new Backbone.Model(refundDto["cancelBookingModel"]);
+            this.backboneModel = new Backbone.Model(refundDto["refundBookingModel"]);
             var refundModel = this.backboneModel;
 
             this.UIBinding(refundModel);
@@ -99,13 +99,14 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
             //this.GetAllCompletedNew(this.collection);
         };
 
-        CancelBookingCtrl.prototype.Save = function (refund) {
+        RefundBookingCtrl.prototype.Save = function (refund) {
             var _this = this;
             var appObj = this.app.request("AppGlobalSetting");
             refund.set("modifiedBy", appObj.get("Id"));
-            refund.set("landmarkId", refund.get("landmarkIdSelected").id);
+            refund.set("refundTypeId", refund.get("refundTypeSelected").id);
+            refund.set("refundOfficeLocation", refund.get("alkhidmatCentreSelected").id);
+            refund.set("refundOfficer", refund.get("cashierSelected").id);
             refund.set("isActive", refund.get("isActive") == "1" ? true : false);
-            refund.set("isCoPartner", refund.get("isCoPartner") == "1" ? true : false);
             var deferred = DAL.Save(refund);
             deferred.done(function (p) {
                 return _this.SaveCompleted(p);
@@ -119,47 +120,53 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
         //    this.collectionView.on("itemview:ShowDetail", (view) => this.GetByIdCompleted(view.model));
         //    this.app.MainRegion.show(this.collectionView);
         //}
-        CancelBookingCtrl.prototype.SaveCompleted = function (refundDto) {
+        RefundBookingCtrl.prototype.SaveCompleted = function (refundDto) {
             this.backboneModel = new Backbone.Model(refundDto);
             var refundModel = this.backboneModel;
 
             //console.log(loginResponse);
             if (refundDto == undefined) {
-                alert("Booking has been cancelled successfully!");
+                //alert("Booking has not been cancelled successfully!");
+                helper.ShowModalPopup("danger", "Booking", "Booking has not been cancelled successfully!");
             } else {
-                alert("Record has been saved successfully with ID : " + refundDto["id"]);
-
-                //this.UIBinding(model);
+                //alert("Record has been saved successfully with ID : " + refundDto["id"]);
+                helper.ShowModalPopup("success", "Booking", "Record has been saved successfully with ID : " + refundDto["id"]);
                 this.Cancel();
             }
         };
 
-        CancelBookingCtrl.prototype.Cancel = function () {
+        RefundBookingCtrl.prototype.Cancel = function () {
             window.location.href = "#viewBooking";
         };
 
-        CancelBookingCtrl.prototype.UIBinding = function (refundModel) {
+        RefundBookingCtrl.prototype.UIBinding = function (refundModel) {
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
             refundModel.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
             refundModel.set("cashierList", lookupResponse.cashier);
+            refundModel.set("refundTypeList", lookupResponse.refundType);
 
             var centre = _.filter(lookupResponse.alkhidmatCentre, function (p) {
-                return p.id == refundModel.get("alkhidmatCentreId");
+                return p.id == refundModel.get("refundOfficeLocation");
             });
             refundModel.set("alkhidmatCentreSelected", centre[0]);
 
             var cashier = _.filter(lookupResponse.cashier, function (p) {
-                return p.id == refundModel.get("officerId");
+                return p.id == refundModel.get("refundOfficer");
             });
             refundModel.set("cashierSelected", cashier[0]);
+
+            var refundType = _.filter(lookupResponse.refundType, function (p) {
+                return p.id == refundModel.get("refundTypeId");
+            });
+            refundModel.set("refundTypeSelected", refundType[0]);
 
             this.viewModel.bbModel = refundModel;
             this.viewModel.model = kb.viewModel(refundModel);
             ko.cleanNode($(this.view.el)[0]);
             ko.applyBindings(this.viewModel, this.view.el);
         };
-        return CancelBookingCtrl;
+        return RefundBookingCtrl;
     })(helper.Controller);
-    exports.CancelBookingCtrl = CancelBookingCtrl;
+    exports.RefundBookingCtrl = RefundBookingCtrl;
 });
 //# sourceMappingURL=RefundBookingCtrl.js.map

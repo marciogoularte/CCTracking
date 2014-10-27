@@ -42,9 +42,11 @@
     <Compile Include="AlkhidmatCentre.cs" />
     <Compile Include="BaseModel.cs" />
     <Compile Include="Booking.cs" />
+    <Compile Include="BookingSummary.cs" />
     <Compile Include="Bus.cs" />
     <Compile Include="BusVisit.cs" />
     <Compile Include="CauseofDeath.cs" />
+    <Compile Include="BookingLeft.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="PaymentType.cs" />
     <Compile Include="Driver.cs" />
@@ -59,6 +61,8 @@
     <Compile Include="RefundType.cs" />
     <Compile Include="Response\BaseModelResponse.cs" />
     <Compile Include="Response\BookingResponse.cs" />
+    <Compile Include="Response\BookingLeftResponse.cs" />
+    <Compile Include="Response\BookingSummaryResponse.cs" />
     <Compile Include="Response\PaymentTypeResponse.cs" />
     <Compile Include="Response\UnionCouncilResponse.cs" />
     <Compile Include="Response\VisitTypeResponse.cs" />

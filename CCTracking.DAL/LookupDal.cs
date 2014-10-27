@@ -51,6 +51,7 @@ namespace CCTracking.DAL
             List<Lookup> paymentType = new List<Lookup>();
             List<Lookup> visitType = new List<Lookup>();
             List<Lookup> role = new List<Lookup>();
+            List<Lookup> refundType = new List<Lookup>();
 
 
             Lookup lookup = null;
@@ -104,6 +105,10 @@ namespace CCTracking.DAL
                 {
                     role.Add(new Lookup { Id = Convert.ToInt32(item["id"]), Description = item["description"].ToString() });
                 }
+                foreach (DataRow item in ds.Tables[12].Rows)
+                {
+                    refundType.Add(new Lookup { Id = Convert.ToInt32(item["id"]), Description = item["description"].ToString() });
+                }
                 lookupResponse.CauseOfDeath = causeOfDeath;
                 lookupResponse.Town = town;
                 lookupResponse.UnionCouncil = unionCouncil;
@@ -119,6 +124,7 @@ namespace CCTracking.DAL
                 lookupResponse.VisitType = visitType;
                 lookupResponse.BusModel = GetBusModel();
                 lookupResponse.Role = role;
+                lookupResponse.RefundType = refundType;
 
             }
             return lookupResponse;

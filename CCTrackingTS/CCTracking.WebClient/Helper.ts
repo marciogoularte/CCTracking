@@ -186,8 +186,8 @@ export function ShowModalPopup(type, title, message) {
 export function ShowBusDetailModalPopup(busDetialDto, busDetailCollection) {
     //var alertModel = new Backbone.Model({ type: 'btn-' + type, title: title, message: message });
     //var view = new this.BusDetailModalPopupView({ model: busDetialDto});
-    
-    var view = new this.BusDetailModalPopupCollectionView({ collection: busDetailCollection, model: busDetialDto});
+
+    var view = new this.BusDetailModalPopupCollectionView({ collection: busDetailCollection, model: busDetialDto });
     var app = APP.Application.getInstance();
     app.ModalRegion.show(view);
 }

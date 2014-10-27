@@ -24,7 +24,7 @@ export class PaymentCtrl extends helper.Controller {
     paymentView: views.PaymentView;
     busVisitCollection: any;
     backboneCollection: Backbone.Collection;
-    busVisitCollectionView: views.BusVisitCollectionView;    
+    busVisitCollectionView: views.BusVisitCollectionView;
     idCounter: number;
     constructor() {
         app = application.Application.getInstance();
@@ -34,8 +34,8 @@ export class PaymentCtrl extends helper.Controller {
             //{ busVisitId: 2, centreId: 'center-c', busId: 'bus-c', driverId: 'driver-c' }
         ];
         //this.busVisitCollection.push({ busVisitId:3,  centreId: 'center-a', busId: 'bus-a', driverId: 'driver-a' });
-        this.backboneCollection= new Backbone.Collection(this.busVisitCollection);
-        this.busVisitCollectionView = new views.BusVisitCollectionView({ collection: this.backboneCollection });        
+        this.backboneCollection = new Backbone.Collection(this.busVisitCollection);
+        this.busVisitCollectionView = new views.BusVisitCollectionView({ collection: this.backboneCollection });
         this.busVisitCollectionView.on("itemview:BusVisitRemoveItem", (currentView, busId, centreId, driverId) => this.RemoveBusVisitItem(busId, centreId, driverId));
         //this.paymentViewModel = new views.PaymentViewModel(new Backbone.Model(), this);
         this.idCounter = 1;
@@ -63,10 +63,10 @@ export class PaymentCtrl extends helper.Controller {
         //booking id
         var url = window.location.href;
         var id = (url.substring(url.indexOf("id=") + 3, url.length));
-        if (model.get("id") === undefined || model.get("id")===0) {
+        if (model.get("id") === undefined || model.get("id") === 0) {
             this.InitalizeKoBinding(model);
         }
-        
+
         model.set("bookingId", id);
         //model.set("busList", lookupResponse.bus);
         //model.set("driverList", lookupResponse.driver);
@@ -74,19 +74,19 @@ export class PaymentCtrl extends helper.Controller {
         //model.set("paymentLocationList", lookupResponse.alkhidmatCentre);
         //model.set("paymentTypeList", lookupResponse.paymentType);
         //model.set("cashierList", lookupResponse.cashier);
-        
+
         //model.set("busSelected", "");
         //model.set("driverSelected", "");
         //model.set("alkhidmatCentreSelected", "");
-        
+
 
         //debugger;
         //var paymentLocation1 = _.filter(lookupResponse.alkhidmatCentre, (p) => { return p.id == model.get("paymentLocation") });
         //model.set("paymentLocationSelected1", paymentLocation1[0]);
 
-        
 
-        
+
+
         //var paymentType = _.filter(lookupResponse.paymentType, (p) => { return p.id == model.get("paymentType") });
         //model.set("paymentTypeSelected", paymentType[0]);
 
@@ -113,11 +113,11 @@ export class PaymentCtrl extends helper.Controller {
 
 
 
-        this.paymentView.on("BusVisitAddItem", (bookingId, alkhidmatCentre, driver, bus) => this.AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus));                
+        this.paymentView.on("BusVisitAddItem", (bookingId, alkhidmatCentre, driver, bus) => this.AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus));
         this.paymentView.on("PaymentSave", (bbmodel) => this.Save(bbmodel));
 
         this.backboneCollection = new Backbone.Collection(model.get("busVisits"));
-        this.busVisitCollectionView = new views.BusVisitCollectionView({ collection: this.backboneCollection });        
+        this.busVisitCollectionView = new views.BusVisitCollectionView({ collection: this.backboneCollection });
         this.busVisitCollectionView.on("itemview:BusVisitRemoveItem", (currentView, busId, centreId, driverId) => this.RemoveBusVisitItem(busId, centreId, driverId));
 
         app.MainRegion.show(this.paymentView);
@@ -126,7 +126,7 @@ export class PaymentCtrl extends helper.Controller {
     }
 
     //BindWithVM(vm) {
-        
+
     //    this.paymentView.viewModel.extraAmountReason("heheheheheh");
     //    this.paymentView.viewModel.paymentLocationList(paymentLocation[0]);
 
@@ -144,7 +144,7 @@ export class PaymentCtrl extends helper.Controller {
     }
 
     LoadCompleted() {
-       
+
         this.layout = app.AppLayout;
         this.paymentView = new views.PaymentView();
 
@@ -198,10 +198,10 @@ export class PaymentCtrl extends helper.Controller {
     //    app.SubRegion.show(this.busVisitCollectionView);
     //}
 
-    AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus) {        
-        var counter = this.idCounter++;        
+    AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus) {
+        var counter = this.idCounter++;
         var busExist = this.backboneCollection.findWhere({ busId: bus.id });
-        var driverExist = this.backboneCollection.findWhere({ driverId: driver.id  });
+        var driverExist = this.backboneCollection.findWhere({ driverId: driver.id });
 
         //var alreadyExist = this.backboneCollection.findWhere({ centreId: alkhidmatCentre.id, busId: bus.id, driverId: driver.id });
         //var alreadyExist = _.filter(this.backboneCollection, (item) => {
@@ -209,7 +209,7 @@ export class PaymentCtrl extends helper.Controller {
         //    return (item.busId == bus.id || item.driverId == driver.id);
         //});
 
-        if (busExist==undefined && driverExist==undefined) {
+        if (busExist == undefined && driverExist == undefined) {
             this.backboneCollection.push(new Backbone.Model({
                 busVisitId: counter,
                 centreId: alkhidmatCentre.id, centreDesc: alkhidmatCentre.description,
@@ -218,16 +218,16 @@ export class PaymentCtrl extends helper.Controller {
                 visitTypeId: "2",
                 isAvailableForBooking: false,
                 isAvailableForFutureBooking: false,
-                bookingId:bookingId
+                bookingId: bookingId
             }));
             this.busVisitCollectionView.collection = this.backboneCollection;
         }
         else {
             alert("Already exists!");
         }
-        
+
     }
-    RemoveBusVisitItem(busId, centreId, driverId) {        
+    RemoveBusVisitItem(busId, centreId, driverId) {
         this.backboneCollection.remove(this.backboneCollection.findWhere({ busId: busId, centreId: centreId, driverId: driverId }));
     }
 
@@ -236,7 +236,7 @@ export class PaymentCtrl extends helper.Controller {
     //    deferred.done(p=> new views.PaymentView().GetAllCompleted(p));
     //}
     //Add(booking: dto.Models.BookingRequest) {
-    Save(payment: any) {        
+    Save(payment: any) {
         //reset actual id - match with DAL object's properties
         if (this.backboneCollection.length < 1) {
             alert("Please add bus details");
@@ -250,7 +250,7 @@ export class PaymentCtrl extends helper.Controller {
         //payment.set("paymentType", payment.get("paymentTypeSelected").id);
         payment.set("busVisits", this.backboneCollection.toJSON());
         var deferred = DAL.Save(payment);
-        
+
         //TODO: call controller from here...
         deferred.done(p=> new views.PaymentView().SaveCompleted(p));
     }

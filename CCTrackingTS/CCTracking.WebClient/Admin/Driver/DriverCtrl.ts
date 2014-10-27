@@ -130,11 +130,12 @@ export class DriverCtrl extends helper.Controller {
         var model = this.backboneModel;
         //console.log(loginResponse);        
         if (driverDto == undefined) {
-            alert("Driver Detail have not been saved successfully!");
+            //alert("Driver Detail have not been saved successfully!");
+            helper.ShowModalPopup("danger", "Driver", "Driver have not been saved successfully!");
         }
         else {
-            alert("Record has been saved successfully with Driver ID : " + driverDto["id"]);
-            //this.UIBinding(model);
+            //alert("Record has been saved successfully with Driver ID : " + driverDto["id"]);
+            helper.ShowModalPopup("success", "Driver", "Record has been saved successfully with Driver ID : " + driverDto["id"]);
             this.Cancel();
         }
     }

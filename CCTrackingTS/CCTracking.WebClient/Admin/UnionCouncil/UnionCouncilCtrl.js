@@ -138,11 +138,11 @@ define(["require", "exports", "../../App", "../../Helper", "./UnionCouncilView",
 
             //console.log(loginResponse);
             if (unionCouncilDto == undefined) {
-                alert("UnionCouncil Detail have not been saved successfully!");
+                //alert("UnionCouncil Detail have not been saved successfully!");
+                helper.ShowModalPopup("danger", "Union Council", "UnionCouncil Detail have not been saved successfully!");
             } else {
-                alert("Record has been saved successfully with UnionCouncil ID : " + unionCouncilDto["id"]);
-
-                //this.UIBinding(model);
+                //alert("Record has been saved successfully with UnionCouncil ID : " + unionCouncilDto["id"]);
+                helper.ShowModalPopup("success", "Union Council", "Record has been saved successfully with UnionCouncil ID : " + unionCouncilDto["id"]);
                 this.Cancel();
             }
         };
@@ -171,4 +171,3 @@ define(["require", "exports", "../../App", "../../Helper", "./UnionCouncilView",
     })(helper.Controller);
     exports.UnionCouncilCtrl = UnionCouncilCtrl;
 });
-//# sourceMappingURL=UnionCouncilCtrl.js.map

@@ -12,7 +12,7 @@
                                 <td class="col-sm-4 col-md-4 input-sm">Alkhidmat Center</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlCentre" class="form-control input-sm"
-                                        data-bind="options: model.alkhidmatCentreList, optionsText:'description', value:model.alkhidmatCentreSelected">
+                                        data-bind="options: model.alkhidmatCentreList, optionsText:'description', value:model.alkhidmatCentreSelected" required="required">
                                     </select></td>
                             </tr>
 
@@ -31,7 +31,7 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Vehical No</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtVehicalNo" type="text" class="form-control input-sm" data-bind="value: model.vehicleNo" /></td>
+                                    <input id="txtVehicalNo" type="text" class="form-control input-sm" data-bind="value: model.vehicleNo" required="required"/></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">
@@ -43,7 +43,7 @@
                                 <td class="col-sm-4 col-md-4 input-sm">Model</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlModel"
-                                        data-bind="options: model.busModelList, optionsText:'description', value:model.busModelSelected">
+                                        data-bind="options: model.busModelList, optionsText:'description', value:model.busModelSelected" required="required">
                                        
                                     </select>
                                 </td>

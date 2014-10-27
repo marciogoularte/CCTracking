@@ -66,7 +66,7 @@ require.config({
 
 
         "bootstrap": ["jquery"],
-        "bootstrapPopover": ["jquery","bootstrap"],
+        "bootstrapPopover": ["jquery", "bootstrap"],
         "bootstrapTooltip": ["jquery", "bootstrap"],
         //"datepicker": ["jquery", "bootstrap"],
 
@@ -86,7 +86,7 @@ require.config({
         //"jquery-ui": ["jquery","bootstrap"],
         "jqueryUI": ["jquery"],
         "jqueryValidate": ["jquery"],
-        "jqueryUnobtrusive": ["jquery","jqueryValidate"],
+        "jqueryUnobtrusive": ["jquery", "jqueryValidate"],
         "jqueryUnobtrusiveAjax": ["jquery"],
 
         "knockoutJqueryuiDatepicker": {
@@ -106,9 +106,9 @@ require([
     "marionette",
     "bootstrap",
     "jqueryUI",
-    //"bootstrapPopover",
-    //"bootstrapTooltip",
-    //"datepicker",
+//"bootstrapPopover",
+//"bootstrapTooltip",
+//"datepicker",
     "knockoutJqueryuiDatepicker",
     "CCTracking.WebClient/App"
 ],
@@ -116,7 +116,7 @@ require([
     //    //console.log('ddddd');
     //}
     () => {
-        
+
     }
-);
+    );
 //aaa

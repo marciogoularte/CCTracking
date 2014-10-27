@@ -27,33 +27,21 @@
     <Content Include="CCTracking.WebClient\Admin\Bus\BusGrid.html" />
     <Content Include="CCTracking.WebClient\Admin\Bus\BusTmpl.html" />
     <Content Include="CCTracking.WebClient\Admin\Bus\BusView.ts" />
-    <Content Include="CCTracking.WebClient\Admin\CauseOfDeath\CauseOfDeathCtrl.js" />
     <Content Include="CCTracking.WebClient\Admin\CauseOfDeath\CauseOfDeathCtrl.ts" />
     <Content Include="CCTracking.WebClient\Admin\CauseOfDeath\CauseOfDeathGrid.html" />
     <Content Include="CCTracking.WebClient\Admin\CauseOfDeath\CauseOfDeathTmpl.html" />
-    <Content Include="CCTracking.WebClient\Admin\CauseOfDeath\CauseOfDeathView.js" />
     <Content Include="CCTracking.WebClient\Admin\CauseOfDeath\CauseOfDeathView.ts" />
-    <Content Include="CCTracking.WebClient\Admin\CauseOfDeath\VisitTypeCtrl.js" />
-    <Content Include="CCTracking.WebClient\Admin\CauseOfDeath\VisitTypeView.js" />
-    <Content Include="CCTracking.WebClient\Admin\Driver\DriverCtrl.js" />
     <Content Include="CCTracking.WebClient\Admin\Driver\DriverCtrl.ts" />
     <Content Include="CCTracking.WebClient\Admin\Driver\DriverGrid.html" />
     <Content Include="CCTracking.WebClient\Admin\Driver\DriverTmpl.html" />
-    <Content Include="CCTracking.WebClient\Admin\Driver\DriverView.js" />
     <Content Include="CCTracking.WebClient\Admin\Driver\DriverView.ts" />
-    <Content Include="CCTracking.WebClient\Admin\Graveyard\DriverCtrl.js" />
-    <Content Include="CCTracking.WebClient\Admin\Graveyard\DriverView.js" />
-    <Content Include="CCTracking.WebClient\Admin\Graveyard\GraveyardCtrl.js" />
     <Content Include="CCTracking.WebClient\Admin\Graveyard\GraveyardCtrl.ts" />
     <Content Include="CCTracking.WebClient\Admin\Graveyard\GraveyardGrid.html" />
     <Content Include="CCTracking.WebClient\Admin\Graveyard\GraveyardTmpl.html" />
-    <Content Include="CCTracking.WebClient\Admin\Graveyard\GraveyardView.js" />
     <Content Include="CCTracking.WebClient\Admin\Graveyard\GraveyardView.ts" />
-    <Content Include="CCTracking.WebClient\Admin\Landmark\LandmarkCtrl.js" />
     <Content Include="CCTracking.WebClient\Admin\Landmark\LandmarkCtrl.ts" />
     <Content Include="CCTracking.WebClient\Admin\Landmark\LandmarkGrid.html" />
     <Content Include="CCTracking.WebClient\Admin\Landmark\LandmarkTmpl.html" />
-    <Content Include="CCTracking.WebClient\Admin\Landmark\LandmarkView.js" />
     <Content Include="CCTracking.WebClient\Admin\Landmark\LandmarkView.ts" />
     <Content Include="CCTracking.WebClient\Admin\PaymentType\PaymentTypeCtrl.js" />
     <Content Include="CCTracking.WebClient\Admin\PaymentType\PaymentTypeCtrl.ts" />
@@ -67,6 +55,10 @@
     <Content Include="CCTracking.WebClient\Admin\RefundType\RefundTypeTmpl.html" />
     <Content Include="CCTracking.WebClient\Admin\RefundType\RefundTypeView.js" />
     <Content Include="CCTracking.WebClient\Admin\RefundType\RefundTypeView.ts" />
+    <TypeScriptCompile Include="CCTracking.WebClient\Admin\AdminSearchBooking\AdminSearchBookingCtrl.ts" />
+    <Content Include="CCTracking.WebClient\Admin\AdminSearchBooking\AdminSearchBookingGrid.html" />
+    <Content Include="CCTracking.WebClient\Admin\AdminSearchBooking\AdminSearchBookingTmpl.html" />
+    <TypeScriptCompile Include="CCTracking.WebClient\Admin\AdminSearchBooking\AdminSearchBookingView.ts" />
     <Content Include="CCTracking.WebClient\Admin\Town\TownCtrl.js" />
     <Content Include="CCTracking.WebClient\Admin\Town\TownCtrl.ts" />
     <Content Include="CCTracking.WebClient\Admin\Town\TownGrid.html" />
@@ -79,12 +71,6 @@
     <Content Include="CCTracking.WebClient\Admin\TrackingDevice\TrackingDeviceTmpl.html" />
     <Content Include="CCTracking.WebClient\Admin\TrackingDevice\TrackingDeviceView.js" />
     <Content Include="CCTracking.WebClient\Admin\TrackingDevice\TrackingDeviceView.ts" />
-    <Content Include="CCTracking.WebClient\Admin\TrackingDevice\VisitTypeCtrl.js" />
-    <Content Include="CCTracking.WebClient\Admin\TrackingDevice\VisitTypeView.js" />
-    <Content Include="CCTracking.WebClient\Admin\UnionCouncil\DriverCtrl.js" />
-    <Content Include="CCTracking.WebClient\Admin\UnionCouncil\DriverView.js" />
-    <Content Include="CCTracking.WebClient\Admin\UnionCouncil\GraveyardCtrl.js" />
-    <Content Include="CCTracking.WebClient\Admin\UnionCouncil\GraveyardView.js" />
     <Content Include="CCTracking.WebClient\Admin\UnionCouncil\UnionCouncilCtrl.js" />
     <Content Include="CCTracking.WebClient\Admin\UnionCouncil\UnionCouncilCtrl.ts" />
     <Content Include="CCTracking.WebClient\Admin\UnionCouncil\UnionCouncilGrid.html" />
@@ -100,6 +86,7 @@
     <Content Include="CCTracking.WebClient\Booking\BokingGridRow.html" />
     <Content Include="CCTracking.WebClient\Booking\BookingCtrl.ts" />
     <Content Include="CCTracking.WebClient\Booking\BookingGrid.html" />
+    <Content Include="CCTracking.WebClient\Booking\BookingLeft\BookingLeftCtrl.ts" />
     <Content Include="CCTracking.WebClient\Booking\BookingTmpl.html" />
     <Content Include="CCTracking.WebClient\Booking\BookingView.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\RefundBooking\RefundBookingCtrl.ts" />
@@ -115,7 +102,9 @@
     <TypeScriptCompile Include="CCTracking.WebClient\DAL\BusAvailability.ts" />
     <Content Include="CCTracking.WebClient\Common\Templates\BusDetailModalPopup.html" />
     <Content Include="CCTracking.WebClient\Common\Templates\BusDetailModalPopupGrid.html" />
+    <TypeScriptCompile Include="CCTracking.WebClient\DAL\AdminSearch.ts" />
     <Content Include="CCTracking.WebClient\DAL\CauseOfDeath.ts" />
+    <Content Include="CCTracking.WebClient\DAL\BookingLeft.ts" />
     <Content Include="CCTracking.WebClient\DAL\Driver.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Dtos\BusAvailabilityDto.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\DAL\Search.ts" />
@@ -128,6 +117,8 @@
     <Content Include="CCTracking.WebClient\DAL\UnionCouncil.ts" />
     <Content Include="CCTracking.WebClient\DAL\VisitType.ts" />
     <Content Include="CCTracking.WebClient\Dtos\CauseOfDeathDto.ts" />
+    <Content Include="CCTracking.WebClient\Dtos\BookingLeftDto.ts" />
+    <TypeScriptCompile Include="CCTracking.WebClient\Dtos\BookingSummaryDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\DriverDto.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Dtos\NearestCentreDto.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Dtos\SearchDto.ts" />
@@ -143,9 +134,9 @@
     <Content Include="CCTracking.WebClient\Login\LoginCtrl.ts" />
     <Content Include="CCTracking.WebClient\Login\LoginView.ts" />
     <Content Include="CCTracking.WebClient\RefundBooking\RefundBookingTmpl.html" />
-    <Content Include="CCTracking.WebClient\Booking\Templates\BookingLeft.html" />
+    <Content Include="CCTracking.WebClient\Booking\BookingLeft\BookingLeftTmpl.html" />
     <Content Include="CCTracking.WebClient\Booking\Templates\BookingRight.html" />
-    <Content Include="CCTracking.WebClient\Booking\Views\BookingLeftView.ts" />
+    <Content Include="CCTracking.WebClient\Booking\BookingLeft\BookingLeftView.ts" />
     <Content Include="CCTracking.WebClient\Bus\Bus.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\Bus\BusCtrl.ts" />
     <Content Include="CCTracking.WebClient\Bus\BusGrid.html" />
@@ -187,9 +178,6 @@
     <Content Include="CCTracking.WebClient\Search\SearchGrid.html" />
     <Content Include="CCTracking.WebClient\Search\SearchTmpl.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\Search\SearchView.ts" />
-    <TypeScriptCompile Include="CCTracking.WebClient\Tests\KoBindingCtrl.ts" />
-    <Content Include="CCTracking.WebClient\Tests\KoBindingTmpl.html" />
-    <TypeScriptCompile Include="CCTracking.WebClient\Tests\KoBindingView.ts" />
     <Content Include="CCTracking.WebClient\User\HtmlPage1.html" />
     <Content Include="CCTracking.WebClient\User\SuccessModal.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\User\UserCtrl.ts" />
@@ -306,19 +294,7 @@
     <Content Include="Content\DataTables-1.10.0\swf\copy_csv_xls_pdf.swf" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\Images\bus.jpg" />
-    <Content Include="Content\Images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\Images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\Images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\Images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\Images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\Images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\Images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\Images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\Images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\Images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\Images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\Images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\Images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\Images\spiffygif_54x54.gif" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\Themes\amelia\bootstrap.min.css" />
     <Content Include="Content\Themes\cerulean\bootstrap.min.css" />
@@ -354,16 +330,6 @@
     <Content Include="Content\DataTables-1.10.0\extensions\TableTools\images\psd\file_types.psd" />
     <Content Include="Content\DataTables-1.10.0\extensions\TableTools\images\psd\copy document.psd" />
     <Content Include="Content\DataTables-1.10.0\extensions\TableTools\images\psd\collection.psd" />
-    <Content Include="CCTracking.WebClient\Admin\CauseOfDeath\CauseOfDeathCtrl.js.map" />
-    <Content Include="CCTracking.WebClient\Admin\CauseOfDeath\CauseOfDeathView.js.map" />
-    <Content Include="CCTracking.WebClient\Admin\Driver\DriverCtrl.js.map" />
-    <Content Include="CCTracking.WebClient\Admin\Driver\DriverView.js.map" />
-    <Content Include="CCTracking.WebClient\Admin\Graveyard\DriverCtrl.js.map" />
-    <Content Include="CCTracking.WebClient\Admin\Graveyard\DriverView.js.map" />
-    <Content Include="CCTracking.WebClient\Admin\Graveyard\GraveyardCtrl.js.map" />
-    <Content Include="CCTracking.WebClient\Admin\Graveyard\GraveyardView.js.map" />
-    <Content Include="CCTracking.WebClient\Admin\Landmark\LandmarkCtrl.js.map" />
-    <Content Include="CCTracking.WebClient\Admin\Landmark\LandmarkView.js.map" />
     <Content Include="CCTracking.WebClient\Admin\PaymentType\PaymentTypeCtrl.js.map" />
     <Content Include="CCTracking.WebClient\Admin\PaymentType\PaymentTypeView.js.map" />
     <Content Include="CCTracking.WebClient\Admin\RefundType\RefundTypeCtrl.js.map" />
@@ -372,8 +338,6 @@
     <Content Include="CCTracking.WebClient\Admin\Town\TownView.js.map" />
     <Content Include="CCTracking.WebClient\Admin\TrackingDevice\TrackingDeviceCtrl.js.map" />
     <Content Include="CCTracking.WebClient\Admin\TrackingDevice\TrackingDeviceView.js.map" />
-    <Content Include="CCTracking.WebClient\Admin\UnionCouncil\DriverCtrl.js.map" />
-    <Content Include="CCTracking.WebClient\Admin\UnionCouncil\DriverView.js.map" />
     <Content Include="CCTracking.WebClient\Admin\UnionCouncil\UnionCouncilCtrl.js.map" />
     <Content Include="CCTracking.WebClient\Admin\UnionCouncil\UnionCouncilView.js.map" />
     <Content Include="CCTracking.WebClient\Admin\VisitType\VisitTypeCtrl.js.map" />
@@ -415,9 +379,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\jqueryUI\core.js" />
-    <Content Include="Scripts\jqueryUI\datepicker.js" />
-    <Content Include="Scripts\jqueryUI\widget.js" />
     <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\knockback-core-stack.js" />
@@ -432,21 +393,6 @@
     <Content Include="Scripts\knockout-3.1.0.js" />
     <Content Include="Scripts\knockout.validation.debug.js" />
     <Content Include="Scripts\knockout.validation.js" />
-    <Content Include="Scripts\KnockoutJqueryUI\accordion.js" />
-    <Content Include="Scripts\KnockoutJqueryUI\autocomplete.js" />
-    <Content Include="Scripts\KnockoutJqueryUI\bindingHandler.js" />
-    <Content Include="Scripts\KnockoutJqueryUI\button.js" />
-    <Content Include="Scripts\KnockoutJqueryUI\buttonset.js" />
-    <Content Include="Scripts\KnockoutJqueryUI\datepicker.js" />
-    <Content Include="Scripts\KnockoutJqueryUI\dialog.js" />
-    <Content Include="Scripts\KnockoutJqueryUI\menu.js" />
-    <Content Include="Scripts\KnockoutJqueryUI\progressbar.js" />
-    <Content Include="Scripts\KnockoutJqueryUI\selectmenu.js" />
-    <Content Include="Scripts\KnockoutJqueryUI\slider.js" />
-    <Content Include="Scripts\KnockoutJqueryUI\spinner.js" />
-    <Content Include="Scripts\KnockoutJqueryUI\tabs.js" />
-    <Content Include="Scripts\KnockoutJqueryUI\tooltip.js" />
-    <Content Include="Scripts\KnockoutJqueryUI\utils.js" />
     <Content Include="Scripts\lib\defaults.js" />
     <Content Include="Scripts\lib\defaults.min.js" />
     <Content Include="Scripts\lib\formatting.js" />
@@ -483,7 +429,9 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="CCTracking.WebClient\Booking\Views\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

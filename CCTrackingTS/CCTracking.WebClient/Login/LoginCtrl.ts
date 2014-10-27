@@ -21,12 +21,11 @@ import menu = require("../Common/Views/HeaderView");
 
 import appObjectDto = require("../Dtos/AppObjectDto");
 
-
-
-
 import adminLeft = require("../Common/Views/AdminLeftView");
 import adminRight = require("../Common/Views/AdminRightView");
-import summary = require("../Booking/Views/BookingLeftView");
+import summary = require("../Booking/BookingLeft/BookingLeftView");
+
+import bookingLeftCtrl = require("../Booking/BookingLeft/BookingLeftCtrl");
 import busAvailabilityCtrl = require("../Bus/BusAvailabilityCtrl");
 import bookingCtrl = require("../Booking/BookingCtrl");
 
@@ -58,28 +57,58 @@ export class LoginCtrl extends helper.Controller {
 
     Login(login: any) {
         //debugger;
+        this.ShowOverlay();
         var appObj = this.app.request("AppGlobalSetting");
         
         login.set("userName", $("#txtUserName").val());
         login.set("password", $("#txtPassword").val());
         var promise = DAL.Login(login);
+        
         promise.done((p) => this.Authenticated(p));
     }
+
+    ShowOverlay() {
+        var ov = $("#Overlay");
+        //var pos = $(_btn).offset();
+        var doc = $(document);
+        ov.css({
+            left: 0, //pos.left + 'px',
+            top: 0, //pos.top + 'px',
+            width: 0,
+            height: 0
+        })
+            .show()
+            .animate({
+                left: 0,
+                top: 0,
+                width: '90%',
+                height: '90%'
+            }, "slow");
+
+    }
+
+    HideOvrlay() {
+        $("#Overlay").hide("slow");
+    }
+
 
     //TODO: this method should be inside controller
     Authenticated(loginDto: dto.Models.LoginDto) {
         //console.log(loginResponse);
-
+        var lblLoginMessage = $("#lblLoginMessage");
         if (loginDto == undefined) {
             alert("User name or password is wrong..");
+            //lblLoginMessage.text('User name or password is wrong..');
         }
 
         if (loginDto["errorMessage"] !== null) {
             alert(loginDto.get("errorMessage"));
+           // lblLoginMessage.text('User name or password is wrong..');
         }
         else {
 
             alert("You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
+           // lblLoginMessage.text("You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
            // var app = this.app.Application.getInstance();
 
             //Setting global object which can be accissible from other pages.
@@ -122,8 +151,9 @@ export class LoginCtrl extends helper.Controller {
 
             }
             else {
-                //app.AppLayout.LeftRegion.show(new summary.BookingSummaryItemView());
-                this.app.LeftRegion.show(new summary.BookingSummaryItemView());
+
+                new bookingLeftCtrl.BookingLeftCtrl().Show();
+                    //this.app.LeftRegion.show(bookingLeftView);
                 new busAvailabilityCtrl.BusAvailabilityCtrl().Show();
                 var ctrlBooking = new bookingCtrl.BookingCtrl();
                 ctrlBooking.Show();
@@ -135,5 +165,8 @@ export class LoginCtrl extends helper.Controller {
     Cancel() {
         window.location.href = "#viewLogin";
     }
+
+
+
 
 }
