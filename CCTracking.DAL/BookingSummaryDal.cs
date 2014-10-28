@@ -12,7 +12,7 @@ namespace CCTracking.DAL
     {
         protected override string GetByIdSql(int id, Dictionary<string, object> dictionary)
         {
-            
+
             return "";
         }
 
@@ -24,21 +24,15 @@ namespace CCTracking.DAL
         protected override string GetByCriteriaSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
             SearchCriteria searchCriteria = (SearchCriteria)baseModel;
-            var contactInfo = string.IsNullOrEmpty(searchCriteria.ContactInfo) ? null : searchCriteria.ContactInfo;
-            var deseasedInfo = string.IsNullOrEmpty(searchCriteria.DeseasedInfo) ? null : searchCriteria.DeseasedInfo;
-            dictionary.Add("@ContactInfo", "%" + contactInfo + "%");
-            dictionary.Add("@DeseasedInfo", "%" + deseasedInfo + "%");
-            dictionary.Add("@GenderId", searchCriteria.GenderId);
-            dictionary.Add("@PaymentStatusId", searchCriteria.PaymentStatusId);
-            dictionary.Add("@GreveyardId", searchCriteria.GreveyardId);
-            dictionary.Add("@CentreId", searchCriteria.CentreId);
-            dictionary.Add("@BusId", searchCriteria.BusId);
+
+            dictionary.Add("@FromBookingDate", searchCriteria.FromBookingDate);
+            dictionary.Add("@ToBookingDate", searchCriteria.ToBookingDate);
             return "GetAdminBookingReport";
         }
 
         protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
-           return "";
+            return "";
         }
 
         protected override BaseModelResponse ConvertToModel(IDataReader dr)
@@ -86,11 +80,11 @@ namespace CCTracking.DAL
 
         private void MapValues(BookingSummary bookingSummary, IDataReader dr)
         {
-            bookingSummary.Alkhidmatentre = dr["Alkhidmatentre"].ToString();
-            bookingSummary.TodaysBooking = Convert.ToInt32(dr["TodaysBooking"]);
-            bookingSummary.UserPiadBooking = Convert.ToInt32(dr["UserPiadBooking"]);
-            bookingSummary.UserUnpaidBooking = Convert.ToInt32(dr["UserUnpaidBooking"]);
-            bookingSummary.UserTotalBooking = Convert.ToInt32(dr["UserTotalBooking"]);
+            bookingSummary.AlkhidmatCentre = dr["Alkhidmatentre"].ToString();
+            bookingSummary.UnpaidAmount = Convert.ToInt32(dr["UnpaidAmount"]);
+            bookingSummary.PaidAmount = Convert.ToInt32(dr["PaidAmount"]);
+            bookingSummary.PaidBooking = Convert.ToInt32(dr["PaidBooking"]);
+            bookingSummary.UnpaidBooking = Convert.ToInt32(dr["UnpaidBooking"]);
         }
     }
 }

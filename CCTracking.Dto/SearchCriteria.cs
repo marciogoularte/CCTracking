@@ -12,6 +12,8 @@ namespace CCTracking.Dto
         public short GreveyardId { get; set; }
         public short CentreId { get; set; }
         public short BusId { get; set; }
+        public DateTime FromBookingDate { get; set; }
+        public DateTime ToBookingDate { get; set; }
 
     }
 

@@ -126,9 +126,15 @@ define(["require", "exports", "../App", "../Helper", "./SearchView", "CCTracking
             if (searchDto.get("bookingDate").trim() != "") {
                 searchDto.set("bookingDate", helper.FormatDateString(searchDto.get("bookingDate")));
             }
-            searchDto.set("greveyardId", searchDto.get("graveyardIdSelected").id);
-            searchDto.set("centreId", searchDto.get("alkhidmatCentreSelected").id);
-            searchDto.set("busId", searchDto.get("busSelected").id);
+            if (searchDto.get("graveyardIdSelected") != undefined) {
+                searchDto.set("greveyardId", searchDto.get("graveyardIdSelected").id);
+            }
+            if (searchDto.get("alkhidmatCentreSelected") != undefined) {
+                searchDto.set("centreId", searchDto.get("alkhidmatCentreSelected").id);
+            }
+            if (searchDto.get("busSelected") != undefined) {
+                searchDto.set("busId", searchDto.get("busSelected").id);
+            }
             var deferred = DAL.GetByCriteria(searchDto);
             deferred.done(function (p) {
                 return _this.GetByCriteriaCompleted(p);
@@ -137,7 +143,6 @@ define(["require", "exports", "../App", "../Helper", "./SearchView", "CCTracking
 
         SearchCtrl.prototype.GetByCriteriaCompleted = function (searchDto) {
             //this.collection.reset();
-            //debugger;
             //this.collectionView.collection.reset();
             this.collection.reset(searchDto["bookingList"]);
             //this.collectionView = new views.SearchCollectionView({ collection: this.collection });

@@ -121,13 +121,9 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
         //    this.app.MainRegion.show(this.collectionView);
         //}
         RefundBookingCtrl.prototype.SaveCompleted = function (refundDto) {
-            this.backboneModel = new Backbone.Model(refundDto);
-            var refundModel = this.backboneModel;
-
-            //console.log(loginResponse);
-            if (refundDto == undefined) {
-                //alert("Booking has not been cancelled successfully!");
-                helper.ShowModalPopup("danger", "Booking", "Booking has not been cancelled successfully!");
+            var result = new Backbone.Model(refundDto);
+            if (result.get("errorMessage") != undefined && result.get("errorMessage").trim() != "") {
+                helper.ShowModalPopup("danger", "Booking", "Due to some technical reason booking payment have not been saved successfully!<br> Pelase try later");
             } else {
                 //alert("Record has been saved successfully with ID : " + refundDto["id"]);
                 helper.ShowModalPopup("success", "Booking", "Record has been saved successfully with ID : " + refundDto["id"]);

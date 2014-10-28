@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CCTracking.Dto
 {
-    public class RefundBooking :  BaseModel
+    public class RefundBooking : BaseModel
     {
         public int BookingId { get; set; }
         public decimal ActualBookingAmount { get; set; }
@@ -15,7 +15,7 @@ namespace CCTracking.Dto
         public decimal RefundAmount { get; set; }
         public decimal AmountDeducted { get; set; }
         public string RefundReason { get; set; }
-        public string  RefundReceipt { get; set; }
+        public string RefundReceipt { get; set; }
         public int RefundOfficer { get; set; }
 
     }

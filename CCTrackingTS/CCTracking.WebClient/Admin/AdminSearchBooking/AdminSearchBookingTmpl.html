@@ -5,44 +5,13 @@
             <div class="panel-body">
                 <form id="form1">
                     <table class="table table-condensed table-hover form-group">
-                        <tr>
-                            <td class="col-sm-6 col-md-6">
-                                <input type="text" id="txtContactInfo" class="form-control input-sm" placeholder="Contact Info: Name, Mobile or Nic" data-bind="value:contactInfo" />
-                            </td>
-                            <td class="col-sm-6 col-md-6">
-                                <input type="text" id="txtDeseasedInfo" class="form-control input-sm" placeholder="Deseased Info: Name or Address" data-bind="value:deseasedInfo" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-sm-6 col-md-6">
-                                <input type="radio" class="jsGender" name="rbGender" value="1" data-bind="checked:genderId" />Male
-                                <input type="radio" class="jsGender"  name="rbGender" value="2" data-bind="checked:genderId" />Female
-                            </td>
-                            <td class="col-sm-6 col-md-6">
-                                <input name="rbStatus" class="jsPaymentStatus" type="radio" title="Paid" value="1" data-bind="checked:paymentStatusId" />Paid
-                                <input name="rbStatus" class="jsPaymentStatus" type="radio" title="UnPaid" value="2" data-bind="checked:paymentStatusId" />UnpPaid 
-                            </td>
-                        </tr>
+                       
                         <tr> 
                             <td class="col-sm-6 col-md-6">
-                                <input type="text" id="txtBookingDate" class="form-control input-sm" data-bind="customDateBinding: bookingDate"/>
+                                <input type="text" id="txtFromBookingDate" class="form-control input-sm"  data-bind="datepicker: {}, value: fromBookingDate"/>
                             </td>
                             <td class="col-sm-6 col-md-6">
-                                <select id="ddlGraveyard" class="form-control input-sm"
-                                        data-bind="options:graveyardList, optionsText:'description', value:graveyardIdSelected">
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-sm-6 col-md-6">
-                                <select id="ddlCentre" class="form-control input-sm"
-                                        data-bind="options: alkhidmatCentreList, optionsText:'description', value:alkhidmatCentreSelected">
-                                </select>
-                            </td>
-                            <td class="col-sm-6 col-md-6">
-                                <select id="ddlBusDetails" class="form-control input-sm"
-                                        data-bind="options: busList, optionsText:'description', value:busSelected">
-                                </select>
+                                <input type="text" id="txtToBookingDate" class="form-control input-sm"  data-bind="datepicker: {}, value: toBookingDate"/>
                             </td>
                         </tr>
                         <tr>
@@ -69,12 +38,11 @@
                     <table id="tblSearch" class="table table-condensed table-bordered table-hover table-striped form-group">
                         <thead>
                             <tr class="active">
-                                <th class="input-sm">Contat Name</th>
-                                <th class="input-sm">Contact Mobile</th>
-                                <th class="input-sm">Contact Nic</th>
-                                <th class="input-sm">Deseased Name</th>
-                                <th class="input-sm">Address</th>
-                                <th class="input-sm">Status</th>
+                                <th class="input-sm">Centre Name</th>
+                                <th class="input-sm">Unpaid Amount</th>
+                                <th class="input-sm">Paid Amount</th>
+                                <th class="input-sm">Unpaid Booking</th>
+                                <th class="input-sm">Paid Booikng</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -86,25 +54,16 @@
                     </table>
                 </div>
             </div>
-        <!--</div>-->
-        
-      <!--  <script type="text/javascript">
-            $(function () {
-                alert('dddd');
-                $("#txtBookingDate").datepicker();
-            });
-        </script>-->
 
     </div>
     
     <script type="text/html" id="rowTemplate">
-        <td class="jsShowDetail input-sm"><a href="#editBooking?id=<%=id%>"><%=contactName %></a></td>
-        <td class="input-sm"><%=contactMobile%></td>
-        <td class="input-sm"><%=contactNic%></td>
-        <td class="input-sm"><%=deseasedName%></td>
-        <td class="input-sm"><%=address%></td>
-        <td class="input-sm"><%=status%></td>
+      <td class="jsShowDetail input-sm"><%=alkhidmatCentre%></td>
+        <td class="input-sm"><%=unpaidAmount%></td>
+        <td class="input-sm"><%=paidAmount%></td>
+        <td class="input-sm"><%=unpaidBooking%></td>
+        <td class="input-sm"><%=paidBooking%></td>
+
     </script>
 
 </div>
-

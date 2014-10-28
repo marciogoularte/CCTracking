@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CCTracking.Dto
+﻿namespace CCTracking.Dto
 {
-   public class BookingSummary : BaseModel
+    public class BookingSummary : BaseModel
     {
-        public string Alkhidmatentre { get; set; }
-        public int TodaysBooking { get; set; }
-        public int UserTotalBooking { get; set; }
-        public int UserPiadBooking { get; set; }
-        public int UserUnpaidBooking { get; set; }
+        public string AlkhidmatCentre { get; set; }
+        public int UnpaidAmount { get; set; }
+        public int PaidAmount { get; set; }
+        public int PaidBooking { get; set; }
+        public int UnpaidBooking { get; set; }
     }
 }

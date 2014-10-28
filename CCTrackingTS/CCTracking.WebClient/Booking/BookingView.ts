@@ -70,6 +70,7 @@ export class BookingView extends helper.Views.MvvmView {
 
 
     GetAllCompleted(bookingResponse: bookingDto.Models.BookingResponseCollection) {
+        
         var a = templateGrid;
         app = application.Application.getInstance();
         var bookingCollection = new bookingDto.Models.BookingResponseCollection(bookingResponse["bookingList"]);

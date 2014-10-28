@@ -89,13 +89,14 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
         this.trigger("PaymentSave", this.bbModel);
     }
 
-    SaveCompleted(paymentResponse: bookingDto.Models.BookingResponse) {
-        //console.log(loginResponse);
-        if (paymentResponse == undefined) {
-            alert("Payment have not been saved successfully!");
+    SaveCompleted(paymentResponse: any) {
+        var result = new Backbone.Model(paymentResponse);
+        if (result.get("errorMessage") != undefined && result.get("errorMessage").trim() != "") {
+            helper.ShowModalPopup("danger", "Payment", "Due to some technical reason payment have not been saved successfully!<br> Pelase try later");
         }
         else {
-            alert("Record has been saved successfully with Payment ID : " + paymentResponse["id"]);
+            helper.ShowModalPopup("success", "Payment", "Record has been saved successfully with Payment ID : " + paymentResponse["id"]);
+            //alert("Record has been saved successfully with Payment ID : " + paymentResponse["id"]);
             location.href = "#viewBooking";
         }
     }

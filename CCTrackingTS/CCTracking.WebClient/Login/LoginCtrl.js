@@ -41,7 +41,7 @@ define(["require", "exports", "../App", "../Helper", "./LoginView", "../Dtos/Log
         LoginCtrl.prototype.Login = function (login) {
             var _this = this;
             //debugger;
-            this.ShowOverlay();
+            //this.ShowOverlay();
             var appObj = this.app.request("AppGlobalSetting");
 
             login.set("userName", $("#txtUserName").val());
@@ -80,16 +80,18 @@ define(["require", "exports", "../App", "../Helper", "./LoginView", "../Dtos/Log
             //console.log(loginResponse);
             var lblLoginMessage = $("#lblLoginMessage");
             if (loginDto == undefined) {
-                alert("User name or password is wrong..");
+                helper.ShowModalPopup("danger", "Authentication", "User name or password is wrong..!<br> Pelase try again");
+                // alert("User name or password is wrong..");
                 //lblLoginMessage.text('User name or password is wrong..');
             }
 
             if (loginDto["errorMessage"] !== null) {
-                alert(loginDto.get("errorMessage"));
+                helper.ShowModalPopup("danger", "Authentication", loginDto.get("errorMessage"));
+                //alert(loginDto.get("errorMessage"));
                 // lblLoginMessage.text('User name or password is wrong..');
             } else {
-                alert("You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
-
+                //helper.ShowModalPopup("success", "Authentication", "You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
+                //alert("You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
                 // lblLoginMessage.text("You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
                 // var app = this.app.Application.getInstance();
                 //Setting global object which can be accissible from other pages.
@@ -99,6 +101,7 @@ define(["require", "exports", "../App", "../Helper", "./LoginView", "../Dtos/Log
                 appObject.set("FirstName", loginDto["firstName"]);
                 appObject.set("LastName", loginDto["lastName"]);
                 appObject.set("UserName", loginDto["userName"]);
+                appObject.set("UserName", loginDto["isAdmin"]);
                 appObject.set("AuthenticationToken", loginDto["authenticationToken"]);
 
                 this.app.reqres.setHandler("AppGlobalSetting", function () {
@@ -152,4 +155,3 @@ define(["require", "exports", "../App", "../Helper", "./LoginView", "../Dtos/Log
     })(helper.Controller);
     exports.LoginCtrl = LoginCtrl;
 });
-//# sourceMappingURL=LoginCtrl.js.map

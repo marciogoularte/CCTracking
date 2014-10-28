@@ -28,7 +28,7 @@ export class BookingCtrl extends helper.Controller {
         //TODO: model fill from server..        
         //if localStorage is empty then call from db        
         //var a = localStorage.getItem('lookupResponse');
-
+        
         var url = window.location.href;
         //update booking
         if (url.indexOf("id=") > -1) {

@@ -20,7 +20,7 @@
                             </td>
                             <td class="col-sm-6 col-md-6">
                                 <input name="rbStatus" class="jsPaymentStatus" type="radio" title="Paid" value="1" data-bind="checked:paymentStatusId" />Paid
-                                <input name="rbStatus" class="jsPaymentStatus" type="radio" title="UnPaid" value="2" data-bind="checked:paymentStatusId" />UnpPaid 
+                                <input name="rbStatus" class="jsPaymentStatus" type="radio" title="UnPaid" value="0" data-bind="checked:paymentStatusId" />UnpPaid 
                             </td>
                         </tr>
                         <tr> 
@@ -29,19 +29,19 @@
                             </td>
                             <td class="col-sm-6 col-md-6">
                                 <select id="ddlGraveyard" class="form-control input-sm"
-                                        data-bind="options:graveyardList, optionsText:'description', value:graveyardIdSelected">
+                                        data-bind="options:graveyardList, optionsText:'description', value:graveyardIdSelected,optionsCaption: 'Please Select Graveyard'">
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td class="col-sm-6 col-md-6">
                                 <select id="ddlCentre" class="form-control input-sm"
-                                        data-bind="options: alkhidmatCentreList, optionsText:'description', value:alkhidmatCentreSelected">
+                                        data-bind="options: alkhidmatCentreList, optionsText:'description', value:alkhidmatCentreSelected,optionsCaption: 'Please Select Centre'">
                                 </select>
                             </td>
                             <td class="col-sm-6 col-md-6">
                                 <select id="ddlBusDetails" class="form-control input-sm"
-                                        data-bind="options: busList, optionsText:'description', value:busSelected">
+                                        data-bind="options: busList, optionsText:'description', value:busSelected, optionsCaption: 'Please Select Bus'">
                                 </select>
                             </td>
                         </tr>

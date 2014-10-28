@@ -135,16 +135,21 @@ export class SearchCtrl extends helper.Controller {
         if (searchDto.get("bookingDate").trim() != "") {
             searchDto.set("bookingDate", helper.FormatDateString(searchDto.get("bookingDate")));
         }
-        searchDto.set("greveyardId", searchDto.get("graveyardIdSelected").id);
-        searchDto.set("centreId", searchDto.get("alkhidmatCentreSelected").id);
-        searchDto.set("busId", searchDto.get("busSelected").id);
+        if (searchDto.get("graveyardIdSelected") != undefined) {
+            searchDto.set("greveyardId", searchDto.get("graveyardIdSelected").id);
+        }
+        if (searchDto.get("alkhidmatCentreSelected") != undefined) {
+            searchDto.set("centreId", searchDto.get("alkhidmatCentreSelected").id);
+        }
+        if (searchDto.get("busSelected") != undefined) {
+            searchDto.set("busId", searchDto.get("busSelected").id);
+        }
         var deferred = DAL.GetByCriteria(searchDto);
         deferred.done(p=> this.GetByCriteriaCompleted(p));
     }
 
     GetByCriteriaCompleted(searchDto: dto.Models.SearchDto) {
         //this.collection.reset();
-        //debugger;
         //this.collectionView.collection.reset();
         this.collection.reset(searchDto["bookingList"]);
 

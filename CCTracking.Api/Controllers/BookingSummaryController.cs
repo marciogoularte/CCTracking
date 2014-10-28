@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Web.Http;
 using CCTracking.DAL;
 using CCTracking.Dto;
 using CCTracking.Dto.Response;
@@ -8,11 +9,11 @@ namespace CCTracking.Api.Controllers
     public class BookingSummaryController : ApiController
     {
         [HttpPost]
-        public BookingResponse GetByCriteria(SearchCriteria criteria)
+        public BookingSummaryResponse GetByCriteria(SearchCriteria criteria)
         {
-            DBFacade facade = new BookingDal();
+            DBFacade facade = new BookingSummaryDal();
             BaseModelResponse baseModelResponse = facade.GetByCriteria(criteria);
-            BookingResponse bookingResponse = (BookingResponse)baseModelResponse;
+            BookingSummaryResponse bookingResponse = (BookingSummaryResponse)baseModelResponse;
             return bookingResponse;
         }
     }

@@ -2,7 +2,7 @@
 /// <reference path="../../../Scripts/typings/marionette/marionette.d.ts" />
 /// <amd-dependency path="marionette"/>
 /// <amd-dependency path="jquery"/>
-/// <amd-dependency path="datepicker"/>
+/// <amd-dependency path="jqueryUI"/>
 /// <amd-dependency path="knockout"/>
 /// <amd-dependency path="text!./AdminSearchBookingTmpl.html"/>
 var __extends = this.__extends || function (d, b) {
@@ -11,7 +11,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../../Helper", "marionette", "jquery", "datepicker", "knockout", "text!./AdminSearchBookingTmpl.html"], function(require, exports, helper) {
+define(["require", "exports", "../../Helper", "marionette", "jquery", "jqueryUI", "knockout", "text!./AdminSearchBookingTmpl.html"], function(require, exports, helper) {
     var _ = require('underscore');
 
     var templateView = require("text!./AdminSearchBookingTmpl.html");
@@ -38,6 +38,8 @@ define(["require", "exports", "../../Helper", "marionette", "jquery", "datepicke
             //}
             _super.call(this, options);
         }
+        SearchView.prototype.onDomRefresh = function () {
+        };
         return SearchView;
     })(helper.Views.MvvmView);
     exports.SearchView = SearchView;
@@ -56,17 +58,7 @@ define(["require", "exports", "../../Helper", "marionette", "jquery", "datepicke
         }
         SearchCollectionView.prototype.Search = function (e) {
             e.preventDefault();
-            this.trigger("SearchBooking");
-        };
-
-        //initialize() {
-        //    alert('initialize..');
-        //    $("#txtBookingDate").datepicker();
-        //}
-        SearchCollectionView.prototype.onDomRefresh = function () {
-            //alert('onDomRefresh');
-            //$("#txtBookingDate").datepicker();
-            //this.$el.find("#txtBookingDate").datepicker();
+            this.trigger("AdminSearchBooking");
         };
         return SearchCollectionView;
     })(helper.Views.CompositeView);

@@ -18,26 +18,33 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
             }
             BookingSummaryDto.prototype.default = function () {
                 return {
-                    alkhidmatentre: "",
-                    todaysBooking: "",
-                    userTotalBooking: "",
-                    userPiadBooking: "",
-                    userUnpaidBooking: ""
+                    alkhidmatCentre: "",
+                    createdBy: "",
+                    createdDate: "",
+                    errorMessage: "",
+                    id: "",
+                    isActive: "",
+                    modifiedBy: "",
+                    modifiedDate: "",
+                    paidAmount: "",
+                    paidBooking: "",
+                    unpaidAmount: "",
+                    unpaidBooking: ""
                 };
             };
             return BookingSummaryDto;
         })(Backbone.Model);
         Models.BookingSummaryDto = BookingSummaryDto;
 
-        var SearchCollection = (function (_super) {
-            __extends(SearchCollection, _super);
-            function SearchCollection(options) {
+        var BookingSummaryCollection = (function (_super) {
+            __extends(BookingSummaryCollection, _super);
+            function BookingSummaryCollection(options) {
                 this.model = BookingSummaryDto;
                 _super.call(this, options);
             }
-            return SearchCollection;
+            return BookingSummaryCollection;
         })(Backbone.Collection);
-        Models.SearchCollection = SearchCollection;
+        Models.BookingSummaryCollection = BookingSummaryCollection;
     })(exports.Models || (exports.Models = {}));
     var Models = exports.Models;
 });

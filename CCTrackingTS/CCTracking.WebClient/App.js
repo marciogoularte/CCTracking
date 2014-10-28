@@ -186,8 +186,8 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     //new stationController.StationCtrl().GetAll();
                 },
                 goCancel: function () {
-                    require(['./Admin/RefundType/RefundTypeCtrl'], function (p) {
-                        new p.RefundBookingCtrl().GetAll();
+                    require(['./RefundBooking/RefundBookingCtrl'], function (p) {
+                        new p.RefundBookingCtrl().Show();
                     });
                     // new refundBookingController.RefundBookingCtrl().Show();
                 },
@@ -224,7 +224,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     });
                 },
                 goAdminSearchBooking: function () {
-                    require(['.Admin/AdminSearch/AdminSearchBookingCtrl'], function (p) {
+                    require(['./Admin/AdminSearchBooking/AdminSearchBookingCtrl'], function (p) {
                         new p.AdminSearchBookingCtrl().Show();
                     });
                 },

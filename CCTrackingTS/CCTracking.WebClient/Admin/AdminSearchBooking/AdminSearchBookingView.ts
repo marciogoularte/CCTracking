@@ -2,27 +2,23 @@
 /// <reference path="../../../Scripts/typings/marionette/marionette.d.ts" />
 /// <amd-dependency path="marionette"/>
 /// <amd-dependency path="jquery"/>
-/// <amd-dependency path="datepicker"/>
+/// <amd-dependency path="jqueryUI"/>
 /// <amd-dependency path="knockout"/>
 /// <amd-dependency path="text!./AdminSearchBookingTmpl.html"/>
 
 var _ = require('underscore');
 import helper = require("../../Helper");
-//import searchDto = require("CCTracking.WebClient/Dtos/searchDto");
 import searchCtrl = require("./AdminSearchBookingCtrl");
 var templateView = require("text!./AdminSearchBookingTmpl.html");
-//var templateRow = require("text!./BokingGridRow.html");
 import application = require("../../App");
 var app;
-
-
-
 
 export class SearchViewModel extends helper.ViewModel {
     constructor(model:any, controller:any) {
         super(model, controller);
     }
 }
+
 
 export class SearchView extends helper.Views.MvvmView {
     constructor(options?) {
@@ -33,6 +29,9 @@ export class SearchView extends helper.Views.MvvmView {
         //}
         super(options);
     }
+    onDomRefresh() {
+    }
+
 }
 
 export class SearchCollectionView extends helper.Views.CompositeView {
@@ -49,20 +48,14 @@ export class SearchCollectionView extends helper.Views.CompositeView {
     }
     Search(e) {
         e.preventDefault();
-        this.trigger("SearchBooking");
+        this.trigger("AdminSearchBooking");
     }
 
     //initialize() {
     //    alert('initialize..');
     //    $("#txtBookingDate").datepicker();
     //}
-
-    onDomRefresh() {
-        //alert('onDomRefresh');
-        //$("#txtBookingDate").datepicker();
-        //this.$el.find("#txtBookingDate").datepicker();
-
-    }
+   
 }
 
 export class SearchItemView extends helper.Views.ItemView {

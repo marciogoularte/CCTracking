@@ -124,7 +124,7 @@ export class ViewModel {
     driverSelected: any;
     alkhidmatCentreSelected: any;
     visitTypeSelected: any;
-
+    isEdit:any;
 
 
     constructor(model) {
@@ -138,6 +138,7 @@ export class ViewModel {
 
         if (model == undefined) {
             this.id = ko.observable();
+            this.isEdit = ko.observable(false);
             this.isActive = ko.observable("1");
             this.centreId = ko.observable();
             this.busId = ko.observable();
@@ -197,6 +198,7 @@ export class ViewModel {
         }
         else {
             this.id = ko.observable(model.get("id"));
+            this.isEdit = ko.observable(true);
             this.isActive = ko.observable(model.get("isActive"));
             this.centreId = ko.observable(model.get("centreId"));
             this.busId = ko.observable(model.get("busId"));

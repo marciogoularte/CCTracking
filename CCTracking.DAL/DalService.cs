@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CCTracking.Dto.Response;
 using CCTracking.Dto;
 
@@ -13,8 +10,8 @@ namespace CCTracking.DAL
         DBFacade facade = null;
         public BaseModelResponse SavePayment(Payment payment)
         {
-            BaseModelResponse paymentResponse = null;
-            
+            BaseModelResponse paymentResponse = new BaseModelResponse();
+
             //delete payment if previously added and now modifying
             DeletePayment(payment);
             if (SaveBusVisit(payment))
@@ -27,7 +24,6 @@ namespace CCTracking.DAL
             {
                 paymentResponse.ErrorMessage = "Couldn't save payment! Problem occured while saving BusVists";
             }
-
             return paymentResponse;
         }
 
@@ -46,7 +42,7 @@ namespace CCTracking.DAL
             if (payment.BusVisits == null) return false;
 
             bool flag = false;
-            List <BusVisit> busVisitList = GetBusVisitList(payment.BookingId);
+            List<BusVisit> busVisitList = GetBusVisitList(payment.BookingId);
             facade = new CCTracking.DAL.BusVisitDal();
             foreach (BusVisit item in busVisitList)
             {
@@ -67,7 +63,7 @@ namespace CCTracking.DAL
                 //        break;
                 //    }
                 //    else
-                    
+
                 //}
             }
             return flag;
@@ -81,7 +77,7 @@ namespace CCTracking.DAL
             return busVisitResponse.BusVisitList;
 
         }
-        
+
         private List<BusVisit> GetBusVisit(int bookingId)
         {
             List<BusVisit> list = new List<BusVisit>();
@@ -95,6 +91,7 @@ namespace CCTracking.DAL
         {
             bool flag = false;
             List<BusVisit> busVisit = payment.BusVisits;
+            BaseModelResponse response = null;
             if (busVisit != null && busVisit.Count > 0)
             {
                 try
@@ -111,7 +108,9 @@ namespace CCTracking.DAL
                         {
                             visit.ModifiedDate = DateTime.Today;
                         }
-                        facade.Execute(visit);
+                        response = facade.Execute(visit);
+                        if (response != null && !string.IsNullOrEmpty(response.ErrorMessage))
+                            break;
                     }
                     flag = true;
                 }
@@ -119,10 +118,15 @@ namespace CCTracking.DAL
                 {
                     flag = false;
                 }
+                finally
+                {
+                    if (response != null && !string.IsNullOrEmpty(response.ErrorMessage))
+                        flag = false;
+                }
             }
             return flag;
         }
 
-        
+
     }
 }

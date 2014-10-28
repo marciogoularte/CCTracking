@@ -27,8 +27,17 @@ namespace CCTracking.Api.Controllers
                 {
                     refundBooking.ModifiedDate = DateTime.Today;
                 }
+                refundBooking.AmountDeducted = refundBooking.ActualBookingAmount - refundBooking.RefundAmount;
                 BaseModelResponse refundBookingResponse = facade.Execute(refundBooking);
-                refundBooking = ((RefundBookingResponse)refundBookingResponse).RefundBookingModel;
+
+                if (!string.IsNullOrEmpty(refundBookingResponse.ErrorMessage))
+                {
+                    refundBooking.ErrorMessage = refundBookingResponse.ErrorMessage;
+                }
+                else
+                {
+                    refundBooking = ((RefundBookingResponse)refundBookingResponse).RefundBookingModel;
+                }
             }
             return refundBooking;
         }

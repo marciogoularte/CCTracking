@@ -45,7 +45,7 @@ export class LoginCtrl extends helper.Controller {
         this.loginViewModel = new views.LoginViewModel(this.backboneModel, this);
         this.loginView = new views.LoginView({ viewModel: this.loginViewModel });
     }
-    
+
     Load() {
 
         this.loginView = new views.LoginView();
@@ -57,13 +57,13 @@ export class LoginCtrl extends helper.Controller {
 
     Login(login: any) {
         //debugger;
-        this.ShowOverlay();
+        //this.ShowOverlay();
         var appObj = this.app.request("AppGlobalSetting");
-        
+
         login.set("userName", $("#txtUserName").val());
         login.set("password", $("#txtPassword").val());
         var promise = DAL.Login(login);
-        
+
         promise.done((p) => this.Authenticated(p));
     }
 
@@ -97,19 +97,21 @@ export class LoginCtrl extends helper.Controller {
         //console.log(loginResponse);
         var lblLoginMessage = $("#lblLoginMessage");
         if (loginDto == undefined) {
-            alert("User name or password is wrong..");
+            helper.ShowModalPopup("danger", "Authentication", "User name or password is wrong..!<br> Pelase try again");
+            // alert("User name or password is wrong..");
             //lblLoginMessage.text('User name or password is wrong..');
         }
 
         if (loginDto["errorMessage"] !== null) {
-            alert(loginDto.get("errorMessage"));
-           // lblLoginMessage.text('User name or password is wrong..');
+            helper.ShowModalPopup("danger", "Authentication", loginDto.get("errorMessage"));
+            //alert(loginDto.get("errorMessage"));
+            // lblLoginMessage.text('User name or password is wrong..');
         }
         else {
-
-            alert("You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
-           // lblLoginMessage.text("You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
-           // var app = this.app.Application.getInstance();
+            //helper.ShowModalPopup("success", "Authentication", "You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
+            //alert("You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
+            // lblLoginMessage.text("You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
+            // var app = this.app.Application.getInstance();
 
             //Setting global object which can be accissible from other pages.
             var appObject = new appObjectDto.Models.AppObject();
@@ -118,8 +120,9 @@ export class LoginCtrl extends helper.Controller {
             appObject.set("FirstName", loginDto["firstName"]);
             appObject.set("LastName", loginDto["lastName"]);
             appObject.set("UserName", loginDto["userName"]);
+            appObject.set("UserName", loginDto["isAdmin"]);
             appObject.set("AuthenticationToken", loginDto["authenticationToken"]);
-
+            
             this.app.reqres.setHandler("AppGlobalSetting", () => appObject, this);
 
             //app.AppLayout.LoginRegion.close();
@@ -143,17 +146,17 @@ export class LoginCtrl extends helper.Controller {
                 this.app.LeftRegion.show(new adminLeft.AdminLeftItemView());
 
                 var ctrl = new uc.UserCtrl();
-               // ctrl.Show();
+                // ctrl.Show();
                 ctrl.GetAll();
                 var vm = ctrl.userViewModel.model;
                 //knockout binding syntax
-               // vm.FirstName("value set from another place...")
+                // vm.FirstName("value set from another place...")
 
             }
             else {
 
                 new bookingLeftCtrl.BookingLeftCtrl().Show();
-                    //this.app.LeftRegion.show(bookingLeftView);
+                //this.app.LeftRegion.show(bookingLeftView);
                 new busAvailabilityCtrl.BusAvailabilityCtrl().Show();
                 var ctrlBooking = new bookingCtrl.BookingCtrl();
                 ctrlBooking.Show();

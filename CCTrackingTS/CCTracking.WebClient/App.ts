@@ -56,7 +56,7 @@ export class Application extends Marionette.Application {
             throw new Error("Error: Creating Application object.");
         }
         Application._instance = this;
-        
+
         this.on('initialize:after', this.initializeAfter);
 
         this.addRegions({
@@ -166,19 +166,19 @@ export class Application extends Marionette.Application {
             },
             goBus() {
                 require(['./Bus/BusCtrl'], (p) => { new p.BusCtrl().Show(); });
-               // new busController.BusCtrl().Show();
+                // new busController.BusCtrl().Show();
             },
             goAddBooking() {
-            require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().Show(); });
+                require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().Show(); });
                 //new bookingController.BookingCtrl().Show();
             },
             goEditBooking() {
-            require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().Show(); });
+                require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().Show(); });
                 //new bookingController.BookingCtrl().Show();
             },
             goViewBooking() {
-            require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });
-               // new bookingController.BookingCtrl().GetAll(1);
+                require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });
+                // new bookingController.BookingCtrl().GetAll(1);
             },
             goPayment() {
                 require(['./Payment/PaymentCtrl'], (p) => { new p.PaymentCtrl().Show(); });
@@ -195,8 +195,8 @@ export class Application extends Marionette.Application {
                 //new stationController.StationCtrl().GetAll();
             },
             goCancel() {
-            require(['./Admin/RefundType/RefundTypeCtrl'], (p) => { new p.RefundBookingCtrl().GetAll(); });
-               // new refundBookingController.RefundBookingCtrl().Show();
+            require(['./RefundBooking/RefundBookingCtrl'], (p) => { new p.RefundBookingCtrl().Show(); });
+                // new refundBookingController.RefundBookingCtrl().Show();
             },
             goViewBusVisit() {
                 require(['./Bus/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().SimpleLoad(); });
@@ -209,25 +209,25 @@ export class Application extends Marionette.Application {
             },
             goAdminBus() {
                 require(['./Admin/Bus/BusCtrl'], (p) => { new p.BusCtrl().Show(); });
-               // new adminBusController.BusCtrl().Show();
+                // new adminBusController.BusCtrl().Show();
             },
             goViewAdminBus() {
                 require(['./Admin/Bus/BusCtrl'], (p) => { new p.BusCtrl().GetAll(); });
-               // new adminBusController.BusCtrl().GetAll();
+                // new adminBusController.BusCtrl().GetAll();
             },
             goSearchBooking() {
                 require(['./Search/SearchCtrl'], (p) => { new p.SearchCtrl().Show(); });
             },
-            
+
             goAdminSearchBooking() {
-                require(['.Admin/AdminSearch/AdminSearchBookingCtrl'], (p) => { new p.AdminSearchBookingCtrl().Show(); });
+                require(['./Admin/AdminSearchBooking/AdminSearchBookingCtrl'], (p) => { new p.AdminSearchBookingCtrl().Show(); });
             },
             goDriver() {
                 require(['./Admin/Driver/DriverCtrl'], (p) => { new p.DriverCtrl().Show(); });
                 //new driverController.DriverCtrl().Show();
             },
             goViewDriver() {
-                require(['./Admin/Driver/DriverCtrl'], (p) => { new p.DriverCtrl().GetAll(); });                
+                require(['./Admin/Driver/DriverCtrl'], (p) => { new p.DriverCtrl().GetAll(); });
                 //new driverController.DriverCtrl().GetAll();
             },
             goGraveyard() {
@@ -271,7 +271,7 @@ export class Application extends Marionette.Application {
                 //new paymentTypeController.PaymentTypeCtrl().GetAll();
             },
             goRefundType() {
-            require(['./Admin/RefundType/RefundTypeCtrl'], (p) => { new p.RefundTypeCtrl().Show(); });
+                require(['./Admin/RefundType/RefundTypeCtrl'], (p) => { new p.RefundTypeCtrl().Show(); });
                 //new refundTypeController.RefundTypeCtrl().Show();
             },
             goViewRefundType() {
@@ -292,18 +292,18 @@ export class Application extends Marionette.Application {
             },
             goViewCauseOfDeath() {
                 require(['./Admin/CauseOfDeath/CauseOfDeathCtrl'], (p) => { new p.PaymentTypeCtrl().GetAll(); });
-               // new causeOfDeathController.CauseOfDeathCtrl().GetAll();
+                // new causeOfDeathController.CauseOfDeathCtrl().GetAll();
             },
             goViewTest() {
-           // new koBindingController.KoBindingCtrl().Show();
+                // new koBindingController.KoBindingCtrl().Show();
             },
             goTrackingDevice() {
                 require(['./Admin/TrackingDevice/TrackingDeviceCtrl'], (p) => { new p.TrackingDeviceCtrl().Show(); });
-               // new trackingDeviceController.TrackingDeviceCtrl().Show();
+                // new trackingDeviceController.TrackingDeviceCtrl().Show();
             },
             goViewTrackingDevice() {
                 require(['./Admin/TrackingDevice/TrackingDeviceCtrl'], (p) => { new p.TrackingDeviceCtrl().GetAll(); });
-               // new trackingDeviceController.TrackingDeviceCtrl().GetAll();
+                // new trackingDeviceController.TrackingDeviceCtrl().GetAll();
             },
             defaultRoute() {
                 //layout.MainRegion.close();
@@ -312,7 +312,7 @@ export class Application extends Marionette.Application {
                 self.ContainerRegion.show(layout);
                 // this.LoginRegion.show(loginView);
                 //loginCtrl.Load();
-            require(['./Login/LoginCtrl'], (p) => { new p.LoginCtrl().Load(); });
+                require(['./Login/LoginCtrl'], (p) => { new p.LoginCtrl().Load(); });
             }
         });
         this.AppRoutes = new routes();

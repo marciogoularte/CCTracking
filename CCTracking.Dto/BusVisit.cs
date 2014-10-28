@@ -14,7 +14,7 @@ namespace CCTracking.Dto
         public string VisitTypeDesc { get; set; }
         public int BookingId { get; set; }
         public string InchargeName { get; set; }
-        public DateTime VisitDate { get; set; }
+        public DateTime? VisitDate { get; set; }
         public byte OutTime { get; set; }
         public byte ReturnTime { get; set; }
         public long ReadingWhenFilling { get; set; }

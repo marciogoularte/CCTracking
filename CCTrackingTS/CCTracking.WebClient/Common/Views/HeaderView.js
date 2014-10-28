@@ -11,14 +11,24 @@ define(["require", "exports", "marionette", "text!CCTracking.WebClient/Common/Te
     /// <amd-dependency path="text!CCTracking.WebClient/Common/Templates/Header.html"/>
     var templateView = require("text!CCTracking.WebClient/Common/Templates/Header.html");
 
+    var app = require("../../App");
+
     var HeaderItemView = (function (_super) {
         __extends(HeaderItemView, _super);
+        //appObj:any;
         function HeaderItemView(options) {
             if (!options)
                 options = {};
             options.template = templateView.getOuterHTML("#SiteHeader");
 
-            //console.log("ddddd" + options);
+            templateHelpers:
+            (function () {
+                return {
+                    isAdminRole: function () {
+                        return app.request("AppGlobalSetting").get("isAdmin");
+                    }
+                };
+            });
             _super.call(this, options);
         }
         return HeaderItemView;
@@ -26,4 +36,3 @@ define(["require", "exports", "marionette", "text!CCTracking.WebClient/Common/Te
     exports.HeaderItemView = HeaderItemView;
 });
 //aaa
-//# sourceMappingURL=HeaderView.js.map

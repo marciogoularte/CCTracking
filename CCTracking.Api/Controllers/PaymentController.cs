@@ -45,7 +45,15 @@ namespace CCTracking.Api.Controllers
 
                 DalService service = new DalService();
                 BaseModelResponse paymentResponse = service.SavePayment(payment);
-                payment = ((PaymentResponse)paymentResponse).PaymentModel;
+                if (!string.IsNullOrEmpty(paymentResponse.ErrorMessage))
+                {
+                    payment.ErrorMessage = paymentResponse.ErrorMessage;
+                }
+                else
+                {
+                    payment = ((PaymentResponse) paymentResponse).PaymentModel;
+                }
+
 
             }
             return payment;

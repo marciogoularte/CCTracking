@@ -7,7 +7,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "CCTracking.WebClient/Dtos/SearchDto", "jquery"], function(require, exports, baseDAL, searchDto) {
+define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "CCTracking.WebClient/Dtos/BookingSummaryDto", "jquery"], function(require, exports, baseDAL, searchDto) {
     var $ = require("jquery");
 
     var AdminSearchDal = (function (_super) {
@@ -16,7 +16,7 @@ define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "CCTrackin
             _super.call(this, this);
         }
         AdminSearchDal.prototype.getResponse = function () {
-            return new searchDto.Models.SearchDto();
+            return new searchDto.Models.BookingSummaryDto();
         };
         return AdminSearchDal;
     })(baseDAL.BaseDto);
@@ -24,30 +24,30 @@ define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "CCTrackin
 
     function Load() {
         var o = new AdminSearchDal();
-        return o.doAjaxRequest(null, "GET", "Search");
+        return o.doAjaxRequest(null, "GET", "BookingSummary");
     }
     exports.Load = Load;
 
     function Save(searchDto) {
         var o = new AdminSearchDal();
-        return o.doAjaxRequest(searchDto, "POST", "Search");
+        return o.doAjaxRequest(searchDto, "POST", "BookingSummary");
     }
     exports.Save = Save;
 
     function GetAll() {
         var o = new AdminSearchDal();
-        return o.doAjaxRequest(null, "GET", "Search?a=a");
+        return o.doAjaxRequest(null, "GET", "BookingSummary?a=a");
     }
     exports.GetAll = GetAll;
     function GetById(id) {
         var o = new AdminSearchDal();
-        return o.doAjaxRequest(null, "GET", "Search?id=" + id);
+        return o.doAjaxRequest(null, "GET", "BookingSummary?id=" + id);
     }
     exports.GetById = GetById;
 
     function GetByCriteria(searchDto) {
         var o = new AdminSearchDal();
-        return o.doAjaxRequest(searchDto, "POST", "Search");
+        return o.doAjaxRequest(searchDto, "POST", "BookingSummary");
     }
     exports.GetByCriteria = GetByCriteria;
 });

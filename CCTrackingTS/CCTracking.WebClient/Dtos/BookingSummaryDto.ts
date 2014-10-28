@@ -9,16 +9,23 @@ export module Models {
     export class BookingSummaryDto extends Backbone.Model {
         default() {
             return {
-                alkhidmatentre: "",
-                todaysBooking: "",
-                userTotalBooking: "",
-                userPiadBooking: "",
-                userUnpaidBooking: ""
+                alkhidmatCentre: "",
+                createdBy: "",
+                createdDate: "",
+                errorMessage: "",
+                id: "",
+                isActive: "",
+                modifiedBy: "",
+                modifiedDate: "",
+                paidAmount: "",
+                paidBooking: "",
+                unpaidAmount: "",
+                unpaidBooking: ""
             }
         }
     }
 
-    export class SearchCollection extends Backbone.Collection {
+    export class BookingSummaryCollection extends Backbone.Collection {
         constructor(options?: any) {
             this.model = BookingSummaryDto;
             super(options);

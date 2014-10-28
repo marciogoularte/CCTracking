@@ -42,7 +42,7 @@ namespace CCTracking.DAL
             dictionary.Add("@RefundReceipt", refundBooking.RefundReceipt);
             dictionary.Add("@RefundOfficeLocation", refundBooking.RefundOfficeLocation);
             dictionary.Add("@RefundOfficer", refundBooking.RefundOfficer);
-            
+
             base.ExecuteSql(refundBooking, dictionary);
             return "dbo.SaveRefundBooking";
         }

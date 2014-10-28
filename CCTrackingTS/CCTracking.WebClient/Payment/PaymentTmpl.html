@@ -95,14 +95,15 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Receipt</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" id="txtReceipt" class="form-control input-sm" data-bind="value:receiptNo, disable:isPaid" />
+                                    <input type="text" id="txtReceipt" class="form-control input-sm" data-bind="value:receiptNo, disable:isPaid" 
+                                        required="required" data-role="validate" title="Receipt" data-content="Receipt is required" />
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">EasyPaisa Transaction No.</td>
                                 <td class="col-sm-8 col-md-8">
                                     <input type="text" id="txtEasyPaisaTranNo" class="form-control input-sm" data-bind="value:easyPaisaTranNo, enable:isEasyPaisa" />
-                                    <span data-bind="text:isPaid"></span> 
+                                    <!--<span data-bind="text:isPaid"></span> -->
                                 </td>
                             </tr>
 
