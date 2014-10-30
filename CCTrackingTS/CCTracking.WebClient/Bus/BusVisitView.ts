@@ -330,6 +330,14 @@ export class BusVisitItemView extends helper.Views.ItemView {
         options.events = {
             "click .jsShowDetail": "ShowDetail"
         };
+        
+        //this.templateHelpers = () => {
+        //    visitDateFormatted: {
+        //        if (this.model.get("visitDate") != undefined) {
+        //            this.model.set("visitDate", helper.FormatDateString(this.model.get("visitDate")));
+        //        }
+        //    }
+        //}
         super(options);
     }
     ShowDetail() {

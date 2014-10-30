@@ -108,6 +108,7 @@ export class LoginCtrl extends helper.Controller {
             // lblLoginMessage.text('User name or password is wrong..');
         }
         else {
+            //debugger;
             //helper.ShowModalPopup("success", "Authentication", "You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
             //alert("You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
             // lblLoginMessage.text("You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
@@ -120,7 +121,7 @@ export class LoginCtrl extends helper.Controller {
             appObject.set("FirstName", loginDto["firstName"]);
             appObject.set("LastName", loginDto["lastName"]);
             appObject.set("UserName", loginDto["userName"]);
-            appObject.set("UserName", loginDto["isAdmin"]);
+            appObject.set("IsAdmin", loginDto["isAdmin"]);
             appObject.set("AuthenticationToken", loginDto["authenticationToken"]);
             
             this.app.reqres.setHandler("AppGlobalSetting", () => appObject, this);

@@ -4,26 +4,21 @@
 /// <amd-dependency path="text!CCTracking.WebClient/Common/Templates/Header.html"/>
 var templateView = require("text!CCTracking.WebClient/Common/Templates/Header.html");
 import helper = require("../../Helper");
-var app = require("../../App");
-
+import application = require("../../App");
+var app;
 export class HeaderItemView extends Marionette.ItemView {
-    //appObj:any;
     constructor(options?) {
         if (!options)
             options = {};
+        app = application.Application.getInstance();
         options.template = templateView.getOuterHTML("#SiteHeader");
-        //this.appObj = app.request("AppGlobalSetting");
-        //station.set("modifiedBy", appObj.get("isAdmin"));
-
-        //console.log("ddddd" + options);
-        
-        templateHelpers : ()=> {
+        this.templateHelpers = ()=> {
             return {
-                isAdminRole: () => app.request("AppGlobalSetting").get("isAdmin")
-
+                isAdminRole:()=> {
+                    app.request("AppGlobalSetting").get("IsAdmin");
+                }
             }
         }
         super(options);
     }
 }
-//aaa

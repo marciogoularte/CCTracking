@@ -295,6 +295,14 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
             options.events = {
                 "click .jsShowDetail": "ShowDetail"
             };
+
+            //this.templateHelpers = () => {
+            //    visitDateFormatted: {
+            //        if (this.model.get("visitDate") != undefined) {
+            //            this.model.set("visitDate", helper.FormatDateString(this.model.get("visitDate")));
+            //        }
+            //    }
+            //}
             _super.call(this, options);
         }
         BusVisitItemView.prototype.ShowDetail = function () {

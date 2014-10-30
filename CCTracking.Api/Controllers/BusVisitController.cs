@@ -28,7 +28,7 @@ namespace CCTracking.Api.Controllers
                 {
                     busVisit.ModifiedDate = DateTime.Today;
                 }
-                if ((VisitTypes)busVisit.VisitTypeId == VisitTypes.PatrolPump)
+                if ((VisitTypes)busVisit.VisitTypeId != VisitTypes.PatrolPump)
                 {
                     busVisit.PumpLocation = string.Empty;
                     busVisit.FuelAmount = busVisit.FuelRate = 0;

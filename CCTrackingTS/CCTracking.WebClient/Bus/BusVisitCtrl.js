@@ -27,7 +27,8 @@ define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/
             //this.view = new views.BusVisitView({ viewModel: this.viewModel });
             //this.stationView.on("Event:SaveForm", () => this.Save(this.stationView.model));
             //this.collection = new dto.Models.BusVisitCollection({});
-            this.collection = new dto.Models.BusVisitCollection({ id: "", busDesc: "", visitTypeDesc: "", initialReading: "", finalReading: "" });
+            //this.collection = new dto.Models.BusVisitCollection({ id: "", busDesc: "", visitTypeDesc: "", initialReading: "", finalReading: "" });
+            this.collection = new dto.Models.BusVisitCollection([]);
             this.collectionView = new views.BusVisitCollectionView({ collection: this.collection });
             this.compositeModel = new Backbone.Model();
             //this.events.listento
@@ -189,7 +190,12 @@ define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/
         };
 
         BusVisitCtrl.prototype.GetAllCompleted = function (model) {
-            this.collection.reset(model["busVisitList"]);
+            //debugger;
+            var busVisits = _.map(model["busVisitList"], function (item) {
+                item.visitDate = helper.FormatDateString(item.visitDate);
+                return item;
+            });
+            this.collection.reset(busVisits);
             //this.collectionView.on("itemview:ShowDetail", (view) => this.GetByIdCompleted(view.model));
             //this.collectionView.listenTo(this.collectionView.model, "Event:SearchVisit", (busId) => this.SearchVisit(busId));
         };

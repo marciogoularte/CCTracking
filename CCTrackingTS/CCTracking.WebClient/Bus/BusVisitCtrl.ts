@@ -32,7 +32,8 @@ export class BusVisitCtrl extends helper.Controller {
         //this.view = new views.BusVisitView({ viewModel: this.viewModel });
         //this.stationView.on("Event:SaveForm", () => this.Save(this.stationView.model));        
         //this.collection = new dto.Models.BusVisitCollection({});
-        this.collection = new dto.Models.BusVisitCollection({ id: "", busDesc: "", visitTypeDesc: "", initialReading: "", finalReading: "" });
+        //this.collection = new dto.Models.BusVisitCollection({ id: "", busDesc: "", visitTypeDesc: "", initialReading: "", finalReading: "" });
+        this.collection = new dto.Models.BusVisitCollection([]);
         this.collectionView = new views.BusVisitCollectionView({ collection: this.collection });
         this.compositeModel = new Backbone.Model();
         //this.events.listento
@@ -193,7 +194,12 @@ export class BusVisitCtrl extends helper.Controller {
     }
 
     GetAllCompleted(model: dto.Models.BusVisitDto) {
-        this.collection.reset(model["busVisitList"]);
+        //debugger;
+        var busVisits = _.map(model["busVisitList"], (item) => {
+            item.visitDate = helper.FormatDateString(item.visitDate);
+            return item;
+        });
+        this.collection.reset(busVisits);
         //this.collectionView.on("itemview:ShowDetail", (view) => this.GetByIdCompleted(view.model));
         //this.collectionView.listenTo(this.collectionView.model, "Event:SearchVisit", (busId) => this.SearchVisit(busId));
     }
