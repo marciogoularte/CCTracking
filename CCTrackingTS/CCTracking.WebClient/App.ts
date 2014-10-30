@@ -3,36 +3,9 @@
 /// <amd-dependency path="marionette"/>
 /// <amd-dependency path="datatablesBootstrap"/>
 
-//import menu = require("CCTracking.WebClient/Common/views/HeaderView");
-//import summary = require("CCTracking.WebClient/Booking/views/BookingLeftView");
-//import main = require("CCTracking.WebClient/Booking/views/BookingMainView");
 
-//import login = require("../CCTracking.WebClient/Login/Views/LoginView");
-//import loginController = require("./Login/LoginCtrl");
 import adminLeft = require("../CCTracking.WebClient/Common/Views/AdminLeftView");
 import modalHelper = require("./ModalHelper");
-//import busController = require("./Bus/BusCtrl");
-//import userController = require("./User/UserCtrl");
-//import bookingController = require("./Booking/BookingCtrl");
-//import paymentController = require("./Payment/PaymentCtrl");
-//import stationController = require("./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl");
-///import refundBookingController = require("./RefundBooking/RefundBookingCtrl");
-//import busVisitController = require("./Bus/BusVisitCtrl");
-//import adminBusController = require("./Admin/Bus/BusCtrl");
-//import searchController = require("./Search/SearchCtrl");
-
-//import driverController = require("./Admin/Driver/DriverCtrl");
-//import graveyardController = require("./Admin/Graveyard/GraveyardCtrl");
-//import townController = require("./Admin/Town/TownCtrl");
-//import unionCouncilController = require("./Admin/UnionCouncil/UnionCouncilCtrl");
-//import landmarkController = require("./Admin/Landmark/LandmarkCtrl");
-//import paymentTypeController = require("./Admin/PaymentType/PaymentTypeCtrl");
-//import refundTypeController = require("./Admin/RefundType/RefundTypeCtrl");
-//import visitTypeController = require("./Admin/VisitType/VisitTypeCtrl");
-//import causeOfDeathController = require("./Admin/CauseOfDeath/CauseOfDeathCtrl");
-//import trackingDeviceController = require("./Admin/TrackingDevice/TrackingDeviceCtrl");
-//import koBindingController = require("./Tests/KoBindingCtrl");
-
 var datatablesBootstrap = require("datatablesBootstrap");
 
 export class Application extends Marionette.Application {
@@ -120,6 +93,7 @@ export class Application extends Marionette.Application {
                 'busVisit': 'gobusVisit',
                 'editBusVisit': 'goEditBusVisit',
                 'viewBusVisit': 'goViewBusVisit',
+                'adminBusVisit': 'goAdminBusVisit',
                 'adminBus': 'goAdminBus',
                 'viewAdminBus': 'goViewAdminBus',
                 'searchBooking': 'goSearchBooking',
@@ -206,6 +180,9 @@ export class Application extends Marionette.Application {
             },
             goEditBusVisit() {
                 require(['./Bus/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().Show(); });
+            },
+            goAdminBusVisit() {
+            require(['./Admin/BusMilage/BusMilageCtrl'], (p) => { new p.BusMilageCtrl().SimpleLoad(); });
             },
             goAdminBus() {
                 require(['./Admin/Bus/BusCtrl'], (p) => { new p.BusCtrl().Show(); });

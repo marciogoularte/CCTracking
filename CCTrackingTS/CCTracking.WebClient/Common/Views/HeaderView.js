@@ -22,7 +22,7 @@ define(["require", "exports", "../../App", "marionette", "text!CCTracking.WebCli
             this.templateHelpers = function () {
                 return {
                     isAdminRole: function () {
-                        app.request("AppGlobalSetting").get("IsAdmin");
+                        return app.request("AppGlobalSetting").get("IsAdmin");
                     }
                 };
             };

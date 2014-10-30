@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="BookingDal.cs" />
     <Compile Include="BusDal.cs" />
+    <Compile Include="BusMilageDal.cs" />
     <Compile Include="CentreDal.cs" />
     <Compile Include="BusVisitDal.cs" />
     <Compile Include="CauseofDeathDal.cs" />

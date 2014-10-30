@@ -98,22 +98,15 @@ export class LoginCtrl extends helper.Controller {
         var lblLoginMessage = $("#lblLoginMessage");
         if (loginDto == undefined) {
             helper.ShowModalPopup("danger", "Authentication", "User name or password is wrong..!<br> Pelase try again");
+            return;
             // alert("User name or password is wrong..");
             //lblLoginMessage.text('User name or password is wrong..');
         }
 
         if (loginDto["errorMessage"] !== null) {
             helper.ShowModalPopup("danger", "Authentication", loginDto.get("errorMessage"));
-            //alert(loginDto.get("errorMessage"));
-            // lblLoginMessage.text('User name or password is wrong..');
         }
         else {
-            //debugger;
-            //helper.ShowModalPopup("success", "Authentication", "You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
-            //alert("You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
-            // lblLoginMessage.text("You are authencated.." + loginDto["userName"] + " Authenticaiton id is: " + loginDto["authenticationToken"]);
-            // var app = this.app.Application.getInstance();
-
             //Setting global object which can be accissible from other pages.
             var appObject = new appObjectDto.Models.AppObject();
 

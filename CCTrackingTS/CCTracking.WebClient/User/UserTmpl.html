@@ -8,57 +8,60 @@
                     <div class="panel-body">
                         <table class="table table-removeTopBorder table-condensed table-hover form-group">
                               <tr>
-                                <td class="col-sm-4 col-md-4 input-sm">First Name</td>
+                                <td class="col-sm-4 col-md-4 input-sm">First Name *</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtFirstName" type="text" class="form-control input-sm" data-bind="value: model.firstName" required /></td>
+                                    <input id="txtFirstName" type="text" class="form-control input-sm" data-bind="value: model.firstName" 
+                                        required="required" data-role="validate" title="First Name" data-content="First name is required" /></td>
                             </tr>
                               <tr>
-                                <td class="col-sm-4 col-md-4 input-sm">Last Name</td>
+                                <td class="col-sm-4 col-md-4 input-sm">Last Name *</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtLastName" type="text" class="form-control input-sm" data-bind="value: model.lastName" required/></td>
+                                    <input id="txtLastName" type="text" class="form-control input-sm" data-bind="value: model.lastName" 
+                                        required="required" data-role="validate" title="Last Name" data-content="Last name is required"/></td>
                             </tr>
                             <tr>
-                                <td class="col-sm-4 col-md-4 input-sm">User Name</td>
+                                <td class="col-sm-4 col-md-4 input-sm">User Name *</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtUserName" type="text" class="form-control input-sm" data-bind="value: model.userName, enable: model.id > '0' ? false:true" required/></td>
+                                    <input id="txtUserName" type="text" class="form-control input-sm" data-bind="value: model.userName, enable: model.id > '0' ? false:true" 
+                                        required="required" data-role="validate" title="User name" data-content="User name is required"/></td>
                             </tr>
                               <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">CNIC</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtCnic" type="text" class="form-control input-sm" data-bind="value: model.cnic" required/></td>
+                                    <input id="txtCnic" type="text" class="form-control input-sm" data-bind="value: model.cnic" /></td>
                             </tr>
                               <tr>
-                                <td class="col-sm-4 col-md-4 input-sm">Mobile</td>
+                                <td class="col-sm-4 col-md-4 input-sm">Mobile *</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtMobile" type="text" class="form-control input-sm" data-bind="value: model.mobile" required/></td>
+                                    <input id="txtMobile" type="text" class="form-control input-sm" data-bind="value: model.mobile" required="required" data-role="validate" title="Mobile number" data-content="Mobile number is required" /></td>
                             </tr>
                              <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Email</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtEmail" type="email" class="form-control input-sm" data-bind="value: model.email" required/></td>
+                                    <input id="txtEmail" type="email" class="form-control input-sm" data-bind="value: model.email" /></td>
                             </tr>
                               <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Address</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtAddress" type="text" class="form-control input-sm" data-bind="value: model.address" required/></td>
+                                    <input id="txtAddress" type="text" class="form-control input-sm" data-bind="value: model.address" /></td>
                             </tr>
                               <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">City</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtCity" type="text" class="form-control input-sm" data-bind="value: model.city" required/></td>
+                                    <input id="txtCity" type="text" class="form-control input-sm" data-bind="value: model.city" /></td>
                             </tr>
                             <tr>
-                                <td class="col-sm-4 col-md-4 input-sm">Alkhidmat Center</td>
+                                <td class="col-sm-4 col-md-4 input-sm">Alkhidmat Center *</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlCentre" class="form-control input-sm"
-                                        data-bind="options: model.alkhidmatCentreList, optionsText:'description', value:model.alkhidmatCentreSelected" required>
+                                        data-bind="options: model.alkhidmatCentreList, optionsText:'description', value:model.alkhidmatCentreSelected">
                                     </select></td>
                             </tr>
                             <tr>
-                                <td class="col-sm-4 col-md-4 input-sm">Role</td>
+                                <td class="col-sm-4 col-md-4 input-sm">Role *</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlRole" class="form-control input-sm"
-                                        data-bind="options: model.roleList, optionsText:'description', value:model.roleSelected" required>
+                                        data-bind="options: model.roleList, optionsText:'description', value:model.roleSelected">
                                     </select></td>
                             </tr>
                             

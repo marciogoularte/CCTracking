@@ -23,6 +23,9 @@
     <Content Include="CCTracking.WebClient\Admin\AlkhidmatCentre\AlkhidmatCentreGridRow.html" />
     <Content Include="CCTracking.WebClient\Admin\AlkhidmatCentre\AlkhidmatCentreTmpl.html" />
     <Content Include="CCTracking.WebClient\Admin\AlkhidmatCentre\AlkhidmatCentreView.ts" />
+    <Content Include="CCTracking.WebClient\Admin\BusMilage\BusMilageCtrl.ts" />
+    <Content Include="CCTracking.WebClient\Admin\BusMilage\BusMilageGrid.html" />
+    <Content Include="CCTracking.WebClient\Admin\BusMilage\BusMilageView.ts" />
     <Content Include="CCTracking.WebClient\Admin\Bus\BusCtrl.ts" />
     <Content Include="CCTracking.WebClient\Admin\Bus\BusGrid.html" />
     <Content Include="CCTracking.WebClient\Admin\Bus\BusTmpl.html" />
@@ -103,6 +106,7 @@
     <Content Include="CCTracking.WebClient\Common\Templates\BusDetailModalPopup.html" />
     <Content Include="CCTracking.WebClient\Common\Templates\BusDetailModalPopupGrid.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\DAL\AdminSearch.ts" />
+    <Content Include="CCTracking.WebClient\DAL\BusMilage.ts" />
     <Content Include="CCTracking.WebClient\DAL\CauseOfDeath.ts" />
     <Content Include="CCTracking.WebClient\DAL\BookingLeft.ts" />
     <Content Include="CCTracking.WebClient\DAL\Driver.ts" />
@@ -116,6 +120,7 @@
     <Content Include="CCTracking.WebClient\DAL\TrackingDevice.ts" />
     <Content Include="CCTracking.WebClient\DAL\UnionCouncil.ts" />
     <Content Include="CCTracking.WebClient\DAL\VisitType.ts" />
+    <Content Include="CCTracking.WebClient\Dtos\BusMilageDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\CauseOfDeathDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\BookingLeftDto.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Dtos\BookingSummaryDto.ts" />

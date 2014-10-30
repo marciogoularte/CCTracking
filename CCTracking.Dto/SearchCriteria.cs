@@ -14,6 +14,9 @@ namespace CCTracking.Dto
         public short BusId { get; set; }
         public DateTime FromBookingDate { get; set; }
         public DateTime ToBookingDate { get; set; }
+        public DateTime FromVisitDate { get; set; }
+        public DateTime ToVisitDate { get; set; }
+
 
     }
 

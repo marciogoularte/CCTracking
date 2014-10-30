@@ -31,14 +31,13 @@ namespace CCTracking.Api.Controllers
                 }
                 else //edit
                 {
-                    if ((PaymentTypes)payment.PaymentType == PaymentTypes.EasyPaisa && !string.IsNullOrEmpty(payment.EasyPaisaTranNo))
+                    if (((PaymentTypes)payment.PaymentType == PaymentTypes.Cash) || ((PaymentTypes)payment.PaymentType == PaymentTypes.EasyPaisa && !string.IsNullOrEmpty(payment.EasyPaisaTranNo)))
                     {
                         payment.PaymentStatus = 1;
                     }
                     else
                     {
                         payment.EasyPaisaTranNo = string.Empty;
-                        
                     }
                     payment.ModifiedDate = DateTime.Today;
                 }

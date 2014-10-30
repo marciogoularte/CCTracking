@@ -72,7 +72,7 @@
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Amount</td>
                             <td class="col-sm-8 col-md-8">
-                                <input id="txtAmount" type="text" class="form-control input-sm" data-bind="value: amount, disable:isPaid" 
+                                <input id="txtAmount" type="text" class="form-control input-sm" data-bind="value: amount, disable:isPaid, numeric: 1, valueUpdate: 'afterkeydown'" 
                                     required="required" data-role="validate" title="Amount" data-content="Amount is required"
                                     /></td>
                         </tr>
@@ -95,7 +95,7 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Receipt</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" id="txtReceipt" class="form-control input-sm" data-bind="value:receiptNo, disable:isPaid" 
+                                    <input type="text" id="txtReceipt" class="form-control input-sm" data-bind="value:receiptNo, disable:isPaid,numeric: 1, valueUpdate: 'afterkeydown'" 
                                         required="required" data-role="validate" title="Receipt" data-content="Receipt is required" />
                                 </td>
                             </tr>
@@ -110,7 +110,7 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Extra Chareges</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" id="txtExtraAmount" class="form-control input-sm" data-bind="value: extraAmountCharge"/></td>
+                                    <input type="text" id="txtExtraAmount" class="form-control input-sm" data-bind="value: extraAmountCharge,numeric: 1, valueUpdate: 'afterkeydown'"/></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Reason for Extra Charges</td>
@@ -121,7 +121,7 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Receipt for Extra Charges</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" id="txtExtraAmountReceipt" class="form-control input-sm" data-bind="value: extraAmountReceipt"/></td>
+                                    <input type="text" id="txtExtraAmountReceipt" class="form-control input-sm" data-bind="value: extraAmountReceipt,numeric: 1, valueUpdate: 'afterkeydown'"/></td>
                             </tr>
 
                             <tr>

@@ -15,7 +15,7 @@ export class HeaderItemView extends Marionette.ItemView {
         this.templateHelpers = ()=> {
             return {
                 isAdminRole:()=> {
-                    app.request("AppGlobalSetting").get("IsAdmin");
+                    return app.request("AppGlobalSetting").get("IsAdmin");
                 }
             }
         }

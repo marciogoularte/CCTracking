@@ -66,7 +66,7 @@ export class UserCtrl extends helper.Controller {
         model.set("city", "");
         model.set("mobile", "");
         model.set("email", "");
-        model.set("isActive", "");
+        model.set("isActive", "1");
 
         this.userViewModel = new views.UserViewModel(model, this);
         this.userView = new views.UserView({ viewModel: this.userViewModel });

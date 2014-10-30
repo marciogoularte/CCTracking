@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Text;
-using System.Threading.Tasks;
 using CCTracking.Dto;
 using CCTracking.Dto.Response;
 
@@ -35,6 +31,7 @@ namespace CCTracking.DAL
             User user = baseModel as User;
             dictionary.Add("@CentreId", user.CentreId);
             dictionary.Add("@RoleId", user.RoleId);
+            dictionary.Add("@Password", user.Password);
             dictionary.Add("@UserName", user.UserName);
             dictionary.Add("@FirstName", user.FirstName);
             dictionary.Add("@LastName", user.LastName);
