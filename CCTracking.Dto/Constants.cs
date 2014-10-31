@@ -13,4 +13,11 @@
         Maintenance = 3,
         Others = 4
     }
+
+    public enum PaymentStaus
+    {
+        Unpaid = 0,
+        Paid = 1,
+        Cancel = 2
+    }
 }

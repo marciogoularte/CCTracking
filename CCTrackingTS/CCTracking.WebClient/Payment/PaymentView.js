@@ -27,7 +27,6 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
             var _this = this;
             _super.call(this, model, controller);
             this.model.paymentTypeSelected.subscribe(function () {
-                debugger;
                 if (_this.model.paymentTypeSelected().id == 1) {
                     _this.model.isCash = true;
                 } else {
@@ -118,6 +117,7 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                 this.extraAmountReason = ko.observable();
                 this.extraAmountReceipt = ko.observable();
                 this.paymentStatus = ko.observable();
+
                 this.easyPaisaTranNo = ko.observable();
 
                 var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
@@ -134,6 +134,7 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                 this.cashierSelected = ko.observable();
                 this.paymentTypeList = ko.observableArray(lookupResponse.paymentType);
                 this.paymentTypeSelected = ko.observable();
+                this.currentDisplay = ko.observable();
                 this.isEasyPaisa = ko.computed({
                     owner: this,
                     read: function () {
@@ -154,6 +155,33 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                             return true;
                         } else {
                             return false;
+                        }
+                    }
+                });
+                this.isCancel = ko.computed({
+                    owner: this,
+                    read: function () {
+                        //if cancel
+                        if (_this.paymentStatus() == "2") {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                });
+                this.paymentStatusDesc = ko.computed({
+                    owner: this,
+                    read: function () {
+                        //if paid
+                        if (_this.paymentStatus() == "1") {
+                            _this.currentDisplay("panel panel-default");
+                            return "Paid";
+                        } else if (_this.paymentStatus() == "2") {
+                            _this.currentDisplay("panel panel-danger");
+                            return "Cancel";
+                        } else {
+                            _this.currentDisplay("panel panel-warning");
+                            return "Unpaid";
                         }
                     }
                 });
@@ -202,6 +230,7 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                 this.cashierSelected = ko.observable(cashier[0]);
                 this.paymentTypeList = ko.observableArray(lookupResponse.paymentType);
                 this.paymentTypeSelected = ko.observable(paymentType[0]);
+                this.currentDisplay = ko.observable();
                 this.isEasyPaisa = ko.computed({
                     owner: this,
                     read: function () {
@@ -222,6 +251,33 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                             return true;
                         } else {
                             return false;
+                        }
+                    }
+                });
+                this.isCancel = ko.computed({
+                    owner: this,
+                    read: function () {
+                        //if cancel
+                        if (_this.paymentStatus() == "2") {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                });
+                this.paymentStatusDesc = ko.computed({
+                    owner: this,
+                    read: function () {
+                        //if paid
+                        if (_this.paymentStatus() == "1") {
+                            _this.currentDisplay("panel panel-default");
+                            return "Paid";
+                        } else if (_this.paymentStatus() == "2") {
+                            _this.currentDisplay("panel panel-danger");
+                            return "Cancel";
+                        } else {
+                            _this.currentDisplay("panel panel-warning");
+                            return "Unpaid";
                         }
                     }
                 });

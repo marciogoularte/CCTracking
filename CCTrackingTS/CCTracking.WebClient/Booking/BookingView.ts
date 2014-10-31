@@ -71,12 +71,20 @@ export class BookingView extends helper.Views.MvvmView {
 
     GetAllCompleted(bookingResponse: bookingDto.Models.BookingResponseCollection) {
         
-        var a = templateGrid;
+        //var a = templateGrid;
         app = application.Application.getInstance();
-        var bookingCollection = new bookingDto.Models.BookingResponseCollection(bookingResponse["bookingList"]);
-        var collectionView: BookingCollectionView = new BookingCollectionView({ collection: bookingCollection });
-
-        var bookingGrid = collectionView.$("#tblBooking");
+        var bookings = _.map(bookingResponse["bookingList"], (item) => {
+            if (item.pickupDate != "0001-01-01T00:00:00")
+                item.pickupDate = helper.FormatDateString(item.pickupDate);
+            else
+                item.pickupDate = "";
+            return item;
+        });
+        var bookingCollection = new bookingDto.Models.BookingResponseCollection(bookings);
+        //var model = new Backbone.Model();
+        //model.set("itemCount", bookingCollection.length);
+        var collectionView: BookingCollectionView = new BookingCollectionView({ collection: bookingCollection});
+        //var bookingGrid = collectionView.$("#tblBooking");
         app.MainRegion.show(collectionView);
     }
 }
@@ -84,9 +92,10 @@ export class BookingView extends helper.Views.MvvmView {
 export class BookingCollectionView extends helper.Views.CompositeView {
     dataTable: any;
     constructor(options?: any) {
-        options.itemView = BookingItemView;
-        options.template = templateGrid.getOuterHTML("#gridTemplate");
-        options.itemViewContainer = "tbody";
+        this.itemView = BookingItemView;
+        this.template = templateGrid.getOuterHTML("#gridTemplate");
+        this.itemViewContainer = "tbody";
+        
         super(options);
     }
     //onShow() {
@@ -121,7 +130,7 @@ export class BookingCollectionView extends helper.Views.CompositeView {
 
 export class BookingItemView extends helper.Views.ItemView {
     constructor(options?: any) {
-        if (!options) options = {};
+        //if (!options) options = {};
         options.template = templateRow.getOuterHTML("#rowTemplate");
         options.tagName = "tr";
         options.className = "jsRowClick";
@@ -129,6 +138,7 @@ export class BookingItemView extends helper.Views.ItemView {
             "mouseover .jsShowDetail": "ShowDetail",
             "click .jsShowDetail": "ShowDetail"
         };
+        
         super(options);
     }
     ShowDetail() {

@@ -75,12 +75,22 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto
         };
 
         BookingView.prototype.GetAllCompleted = function (bookingResponse) {
-            var a = templateGrid;
+            //var a = templateGrid;
             app = application.Application.getInstance();
-            var bookingCollection = new bookingDto.Models.BookingResponseCollection(bookingResponse["bookingList"]);
+            var bookings = _.map(bookingResponse["bookingList"], function (item) {
+                if (item.pickupDate != "0001-01-01T00:00:00")
+                    item.pickupDate = helper.FormatDateString(item.pickupDate);
+                else
+                    item.pickupDate = "";
+                return item;
+            });
+            var bookingCollection = new bookingDto.Models.BookingResponseCollection(bookings);
+
+            //var model = new Backbone.Model();
+            //model.set("itemCount", bookingCollection.length);
             var collectionView = new BookingCollectionView({ collection: bookingCollection });
 
-            var bookingGrid = collectionView.$("#tblBooking");
+            //var bookingGrid = collectionView.$("#tblBooking");
             app.MainRegion.show(collectionView);
         };
         return BookingView;
@@ -90,9 +100,10 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto
     var BookingCollectionView = (function (_super) {
         __extends(BookingCollectionView, _super);
         function BookingCollectionView(options) {
-            options.itemView = BookingItemView;
-            options.template = templateGrid.getOuterHTML("#gridTemplate");
-            options.itemViewContainer = "tbody";
+            this.itemView = BookingItemView;
+            this.template = templateGrid.getOuterHTML("#gridTemplate");
+            this.itemViewContainer = "tbody";
+
             _super.call(this, options);
         }
         return BookingCollectionView;
@@ -102,8 +113,7 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto
     var BookingItemView = (function (_super) {
         __extends(BookingItemView, _super);
         function BookingItemView(options) {
-            if (!options)
-                options = {};
+            //if (!options) options = {};
             options.template = templateRow.getOuterHTML("#rowTemplate");
             options.tagName = "tr";
             options.className = "jsRowClick";
@@ -111,6 +121,7 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto
                 "mouseover .jsShowDetail": "ShowDetail",
                 "click .jsShowDetail": "ShowDetail"
             };
+
             _super.call(this, options);
         }
         BookingItemView.prototype.ShowDetail = function () {

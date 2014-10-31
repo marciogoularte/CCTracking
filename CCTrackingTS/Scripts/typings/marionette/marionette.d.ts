@@ -265,6 +265,8 @@ declare module Marionette {
         render(): CompositeView;
         getItemViewContainer(containerView: any);
         renderModel(): any;
+        templateHelpers: any;
+
     }
 
     class Layout extends ItemView {

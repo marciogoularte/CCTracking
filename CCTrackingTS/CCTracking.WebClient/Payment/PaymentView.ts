@@ -25,7 +25,6 @@ export class PaymentViewModel extends helper.ViewModel {
     constructor(model: any, controller: any) {
         super(model, controller);
         this.model.paymentTypeSelected.subscribe(() => {
-            debugger;
             if (this.model.paymentTypeSelected().id == 1) {
                 this.model.isCash = true;
             } else {
@@ -135,7 +134,9 @@ export class ViewModel {
     isPaid: boolean;
     isCash: any;
     isEasyPaisa: any;
-
+    paymentStatusDesc:any;
+    isCancel: any;
+    currentDisplay:any;
 
     constructor(model) {
 
@@ -152,6 +153,7 @@ export class ViewModel {
             this.extraAmountReason = ko.observable();
             this.extraAmountReceipt = ko.observable();
             this.paymentStatus = ko.observable();
+            
             this.easyPaisaTranNo = ko.observable();
 
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
@@ -168,6 +170,7 @@ export class ViewModel {
             this.cashierSelected = ko.observable();
             this.paymentTypeList = ko.observableArray(lookupResponse.paymentType);
             this.paymentTypeSelected = ko.observable();
+            this.currentDisplay = ko.observable();
             this.isEasyPaisa = ko.computed({
                 owner: this,
                 read: () => {
@@ -188,6 +191,35 @@ export class ViewModel {
                         return true;
                     } else {
                         return false;
+                    }
+                }
+            });
+            this.isCancel = ko.computed({
+                owner: this,
+                read: () => {
+                    //if cancel
+                    if (this.paymentStatus() == "2") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            });
+            this.paymentStatusDesc = ko.computed({
+                owner: this,
+                read: () => {
+                    //if paid
+                    if (this.paymentStatus() == "1") {
+                        this.currentDisplay("panel panel-default");
+                        return "Paid";
+                    }
+                    else if (this.paymentStatus() == "2") {
+                        this.currentDisplay("panel panel-danger");
+                        return "Cancel";
+                    }
+                    else {
+                        this.currentDisplay("panel panel-warning");
+                        return "Unpaid";
                     }
                 }
             });
@@ -229,6 +261,7 @@ export class ViewModel {
             this.cashierSelected = ko.observable(cashier[0]);
             this.paymentTypeList = ko.observableArray(lookupResponse.paymentType);
             this.paymentTypeSelected = ko.observable(paymentType[0]);
+            this.currentDisplay = ko.observable();
             this.isEasyPaisa = ko.computed({
                 owner: this,
                 read: () => {
@@ -252,7 +285,35 @@ export class ViewModel {
                     }
                 }
             });
-
+            this.isCancel = ko.computed({
+                owner: this,
+                read: () => {
+                    //if cancel
+                    if (this.paymentStatus() == "2") {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            });
+            this.paymentStatusDesc = ko.computed({
+                owner: this,
+                read: () => {
+                    //if paid
+                    if (this.paymentStatus() == "1") {
+                        this.currentDisplay("panel panel-default");
+                        return "Paid";
+                    }
+                    else if (this.paymentStatus() == "2") {
+                        this.currentDisplay("panel panel-danger");
+                        return "Cancel";
+                    }
+                    else {
+                        this.currentDisplay("panel panel-warning");
+                        return "Unpaid";
+                    }
+                }
+            });
 
         }
     }
