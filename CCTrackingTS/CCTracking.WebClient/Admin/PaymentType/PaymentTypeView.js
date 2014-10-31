@@ -93,4 +93,3 @@ define(["require", "exports", "../../Helper", "marionette", "jquery", "knockout"
     })(helper.Views.ItemView);
     exports.PaymentTypeItemView = PaymentTypeItemView;
 });
-//# sourceMappingURL=PaymentTypeView.js.map

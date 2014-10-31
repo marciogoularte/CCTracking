@@ -26,7 +26,7 @@ export class StationViewModel extends helper.ViewModel {
 
 // View
 export class StationView extends helper.Views.MvvmView {
-    constructor(options?) {        
+    constructor(options?) {
         this.template = templateView;
         this.events = {
             "submit": "Save",

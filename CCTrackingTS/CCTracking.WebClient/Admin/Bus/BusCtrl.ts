@@ -59,7 +59,7 @@ export class BusCtrl extends helper.Controller {
         var model = this.backboneModel;
         this.busViewModel.bbModel = model;
         this.busViewModel.model = kb.viewModel(model);
-       // debugger;
+        // debugger;
         model.set("trackingDeviceId", "");
         model.set("vehicleNo", "");
         model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
@@ -68,7 +68,7 @@ export class BusCtrl extends helper.Controller {
         model.set("busModelSelected", "");
         model.set("no", "");
         model.set("description", "");
-        model.set("isActive", "");
+        model.set("isActive", "1");
 
         this.busViewModel = new views.BusViewModel(model, this);
         this.busView = new views.BusView({ viewModel: this.busViewModel });
@@ -87,7 +87,7 @@ export class BusCtrl extends helper.Controller {
 
     GetByIdCompleted(busDto: dto.Models.BusDto) {
         //alert("GetByIdCompleted..");
-       
+
         this.backboneModel = new Backbone.Model(busDto["busModel"]);
         var model = this.backboneModel;
 
@@ -120,7 +120,7 @@ export class BusCtrl extends helper.Controller {
 
     GetAllCompleted(bus: dto.Models.BusDto) {
         //app = application.Application.getInstance();
-      //  debugger;
+        //  debugger;
         this.collection.reset(bus["busList"]);
         this.collectionView = new views.BusCollectionView({ collection: this.collection });
         this.collectionView.on("itemview:ShowDetail", (view) => this.GetByIdCompleted(view.model));
@@ -132,7 +132,7 @@ export class BusCtrl extends helper.Controller {
         var model = this.backboneModel;
         //console.log(loginResponse);        
         if (busDto == undefined) {
-           // alert("Bus Detail have not been saved successfully!");
+            // alert("Bus Detail have not been saved successfully!");
             helper.ShowModalPopup("danger", "Bus", "Bus Details have not been saved successfully!");
         }
         else {
@@ -157,7 +157,7 @@ export class BusCtrl extends helper.Controller {
         model.set("busModelList", lookupResponse.busModel);
         var modelNo = _.filter(lookupResponse.busModel, (p) => { return p.id == model.get("modelNo"); });
         model.set("busModelSelected", modelNo[0]);
-        
+
         model.set("isActive", model.get("isActive") ? "1" : "0");
 
         this.busViewModel.bbModel = model;

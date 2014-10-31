@@ -54,7 +54,7 @@ define(["require", "exports", "../../App", "../../Helper", "./PaymentTypeView", 
 
             // debugger;
             model.set("name", "");
-            model.set("isActive", "");
+            model.set("isActive", "1");
 
             this.paymentTypeViewModel = new views.PaymentTypeViewModel(model, this);
             this.paymentTypeView = new views.PaymentTypeView({ viewModel: this.paymentTypeViewModel });

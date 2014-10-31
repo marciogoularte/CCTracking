@@ -93,4 +93,3 @@ define(["require", "exports", "../../Helper", "marionette", "jquery", "knockout"
     })(helper.Views.ItemView);
     exports.TrackingDeviceItemView = TrackingDeviceItemView;
 });
-//# sourceMappingURL=TrackingDeviceView.js.map

@@ -93,4 +93,3 @@ define(["require", "exports", "../../Helper", "marionette", "jquery", "knockout"
     })(helper.Views.ItemView);
     exports.BusItemView = BusItemView;
 });
-//# sourceMappingURL=BusView.js.map

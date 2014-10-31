@@ -59,7 +59,7 @@ define(["require", "exports", "../../App", "../../Helper", "./UnionCouncilView",
             model.set("name", "");
             model.set("landmarkIdSelected", "");
             model.set("landmarkList", lookupResponse.landmark);
-            model.set("isActive", "");
+            model.set("isActive", "1");
 
             this.unionCouncilViewModel = new views.UnionCouncilViewModel(model, this);
             this.unionCouncilView = new views.UnionCouncilView({ viewModel: this.unionCouncilViewModel });

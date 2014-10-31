@@ -15,8 +15,6 @@ var templateGrid = require("text!./RefundTypeGrid.html");
 import application = require("../../App");
 var app;
 
-
-
 // View Model
 export class RefundTypeViewModel extends helper.ViewModel {
     constructor(model: any, controller: any) {
@@ -26,7 +24,7 @@ export class RefundTypeViewModel extends helper.ViewModel {
 
 // View
 export class RefundTypeView extends helper.Views.MvvmView {
-    constructor(options?) {        
+    constructor(options?) {
         this.template = templateView;
         this.events = {
             "submit": "Save",

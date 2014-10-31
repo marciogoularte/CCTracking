@@ -131,6 +131,8 @@ export class TownCtrl extends helper.Controller {
         }
     }
 
+
+
     Cancel() {
         window.location.href = "#viewTown";
     }

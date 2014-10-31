@@ -26,7 +26,7 @@ export class DriverViewModel extends helper.ViewModel {
 
 // View
 export class DriverView extends helper.Views.MvvmView {
-    constructor(options?) {        
+    constructor(options?) {
         this.template = templateView;
         this.events = {
             "submit": "Save",

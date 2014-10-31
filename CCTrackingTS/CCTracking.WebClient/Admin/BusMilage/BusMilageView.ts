@@ -28,10 +28,10 @@ export class BusMilageViewModel extends helper.ViewModel {
 //        this.template = templateView;
 //        this.viewModel = new ViewModel(options);
 //        this.bbModel = new Backbone.Model();
-        
+
 //        super(options);
 //    }
-   
+
 //    Cancel() {
 //        this.trigger("Event:CancelForm");
 //    }
@@ -244,7 +244,7 @@ export class BusMilageCollectionView extends helper.Views.CompositeView {
             //debugger;
             ko.applyBindingsToNode(option, { disable: true, text: item.description + ' - Maintenance' }, item);
         }
-    }    
+    }
 }
 
 export class BusMilageItemView extends helper.Views.ItemView {

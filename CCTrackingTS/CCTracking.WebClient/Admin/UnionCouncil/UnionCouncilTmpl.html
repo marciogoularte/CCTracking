@@ -11,14 +11,15 @@
                                 <td class="col-sm-4 col-md-4 input-sm">Landmark</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlLandmark" class="form-control input-sm"
-                                        data-bind="options: model.landmarkList, optionsText:'description', value:model.landmarkIdSelected" required="required">
+                                        data-bind="options: model.landmarkList, optionsText:'description', value:model.landmarkIdSelected">
                                     </select></td>
                             </tr>
 
                            <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Union Council</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtUnionCouncil" type="text" class="form-control input-sm" data-bind="value: model.name" required="required"/></td>
+                                    <input id="txtUnionCouncil" type="text" class="form-control input-sm" data-bind="value: model.name" 
+                                        required="required" data-role="validate" title="Union Council" data-content="Union Council is required"/></td>
                             </tr>
                           
                             <tr>

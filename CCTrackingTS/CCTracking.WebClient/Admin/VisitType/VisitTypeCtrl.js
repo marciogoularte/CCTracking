@@ -54,7 +54,7 @@ define(["require", "exports", "../../App", "../../Helper", "./VisitTypeView", ".
 
             // debugger;
             model.set("name", "");
-            model.set("isActive", "");
+            model.set("isActive", "1");
 
             this.visitTypeViewModel = new views.VisitTypeViewModel(model, this);
             this.visitTypeView = new views.VisitTypeView({ viewModel: this.visitTypeViewModel });

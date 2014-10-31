@@ -38,8 +38,8 @@ define(["require", "exports", "../../App", "../../Helper", "./AdminSearchBooking
             var _this = this;
             var model = this.backboneModel;
 
-            model.set("fromBookingDate", "10/10/2000");
-            model.set("toBookingDate", "10/10/2000");
+            model.set("fromBookingDate", helper.FormatDateString(Date.now()));
+            model.set("toBookingDate", helper.FormatDateString(Date.now()));
             this.compositeModel = model;
 
             this.collectionView.listenTo(this.collectionView, "AdminSearchBooking", function () {

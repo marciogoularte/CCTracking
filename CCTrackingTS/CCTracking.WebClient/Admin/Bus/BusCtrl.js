@@ -64,7 +64,7 @@ define(["require", "exports", "../../App", "../../Helper", "./BusView", "../../D
             model.set("busModelSelected", "");
             model.set("no", "");
             model.set("description", "");
-            model.set("isActive", "");
+            model.set("isActive", "1");
 
             this.busViewModel = new views.BusViewModel(model, this);
             this.busView = new views.BusView({ viewModel: this.busViewModel });

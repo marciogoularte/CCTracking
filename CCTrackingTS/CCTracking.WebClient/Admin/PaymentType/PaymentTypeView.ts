@@ -26,7 +26,7 @@ export class PaymentTypeViewModel extends helper.ViewModel {
 
 // View
 export class PaymentTypeView extends helper.Views.MvvmView {
-    constructor(options?) {        
+    constructor(options?) {
         this.template = templateView;
         this.events = {
             "submit": "Save",

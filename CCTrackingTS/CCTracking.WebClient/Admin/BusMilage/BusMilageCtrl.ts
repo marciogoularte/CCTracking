@@ -36,7 +36,7 @@ export class BusMilageCtrl extends helper.Controller {
     SimpleLoad() {
        var model = this.backboneModel;
        
-        model.set("fromVisitDate", helper.FormatDateString(Date.now()));
+        model.set("fromVisitDate", helper.FormatDateString( Date.now()));
         model.set("toVisitDate", helper.FormatDateString(Date.now()));
         this.compositeModel = model;
 
@@ -62,7 +62,7 @@ export class BusMilageCtrl extends helper.Controller {
     }
     
     GetByCriteriaCompleted(model: dto.Models.BusMilageDto) {
-        debugger;
+       // debugger;
         this.collection.reset(model["busMilageList"]);
     }
 

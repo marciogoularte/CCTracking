@@ -6,8 +6,6 @@
 /// <amd-dependency path="knockout"/>
 /// <amd-dependency path="text!./RefundTypeTmpl.html"/>
 
-
-
 var _ = require("underscore");
 var ko = require("knockout");
 var kb = require("knockback");
@@ -60,7 +58,7 @@ export class RefundTypeCtrl extends helper.Controller {
         this.refundTypeViewModel.model = kb.viewModel(model);
         // debugger;
         model.set("name", "");
-        model.set("isActive", "");
+        model.set("isActive", "1");
 
         this.refundTypeViewModel = new views.RefundTypeViewModel(model, this);
         this.refundTypeView = new views.RefundTypeView({ viewModel: this.refundTypeViewModel });

@@ -26,7 +26,7 @@ export class GraveyardViewModel extends helper.ViewModel {
 
 // View
 export class GraveyardView extends helper.Views.MvvmView {
-    constructor(options?) {        
+    constructor(options?) {
         this.template = templateView;
         this.events = {
             "submit": "Save",

@@ -93,4 +93,3 @@ define(["require", "exports", "../../Helper", "marionette", "jquery", "knockout"
     })(helper.Views.ItemView);
     exports.GraveyardItemView = GraveyardItemView;
 });
-//# sourceMappingURL=GraveyardView.js.map

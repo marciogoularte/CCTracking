@@ -93,4 +93,3 @@ define(["require", "exports", "../../Helper", "marionette", "jquery", "knockout"
     })(helper.Views.ItemView);
     exports.LandmarkItemView = LandmarkItemView;
 });
-//# sourceMappingURL=LandmarkView.js.map

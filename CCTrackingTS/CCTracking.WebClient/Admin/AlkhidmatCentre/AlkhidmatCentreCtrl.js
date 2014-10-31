@@ -61,8 +61,8 @@ define(["require", "exports", "../../App", "../../Helper", "./AlkhidmatCentreVie
             model.set("landmarkList", lookupResponse.landmark);
             model.set("contactNo1", "");
             model.set("contactNo2", "");
-            model.set("isCoPartner", "");
-            model.set("isActive", "");
+            model.set("isCoPartner", "0");
+            model.set("isActive", "1");
 
             this.stationViewModel = new views.StationViewModel(model, this);
             this.stationView = new views.StationView({ viewModel: this.stationViewModel });

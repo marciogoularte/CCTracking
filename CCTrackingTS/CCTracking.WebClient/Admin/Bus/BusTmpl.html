@@ -12,17 +12,11 @@
                                 <td class="col-sm-4 col-md-4 input-sm">Alkhidmat Center</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlCentre" class="form-control input-sm"
-                                        data-bind="options: model.alkhidmatCentreList, optionsText:'description', value:model.alkhidmatCentreSelected" required="required">
+                                        data-bind="options: model.alkhidmatCentreList, optionsText:'description', value:model.alkhidmatCentreSelected" >
                                     </select></td>
                             </tr>
 
-                            <!--<tr>
-                                    <td class="col-sm-4 col-md-4 input-sm">Pricing</td>
-                                    <td class="col-sm-8 col-md-8">
-                                        <input type="radio" name="rbPricing" id="rbPricingFixed" />Fixed
-                                        <input type="radio" name="rbPricing" id="rbPricingCalculated" />Calculated </td>
-                                </tr>-->
-
+                          
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Tracking Device</td>
                                 <td class="col-sm-8 col-md-8">
@@ -31,7 +25,8 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Vehical No</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtVehicalNo" type="text" class="form-control input-sm" data-bind="value: model.vehicleNo" required="required"/></td>
+                                    <input id="txtVehicalNo" type="text" class="form-control input-sm" data-bind="value: model.vehicleNo" 
+                                        required="required" data-role="validate" title="Vehicle No" data-content="Vehicle No is required"/></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">
@@ -43,7 +38,7 @@
                                 <td class="col-sm-4 col-md-4 input-sm">Model</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlModel"
-                                        data-bind="options: model.busModelList, optionsText:'description', value:model.busModelSelected" required="required">
+                                        data-bind="options: model.busModelList, optionsText:'description', value:model.busModelSelected" >
                                        
                                     </select>
                                 </td>

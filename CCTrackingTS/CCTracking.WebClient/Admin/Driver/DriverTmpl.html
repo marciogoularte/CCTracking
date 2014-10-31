@@ -12,41 +12,46 @@
                                 <td class="col-sm-4 col-md-4 input-sm">Alkhidmat Center</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlCentre" class="form-control input-sm"
-                                        data-bind="options: model.alkhidmatCentreList, optionsText:'description', value:model.alkhidmatCentreSelected" required="required">
+                                        data-bind="options: model.alkhidmatCentreList, optionsText:'description', value:model.alkhidmatCentreSelected" >
                                     </select></td>
                             </tr>
 
                            <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">First Name</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtFirstName" type="text" class="form-control input-sm" data-bind="value: model.firstName" required="required"/></td>
+                                    <input id="txtFirstName" type="text" class="form-control input-sm" data-bind="value: model.firstName" 
+                                        required="required" data-role="validate" title="First Name" data-content="First Name is required"/></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Last Name</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtLastName" type="text" class="form-control input-sm" data-bind="value: model.lastName" required="required"/></td>
+                                    <input id="txtLastName" type="text" class="form-control input-sm" data-bind="value: model.lastName" 
+                                        required="required" data-role="validate" title="Last Name" data-content="Last Name is required"/></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">CNIC</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtCnic" type="text" class="form-control input-sm" data-bind="value: model.cnic" required="required"/></td>
+                                    <input id="txtCnic" type="text" class="form-control input-sm" data-bind="value: model.cnic" 
+                                        required="required" data-role="validate" title="Driver CNIC" data-content="Driver CNIC is required"/></td>
                             </tr>
                             
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Mobile</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtMobile" type="text" class="form-control input-sm" data-bind="value: model.mobile" required="required"/></td>
+                                    <input id="txtMobile" type="text" class="form-control input-sm" data-bind="value: model.mobile" 
+                                        required="required" data-role="validate" title="Driver Mobile" data-content="Driver Mobile is required"/></td>
                             </tr>
                             
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Address</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtAddress" type="text" class="form-control input-sm" data-bind="value: model.address" required="required"/></td>
+                                    <input id="txtAddress" type="text" class="form-control input-sm" data-bind="value: model.address" 
+                                        required="required" data-role="validate" title="Contact Name" data-content="Contact name is required"/></td>
                             </tr>
                              <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">City</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtCity" type="text" class="form-control input-sm" data-bind="value: model.city" required="required"/></td>
+                                    <input id="txtCity" type="text" class="form-control input-sm" data-bind="value: model.city" /></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Is Active</td>

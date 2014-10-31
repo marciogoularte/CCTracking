@@ -64,7 +64,7 @@ export class LandmarkCtrl extends helper.Controller {
         model.set("name", "");
         model.set("unionCouncilList", lookupResponse.unionCouncil);
         model.set("unionCouncilIdSelected", "");
-        model.set("isActive", "");
+        model.set("isActive", "1");
 
         this.landmarkViewModel = new views.LandmarkViewModel(model, this);
         this.landmarkView = new views.LandmarkView({ viewModel: this.landmarkViewModel });

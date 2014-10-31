@@ -68,7 +68,7 @@ export class DriverCtrl extends helper.Controller {
         model.set("address", "");
         model.set("city", "");
         model.set("mobile", "");
-        model.set("isActive", "");
+        model.set("isActive", "1");
 
         this.driverViewModel = new views.DriverViewModel(model, this);
         this.driverView = new views.DriverView({ viewModel: this.driverViewModel });

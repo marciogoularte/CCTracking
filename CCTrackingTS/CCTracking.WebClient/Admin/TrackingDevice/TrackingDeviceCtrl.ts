@@ -60,7 +60,7 @@ export class TrackingDeviceCtrl extends helper.Controller {
         this.trackingDeviceViewModel.model = kb.viewModel(model);
         // debugger;
         model.set("trackingNo", "");
-        model.set("isActive", "");
+        model.set("isActive", "1");
 
         this.trackingDeviceViewModel = new views.TrackingDeviceViewModel(model, this);
         this.trackingDeviceView = new views.TrackingDeviceView({ viewModel: this.trackingDeviceViewModel });

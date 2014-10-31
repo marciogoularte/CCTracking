@@ -26,7 +26,7 @@ export class VisitTypeViewModel extends helper.ViewModel {
 
 // View
 export class VisitTypeView extends helper.Views.MvvmView {
-    constructor(options?) {        
+    constructor(options?) {
         this.template = templateView;
         this.events = {
             "submit": "Save",
@@ -63,6 +63,7 @@ export class VisitTypeCollectionView extends helper.Views.CompositeView {
         super(options);
     }
 }
+
 
 export class VisitTypeItemView extends helper.Views.ItemView {
     constructor(options?: any) {

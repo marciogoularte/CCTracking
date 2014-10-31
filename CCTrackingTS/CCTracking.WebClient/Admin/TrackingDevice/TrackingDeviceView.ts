@@ -15,18 +15,15 @@ var templateGrid = require("text!./TrackingDeviceGrid.html");
 import application = require("../../App");
 var app;
 
-
-
 // View Model
 export class TrackingDeviceViewModel extends helper.ViewModel {
     constructor(model: any, controller: any) {
         super(model, controller);
     }
 }
-
 // View
 export class TrackingDeviceView extends helper.Views.MvvmView {
-    constructor(options?) {        
+    constructor(options?) {
         this.template = templateView;
         this.events = {
             "submit": "Save",
@@ -79,4 +76,6 @@ export class TrackingDeviceItemView extends helper.Views.ItemView {
         this.trigger("ShowDetail");
     }
 }
+
+
 

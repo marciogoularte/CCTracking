@@ -93,4 +93,3 @@ define(["require", "exports", "../../Helper", "marionette", "jquery", "knockout"
     })(helper.Views.ItemView);
     exports.CauseOfDeathItemView = CauseOfDeathItemView;
 });
-//# sourceMappingURL=CauseOfDeathView.js.map

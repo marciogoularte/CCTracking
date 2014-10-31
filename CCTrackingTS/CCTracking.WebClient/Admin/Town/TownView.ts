@@ -26,7 +26,7 @@ export class TownViewModel extends helper.ViewModel {
 
 // View
 export class TownView extends helper.Views.MvvmView {
-    constructor(options?) {        
+    constructor(options?) {
         this.template = templateView;
         this.events = {
             "submit": "Save",

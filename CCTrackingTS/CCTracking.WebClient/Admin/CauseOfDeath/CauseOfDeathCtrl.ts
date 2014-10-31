@@ -5,9 +5,6 @@
 /// <amd-dependency path="jquery"/>
 /// <amd-dependency path="knockout"/>
 /// <amd-dependency path="text!./CauseOfDeathTmpl.html"/>
-
-
-
 var _ = require("underscore");
 var ko = require("knockout");
 var kb = require("knockback");
@@ -54,7 +51,7 @@ export class CauseOfDeathCtrl extends helper.Controller {
 
     Load() {
 
-        
+
         var model = this.backboneModel;
         this.causeOfDeathViewModel.bbModel = model;
         this.causeOfDeathViewModel.model = kb.viewModel(model);
@@ -109,7 +106,7 @@ export class CauseOfDeathCtrl extends helper.Controller {
 
     GetAllCompleted(causeOfDeath: dto.Models.CauseOfDeathDto) {
         //app = application.Application.getInstance();
-       //  debugger;
+        //  debugger;
         this.collection.reset(causeOfDeath["causeofDeathList"]);
         this.collectionView = new views.CauseOfDeathCollectionView({ collection: this.collection });
         this.collectionView.on("itemview:ShowDetail", (view) => this.GetByIdCompleted(view.model));
@@ -137,7 +134,7 @@ export class CauseOfDeathCtrl extends helper.Controller {
 
     UIBinding(model: any) {
 
-         model.set("isActive", model.get("isActive") ? "1" : "0");
+        model.set("isActive", model.get("isActive") ? "1" : "0");
 
         this.causeOfDeathViewModel.bbModel = model;
         this.causeOfDeathViewModel.model = kb.viewModel(model);

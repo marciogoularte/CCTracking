@@ -54,7 +54,7 @@ define(["require", "exports", "../../App", "../../Helper", "./RefundTypeView", "
 
             // debugger;
             model.set("name", "");
-            model.set("isActive", "");
+            model.set("isActive", "1");
 
             this.refundTypeViewModel = new views.RefundTypeViewModel(model, this);
             this.refundTypeView = new views.RefundTypeView({ viewModel: this.refundTypeViewModel });
