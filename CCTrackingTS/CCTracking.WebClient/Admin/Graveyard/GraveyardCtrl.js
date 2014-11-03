@@ -59,7 +59,7 @@ define(["require", "exports", "../../App", "../../Helper", "./GraveyardView", ".
             model.set("name", "");
             model.set("landmarkIdSelected", "");
             model.set("landmarkList", lookupResponse.landmark);
-            model.set("isActive", "");
+            model.set("isActive", "1");
 
             this.graveyardViewModel = new views.GraveyardViewModel(model, this);
             this.graveyardView = new views.GraveyardView({ viewModel: this.graveyardViewModel });

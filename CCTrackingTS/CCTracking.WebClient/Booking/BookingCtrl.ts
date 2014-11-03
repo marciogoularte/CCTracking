@@ -40,17 +40,7 @@ export class BookingCtrl extends helper.Controller {
         }
         //add booking
         else {
-            if (localStorage.getItem('lookupResponse') == null) {
-                var deferred = DAL.Load();
-                deferred.done(p=> {
-                    localStorage.setItem('lookupResponse', JSON.stringify(p));
-                    this.LoadCompleted(p);
-                }
-                    );
-            }
-            else {
-                this.LoadCompleted(JSON.parse(localStorage.getItem('lookupResponse')));
-            }
+            this.LoadCompleted(JSON.parse(localStorage.getItem('lookupResponse')));
         }
     }
 
@@ -106,14 +96,6 @@ export class BookingCtrl extends helper.Controller {
     }
     LoadCompleted(lookupResponse) {
         var model = new dto.Models.BookingResponse();
-
-
-        //localStorage.setItem('lookupResponse', JSON.stringify(lookupResponse))
-        //var arr = ["home", "hospital", "accident"];
-        //var arr = [{ idd: 1, text: "home" }, { idd: 2, text: "hospital" }, { idd: 3, text: "accident" }, { idd: 4, text: "murder" }];
-
-        //var a = _.filter(lookupResponse.unionCouncil, (p)=> { return p.id==1});
-
 
         model.set("contactName", "");
         model.set("contactMobile", "");

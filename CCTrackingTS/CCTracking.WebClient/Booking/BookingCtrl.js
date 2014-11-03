@@ -38,15 +38,7 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
                     return _this.GetByIdCompleted(p);
                 });
             } else {
-                if (localStorage.getItem('lookupResponse') == null) {
-                    var deferred = DAL.Load();
-                    deferred.done(function (p) {
-                        localStorage.setItem('lookupResponse', JSON.stringify(p));
-                        _this.LoadCompleted(p);
-                    });
-                } else {
-                    this.LoadCompleted(JSON.parse(localStorage.getItem('lookupResponse')));
-                }
+                this.LoadCompleted(JSON.parse(localStorage.getItem('lookupResponse')));
             }
         };
 
@@ -120,10 +112,6 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
         BookingCtrl.prototype.LoadCompleted = function (lookupResponse) {
             var model = new dto.Models.BookingResponse();
 
-            //localStorage.setItem('lookupResponse', JSON.stringify(lookupResponse))
-            //var arr = ["home", "hospital", "accident"];
-            //var arr = [{ idd: 1, text: "home" }, { idd: 2, text: "hospital" }, { idd: 3, text: "accident" }, { idd: 4, text: "murder" }];
-            //var a = _.filter(lookupResponse.unionCouncil, (p)=> { return p.id==1});
             model.set("contactName", "");
             model.set("contactMobile", "");
             model.set("contactNic", "");

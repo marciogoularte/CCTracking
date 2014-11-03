@@ -24,5 +24,7 @@ namespace CCTracking.Dto.Response
         public List<Lookup> BusModel { get; set; }
         public List<Lookup> Role { get; set; }
         public List<Lookup> RefundType { get; set; }
+        public List<Lookup> BusStatus { get; set; }
+        
     }
 }

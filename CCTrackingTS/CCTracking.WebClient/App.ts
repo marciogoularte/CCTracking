@@ -68,7 +68,7 @@ export class Application extends Marionette.Application {
 
     initializeAfter() {
         //console.log('Initalize after called..');
-
+        this.initalizeLocalStorage();
         //var loginView = new login.LoginItemView();
         var layout = this.AppLayout;
         this.ContainerRegion.show(layout);
@@ -295,6 +295,18 @@ export class Application extends Marionette.Application {
         this.AppRoutes = new routes();
     }
 
+    initalizeLocalStorage() {
+        if (localStorage.getItem('lookupResponse') != null) {
+            localStorage.removeItem('lookupResponse');
+        }
+        require(['./DAL/Booking'], (p) => {
+            var deferred = p.Load();
+            deferred.done(p => {
+                    localStorage.setItem('lookupResponse', JSON.stringify(p));
+                }
+            );
+        });
+    }
     public static getInstance(): Application {
 
         if (Application._instance === null) {

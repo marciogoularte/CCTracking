@@ -38,11 +38,14 @@ export class PaymentViewModel extends helper.ViewModel {
 export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView {    
     viewModel: ViewModel;
     bbModel: Backbone.Model;
-    constructor(options?) {
+    //availabilityList:any;
+    constructor(busList?,options? ) {
 
         app = application.Application.getInstance();
         this.template = templateView;
-        this.viewModel = new ViewModel(options);
+        //this.availabilityList = [{}];
+        this.viewModel = new ViewModel(busList, options);
+        
         this.bbModel = new Backbone.Model();
         this.events = {
             "submit": "Save",
@@ -50,6 +53,8 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
         }
         super(options);
     }
+    
+    
 
     AddMore() {
         //var a = this.$el.find("#ddlCentre")        
@@ -97,10 +102,15 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
             helper.ShowModalPopup("success", "Payment", "Record has been saved successfully with Payment ID : " + paymentResponse["id"]);
             //alert("Record has been saved successfully with Payment ID : " + paymentResponse["id"]);
             location.href = "#viewBooking";
+            app.vent.trigger("Event:UpdateSummary");
         }
     }
     onShow() {
         ko.applyBindings(this.viewModel, this.el);
+    }
+
+    onClose() {
+        app.vent.off("Event:UpdateSummary");
     }
 }
 
@@ -138,8 +148,7 @@ export class ViewModel {
     isCancel: any;
     currentDisplay:any;
 
-    constructor(model) {
-
+    constructor(busLsit, model) {
         if (model == undefined) {
             this.Id = ko.observable();
             this.bookingId = ko.observable();
@@ -158,7 +167,7 @@ export class ViewModel {
 
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
 
-            this.busList = ko.observableArray(lookupResponse.bus);
+            this.busList = ko.observableArray(busLsit);
             this.busSelected = ko.observable();
             this.driverList = ko.observableArray(lookupResponse.driver);
             this.driverSelected = ko.observable();
@@ -241,7 +250,7 @@ export class ViewModel {
 
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
 
-            this.busList = ko.observableArray(lookupResponse.bus);
+            this.busList = ko.observableArray(busLsit);
             this.busSelected = ko.observable();
             this.driverList = ko.observableArray(lookupResponse.driver);
             this.driverSelected = ko.observable();
@@ -318,6 +327,12 @@ export class ViewModel {
         }
     }
 
+    setOptionDisable(option, item) {
+        if (item.description.indexOf('Booked - Paid') >= 0 || item.description.indexOf('Booked - Unpaid') >= 0) {
+            ko.applyBindingsToNode(option, { disable: true, text: item.description}, item);
+        }
+    }
+
 }
 
 export class BusVisitCollectionView extends helper.Views.CompositeView {
@@ -329,6 +344,7 @@ export class BusVisitCollectionView extends helper.Views.CompositeView {
         options.itemViewContainer = "tbody";
         super(options);
     }
+   
 }
 
 export class BusVisitItemView extends helper.Views.ItemView {

@@ -9,6 +9,7 @@
         public string No { get; set; }
         public string ModelNo { get; set; }
         public string Description { get; set; }
-
+        //public byte BusStatus { get; set; }
+        //public byte BookForPrayer { get; set; }
     }
 }

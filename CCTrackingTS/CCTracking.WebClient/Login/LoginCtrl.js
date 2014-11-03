@@ -43,7 +43,6 @@ define(["require", "exports", "../App", "../Helper", "./LoginView", "../Dtos/Log
             //debugger;
             //this.ShowOverlay();
             var appObj = this.app.request("AppGlobalSetting");
-
             login.set("userName", $("#txtUserName").val());
             login.set("password", $("#txtPassword").val());
             var promise = DAL.Login(login);

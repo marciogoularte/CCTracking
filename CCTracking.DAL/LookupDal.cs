@@ -120,6 +120,7 @@ namespace CCTracking.DAL
                 lookupResponse.Cashier = cashier;
                 lookupResponse.PaymentType = paymentType;
                 lookupResponse.Prayers = GetPrayers();
+                lookupResponse.BusStatus = GetBusStatus();
                 lookupResponse.TimeSlot = GetTimeSlots();
                 lookupResponse.VisitType = visitType;
                 lookupResponse.BusModel = GetBusModel();
@@ -151,6 +152,19 @@ namespace CCTracking.DAL
             prayers.Add(new Lookup { Id = 6, Description = "Isha'a" });
             prayers.Add(new Lookup { Id = 7, Description = "After Isha'a" });
             return prayers;
+        }
+        private List<Lookup> GetBusStatus()
+        {
+            List<Lookup> busStatus = new List<Lookup>();
+            busStatus.Add(new Lookup { Id = 1, Description = "Available" });
+            busStatus.Add(new Lookup { Id = 2, Description = "Booked - Unpaid" });
+            busStatus.Add(new Lookup { Id = 3, Description = "Booked - Paid" });
+            busStatus.Add(new Lookup { Id = 4, Description = "Available Soon" });
+            busStatus.Add(new Lookup { Id = 5, Description = "Maintenance" });
+            busStatus.Add(new Lookup { Id = 6, Description = "Puncher" });
+            busStatus.Add(new Lookup { Id = 7, Description = "Unavailable" });
+            
+            return busStatus;
         }
 
         private List<Lookup> GetTimeSlots()

@@ -57,6 +57,8 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
         }
         Application.prototype.initializeAfter = function () {
             //console.log('Initalize after called..');
+            this.initalizeLocalStorage();
+
             //var loginView = new login.LoginItemView();
             var layout = this.AppLayout;
             this.ContainerRegion.show(layout);
@@ -353,6 +355,17 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
             this.AppRoutes = new routes();
         };
 
+        Application.prototype.initalizeLocalStorage = function () {
+            if (localStorage.getItem('lookupResponse') != null) {
+                localStorage.removeItem('lookupResponse');
+            }
+            require(['./DAL/Booking'], function (p) {
+                var deferred = p.Load();
+                deferred.done(function (p) {
+                    localStorage.setItem('lookupResponse', JSON.stringify(p));
+                });
+            });
+        };
         Application.getInstance = function () {
             if (Application._instance === null) {
                 //alert("new instance");

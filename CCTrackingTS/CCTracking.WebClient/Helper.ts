@@ -24,6 +24,12 @@ String.prototype["getOuterHTML"] = function (selector) {
     return $(this.toString()).find(selector)[0].outerHTML;
 }
 
+APP.Application.getInstance().vent.on("Event:UpdateSummary", () => {
+    require(['./Booking/BookingLeft/BookingLeftCtrl'], (p) => {
+        new p.BookingLeftCtrl().Show();
+    });
+});
+
 export class Controller {
     layout: Marionette.Layout;
 }

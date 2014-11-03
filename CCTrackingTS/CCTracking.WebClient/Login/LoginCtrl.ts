@@ -59,7 +59,6 @@ export class LoginCtrl extends helper.Controller {
         //debugger;
         //this.ShowOverlay();
         var appObj = this.app.request("AppGlobalSetting");
-
         login.set("userName", $("#txtUserName").val());
         login.set("password", $("#txtPassword").val());
         var promise = DAL.Login(login);
@@ -95,6 +94,7 @@ export class LoginCtrl extends helper.Controller {
     //TODO: this method should be inside controller
     Authenticated(loginDto: dto.Models.LoginDto) {
         //console.log(loginResponse);
+        
         var lblLoginMessage = $("#lblLoginMessage");
         if (loginDto == undefined) {
             helper.ShowModalPopup("danger", "Authentication", "User name or password is wrong..!<br> Pelase try again");
@@ -118,7 +118,8 @@ export class LoginCtrl extends helper.Controller {
             appObject.set("AuthenticationToken", loginDto["authenticationToken"]);
             
             this.app.reqres.setHandler("AppGlobalSetting", () => appObject, this);
-
+            
+            
             //app.AppLayout.LoginRegion.close();
             this.app.LoginRegion.close();
 
@@ -158,6 +159,8 @@ export class LoginCtrl extends helper.Controller {
 
         }
     }
+
+    
 
     Cancel() {
         window.location.href = "#viewLogin";

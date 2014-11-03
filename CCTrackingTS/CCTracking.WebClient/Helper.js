@@ -19,6 +19,12 @@ define(["require", "exports", "./App", "text!./Common/Templates/ModalPopup.html"
         return $(this.toString()).find(selector)[0].outerHTML;
     };
 
+    APP.Application.getInstance().vent.on("Event:UpdateSummary", function () {
+        require(['./Booking/BookingLeft/BookingLeftCtrl'], function (p) {
+            new p.BookingLeftCtrl().Show();
+        });
+    });
+
     var Controller = (function () {
         function Controller() {
         }
