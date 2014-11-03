@@ -210,6 +210,7 @@ define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/
                 //this.UIBinding(model);
                 this.Cancel();
             }
+            app.vent.trigger("Event:UpdateSummary");
         };
 
         BusVisitCtrl.prototype.Cancel = function () {

@@ -49,8 +49,10 @@
     <Compile Include="CauseofDeathDal.cs" />
     <Compile Include="BookingLeftDal.cs" />
     <Compile Include="BookingSummaryDal.cs" />
+    <Compile Include="ChangePasswordDal.cs" />
     <Compile Include="DalService.cs" />
     <Compile Include="PaymentTypeDal.cs" />
+    <Compile Include="ResetPasswordDal.cs" />
     <Compile Include="UnionCouncilDal.cs" />
     <Compile Include="VisitTypeDal.cs" />
     <Compile Include="TrackingDeviceDal.cs" />

@@ -290,6 +290,12 @@ function RemoveItem() {
 export function FormatDateString(aDate) {
     return new Date(aDate).toLocaleDateString();
 }
+export function GetParameterByName(paramName, locationHref) {
+    paramName = paramName.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + paramName + "=([^&#]*)"),
+        results = regex.exec(locationHref);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
 export enum VisitTypes {
     PatrolPump = 1,

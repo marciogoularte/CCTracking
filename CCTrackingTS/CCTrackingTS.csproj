@@ -171,13 +171,15 @@
     <Content Include="CCTracking.WebClient\Search\SearchGrid.html" />
     <Content Include="CCTracking.WebClient\Search\SearchTmpl.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\Search\SearchView.ts" />
-    <Content Include="CCTracking.WebClient\User\HtmlPage1.html" />
     <Content Include="CCTracking.WebClient\User\SuccessModal.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\User\UserCtrl.ts" />
     <Content Include="CCTracking.WebClient\User\UserGrid.html" />
     <Content Include="CCTracking.WebClient\User\UserGridRow.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\User\UserView.ts" />
     <Content Include="CCTracking.WebClient\User\UserTmpl.html" />
+    <Content Include="CCTracking.WebClient\ChangePassword\ChangePassword.html" />
+    <Content Include="CCTracking.WebClient\ChangePassword\ChangePasswordCtrl.ts" />
+    <Content Include="CCTracking.WebClient\ChangePassword\ChangePasswordView.ts" />
     <Content Include="Content\App.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

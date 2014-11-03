@@ -25,6 +25,7 @@ define(["require", "exports", "backbone"], function(require, exports) {
                     nic: "",
                     userName: "",
                     password: "",
+                    resetPassword: "",
                     isAdmin: false,
                     authenticationToken: "",
                     errorMessage: ""

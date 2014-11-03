@@ -21,48 +21,14 @@ define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "CCTrackin
 
     function Login(loginDto) {
         var o = new LoginDal();
-        return o.doAjaxRequest(loginDto, "GET", "User");
+        return o.doAjaxRequest(loginDto, "POST", "Login");
     }
     exports.Login = Login;
+
+    function ChangePasswrd(loginDto) {
+        var o = new LoginDal();
+        return o.doAjaxRequest(loginDto, "POST", "ChangePassword");
+    }
+    exports.ChangePasswrd = ChangePasswrd;
 });
-//export function Login1(loginRequest: loginDto.Models.LoginDto) {
-//    var deferred = $.Deferred();
-//    //setTimeout(function () {
-//    //    console.log('counter..');
-//    //    deferred.reject("show message....");
-//    //}, 5000);
-//    var request: any, requestType: string, actionUrl: string
-//    request = loginRequest;
-//    requestType = 'GET';
-//    actionUrl = 'User';
-//    var webApiUrl = 'http://localhost/CCTracking.Api/api/' + actionUrl;
-//    var postData = null;
-//    if (request != null) {
-//        postData = request.toJSON();
-//    }
-//    $.ajax({
-//        type: requestType,
-//        datatype: 'json',
-//        url: webApiUrl,
-//        //data: { userName: loginRequest.get("userName"), password: loginRequest.get("password") }
-//        data: postData
-//    }).done(loginDto=> {
-//            var response = loginDto;
-//        if (loginDto == undefined) {
-//                deferred.reject(null);
-//            }
-//            else {
-//                response = this.ajaxRequest.getResponse();
-//                response = loginDto;
-//                deferred.resolve(response);
-//            }
-//        })
-//        .fail(e=>{
-//            var response = this.ajaxRequest.getResponse();
-//            response.errorMessage = e.responseText.toString();
-//            deferred.reject(response);
-//        })
-//    return deferred.promise();
-//}
-//aaa
 //# sourceMappingURL=Login.js.map

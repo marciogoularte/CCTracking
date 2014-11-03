@@ -198,6 +198,7 @@ export class BusVisitCtrl extends helper.Controller {
             //this.UIBinding(model);
             this.Cancel();
         }
+        app.vent.trigger("Event:UpdateSummary");
     }
 
     Cancel() {

@@ -17,6 +17,7 @@ export module Models {
                 nic: "",
                 userName: "",
                 password: "",
+                resetPassword: "",
                 isAdmin: false,
                 authenticationToken: "",
                 errorMessage: ""

@@ -102,8 +102,8 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
             helper.ShowModalPopup("success", "Payment", "Record has been saved successfully with Payment ID : " + paymentResponse["id"]);
             //alert("Record has been saved successfully with Payment ID : " + paymentResponse["id"]);
             location.href = "#viewBooking";
-            app.vent.trigger("Event:UpdateSummary");
         }
+        app.vent.trigger("Event:UpdateSummary");
     }
     onShow() {
         ko.applyBindings(this.viewModel, this.el);

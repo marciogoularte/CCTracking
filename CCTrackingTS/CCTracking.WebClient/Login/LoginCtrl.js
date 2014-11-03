@@ -52,28 +52,6 @@ define(["require", "exports", "../App", "../Helper", "./LoginView", "../Dtos/Log
             });
         };
 
-        LoginCtrl.prototype.ShowOverlay = function () {
-            var ov = $("#Overlay");
-
-            //var pos = $(_btn).offset();
-            var doc = $(document);
-            ov.css({
-                left: 0,
-                top: 0,
-                width: 0,
-                height: 0
-            }).show().animate({
-                left: 0,
-                top: 0,
-                width: '90%',
-                height: '90%'
-            }, "slow");
-        };
-
-        LoginCtrl.prototype.HideOvrlay = function () {
-            $("#Overlay").hide("slow");
-        };
-
         //TODO: this method should be inside controller
         LoginCtrl.prototype.Authenticated = function (loginDto) {
             //console.log(loginResponse);
@@ -81,14 +59,11 @@ define(["require", "exports", "../App", "../Helper", "./LoginView", "../Dtos/Log
             if (loginDto == undefined) {
                 helper.ShowModalPopup("danger", "Authentication", "User name or password is wrong..!<br> Pelase try again");
                 return;
-                // alert("User name or password is wrong..");
-                //lblLoginMessage.text('User name or password is wrong..');
             }
 
             if (loginDto["errorMessage"] !== null) {
-                helper.ShowModalPopup("danger", "Authentication", loginDto.get("errorMessage"));
+                helper.ShowModalPopup("danger", "Authentication", loginDto["errorMessage"]);
             } else {
-                //Setting global object which can be accissible from other pages.
                 var appObject = new appObjectDto.Models.AppObject();
 
                 appObject.set("Id", loginDto["id"]);
@@ -102,39 +77,26 @@ define(["require", "exports", "../App", "../Helper", "./LoginView", "../Dtos/Log
                     return appObject;
                 }, this);
 
-                //app.AppLayout.LoginRegion.close();
                 this.app.LoginRegion.close();
 
                 var appObj = this.app.request("AppGlobalSetting");
-
-                //alert(appObj.get("FirstName") + ',' + appObj.get("LastName"));
-                //var headerModel = new Backbone.Model({ firstName: "Muhammad", lastName: "Ahmed" });
                 var headerModel = new Backbone.Model({ firstName: appObj.get("FirstName"), lastName: appObj.get("LastName"), userName: appObj.get("UserName") });
 
-                //var headerModel = new Backbone.Model({ appObj });
                 var headerView = new menu.HeaderItemView({
                     model: headerModel
                 });
 
-                //app.AppLayout.HeaderRegion.show(headerView);
                 this.app.HeaderRegion.show(headerView);
 
                 if (loginDto["isAdmin"]) {
                     //admin view
-                    //app.AppLayout.LeftRegion.show(new adminLeft.AdminLeftItemView());
                     this.app.LeftRegion.show(new adminLeft.AdminLeftItemView());
 
                     var ctrl = new uc.UserCtrl();
-
-                    // ctrl.Show();
                     ctrl.GetAll();
                     var vm = ctrl.userViewModel.model;
-                    //knockout binding syntax
-                    // vm.FirstName("value set from another place...")
                 } else {
                     new bookingLeftCtrl.BookingLeftCtrl().Show();
-
-                    //this.app.LeftRegion.show(bookingLeftView);
                     new busAvailabilityCtrl.BusAvailabilityCtrl().Show();
                     var ctrlBooking = new bookingCtrl.BookingCtrl();
                     ctrlBooking.Show();

@@ -289,6 +289,12 @@ define(["require", "exports", "./App", "text!./Common/Templates/ModalPopup.html"
         return new Date(aDate).toLocaleDateString();
     }
     exports.FormatDateString = FormatDateString;
+    function GetParameterByName(paramName, locationHref) {
+        paramName = paramName.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + paramName + "=([^&#]*)"), results = regex.exec(locationHref);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+    exports.GetParameterByName = GetParameterByName;
 
     (function (VisitTypes) {
         VisitTypes[VisitTypes["PatrolPump"] = 1] = "PatrolPump";

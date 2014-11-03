@@ -96,8 +96,8 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
 
                 //alert("Record has been saved successfully with Payment ID : " + paymentResponse["id"]);
                 location.href = "#viewBooking";
-                app.vent.trigger("Event:UpdateSummary");
             }
+            app.vent.trigger("Event:UpdateSummary");
         };
         PaymentView.prototype.onShow = function () {
             ko.applyBindings(this.viewModel, this.el);
