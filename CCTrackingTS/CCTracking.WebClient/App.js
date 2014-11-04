@@ -37,7 +37,8 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     RightRegion: '#RightRegion',
                     MainRegion: '#MainRegion',
                     DetailRegion: '#DetailRegion',
-                    SubRegion: '#SubRegion'
+                    SubRegion: '#SubRegion',
+                    BusAvailabilityRegion: '#BusAvailabilityRegion'
                 }
             });
             this.AppLayout = new layout();
@@ -49,6 +50,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
             this.MainRegion = this.AppLayout.MainRegion;
             this.DetailRegion = this.AppLayout.DetailRegion;
             this.SubRegion = this.AppLayout.SubRegion;
+            this.BusAvailabilityRegion = this.AppLayout.BusAvailabilityRegion;
 
             //start history...
             if (Backbone.history) {

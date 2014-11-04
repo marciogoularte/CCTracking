@@ -87,7 +87,6 @@ define(["require", "exports", "../App", "../Helper", "./LoginView", "../Dtos/Log
                 });
 
                 this.app.HeaderRegion.show(headerView);
-
                 if (loginDto["isAdmin"]) {
                     //admin view
                     this.app.LeftRegion.show(new adminLeft.AdminLeftItemView());

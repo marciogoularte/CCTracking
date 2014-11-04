@@ -17,7 +17,7 @@ import DAL = require("../../DAL/BusMilage");
 export class BusMilageCtrl extends helper.Controller {
     app: any;
     viewModel: views.BusMilageViewModel;
-    view: views.BusMilageView;
+    //view: views.BusMilageView;
     backboneModel: Backbone.Model;
     collection: dto.Models.BusMilageCollection;
     collectionView: views.BusMilageCollectionView;

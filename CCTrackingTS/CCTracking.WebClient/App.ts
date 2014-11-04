@@ -20,6 +20,7 @@ export class Application extends Marionette.Application {
     DetailRegion: Marionette.Region;
     ModalRegion: Marionette.Region;
     SubRegion: Marionette.Region;
+    BusAvailabilityRegion: Marionette.Region;
 
     private static _instance: Application = null;
 
@@ -47,7 +48,9 @@ export class Application extends Marionette.Application {
                 RightRegion: '#RightRegion',
                 MainRegion: '#MainRegion',
                 DetailRegion: '#DetailRegion',
-                SubRegion: '#SubRegion'
+                SubRegion: '#SubRegion',
+                BusAvailabilityRegion: '#BusAvailabilityRegion',
+                
             }
         });
         this.AppLayout = new layout();
@@ -59,6 +62,7 @@ export class Application extends Marionette.Application {
         this.MainRegion = this.AppLayout.MainRegion;
         this.DetailRegion = this.AppLayout.DetailRegion;
         this.SubRegion = this.AppLayout.SubRegion;
+        this.BusAvailabilityRegion = this.AppLayout.BusAvailabilityRegion;
 
         //start history...
         if (Backbone.history) {

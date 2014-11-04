@@ -104,7 +104,6 @@ export class LoginCtrl extends helper.Controller {
             });
 
             this.app.HeaderRegion.show(headerView);
-
             if (loginDto["isAdmin"]) {
                 //admin view
                 this.app.LeftRegion.show(new adminLeft.AdminLeftItemView());
