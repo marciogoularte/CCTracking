@@ -65,7 +65,7 @@
                                 data-bind="options: reutrnTimeSlotList, optionsText:'description', value:returnTimeSlotSelected">
                             </select>
                             </tr>
-                            <tr>
+                            <tr style="display:none">
                                 <td class="col-sm-4 col-md-4 input-sm">Current Reading</td>
                                 <td class="col-sm-8 col-md-8">
                                     <input type="text" class="form-control input-sm" placeholder="Current Reading" data-bind="value:readingWhenFilling" 
@@ -75,7 +75,7 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Initial Reading</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" class="form-control input-sm" placeholder="Bus Initial Reading" disabled data-bind="value:initialReading" />   
+                                    <input type="text" class="form-control input-sm" placeholder="Bus Initial Reading" data-bind="value:initialReading" />   
                                 </td>
                             </tr>
                             <tr>

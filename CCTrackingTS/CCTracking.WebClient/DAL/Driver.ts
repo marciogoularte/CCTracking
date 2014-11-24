@@ -34,6 +34,15 @@ export function GetById(id) {
     return o.doAjaxRequest(null, "GET", "Driver?id=" + id);
 }
 
+export function GetAllSummary() {
+    var o: baseDAL.BaseDto = new DriverDal();
+    return o.doAjaxRequest(null, "GET", "DriverSummary");
+}
+export function GetAllDetail(id:number) {
+    var o: baseDAL.BaseDto = new DriverDal();
+    return o.doAjaxRequest(null, "GET", "DriverSummary?id=" + id);
+}
+
 //aaa
 
 

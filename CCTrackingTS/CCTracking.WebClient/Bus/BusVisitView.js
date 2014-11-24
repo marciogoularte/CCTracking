@@ -54,6 +54,17 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
         BusVisitView.prototype.Save = function (e) {
             e.preventDefault();
 
+            if (!this.viewModel.isValidReading()) {
+                helper.ShowModalPopup("danger", "Bus Visit", "Please enter valid reading! Final reading should be greather than the Initial reading!");
+                return false;
+            }
+            if (this.viewModel.isBookingCompleted() == "1") {
+                if (this.viewModel.finalReading() == undefined || this.viewModel.finalReading() == "" || this.viewModel.finalReading() == 0) {
+                    helper.ShowModalPopup("danger", "Bus Visit", "Please enter valid final reading to complete the booking.");
+                    return false;
+                }
+            }
+
             this.bbModel.set("id", this.viewModel.id());
             this.bbModel.set("isActive", this.viewModel.isActive() == "1" ? true : false);
 
@@ -254,6 +265,23 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
                     }
                 });
             }
+            this.isValidReading = ko.computed({
+                owner: this,
+                read: function () {
+                    if (_this.finalReading() != undefined && _this.finalReading() == 0) {
+                        return true;
+                    } else if (_this.initialReading() != undefined && _this.finalReading() != undefined) {
+                        if (parseInt(_this.initialReading()) > parseInt(_this.finalReading())) {
+                            //alert("Please enter valid reading! Final reading should be greather than the Initial reading");
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    } else {
+                        return true;
+                    }
+                }
+            });
         }
         return ViewModel;
     })();

@@ -29,8 +29,8 @@ define(["require", "exports", "../App", "../Helper", "./LoginView", "../Dtos/Log
         LoginCtrl.prototype.Load = function () {
             var _this = this;
             this.loginView = new views.LoginView();
-            var layout = this.app.AppLayout;
 
+            //var layout = this.app.AppLayout;
             //this.ContainerRegion.show(layout);
             this.app.LoginRegion.show(this.loginView);
             this.loginView.on("LoginUser", function () {
@@ -89,12 +89,14 @@ define(["require", "exports", "../App", "../Helper", "./LoginView", "../Dtos/Log
                 this.app.HeaderRegion.show(headerView);
                 if (loginDto["isAdmin"]) {
                     //admin view
-                    this.app.LeftRegion.show(new adminLeft.AdminLeftItemView());
+                    this.app.AdminLeftRegion.show(new adminLeft.AdminLeftItemView());
 
                     var ctrl = new uc.UserCtrl();
                     ctrl.GetAll();
                     var vm = ctrl.userViewModel.model;
-                } else {
+                }
+
+                 {
                     new bookingLeftCtrl.BookingLeftCtrl().Show();
                     new busAvailabilityCtrl.BusAvailabilityCtrl().Show();
                     var ctrlBooking = new bookingCtrl.BookingCtrl();

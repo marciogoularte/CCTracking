@@ -47,6 +47,17 @@ export class BusVisitView extends helper.Views.ItemView {
     Save(e) {
         e.preventDefault();
 
+        if (!this.viewModel.isValidReading()) {
+            helper.ShowModalPopup("danger", "Bus Visit", "Please enter valid reading! Final reading should be greather than the Initial reading!");
+            return false;
+        }
+        if (this.viewModel.isBookingCompleted() == "1") {
+            if (this.viewModel.finalReading() == undefined || this.viewModel.finalReading()=="" || this.viewModel.finalReading() == 0) {
+                helper.ShowModalPopup("danger", "Bus Visit", "Please enter valid final reading to complete the booking.");
+                return false;
+            }
+        }
+
         this.bbModel.set("id", this.viewModel.id());
         this.bbModel.set("isActive", this.viewModel.isActive() == "1" ? true : false);
         //this.bbModel.set("centreId", this.viewModel.centreId());
@@ -125,7 +136,7 @@ export class ViewModel {
     alkhidmatCentreSelected: any;
     visitTypeSelected: any;
     isEdit:any;
-
+    isValidReading:any;
 
     constructor(model) {
         var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
@@ -269,6 +280,24 @@ export class ViewModel {
                 }
             });
         }
+        this.isValidReading = ko.computed({
+            owner: this,
+            read: () => {
+                if (this.finalReading() != undefined && this.finalReading() == 0) {
+                    return true;
+                }
+                else if (this.initialReading() != undefined && this.finalReading() != undefined) {
+                    if (parseInt(this.initialReading()) > parseInt(this.finalReading())) {
+                        //alert("Please enter valid reading! Final reading should be greather than the Initial reading");
+                        return false;
+                    } else {
+                        return true;
+                    }
+                } else {
+                    return true;
+                }
+            }
+        });
     }
 }
 

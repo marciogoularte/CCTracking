@@ -15,6 +15,7 @@ export class Application extends Marionette.Application {
     LoginRegion: Marionette.Region;
     HeaderRegion: Marionette.Region;
     LeftRegion: Marionette.Region;
+    AdminLeftRegion: Marionette.Region;
     RightRegion: Marionette.Region;
     MainRegion: Marionette.Region;
     DetailRegion: Marionette.Region;
@@ -45,6 +46,7 @@ export class Application extends Marionette.Application {
                 LoginRegion: '#LoginRegion',
                 HeaderRegion: '#HeaderRegion',
                 LeftRegion: '#LeftRegion',
+                AdminLeftRegion: '#AdminLeftRegion',
                 RightRegion: '#RightRegion',
                 MainRegion: '#MainRegion',
                 DetailRegion: '#DetailRegion',
@@ -58,6 +60,7 @@ export class Application extends Marionette.Application {
         this.LoginRegion = this.AppLayout.LoginRegion;
         this.HeaderRegion = this.AppLayout.HeaderRegion;
         this.LeftRegion = this.AppLayout.LeftRegion;
+        this.AdminLeftRegion = this.AppLayout.AdminLeftRegion;
         this.RightRegion = this.AppLayout.RightRegion;
         this.MainRegion = this.AppLayout.MainRegion;
         this.DetailRegion = this.AppLayout.DetailRegion;
@@ -72,9 +75,12 @@ export class Application extends Marionette.Application {
 
     initializeAfter() {
         //console.log('Initalize after called..');
+        this.ContainerRegion.reset();
         this.initalizeLocalStorage();
         //var loginView = new login.LoginItemView();
+        
         var layout = this.AppLayout;
+
         this.ContainerRegion.show(layout);
         //var loginCtrl = new loginController.LoginCtrl();
         //loginCtrl.Load();
@@ -131,8 +137,10 @@ export class Application extends Marionette.Application {
 
                 'trackingDevice': 'goTrackingDevice',
                 'viewTrackingDevice': 'goViewTrackingDevice',
-
+                'driverSummary': 'goDriverSummary',
+                'driverDetail': '',
                 'changePassword': 'goChangePassword',
+                'auditBooking': 'goAuditBooking',
                 '*other': 'defaultRoute'
             },
             goUser() {
@@ -258,6 +266,12 @@ export class Application extends Marionette.Application {
             goChangePassword() {
                 require(['./ChangePassword/ChangePasswordCtrl'], (p) => { new p.ChangePasswordCtrl().Load(); });
             },
+            goDriverSummary() {
+                require(['./Admin/Reports/Driver/DriverSummaryCtrl'], (p) => { new p.DriverSummaryCtrl().Show(); });
+            },
+            goAuditBooking(){
+            require(['./Admin/Reports/Audit/Booking/AuditBookingCtrl'], (p) => { new p.AuditBookingCtrl().Show(); });
+            },
             defaultRoute() {
                 self.ContainerRegion.reset();
                 self.ContainerRegion.show(layout);
@@ -265,6 +279,7 @@ export class Application extends Marionette.Application {
             }
         });
         this.AppRoutes = new routes();
+        //Backbone.history.start();
     }
 
     initalizeLocalStorage() {

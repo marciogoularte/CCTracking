@@ -34,6 +34,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     LoginRegion: '#LoginRegion',
                     HeaderRegion: '#HeaderRegion',
                     LeftRegion: '#LeftRegion',
+                    AdminLeftRegion: '#AdminLeftRegion',
                     RightRegion: '#RightRegion',
                     MainRegion: '#MainRegion',
                     DetailRegion: '#DetailRegion',
@@ -46,6 +47,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
             this.LoginRegion = this.AppLayout.LoginRegion;
             this.HeaderRegion = this.AppLayout.HeaderRegion;
             this.LeftRegion = this.AppLayout.LeftRegion;
+            this.AdminLeftRegion = this.AppLayout.AdminLeftRegion;
             this.RightRegion = this.AppLayout.RightRegion;
             this.MainRegion = this.AppLayout.MainRegion;
             this.DetailRegion = this.AppLayout.DetailRegion;
@@ -59,10 +61,12 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
         }
         Application.prototype.initializeAfter = function () {
             //console.log('Initalize after called..');
+            this.ContainerRegion.reset();
             this.initalizeLocalStorage();
 
             //var loginView = new login.LoginItemView();
             var layout = this.AppLayout;
+
             this.ContainerRegion.show(layout);
 
             //var loginCtrl = new loginController.LoginCtrl();
@@ -113,7 +117,10 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     'viewTest': 'goViewTest',
                     'trackingDevice': 'goTrackingDevice',
                     'viewTrackingDevice': 'goViewTrackingDevice',
+                    'driverSummary': 'goDriverSummary',
+                    'driverDetail': '',
                     'changePassword': 'goChangePassword',
+                    'auditBooking': 'goAuditBooking',
                     '*other': 'defaultRoute'
                 },
                 goUser: function () {
@@ -314,6 +321,16 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                         new p.ChangePasswordCtrl().Load();
                     });
                 },
+                goDriverSummary: function () {
+                    require(['./Admin/Reports/Driver/DriverSummaryCtrl'], function (p) {
+                        new p.DriverSummaryCtrl().Show();
+                    });
+                },
+                goAuditBooking: function () {
+                    require(['./Admin/Reports/Audit/Booking/AuditBookingCtrl'], function (p) {
+                        new p.AuditBookingCtrl().Show();
+                    });
+                },
                 defaultRoute: function () {
                     self.ContainerRegion.reset();
                     self.ContainerRegion.show(layout);
@@ -323,6 +340,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                 }
             });
             this.AppRoutes = new routes();
+            //Backbone.history.start();
         };
 
         Application.prototype.initalizeLocalStorage = function () {
