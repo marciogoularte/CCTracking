@@ -8,7 +8,7 @@ namespace CCTracking.Dto.Response
     {
         public Booking BookingModel { get; set; }
         public List<Booking> BookingList { get; set; }
-        public List<AuditBookingDisplay> AuditBookingDisplayList { get; set; }
+        public List<AuditDisplay> AuditBookingDisplayList { get; set; }
         public List<AuditBooking> AuditBookingList { get; set; }
     }
 }

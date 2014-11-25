@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using CCTracking.DAL;
 using CCTracking.Dto;
 using CCTracking.Dto.Audit;
 using CCTracking.Dto.Response;
-using Newtonsoft.Json;
 
 namespace CCTracking.Api.Controllers
 {
@@ -25,7 +23,7 @@ namespace CCTracking.Api.Controllers
         private BookingResponse TransformResultSet(List<AuditBooking> bookings )
         {
             BookingResponse response=new BookingResponse();
-            List<AuditBookingDisplay> auditList = new List<AuditBookingDisplay>();
+            List<AuditDisplay> auditList = new List<AuditDisplay>();
             int counter = 0;
             foreach (AuditBooking each in bookings)
             {
@@ -83,9 +81,9 @@ namespace CCTracking.Api.Controllers
             return response;
         }
 
-        private AuditBookingDisplay SetProperty(string propName,string propVal,AuditBooking audit)
+        private AuditDisplay SetProperty(string propName,string propVal,AuditBooking audit)
         {
-            return new AuditBookingDisplay
+            return new AuditDisplay
             {
                 BookingId = audit.Id,
                 PropertyName = propName,

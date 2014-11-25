@@ -2,7 +2,7 @@
 
 namespace CCTracking.Dto.Audit
 {
-    public class AuditBookingDisplay 
+    public class AuditDisplay 
     {
         public int BookingId { get; set; }
         public string PropertyName { get; set; }
@@ -13,7 +13,5 @@ namespace CCTracking.Dto.Audit
         public DateTime ActualModifiedDate { get; set; }
         public int RowCounter { get; set; }
         public string UserName { get; set; }
-
-
     }
 }

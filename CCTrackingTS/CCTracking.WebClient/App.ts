@@ -141,6 +141,8 @@ export class Application extends Marionette.Application {
                 'driverDetail': '',
                 'changePassword': 'goChangePassword',
                 'auditBooking': 'goAuditBooking',
+                'auditPayment': 'goAuditPayment',
+                'auditRefundBooking': 'goAuditRefundBooking',
                 '*other': 'defaultRoute'
             },
             goUser() {
@@ -271,6 +273,12 @@ export class Application extends Marionette.Application {
             },
             goAuditBooking(){
             require(['./Admin/Reports/Audit/Booking/AuditBookingCtrl'], (p) => { new p.AuditBookingCtrl().Show(); });
+            },
+            goAuditPayment() {
+                require(['./Admin/Reports/Audit/Payment/AuditPaymentCtrl'], (p) => { new p.AuditPaymentCtrl().Show(); });
+            },
+            goAuditRefundBooking() {
+                require(['./Admin/Reports/Audit/Refund/AuditRefundBookingCtrl'], (p) => { new p.AuditRefundBookingCtrl().Show(); });
             },
             defaultRoute() {
                 self.ContainerRegion.reset();

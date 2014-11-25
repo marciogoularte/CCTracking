@@ -121,6 +121,8 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     'driverDetail': '',
                     'changePassword': 'goChangePassword',
                     'auditBooking': 'goAuditBooking',
+                    'auditPayment': 'goAuditPayment',
+                    'auditRefundBooking': 'goAuditRefundBooking',
                     '*other': 'defaultRoute'
                 },
                 goUser: function () {
@@ -329,6 +331,16 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                 goAuditBooking: function () {
                     require(['./Admin/Reports/Audit/Booking/AuditBookingCtrl'], function (p) {
                         new p.AuditBookingCtrl().Show();
+                    });
+                },
+                goAuditPayment: function () {
+                    require(['./Admin/Reports/Audit/Payment/AuditPaymentCtrl'], function (p) {
+                        new p.AuditPaymentCtrl().Show();
+                    });
+                },
+                goAuditRefundBooking: function () {
+                    require(['./Admin/Reports/Audit/Refund/AuditRefundBookingCtrl'], function (p) {
+                        new p.AuditRefundBookingCtrl().Show();
                     });
                 },
                 defaultRoute: function () {

@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuditBookingDal.cs" />
+    <Compile Include="AuditPaymentDal.cs" />
+    <Compile Include="AuditRefundBookingDal.cs" />
     <Compile Include="BookingDal.cs" />
     <Compile Include="BusAvailabilityDal.cs" />
     <Compile Include="BusDal.cs" />
