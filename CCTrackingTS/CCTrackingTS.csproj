@@ -69,6 +69,10 @@
     <Content Include="CCTracking.WebClient\Admin\Reports\Audit\Refund\AuditRefundBooking.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\Admin\Reports\Audit\Refund\AuditRefundBookingCtrl.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Admin\Reports\Audit\Refund\AuditRefundBookingView.ts" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\BusVisit\BusVisitDetail.html" />
+    <TypeScriptCompile Include="CCTracking.WebClient\Admin\Reports\BusVisit\BusVisitSummaryCtrl.ts" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\BusVisit\BusVisitSummaryTmpl.html" />
+    <TypeScriptCompile Include="CCTracking.WebClient\Admin\Reports\BusVisit\BusVisitSummaryView.ts" />
     <Content Include="CCTracking.WebClient\Admin\Reports\Driver\DriverDetail.html" />
     <Content Include="CCTracking.WebClient\Admin\Reports\Driver\DriverSummaryTmpl.html" />
     <Content Include="CCTracking.WebClient\Admin\Town\TownCtrl.ts" />
@@ -428,7 +432,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CCTracking.WebClient\Admin\Reports\Audit\BusVisit\" />
-    <Folder Include="CCTracking.WebClient\Admin\Reports\Bus\" />
     <Folder Include="CCTracking.WebClient\Admin\Reports\Centre\" />
     <Folder Include="CCTracking.WebClient\Booking\Views\" />
   </ItemGroup>

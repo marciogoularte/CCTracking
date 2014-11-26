@@ -118,7 +118,11 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     'trackingDevice': 'goTrackingDevice',
                     'viewTrackingDevice': 'goViewTrackingDevice',
                     'driverSummary': 'goDriverSummary',
+                    'busVisitSummary': 'goBusVisitSummary',
+                    'busVisitMilageSummary': 'goBusVisitMilageSummary',
                     'driverDetail': '',
+                    'busVisitDetail': '',
+                    'busVisitMilageDetail': '',
                     'changePassword': 'goChangePassword',
                     'auditBooking': 'goAuditBooking',
                     'auditPayment': 'goAuditPayment',
@@ -326,6 +330,16 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                 goDriverSummary: function () {
                     require(['./Admin/Reports/Driver/DriverSummaryCtrl'], function (p) {
                         new p.DriverSummaryCtrl().Show();
+                    });
+                },
+                goBusVisitSummary: function () {
+                    require(['./Admin/Reports/BusVisit/BusVisitSummaryCtrl'], function (p) {
+                        new p.BusVisitSummaryCtrl().ShowVisit();
+                    });
+                },
+                goBusVisitMilageSummary: function () {
+                    require(['./Admin/Reports/BusVisit/BusVisitSummaryCtrl'], function (p) {
+                        new p.BusVisitSummaryCtrl().ShowMilage();
                     });
                 },
                 goAuditBooking: function () {

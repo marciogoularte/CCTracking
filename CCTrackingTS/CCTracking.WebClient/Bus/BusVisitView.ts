@@ -38,15 +38,14 @@ export class BusVisitView extends helper.Views.ItemView {
     }
     close() {
         //alert("closeing this view");
-        this.off("Event:SaveForm");
-        this.off("Event:CancelForm");
+        //this.off("Event:SaveForm");
+        //this.off("Event:CancelForm");
     }
     Cancel() {
         this.trigger("Event:CancelForm");
     }
     Save(e) {
         e.preventDefault();
-
         if (!this.viewModel.isValidReading()) {
             helper.ShowModalPopup("danger", "Bus Visit", "Please enter valid reading! Final reading should be greather than the Initial reading!");
             return false;
@@ -319,7 +318,6 @@ export class BusVisitCollectionView extends helper.Views.CompositeView {
 
     setOptionDisable(option, item) {
         if (item.id == 1) {
-            //debugger;
             ko.applyBindingsToNode(option, { disable: true, text: item.description + ' - Maintenance' }, item);
         }
     }

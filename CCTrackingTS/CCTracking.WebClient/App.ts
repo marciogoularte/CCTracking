@@ -138,7 +138,11 @@ export class Application extends Marionette.Application {
                 'trackingDevice': 'goTrackingDevice',
                 'viewTrackingDevice': 'goViewTrackingDevice',
                 'driverSummary': 'goDriverSummary',
+                'busVisitSummary': 'goBusVisitSummary',
+                'busVisitMilageSummary': 'goBusVisitMilageSummary',
                 'driverDetail': '',
+                'busVisitDetail': '',
+                'busVisitMilageDetail': '',
                 'changePassword': 'goChangePassword',
                 'auditBooking': 'goAuditBooking',
                 'auditPayment': 'goAuditPayment',
@@ -270,6 +274,12 @@ export class Application extends Marionette.Application {
             },
             goDriverSummary() {
                 require(['./Admin/Reports/Driver/DriverSummaryCtrl'], (p) => { new p.DriverSummaryCtrl().Show(); });
+            },
+            goBusVisitSummary() {
+            require(['./Admin/Reports/BusVisit/BusVisitSummaryCtrl'], (p) => { new p.BusVisitSummaryCtrl().ShowVisit(); });
+            },
+            goBusVisitMilageSummary() {
+                require(['./Admin/Reports/BusVisit/BusVisitSummaryCtrl'],(p) => { new p.BusVisitSummaryCtrl().ShowMilage(); });
             },
             goAuditBooking(){
             require(['./Admin/Reports/Audit/Booking/AuditBookingCtrl'], (p) => { new p.AuditBookingCtrl().Show(); });

@@ -45,15 +45,14 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
         }
         BusVisitView.prototype.close = function () {
             //alert("closeing this view");
-            this.off("Event:SaveForm");
-            this.off("Event:CancelForm");
+            //this.off("Event:SaveForm");
+            //this.off("Event:CancelForm");
         };
         BusVisitView.prototype.Cancel = function () {
             this.trigger("Event:CancelForm");
         };
         BusVisitView.prototype.Save = function (e) {
             e.preventDefault();
-
             if (!this.viewModel.isValidReading()) {
                 helper.ShowModalPopup("danger", "Bus Visit", "Please enter valid reading! Final reading should be greather than the Initial reading!");
                 return false;
@@ -305,7 +304,6 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
 
         BusVisitCollectionView.prototype.setOptionDisable = function (option, item) {
             if (item.id == 1) {
-                //debugger;
                 ko.applyBindingsToNode(option, { disable: true, text: item.description + ' - Maintenance' }, item);
             }
         };

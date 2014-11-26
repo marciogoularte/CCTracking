@@ -47,6 +47,8 @@
     <Compile Include="BusAvailabilityDal.cs" />
     <Compile Include="BusDal.cs" />
     <Compile Include="BusMilageDal.cs" />
+    <Compile Include="BusVisitMilageSummaryDal.cs" />
+    <Compile Include="BusVisitSummaryDal.cs" />
     <Compile Include="CentreDal.cs" />
     <Compile Include="BusVisitDal.cs" />
     <Compile Include="CauseofDeathDal.cs" />
