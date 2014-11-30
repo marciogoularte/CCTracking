@@ -24,7 +24,8 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
 
             this.addRegions({
                 ContainerRegion: '#ContainerRegion',
-                ModalRegion: '#ModalPopup'
+                ModalRegion: '#ModalPopup',
+                ModalAlertRegion: "#ModalAlertPopup"
             });
 
             //alert('constructor');
@@ -300,13 +301,13 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     });
                 },
                 goCauseOfDeath: function () {
-                    require(['./Admin/PaymentType/PaymentTypeCtrl'], function (p) {
-                        new p.PaymentTypeCtrl().Show();
+                    require(['./Admin/CauseOfDeath/CauseOfDeathCtrl'], function (p) {
+                        new p.CauseOfDeathCtrl().Show();
                     });
                 },
                 goViewCauseOfDeath: function () {
                     require(['./Admin/CauseOfDeath/CauseOfDeathCtrl'], function (p) {
-                        new p.PaymentTypeCtrl().GetAll();
+                        new p.CauseOfDeathCtrl().GetAll();
                     });
                 },
                 goViewTest: function () {
@@ -399,10 +400,12 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
 
         //var rgnModal = modalHelper.GetModalRegion();
         var rgnModal = new modalHelper.ModalRegion({ el: '#ModalPopup' });
+        var rgnModalAlert = new modalHelper.ModalRegion({ el: '#ModalAlertPopup' });
 
         //var modal = new rgnModal({ el: '#ModalPopup' });
         //app.ModalRegion = modal;
         app.ModalRegion = rgnModal;
+        app.ModalAlertRegion = rgnModalAlert;
     });
 });
 //aaa

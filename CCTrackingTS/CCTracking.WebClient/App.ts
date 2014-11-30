@@ -20,6 +20,7 @@ export class Application extends Marionette.Application {
     MainRegion: Marionette.Region;
     DetailRegion: Marionette.Region;
     ModalRegion: Marionette.Region;
+    ModalAlertRegion: Marionette.Region;
     SubRegion: Marionette.Region;
     BusAvailabilityRegion: Marionette.Region;
 
@@ -36,7 +37,8 @@ export class Application extends Marionette.Application {
 
         this.addRegions({
             ContainerRegion: '#ContainerRegion',
-            ModalRegion: '#ModalPopup'
+            ModalRegion: '#ModalPopup',
+            ModalAlertRegion:"#ModalAlertPopup"
         });
 
         //alert('constructor');
@@ -255,10 +257,10 @@ export class Application extends Marionette.Application {
                 require(['./Admin/VisitType/VisitTypeCtrl'], (p) => { new p.VisitTypeCtrl().GetAll(); });
             },
             goCauseOfDeath() {
-                require(['./Admin/PaymentType/PaymentTypeCtrl'], (p) => { new p.PaymentTypeCtrl().Show(); });
+                require(['./Admin/CauseOfDeath/CauseOfDeathCtrl'], (p) => { new p.CauseOfDeathCtrl().Show(); });
             },
             goViewCauseOfDeath() {
-                require(['./Admin/CauseOfDeath/CauseOfDeathCtrl'], (p) => { new p.PaymentTypeCtrl().GetAll(); });
+                require(['./Admin/CauseOfDeath/CauseOfDeathCtrl'], (p) => { new p.CauseOfDeathCtrl().GetAll(); });
             },
             goViewTest() {
                 // new koBindingController.KoBindingCtrl().Show();
@@ -329,10 +331,12 @@ $(function () {
 
     //var rgnModal = modalHelper.GetModalRegion();
     var rgnModal = new modalHelper.ModalRegion({ el: '#ModalPopup' });
-
+    var rgnModalAlert = new modalHelper.ModalRegion({ el: '#ModalAlertPopup' });
+    
     //var modal = new rgnModal({ el: '#ModalPopup' });    
     //app.ModalRegion = modal;
 
     app.ModalRegion = rgnModal;
+    app.ModalAlertRegion = rgnModalAlert;
 });
 //aaa

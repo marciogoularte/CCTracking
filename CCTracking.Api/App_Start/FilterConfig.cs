@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using CCTracking.Api.App_Start;
 
 namespace CCTracking.Api
 {
@@ -7,6 +8,7 @@ namespace CCTracking.Api
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            //filters.Add(new AuthorizationFilterAttribute());
         }
     }
 }

@@ -111,6 +111,7 @@
     <Content Include="CCTracking.WebClient\Common\Templates\BusDetailModalPopup.html" />
     <Content Include="CCTracking.WebClient\Common\Templates\BusDetailModalPopupGrid.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\DAL\AdminSearch.ts" />
+    <Content Include="CCTracking.WebClient\Common\Templates\Progressbar.html" />
     <Content Include="CCTracking.WebClient\DAL\BusMilage.ts" />
     <Content Include="CCTracking.WebClient\DAL\CauseOfDeath.ts" />
     <Content Include="CCTracking.WebClient\DAL\BookingLeft.ts" />
@@ -306,6 +307,7 @@
     <Content Include="Content\DataTables-1.10.0\swf\copy_csv_xls_pdf.swf" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\Images\bus.jpg" />
+    <Content Include="Content\Images\progressbar.gif" />
     <Content Include="Content\Images\spiffygif_54x54.gif" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\Themes\amelia\bootstrap.min.css" />
