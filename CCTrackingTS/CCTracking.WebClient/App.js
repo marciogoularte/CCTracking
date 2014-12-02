@@ -84,6 +84,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     'bus': 'goBus',
                     'addBooking': 'goAddBooking',
                     'editBooking': 'goEditBooking',
+                    'viewHome': 'goViewHome',
                     'viewBooking': 'goViewBooking',
                     'payment': 'goPayment',
                     'alkhidmatCentre': 'goStation',
@@ -153,6 +154,11 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                 goEditBooking: function () {
                     require(['./Booking/BookingCtrl'], function (p) {
                         new p.BookingCtrl().Show();
+                    });
+                },
+                goViewHome: function () {
+                    require(['./Home/HomeCtrl'], function (p) {
+                        new p.HomeCtrl().Show();
                     });
                 },
                 goViewBooking: function () {

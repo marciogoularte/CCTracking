@@ -195,16 +195,11 @@ export function ShowModalPopup(type, title, message) {
     });
 }
 export function ShowProgressbar() {
-    //var view = new this.ProgressbarView();
-    //var app = APP.Application.getInstance();
-    //app.ModalRegion.show(view);
     require(['./Booking/BookingLeft/BookingLeftCtrl'], (p) => {
         new p.BookingLeftCtrl().ShowProgressbar();
     });
 }
 export function HideProgressbar() {
-    //var app = APP.Application.getInstance();
-    //app.ModalRegion.close();
     require(['./Booking/BookingLeft/BookingLeftCtrl'], (p) => {
         new p.BookingLeftCtrl().HideProgressbar();
     });
@@ -221,7 +216,7 @@ export function ShowBusDetailModalPopup(busDetialDto, busDetailCollection) {
         //alert(p);
         view = new p.BusDetailModalPopupCollectionView({ collection: busDetailCollection, model: busDetialDto });
         var app = APP.Application.getInstance();
-        app.ModalRegion.show(view);
+        app.ModalAlertRegion.show(view);
     });
     //debugger;
     //var view = new this.BusDetailModalPopupCollectionView({ collection: busDetailCollection, model: busDetialDto });
@@ -253,18 +248,14 @@ export function ShowBusDetailModalPopup(busDetialDto, busDetailCollection) {
 /// Adds Authentication Token to each outgoing call if there is an AppGlobalSetting present
 $.ajaxSetup({
     'beforeSend': function (xhr) {
-        //ShowProgressbar();
+        ShowProgressbar();
         var app = APP.Application.getInstance();
         if (app.reqres.hasHandler("AppGlobalSetting")) {
             xhr.setRequestHeader("AuthenticationToken", app.request("AppGlobalSetting").get("AuthenticationToken"));
         }
     },
     'complete': function (xhr, status) {
-        //debugger;
-        //var deferred = $.Deferred();
-        //alert('compelete');
-        //HideProgressbar();
-        //return deferred.promise();
+        HideProgressbar();
     }
 
 });

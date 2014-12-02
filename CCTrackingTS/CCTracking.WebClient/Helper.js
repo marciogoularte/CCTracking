@@ -188,17 +188,12 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
     }
     exports.ShowModalPopup = ShowModalPopup;
     function ShowProgressbar() {
-        //var view = new this.ProgressbarView();
-        //var app = APP.Application.getInstance();
-        //app.ModalRegion.show(view);
         require(['./Booking/BookingLeft/BookingLeftCtrl'], function (p) {
             new p.BookingLeftCtrl().ShowProgressbar();
         });
     }
     exports.ShowProgressbar = ShowProgressbar;
     function HideProgressbar() {
-        //var app = APP.Application.getInstance();
-        //app.ModalRegion.close();
         require(['./Booking/BookingLeft/BookingLeftCtrl'], function (p) {
             new p.BookingLeftCtrl().HideProgressbar();
         });
@@ -216,7 +211,7 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
             //alert(p);
             view = new p.BusDetailModalPopupCollectionView({ collection: busDetailCollection, model: busDetialDto });
             var app = APP.Application.getInstance();
-            app.ModalRegion.show(view);
+            app.ModalAlertRegion.show(view);
         });
         //debugger;
         //var view = new this.BusDetailModalPopupCollectionView({ collection: busDetailCollection, model: busDetialDto });
@@ -243,18 +238,14 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
     /// Adds Authentication Token to each outgoing call if there is an AppGlobalSetting present
     $.ajaxSetup({
         'beforeSend': function (xhr) {
-            //ShowProgressbar();
+            exports.ShowProgressbar();
             var app = APP.Application.getInstance();
             if (app.reqres.hasHandler("AppGlobalSetting")) {
                 xhr.setRequestHeader("AuthenticationToken", app.request("AppGlobalSetting").get("AuthenticationToken"));
             }
         },
         'complete': function (xhr, status) {
-            //debugger;
-            //var deferred = $.Deferred();
-            //alert('compelete');
-            //HideProgressbar();
-            //return deferred.promise();
+            exports.HideProgressbar();
         }
     });
 
