@@ -1,7 +1,4 @@
-﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
-/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
-/// <amd-dependency path="jquery"/>
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -34,10 +31,6 @@ define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "CCTrackin
     }
     exports.Save = Save;
 
-    //export function GetAll() {
-    //    var o: baseDAL.BaseDto = new CancelBookingDal();
-    //    return o.doAjaxRequest(null, "GET", "RefundBooking?a=a");
-    //}
     function GetById(id) {
         var o = new RefundBookingDal();
         return o.doAjaxRequest(null, "GET", "RefundBooking?id=" + id);
@@ -49,4 +42,3 @@ define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "CCTrackin
     }
     exports.GetAllAuditRefundBooking = GetAllAuditRefundBooking;
 });
-//# sourceMappingURL=RefundBooking.js.map

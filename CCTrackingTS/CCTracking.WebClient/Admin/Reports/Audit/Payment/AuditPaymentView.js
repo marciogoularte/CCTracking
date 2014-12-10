@@ -1,20 +1,12 @@
-﻿/// <reference path="../../../../../Scripts/typings/require/require.d.ts" />
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
 define(["require", "exports", "../../../../Helper", "marionette", "jquery", "jqueryUI", "knockout", "text!./AuditPayment.html"], function(require, exports, helper) {
-    /// <reference path="../../../../../Scripts/typings/marionette/marionette.d.ts" />
-    /// <amd-dependency path="marionette"/>
-    /// <amd-dependency path="jquery"/>
-    /// <amd-dependency path="jqueryUI"/>
-    /// <amd-dependency path="knockout"/>
-    /// <amd-dependency path="text!./AuditPayment.html"/>
     var _ = require('underscore');
 
-    //import searchCtrl = require("./AuditBookingCtrl");
     var templateView = require("text!./AuditPayment.html");
 
     var app;
@@ -58,16 +50,11 @@ define(["require", "exports", "../../../../Helper", "marionette", "jquery", "jqu
                 options.className = "warning";
             }
 
-            //options.events = {
-            //    "click .jsShowDetail": () => { this.ShowDetail(this.model.get("driverId")); }
-            //};
             _super.call(this, options);
         }
         AuditPaymentItemView.prototype.ShowDetail = function (id) {
-            //this.trigger("DriverSummaryDetail", id);
         };
         return AuditPaymentItemView;
     })(helper.Views.ItemView);
     exports.AuditPaymentItemView = AuditPaymentItemView;
 });
-//# sourceMappingURL=AuditPaymentView.js.map

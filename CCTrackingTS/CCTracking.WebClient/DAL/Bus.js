@@ -41,5 +41,3 @@ define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "../Dtos/B
     }
     exports.GetById = GetById;
 });
-//aaa
-//# sourceMappingURL=Bus.js.map

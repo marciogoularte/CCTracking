@@ -92,6 +92,7 @@
   <ItemGroup>
     <Content Include="Db\CDC-ChangesOnly.txt" />
     <Content Include="Db\ChangeDataCapture.txt" />
+    <Content Include="Db\CleanDb.txt" />
     <Content Include="Db\QryDbModification.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

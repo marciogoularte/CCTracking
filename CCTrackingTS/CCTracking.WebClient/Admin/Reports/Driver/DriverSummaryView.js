@@ -1,12 +1,4 @@
-﻿/// <reference path="../../../../Scripts/typings/require/require.d.ts" />
-/// <reference path="../../../../Scripts/typings/marionette/marionette.d.ts" />
-/// <amd-dependency path="marionette"/>
-/// <amd-dependency path="jquery"/>
-/// <amd-dependency path="jqueryUI"/>
-/// <amd-dependency path="knockout"/>
-/// <amd-dependency path="text!./DriverSummaryTmpl.html"/>
-/// <amd-dependency path="text!./DriverDetail.html"/>
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -62,7 +54,6 @@ define(["require", "exports", "../../../Helper", "marionette", "jquery", "jquery
             options.tagName = "tr";
             options.className = "jsRowClick";
             options.events = {
-                //"mouseover .jsShowDetail": "ShowDetail",
                 "click .jsShowDetail": function () {
                     _this.ShowDetail(_this.model.get("driverId"));
                 }
@@ -70,7 +61,6 @@ define(["require", "exports", "../../../Helper", "marionette", "jquery", "jquery
             _super.call(this, options);
         }
         DriverSummaryItemView.prototype.ShowDetail = function (id) {
-            //new userCtrl.UserCtrl().ShowDetail(this.model);
             this.trigger("DriverSummaryDetail", id);
         };
         return DriverSummaryItemView;
@@ -89,10 +79,8 @@ define(["require", "exports", "../../../Helper", "marionette", "jquery", "jquery
             _super.call(this, options);
         }
         DriverDetailItemView.prototype.ShowDetail = function (id) {
-            //this.trigger("DriverSummaryDetail", id);
         };
         return DriverDetailItemView;
     })(helper.Views.ItemView);
     exports.DriverDetailItemView = DriverDetailItemView;
 });
-//# sourceMappingURL=DriverSummaryView.js.map

@@ -1,12 +1,4 @@
-﻿/// <reference path="../../../../Scripts/typings/require/require.d.ts" />
-/// <reference path="../../../../Scripts/typings/marionette/marionette.d.ts" />
-/// <amd-dependency path="marionette"/>
-/// <amd-dependency path="jquery"/>
-/// <amd-dependency path="jqueryUI"/>
-/// <amd-dependency path="knockout"/>
-/// <amd-dependency path="text!./BusVisitSummaryTmpl.html"/>
-/// <amd-dependency path="text!./BusVisitDetail.html"/>
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -63,7 +55,6 @@ define(["require", "exports", "../../../Helper", "marionette", "jquery", "jquery
             options.tagName = "tr";
             options.className = "jsRowClick";
             options.events = {
-                //"mouseover .jsShowDetail": "ShowDetail",
                 "click .jsShowDetail": function () {
                     _this.ShowDetail(_this.model.get("busId"));
                 }
@@ -71,7 +62,6 @@ define(["require", "exports", "../../../Helper", "marionette", "jquery", "jquery
             _super.call(this, options);
         }
         BusVisitSummaryItemView.prototype.ShowDetail = function (id) {
-            //new userCtrl.UserCtrl().ShowDetail(this.model);
             this.trigger("BusVisitSummaryDetail", id);
         };
         return BusVisitSummaryItemView;
@@ -90,10 +80,8 @@ define(["require", "exports", "../../../Helper", "marionette", "jquery", "jquery
             _super.call(this, options);
         }
         BusVisitDetailItemView.prototype.ShowDetail = function (id) {
-            //this.trigger("DriverSummaryDetail", id);
         };
         return BusVisitDetailItemView;
     })(helper.Views.ItemView);
     exports.BusVisitDetailItemView = BusVisitDetailItemView;
 });
-//# sourceMappingURL=BusVisitSummaryView.js.map

@@ -1,11 +1,4 @@
-﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
-/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
-/// <amd-dependency path="marionette"/>
-/// <amd-dependency path="jquery"/>
-/// <amd-dependency path="jqueryUI"/>
-/// <amd-dependency path="knockout"/>
-/// <amd-dependency path="text!./SearchTmpl.html"/>
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -30,18 +23,11 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "jqueryUI", "
     var SearchView = (function (_super) {
         __extends(SearchView, _super);
         function SearchView(options) {
-            this.template = templateView; //templateView.getOuterHTML("#searchFilter");
+            this.template = templateView;
 
-            //this.events = {
-            //    "click .jsSearch": "Search",
-            //    "click .jsCancel": "Cancel"
-            //}
             _super.call(this, options);
         }
         SearchView.prototype.onDomRefresh = function () {
-            //alert("ddd");
-            //debugger;
-            //this.$el.find("#txtBookingDate").datepicker();
         };
         return SearchView;
     })(helper.Views.MvvmView);
@@ -63,10 +49,11 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "jqueryUI", "
             e.preventDefault();
             this.trigger("SearchBooking");
         };
+        SearchCollectionView.prototype.Cancel = function (e) {
+            e.preventDefault();
+            this.trigger("CancelForm");
+        };
         SearchCollectionView.prototype.onDomRefresh = function () {
-            //alert("ddd");
-            //debugger;
-            //this.$el.find("#txtBookingDate").datepicker();
         };
         return SearchCollectionView;
     })(helper.Views.CompositeView);
@@ -87,10 +74,8 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "jqueryUI", "
             _super.call(this, options);
         }
         SearchItemView.prototype.ShowDetail = function () {
-            //new userCtrl.UserCtrl().ShowDetail(this.model);
         };
         return SearchItemView;
     })(helper.Views.ItemView);
     exports.SearchItemView = SearchItemView;
 });
-//# sourceMappingURL=SearchView.js.map
