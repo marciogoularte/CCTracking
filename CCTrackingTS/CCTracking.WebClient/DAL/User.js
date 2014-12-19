@@ -47,3 +47,5 @@ define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "CCTrackin
     }
     exports.ResetUserPasswrd = ResetUserPasswrd;
 });
+//aaa
+//# sourceMappingURL=User.js.map

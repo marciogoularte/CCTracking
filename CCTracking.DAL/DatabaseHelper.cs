@@ -23,6 +23,7 @@ namespace CCTracking.DAL
             objFactory = DBFactory.GetProvider(provider);
             objConnection = objFactory.CreateConnection();
             objCommand = objFactory.CreateCommand();
+            objCommand.CommandTimeout = 60;
             objConnection.ConnectionString = this.strConnectionString;
             objCommand.Connection = objConnection;
 

@@ -1,10 +1,17 @@
-﻿var __extends = this.__extends || function (d, b) {
+﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
 define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "text!./UserTmpl.html", "text!./UserGrid.html"], function(require, exports, helper) {
+    /// <amd-dependency path="marionette"/>
+    /// <amd-dependency path="jquery"/>
+    /// <amd-dependency path="knockout"/>
+    /// <amd-dependency path="text!./UserTmpl.html"/>
+    /// <amd-dependency path="text!./UserGrid.html"/>
     var _ = require('underscore');
 
     var templateView = require("text!./UserTmpl.html");
@@ -12,6 +19,7 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
 
     var app;
 
+    // View Model
     var UserViewModel = (function (_super) {
         __extends(UserViewModel, _super);
         function UserViewModel(model, controller) {
@@ -21,6 +29,7 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
     })(helper.ViewModel);
     exports.UserViewModel = UserViewModel;
 
+    // View
     var UserView = (function (_super) {
         __extends(UserView, _super);
         function UserView(options) {
@@ -30,8 +39,11 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
                 "click .jsCancel": "Cancel"
             };
             _super.call(this, options);
+            //this.listenTo(this, "TestEvent", () => this.TestFunction());
         }
         UserView.prototype.close = function () {
+            //alert("closeing this view");
+            //this.off("SaveUser");
         };
         UserView.prototype.Cancel = function () {
             this.trigger("CancelForm");
@@ -87,3 +99,4 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
     })(helper.Views.ItemView);
     exports.UserItemView = UserItemView;
 });
+//# sourceMappingURL=UserView.js.map

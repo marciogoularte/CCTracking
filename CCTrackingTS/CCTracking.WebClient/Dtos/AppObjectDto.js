@@ -5,6 +5,9 @@
     d.prototype = new __();
 };
 define(["require", "exports", "backbone"], function(require, exports) {
+    /// <reference path="../../Scripts/typings/require/require.d.ts" />
+    /// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+    /// <amd-dependency path="backbone"/>
     (function (Models) {
         var AppObject = (function (_super) {
             __extends(AppObject, _super);
@@ -25,3 +28,4 @@ define(["require", "exports", "backbone"], function(require, exports) {
     })(exports.Models || (exports.Models = {}));
     var Models = exports.Models;
 });
+//# sourceMappingURL=AppObjectDto.js.map

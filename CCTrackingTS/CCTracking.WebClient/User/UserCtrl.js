@@ -1,10 +1,16 @@
-﻿var __extends = this.__extends || function (d, b) {
+﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
 define(["require", "exports", "../App", "../Helper", "./UserView", "../Dtos/UserDto", "../DAL/User", "marionette", "jquery", "knockout", "text!./UserTmpl.html"], function(require, exports, application, helper, views, dto, DAL) {
+    /// <amd-dependency path="marionette"/>
+    /// <amd-dependency path="jquery"/>
+    /// <amd-dependency path="knockout"/>
+    /// <amd-dependency path="text!./UserTmpl.html"/>
     var _ = require("underscore");
     var ko = require("knockout");
     var kb = require("knockback");
@@ -41,6 +47,7 @@ define(["require", "exports", "../App", "../Helper", "./UserView", "../Dtos/User
             this.userViewModel.bbModel = model;
             this.userViewModel.model = kb.viewModel(model);
 
+            // debugger;
             model.set("firstName", "");
             model.set("lastName", "");
             model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
@@ -77,6 +84,7 @@ define(["require", "exports", "../App", "../Helper", "./UserView", "../Dtos/User
 
         UserCtrl.prototype.GetByIdCompleted = function (userDto) {
             var _this = this;
+            //alert("GetByIdCompleted..");
             this.backboneModel = new Backbone.Model(userDto);
             var model = this.backboneModel;
 
@@ -90,11 +98,13 @@ define(["require", "exports", "../App", "../Helper", "./UserView", "../Dtos/User
                 return _this.Cancel();
             });
 
+            //app = application.Application.getInstance();
             this.app.MainRegion.show(this.userView);
         };
 
         UserCtrl.prototype.Save = function (user) {
             var _this = this;
+            //debugger;
             var appObj = this.app.request("AppGlobalSetting");
             user.set("modifiedBy", appObj.get("Id"));
             user.set("centreId", user.get("alkhidmatCentreSelected").id);
@@ -108,6 +118,7 @@ define(["require", "exports", "../App", "../Helper", "./UserView", "../Dtos/User
 
         UserCtrl.prototype.GetAllCompleted = function (user) {
             var _this = this;
+            // debugger;
             this.collection.reset(user);
             this.collectionView = new views.UserCollectionView({ collection: this.collection });
             this.collectionView.on("itemview:ShowDetail", function (view) {
@@ -124,11 +135,15 @@ define(["require", "exports", "../App", "../Helper", "./UserView", "../Dtos/User
             this.backboneModel = new Backbone.Model(userDto);
             var model = this.backboneModel;
 
+            //console.log(loginResponse);
             if (userDto == undefined) {
+                //alert("User Detail have not been saved successfully!");
                 helper.ShowModalPopup("danger", "User Detail", "User Detail have not been saved successfully!");
             } else {
+                // alert("Record has been saved successfully with User ID : " + userDto["id"]);
                 helper.ShowModalPopup("success", "User Detail", "Record has been saved successfully with User ID : " + userDto["id"]);
 
+                //this.UIBinding(model);
                 this.Cancel();
             }
         };
@@ -188,3 +203,4 @@ define(["require", "exports", "../App", "../Helper", "./UserView", "../Dtos/User
     })(helper.Controller);
     exports.UserCtrl = UserCtrl;
 });
+//# sourceMappingURL=UserCtrl.js.map

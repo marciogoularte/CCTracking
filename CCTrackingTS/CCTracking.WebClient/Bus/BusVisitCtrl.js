@@ -1,10 +1,15 @@
-﻿var __extends = this.__extends || function (d, b) {
+﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
 define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/BusVisitDto", "../DAL/BusVisit", "marionette", "jquery", "knockout"], function(require, exports, application, helper, views, dto, DAL) {
+    /// <amd-dependency path="marionette"/>
+    /// <amd-dependency path="jquery"/>
+    /// <amd-dependency path="knockout"/>
     var _ = require("underscore");
     var ko = require("knockout");
     var kb = require("knockback");
@@ -14,12 +19,19 @@ define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/
         function BusVisitCtrl() {
             _super.call(this);
 
+            //alert("constructor");
             this.app = application.Application.getInstance();
             this.backboneModel = new dto.Models.BusVisitDto();
 
+            //this.viewModel = new views.BusVisitViewModel(this.backboneModel, this);
+            //this.view = new views.BusVisitView({ viewModel: this.viewModel });
+            //this.stationView.on("Event:SaveForm", () => this.Save(this.stationView.model));
+            //this.collection = new dto.Models.BusVisitCollection({});
+            //this.collection = new dto.Models.BusVisitCollection({ id: "", busDesc: "", visitTypeDesc: "", initialReading: "", finalReading: "" });
             this.collection = new dto.Models.BusVisitCollection([]);
             this.collectionView = new views.BusVisitCollectionView({ collection: this.collection });
             this.compositeModel = new Backbone.Model();
+            //this.events.listento
         }
         BusVisitCtrl.prototype.Show = function () {
             var _this = this;
@@ -42,6 +54,7 @@ define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/
             this.compositeModel.set("busSelected", "");
             this.collectionView.model = this.compositeModel;
 
+            //this.collectionView.on("itemview:ShowDetail", (view) => this.GetByIdCompleted(view.model));
             this.collectionView.listenTo(this.collectionView, "Event:SearchVisit", function (busId) {
                 return _this.SearchVisit(busId);
             });
@@ -54,10 +67,48 @@ define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/
             ko.applyBindings(vm, element);
         };
 
+        //setOptionDisable(option, item) {
+        //    alert("dddddd");
+        //}
         BusVisitCtrl.prototype.Load = function () {
             var _this = this;
+            //var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
+            //var model = new dto.Models.StationDto();
             var model = this.backboneModel;
 
+            //this.viewModel.bbModel = model;
+            //this.viewModel.model = kb.viewModel(model);
+            //model.set("outTimeSlotList", lookupResponse.timeSlot);
+            //model.set("outTimeSlotSelected", "");
+            //model.set("reutrnTimeSlotList", lookupResponse.timeSlot);
+            //model.set("returnTimeSlotSelected", "");
+            //model.set("busList", lookupResponse.bus);
+            //model.set("busSelected", "");
+            //model.set("driverList", lookupResponse.driver);
+            //model.set("driverSelected", "");
+            //model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
+            //model.set("alkhidmatCentreSelected", "");
+            //model.set("visitTypeList", lookupResponse.visitType);
+            //model.set("visitTypeSelected", "");
+            //model.set("centreId", "");
+            //model.set("busId", "");
+            //model.set("driverId", "");
+            //model.set("visitTypeId", lookupResponse.landmark);
+            //model.set("bookingId", "");
+            //model.set("inchargeName", "");
+            //model.set("visitDate", "");
+            //model.set("readingWhenFilling", "");
+            //model.set("pumpLocation", "");
+            //model.set("fuelRate", "");
+            //model.set("fuelAmount", "");
+            //model.set("isBookingCompleted", "");
+            //model.set("description", "");
+            //model.set("initialReading", "");
+            //model.set("finalReading", "");
+            //model.set("isActive", "");
+            //model.set("modifiedBy", "");
+            //this.viewModel = new views.BusVisitViewModel(model, this);
+            //this.view = new views.BusVisitView({ viewModel: this.viewModel });
             this.view = new views.BusVisitView();
 
             this.view.on("Event:SaveForm", function (busVisitModel) {
@@ -150,11 +201,13 @@ define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/
             this.backboneModel = new Backbone.Model(dto);
             var model = this.backboneModel;
 
+            //console.log(loginResponse);
             if (dto == undefined) {
                 helper.ShowModalPopup("danger", "Bus Visit", "Bus visit have not been saved successfully!");
             } else {
                 helper.ShowModalPopup("success", "Bus Visit", "Record has been saved successfully with Bus Visit ID : " + dto["id"]);
 
+                //this.UIBinding(model);
                 this.Cancel();
             }
             this.app.vent.trigger("Event:UpdateSummary");
@@ -177,3 +230,4 @@ define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/
     })(helper.Controller);
     exports.BusVisitCtrl = BusVisitCtrl;
 });
+//# sourceMappingURL=BusVisitCtrl.js.map

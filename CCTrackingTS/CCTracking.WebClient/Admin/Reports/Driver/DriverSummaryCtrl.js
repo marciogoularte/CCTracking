@@ -1,10 +1,15 @@
-﻿var __extends = this.__extends || function (d, b) {
+﻿/// <reference path="../../../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../../../Scripts/typings/marionette/marionette.d.ts" />
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
 define(["require", "exports", "../../../App", "../../../Helper", "./DriverSummaryView", "../../../Dtos/DriverDto", "../../../DAL/Driver", "marionette", "jquery", "knockout"], function(require, exports, application, helper, views, dto, DAL) {
+    /// <amd-dependency path="marionette"/>
+    /// <amd-dependency path="jquery"/>
+    /// <amd-dependency path="knockout"/>
     var _ = require("underscore");
     var ko = require("knockout");
     var kb = require("knockback");
@@ -38,6 +43,7 @@ define(["require", "exports", "../../../App", "../../../Helper", "./DriverSummar
             deferred.done(function (p) {
                 return _this.GetDriverDetailCompleted(p);
             });
+            //history.pushState(id,'title' + id);
         };
 
         DriverSummaryCtrl.prototype.GetDriverDetailCompleted = function (driverDetailDto) {
@@ -54,12 +60,14 @@ define(["require", "exports", "../../../App", "../../../Helper", "./DriverSummar
         };
 
         DriverSummaryCtrl.prototype.GetDrvierSummaryCompleted = function (driverSummaryDto) {
+            //TODO:Hack - need rework
             var result = driverSummaryDto["driverList"];
             var summary = [];
             for (var i = 0; i < result.length; i++) {
                 summary[i] = { driverId: result[i].driverId, driverName: result[i].driverName, milage: result[i].milage, visitCount: result[i].visitCount };
             }
             this.backboneCollection.reset(summary);
+            //history.pushState(result[0].driverId, 'title' + result[0].driverId);
         };
 
         DriverSummaryCtrl.prototype.Cancel = function () {
@@ -69,3 +77,4 @@ define(["require", "exports", "../../../App", "../../../Helper", "./DriverSummar
     })(helper.Controller);
     exports.DriverSummaryCtrl = DriverSummaryCtrl;
 });
+//# sourceMappingURL=DriverSummaryCtrl.js.map

@@ -1,10 +1,17 @@
-﻿var __extends = this.__extends || function (d, b) {
+﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
 define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "text!./BusVisit.html", "text!./BusVisitGrid.html"], function(require, exports, helper) {
+    /// <amd-dependency path="marionette"/>
+    /// <amd-dependency path="jquery"/>
+    /// <amd-dependency path="knockout"/>
+    /// <amd-dependency path="text!./BusVisit.html"/>
+    /// <amd-dependency path="text!./BusVisitGrid.html"/>
     var _ = require('underscore');
     var ko = require("knockout");
 
@@ -13,6 +20,7 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
 
     var app;
 
+    // View Model
     var BusVisitViewModel = (function (_super) {
         __extends(BusVisitViewModel, _super);
         function BusVisitViewModel(model, controller) {
@@ -22,6 +30,7 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
     })(helper.ViewModel);
     exports.BusVisitViewModel = BusVisitViewModel;
 
+    // View
     var BusVisitView = (function (_super) {
         __extends(BusVisitView, _super);
         function BusVisitView(options) {
@@ -35,6 +44,9 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
             _super.call(this, options);
         }
         BusVisitView.prototype.close = function () {
+            //alert("closeing this view");
+            //this.off("Event:SaveForm");
+            //this.off("Event:CancelForm");
         };
         BusVisitView.prototype.Cancel = function () {
             this.trigger("Event:CancelForm");
@@ -55,10 +67,16 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
             this.bbModel.set("id", this.viewModel.id());
             this.bbModel.set("isActive", this.viewModel.isActive() == "1" ? true : false);
 
+            //this.bbModel.set("centreId", this.viewModel.centreId());
+            //this.bbModel.set("busId", this.viewModel.busId());
+            //this.bbModel.set("driverId", this.viewModel.driverId());
+            //this.bbModel.set("visitTypeId", this.viewModel.visitTypeId());
             this.bbModel.set("bookingId", this.viewModel.bookingId());
             this.bbModel.set("inchargeName", this.viewModel.inchargeName());
             this.bbModel.set("visitDate", this.viewModel.visitDate());
 
+            //this.bbModel.set("outTime", this.viewModel.outTime());
+            //this.bbModel.set("returnTime", this.viewModel.returnTime());
             this.bbModel.set("readingWhenFilling", this.viewModel.readingWhenFilling());
             this.bbModel.set("pumpLocation", this.viewModel.pumpLocation());
             this.bbModel.set("fuelRate", this.viewModel.fuelRate());
@@ -114,10 +132,12 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
                 this.returnTime = ko.observable();
                 this.readingWhenFilling = ko.observable();
 
+                //only for fueling
                 this.pumpLocation = ko.observable();
                 this.fuelRate = ko.observable();
                 this.fuelAmount = ko.observable();
 
+                //for booking only
                 this.isBookingCompleted = ko.observable();
 
                 this.description = ko.observable();
@@ -170,6 +190,7 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
                 this.returnTime = ko.observable(model.get("returnTime"));
                 this.readingWhenFilling = ko.observable(model.get("readingWhenFilling"));
 
+                //only for fueling
                 if (model.get("pumpLocation") != undefined && model.get("pumpLocation").trim() == "")
                     this.pumpLocation = ko.observable();
                 else
@@ -184,8 +205,9 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
                 else
                     this.fuelAmount = ko.observable(model.get("fuelAmount"));
 
+                //for booking only
                 var flag = model.get("isBookingCompleted") == true ? "1" : "0";
-                this.isBookingCompleted = ko.observable(flag);
+                this.isBookingCompleted = ko.observable(flag); //ko.observable(model.get("isBookingCompleted"));
 
                 this.description = ko.observable(model.get("description"));
                 this.initialReading = ko.observable(model.get("initialReading"));
@@ -249,6 +271,7 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
                         return true;
                     } else if (_this.initialReading() != undefined && _this.finalReading() != undefined) {
                         if (parseInt(_this.initialReading()) > parseInt(_this.finalReading())) {
+                            //alert("Please enter valid reading! Final reading should be greather than the Initial reading");
                             return false;
                         } else {
                             return true;
@@ -300,6 +323,13 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
                 "click .jsShowDetail": "ShowDetail"
             };
 
+            //this.templateHelpers = () => {
+            //    visitDateFormatted: {
+            //        if (this.model.get("visitDate") != undefined) {
+            //            this.model.set("visitDate", helper.FormatDateString(this.model.get("visitDate")));
+            //        }
+            //    }
+            //}
             _super.call(this, options);
         }
         BusVisitItemView.prototype.ShowDetail = function () {
@@ -314,3 +344,4 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
     }
     exports.setOptionDisable = setOptionDisable;
 });
+//# sourceMappingURL=BusVisitView.js.map

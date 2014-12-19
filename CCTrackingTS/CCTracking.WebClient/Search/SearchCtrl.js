@@ -1,10 +1,16 @@
-﻿var __extends = this.__extends || function (d, b) {
+﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
 define(["require", "exports", "../App", "../Helper", "./SearchView", "CCTracking.WebClient/Dtos/SearchDto", "../DAL/Search", "marionette", "jquery", "knockout", "text!./SearchTmpl.html"], function(require, exports, application, helper, views, dto, DAL) {
+    /// <amd-dependency path="marionette"/>
+    /// <amd-dependency path="jquery"/>
+    /// <amd-dependency path="knockout"/>
+    /// <amd-dependency path="text!./SearchTmpl.html"/>
     var _ = require("underscore");
     var ko = require("knockout");
     var kb = require("knockback");
@@ -19,6 +25,7 @@ define(["require", "exports", "../App", "../Helper", "./SearchView", "CCTracking
             this.backboneModel = new dto.Models.SearchDto();
             this.searchViewModel = new views.SearchViewModel(this.backboneModel, this);
 
+            //this.searchView = new views.SearchView({ viewModel: this.searchViewModel });
             this.compositeModel = new Backbone.Model();
             this.collection = new dto.Models.SearchCollection({ id: "", contactName: "", contactMobile: "", contactNic: "", deseasedName: "", address: "", status: "" });
             this.collectionView = new views.SearchCollectionView({ collection: this.collection, model: this.compositeModel });
@@ -44,6 +51,11 @@ define(["require", "exports", "../App", "../Helper", "./SearchView", "CCTracking
             model.set("bookingDate", "");
             this.compositeModel = model;
 
+            //this.searchViewModel = new views.SearchViewModel(this.compositeModel, this);
+            //this.collectionView = new views.SearchCollectionView({ viewModel: this.searchViewModel, collection: null, model: this.compositeModel });
+            //this.collectionView.collection = this.collection;
+            //this.collectionView.model = this.compositeModel;
+            //this.collectionView.on("SearchBooking", () => this.GetByCriteria(this.searchViewModel.bbModel));
             this.collectionView.listenTo(this.collectionView, "SearchBooking", function () {
                 return _this.GetByCriteria(_this.searchViewModel.bbModel);
             });
@@ -55,6 +67,7 @@ define(["require", "exports", "../App", "../Helper", "./SearchView", "CCTracking
 
             var vm = kb.viewModel(this.compositeModel);
 
+            //vm.setOptionDisable = this.collectionView.setOptionDisable;
             var element = $('#ddlGraveyard')[0];
             ko.cleanNode(element);
             ko.applyBindings(vm, element);
@@ -90,9 +103,23 @@ define(["require", "exports", "../App", "../Helper", "./SearchView", "CCTracking
             var bookingDate = $('#txtBookingDate')[0];
             ko.cleanNode(bookingDate);
             ko.applyBindings(vm, bookingDate);
+            //this.searchView = new views.SearchView({ viewModel: this.searchViewModel });
+            //this.searchView.on("SearchBooking", () => this.GetByCriteria(this.searchViewModel.bbModel));
+            //this.searchView.on("CancelForm", () => this.Cancel());
+            //this.app.MainRegion.show(this.searchView);
         };
 
         SearchCtrl.prototype.GetByCriteria = function (searchDto) {
+            //alert('ctrl');
+            //var searchRequest = new dto.Models.SearchDto();
+            ////searchRequest.set("contactInfo", )
+            ////searchRequest.set("deseasedInfo", )
+            //searchRequest.set("gender", searchDto.get("gender").toString());
+            //searchRequest.set("paymentStatus", searchDto.get("paymentStatus").toString());
+            //searchRequest.set("bookingDate", Date.now());
+            //searchRequest.set("greveyard", searchDto.get("graveyardIdSelected").id);
+            //searchRequest.set("centre", searchDto.get("alkhidmatCentreSelected").id);
+            //searchRequest.set("bus", searchDto.get("busSelected").id);
             var _this = this;
             searchDto.set("genderId", searchDto.get("genderId").toString());
             searchDto.set("paymentStatusId", searchDto.get("paymentStatusId").toString());
@@ -115,13 +142,21 @@ define(["require", "exports", "../App", "../Helper", "./SearchView", "CCTracking
         };
 
         SearchCtrl.prototype.GetByCriteriaCompleted = function (searchDto) {
+            //this.collection.reset();
+            //this.collectionView.collection.reset();
             this.collection.reset(searchDto["bookingList"]);
+            //this.collectionView = new views.SearchCollectionView({ collection: this.collection });
+            //this.app.MainRegion.show(this.collectionView);
         };
 
         SearchCtrl.prototype.Cancel = function () {
             this.Load();
+            //this.backboneModel = new dto.Models.SearchDto();
+            //this.searchViewModel = new views.SearchViewModel(this.backboneModel, this);
+            //window.location.href = "#searchBooking";
         };
         return SearchCtrl;
     })(helper.Controller);
     exports.SearchCtrl = SearchCtrl;
 });
+//# sourceMappingURL=SearchCtrl.js.map

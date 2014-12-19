@@ -10,9 +10,6 @@ var kb = require("knockback");
 import application = require("../App");
 import helper = require("../Helper");
 import views = require("./HomeView");
-//import dto = require("CCTracking.WebClient/Dtos/SearchDto");
-//import DAL = require("../DAL/Search");
-
 
 export class HomeCtrl extends helper.Controller {
     homeItemView: views.HomeItemView;

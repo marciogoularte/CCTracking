@@ -1,10 +1,18 @@
-﻿var __extends = this.__extends || function (d, b) {
+﻿/// <reference path="../../Scripts/typings/knockout/knockout.d.ts" />
+/// <reference path="../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
 define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "knockout", "text!./PaymentTmpl.html", "text!./PaymentGrid.html"], function(require, exports, helper, application) {
+    /// <amd-dependency path="marionette"/>
+    /// <amd-dependency path="jquery"/>
+    /// <amd-dependency path="knockout"/>
+    /// <amd-dependency path="text!./PaymentTmpl.html"/>
+    /// <amd-dependency path="text!./PaymentGrid.html"/>
     var _ = require('underscore');
     var ko = require("knockout");
 
@@ -32,10 +40,12 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
 
     var PaymentView = (function (_super) {
         __extends(PaymentView, _super);
+        //availabilityList:any;
         function PaymentView(busList, options) {
             app = application.Application.getInstance();
             this.template = templateView;
 
+            //this.availabilityList = [{}];
             this.viewModel = new ViewModel(busList, options);
 
             this.bbModel = new Backbone.Model();
@@ -46,7 +56,9 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
             _super.call(this, options);
         }
         PaymentView.prototype.AddMore = function () {
+            //var a = this.$el.find("#ddlCentre")
             this.trigger("BusVisitAddItem", this.viewModel.bookingId(), this.viewModel.alkhidmatCentreSelected(), this.viewModel.driverSelected(), this.viewModel.busSelected());
+            ////app.vent.trigger("BusVisitItem:Add", this.busVisitCollection);
         };
 
         PaymentView.prototype.Save = function (e) {
@@ -82,6 +94,7 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
             } else {
                 helper.ShowModalPopup("success", "Payment", "Record has been saved successfully with Payment ID : " + paymentResponse["id"]);
 
+                //alert("Record has been saved successfully with Payment ID : " + paymentResponse["id"]);
                 location.href = "#viewBooking";
             }
             app.vent.trigger("Event:UpdateSummary");
@@ -135,8 +148,10 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                     owner: this,
                     read: function () {
                         if (_this.paymentTypeSelected() != undefined && _this.paymentTypeSelected().id === 2 && _this.easyPaisaTranNo().trim() == "") {
+                            //this.paymentStatus("0");
                             return true;
                         } else {
+                            //this.paymentStatus("1");
                             return false;
                         }
                     }
@@ -144,6 +159,7 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                 this.isPaid = ko.computed({
                     owner: this,
                     read: function () {
+                        //if paid
                         if (_this.paymentStatus() == "1") {
                             return true;
                         } else {
@@ -154,6 +170,7 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                 this.isCancel = ko.computed({
                     owner: this,
                     read: function () {
+                        //if cancel
                         if (_this.paymentStatus() == "2") {
                             return true;
                         } else {
@@ -164,6 +181,7 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                 this.paymentStatusDesc = ko.computed({
                     owner: this,
                     read: function () {
+                        //if paid
                         if (_this.paymentStatus() == "1") {
                             _this.currentDisplay("panel panel-default");
                             return "Paid";
@@ -205,14 +223,17 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                     return p.id == model.get("paymentLocation");
                 });
 
+                //model.set("paymentLocationSelected", paymentLocation[0]);
                 var paymentType = _.filter(lookupResponse.paymentType, function (p) {
                     return p.id == model.get("paymentType");
                 });
 
+                //model.set("paymentTypeSelected", paymentType[0]);
                 var cashier = _.filter(lookupResponse.cashier, function (p) {
                     return p.id == model.get("officerId");
                 });
 
+                //model.set("cashierSelected", cashier[0]);
                 this.paymentLocationSelected = ko.observable(paymentLocation[0]);
                 this.cashierList = ko.observableArray(lookupResponse.cashier);
                 this.cashierSelected = ko.observable(cashier[0]);
@@ -223,8 +244,10 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                     owner: this,
                     read: function () {
                         if (_this.paymentTypeSelected() != undefined && _this.paymentTypeSelected().id === 2 && _this.easyPaisaTranNo().trim() == "") {
+                            //this.paymentStatus("0");
                             return true;
                         } else {
+                            //this.paymentStatus("1");
                             return false;
                         }
                     }
@@ -232,6 +255,7 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                 this.isPaid = ko.computed({
                     owner: this,
                     read: function () {
+                        //if paid
                         if (_this.paymentStatus() == "1") {
                             return true;
                         } else {
@@ -242,6 +266,7 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                 this.isCancel = ko.computed({
                     owner: this,
                     read: function () {
+                        //if cancel
                         if (_this.paymentStatus() == "2") {
                             return true;
                         } else {
@@ -252,6 +277,7 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                 this.paymentStatusDesc = ko.computed({
                     owner: this,
                     read: function () {
+                        //if paid
                         if (_this.paymentStatus() == "1") {
                             _this.currentDisplay("panel panel-default");
                             return "Paid";
@@ -308,10 +334,13 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
         }
         BusVisitItemView.prototype.RemoveItem = function () {
             this.trigger("BusVisitRemoveItem", this.model.get("busId"), this.model.get("centreId"), this.model.get("driverId"));
+            //this.trigger("BusVisitRemoveItem", this.model.get("busVisitId"));
         };
         BusVisitItemView.prototype.ShowDetail = function () {
+            //new userCtrl.UserCtrl().ShowDetail(this.model);
         };
         return BusVisitItemView;
     })(helper.Views.ItemView);
     exports.BusVisitItemView = BusVisitItemView;
 });
+//# sourceMappingURL=PaymentView.js.map
