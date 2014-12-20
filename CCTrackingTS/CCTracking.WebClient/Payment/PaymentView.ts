@@ -62,7 +62,8 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
             this.viewModel.bookingId(),
             this.viewModel.alkhidmatCentreSelected(),
             this.viewModel.driverSelected(),
-            this.viewModel.busSelected()
+            this.viewModel.busSelected(),
+            this.viewModel.fuelAmount()
             );
         ////app.vent.trigger("BusVisitItem:Add", this.busVisitCollection);
     }
@@ -81,6 +82,8 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
         this.bbModel.set("extraAmountCharge", this.viewModel.extraAmountCharge());
         this.bbModel.set("extraAmountReason", this.viewModel.extraAmountReason());
         this.bbModel.set("extraAmountReceipt", this.viewModel.extraAmountReceipt());
+        this.bbModel.set("isReferralBookingPaid", this.viewModel.isReferralBookingPaid() == "1" ? true : false);
+        this.bbModel.set("referralPaymentDate", this.viewModel.referralPaymentDate());
         this.bbModel.set("easyPaisaTranNo", this.viewModel.easyPaisaTranNo());
 
         this.bbModel.set("bus", this.viewModel.busSelected().id);
@@ -89,6 +92,8 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
         this.bbModel.set("paymentLocation", this.viewModel.paymentLocationSelected().id);
         this.bbModel.set("officerId", this.viewModel.cashierSelected().id);
         this.bbModel.set("paymentType", this.viewModel.paymentTypeSelected().id);
+        this.bbModel.set("fuelAmount", this.viewModel.fuelAmount());
+
 
         this.trigger("PaymentSave", this.bbModel);
     }
@@ -126,10 +131,13 @@ export class ViewModel {
     extraAmountCharge: any;
     extraAmountReason: any;
     extraAmountReceipt: any;
+    isReferralBookingPaid: any;
+    referralPaymentDate: any;
     paymentStatus: any;
     easyPaisaTranNo: any;
 
     busList: any;
+    fuelAmount :any;
     busSelected: any;
     driverList: any;
     driverSelected: any;
@@ -161,6 +169,8 @@ export class ViewModel {
             this.extraAmountCharge = ko.observable();
             this.extraAmountReason = ko.observable();
             this.extraAmountReceipt = ko.observable();
+            this.isReferralBookingPaid = ko.observable();
+            this.referralPaymentDate = ko.observable();
             this.paymentStatus = ko.observable();
             
             this.easyPaisaTranNo = ko.observable();
@@ -168,6 +178,7 @@ export class ViewModel {
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
 
             this.busList = ko.observableArray(busLsit);
+            this.fuelAmount = ko.observable();
             this.busSelected = ko.observable();
             this.driverList = ko.observableArray(lookupResponse.driver);
             this.driverSelected = ko.observable();
@@ -232,6 +243,15 @@ export class ViewModel {
                     }
                 }
             });
+            //this.amount = ko.computed({
+            //    owner: this,
+            //    read: () => {
+            //        return 0;
+            //    },
+            //    write: (a) => {
+            //        //return 0;
+            //    }
+            //});
         }
         else {
             this.Id = ko.observable(model.get("id"));
@@ -245,12 +265,22 @@ export class ViewModel {
             this.extraAmountCharge = ko.observable(model.get("extraAmountCharge"));
             this.extraAmountReason = ko.observable(model.get("extraAmountReason"));
             this.extraAmountReceipt = ko.observable(model.get("extraAmountReceipt"));
+            
+            this.isReferralBookingPaid = ko.observable(model.get("isReferralBookingPaid") ? "1" : "0");
+
+            if (model.get("referralPaymentDate") != "0001-01-01T00:00:00")
+                this.referralPaymentDate = ko.observable(helper.FormatDateString(model.get("referralPaymentDate")));
+            else
+                this.referralPaymentDate  = ko.observable("");
+
+            //this.referralPaymentDate = ko.observable(model.get("referralPaymentDate"));
             this.paymentStatus = ko.observable(model.get("paymentStatus"));
             this.easyPaisaTranNo = ko.observable(model.get("easyPaisaTranNo"));
 
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
 
             this.busList = ko.observableArray(busLsit);
+            this.fuelAmount = ko.observable(model.get("fuelAmoun"));
             this.busSelected = ko.observable();
             this.driverList = ko.observableArray(lookupResponse.driver);
             this.driverSelected = ko.observable();
@@ -323,6 +353,28 @@ export class ViewModel {
                     }
                 }
             });
+            //this.amount = ko.computed({
+            //    owner: this,
+            //    read: () => {
+            //        if (model != undefined && model.get("busVisits") != undefined && model.get("busVisits").length>0) {
+            //            var sum = _.reduce(model.get("busVisits"), (memo, item) => memo + item.fuelAmount, 0);
+            //            return sum;
+            //        } else {
+            //            return 0;
+            //        }
+            //    },
+            //    write: (a) => {
+            //        this.amount = a;
+            //        //return a;
+            //        //debugger;
+            //        //if (model != undefined && model.get("busVisits") != undefined && model.get("busVisits").length > 0) {
+            //        //    var sum = _.reduce(model.get("busVisits"), (memo, item) => memo + item.fuelAmount, 0);
+            //        //    return sum;
+            //        //} else {
+            //        //    return 0;
+            //        //}
+            //    }
+            //});
 
         }
     }

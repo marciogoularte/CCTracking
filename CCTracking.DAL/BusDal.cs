@@ -41,6 +41,7 @@ namespace CCTracking.DAL
             Bus bus = baseModel as Bus;
             dictionary.Add("@CentreId", bus.CentreId);
             dictionary.Add("@VehicleNo", bus.VehicleNo);
+            dictionary.Add("@AlkhidmatBusNo", bus.AlkhidmatBusNo);
             dictionary.Add("@TrackingDeviceId", bus.TrackingDeviceId);
             dictionary.Add("@ModelNo", bus.ModelNo);
             dictionary.Add("@No", bus.No);
@@ -93,6 +94,8 @@ namespace CCTracking.DAL
                 bus.CentreDesc = dr.GetString(dr.GetOrdinal("CentreDesc"));
             if (!dr.IsDBNull(dr.GetOrdinal("VehicleNo")))
                 bus.VehicleNo = dr.GetString(dr.GetOrdinal("VehicleNo"));
+            if (!dr.IsDBNull(dr.GetOrdinal("AlkhidmatBusNo")))
+                bus.AlkhidmatBusNo = dr.GetInt32(dr.GetOrdinal("AlkhidmatBusNo"));
             if (!dr.IsDBNull(dr.GetOrdinal("TrackingDeviceId")))
                 bus.TrackingDeviceId = dr.GetString(dr.GetOrdinal("TrackingDeviceId"));
             if (!dr.IsDBNull(dr.GetOrdinal("ModelNo")))

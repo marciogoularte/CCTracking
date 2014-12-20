@@ -14,6 +14,7 @@ namespace CCTracking.Dto
         public byte CauseOfDeath { get; set; }
         public string Address { get; set; }
 
+        public int AlkhidmatCentreId { get; set; }
         public int BusPoint { get; set; }
         public int LandmarkId { get; set; }
         public int UnionCouncilId { get; set; }
@@ -27,6 +28,10 @@ namespace CCTracking.Dto
         public string NamazEJanazaLocation { get; set; }
         public string MasjidName{ get; set; }        
         public string OtherDetail { get; set; }
+
+        public bool IsReferralBooking { get; set; }
+        public string ReferralName { get; set; }
+        public string ReferralDetail { get; set; }
 
         //for auditing purpose
         public int OperationType { get; set; }

@@ -80,6 +80,7 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
             this.bbModel.set("readingWhenFilling", this.viewModel.readingWhenFilling());
             this.bbModel.set("pumpLocation", this.viewModel.pumpLocation());
             this.bbModel.set("fuelRate", this.viewModel.fuelRate());
+            this.bbModel.set("fuelQuantity", this.viewModel.fuelQuantity());
             this.bbModel.set("fuelAmount", this.viewModel.fuelAmount());
             this.bbModel.set("isBookingCompleted", this.viewModel.isBookingCompleted());
             this.bbModel.set("description", this.viewModel.description());
@@ -135,7 +136,8 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
                 //only for fueling
                 this.pumpLocation = ko.observable();
                 this.fuelRate = ko.observable();
-                this.fuelAmount = ko.observable();
+                this.fuelAmount = ko.observable(); //update
+                this.fuelQuantity = ko.observable();
 
                 //for booking only
                 this.isBookingCompleted = ko.observable();
@@ -204,6 +206,10 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
                     this.fuelAmount = ko.observable();
                 else
                     this.fuelAmount = ko.observable(model.get("fuelAmount"));
+                if (model.get("fuelQuantity") != undefined && model.get("fuelQuantity") == "0")
+                    this.fuelQuantity = ko.observable();
+                else
+                    this.fuelQuantity = ko.observable(model.get("fuelQuantity"));
 
                 //for booking only
                 var flag = model.get("isBookingCompleted") == true ? "1" : "0";

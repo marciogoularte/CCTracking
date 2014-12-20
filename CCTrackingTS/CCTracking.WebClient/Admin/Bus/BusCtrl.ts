@@ -6,8 +6,6 @@
 /// <amd-dependency path="knockout"/>
 /// <amd-dependency path="text!./BusTmpl.html"/>
 
-
-
 var _ = require("underscore");
 var ko = require("knockout");
 var kb = require("knockback");
@@ -62,6 +60,7 @@ export class BusCtrl extends helper.Controller {
         // debugger;
         model.set("trackingDeviceId", "");
         model.set("vehicleNo", "");
+        model.set("alkhidmatBusNo", "");
         model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
         model.set("alkhidmatCentreSelected", "");
         model.set("busModelList", lookupResponse.busModel);

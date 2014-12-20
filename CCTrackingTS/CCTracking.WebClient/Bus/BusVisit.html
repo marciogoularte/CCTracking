@@ -65,8 +65,8 @@
                                 data-bind="options: reutrnTimeSlotList, optionsText:'description', value:returnTimeSlotSelected">
                             </select>
                             </tr>
-                            <tr style="display:none">
-                                <td class="col-sm-4 col-md-4 input-sm">Current Reading</td>
+                            <tr >
+                                <td class="col-sm-4 col-md-4 input-sm">Filling Meter Reading </td>
                                 <td class="col-sm-8 col-md-8">
                                     <input type="text" class="form-control input-sm" placeholder="Current Reading" data-bind="value:readingWhenFilling" />
                                         <!--required="required" data-role="validate" title="Current Reading" data-content="Current reading is required" />   -->
@@ -115,6 +115,13 @@
                                 <td class="col-sm-8 col-md-8">
                                     <input type="text" placeholder="Fuel Amount"  class="form-control input-sm" data-bind="value:fuelAmount, enable:isPatrolPump()" 
                                         required="required" data-role="validate" title="Fuel Amount" data-content="Fuel amount is required"  />   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-4 col-md-4 input-sm">Fuel Quantity (Liter)</td>
+                                <td class="col-sm-8 col-md-8">
+                                    <input type="text" placeholder="Fuel Quantity"  class="form-control input-sm" data-bind="value:fuelQuantity, enable:isPatrolPump()" 
+                                        required="required" data-role="validate" title="Fuel Quantity" data-content="Fuel quantity is required"  />   
                                 </td>
                             </tr>
                             <tr>

@@ -89,7 +89,7 @@ export class PaymentCtrl extends helper.Controller {
         this.paymentView = new views.PaymentView(busList,model);
         var vm = this.paymentView.viewModel;
 
-        this.paymentView.on("BusVisitAddItem", (bookingId, alkhidmatCentre, driver, bus) => this.AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus));
+        this.paymentView.on("BusVisitAddItem", (bookingId, alkhidmatCentre, driver, bus, fuelAmount) => this.AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus, fuelAmount));
         this.paymentView.on("PaymentSave", (bbmodel) => this.Save(bbmodel));
 
         this.backboneCollection = new Backbone.Collection(model.get("busVisits"));
@@ -116,7 +116,7 @@ export class PaymentCtrl extends helper.Controller {
         this.layout = app.AppLayout;
         this.paymentView = new views.PaymentView(busList);
 
-        this.paymentView.on("BusVisitAddItem", (bookingId, alkhidmatCentre, driver, bus) => this.AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus));
+        this.paymentView.on("BusVisitAddItem", (bookingId, alkhidmatCentre, driver, bus, fuelAmount) => this.AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus, fuelAmount));
         this.paymentView.on("PaymentSave", (bbmodel) => this.Save(bbmodel));
         app.MainRegion.show(this.paymentView);
         app.SubRegion.reset();
@@ -166,7 +166,11 @@ export class PaymentCtrl extends helper.Controller {
     //    app.SubRegion.show(this.busVisitCollectionView);
     //}
 
-    AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus) {
+    AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus, fuelAmount) {
+        if (fuelAmount == undefined || fuelAmount === 0) {
+            helper.ShowModalPopup("danger", "Bus Info", "Please enter valid amount!");
+            return;
+        }
         var counter = this.idCounter++;
         var busExist = this.backboneCollection.findWhere({ busId: bus.id });
         var driverExist = this.backboneCollection.findWhere({ driverId: driver.id });
@@ -186,17 +190,24 @@ export class PaymentCtrl extends helper.Controller {
                 visitTypeId: "2",
                 isAvailableForBooking: false,
                 isAvailableForFutureBooking: false,
-                bookingId: bookingId
+                bookingId: bookingId,
+                fuelAmount: fuelAmount
             }));
+            
             this.busVisitCollectionView.collection = this.backboneCollection;
+
+            var sum = _.reduce(this.backboneCollection.models, (memo, item) => memo + parseFloat(item.get("fuelAmount")), 0);
+            this.paymentView.viewModel.amount(sum);
         }
         else {
-            alert("Already exists!");
+            helper.ShowModalPopup("danger", "Bus Info", "Entry already exists!");
         }
 
     }
     RemoveBusVisitItem(busId, centreId, driverId) {
         this.backboneCollection.remove(this.backboneCollection.findWhere({ busId: busId, centreId: centreId, driverId: driverId }));
+        var sum = _.reduce(this.backboneCollection.models, (memo, item) => memo + parseFloat(item.get("fuelAmount")), 0);
+        this.paymentView.viewModel.amount(sum);
     }
 
     //GetAll() {

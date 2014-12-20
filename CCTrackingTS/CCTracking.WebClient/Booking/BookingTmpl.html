@@ -1,9 +1,10 @@
 ﻿<div id="BookingMainPane">
     <div class="panel panel-default">
-        <div class="panel-heading header-bold"><span class="fa fa-book">&nbsp;</span> BOOKING REQUEST FORM
+        <div class="panel-heading header-bold">
+            <span class="fa fa-book">&nbsp;</span> BOOKING REQUEST FORM
             <div class="pull-right">
                 Booking ID - <span data-bind="text: model.id"></span>
-             </div>
+            </div>
         </div>
         <div class="panel-body">
             <form id="form1">
@@ -14,14 +15,14 @@
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Name</td>
                         <td class="col-sm-8 col-md-8">
-                            <input type="text" id="txtName" class="form-control input-sm" data-bind="value: model.contactName"  placeholder="Contact Name"
+                            <input type="text" id="txtName" class="form-control input-sm" data-bind="value: model.contactName" placeholder="Contact Name"
                                 required="required" data-role="validate" title="Contact Name" maxlength="200" data-content="Contact name is required" />
                         </td>
                     </tr>
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Mobile</td>
                         <td class="col-sm-8 col-md-8">
-                            <input type="text" id="txtMobile" class="form-control input-sm"  data-bind="value: model.contactMobile"  placeholder="Contact Mobile"
+                            <input type="text" id="txtMobile" class="form-control input-sm" data-bind="value: model.contactMobile" placeholder="Contact Mobile"
                                 required="required" data-role="validate" title="Contact Mobile" maxlength="200" data-content="Contact mobile is required" />
                         </td>
                     </tr>
@@ -56,16 +57,15 @@
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Cause/Place of Death</td>
                         <td class="col-sm-8 col-md-8">
-                            <select id="ddlCauseOfDeath" class="form-control input-sm" 
+                            <select id="ddlCauseOfDeath" class="form-control input-sm"
                                 data-bind="options: model.causeOfDeathList, optionsText:'description', value:model.causeOfDeathSelected">
-
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Address</td>
                         <td class="col-sm-8 col-md-8">
-                            <textarea id="txtAddress"  class="form-control input-sm"  data-bind="value: model.address"></textarea>
+                            <textarea id="txtAddress" class="form-control input-sm" data-bind="value: model.address"></textarea>
                         </td>
                     </tr>
                     <!--<tr>
@@ -81,11 +81,17 @@
                         <td colspan="2" class="header-bold">Booking Details</td>
                     </tr>
                     <tr>
+                        <td class="col-sm-4 col-md-4 input-sm">Alkhidmat/Co-Partners</td>
+                        <td class="col-sm-8 col-md-8">
+                            <select id="ddlCentre" class="form-control input-sm"
+                                data-bind="options: model.alkhidmatCentreList, optionsText:'description', value:model.alkhidmatCentreSelected">
+                            </select></td>
+                    </tr>
+                    <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Bus Point</td>
                         <td class="col-sm-8 col-md-8">
                             <select id="Select1" class="form-control input-sm"
                                 data-bind="options: model.busPointList, optionsText:'description', value:model.busPointSelected">
-                                
                             </select>
                         </td>
                     </tr>
@@ -109,7 +115,7 @@
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Pick-up Date</td>
                         <td class="col-sm-8 col-md-8">
-                            <input type="text" id="PickupDate" placeholder="mm/dd/yyyy" class="form-control input-sm" data-bind="datepicker: {}, value: model.pickupDate" 
+                            <input type="text" id="PickupDate" placeholder="mm/dd/yyyy" class="form-control input-sm" data-bind="datepicker: {}, value: model.pickupDate"
                                 required="required" data-role="validate" title="Pick-up Date" data-content="Pickup Date is required" />
                         </td>
                     </tr>
@@ -125,7 +131,7 @@
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Return Time</td>
                         <td class="col-sm-8 col-md-8">
-                             <select id="ddlReturnTime" class="form-control input-sm"
+                            <select id="ddlReturnTime" class="form-control input-sm"
                                 data-bind="options: model.returnTimeSlotList, optionsText:'description', value:model.returnTimeSlotSelected">
                             </select>
                         </td>
@@ -146,7 +152,7 @@
                             </select>
                         </td>
                     </tr>
-                     <tr>
+                    <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Funeral Location</td>
                         <td class="col-sm-8 col-md-8">
                             <input type="text" id="Text1" class="form-control input-sm" placeholder="Funeral Location" data-bind="value: model.namazEJanazaLocation" />
@@ -158,7 +164,7 @@
                             <input type="text" id="Text2" class="form-control input-sm" placeholder="Masjid Name" data-bind="value: model.masjidName" />
                         </td>
                     </tr>
-                   <!-- 
+                    <!-- 
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Bus Detail</td>
                         <td class="col-sm-8 col-md-8">
@@ -191,10 +197,32 @@
                         </td>
                     </tr>
                     -->
-                     <tr>
+                    <tr>
+                        <td class="col-sm-4 col-md-4 input-sm">Is Referral Booking</td>
+                        <td class="col-sm-8 col-md-8">
+                            <input type="radio" name="rbIsReferralBoking" value="1" data-bind="checked: model.isReferralBooking" />Yes
+                                    &nbsp;
+                                    <input type="radio" name="rbIsReferralBoking" value="0" data-bind="checked: model.isReferralBooking" />No 
+                           <!-- <input type="checkbox" id="chkIsReferralBooking" class="form-control input-sm"  data-bind="checked: model.isReferralBoking" />-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-4 col-md-4 input-sm">Referral Name</td>
+                        <td class="col-sm-8 col-md-8">
+                            <input type="text" id="txtReferralName" class="form-control input-sm" placeholder="Referral Name" data-bind="value: model.referralName"></textarea>                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-4 col-md-4 input-sm">Referral Details</td>
+                        <td class="col-sm-8 col-md-8">
+                            <textarea id="txtReferralDetails" class="form-control input-sm" placeholder="Referral Details" data-bind="value: model.referralDetail"></textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Other Details</td>
                         <td class="col-sm-8 col-md-8">
-                            <textarea id="txtOtherDetails" class="form-control input-sm" placeholder="set place holder" data-bind="value: model.otherDetail" ></textarea>                            
+                            <textarea id="txtOtherDetails" class="form-control input-sm" placeholder="set place holder" data-bind="value: model.otherDetail"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -235,5 +263,5 @@
             });
         });
     </script>
-    
+
 </div>

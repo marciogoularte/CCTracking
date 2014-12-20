@@ -39,6 +39,8 @@ namespace CCTracking.DAL
             dictionary.Add("@ExtraAmountReceipt", payment.ExtraAmountReceipt);
             dictionary.Add("@PaymentStatus", payment.PaymentStatus);
             dictionary.Add("@EasyPaisaTranNo", payment.EasyPaisaTranNo);
+            dictionary.Add("@IsReferralBookingPaid", payment.IsReferralBookingPaid);
+            dictionary.Add("@ReferralPaymentDate", payment.ReferralPaymentDate);
             dictionary.Add("@CreatedBy", payment.CreatedBy);
             dictionary.Add("@ModifiedBy", payment.ModifiedBy);
             dictionary.Add("@ModifiedDate", payment.ModifiedDate);
@@ -102,6 +104,9 @@ namespace CCTracking.DAL
             payment.EasyPaisaTranNo = dr["EasyPaisaTranNo"].ToString();
             payment.CreatedBy = Convert.ToInt32(dr["CreatedBy"]);
             payment.ModifiedBy = Convert.ToInt32(dr["ModifiedBy"]);
+
+            payment.IsReferralBookingPaid = dr["IsReferralBookingPaid"] == DBNull.Value ? false : Convert.ToBoolean(dr["IsReferralBookingPaid"]);
+            payment.ReferralPaymentDate = dr["ReferralPaymentDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr["ReferralPaymentDate"]);
         }
 
     }

@@ -23,6 +23,7 @@ export module Models {
                 pumpLocation: "",
                 fuelRate: "",
                 fuelAmount: "",
+                fuelQuantity:"",
                 isBookingCompleted: "",
                 description:"",
                 initialReading: "",

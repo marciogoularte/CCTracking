@@ -11,6 +11,7 @@ export module Models {
                 stationId: "",
                 trackingDeviceId: "",
                 vehicleNo: "",
+                alkhidmatBusNo:"",
                 no: "",
                 modelNo: "",
                 description: "",

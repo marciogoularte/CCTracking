@@ -19,7 +19,9 @@ export module Models {
                 extraAmountCharge: "",
                 extraAmountReason: "",
                 extraAmountReceipt: "",
-                paymentStatus: ""
+                paymentStatus: "",
+                isReferralBookingPaid: "",
+                referralPaymentDate : ""
             }
         }
     }
@@ -38,7 +40,9 @@ export module Models {
                 extraAmountReason: "",
                 extraAmountReceipt: "",
                 paymentStatus: "",
-                easyPaisaTranNo: ""
+                easyPaisaTranNo: "",
+                isReferralBookingPaid: "",
+                referralPaymentDate: ""
             }
         }
     }

@@ -89,8 +89,8 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "../DAL/Pa
             this.paymentView = new views.PaymentView(busList, model);
             var vm = this.paymentView.viewModel;
 
-            this.paymentView.on("BusVisitAddItem", function (bookingId, alkhidmatCentre, driver, bus) {
-                return _this.AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus);
+            this.paymentView.on("BusVisitAddItem", function (bookingId, alkhidmatCentre, driver, bus, fuelAmount) {
+                return _this.AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus, fuelAmount);
             });
             this.paymentView.on("PaymentSave", function (bbmodel) {
                 return _this.Save(bbmodel);
@@ -122,8 +122,8 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "../DAL/Pa
             this.layout = app.AppLayout;
             this.paymentView = new views.PaymentView(busList);
 
-            this.paymentView.on("BusVisitAddItem", function (bookingId, alkhidmatCentre, driver, bus) {
-                return _this.AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus);
+            this.paymentView.on("BusVisitAddItem", function (bookingId, alkhidmatCentre, driver, bus, fuelAmount) {
+                return _this.AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus, fuelAmount);
             });
             this.paymentView.on("PaymentSave", function (bbmodel) {
                 return _this.Save(bbmodel);
@@ -170,7 +170,11 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "../DAL/Pa
         //    app.SubRegion.reset();
         //    app.SubRegion.show(this.busVisitCollectionView);
         //}
-        PaymentCtrl.prototype.AddBusVisitItem = function (bookingId, alkhidmatCentre, driver, bus) {
+        PaymentCtrl.prototype.AddBusVisitItem = function (bookingId, alkhidmatCentre, driver, bus, fuelAmount) {
+            if (fuelAmount == undefined || fuelAmount === 0) {
+                helper.ShowModalPopup("danger", "Bus Info", "Please enter valid amount!");
+                return;
+            }
             var counter = this.idCounter++;
             var busExist = this.backboneCollection.findWhere({ busId: bus.id });
             var driverExist = this.backboneCollection.findWhere({ driverId: driver.id });
@@ -189,15 +193,26 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "../DAL/Pa
                     visitTypeId: "2",
                     isAvailableForBooking: false,
                     isAvailableForFutureBooking: false,
-                    bookingId: bookingId
+                    bookingId: bookingId,
+                    fuelAmount: fuelAmount
                 }));
+
                 this.busVisitCollectionView.collection = this.backboneCollection;
+
+                var sum = _.reduce(this.backboneCollection.models, function (memo, item) {
+                    return memo + parseFloat(item.get("fuelAmount"));
+                }, 0);
+                this.paymentView.viewModel.amount(sum);
             } else {
-                alert("Already exists!");
+                helper.ShowModalPopup("danger", "Bus Info", "Entry already exists!");
             }
         };
         PaymentCtrl.prototype.RemoveBusVisitItem = function (busId, centreId, driverId) {
             this.backboneCollection.remove(this.backboneCollection.findWhere({ busId: busId, centreId: centreId, driverId: driverId }));
+            var sum = _.reduce(this.backboneCollection.models, function (memo, item) {
+                return memo + parseFloat(item.get("fuelAmount"));
+            }, 0);
+            this.paymentView.viewModel.amount(sum);
         };
 
         //GetAll() {

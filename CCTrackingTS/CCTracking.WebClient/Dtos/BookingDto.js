@@ -28,6 +28,7 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
                     causeOfDeath: "",
                     causeOfDeathSelected: "",
                     address: "",
+                    alkhidmatCentreId: "",
                     busPoint: "",
                     unionCouncil: "",
                     town: "",
@@ -38,7 +39,10 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
                     namazEJanazaHeldIn: "",
                     namazEJanazaLocation: "",
                     masjidName: "",
-                    otherDetail: ""
+                    otherDetail: "",
+                    isReferralBooking: "",
+                    referralName: "",
+                    referralDetail: ""
                 };
             };
             return BookingRequest;
@@ -72,7 +76,10 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
                     namazEJanazaHeldIn: "",
                     namazEJanazaLocation: "",
                     masjidName: "",
-                    otherDetail: ""
+                    otherDetail: "",
+                    isReferralBooking: "",
+                    referralName: "",
+                    referralDetail: ""
                 };
             };
             return BookingResponse;

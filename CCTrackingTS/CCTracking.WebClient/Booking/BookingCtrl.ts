@@ -15,8 +15,6 @@ import dto = require("CCTracking.WebClient/Dtos/BookingDto");
 import DAL = require("../DAL/Booking");
 
 var app;
-
-
 export class BookingCtrl extends helper.Controller {
     private bookingViewModel: views.BookingViewModel;
     bookingView: views.BookingView;
@@ -58,7 +56,8 @@ export class BookingCtrl extends helper.Controller {
         model.set("pickupTimeSlotList", lookupResponse.timeSlot);
         model.set("returnTimeSlotList", lookupResponse.timeSlot);
         model.set("prayersList", lookupResponse.prayers);
-
+        model.set("prayersList", lookupResponse.prayers);
+        model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
 
 
         var causeOfDeath = _.filter(lookupResponse.causeOfDeath, (p) => { return p.id == model.get("causeOfDeath") });
@@ -73,6 +72,8 @@ export class BookingCtrl extends helper.Controller {
         var returnTime = _.filter(lookupResponse.timeSlot, (p) => { return p.id == model.get("returnTime") });
         var prayer = _.filter(lookupResponse.prayers, (p) => { return p.id == model.get("namazEJanazaHeldIn") });
 
+        var alkhidmatCentre = _.filter(lookupResponse.alkhidmatCentre, (p) => { return p.id == model.get("alkhidmatCentreId") });
+
         model.set("causeOfDeathSelected", causeOfDeath[0]);//model.get("causeOfDeath")
         //model.set("landmarkIdSelected", landmark[0]);
         model.set("busPointSelected", busPoint[0]);
@@ -81,11 +82,14 @@ export class BookingCtrl extends helper.Controller {
         model.set("graveyardIdSelected", graveyard[0]);
         model.set("busDetailIdSelected", busDetail[0]);
         model.set("deseasedGender", model.get("deseasedGender").toString());
+        model.set("alkhidmatCentreSelected", alkhidmatCentre[0]);
 
 
         model.set("pickupTimeSlotSelected", pickupTime[0]);
         model.set("returnTimeSlotSelected", returnTime[0]);
         model.set("prayersSelected", prayer[0]);
+
+        model.set("isReferralBooking", model.get("isReferralBooking") ? "1" : "0");
 
         model.set("pickupDate", helper.FormatDateString(model.get("pickupDate")));
         this.bookingViewModel = new views.BookingViewModel(model, this);
@@ -113,6 +117,9 @@ export class BookingCtrl extends helper.Controller {
         model.set("busPointList", lookupResponse.landmark);
         model.set("busPointSelected", "");
 
+        model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
+        model.set("alkhidmatCentreSelected", "");
+
         model.set("unionCouncilList", lookupResponse.unionCouncil);
         model.set("unionCouncilIdSelected", "");
         model.set("townList", lookupResponse.town);
@@ -134,6 +141,9 @@ export class BookingCtrl extends helper.Controller {
         model.set("namazEJanazaLocation", "");
         model.set("masjidName", "");
         model.set("otherDetail", "");
+        model.set("isReferralBooking", "");
+        model.set("referralName", "");
+        model.set("referralDetail", "");
 
 
         //model.set("busDetailsList", lookupResponse.bus);
@@ -175,6 +185,10 @@ export class BookingCtrl extends helper.Controller {
         booking.set("pickupTime", booking.get("pickupTimeSlotSelected").id);
         booking.set("returnTime", booking.get("returnTimeSlotSelected").id);
         booking.set("namazEJanazaHeldIn", booking.get("prayersSelected").id);
+
+        booking.set("alkhidmatCentreId", booking.get("alkhidmatCentreSelected").id);
+        booking.set("isReferralBooking", booking.get("isReferralBooking") == "1" ? true : false);
+
 
         //booking.set("busDetailId", booking.get("busDetailIdSelected").id);
         var deferred = DAL.Save(booking);

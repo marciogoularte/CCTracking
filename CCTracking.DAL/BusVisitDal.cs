@@ -59,6 +59,7 @@ namespace CCTracking.DAL
             dictionary.Add("@InitialReading", busVisit.InitialReading);
             dictionary.Add("@FinalReading", busVisit.FinalReading);
             dictionary.Add("@Description", busVisit.Description);
+            dictionary.Add("@FuelQuantity", busVisit.FuelQuantity);
             base.ExecuteSql(busVisit, dictionary);
             return "dbo.SaveBusVisit";
         }
@@ -138,6 +139,8 @@ namespace CCTracking.DAL
                 busVisit.FuelRate = dr.GetDecimal(dr.GetOrdinal("FuelRate"));
             if (!dr.IsDBNull(dr.GetOrdinal("FuelAmount")))
                 busVisit.FuelAmount = dr.GetDecimal(dr.GetOrdinal("FuelAmount"));
+            if (!dr.IsDBNull(dr.GetOrdinal("FuelQuantity")))
+                busVisit.FuelQuantity = dr.GetDecimal(dr.GetOrdinal("FuelQuantity"));
             if (!dr.IsDBNull(dr.GetOrdinal("IsBookingCompleted")))
                 busVisit.IsBookingCompleted = dr.GetBoolean(dr.GetOrdinal("IsBookingCompleted"));
             if (!dr.IsDBNull(dr.GetOrdinal("InitialReading")))

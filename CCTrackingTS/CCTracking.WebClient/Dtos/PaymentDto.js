@@ -28,7 +28,9 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
                     extraAmountCharge: "",
                     extraAmountReason: "",
                     extraAmountReceipt: "",
-                    paymentStatus: ""
+                    paymentStatus: "",
+                    isReferralBookingPaid: "",
+                    referralPaymentDate: ""
                 };
             };
             return PaymentRequest;
@@ -53,7 +55,9 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
                     extraAmountReason: "",
                     extraAmountReceipt: "",
                     paymentStatus: "",
-                    easyPaisaTranNo: ""
+                    easyPaisaTranNo: "",
+                    isReferralBookingPaid: "",
+                    referralPaymentDate: ""
                 };
             };
             return PaymentResponse;

@@ -8,6 +8,7 @@ namespace CCTracking.Dto
         public string CentreDesc { get; set; }
         public string TrackingDeviceId { get; set; }
         public string VehicleNo { get; set; }
+        public int AlkhidmatBusNo { get; set; }
         public long InitialReading { get; set; }
         public string No { get; set; }
         public string ModelNo { get; set; }

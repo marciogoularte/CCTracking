@@ -58,6 +58,7 @@ define(["require", "exports", "../../App", "../../Helper", "./BusView", "../../D
             // debugger;
             model.set("trackingDeviceId", "");
             model.set("vehicleNo", "");
+            model.set("alkhidmatBusNo", "");
             model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
             model.set("alkhidmatCentreSelected", "");
             model.set("busModelList", lookupResponse.busModel);

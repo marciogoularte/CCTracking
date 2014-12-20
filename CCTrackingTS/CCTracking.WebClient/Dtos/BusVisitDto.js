@@ -32,6 +32,7 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
                     pumpLocation: "",
                     fuelRate: "",
                     fuelAmount: "",
+                    fuelQuantity: "",
                     isBookingCompleted: "",
                     description: "",
                     initialReading: "",

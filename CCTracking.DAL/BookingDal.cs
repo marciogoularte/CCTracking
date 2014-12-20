@@ -59,7 +59,12 @@ namespace CCTracking.DAL
             dictionary.Add("NamazEJanazaHeldIn", booking.NamazEJanazaHeldIn);
             dictionary.Add("NamazEJanazaLocation", booking.NamazEJanazaLocation);
             dictionary.Add("MasjidName", booking.MasjidName);
+            dictionary.Add("IsReferralBooking", booking.IsReferralBooking);
+            dictionary.Add("ReferralName", booking.ReferralName);
+            dictionary.Add("ReferralDetail", booking.ReferralDetail);
             dictionary.Add("OtherDetail", booking.OtherDetail);
+            dictionary.Add("AlkhidmatCentre", booking.AlkhidmatCentreId);
+            
             base.ExecuteSql(booking, dictionary);
 
 
@@ -120,6 +125,8 @@ namespace CCTracking.DAL
             booking.CauseOfDeath = Convert.ToByte(dr["CauseOfDeath"]);
             booking.Address = dr["Address"].ToString();
             booking.BusPoint = dr["BusPoint"] == DBNull.Value ? 0 : Convert.ToInt32(dr["BusPoint"]);
+
+            booking.AlkhidmatCentreId = dr["AlkhidmatCentre"] == DBNull.Value ? 0 : Convert.ToInt32(dr["AlkhidmatCentre"]);
             booking.LandmarkId = dr["LandmarkId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["LandmarkId"]);
             booking.UnionCouncilId = dr["UnionCouncilId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["UnionCouncilId"]);
             booking.TownId = dr["TownId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["TownId"]);
@@ -131,6 +138,10 @@ namespace CCTracking.DAL
             booking.NamazEJanazaLocation = dr["NamazEJanazaLocation"] == DBNull.Value ? "" : dr["NamazEJanazaLocation"].ToString();
             booking.MasjidName = dr["MasjidName"] == DBNull.Value ? "" : dr["MasjidName"].ToString();
             booking.OtherDetail = dr["OtherDetail"].ToString();
+
+            booking.IsReferralBooking = dr["IsReferralBooking"] == DBNull.Value ? false : Convert.ToBoolean(dr["IsReferralBooking"]);
+            booking.ReferralName = dr["ReferralName"] == DBNull.Value ? "" : dr["ReferralName"].ToString();
+            booking.ReferralDetail = dr["ReferralDetail"] == DBNull.Value ? "" : dr["ReferralDetail"].ToString();
 
         }
     }

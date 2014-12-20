@@ -34,11 +34,20 @@
                                 <td class="col-sm-4 col-md-4 input-sm">Vehicle No</td>
                                 <td class="col-sm-8 col-md-8">
                                     <select id="ddlBusDetails" class="form-control input-sm"
-                                        data-bind="options: busList, optionsText:'description', value:busSelected, optionsAfterRender:setOptionDisable">
+                                            data-bind="options: busList, optionsText:'description', value:busSelected, optionsAfterRender:setOptionDisable">
                                     </select>
                                 </td>
                             </tr>
-                        <tr>
+                            
+                            <tr>
+                                <td class="col-sm-4 col-md-4 input-sm">Booking Amount</td>
+                                <td class="col-sm-8 col-md-8">
+                                    <input id="txtAmount" type="text" class="form-control input-sm" data-bind="value: fuelAmount, numeric: 1, valueUpdate: 'afterkeydown'" 
+                                     data-role="validate" title="Amount" data-content="Amount is required" />
+                                </td>
+                            </tr>
+
+                            <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Reason for Bus Change</td>
                             <td class="col-sm-8 col-md-8">
                                 <input id="Text2" type="text" class="form-control input-sm" data-bind="busChangeReason" />
@@ -76,9 +85,7 @@
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Amount</td>
                             <td class="col-sm-8 col-md-8">
-                                <input id="txtAmount" type="text" class="form-control input-sm" data-bind="value: amount, numeric: 1, valueUpdate: 'afterkeydown'" 
-                                    required="required" data-role="validate" title="Amount" data-content="Amount is required"
-                                    /></td>
+                                <input id="txtAmount" type="text" class="form-control input-sm" data-bind="value: amount, numeric: 1, valueUpdate: 'afterkeydown'" disabled/></td>
                         </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Office/Payment Location</td>
@@ -127,7 +134,21 @@
                                 <td class="col-sm-8 col-md-8">
                                     <input type="text" id="txtExtraAmountReceipt" class="form-control input-sm" data-bind="value: extraAmountReceipt,numeric: 1, valueUpdate: 'afterkeydown'"/></td>
                             </tr>
-
+                              <tr>
+                                <td class="col-sm-4 col-md-4 input-sm">Is Referral Booking Paid</td>
+                                <td class="col-sm-8 col-md-8">
+                                    <input type="radio" name="rbIsReferralBoking" value="1" data-bind="checked: isReferralBookingPaid" />Yes
+                                    &nbsp;
+                                    <input type="radio" name="rbIsReferralBoking" value="0" data-bind="checked: isReferralBookingPaid" />No 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-4 col-md-4 input-sm">Referral Booking Payment Date</td>
+                                <td class="col-sm-8 col-md-8">
+                                    <input type="text" id="PickupDate" placeholder="mm/dd/yyyy" class="form-control input-sm" data-bind="datepicker: {}, value: referralPaymentDate"
+                                        data-role="validate" title="Pick-up Date"  />
+                                </td>
+                            </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Payment Status</td>
                                 <td class="col-sm-8 col-md-8">

@@ -19,6 +19,7 @@ export module Models {
                 causeOfDeath: "",
                 causeOfDeathSelected: "",
                 address: "",
+                alkhidmatCentreId: "",
                 busPoint: "",
                 unionCouncil: "",
                 town: "",
@@ -29,7 +30,11 @@ export module Models {
                 namazEJanazaHeldIn: "",
                 namazEJanazaLocation: "",
                 masjidName: "",
-                otherDetail: ""
+                otherDetail: "",
+                isReferralBooking: "",
+                referralName: "",
+                referralDetail : ""
+
             }
         }
     }
@@ -60,7 +65,11 @@ export module Models {
                 namazEJanazaHeldIn: "",
                 namazEJanazaLocation: "",
                 masjidName: "",
-                otherDetail: ""
+                otherDetail: "",
+                isReferralBooking: "",
+                referralName: "",
+                referralDetail: ""
+
             }
         }
     }

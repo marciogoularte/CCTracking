@@ -15,7 +15,6 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
     var ko = require("knockout");
 
     var app;
-
     var BookingCtrl = (function (_super) {
         __extends(BookingCtrl, _super);
         function BookingCtrl() {
@@ -56,6 +55,8 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             model.set("pickupTimeSlotList", lookupResponse.timeSlot);
             model.set("returnTimeSlotList", lookupResponse.timeSlot);
             model.set("prayersList", lookupResponse.prayers);
+            model.set("prayersList", lookupResponse.prayers);
+            model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
 
             var causeOfDeath = _.filter(lookupResponse.causeOfDeath, function (p) {
                 return p.id == model.get("causeOfDeath");
@@ -89,6 +90,10 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
                 return p.id == model.get("namazEJanazaHeldIn");
             });
 
+            var alkhidmatCentre = _.filter(lookupResponse.alkhidmatCentre, function (p) {
+                return p.id == model.get("alkhidmatCentreId");
+            });
+
             model.set("causeOfDeathSelected", causeOfDeath[0]); //model.get("causeOfDeath")
 
             //model.set("landmarkIdSelected", landmark[0]);
@@ -98,10 +103,13 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             model.set("graveyardIdSelected", graveyard[0]);
             model.set("busDetailIdSelected", busDetail[0]);
             model.set("deseasedGender", model.get("deseasedGender").toString());
+            model.set("alkhidmatCentreSelected", alkhidmatCentre[0]);
 
             model.set("pickupTimeSlotSelected", pickupTime[0]);
             model.set("returnTimeSlotSelected", returnTime[0]);
             model.set("prayersSelected", prayer[0]);
+
+            model.set("isReferralBooking", model.get("isReferralBooking") ? "1" : "0");
 
             model.set("pickupDate", helper.FormatDateString(model.get("pickupDate")));
             this.bookingViewModel = new views.BookingViewModel(model, this);
@@ -128,6 +136,9 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             model.set("busPointList", lookupResponse.landmark);
             model.set("busPointSelected", "");
 
+            model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
+            model.set("alkhidmatCentreSelected", "");
+
             model.set("unionCouncilList", lookupResponse.unionCouncil);
             model.set("unionCouncilIdSelected", "");
             model.set("townList", lookupResponse.town);
@@ -149,6 +160,9 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             model.set("namazEJanazaLocation", "");
             model.set("masjidName", "");
             model.set("otherDetail", "");
+            model.set("isReferralBooking", "");
+            model.set("referralName", "");
+            model.set("referralDetail", "");
 
             //model.set("busDetailsList", lookupResponse.bus);
             //model.set("busDetailIdSelected", "");
@@ -192,6 +206,9 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             booking.set("pickupTime", booking.get("pickupTimeSlotSelected").id);
             booking.set("returnTime", booking.get("returnTimeSlotSelected").id);
             booking.set("namazEJanazaHeldIn", booking.get("prayersSelected").id);
+
+            booking.set("alkhidmatCentreId", booking.get("alkhidmatCentreSelected").id);
+            booking.set("isReferralBooking", booking.get("isReferralBooking") == "1" ? true : false);
 
             //booking.set("busDetailId", booking.get("busDetailIdSelected").id);
             var deferred = DAL.Save(booking);

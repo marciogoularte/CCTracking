@@ -21,6 +21,7 @@ define(["require", "exports", "backbone"], function(require, exports) {
                     stationId: "",
                     trackingDeviceId: "",
                     vehicleNo: "",
+                    alkhidmatBusNo: "",
                     no: "",
                     modelNo: "",
                     description: "",
