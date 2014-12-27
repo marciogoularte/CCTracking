@@ -380,9 +380,16 @@ export class ViewModel {
     }
 
     setOptionDisable(option, item) {
+        var modifiedDesc = item.description;
         if (item.description.indexOf('Booked - Paid') >= 0 || item.description.indexOf('Booked - Unpaid') >= 0) {
-            ko.applyBindingsToNode(option, { disable: true, text: item.description}, item);
+            modifiedDesc = item.description;
+            ko.applyBindingsToNode(option, { disable: true, text: modifiedDesc }, item);
         }
+        if (item.isOnMaintainance) {
+            modifiedDesc = item.description + ' - Maintenance';
+            ko.applyBindingsToNode(option, { disable: true, text: modifiedDesc }, item);
+        }
+        
     }
 
 }

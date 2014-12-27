@@ -22,8 +22,8 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
             //alert("constructor");
             this.app = application.Application.getInstance();
             this.backboneModel = new dto.Models.RefundBookingDto();
-            this.viewModel = new views.RefundBookingViewModel(this.backboneModel, this);
-            this.view = new views.RefundBookingView({ viewModel: this.viewModel });
+            //this.viewModel = new views.RefundBookingViewModel(this.backboneModel, this);
+            //this.view = new views.RefundBookingView({ viewModel: this.viewModel });
         }
         RefundBookingCtrl.prototype.Show = function () {
             var _this = this;
@@ -79,7 +79,9 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
         RefundBookingCtrl.prototype.GetByIdCompleted = function (refundDto) {
             var _this = this;
             //alert("GetByIdCompleted..");
-            this.backboneModel = new Backbone.Model(refundDto["refundBookingModel"]);
+            //debugger;
+            this.collection = refundDto["refundBookingList"];
+            this.backboneModel = new Backbone.Model(refundDto["refundBookingList"][0]);
             var refundModel = this.backboneModel;
 
             this.UIBinding(refundModel);
@@ -103,23 +105,38 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
             var _this = this;
             var appObj = this.app.request("AppGlobalSetting");
             refund.set("modifiedBy", appObj.get("Id"));
-            refund.set("refundTypeId", refund.get("refundTypeSelected").id);
-            refund.set("refundOfficeLocation", refund.get("alkhidmatCentreSelected").id);
-            refund.set("refundOfficer", refund.get("cashierSelected").id);
+
+            if (refund.get("refundTypeSelected") == undefined) {
+                refund.set("refundTypeId", refund.get("refundTypeId"));
+            } else {
+                refund.set("refundTypeId", refund.get("refundTypeSelected").id);
+            }
+
+            if (refund.get("alkhidmatCentreSelected") == undefined) {
+                refund.set("refundOfficeLocation", refund.get("refundOfficeLocation"));
+            } else {
+                refund.set("refundOfficeLocation", refund.get("alkhidmatCentreSelected").id);
+            }
+            if (refund.get("busSelected") == undefined) {
+                refund.set("busId", refund.get("busId"));
+            } else {
+                refund.set("busId", refund.get("busSelected").id);
+            }
+            if (refund.get("cashierSelected") == undefined) {
+                refund.set("refundOfficer", refund.get("refundOfficer"));
+            } else {
+                refund.set("refundOfficer", refund.get("cashierSelected").id);
+            }
             refund.set("isActive", refund.get("isActive") == "1" ? true : false);
+
+            //alert($("#hdnRefundId").val());
+            refund.set("id", $("#hdnRefundId").val());
             var deferred = DAL.Save(refund);
             deferred.done(function (p) {
                 return _this.SaveCompleted(p);
             });
         };
 
-        //GetAllCompleted(cancelBooking: dto.Models.CancelBookingDto) {
-        //    //app = application.Application.getInstance();
-        //    this.collection.reset(cancelBooking["centreList"]);
-        //    this.collectionView = new views.StationCollectionView({ collection: this.collection });
-        //    this.collectionView.on("itemview:ShowDetail", (view) => this.GetByIdCompleted(view.model));
-        //    this.app.MainRegion.show(this.collectionView);
-        //}
         RefundBookingCtrl.prototype.SaveCompleted = function (refundDto) {
             var result = new Backbone.Model(refundDto);
             if (result.get("errorMessage") != undefined && result.get("errorMessage").trim() != "") {
@@ -137,6 +154,9 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
 
         RefundBookingCtrl.prototype.UIBinding = function (refundModel) {
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
+            refundModel.set("busList", refundModel.get("busList"));
+            refundModel.set("busSelected", "");
+
             refundModel.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
             refundModel.set("cashierList", lookupResponse.cashier);
             refundModel.set("refundTypeList", lookupResponse.refundType);
@@ -156,10 +176,26 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
             });
             refundModel.set("refundTypeSelected", refundType[0]);
 
+            //var bus = _.filter(refundModel.get("busList"), (p) => { return p.id == refundModel.get("busId") });
+            //refundModel.set("busId", bus[0].id);
+            if (refundType.length > 0) {
+                refundModel.set("refundTypeSelectedDesc", refundType[0].description);
+            } else {
+                refundModel.set("refundTypeSelectedDesc", "");
+            }
+            if (centre.length > 0) {
+                refundModel.set("refundFromOfficeDesc", centre[0].description);
+            } else {
+                refundModel.set("refundFromOfficeDesc", "");
+            }
+            if (cashier.length > 0) {
+                refundModel.set("refundCashierDesc", cashier[0].description);
+            } else {
+                refundModel.set("refundCashierDesc", "");
+            }
+            refundModel.set("refundBookings", this.collection);
+            this.viewModel = new views.RefundBookingViewModel(refundModel, this);
             this.viewModel.bbModel = refundModel;
-            this.viewModel.model = kb.viewModel(refundModel);
-            ko.cleanNode($(this.view.el)[0]);
-            ko.applyBindings(this.viewModel, this.view.el);
         };
         return RefundBookingCtrl;
     })(helper.Controller);

@@ -20,7 +20,14 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
     var RefundBookingViewModel = (function (_super) {
         __extends(RefundBookingViewModel, _super);
         function RefundBookingViewModel(model, controller) {
+            var _this = this;
             _super.call(this, model, controller);
+            this.model.busSelected.subscribe(function () {
+                var booking = _.filter(_this.model.refundBookings(), function (p) {
+                    return p.busId == _this.model.busSelected().id;
+                });
+                UIBinding(_this, booking[0]);
+            });
         }
         return RefundBookingViewModel;
     })(helper.ViewModel);
@@ -46,5 +53,45 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
         return RefundBookingView;
     })(helper.Views.MvvmView);
     exports.RefundBookingView = RefundBookingView;
+
+    function UIBinding(self, refundModel) {
+        var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
+        self.model.actualBookingAmount(refundModel.actualBookingAmount);
+        self.model.refundReason(refundModel.refundReason);
+        self.model.refundAmount(refundModel.refundAmount);
+        self.model.amountDeducted(refundModel.amountDeducted);
+        self.model.refundReceipt(refundModel.refundReceipt);
+
+        var refundType = _.filter(lookupResponse.refundType, function (p) {
+            return p.id == refundModel.refundTypeId;
+        });
+
+        if (refundType.length > 0) {
+            self.model.refundTypeSelectedDesc(refundType[0].description);
+        } else {
+            self.model.refundTypeSelectedDesc("");
+        }
+
+        var officeLocation = _.filter(lookupResponse.alkhidmatCentre, function (p) {
+            return p.id == refundModel.refundOfficeLocation;
+        });
+        if (officeLocation.length > 0) {
+            self.model.refundFromOfficeDesc(officeLocation[0].description);
+        } else {
+            self.model.refundFromOfficeDesc("");
+        }
+
+        var cashier = _.filter(lookupResponse.cashier, function (p) {
+            return p.id == refundModel.refundOfficer;
+        });
+        if (cashier.length > 0) {
+            self.model.refundCashierDesc(cashier[0].description);
+        } else {
+            self.model.refundCashierDesc("");
+        }
+
+        self.model.id(refundModel.id);
+        //self.bbModel = new Backbone.Model(refundModel);
+    }
 });
 //# sourceMappingURL=RefundBookingView.js.map

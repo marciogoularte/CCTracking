@@ -44,6 +44,14 @@ namespace CCTracking.DAL
             return baseModelResponse;
         }
 
+        public BaseModelResponse GetBuslistByBookingId(int bookingId)
+        {
+            DBFacade facade = new BusDal();
+            BaseModelResponse baseModelResponse = facade.GetByCriteria(new Bus {Id = bookingId, VehicleNo = "-1"});
+            BusResponse busResponse = (BusResponse)baseModelResponse;
+            return busResponse;
+        }
+
         private bool DeletePayment(Payment payment)
         {
             if (payment.BusVisits == null) return false;

@@ -15,5 +15,6 @@ namespace CCTracking.Dto
         public string Description { get; set; }
         public byte BusStatus { get; set; }
         public byte BookForPrayer { get; set; }
+        public bool IsOnMaintainance { get; set; }
     }
 }

@@ -11,6 +11,7 @@ export module Models {
             return {
                 id: "",
                 bookingId: "",
+                busId:"",
                 actualBookingAmount: "",
                 refundOfficeLocation: "",
                 refundTypeId: "",
@@ -42,6 +43,12 @@ export module Models {
                 userName: ""
             }
 
+        }
+    }
+    export class RefundBookingCollection extends Backbone.Collection {
+        constructor(options?: any) {
+            this.model = RefundBookingDto;
+            super(options);
         }
     }
     export class AuditRefundBookingResponseCollection extends Backbone.Collection {

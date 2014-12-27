@@ -18,7 +18,7 @@ namespace CCTracking.Dto
         public string EasyPaisaTranNo { get; set; }
         public List<BusVisit> BusVisits { get; set; }
         public bool IsReferralBookingPaid { get; set; }
-        public DateTime ReferralPaymentDate { get; set; }
+        public DateTime? ReferralPaymentDate { get; set; }
     }
     public class AuditPayment : BaseModel
     {

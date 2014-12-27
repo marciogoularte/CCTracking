@@ -1,4 +1,6 @@
-﻿using CCTracking.DAL;
+﻿using System.Collections.Generic;
+using CCTracking.DAL;
+using CCTracking.Dto;
 using CCTracking.Dto.Response;
 using System;
 using System.Web.Http;
@@ -60,8 +62,20 @@ namespace CCTracking.Api.Controllers
         public RefundBookingResponse GetById(int id)
         {
             DBFacade facade = new CCTracking.DAL.RefundBookingDal();
-            BaseModelResponse baseModelResponse = facade.GetById(id);
+            BaseModelResponse baseModelResponse = facade.GetByCriteria(new RefundBooking {BookingId = id});
             RefundBookingResponse refundBookingResponse = (RefundBookingResponse)baseModelResponse;
+            DalService service=new DalService();
+            if (refundBookingResponse != null && refundBookingResponse.RefundBookingList.Count > 0)
+            {
+                BusResponse busResponse = (BusResponse) service.GetBuslistByBookingId(refundBookingResponse.RefundBookingList[0].BookingId);
+
+                foreach (RefundBooking each in refundBookingResponse.RefundBookingList)
+                {
+                    each.BusList = busResponse.BusList;
+                }
+                //refundBookingResponse.RefundBookingList.BusList = busResponse.BusList;
+            }
+            
             return refundBookingResponse;
         }
     }

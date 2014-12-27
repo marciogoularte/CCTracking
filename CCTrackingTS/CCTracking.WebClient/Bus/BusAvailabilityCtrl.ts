@@ -60,7 +60,12 @@ export class BusAvailabilityCtrl extends helper.Controller {
     }
 
     ShowBusBookingDetailCompleted(model) {
-        var busDetailCollection = new Backbone.Collection(model["nearestCentreList"]);
+        //debugger;
+        var list = _.map(model["nearestCentreList"], (item) => {
+            item.pickupDate = helper.FormatDateString(item.pickupDate);
+            return item;
+        });
+        var busDetailCollection = new Backbone.Collection(list);
         var busDetail = new Backbone.Model();
         busDetail.set("type", "btn-warning");
         //busDetail.set("title", "BUS DETAIL");

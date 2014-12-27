@@ -100,7 +100,7 @@ export class BusDetailModalPopupView extends helper.Views.ItemView {
     constructor(options?) {
         //var modalPopupView = require("text!./Common/Templates/BusDetailModalPopup.html");
         this.template = busDeatilView.getOuterHTML("#Modal");
-        this.tagName = "table";
+        this.tagName = "div";
         super(options);
         //this.model = options.model;
     }

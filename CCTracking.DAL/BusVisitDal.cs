@@ -51,6 +51,7 @@ namespace CCTracking.DAL
             dictionary.Add("@VisitDate", busVisit.VisitDate);
             dictionary.Add("@OutTime", busVisit.OutTime);
             dictionary.Add("@ReturnTime", busVisit.ReturnTime);
+            dictionary.Add("@ReturnDate", busVisit.ReturnDate);
             dictionary.Add("@ReadingWhenFilling", busVisit.ReadingWhenFilling);
             dictionary.Add("@PumpLocation", busVisit.PumpLocation);
             dictionary.Add("@FuelRate", busVisit.FuelRate);
@@ -58,8 +59,8 @@ namespace CCTracking.DAL
             dictionary.Add("@IsBookingCompleted", busVisit.IsBookingCompleted);
             dictionary.Add("@InitialReading", busVisit.InitialReading);
             dictionary.Add("@FinalReading", busVisit.FinalReading);
-            dictionary.Add("@Description", busVisit.Description);
             dictionary.Add("@FuelQuantity", busVisit.FuelQuantity);
+            dictionary.Add("@Description", busVisit.Description);
             base.ExecuteSql(busVisit, dictionary);
             return "dbo.SaveBusVisit";
         }
@@ -131,6 +132,8 @@ namespace CCTracking.DAL
                 busVisit.OutTime = dr.GetByte(dr.GetOrdinal("OutTime"));
             if (!dr.IsDBNull(dr.GetOrdinal("ReturnTime")))
                 busVisit.ReturnTime = dr.GetByte(dr.GetOrdinal("ReturnTime"));
+            if (!dr.IsDBNull(dr.GetOrdinal("ReturnDate")))
+                busVisit.ReturnDate = dr.GetDateTime(dr.GetOrdinal("ReturnDate"));
             if (!dr.IsDBNull(dr.GetOrdinal("ReadingWhenFilling")))
                 busVisit.ReadingWhenFilling = dr.GetInt64(dr.GetOrdinal("ReadingWhenFilling"));
             if (!dr.IsDBNull(dr.GetOrdinal("PumpLocation")))

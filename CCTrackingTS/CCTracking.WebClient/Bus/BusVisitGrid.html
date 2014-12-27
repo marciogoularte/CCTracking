@@ -30,9 +30,8 @@
                         <tr class="active">
                             <th class="input-sm">Bus</th>
                             <th class="input-sm">Visit Type</th>
-                            <th class="input-sm">Date</th>
-                            <th class="input-sm">Initial</th>
-                            <th class="input-sm">Final</th>
+                            <th class="input-sm">Dates</th>
+                            <th class="input-sm">Meter Reading</th>
                             <!-- <th class="input-sm">Action</th>-->
                         </tr>
                     </thead>
@@ -51,8 +50,8 @@
     <script type="text/html" id="rowTemplate">
         <td class="jsShowDetail input-sm"><a href="#editBusVisit?id=<%=id%>"><%=busDesc %></a></td>        
         <td class="input-sm"><%=visitTypeDesc%></td>
-        <td class="input-sm"><%=visitDate%></td>
-        <td class="input-sm"><%=initialReading%></td>
-        <td class="input-sm"><%=finalReading%></td>
+        <td class="input-sm"><%=visitDate%> - <%=returnDate%></td>
+        <td class="input-sm"><%=initialReading%> - <%=finalReading%></td>
+        
     </script>
 </div>

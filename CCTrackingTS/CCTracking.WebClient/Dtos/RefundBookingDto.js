@@ -20,6 +20,7 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
                 return {
                     id: "",
                     bookingId: "",
+                    busId: "",
                     actualBookingAmount: "",
                     refundOfficeLocation: "",
                     refundTypeId: "",
@@ -60,6 +61,15 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
             return AuditRefundBooking;
         })(Backbone.Model);
         Models.AuditRefundBooking = AuditRefundBooking;
+        var RefundBookingCollection = (function (_super) {
+            __extends(RefundBookingCollection, _super);
+            function RefundBookingCollection(options) {
+                this.model = RefundBookingDto;
+                _super.call(this, options);
+            }
+            return RefundBookingCollection;
+        })(Backbone.Collection);
+        Models.RefundBookingCollection = RefundBookingCollection;
         var AuditRefundBookingResponseCollection = (function (_super) {
             __extends(AuditRefundBookingResponseCollection, _super);
             function AuditRefundBookingResponseCollection(options) {

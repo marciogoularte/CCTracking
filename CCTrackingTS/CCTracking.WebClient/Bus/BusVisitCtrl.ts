@@ -140,6 +140,8 @@ export class BusVisitCtrl extends helper.Controller {
 
         if (model.get("visitDate")!=null && model.get("visitDate").trim() != "")
             model.set("visitDate", helper.FormatDateString(model.get("visitDate")));
+        if (model.get("returnDate") != null && model.get("returnDate").trim() != "")
+            model.set("returnDate", helper.FormatDateString(model.get("returnDate")));
         
         this.view = new views.BusVisitView(model);
         this.view.on("Event:SaveForm", (busVisitModel) => this.Save(busVisitModel));
@@ -158,6 +160,8 @@ export class BusVisitCtrl extends helper.Controller {
     GetAllCompleted(model: dto.Models.BusVisitDto) {
         var busVisits = _.map(model["busVisitList"], (item) => {
             item.visitDate = helper.FormatDateString(item.visitDate);
+            if (item.returnDate!=undefined)
+                item.returnDate = helper.FormatDateString(item.returnDate);
             return item;
         });
         this.collection.reset(busVisits);

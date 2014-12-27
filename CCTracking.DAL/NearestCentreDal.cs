@@ -126,10 +126,10 @@ namespace CCTracking.DAL
 
             if (!dr.IsDBNull(dr.GetOrdinal("PickupDate")))
                 nearestCentre.PickupDate = dr.GetDateTime((dr.GetOrdinal("PickupDate")));
-            //if (!dr.IsDBNull(dr.GetOrdinal("OutTime")))
-            //    nearestCentre.PickupTime = dr.GetString(dr.GetOrdinal("PickupTime"));
-            //if (!dr.IsDBNull(dr.GetOrdinal("ReturnTime")))
-            //    nearestCentre.ReturnTime = dr.GetString(dr.GetOrdinal("ReturnTime"));
+            if (!dr.IsDBNull(dr.GetOrdinal("PickupTime")))
+                nearestCentre.PickupTime = dr.GetString(dr.GetOrdinal("PickupTime"));
+            if (!dr.IsDBNull(dr.GetOrdinal("ReturnTime")))
+                nearestCentre.ReturnTime = dr.GetString(dr.GetOrdinal("ReturnTime"));
             if (!dr.IsDBNull(dr.GetOrdinal("Address")))
                 nearestCentre.Address = dr.GetString(dr.GetOrdinal("Address"));
             if (!dr.IsDBNull(dr.GetOrdinal("BusPoint")))

@@ -119,7 +119,7 @@ define(["require", "exports", "../../App", "../../Helper", "text!CCTracking.WebC
         function BusDetailModalPopupView(options) {
             //var modalPopupView = require("text!./Common/Templates/BusDetailModalPopup.html");
             this.template = busDeatilView.getOuterHTML("#Modal");
-            this.tagName = "table";
+            this.tagName = "div";
             _super.call(this, options);
             //this.model = options.model;
         }

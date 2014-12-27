@@ -17,6 +17,7 @@ namespace CCTracking.Dto
         public DateTime? VisitDate { get; set; }
         public byte OutTime { get; set; }
         public byte ReturnTime { get; set; }
+        public DateTime? ReturnDate { get; set; }
         public long ReadingWhenFilling { get; set; }
         public string PumpLocation { get; set; }
         public decimal FuelRate { get; set; }

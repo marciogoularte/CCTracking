@@ -61,9 +61,15 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Return Time</td>
                                 <td class="col-sm-8 col-md-8">
-                                     <select id="Select2" class="form-control input-sm"
-                                data-bind="options: reutrnTimeSlotList, optionsText:'description', value:returnTimeSlotSelected">
-                            </select>
+                                <select id="Select2" class="form-control input-sm"
+                                        data-bind="options: reutrnTimeSlotList, optionsText:'description', value:returnTimeSlotSelected">
+                                </select>
+                            </tr>
+                             <tr>
+                                <td class="col-sm-4 col-md-4 input-sm">Return Date</td>
+                                <td class="col-sm-8 col-md-8">
+                                    <input type="text" id="Text1" class="form-control input-sm" placeholder="mm/dd/yyyy" data-bind="datepicker: {}, value: returnDate" />   
+                                </td>
                             </tr>
                             <tr >
                                 <td class="col-sm-4 col-md-4 input-sm">Filling Meter Reading </td>

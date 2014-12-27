@@ -17,6 +17,8 @@ namespace CCTracking.Dto
         public string RefundReason { get; set; }
         public string RefundReceipt { get; set; }
         public int RefundOfficer { get; set; }
+        public int BusId { get; set; }
+        public List<Bus> BusList { get; set; }
 
     }
     public class AuditRefundBooking : BaseModel

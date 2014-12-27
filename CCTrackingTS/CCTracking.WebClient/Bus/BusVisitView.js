@@ -58,7 +58,10 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
                 return false;
             }
             if (this.viewModel.isBookingCompleted() == "1") {
-                if (this.viewModel.finalReading() == undefined || this.viewModel.finalReading() == "" || this.viewModel.finalReading() == 0) {
+                if (this.viewModel.returnDate() == undefined || this.viewModel.returnDate() == "") {
+                    helper.ShowModalPopup("danger", "Bus Visit", "Please enter valid return date to complete the booking.");
+                    return false;
+                } else if (this.viewModel.finalReading() == undefined || this.viewModel.finalReading() == "" || this.viewModel.finalReading() == 0) {
                     helper.ShowModalPopup("danger", "Bus Visit", "Please enter valid final reading to complete the booking.");
                     return false;
                 }
@@ -74,6 +77,7 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
             this.bbModel.set("bookingId", this.viewModel.bookingId());
             this.bbModel.set("inchargeName", this.viewModel.inchargeName());
             this.bbModel.set("visitDate", this.viewModel.visitDate());
+            this.bbModel.set("returnDate", this.viewModel.returnDate());
 
             //this.bbModel.set("outTime", this.viewModel.outTime());
             //this.bbModel.set("returnTime", this.viewModel.returnTime());
@@ -131,6 +135,7 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
                 this.visitDate = ko.observable();
                 this.outTime = ko.observable();
                 this.returnTime = ko.observable();
+                this.returnDate = ko.observable();
                 this.readingWhenFilling = ko.observable();
 
                 //only for fueling
@@ -170,7 +175,7 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
                 this.isBooking = ko.computed({
                     owner: this,
                     read: function () {
-                        if (_this.visitTypeSelected() != undefined && helper.VisitTypes[_this.visitTypeSelected().id] == helper.VisitTypes[2 /* Booking */]) {
+                        if (_this.visitTypeSelected() != undefined && (helper.VisitTypes[_this.visitTypeSelected().id] == helper.VisitTypes[2 /* Booking */] || helper.VisitTypes[_this.visitTypeSelected().id] == helper.VisitTypes[3 /* Maintenance */])) {
                             return true;
                         } else {
                             return false;
@@ -179,6 +184,8 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
                 });
             } else {
                 this.id = ko.observable(model.get("id"));
+
+                //var editFlag = model.get("visitTypeId") == 3 ? false : true;
                 this.isEdit = ko.observable(true);
                 this.isActive = ko.observable(model.get("isActive"));
                 this.centreId = ko.observable(model.get("centreId"));
@@ -190,6 +197,7 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
                 this.visitDate = ko.observable(model.get("visitDate"));
                 this.outTime = ko.observable(model.get("outTime"));
                 this.returnTime = ko.observable(model.get("returnTime"));
+                this.returnDate = ko.observable(model.get("returnDate"));
                 this.readingWhenFilling = ko.observable(model.get("readingWhenFilling"));
 
                 //only for fueling
@@ -262,7 +270,7 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
                 this.isBooking = ko.computed({
                     owner: this,
                     read: function () {
-                        if (_this.visitTypeSelected() != undefined && helper.VisitTypes[_this.visitTypeSelected().id] == helper.VisitTypes[2 /* Booking */]) {
+                        if (_this.visitTypeSelected() != undefined && (helper.VisitTypes[_this.visitTypeSelected().id] == helper.VisitTypes[2 /* Booking */] || helper.VisitTypes[_this.visitTypeSelected().id] == helper.VisitTypes[3 /* Maintenance */])) {
                             return true;
                         } else {
                             return false;
@@ -309,9 +317,9 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
         };
 
         BusVisitCollectionView.prototype.setOptionDisable = function (option, item) {
-            if (item.id == 1) {
-                ko.applyBindingsToNode(option, { disable: true, text: item.description + ' - Maintenance' }, item);
-            }
+            //if (item.otherDetail.toLowerCase()==="true") {
+            //    ko.applyBindingsToNode(option, { disable: true, text: item.description + ' - Maintenance' }, item);
+            //}
         };
         return BusVisitCollectionView;
     })(helper.Views.CompositeView);
@@ -344,10 +352,8 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
         return BusVisitItemView;
     })(helper.Views.ItemView);
     exports.BusVisitItemView = BusVisitItemView;
-
-    function setOptionDisable(option, item) {
-        alert("dddddd");
-    }
-    exports.setOptionDisable = setOptionDisable;
 });
+//export function setOptionDisable(option, item) {
+//    alert("dddddd");
+//}
 //# sourceMappingURL=BusVisitView.js.map

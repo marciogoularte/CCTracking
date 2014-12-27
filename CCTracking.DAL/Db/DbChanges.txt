@@ -1,0 +1,341 @@
+﻿-------From 24 Dec,2014--------------------
+Busid Field added in RefundBooking table
+BusId	int	Checked
+;
+
+alter PROCEDURE [dbo].[SaveRefundBooking]       
+@Id int,      
+@BusId int,
+@BookingId int,      
+@RefundTypeId int,      
+@RefundReason nvarchar(500),      
+@ActualBookingAmount money,      
+@RefundAmount money,      
+@RefundReceipt nvarchar(50),      
+@RefundOfficeLocation int,      
+@RefundOfficer int,      
+@IsActive bit,      
+@CreatedBy int,      
+@ModifiedBy int,      
+@ModifiedDate datetime      
+       
+AS      
+      
+BEGIN      
+declare @newId int    
+ if exists(select id from refundBooking where id=@Id and busId=@BusId)   
+ --if @Id is not null and @Id > 0      
+ begin      
+ set @newId=@Id    
+ update [RefundBooking]       
+ set       
+ BusId=@BusId,
+ BookingId =  @BookingId,RefundTypeId= @RefundTypeId,RefundReason = @RefundReason,      
+ ActualBookingAmount = @ActualBookingAmount,RefundAmount = @RefundAmount,RefundReceipt=@RefundReceipt,       
+ RefundOfficeLocation = @RefundOfficeLocation, RefundOfficer = @RefundOfficer,      
+ IsActive = @IsActive,CreatedBy = @CreatedBy,ModifiedBy = @ModifiedBy,ModifiedDate = @ModifiedDate      
+ where id = @newId and busId=@BusId     
+    
+ end       
+ else      
+ begin      
+     
+   
+ insert into RefundBooking       
+ (BusId,BookingId,ActualBookingAmount,RefundOfficeLocation,RefundTypeId,RefundAmount,RefundReason, RefundOfficer,RefundReceipt, IsActive,CreatedBy,ModifiedBy,ModifiedDate)      
+ values      
+ (@BusId,@BookingId,@ActualBookingAmount,@RefundOfficeLocation,@RefundTypeId,@RefundAmount,@RefundReason,@RefundOfficer,@RefundReceipt,@IsActive,@CreatedBy,@ModifiedBy,@ModifiedDate)           
+ set @newId=SCOPE_IDENTITY()     
+    
+ end      
+    
+ update Payment set PaymentStatus=2 where BookingId=@BookingId    
+ update BusVisit set IsBookingCompleted=1 where BookingId=@BookingId    
+       
+ select isnull(rb.Id,0) Id ,rb.BusId,  b.Id as BookingId , isnull(rb.RefundAmount, 0) RefundAmount ,        
+ isnull(rb.RefundOfficeLocation,0)as RefundOfficeLocation , isnull(rb.RefundReason,'')as RefundReason ,       
+ isnull(rb.RefundReceipt,'') RefundReceipt, isnull(rb.RefundTypeId, 0) as RefundTypeId ,       
+ ISNULL(rb.ActualBookingAmount ,  p.Amount) as ActualBookingAmount, isnull(rb.RefundOfficer ,  0) as RefundOfficer,      
+ isnull(rb.ActualBookingAmount,0) - ISNULL(rb.RefundAmount,0) as AmountDeducted , ISNULL(rb.IsActive ,  b.isactive) as IsActive,      
+ ISNULL(rb.CreatedBy ,  b.CreatedBy) as CreatedBy, ISNULL(rb.CreatedDate ,b.CreatedDate) CreatedDate,      
+ ISNULL(rb.ModifiedBy , b.ModifiedBy) ModifiedBy, ISNULL(rb.ModifiedDate, b.ModifiedDate) ModifiedDate      
+ from Booking b       
+ left join Payment p  on b.Id =  p.BookingId      
+ left join RefundBooking rb  on b.Id = rb.BookingId      
+ where rb.Id = @newId      
+          
+END 
+GO
+alter procedure [dbo].[GetRefundBookingById]     
+@Id int    
+as    
+begin    
+select bus.Id as busId,bus.Description as busDesc, isnull(rb.Id,0) Id ,  b.Id as BookingId , isnull(rb.RefundAmount, 0) RefundAmount ,      
+isnull(rb.RefundOfficeLocation,0)as RefundOfficeLocation , isnull(rb.RefundReason,'')as RefundReason ,     
+isnull(rb.RefundReceipt,'') RefundReceipt, isnull(rb.RefundTypeId, 0) as RefundTypeId ,     
+ISNULL(rb.ActualBookingAmount ,  bv.FuelAmount) as ActualBookingAmount,    
+   isnull(rb.ActualBookingAmount,0) - ISNULL(rb.RefundAmount,0) as AmountDeducted , isnull(rb.RefundOfficer ,  0) RefundOfficer,    
+   ISNULL(rb.IsActive ,  b.isactive) as IsActive,    
+   ISNULL(rb.CreatedBy ,  b.CreatedBy) as CreatedBy, ISNULL(rb.CreatedDate ,b.CreatedDate) CreatedDate,    
+   ISNULL(rb.ModifiedBy , b.ModifiedBy) ModifiedBy, ISNULL(rb.ModifiedDate, b.ModifiedDate) ModifiedDate    
+   from Booking b     
+   inner join BusVisit bv on bv.BookingId=b.Id  
+   inner join Bus on bus.Id=bv.BusId  
+--left join Payment p  on b.Id =  p.BookingId    
+left join RefundBooking rb  on b.Id = rb.BookingId  and rb.BusId=bus.Id  
+    
+where b.Id =  @Id    
+  
+end  
+go
+alter procedure [dbo].[GetBusByCriteria]  
+@VehicleNo nvarchar(50)  ,
+@BookingId int
+as  
+begin  
+if @VehicleNo='-1'
+begin
+	select b.*,c.Name as CentreDesc from BusVisit bv 
+	inner join Bus b on b.Id=bv.BusId
+	inner join AlkhidmatCentre c on c.id=b.centreid  
+	where bv.BookingId=@bookingId
+end
+else 
+begin
+	select b.*,c.name as CentreDesc from [Bus] b   
+	 inner join AlkhidmatCentre c on c.id=b.centreid  
+	  where b.VehicleNo  =  @VehicleNo and b.IsActive = 1  
+end	  
+end  
+
+GO
+
+-------From 20 Dec,2014--------------------
+alter procedure [dbo].[Lookup]                      
+as                      
+select Id,[Name] as Description from CauseOfDeath                    
+select Id,[name]  as Description from Town                    
+select Id,[name]  as Description,townid from UnionCouncil                    
+select Id,name as Description,UcId from Landmark                    
+select Id,name as Description,LandmarkId  from Graveyard                  
+select id,vehicleno as Description ,TrackingDeviceId, AlkhidmatBusNo,isnull(IsOnMaintainance,0) as IsOnMaintainance from Bus                
+select id,FirstName + ' ' + LastName as Description,Mobile from Driver                
+select id,Name as Description from AlkhidmatCentre                
+select id,(firstName + ' ' + lastname) as Description from [User] where RoleId=3                
+select Id,Name as Description from PaymentType              
+select Id,Name as Description from VisitType where IsActive=1   
+select Id, Name as Description  from [Role]  r where r.IsActive =  1            
+select Id, Name as Description  from [RefundType]  r where r.IsActive =  1  
+
+GO
+
+alter procedure [dbo].[SaveBusVisit]              
+@Id int,              
+@CentreId int,              
+@BusId int,              
+@DriverId int,              
+@VisitTypeId int,              
+@BookingId int,              
+@InchargeName nvarchar(30)=null,            
+@VisitDate DateTime=null,            
+@OutTime tinyint,            
+@ReturnTime tinyint,    
+@ReturnDate datetime=null,          
+@ReadingWhenFilling bigint,            
+@PumpLocation nvarchar(50)=null,            
+@FuelRate money,            
+@FuelAmount money,            
+@IsBookingCompleted bit,              
+@InitialReading bigint,              
+@FinalReading bigint,       
+@FuelQuantity money,             
+@Description nvarchar(300)=null,            
+@IsActive bit,              
+@CreatedBy int,              
+@ModifiedBy int,              
+@ModifiedDate datetime              
+              
+as              
+begin          
+declare @newId int  
+declare @visitCount int
+
+
+if @Id is not null and @Id > 0              
+ begin          
+ set @newId=@Id            
+ update [BusVisit]              
+ set               
+ CentreId = @CentreId,BusId = @BusId,DriverId = @DriverId,VisitTypeId=  @VisitTypeId,BookingId = @BookingId, InchargeName=@InchargeName,VisitDate=@VisitDate,OutTime=@OutTime,ReturnTime=@ReturnTime,ReturnDate=@ReturnDate,ReadingWhenFilling=@ReadingWhenFilling,PumpLocation=@PumpLocation,FuelRate=@FuelRate,FuelAmount=@FuelAmount,IsBookingCompleted=@IsBookingCompleted, InitialReading = @InitialReading,FinalReading= @FinalReading,Description=@Description,IsActive = @IsActive,CreatedBy = @CreatedBy,ModifiedBy = @ModifiedBy,ModifiedDate = @ModifiedDate, FuelQuantity = @FuelQuantity      
+ where id = @Id               
+ end               
+ else              
+ begin              
+ select @visitCount=COUNT(id) from BusVisit where BusId=@BusId
+ if @visitCount=0 
+ begin
+	select @InitialReading= InitialReading from Bus where id=@BusId
+ end
+ insert into BusVisit              
+ (CentreId,BusId,DriverId,VisitTypeId,BookingId,InchargeName,VisitDate,OutTime,ReturnTime,ReturnDate,ReadingWhenFilling,PumpLocation,FuelRate,FuelAmount,IsBookingCompleted,InitialReading,FinalReading,Description,CreatedBy,ModifiedBy,ModifiedDate,FuelQuantity)             
+       
+ values              
+ (@CentreId,@BusId,@DriverId,@VisitTypeId,@BookingId,@InchargeName,@VisitDate,@OutTime,@ReturnTime,@ReturnDate,@ReadingWhenFilling,@PumpLocation,@FuelRate,@FuelAmount,@IsBookingCompleted,@InitialReading,@FinalReading,@Description,@CreatedBy,@ModifiedBy,@ModifiedDate,  
+@FuelQuantity)      
+          
+ set @newId=SCOPE_IDENTITY()        
+        
+end              
+        
+--update BusVisit set FinalReading=@ReadingWhenFilling where id=(select top 1 id from BusVisit where id<>@newId and BusId=@BusId order by VisitDate desc,CreatedDate desc)        
+update BusVisit set BusStatus=3 where id=@newId        
+update BusVisit set VisitDate=b.PickupDate,OutTime=b.PickupTime,ReturnTime=b.ReturnTime from Booking b inner join BusVisit bv on b.Id=bv.BookingId        
+    
+if @VisitTypeId=3     
+begin    
+ update Bus set IsOnMaintainance=1 where id=@BusId    
+end    
+if @VisitTypeId=3 and @IsBookingCompleted=1     
+begin    
+ update Bus set IsOnMaintainance=0 where id=@BusId    
+end    
+    
+select bv.*,t.Name as VisitType ,b.VehicleNo as BusDesc,(d.FirstName + ' ' + d.LastName) as DriverDesc,a.Name as CentreDesc    
+from BusVisit bv               
+inner join Bus b on b.Id=bv.BusId              
+inner join Driver d on d.Id=bv.DriverId              
+inner join AlkhidmatCentre a on a.Id=bv.CentreId              
+inner join VisitType t on t.Id=bv.VisitTypeId  where bv.Id = @newId         
+        
+end 
+GO
+alter Procedure GetBusAvailabilityByBookingId
+@BookingId int  
+as  
+declare @NamazEJanazaHeldIn tinyint  
+declare @PickupDate  datetime  
+--set @BookingId=65  
+  
+select @NamazEJanazaHeldIn=NamazEJanazaHeldIn,@PickupDate=PickupDate from Booking where id=@BookingId  
+  
+select id,(ob.vehicleno)  as Description ,TrackingDeviceId,IsActive,CreatedBy,CreatedDate,ModifiedBy,ModifiedDate,ISNULL(IsOnMaintainance,0) AS IsOnMaintainance from Bus ob 
+where id not in  
+(  
+select Bus.ID  
+from Bus   
+inner join BusVisit bv on bv.BusId=bus.Id  
+inner join booking b on b.Id=bv.BookingId  
+where b.NamazEJanazaHeldIn=@NamazEJanazaHeldIn and b.PickupDate=@PickupDate and bv.IsBookingCompleted=0  
+)  
+union  
+select bus.Id,  
+case isnull(p.PaymentType,0)   
+when 1 then (Bus.vehicleno + ' - Booked - Paid')  
+when 2 then (Bus.vehicleno + ' - Booked - Unpaid')  
+else (Bus.vehicleno + ' - Available')  
+end  as Description ,  
+TrackingDeviceId ,Bus.IsActive,Bus.CreatedBy,Bus.CreatedDate,Bus.ModifiedBy,Bus.ModifiedDate,ISNULL(IsOnMaintainance,0) AS IsOnMaintainance 
+from Bus   
+inner join BusVisit bv on bv.BusId=bus.Id  
+inner join booking b on b.Id=bv.BookingId  
+left join Payment p on p.BookingId=b.Id  
+where b.NamazEJanazaHeldIn=@NamazEJanazaHeldIn and b.PickupDate=@PickupDate  and bv.IsBookingCompleted=0  
+  
+GO
+
+added in bus table - IsOnMaintainance	bit	Checked, default=0
+GO
+busVisit table - ReturnDate	date	Checked
+
+go
+alter procedure [dbo].[GetBusVisitById]    
+@Id int    
+as    
+begin    
+select bv.Id,bv.CentreId,bv.BusId,bv.DriverId,bv.VisitTypeId,bv.BookingId,bv.InchargeName,bv.VisitDate,bv.OutTime,bv.ReturnTime,bv.ReturnDate,
+bv.ReadingWhenFilling,bv.PumpLocation,bv.FuelRate,bv.FuelAmount,bv.IsBookingCompleted,
+dbo.fn_GetPreviousBusMeterReading(bv.BusId,bv.Id) as InitialReading,
+bv.FinalReading
+,bv.Description,
+bv.BusStatus,bv.IsActive,bv.CreatedBy,bv.CreatedDate,bv.ModifiedBy,bv.ModifiedDate,bv.FuelQuantity,
+t.Name as VisitType ,b.VehicleNo as BusDesc,(d.FirstName + ' ' + d.LastName) as DriverDesc,a.Name as CentreDesc       
+from BusVisit bv     
+inner join Bus b on b.Id=bv.BusId    
+inner join Driver d on d.Id=bv.DriverId    
+inner join AlkhidmatCentre a on a.Id=bv.CentreId    
+left join VisitType t on t.Id=bv.VisitTypeId    
+where bv.IsActive=1 and bv.Id=@Id    
+  
+end
+go
+
+alter procedure [dbo].[GetAllBusVisit]  
+@Id int  
+as    
+select bv.Id,bv.CentreId,bv.BusId,bv.DriverId,bv.VisitTypeId,bv.BookingId,bv.InchargeName,bv.VisitDate,bv.OutTime,bv.ReturnTime,bv.ReturnDate,
+bv.ReadingWhenFilling,bv.PumpLocation,bv.FuelRate,bv.FuelAmount,bv.IsBookingCompleted,
+dbo.fn_GetPreviousBusMeterReading(bv.BusId,bv.Id) InitialReading,
+bv.FinalReading
+,bv.Description,
+bv.BusStatus,bv.IsActive,bv.CreatedBy,bv.CreatedDate,bv.ModifiedBy,bv.ModifiedDate,bv.FuelQuantity,
+t.Name as VisitType ,b.VehicleNo as BusDesc,(d.FirstName + ' ' + d.LastName) as DriverDesc,a.Name as CentreDesc     
+from BusVisit bv   
+inner join Bus b on b.Id=bv.BusId  
+inner join Driver d on d.Id=bv.DriverId  
+inner join AlkhidmatCentre a on a.Id=bv.CentreId  
+left join VisitType t on t.Id=bv.VisitTypeId  
+where bv.IsActive=1 and bv.busId=@Id  
+go
+
+alter FUNCTION [dbo].[fn_GetPreviousBusMeterReading](                  
+    @BusId as int,
+    @CurrentId int  
+    )          
+RETURNS bigint
+AS          
+begin  
+declare @result bigint
+declare @visitCount int
+select @visitCount=COUNT(id) from BusVisit where BusId=@BusId
+ if @visitCount=0 
+ begin
+	select @result= InitialReading from Bus where id=@BusId
+ end
+ else
+ begin  
+	SELECT @result = isnull(Max(asv.FinalReading),0) 
+	FROM AdminSummary_View asv
+	WHERE asv.busvisitid < @CurrentId and asv.BusId = @BusId
+	
+	if @result=0
+	begin
+		select @result= InitialReading from Bus where id=@BusId
+	end
+end
+  
+--select @result = u.FirstName + ' ' + u.LastName  from [User] u where id = @Id
+return @result   
+end
+go
+alter procedure [dbo].[GetNearestCentreByCriteria]    
+@Id int    
+as    
+begin    
+select bv.Id, bv.BookingId,bv.OutTime,bk.Address,l.Name as BusPoint,g.Name as Graveyard,bk.MasjidName,[dbo].[GetPrayerTime](bk.NamazEJanazaHeldIn) as NamazEJanazaHeldIn,bk.NamazEJanazaLocation,bk.OtherDetail,bk.PickupDate
+,ts1.Description as PickupTime,ts2.Description as ReturnTime     
+,b.VehicleNo,c.Name as CentreName,c.Address CenreAddress,c.ContactNo1,c.ContactNo2,(d.FirstName + ' ' + d.LastName) as fullName,d.Mobile as MobileNo,  
+bv.IsActive,bv.CreatedBy,bv.CreatedDate,bv.ModifiedBy,bv.ModifiedDate  
+from BusVisit bv     
+inner join Driver d on d.Id=bv.DriverId and bv.BusId=@Id 
+and VisitTypeId=2 and IsBookingCompleted=0 AND isnull(BookingId,0)<>0    
+inner join Booking bk on bk.Id=bv.BookingId    
+inner join Landmark l on l.Id=bk.BusPoint    
+inner join Bus b on b.Id=bv.BusId    
+inner join Graveyard g on g.Id=bk.GraveyardId    
+inner join AlkhidmatCentre c on c.Id=bv.CentreId    
+inner join TimeSlot ts1 on ts1.Id=bk.PickupTime
+inner join TimeSlot ts2 on ts2.Id=bk.ReturnTime
+    
+end 
+
+go

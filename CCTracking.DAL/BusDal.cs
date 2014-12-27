@@ -23,6 +23,7 @@ namespace CCTracking.DAL
         {
             Bus bus = baseModel as Bus;
             dictionary.Add("@VehicleNo", bus.VehicleNo);
+            dictionary.Add("@BookingId", bus.Id); //hack: id uses booking id
             return "GetBusByCriteria";
         }
 

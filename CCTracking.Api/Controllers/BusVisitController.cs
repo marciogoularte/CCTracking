@@ -9,12 +9,12 @@ namespace CCTracking.Api.Controllers
     public class BusVisitController : ApiController
     {
         [HttpPost]
-        public CCTracking.Dto.BusVisit SaveBusVisit(CCTracking.Dto.BusVisit busVisit)
+        public BusVisit SaveBusVisit(BusVisit busVisit)
         {
             if (busVisit != null)
             {
                 //booking.Id = rowCounter++;
-                DBFacade facade = new CCTracking.DAL.BusVisitDal();
+                DBFacade facade = new BusVisitDal();
                 if (busVisit.Id <= 0)
                 {
                     busVisit.CreatedDate = busVisit.ModifiedDate = DateTime.Today;
@@ -29,7 +29,8 @@ namespace CCTracking.Api.Controllers
                     busVisit.PumpLocation = string.Empty;
                     busVisit.FuelAmount = busVisit.FuelRate = 0;
                 }
-                if ((VisitTypes)busVisit.VisitTypeId != VisitTypes.Booking)
+                //used for booking & maintainance
+                if ((VisitTypes)busVisit.VisitTypeId != VisitTypes.Booking && (VisitTypes)busVisit.VisitTypeId != VisitTypes.Maintenance)
                 {
                     busVisit.IsBookingCompleted = false;
                 }
@@ -42,7 +43,7 @@ namespace CCTracking.Api.Controllers
         [HttpGet]
         public LookupResponse BusVisitDefault()
         {
-            DBFacade facade = new CCTracking.DAL.LookupDal();
+            DBFacade facade = new LookupDal();
             BaseModelResponse baseModelResponse = facade.ExecuteDs(null);
             LookupResponse lookupResponse = (LookupResponse)baseModelResponse;
             return lookupResponse;
@@ -51,7 +52,7 @@ namespace CCTracking.Api.Controllers
         [HttpGet]
         public BusVisitResponse GetAll(int idAll)
         {
-            DBFacade facade = new CCTracking.DAL.BusVisitDal();
+            DBFacade facade = new BusVisitDal();
             BaseModelResponse baseModelResponse = facade.GetAll(idAll);
             BusVisitResponse response = (BusVisitResponse)baseModelResponse;
             return response;
@@ -60,7 +61,7 @@ namespace CCTracking.Api.Controllers
         [HttpGet]
         public BusVisitResponse GetById(int id)
         {
-            DBFacade facade = new CCTracking.DAL.BusVisitDal();
+            DBFacade facade = new BusVisitDal();
             BaseModelResponse baseModelResponse = facade.GetById(id);
             BusVisitResponse response = (BusVisitResponse)baseModelResponse;
             return response;

@@ -7,21 +7,77 @@
         </div>
         <div class="panel-body">
             <form id="form1">
-                <table class="table table-condensed table-hover form-group">
+                <table class="table table-removeTopBorder table-condensed table-hover form-group">
+                    <tr>
+                        <td class="col-sm-4 col-md-4 input-sm">Vehicle No</td>
+                        <td class="col-sm-8 col-md-8">
+                            <select id="ddlBusDetails" class="form-control input-sm"
+                                    data-bind="options: model.busList, optionsText: 'vehicleNo', value: model.busSelected">
+                            </select>
+                        </td>
+                    </tr>
+                    
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Reason for Cancellation</td>
                         <td class="col-sm-8 col-md-8">
                             <select id="ddlReasonForCancelation" class="form-control input-sm" 
-                                data-bind="options: model.refundTypeList, optionsText:'description', value:model.refundTypeSelected">
+                                    data-bind="options: model.refundTypeList, optionsText: 'description', value: model.refundTypeSelected">
                                
                             </select>
                         </td>
                     </tr>
+
+                    <tr>
+                        <td class="col-sm-4 col-md-4 input-sm">Refund from (Office)</td>
+                        <td class="col-sm-8 col-md-8">
+                            <select id="ddlCentre" class="form-control input-sm"
+                                    data-bind="options: model.alkhidmatCentreList, optionsText: 'description', value: model.alkhidmatCentreSelected" >
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-4 col-md-4 input-sm">Officer/Cashier</td>
+                        <td class="col-sm-8 col-md-8">
+                            <select id="ddlOfficerName" class="form-control input-sm"
+                                    data-bind="options: model.cashierList, optionsText: 'description', value: model.cashierSelected" >
+                            </select>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2"><hr/></td>
+                    </tr>
+                    <tr style="display: none">
+                        <td class="col-sm-4 col-md-4 input-sm">ID</td>
+                        <td class="col-sm-8 col-md-8 input-sm">
+                            <input id="hdnRefundId" type="hidden" data-bind="value:model.id"/>
+                            <span data-bind="text: model.id"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-4 col-md-4 input-sm">Reason for Cancellation</td>
+                        <td class="col-sm-8 col-md-8 input-sm">
+                            <span data-bind="text: model.refundTypeSelectedDesc"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-4 col-md-4 input-sm">Refund from (Office)</td>
+                        <td class="col-sm-8 col-md-8 input-sm">
+                         <span data-bind="text: model.refundFromOfficeDesc"></span>
+                        </td>
+                    </tr>
+                   
+                    <tr>
+                        <td class="col-sm-4 col-md-4 input-sm">Officer/Cashier</td>
+                        <td class="col-sm-8 col-md-8 input-sm">
+                            <span data-bind="text: model.refundCashierDesc"></span>
+                        </td>
+                    </tr>
+
                     <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Cancellation Details</td>
                         <td class="col-sm-8 col-md-8">
                             <textarea rows="5" class="form-control input-sm" data-bind="value:model.refundReason" 
-                                required="required" data-role="validate" title="Cancellation Details" maxlength="200" data-content="Cancellation Details is required" ></textarea>
+                                      required="required" data-role="validate" title="Cancellation Details" maxlength="200" data-content="Cancellation Details is required" ></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -34,7 +90,7 @@
                         <td class="col-sm-4 col-md-4 input-sm">Amount Refund</td>
                         <td class="col-sm-8 col-md-8">
                             <input type="text" placeholder="Amount Refund" class="form-control input-sm" data-bind="value:model.refundAmount" 
-                            required="required" data-role="validate" title="Amount Refund" maxlength="10" data-content="Amount Refund is required" />
+                                   required="required" data-role="validate" title="Amount Refund" maxlength="10" data-content="Amount Refund is required" />
                         </td>
                     </tr>
                     <tr>
@@ -43,42 +99,28 @@
                             <input type="text" placeholder="Automatically calculate" disabled class="form-control input-sm" data-bind="value:model.amountDeducted">
                         </td>
                     </tr>
-                     <tr>
+                    <tr>
                         <td class="col-sm-4 col-md-4 input-sm">Refund Receipt</td>
                         <td class="col-sm-8 col-md-8">
                             <input type="text" placeholder="Refund Receipt" class="form-control input-sm" data-bind="value:model.refundReceipt"
-                                required="required" data-role="validate" title="Refund Receipt" maxlength="50" data-content="Refund Receipt is required" />
+                                   required="required" data-role="validate" title="Refund Receipt" maxlength="50" data-content="Refund Receipt is required" />
                         </td>
                     </tr>
                     <!--<tr>
-                        <td class="col-sm-4 col-md-4 input-sm">Refund from (Office)</td>
-                        <td class="col-sm-8 col-md-8">
+                            <td class="col-sm-4 col-md-4 input-sm">Refund from (Office)</td>
+                            <td class="col-sm-8 col-md-8">
                             <select id="ddlRefundFrom" class="form-control input-sm"
-                                data-bind="options: model.landmarkList, optionsText:'description', value:model.landmarkIdSelected">
+                                    data-bind="options: model.landmarkList, optionsText:'description', value:model.landmarkIdSelected">
                             </select>
-                    </tr>-->
-                     <tr>
-                        <td class="col-sm-4 col-md-4 input-sm">Refund from (Office)</td>
-                        <td class="col-sm-8 col-md-8">
-                            <select id="ddlCentre" class="form-control input-sm"
-                                data-bind="options: model.alkhidmatCentreList, optionsText:'description', value:model.alkhidmatCentreSelected" >
-                            </select></td>
-                    </tr>
-                    <tr>
-                        <td class="col-sm-4 col-md-4 input-sm">Officer/Cashier</td>
-                        <td class="col-sm-8 col-md-8">
-                            <select id="ddlOfficerName" class="form-control input-sm"
-                                data-bind="options: model.cashierList, optionsText:'description', value:model.cashierSelected" >
-                            </select>
-                        </td>
-                    </tr>
+                        </tr>-->
+                    
 
                     <tr>
                         <td class="col-sm-4 col-md-4"></td>
                         <td class="col-sm-8 col-md-8">
                             <button type="submit" class="btn btn-default">Save</button>
                             &nbsp;
-                        <button type="button" class="jsCancel btn btn-default">Cancel</button>
+                            <button type="button" class="jsCancel btn btn-default">Cancel</button>
                         </td>
                     </tr>
                     

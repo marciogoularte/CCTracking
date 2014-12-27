@@ -51,7 +51,11 @@ export class BusVisitView extends helper.Views.ItemView {
             return false;
         }
         if (this.viewModel.isBookingCompleted() == "1") {
-            if (this.viewModel.finalReading() == undefined || this.viewModel.finalReading()=="" || this.viewModel.finalReading() == 0) {
+            if (this.viewModel.returnDate() == undefined || this.viewModel.returnDate()=="") {
+                helper.ShowModalPopup("danger", "Bus Visit", "Please enter valid return date to complete the booking.");
+                return false;
+            }
+            else if (this.viewModel.finalReading() == undefined || this.viewModel.finalReading() == "" || this.viewModel.finalReading() == 0) {
                 helper.ShowModalPopup("danger", "Bus Visit", "Please enter valid final reading to complete the booking.");
                 return false;
             }
@@ -66,6 +70,7 @@ export class BusVisitView extends helper.Views.ItemView {
         this.bbModel.set("bookingId", this.viewModel.bookingId());
         this.bbModel.set("inchargeName", this.viewModel.inchargeName());
         this.bbModel.set("visitDate", this.viewModel.visitDate());
+        this.bbModel.set("returnDate", this.viewModel.returnDate());
         //this.bbModel.set("outTime", this.viewModel.outTime());
         //this.bbModel.set("returnTime", this.viewModel.returnTime());
         this.bbModel.set("readingWhenFilling", this.viewModel.readingWhenFilling());
@@ -107,6 +112,7 @@ export class ViewModel {
     visitDate: any;
     outTime: any;
     returnTime: any;
+    returnDate:any;
     readingWhenFilling: any;
     pumpLocation: any;
     fuelRate: any;
@@ -161,6 +167,7 @@ export class ViewModel {
             this.visitDate = ko.observable();
             this.outTime = ko.observable();
             this.returnTime = ko.observable();
+            this.returnDate = ko.observable();
             this.readingWhenFilling = ko.observable();
 
             //only for fueling
@@ -201,7 +208,7 @@ export class ViewModel {
             this.isBooking = ko.computed({
                 owner: this,
                 read: () => {
-                    if (this.visitTypeSelected() != undefined && helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Booking]) {
+                    if (this.visitTypeSelected() != undefined && (helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Booking]  || helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Maintenance])) {
                         return true;
                     } else {
                         return false;
@@ -211,6 +218,7 @@ export class ViewModel {
         }
         else {
             this.id = ko.observable(model.get("id"));
+            //var editFlag = model.get("visitTypeId") == 3 ? false : true;
             this.isEdit = ko.observable(true);
             this.isActive = ko.observable(model.get("isActive"));
             this.centreId = ko.observable(model.get("centreId"));
@@ -222,6 +230,7 @@ export class ViewModel {
             this.visitDate = ko.observable(model.get("visitDate"));
             this.outTime = ko.observable(model.get("outTime"));
             this.returnTime = ko.observable(model.get("returnTime"));
+            this.returnDate = ko.observable(model.get("returnDate"));
             this.readingWhenFilling = ko.observable(model.get("readingWhenFilling"));
 
             //only for fueling
@@ -276,7 +285,7 @@ export class ViewModel {
             this.isBooking = ko.computed({
                 owner: this,
                 read: () => {
-                    if (this.visitTypeSelected() != undefined && helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Booking]) {
+                    if (this.visitTypeSelected() != undefined && (helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Booking] || helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Maintenance])) {
                         return true;
                     } else {
                         return false;
@@ -322,9 +331,9 @@ export class BusVisitCollectionView extends helper.Views.CompositeView {
     }
 
     setOptionDisable(option, item) {
-        if (item.id == 1) {
-            ko.applyBindingsToNode(option, { disable: true, text: item.description + ' - Maintenance' }, item);
-        }
+        //if (item.otherDetail.toLowerCase()==="true") {
+        //    ko.applyBindingsToNode(option, { disable: true, text: item.description + ' - Maintenance' }, item);
+        //}
     }
 
     //onShow() {
@@ -379,6 +388,6 @@ export class BusVisitItemView extends helper.Views.ItemView {
     }
 }
 
-export function setOptionDisable(option, item) {
-    alert("dddddd");
-}
+//export function setOptionDisable(option, item) {
+//    alert("dddddd");
+//}

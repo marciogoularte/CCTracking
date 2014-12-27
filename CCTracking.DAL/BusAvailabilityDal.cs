@@ -88,6 +88,8 @@ namespace CCTracking.DAL
                 bus.Description = dr.GetString(dr.GetOrdinal("Description"));
             if (!dr.IsDBNull(dr.GetOrdinal("TrackingDeviceId")))
                 bus.TrackingDeviceId = dr.GetString(dr.GetOrdinal("TrackingDeviceId"));
+            if (!dr.IsDBNull(dr.GetOrdinal("IsOnMaintainance")))
+                bus.IsOnMaintainance = dr.GetBoolean(dr.GetOrdinal("IsOnMaintainance"));
         }
 
     }

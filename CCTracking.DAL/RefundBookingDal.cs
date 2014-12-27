@@ -13,8 +13,9 @@ namespace CCTracking.DAL
     {
         protected override string GetByIdSql(int id, Dictionary<string, object> dictionary)
         {
-            dictionary.Add("@Id", id);
-            return "GetRefundBookingById";
+            //dictionary.Add("@Id", id);
+            //return "GetRefundBookingById";
+            return "";
         }
 
         protected override string GetAllSql()
@@ -24,16 +25,21 @@ namespace CCTracking.DAL
 
         protected override string GetByCriteriaSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
+            //RefundBooking refundBooking = baseModel as RefundBooking;
+            //dictionary.Add("@BookingId", refundBooking.BookingId);
+            //dictionary.Add("@RefundOfficeLocation", refundBooking.RefundOfficeLocation);
+            //dictionary.Add("@RefundTypeId", refundBooking.RefundTypeId);
+            //return "GetRefundBookingByCriteria";
+
             RefundBooking refundBooking = baseModel as RefundBooking;
-            dictionary.Add("@BookingId", refundBooking.BookingId);
-            dictionary.Add("@RefundOfficeLocation", refundBooking.RefundOfficeLocation);
-            dictionary.Add("@RefundTypeId", refundBooking.RefundTypeId);
-            return "GetRefundBookingByCriteria";
+            dictionary.Add("@Id", refundBooking.BookingId);
+            return "GetRefundBookingById";
         }
 
         protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
             RefundBooking refundBooking = baseModel as RefundBooking;
+            dictionary.Add("@BusId", refundBooking.BusId);
             dictionary.Add("@BookingId", refundBooking.BookingId);
             dictionary.Add("@RefundTypeId", refundBooking.RefundTypeId);
             dictionary.Add("@RefundReason", refundBooking.RefundReason);
@@ -96,6 +102,8 @@ namespace CCTracking.DAL
             RefundBooking refundBooking = baseModel as RefundBooking;
             if (!dr.IsDBNull(dr.GetOrdinal("BookingId")))
                 refundBooking.BookingId = dr.GetInt32(dr.GetOrdinal("BookingId"));
+            if (!dr.IsDBNull(dr.GetOrdinal("BusId")))
+                refundBooking.BusId = dr.GetInt32(dr.GetOrdinal("BusId"));
             if (!dr.IsDBNull(dr.GetOrdinal("ActualBookingAmount")))
                 refundBooking.ActualBookingAmount = dr.GetDecimal(dr.GetOrdinal("ActualBookingAmount"));
             if (!dr.IsDBNull(dr.GetOrdinal("RefundAmount")))

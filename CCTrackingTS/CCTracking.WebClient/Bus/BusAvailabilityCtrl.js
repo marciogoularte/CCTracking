@@ -60,7 +60,12 @@ define(["require", "exports", "../App", "../Helper", "./BusAvailabilityView", ".
         };
 
         BusAvailabilityCtrl.prototype.ShowBusBookingDetailCompleted = function (model) {
-            var busDetailCollection = new Backbone.Collection(model["nearestCentreList"]);
+            //debugger;
+            var list = _.map(model["nearestCentreList"], function (item) {
+                item.pickupDate = helper.FormatDateString(item.pickupDate);
+                return item;
+            });
+            var busDetailCollection = new Backbone.Collection(list);
             var busDetail = new Backbone.Model();
             busDetail.set("type", "btn-warning");
 
