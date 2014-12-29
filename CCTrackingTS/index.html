@@ -13,14 +13,14 @@
         <link href="Content/Themes/flatly/bootstrap.min.css" rel="stylesheet" />
         <link href="Content/Themes/simplex/bootstrap.min.css" rel="stylesheet" />
     -->
-    
-    
+
+
     <link href="Content/Themes/slate/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/font-awesome.min.css" rel="stylesheet" />
     <link href="Content/App.css" rel="stylesheet" />
     <script data-main="CCTracking.WebClient/Main" src="Scripts/require.js"></script>
     <link href="Content/jquery-ui.css" rel="stylesheet" />
-    
+
     <!--<link href="Content/datepicker.css" rel="stylesheet" />-->
     <!--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"> </script>-->
 
@@ -30,17 +30,38 @@
     <script type="text/html" id="AppLayout">
         <div id="LoginRegion"></div>
 
-        <div class="container-fluid">
-            <div id="HeaderRegion" class="row-fluid col-sm-12 col-md-12"></div>
-            <div class="row-fluid col-sm-2 col-md-2">
-                <div id="AdminLeftRegion"></div>
-                <div id="LeftRegion"></div>
-            </div>
+        <!--<div class="col-sm-12 container container-fluid" style="border: solid aqua thick">
+                <div id="HeaderRegion" class="col-sm-12 col-md-12"></div>
+                <div class="row-fluid col-sm-2 col-md-2">
+                    <div id="AdminLeftRegion"></div>
+                    <div id="LeftRegion"></div>
+                </div>
 
-            <div id="MainRegion" class="row-fluid col-sm-6 col-md-6"></div>
-            <div id="RightRegion" class="row-fluid col-sm-4 col-md-4"></div>
-            <div id="DetailRegion" class="row-fluid col-sm-6 col-md-6"></div>
-        </div>       
+                <div id="MainRegion" class="row-fluid col-sm-6 col-md-6"></div>
+                <div id="RightRegion" class="row-fluid col-sm-4 col-md-4"></div>
+                <div id="DetailRegion" class="row-fluid col-sm-6 col-md-6"></div>
+            </div>       -->
+        <div class="col-sm-12 container container-fluid">
+            <div class="row" style="border-bottom: solid gray thin">
+                <div id="HeaderRegion" class="col-sm-12 col-md-12"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-md-2">
+                    <div id="AdminLeftRegion"></div>
+                    <div id="LeftRegion"></div>
+                </div>
+                <div id="MainRegion" class="col-sm-6 col-md-6"></div>
+                <div id="RightRegion" class="col-sm-4 col-md-4"></div>
+                <div id="DetailRegion" class="col-sm-6 col-md-6"></div>
+            </div>
+            <div class="row text-center">
+                <div class="panel panel-default">
+                    <div class="panel-heading header-bold softwarecare-footer">
+                        Developed & Desinged by <span class="text-danger ">Software Care</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </script>
 
     <div id="ContainerRegion"></div>

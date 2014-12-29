@@ -2,12 +2,12 @@
     <script type="text/html" id="SiteHeader">
 
         <!--@*<nav class="navbar navbar-default" role="navigation">*@-->
-        <div class="container-fluid">
-            <ul class="nav navbar-nav navbar-left">
-                <li><a href="#viewHome"><i class="fa fa-home">&nbsp;</i>Home</a></li>               
-                <li class="dropdown">
+        <div>
+            <ul class="nav navbar-nav navbar-left header-menu-font-size">
+                <li class="header-menu-font-size"><a href="#viewHome"><i class="fa fa-home">&nbsp;</i>Home</a></li>               
+                <li class="dropdown header-menu-font-size">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-gears">&nbsp;</i>Main<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
+                    <ul class="dropdown-menu header-menu-font-size" role="menu">
                         <!--<li><a href="#addBooking"><span class="glyphicon glyphicon-time"></span>Add</a></li>-->
                         <li><a href="#viewBooking"><i class="fa fa-book">&nbsp;</i>Booking</a></li>
                         <li><a href="#viewBusVisit"><i class="fa fa-bus">&nbsp;</i>Bus Visit</a></li>
@@ -19,9 +19,9 @@
                 </li>
                 <!-- diaplay only to admin-->
                 <% if(isAdminRole()) {%> 
-                <li class="dropdown">
+                <li class="dropdown header-menu-font-size">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-lock">&nbsp;</i>Admin<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
+                    <ul class="dropdown-menu header-menu-font-size" role="menu">
                         <li><a href="#viewAlkhidmatCentre"><i class="fa fa-institution">&nbsp;</i>Alkhidmat Centre</a></li>
                         <li><a href="#viewAdminBus"><i class="fa fa-bus">&nbsp;</i>Bus</a></li>
                         <li><a href="#viewCauseOfDeath"><i class="fa fa-ambulance">&nbsp;</i>Cause of Death</a></li>
@@ -40,6 +40,26 @@
                         <!--<li><a href="#cancelAdmin"><span class="glyphicon glyphicon-time"></span>Cancel</a></li>-->
                     </ul>
                 </li>
+                
+                <li class="dropdown header-menu-font-size">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-line-chart">&nbsp;</i>Reports<span class="caret"></span></a>
+                    <ul class="dropdown-menu header-menu-font-size" role="menu">
+                        <li><a href="#adminSearchBooking"><i class="fa fa-book">&nbsp;</i>&nbsp;Booking</a></li>
+                        <li><a href="#adminBusVisit"><i class="fa fa-bus">&nbsp;</i>&nbsp;Milage</a></li>
+                        <li><a href="#driverSummary"><i class="fa fa-male">&nbsp;</i>&nbsp;Driver's Summary</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#busVisitSummary"><i class="fa fa-bus">&nbsp;</i>&nbsp;Bus Visit - Bookings</a></li>
+                        <li><a href="#busVisitMilageSummary"><i class="fa fa-bus">&nbsp;</i>&nbsp;Bus Visit - Non Bookings</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown header-menu-font-size">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-twitch">&nbsp;</i>Audit Trial<span class="caret"></span></a>
+                    <ul class="dropdown-menu header-menu-font-size" role="menu">
+                        <li><a href="#auditBooking"><i class="fa fa-book">&nbsp;</i>&nbsp;Booking</a></li>
+                        <li><a href="#auditPayment"><i class="fa fa-cc-mastercard">&nbsp;</i>&nbsp;Payment</a></li>
+                        <li><a href="#auditRefundBooking"><i class="fa fa-cc-visa">&nbsp;</i>&nbsp;Refund</a></li>
+                    </ul>
+                </li>
                 <%}%>
                 
             </ul>
@@ -51,9 +71,9 @@
             </form>-->
             <ul class="nav navbar-nav navbar-right">
                 <!--<li><a href="#">Link</a></li>-->
-                <li class="dropdown">
+                <li class="dropdown header-menu-font-size">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user">&nbsp;</i><%=firstName%>,<%=lastName%><span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
+                    <ul class="dropdown-menu header-menu-font-size" role="menu">
                         <li><a href="#"><i class="fa fa-file-text">&nbsp;</i> Profile</a></li>
                         <li><a href="#changePassword"><i class="fa fa-edit">&nbsp;</i> Change Password</a></li>
                         <li class="divider"></li>

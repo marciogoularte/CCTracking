@@ -147,6 +147,7 @@ export class Application extends Marionette.Application {
                 'busVisitDetail': '',
                 'busVisitMilageDetail': '',
                 'changePassword': 'goChangePassword',
+                'extraCharge': 'goExtraCharge',
                 'auditBooking': 'goAuditBooking',
                 'auditPayment': 'goAuditPayment',
                 'auditRefundBooking': 'goAuditRefundBooking',
@@ -277,6 +278,9 @@ export class Application extends Marionette.Application {
             },
             goChangePassword() {
                 require(['./ChangePassword/ChangePasswordCtrl'], (p) => { new p.ChangePasswordCtrl().Load(); });
+            },
+            goExtraCharge() {
+            require(['./ExtraCharge/ExtraChargeCtrl'], (p) => { new p.ExtraChargeCtrl().Show(); });
             },
             goDriverSummary() {
                 require(['./Admin/Reports/Driver/DriverSummaryCtrl'], (p) => { new p.DriverSummaryCtrl().Show(); });

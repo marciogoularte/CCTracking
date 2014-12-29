@@ -57,6 +57,7 @@
     <Compile Include="ChangePasswordDal.cs" />
     <Compile Include="DalService.cs" />
     <Compile Include="DriverSummaryDal.cs" />
+    <Compile Include="ExtraChargesDal.cs" />
     <Compile Include="PaymentTypeDal.cs" />
     <Compile Include="ResetPasswordDal.cs" />
     <Compile Include="UnionCouncilDal.cs" />

@@ -34,9 +34,9 @@ namespace CCTracking.DAL
             dictionary.Add("@PaymentLocation", payment.PaymentLocation);
             dictionary.Add("@OfficerId", payment.OfficerId);
             dictionary.Add("@ReceiptNo", payment.ReceiptNo);
-            dictionary.Add("@ExtraAmountCharge", payment.ExtraAmountCharge);
-            dictionary.Add("@ExtraAmountReason", payment.ExtraAmountReason);
-            dictionary.Add("@ExtraAmountReceipt", payment.ExtraAmountReceipt);
+            //dictionary.Add("@ExtraAmountCharge", payment.ExtraAmountCharge);
+            //dictionary.Add("@ExtraAmountReason", payment.ExtraAmountReason);
+            //dictionary.Add("@ExtraAmountReceipt", payment.ExtraAmountReceipt);
             dictionary.Add("@PaymentStatus", payment.PaymentStatus);
             dictionary.Add("@EasyPaisaTranNo", payment.EasyPaisaTranNo);
             dictionary.Add("@IsReferralBookingPaid", payment.IsReferralBookingPaid);

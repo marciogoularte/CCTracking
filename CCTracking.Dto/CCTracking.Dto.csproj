@@ -52,6 +52,7 @@
     <Compile Include="CauseofDeath.cs" />
     <Compile Include="BookingLeft.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="ExtraCharges.cs" />
     <Compile Include="PaymentType.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="Graveyard.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Response\BookingSummaryResponse.cs" />
     <Compile Include="Response\BusAvailabilityResponse.cs" />
     <Compile Include="Response\BusMilageResponse.cs" />
+    <Compile Include="Response\ExtraChargesResponse.cs" />
     <Compile Include="Response\PaymentTypeResponse.cs" />
     <Compile Include="Response\UnionCouncilResponse.cs" />
     <Compile Include="Response\VisitTypeResponse.cs" />

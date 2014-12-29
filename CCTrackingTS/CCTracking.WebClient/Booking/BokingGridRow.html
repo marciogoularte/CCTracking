@@ -1,13 +1,16 @@
 ﻿<div>
-<script type="text/html" id="rowTemplate">
+    <script type="text/html" id="rowTemplate">
         <td class="jsShowDetail input-sm"><%=contactName %></td>
         <td class="input-sm"><%=contactMobile%></td>
         <td class="input-sm"><%=contactNic%></td>
         <td class="input-sm"><%=deseasedName%></td>
         <td class="input-sm"><%=pickupDate%></td>        
         <td class="input-sm">
-            <a href="#editBooking?id=<%=id%>"> <span class="glyphicon glyphicon-pencil" title="Edit"></span></a>&nbsp;
-            <a href="#payment?id=<%=id%>"><span class="glyphicon glyphicon-briefcase" title="Payment"></span></a>&nbsp;
-            <a href="#cancel?id=<%=id%>"><span class="glyphicon glyphicon-remove-sign" title="Cancel"></span></a></td>        
+            <a href="#editBooking?id=<%=id%>"> <span class="fa fa-edit" title="Edit"></span></a>&nbsp;
+            <a href="#payment?id=<%=id%>"><span class="fa fa-briefcase" title="Payment"></span></a>&nbsp;
+            <a href="#cancel?id=<%=id%>"><span class="fa fa-remove" title="Cancel"></span></a>&nbsp;
+            <a href="#extraCharge?id=<%=id%>"><span class="fa fa-plus-circle" title="Extra Charges"></span></a>
+
+        </td>        
 </script>
 </div>

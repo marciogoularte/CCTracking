@@ -126,6 +126,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     'busVisitDetail': '',
                     'busVisitMilageDetail': '',
                     'changePassword': 'goChangePassword',
+                    'extraCharge': 'goExtraCharge',
                     'auditBooking': 'goAuditBooking',
                     'auditPayment': 'goAuditPayment',
                     'auditRefundBooking': 'goAuditRefundBooking',
@@ -332,6 +333,11 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                 goChangePassword: function () {
                     require(['./ChangePassword/ChangePasswordCtrl'], function (p) {
                         new p.ChangePasswordCtrl().Load();
+                    });
+                },
+                goExtraCharge: function () {
+                    require(['./ExtraCharge/ExtraChargeCtrl'], function (p) {
+                        new p.ExtraChargeCtrl().Show();
                     });
                 },
                 goDriverSummary: function () {

@@ -1,4 +1,125 @@
-﻿-------From 24 Dec,2014--------------------
+﻿-------From 27 Dec,2014--------------------
+-new table added - ExtraCharges
+GO
+alter PROCEDURE [dbo].[SavePayment]            
+@Id int,         
+@BookingId int,        
+@PaymentType tinyint ,        
+--@Pricing tinyint ,        
+@Amount money,        
+@PaymentLocation int,        
+@OfficerId int ,        
+@ReceiptNo nvarchar(100),        
+--@ExtraAmountCharge money=null,          
+--@ExtraAmountReason nvarchar(1000)=null,        
+--@ExtraAmountReceipt nvarchar(100)=null,        
+@PaymentStatus tinyint,        
+@EasyPaisaTranNo nvarchar(30)=null,    
+@IsReferralBookingPaid bit= null,  
+@ReferralPaymentDate datetime=null,    
+@CreatedBy int,        
+@ModifiedBy int,  
+@ModifiedDate datetime        
+as            
+        
+IF @Id=null or @Id=0        
+BEGIN        
+ INSERT INTO Payment(BookingId,PaymentType,Amount,PaymentLocation,OfficerId,ReceiptNo,PaymentStatus,EasyPaisaTranNo,IsReferralBookingPaid,ReferralPaymentDate,CreatedBy,ModifiedBy)            
+ VALUES(@BookingId,@PaymentType,@Amount,@PaymentLocation,@OfficerId,@ReceiptNo,@PaymentStatus,@EasyPaisaTranNo,@IsReferralBookingPaid,@ReferralPaymentDate,@CreatedBy,@ModifiedBy)            
+ select * from Payment where id=SCOPE_IDENTITY()         
+END        
+ELSE         
+BEGIN        
+ UPDATE Payment SET        
+ BookingId=@BookingId,        
+PaymentType=@PaymentType,        
+Amount=@Amount,        
+PaymentLocation=@PaymentLocation,        
+OfficerId=@OfficerId,        
+ReceiptNo=@ReceiptNo,        
+PaymentStatus=@PaymentStatus,        
+EasyPaisaTranNo=@EasyPaisaTranNo,    
+IsReferralBookingPaid = @IsReferralBookingPaid,  
+ReferralPaymentDate = @ReferralPaymentDate,    
+CreatedBy=@CreatedBy,        
+ModifiedBy=@ModifiedBy,  
+ModifiedDate=@ModifiedDate        
+ WHERE Id=@Id        
+ select * from Payment where id=@Id        
+END  
+GO
+create procedure GetExtraChargesByBookingId  
+@BookingId int  
+as  
+
+select isnull(es.Id,0) Id,es.ExtraAmountCharge,es.ExtraAmountReason,es.ExtraAmountReceipt,isnull(es.IsActive,b.isActive) isActive,
+isnull(es.CreatedBy,b.CreatedBy) as CreatedBy,isnull(es.CreatedDate,b.CreatedDate) as CreatedDate,isnull(es.ModifiedBy,b.ModifiedBy) as ModifiedBy,
+isnull(es.ModifiedDate,b.ModifiedDate) as ModifiedDate, bv.BusId,b.Id as BookingId,bv.FuelAmount as BookingAmount from 
+Booking b  
+inner join BusVisit bv on b.Id=bv.BookingId
+left join ExtraCharges es on es.BookingId=b.Id and es.BusId=bv.BusId
+where b.Id=@BookingId 
+GO
+
+CREATE PROCEDURE [dbo].[SaveExtraCharges]       
+@Id int,      
+@BusId int,
+@BookingId int,      
+@ExtraAmountCharge money,
+@ExtraAmountReason nvarchar(500),
+@ExtraAmountReceipt nvarchar(50),
+@IsActive bit,      
+@CreatedBy int,      
+@ModifiedBy int,      
+@ModifiedDate datetime      
+       
+AS      
+      
+BEGIN      
+declare @newId int    
+ if exists(select id from ExtraCharges  where id=@Id and busId=@BusId)   
+ begin      
+ set @newId=@Id    
+ update [ExtraCharges]       
+ set       
+ BusId=@BusId,
+ BookingId =  @BookingId,
+ ExtraAmountCharge = @ExtraAmountCharge,
+ ExtraAmountReason = @ExtraAmountReason,
+ ExtraAmountReceipt =@ExtraAmountReceipt,
+ IsActive = @IsActive,CreatedBy = @CreatedBy,ModifiedBy = @ModifiedBy,ModifiedDate = @ModifiedDate      
+ where id = @newId and busId=@BusId     
+    
+ end       
+ else      
+ begin      
+     
+   
+ insert into ExtraCharges       
+ (BusId,BookingId,ExtraAmountCharge,ExtraAmountReason,ExtraAmountReceipt, IsActive,CreatedBy,ModifiedBy,ModifiedDate)      
+ values      
+ (@BusId,@BookingId,@ExtraAmountCharge,@ExtraAmountReason,@ExtraAmountReceipt,@IsActive,@CreatedBy,@ModifiedBy,@ModifiedDate)           
+ set @newId=SCOPE_IDENTITY()     
+    
+ end      
+    
+ --update Payment set PaymentStatus=2 where BookingId=@BookingId    
+ --update BusVisit set IsBookingCompleted=1 where BookingId=@BookingId    
+
+update Payment set ExtraAmountCharge=(select SUM(ExtraAmountCharge) from ExtraCharges where BookingId=@BookingId)  where BookingId=@BookingId     
+
+ select isnull(ec.Id,0) Id ,ec.BusId,  b.Id as BookingId , isnull(ec.ExtraAmountCharge, 0) ExtraAmountCharge,        
+ isnull(ec.ExtraAmountReason,'')as ExtraAmountReason, isnull(ec.ExtraAmountReceipt,'')as ExtraAmountReceipt,       
+ ec.IsActive, ec.CreatedBy, ec.CreatedDate,ec.ModifiedBy , ec.ModifiedDate,bv.FuelAmount as BookingAmount  
+ from Booking b     
+ inner join BusVisit bv on bv.BookingId=b.Id  
+ left join Payment p  on b.Id =  p.BookingId      
+ left join ExtraCharges ec  on b.Id = ec.BookingId      
+ where ec.Id = @newId      
+          
+END 
+GO
+-------From 24 Dec,2014--------------------
 Busid Field added in RefundBooking table
 BusId	int	Checked
 ;

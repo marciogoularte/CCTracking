@@ -140,6 +140,7 @@
     <Compile Include="Controllers\ChangePasswordController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\DriverSummaryController.cs" />
+    <Compile Include="Controllers\ExtraChargesController.cs" />
     <Compile Include="Controllers\GraveyardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LandmarkController.cs" />

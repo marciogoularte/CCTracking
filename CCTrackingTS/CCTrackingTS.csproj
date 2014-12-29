@@ -118,6 +118,7 @@
     <Content Include="CCTracking.WebClient\DAL\Driver.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Dtos\BusAvailabilityDto.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\DAL\Search.ts" />
+    <TypeScriptCompile Include="CCTracking.WebClient\DAL\ExtraCharges.ts" />
     <Content Include="CCTracking.WebClient\DAL\Graveyard.ts" />
     <Content Include="CCTracking.WebClient\DAL\Landmark.ts" />
     <Content Include="CCTracking.WebClient\DAL\PaymentType.ts" />
@@ -133,6 +134,7 @@
     <Content Include="CCTracking.WebClient\Dtos\DriverDto.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Dtos\NearestCentreDto.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Dtos\SearchDto.ts" />
+    <TypeScriptCompile Include="CCTracking.WebClient\Dtos\ExtraChargesDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\GraveyardDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\LandmarkDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\LoginDto.ts" />
@@ -144,6 +146,9 @@
     <Content Include="CCTracking.WebClient\Dtos\VisitTypeDto.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Home\HomeCtrl.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Home\HomeView.ts" />
+    <TypeScriptCompile Include="CCTracking.WebClient\ExtraCharge\ExtraChargeCtrl.ts" />
+    <TypeScriptCompile Include="CCTracking.WebClient\ExtraCharge\ExtraChargeView.ts" />
+    <Content Include="CCTracking.WebClient\ExtraCharge\ExtraCharge.html" />
     <Content Include="CCTracking.WebClient\Home\Home.html" />
     <Content Include="CCTracking.WebClient\Login\LoginCtrl.ts" />
     <Content Include="CCTracking.WebClient\Login\LoginView.ts" />

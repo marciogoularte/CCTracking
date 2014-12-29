@@ -54,3 +54,15 @@
   margin-left: auto ;
   margin-right: auto ;
 }
+.no-space [class*="span"] {
+    margin-left: 0;
+}
+.header-menu-font-size {
+    font-size: small;
+    font-weight:bold;
+}
+.softwarecare-footer {
+    font-size: small;
+    font-weight: bold;
+    font-style: italic;
+}
