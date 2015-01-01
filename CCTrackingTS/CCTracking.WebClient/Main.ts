@@ -41,7 +41,10 @@ require.config({
         jqueryUnobtrusiveAjax: "Scripts/jquery.unobtrusive-ajax",
         //knockoutJqueryuiUtils: 'Scripts/KnockoutJqueryUI/utils',
         //knockoutJqueryuiHandler: 'Scripts/KnockoutJqueryUI/bindingHandler',
-        knockoutJqueryuiDatepicker: 'Scripts/KnockoutJqueryUI/datepicker'
+        knockoutJqueryuiDatepicker: 'Scripts/KnockoutJqueryUI/datepicker',
+        highcharts: 'Scripts/HighCharts/highcharts',
+        highcharts3d: 'Scripts/HighCharts/highcharts-3d',
+        highchartsExport:'Scripts/HighCharts/exporting'
 
     },
 
@@ -91,6 +94,16 @@ require.config({
 
         "knockoutJqueryuiDatepicker": {
             depts: ["jquery", "knockout", "jqueryUI"]
+        },
+        "highcharts": {
+            deps: ["jquery"],
+            exports:"highcharts"
+        },
+        "highcharts3d": {
+            deps: ["jquery","highcharts"]
+        },
+        "highchartsExport": {
+            deps: ["jquery","highcharts"]
         }
         //"bindings": {
         //    deps: ["bootstrap", "jquery", "knockout", "knockoutvalidation"]
@@ -106,6 +119,9 @@ require([
     "marionette",
     "bootstrap",
     "jqueryUI",
+    "highcharts",
+    "highcharts3d",
+    "highchartsExport",
 //"bootstrapPopover",
 //"bootstrapTooltip",
 //"datepicker",

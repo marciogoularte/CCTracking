@@ -38,7 +38,10 @@ require.config({
         jqueryUnobtrusiveAjax: "Scripts/jquery.unobtrusive-ajax",
         //knockoutJqueryuiUtils: 'Scripts/KnockoutJqueryUI/utils',
         //knockoutJqueryuiHandler: 'Scripts/KnockoutJqueryUI/bindingHandler',
-        knockoutJqueryuiDatepicker: 'Scripts/KnockoutJqueryUI/datepicker'
+        knockoutJqueryuiDatepicker: 'Scripts/KnockoutJqueryUI/datepicker',
+        highcharts: 'Scripts/HighCharts/highcharts',
+        highcharts3d: 'Scripts/HighCharts/highcharts-3d',
+        highchartsExport: 'Scripts/HighCharts/exporting'
     },
     // Configure the dependencies and exports for older, traditional "browser globals"
     // scripts that do not use define() to declare the dependencies and set a module value.
@@ -81,6 +84,16 @@ require.config({
         "jqueryUnobtrusiveAjax": ["jquery"],
         "knockoutJqueryuiDatepicker": {
             depts: ["jquery", "knockout", "jqueryUI"]
+        },
+        "highcharts": {
+            deps: ["jquery"],
+            exports: "highcharts"
+        },
+        "highcharts3d": {
+            deps: ["jquery", "highcharts"]
+        },
+        "highchartsExport": {
+            deps: ["jquery", "highcharts"]
         }
     }
 });
@@ -92,6 +105,9 @@ require([
     "marionette",
     "bootstrap",
     "jqueryUI",
+    "highcharts",
+    "highcharts3d",
+    "highchartsExport",
     "knockoutJqueryuiDatepicker",
     "CCTracking.WebClient/App"
 ], //function ($, Backbone, _, Marionette) {
