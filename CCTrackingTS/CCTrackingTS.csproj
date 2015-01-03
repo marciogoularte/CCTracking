@@ -120,6 +120,7 @@
     <TypeScriptCompile Include="CCTracking.WebClient\DAL\Search.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\DAL\ExtraCharges.ts" />
     <Content Include="CCTracking.WebClient\DAL\Graveyard.ts" />
+    <TypeScriptCompile Include="CCTracking.WebClient\DAL\Home.ts" />
     <Content Include="CCTracking.WebClient\DAL\Landmark.ts" />
     <Content Include="CCTracking.WebClient\DAL\PaymentType.ts" />
     <Content Include="CCTracking.WebClient\DAL\RefundType.ts" />
@@ -136,6 +137,7 @@
     <TypeScriptCompile Include="CCTracking.WebClient\Dtos\SearchDto.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Dtos\ExtraChargesDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\GraveyardDto.ts" />
+    <TypeScriptCompile Include="CCTracking.WebClient\Dtos\HomeDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\LandmarkDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\LoginDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\PaymentTypeDto.ts" />
@@ -402,6 +404,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\json2.min.js" />
+    <Content Include="Scripts\JSPdf\jspdf.min.js" />
     <Content Include="Scripts\knockback-core-stack.js" />
     <Content Include="Scripts\knockback-core-stack.min.js" />
     <Content Include="Scripts\knockback-core.js" />

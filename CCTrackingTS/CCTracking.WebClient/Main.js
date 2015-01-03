@@ -41,7 +41,8 @@ require.config({
         knockoutJqueryuiDatepicker: 'Scripts/KnockoutJqueryUI/datepicker',
         highcharts: 'Scripts/HighCharts/highcharts',
         highcharts3d: 'Scripts/HighCharts/highcharts-3d',
-        highchartsExport: 'Scripts/HighCharts/exporting'
+        highchartsExport: 'Scripts/HighCharts/exporting',
+        jsPDF: 'Scripts/JSPdf/jspdf.min'
     },
     // Configure the dependencies and exports for older, traditional "browser globals"
     // scripts that do not use define() to declare the dependencies and set a module value.
@@ -94,6 +95,9 @@ require.config({
         },
         "highchartsExport": {
             deps: ["jquery", "highcharts"]
+        },
+        "jsPDF": {
+            deps: ["jquery"]
         }
     }
 });
@@ -108,6 +112,7 @@ require([
     "highcharts",
     "highcharts3d",
     "highchartsExport",
+    "jsPDF",
     "knockoutJqueryuiDatepicker",
     "CCTracking.WebClient/App"
 ], //function ($, Backbone, _, Marionette) {

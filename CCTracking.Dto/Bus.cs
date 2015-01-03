@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CCTracking.Dto
+﻿namespace CCTracking.Dto
 {
     public class Bus : BaseModel
     {

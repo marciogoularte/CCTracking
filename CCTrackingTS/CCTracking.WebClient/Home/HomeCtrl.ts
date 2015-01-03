@@ -11,9 +11,12 @@ import application = require("../App");
 import helper = require("../Helper");
 import views = require("./HomeView");
 
+import dto = require("../Dtos/HomeDto");
+import DAL = require("../DAL/Home");
+
 export class HomeCtrl extends helper.Controller {
     homeItemView: views.HomeItemView;
-    app:any;
+    app: any;
     constructor() {
         super();
         this.app = application.Application.getInstance();
@@ -21,22 +24,40 @@ export class HomeCtrl extends helper.Controller {
     }
 
     Show() {
-        //alert("show");
-        //select centre, count(BookingId) BokingCount, sum(FuelAmount) BookingAmount from AdminSummary_View group by centre, VisitTypeId having VisitTypeId = 2
-        //select centre, count(BookingId) BokingCount, sum(FuelAmount) Expenditure from AdminSummary_View group by centre, VisitTypeId  having VisitTypeId< > 2  
-
         this.app.MainRegion.show(this.homeItemView);
-        this.ShowChart();
-    }
-    ShowChart() {
-        //alert(this.$el.find("#container").text());
-        var centreName = ['Tariq Rd', 'Nomayesh', 'Joher', 'Korangi', 'Landhi'];
-        var bookingData = [18500, 11300, 13700, 22400, 6200];
-        var expenditureData = [9000, 5700, 6500, 10200, 3000];
-        var receivableData = [3350, 2500, 4000, 6500, 2000];
-        var profitData = [9500, 5600, 7200, 12200, 3200];
+        var model = new dto.Models.HomeDto();
+        var today = new Date();
+        var fromDate = new Date(today.setDate(today.getDate() - 30));
 
-        this.homeItemView.$el.find("#container").highcharts({
+        model.set("fromDate", helper.FormatDateString(fromDate));
+        model.set("toDate", helper.FormatDateString(new Date()));
+        var deffered = DAL.GetByCriteria(model);
+        deffered.done((p) => { this.ShowChart(p); });
+    }
+    ShowChart(summaryData: any) {
+        var centreName = [];
+        var bookingData = [];
+        var expenditureData = [];
+        var receivableData = [];
+        var profitData = [];
+        _.map(summaryData["homeList"], (item) => {
+            //debugger 
+            centreName.push(item.centreDesc);
+            bookingData.push(item.bookingAmount);
+            expenditureData.push(item.maintenance);
+            receivableData.push(item.receivable);
+            profitData.push(item.profit);
+            return item;
+        });
+
+        //var centreName = ['Tariq Rd', 'Nomayesh', 'Joher', 'Korangi', 'Landhi'];
+        //var bookingData = [18500, 11300, 13700, 22400, 6200];
+        //var expenditureData = [9000, 5700, 6500, 10200, 3000];
+        //var receivableData = [3350, 2500, 4000, 6500, 2000];
+        //var profitData = [9500, 5600, 7200, 12200, 3200];
+
+        //this.homeItemView.$el.find("#container").highcharts({
+        this.homeItemView.$el.find("#container")["highcharts"]({
             chart: {
                 type: 'column',
                 backgroundColor: 'transparent',
@@ -73,7 +94,7 @@ export class HomeCtrl extends helper.Controller {
                 allowDecimals: false,
                 min: 0,
                 title: {
-                    text: 'Number of fruits'
+                    text: 'Amount in Rs'
                 }
             },
 
@@ -107,6 +128,15 @@ export class HomeCtrl extends helper.Controller {
                     stack: 'Profit'
                 }]
         });
+
+        var item = this.homeItemView.$el.find("text")[this.homeItemView.$el.find("text").length - 1];
+        if (item != undefined) {
+            item.innerHTML = "";
+        }
+
+
     }
+
+    
 }
 

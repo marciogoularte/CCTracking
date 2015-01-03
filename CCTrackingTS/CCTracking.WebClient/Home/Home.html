@@ -3,9 +3,8 @@
         <div class="panel panel-default">
             <div class="panel-heading header-bold"><span class="fa fa-dashboard">&nbsp;</span> CC TRACKING DASHBOARD</div>
             <div class="panel-body dashboard-fontSize">
-                <div class="row" >
+                <div class="row">
                     <div class="col-sm-11 col-md-11" id="container">
-                        
                     </div>
                 </div>
                 <div class="row">
@@ -39,8 +38,10 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="row"><hr/></div>
+
+                <div class="row">
+                    <hr />
+                </div>
                 <div class="row">
                     <div class="col-sm-2, col-md-2">
                         <i class="fa fa-3x fa-bus" title="Bus Visit Summary"></i>
@@ -48,11 +49,15 @@
                     <div class="col-sm-10 col-md-10" title="Current Months Summary">
                         <div class="row">
                             <div class="col-sm-4 col-md-4 text-info">Most Booking Made</div>
-                            <div class="col-sm-6 col-md-6 text-warning">Clifton Centre (36)<br/> Tariq Rd (23)<br/> Landhi 89 (19)</div>
+                            <div class="col-sm-6 col-md-6 text-warning">Clifton Centre (36)<br />
+                                Tariq Rd (23)<br />
+                                Landhi 89 (19)</div>
                         </div>
                         <div class="row">
                             <div class="col-sm-4 col-md-4 text-info">Most Milage Covered</div>
-                            <div class="col-sm-6 col-md-6 text-warning">Vh-004 (35,000 Km)<br />Vh-002 (18,000 Km)<br/> Vh-004 (16,000 Km)</div>
+                            <div class="col-sm-6 col-md-6 text-warning">Vh-004 (35,000 Km)<br />
+                                Vh-002 (18,000 Km)<br />
+                                Vh-004 (16,000 Km)</div>
                         </div>
                         <div class="row">
                             <div class="col-sm-4 col-md-4 text-info">Unpaid Bookings</div>
@@ -60,7 +65,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="row"><hr/></div>
+                <div class="row">
+                    <hr />
+                </div>
                 <div class="row">
                     <div class="col-sm-2, col-md-2">
                         <i class="fa fa-3x fa-male" title="Driver Summary"></i>
@@ -68,10 +75,83 @@
                     <div class="col-sm-10, col-md-10">
                         <div class="row">
                             <div class="col-sm-4 col-md-4 text-info">Most Bookings By</div>
-                            <div class="col-sm-6 col-md-6 text-warning">Abduallah <br/>Imaran<br/>Hasan </div>
+                            <div class="col-sm-6 col-md-6 text-warning">Abduallah
+                                <br />
+                                Imaran<br />
+                                Hasan </div>
                         </div>
                     </div>
                 </div>
+
+                <div>
+                    <hr />
+                </div>
+
+                <!-- Start Booking Receipt -->
+                <div>
+                    <button type="button" class="jsExportPdf btn btn-default" >Export to Pdf</button>
+
+                </div>
+                <div id="receiptLayout" class="row" style="border:solid 1px">
+                    <div class="col-sm-12 col-md-12">
+
+                        <div class="row text-center">
+                            <div class="col-sm-12 col-md-12">AKWS Coffin Carrier Tracking System</div>
+                        </div>
+                        <div class="row text-center">
+                            Head Office - Noor-ul-Huda Centre, Near Numayesh Chorangi
+                        </div>
+                        <div class="row">&nbsp;</div>
+                        <div class="row text-center">
+                            <div class="col-sm-12 col-md-12">Cash Receipt</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4">Cash Receipt #: 1234567</div>
+                            <div class="col-sm-8 col-md-8 text-right">Date: DD/MM/YYYY hh:mm</div>
+                        </div>
+                        <div class="row">&nbsp;</div>
+
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4">Booking Id: 140</div>
+                            <div class="col-sm-8 col-md-8 text-right">Booking Date: DD/MM/YYYY</div>
+                        </div>
+                        <div class="row">&nbsp;</div>
+
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-8">Cash Received From______________________________________</div>
+                            <div class="col-sm-4 col-md-4">of Rs._____________________</div>
+                        </div>
+                        <div class="row">&nbsp;</div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">For____________________________________________________________________________________</div>
+                        </div>
+                        <div class="row">&nbsp;</div>
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4">&nbsp;</div>
+                            <div class="col-sm-8 col-md-8">
+                                <table class="table table-condensed table-bordered">
+                                    <tr>
+                                        <td class="col-sm-4 col-md-4">Total Amount Due</td>
+                                        <td class="col-sm-4 col-md-4">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Amount Received</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Balance Due</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-8 col-md-8">Generated By: User Name</div>
+                            <div class="col-sm-4 col-md-4 text-right">Signed By_________________</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Booking Receipt -->
             </div>
         </div>
     </div>

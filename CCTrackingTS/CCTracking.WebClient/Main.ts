@@ -44,7 +44,8 @@ require.config({
         knockoutJqueryuiDatepicker: 'Scripts/KnockoutJqueryUI/datepicker',
         highcharts: 'Scripts/HighCharts/highcharts',
         highcharts3d: 'Scripts/HighCharts/highcharts-3d',
-        highchartsExport:'Scripts/HighCharts/exporting'
+        highchartsExport: 'Scripts/HighCharts/exporting',
+        jsPDF:'Scripts/JSPdf/jspdf.min'
 
     },
 
@@ -104,6 +105,9 @@ require.config({
         },
         "highchartsExport": {
             deps: ["jquery","highcharts"]
+        },
+        "jsPDF": {
+            deps: ["jquery"]
         }
         //"bindings": {
         //    deps: ["bootstrap", "jquery", "knockout", "knockoutvalidation"]
@@ -122,6 +126,7 @@ require([
     "highcharts",
     "highcharts3d",
     "highchartsExport",
+    "jsPDF",
 //"bootstrapPopover",
 //"bootstrapTooltip",
 //"datepicker",

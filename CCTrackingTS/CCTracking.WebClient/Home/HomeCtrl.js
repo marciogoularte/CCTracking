@@ -9,7 +9,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../App", "../Helper", "./HomeView", "marionette", "jquery", "knockout"], function(require, exports, application, helper, views) {
+define(["require", "exports", "../App", "../Helper", "./HomeView", "../Dtos/HomeDto", "../DAL/Home", "marionette", "jquery", "knockout"], function(require, exports, application, helper, views, dto, DAL) {
     var _ = require("underscore");
     var ko = require("knockout");
     var kb = require("knockback");
@@ -22,21 +22,42 @@ define(["require", "exports", "../App", "../Helper", "./HomeView", "marionette",
             this.homeItemView = new views.HomeItemView();
         }
         HomeCtrl.prototype.Show = function () {
-            //alert("show");
-            //select centre, count(BookingId) BokingCount, sum(FuelAmount) BookingAmount from AdminSummary_View group by centre, VisitTypeId having VisitTypeId = 2
-            //select centre, count(BookingId) BokingCount, sum(FuelAmount) Expenditure from AdminSummary_View group by centre, VisitTypeId  having VisitTypeId< > 2
+            var _this = this;
             this.app.MainRegion.show(this.homeItemView);
-            this.ShowChart();
-        };
-        HomeCtrl.prototype.ShowChart = function () {
-            //alert(this.$el.find("#container").text());
-            var centreName = ['Tariq Rd', 'Nomayesh', 'Joher', 'Korangi', 'Landhi'];
-            var bookingData = [18500, 11300, 13700, 22400, 6200];
-            var expenditureData = [9000, 5700, 6500, 10200, 3000];
-            var receivableData = [3350, 2500, 4000, 6500, 2000];
-            var profitData = [9500, 5600, 7200, 12200, 3200];
+            var model = new dto.Models.HomeDto();
+            var today = new Date();
+            var fromDate = new Date(today.setDate(today.getDate() - 30));
 
-            this.homeItemView.$el.find("#container").highcharts({
+            model.set("fromDate", helper.FormatDateString(fromDate));
+            model.set("toDate", helper.FormatDateString(new Date()));
+            var deffered = DAL.GetByCriteria(model);
+            deffered.done(function (p) {
+                _this.ShowChart(p);
+            });
+        };
+        HomeCtrl.prototype.ShowChart = function (summaryData) {
+            var centreName = [];
+            var bookingData = [];
+            var expenditureData = [];
+            var receivableData = [];
+            var profitData = [];
+            _.map(summaryData["homeList"], function (item) {
+                //debugger
+                centreName.push(item.centreDesc);
+                bookingData.push(item.bookingAmount);
+                expenditureData.push(item.maintenance);
+                receivableData.push(item.receivable);
+                profitData.push(item.profit);
+                return item;
+            });
+
+            //var centreName = ['Tariq Rd', 'Nomayesh', 'Joher', 'Korangi', 'Landhi'];
+            //var bookingData = [18500, 11300, 13700, 22400, 6200];
+            //var expenditureData = [9000, 5700, 6500, 10200, 3000];
+            //var receivableData = [3350, 2500, 4000, 6500, 2000];
+            //var profitData = [9500, 5600, 7200, 12200, 3200];
+            //this.homeItemView.$el.find("#container").highcharts({
+            this.homeItemView.$el.find("#container")["highcharts"]({
                 chart: {
                     type: 'column',
                     backgroundColor: 'transparent',
@@ -69,7 +90,7 @@ define(["require", "exports", "../App", "../Helper", "./HomeView", "marionette",
                     allowDecimals: false,
                     min: 0,
                     title: {
-                        text: 'Number of fruits'
+                        text: 'Amount in Rs'
                     }
                 },
                 tooltip: {
@@ -101,6 +122,11 @@ define(["require", "exports", "../App", "../Helper", "./HomeView", "marionette",
                         stack: 'Profit'
                     }]
             });
+
+            var item = this.homeItemView.$el.find("text")[this.homeItemView.$el.find("text").length - 1];
+            if (item != undefined) {
+                item.innerHTML = "";
+            }
         };
         return HomeCtrl;
     })(helper.Controller);
