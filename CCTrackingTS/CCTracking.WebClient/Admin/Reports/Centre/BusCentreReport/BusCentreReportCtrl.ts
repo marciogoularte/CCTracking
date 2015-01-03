@@ -1,5 +1,5 @@
-﻿/// <reference path="../../../Scripts/typings/require/require.d.ts" />
-/// <reference path="../../../Scripts/typings/marionette/marionette.d.ts" />
+﻿/// <reference path="../../../../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../../../../Scripts/typings/marionette/marionette.d.ts" />
 
 /// <amd-dependency path="marionette"/>
 /// <amd-dependency path="jquery"/>
@@ -9,16 +9,16 @@
 var _ = require("underscore");
 var ko = require("knockout");
 var kb = require("knockback");
-import application = require("../../App");
-import helper = require("../../Helper");
-import views = require("./AdminSearchBookingView");
-import dto = require("../../Dtos/BookingSummaryDto");
-import reportDto = require("../../Dtos/ReportDto");
-import DAL = require("../../DAL/AdminSearch");
+import application = require("../../../../App");
+import helper = require("../../../../Helper");
+import views = require("./BusCentreReportView");
+import dto = require("../../../../Dtos/BookingSummaryDto");
+import reportDto = require("../../../../Dtos/ReportDto");
+import DAL = require("../../../../DAL/BusCentreReport");
 
 var app;
 
-export class AdminSearchBookingCtrl extends helper.Controller {
+export class BusCentreReportCtrl extends helper.Controller {
     app: any;
     searchViewModel: views.SearchViewModel;
     //searchView: views.SearchView;
@@ -45,19 +45,23 @@ export class AdminSearchBookingCtrl extends helper.Controller {
     Load() {
         
         var model = this.backboneModel;
-       
-        model.set("fromBookingDate", helper.FormatDateString(Date.now()));
-        model.set("toBookingDate", helper.FormatDateString(Date.now()));
+        var reportFilter = this.app.request("ReportFilterSetting");       
+        //model.set("fromBookingDate", helper.FormatDateString(Date.now()));
+        //model.set("toBookingDate", helper.FormatDateString(Date.now()));
+
+        model.set("fromBookingDate", reportFilter.get("fromDate"));
+        model.set("toBookingDate", reportFilter.get("toDate"));
+        model.set("centreId", reportFilter.get("centreId"));
+
         this.compositeModel = model;
 
-       this.collectionView.listenTo(this.collectionView, "AdminSearchBooking", () => this.GetByCriteria(this.searchViewModel.bbModel));
-       this.collectionView.listenTo(this.collectionView, "itemview:CentreBusSummary", (view, id) => { this.ShowCentreBusSummary(id,model); });
+       this.collectionView.listenTo(this.collectionView, "BusCentreReport", () => this.GetByCriteria(this.searchViewModel.bbModel));
+        this.collectionView.listenTo(this.collectionView, "itemview:BusVisitDetails", (view, id) => { this.ShowBusVisitDetails(id, model); });
 
         this.collectionView.on("CancelForm", () => this.Cancel());
         this.app.MainRegion.show(this.collectionView);
 
-        var vm = kb.viewModel(this.compositeModel);
-       
+        var vm = kb.viewModel(this.compositeModel);       
 
         var fromBookingDate = $('#txtFromBookingDate')[0];
         ko.cleanNode(fromBookingDate);
@@ -67,15 +71,23 @@ export class AdminSearchBookingCtrl extends helper.Controller {
         ko.cleanNode(toBookingDate);
         ko.applyBindings(vm, toBookingDate);
 
+        var bookingSumaryDto = new dto.Models.BookingSummaryDto();
+        bookingSumaryDto.set('centreId', reportFilter.get("centreId"));
+        bookingSumaryDto.set('fromBookingDate', reportFilter.get("fromDate"));
+        bookingSumaryDto.set('toBookingDate', reportFilter.get("toDate"));
+
+        var deferred = DAL.GetByCriteria(bookingSumaryDto);
+        deferred.done(p=> this.GetByCriteriaCompleted(p));
     }
-    ShowCentreBusSummary(id, searchModel) {
+
+    ShowBusVisitDetails(id, searchModel) {
         //alert(searchModel.get("fromBookingDate"));
         var dto = new reportDto.Models.ReportDto(); //set object with parameters
         dto.set("fromDate", searchModel.get("fromBookingDate"));
         dto.set("toDate", searchModel.get("toBookingDate"));
-        dto.set("centreId", id);
+        dto.set("busId", id);
         this.app.reqres.setHandler("ReportFilterSetting", () => dto, this);
-        location.href = "#busCentreReport";
+        location.href = "#busMilageReport";
     }
 
     GetByCriteria(bookingSummaryDto: any) {
@@ -98,13 +110,14 @@ export class AdminSearchBookingCtrl extends helper.Controller {
             summary[i] = {
                 alkhidmatCentre: result[i].alkhidmatCentre, alkhidmatCentreId: result[i].alkhidmatCentreId,
                 bookingAmount: result[i].bookingAmount, bookingMilage: result[i].bookingMilage,
-                bookings: result[i].bookings, receivables: result[i].receivables
+                bookings: result[i].bookings, receivables: result[i].receivables,
+                busNo: result[i].busNo, busId:result[i].busId
             };
         }
         this.backboneCollection.reset(summary);
     }
 
     Cancel() {
-        window.location.href = "#adminSearchBooking";
+        window.location.href = "#busCentreReport";
     }
 }

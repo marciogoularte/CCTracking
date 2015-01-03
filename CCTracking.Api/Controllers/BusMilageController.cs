@@ -8,11 +8,11 @@ namespace CCTracking.Api.Controllers
     public class BusMilageController : ApiController
     {
         [HttpPost]
-        public BusMilageResponse GetByCriteria(SearchCriteria criteria)
+        public BookingSummaryResponse GetByCriteria(SearchCriteria criteria)
         {
             DBFacade facade = new BusMilageDal();
             BaseModelResponse baseModelResponse = facade.GetByCriteria(criteria);
-            BusMilageResponse response = (BusMilageResponse)baseModelResponse;
+            BookingSummaryResponse response = (BookingSummaryResponse)baseModelResponse;
             return response;
         }
     }

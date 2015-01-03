@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace CCTracking.DAL
 {
-    public class BookingSummaryDal : DBFacade
+    public class BusCentreReportDal : DBFacade
     {
         protected override string GetByIdSql(int id, Dictionary<string, object> dictionary)
         {
@@ -29,7 +29,7 @@ namespace CCTracking.DAL
             dictionary.Add("@ToBookingDate", searchCriteria.ToBookingDate);
             dictionary.Add("@CentreId", searchCriteria.CentreId);
             //return "GetAdminBookingReport";
-            return "rptCentreReport";
+            return "rptBusWiseCentreReport";
         }
 
         protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary)
@@ -88,6 +88,8 @@ namespace CCTracking.DAL
             bookingSummary.BookingMilage = dr["BookingMilage"].ToString();
             bookingSummary.Receivables = dr["Receivable"].ToString();
             bookingSummary.Bookings = dr["Bookings"].ToString();
+            bookingSummary.BusNo = dr["VehicleNo"].ToString();
+            bookingSummary.BusId = dr["BusId"].ToString();
 
         }
     }

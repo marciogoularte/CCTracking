@@ -39,6 +39,7 @@
                         <thead>
                             <tr class="active">
                                 <th class="input-sm">Centre Name</th>
+                                <th class="input-sm">Bus No</th>
                                 <th class="input-sm">Booking Amount</th>
                                 <th class="input-sm">Booking Milage</th>
                                 <th class="input-sm">Bookings</th>
@@ -58,7 +59,8 @@
     </div>
     
     <script type="text/html" id="rowTemplate">
-        <td class="jsShowDetail input-sm" style="cursor: hand; cursor: pointer"><%=alkhidmatCentre%></td>
+        <td class="input-sm"><%=alkhidmatCentre%></td>
+        <td class="jsShowDetail input-sm" style="cursor: hand; cursor: pointer"><%=busNo%></td>
         <td class="input-sm"><%=bookingAmount%></td>
         <td class="input-sm"><%=bookingMilage%></td>
         <td class="input-sm"><%=bookings%></td>

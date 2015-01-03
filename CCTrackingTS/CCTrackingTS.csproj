@@ -23,9 +23,6 @@
     <Content Include="CCTracking.WebClient\Admin\AlkhidmatCentre\AlkhidmatCentreGridRow.html" />
     <Content Include="CCTracking.WebClient\Admin\AlkhidmatCentre\AlkhidmatCentreTmpl.html" />
     <Content Include="CCTracking.WebClient\Admin\AlkhidmatCentre\AlkhidmatCentreView.ts" />
-    <Content Include="CCTracking.WebClient\Admin\BusMilage\BusMilageCtrl.ts" />
-    <Content Include="CCTracking.WebClient\Admin\BusMilage\BusMilageGrid.html" />
-    <Content Include="CCTracking.WebClient\Admin\BusMilage\BusMilageView.ts" />
     <Content Include="CCTracking.WebClient\Admin\Bus\BusCtrl.ts" />
     <Content Include="CCTracking.WebClient\Admin\Bus\BusGrid.html" />
     <Content Include="CCTracking.WebClient\Admin\Bus\BusTmpl.html" />
@@ -73,6 +70,17 @@
     <TypeScriptCompile Include="CCTracking.WebClient\Admin\Reports\BusVisit\BusVisitSummaryCtrl.ts" />
     <Content Include="CCTracking.WebClient\Admin\Reports\BusVisit\BusVisitSummaryTmpl.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\Admin\Reports\BusVisit\BusVisitSummaryView.ts" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\Bus\BusMilage\BusMilageCtrl.ts" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\Bus\BusMilage\BusMilageGrid.html" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\Bus\BusMilage\BusMilageTmpl.html" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\Bus\BusMilage\BusMilageView.ts" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\Bus\BusMilage\BusMilageView_bk.ts" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\Centre\BusCentreReport\BusCentreReportCtrl.js" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\Centre\BusCentreReport\BusCentreReportCtrl.ts" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\Centre\BusCentreReport\BusCentreReportGrid.html" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\Centre\BusCentreReport\BusCentreReportTmpl.html" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\Centre\BusCentreReport\BusCentreReportView.js" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\Centre\BusCentreReport\BusCentreReportView.ts" />
     <Content Include="CCTracking.WebClient\Admin\Reports\Driver\DriverDetail.html" />
     <Content Include="CCTracking.WebClient\Admin\Reports\Driver\DriverSummaryTmpl.html" />
     <Content Include="CCTracking.WebClient\Admin\Town\TownCtrl.ts" />
@@ -112,6 +120,7 @@
     <Content Include="CCTracking.WebClient\Common\Templates\BusDetailModalPopupGrid.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\DAL\AdminSearch.ts" />
     <Content Include="CCTracking.WebClient\Common\Templates\Progressbar.html" />
+    <Content Include="CCTracking.WebClient\DAL\BusCentreReport.ts" />
     <Content Include="CCTracking.WebClient\DAL\BusMilage.ts" />
     <Content Include="CCTracking.WebClient\DAL\CauseOfDeath.ts" />
     <Content Include="CCTracking.WebClient\DAL\BookingLeft.ts" />
@@ -142,6 +151,7 @@
     <Content Include="CCTracking.WebClient\Dtos\LoginDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\PaymentTypeDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\RefundTypeDto.ts" />
+    <Content Include="CCTracking.WebClient\Dtos\ReportDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\TownDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\TrackingDeviceDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\UnionCouncilDto.ts" />
@@ -360,6 +370,8 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\Centre\BusCentreReport\BusCentreReportCtrl.js.map" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\Centre\BusCentreReport\BusCentreReportView.js.map" />
     <None Include="Profile1.pubxml" />
     <None Include="PublishProfiles\Profile-1.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -455,7 +467,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CCTracking.WebClient\Admin\Reports\Audit\BusVisit\" />
-    <Folder Include="CCTracking.WebClient\Admin\Reports\Centre\" />
     <Folder Include="CCTracking.WebClient\Booking\Views\" />
     <Folder Include="Content\Fontawsome\" />
   </ItemGroup>

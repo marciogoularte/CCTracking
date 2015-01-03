@@ -1,12 +1,12 @@
-﻿/// <reference path="../../../Scripts/typings/require/require.d.ts" />
-/// <reference path="../../../Scripts/typings/marionette/marionette.d.ts" />
+﻿/// <reference path="../../../../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../../../../Scripts/typings/marionette/marionette.d.ts" />
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../../App", "../../Helper", "./AdminSearchBookingView", "../../Dtos/BookingSummaryDto", "../../Dtos/ReportDto", "../../DAL/AdminSearch", "marionette", "jquery", "knockout"], function(require, exports, application, helper, views, dto, reportDto, DAL) {
+define(["require", "exports", "../../../../App", "../../../../Helper", "./BusCentreReportView", "../../../../Dtos/BookingSummaryDto", "../../../../Dtos/ReportDto", "../../../../DAL/BusCentreReport", "marionette", "jquery", "knockout"], function(require, exports, application, helper, views, dto, reportDto, DAL) {
     /// <amd-dependency path="marionette"/>
     /// <amd-dependency path="jquery"/>
     /// <amd-dependency path="knockout"/>
@@ -16,9 +16,9 @@ define(["require", "exports", "../../App", "../../Helper", "./AdminSearchBooking
 
     var app;
 
-    var AdminSearchBookingCtrl = (function (_super) {
-        __extends(AdminSearchBookingCtrl, _super);
-        function AdminSearchBookingCtrl() {
+    var BusCentreReportCtrl = (function (_super) {
+        __extends(BusCentreReportCtrl, _super);
+        function BusCentreReportCtrl() {
             _super.call(this);
             this.app = application.Application.getInstance();
             this.backboneModel = new dto.Models.BookingSummaryDto();
@@ -30,23 +30,28 @@ define(["require", "exports", "../../App", "../../Helper", "./AdminSearchBooking
             this.collectionView = new views.SearchCollectionView({ collection: this.backboneCollection, model: this.compositeModel });
             this.backboneCollection.reset([]);
         }
-        AdminSearchBookingCtrl.prototype.Show = function () {
+        BusCentreReportCtrl.prototype.Show = function () {
             this.Load();
         };
 
-        AdminSearchBookingCtrl.prototype.Load = function () {
+        BusCentreReportCtrl.prototype.Load = function () {
             var _this = this;
             var model = this.backboneModel;
+            var reportFilter = this.app.request("ReportFilterSetting");
 
-            model.set("fromBookingDate", helper.FormatDateString(Date.now()));
-            model.set("toBookingDate", helper.FormatDateString(Date.now()));
+            //model.set("fromBookingDate", helper.FormatDateString(Date.now()));
+            //model.set("toBookingDate", helper.FormatDateString(Date.now()));
+            model.set("fromBookingDate", reportFilter.get("fromDate"));
+            model.set("toBookingDate", reportFilter.get("toDate"));
+            model.set("centreId", reportFilter.get("centreId"));
+
             this.compositeModel = model;
 
-            this.collectionView.listenTo(this.collectionView, "AdminSearchBooking", function () {
+            this.collectionView.listenTo(this.collectionView, "BusCentreReport", function () {
                 return _this.GetByCriteria(_this.searchViewModel.bbModel);
             });
-            this.collectionView.listenTo(this.collectionView, "itemview:CentreBusSummary", function (view, id) {
-                _this.ShowCentreBusSummary(id, model);
+            this.collectionView.listenTo(this.collectionView, "itemview:BusVisitDetails", function (view, id) {
+                _this.ShowBusVisitDetails(id, model);
             });
 
             this.collectionView.on("CancelForm", function () {
@@ -63,20 +68,31 @@ define(["require", "exports", "../../App", "../../Helper", "./AdminSearchBooking
             var toBookingDate = $('#txtToBookingDate')[0];
             ko.cleanNode(toBookingDate);
             ko.applyBindings(vm, toBookingDate);
+
+            var bookingSumaryDto = new dto.Models.BookingSummaryDto();
+            bookingSumaryDto.set('centreId', reportFilter.get("centreId"));
+            bookingSumaryDto.set('fromBookingDate', reportFilter.get("fromDate"));
+            bookingSumaryDto.set('toBookingDate', reportFilter.get("toDate"));
+
+            var deferred = DAL.GetByCriteria(bookingSumaryDto);
+            deferred.done(function (p) {
+                return _this.GetByCriteriaCompleted(p);
+            });
         };
-        AdminSearchBookingCtrl.prototype.ShowCentreBusSummary = function (id, searchModel) {
+
+        BusCentreReportCtrl.prototype.ShowBusVisitDetails = function (id, searchModel) {
             //alert(searchModel.get("fromBookingDate"));
             var dto = new reportDto.Models.ReportDto();
             dto.set("fromDate", searchModel.get("fromBookingDate"));
             dto.set("toDate", searchModel.get("toBookingDate"));
-            dto.set("centreId", id);
+            dto.set("busId", id);
             this.app.reqres.setHandler("ReportFilterSetting", function () {
                 return dto;
             }, this);
-            location.href = "#busCentreReport";
+            location.href = "#busMilageReport";
         };
 
-        AdminSearchBookingCtrl.prototype.GetByCriteria = function (bookingSummaryDto) {
+        BusCentreReportCtrl.prototype.GetByCriteria = function (bookingSummaryDto) {
             var _this = this;
             if (bookingSummaryDto.get("fromBookingDate").trim() != "") {
                 bookingSummaryDto.set("fromBookingDate", helper.FormatDateString(bookingSummaryDto.get("fromBookingDate")));
@@ -90,7 +106,7 @@ define(["require", "exports", "../../App", "../../Helper", "./AdminSearchBooking
             });
         };
 
-        AdminSearchBookingCtrl.prototype.GetByCriteriaCompleted = function (bookingSummaryDto) {
+        BusCentreReportCtrl.prototype.GetByCriteriaCompleted = function (bookingSummaryDto) {
             //TODO:Hack - need rework
             var result = bookingSummaryDto["bookingSummaryList"];
             var summary = [];
@@ -98,17 +114,17 @@ define(["require", "exports", "../../App", "../../Helper", "./AdminSearchBooking
                 summary[i] = {
                     alkhidmatCentre: result[i].alkhidmatCentre, alkhidmatCentreId: result[i].alkhidmatCentreId,
                     bookingAmount: result[i].bookingAmount, bookingMilage: result[i].bookingMilage,
-                    bookings: result[i].bookings, receivables: result[i].receivables
+                    bookings: result[i].bookings, receivables: result[i].receivables,
+                    busNo: result[i].busNo, busId: result[i].busId
                 };
             }
             this.backboneCollection.reset(summary);
         };
 
-        AdminSearchBookingCtrl.prototype.Cancel = function () {
-            window.location.href = "#adminSearchBooking";
+        BusCentreReportCtrl.prototype.Cancel = function () {
+            window.location.href = "#busCentreReport";
         };
-        return AdminSearchBookingCtrl;
+        return BusCentreReportCtrl;
     })(helper.Controller);
-    exports.AdminSearchBookingCtrl = AdminSearchBookingCtrl;
+    exports.BusCentreReportCtrl = BusCentreReportCtrl;
 });
-//# sourceMappingURL=AdminSearchBookingCtrl.js.map

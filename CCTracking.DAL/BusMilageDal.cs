@@ -25,9 +25,11 @@ namespace CCTracking.DAL
         {
             SearchCriteria searchCriteria = (SearchCriteria)baseModel;
 
-            dictionary.Add("@FromVisitDate", searchCriteria.FromVisitDate);
-            dictionary.Add("@ToVisitDate", searchCriteria.ToVisitDate);
-            return "GetAdminBusMilageReport";
+            dictionary.Add("@FromBookingDate", searchCriteria.FromBookingDate);
+            dictionary.Add("@ToBookingDate", searchCriteria.ToBookingDate);
+            dictionary.Add("@BusId", searchCriteria.BusId);
+            return "RptBusDetailReport";
+            //return "GetAdminBusMilageReport";
         }
 
         protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary)
@@ -37,30 +39,30 @@ namespace CCTracking.DAL
 
         protected override BaseModelResponse ConvertToModel(IDataReader dr)
         {
-            BusMilageResponse busMilageResponse = new BusMilageResponse();
-            BusMilage busMilage = null;
+            BookingSummaryResponse bookingSummaryResponse = new BookingSummaryResponse();
+            BookingSummary bookingSummary = null;
             while (dr.Read())
             {
-                busMilage = new BusMilage();
-                MapValues(busMilage, dr);
-                busMilageResponse.BusMilageModel = busMilage;
+                bookingSummary = new BookingSummary();
+                MapValues(bookingSummary, dr);
+                bookingSummaryResponse.BookingSummaryModel = bookingSummary;
             }
-            return busMilageResponse;
+            return bookingSummaryResponse;
         }
 
         protected override BaseModelResponse ConvertToList(IDataReader dr)
         {
-            BusMilageResponse busMilageResponse = new BusMilageResponse();
-            List<BusMilage> busMilages = new List<BusMilage>();
-            BusMilage busMilage = null;
+            BookingSummaryResponse bookingSummaryResponse = new BookingSummaryResponse();
+            List<BookingSummary> bookingSummarys = new List<BookingSummary>();
+            BookingSummary bookingSummary = null;
             while (dr.Read())
             {
-                busMilage = new BusMilage();
-                MapValues(busMilage, dr);
-                busMilages.Add(busMilage);
+                bookingSummary = new BookingSummary();
+                MapValues(bookingSummary, dr);
+                bookingSummarys.Add(bookingSummary);
             }
-            busMilageResponse.BusMilageList = busMilages;
-            return busMilageResponse;
+            bookingSummaryResponse.BookingSummaryList = bookingSummarys;
+            return bookingSummaryResponse;
         }
 
         protected override BaseModelResponse ConvertToList(DataSet ds)
@@ -78,13 +80,20 @@ namespace CCTracking.DAL
             return string.Empty;
         }
 
-        private void MapValues(BusMilage busMilage, IDataReader dr)
+        private void MapValues(BookingSummary bookingSummary, IDataReader dr)
         {
-            busMilage.BusId = Convert.ToInt32(dr["BusId"]);
-            busMilage.CentreDesc = dr["CentreDesc"].ToString();
-            busMilage.VehicleNo = dr["VehicleNo"].ToString();
-            busMilage.TotalMilage = Convert.ToInt32(dr["TotalMilage"]);
-            busMilage.TotalVisits = Convert.ToInt32(dr["TotalVisits"]);
+            
+            bookingSummary.AlkhidmatCentre = dr["Centre"].ToString();
+            //bookingSummary.AlkhidmatCentreId = dr["CentreId"].ToString();
+            bookingSummary.BookingAmount = dr["amount"].ToString();
+            bookingSummary.BookingMilage = dr["Milage"].ToString();
+            bookingSummary.BusNo = dr["VehicleNo"].ToString();
+            bookingSummary.VisitDate = Convert.ToDateTime(dr["VisitDate"].ToString());
+            bookingSummary.VisitType = dr["VisitType"].ToString();
+            bookingSummary.OutTime = dr["outTime"].ToString();
+            bookingSummary.InTime = dr["returnTime"].ToString();
+            bookingSummary.TimeTaken = dr["visitInterval"].ToString();
+            bookingSummary.Driver = dr["driver"].ToString();
         }
     }
 }

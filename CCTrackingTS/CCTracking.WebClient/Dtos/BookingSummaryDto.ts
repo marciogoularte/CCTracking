@@ -10,6 +10,21 @@ export module Models {
         default() {
             return {
                 alkhidmatCentre: "",
+                alkhidmatCentreId: "",
+                bookingAmount: "",
+                bookingMilage: "",
+                bookings: "",
+                receivables: "",
+                busNo: "",
+                busId: "",
+                visitTypeId: "",
+                visitType: "",
+                visitDate: "",
+                outTime: "",
+                inTime: "",
+                timeTaken: "",
+                driver: "",
+
                 createdBy: "",
                 createdDate: "",
                 errorMessage: "",

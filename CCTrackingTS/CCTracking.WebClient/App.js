@@ -93,7 +93,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     'busVisit': 'gobusVisit',
                     'editBusVisit': 'goEditBusVisit',
                     'viewBusVisit': 'goViewBusVisit',
-                    'adminBusVisit': 'goAdminBusVisit',
+                    'busMilageReport': 'goBusMilageReport',
                     'adminBus': 'goAdminBus',
                     'viewAdminBus': 'goViewAdminBus',
                     'searchBooking': 'goSearchBooking',
@@ -130,6 +130,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     'auditBooking': 'goAuditBooking',
                     'auditPayment': 'goAuditPayment',
                     'auditRefundBooking': 'goAuditRefundBooking',
+                    'busCentreReport': 'goBusCentreReport',
                     '*other': 'defaultRoute'
                 },
                 goUser: function () {
@@ -200,11 +201,6 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                 goEditBusVisit: function () {
                     require(['./Bus/BusVisitCtrl'], function (p) {
                         new p.BusVisitCtrl().Show();
-                    });
-                },
-                goAdminBusVisit: function () {
-                    require(['./Admin/BusMilage/BusMilageCtrl'], function (p) {
-                        new p.BusMilageCtrl().SimpleLoad();
                     });
                 },
                 goAdminBus: function () {
@@ -368,6 +364,16 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                 goAuditRefundBooking: function () {
                     require(['./Admin/Reports/Audit/Refund/AuditRefundBookingCtrl'], function (p) {
                         new p.AuditRefundBookingCtrl().Show();
+                    });
+                },
+                goBusCentreReport: function () {
+                    require(['./Admin/Reports/Centre/BusCentreReport/BusCentreReportCtrl'], function (p) {
+                        new p.BusCentreReportCtrl().Show();
+                    });
+                },
+                goBusMilageReport: function () {
+                    require(['./Admin/Reports/Bus/BusMilage/BusMilageCtrl'], function (p) {
+                        new p.BusMilageCtrl().Show();
                     });
                 },
                 defaultRoute: function () {

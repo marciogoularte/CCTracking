@@ -105,7 +105,7 @@ export class Application extends Marionette.Application {
                 'busVisit': 'gobusVisit',
                 'editBusVisit': 'goEditBusVisit',
                 'viewBusVisit': 'goViewBusVisit',
-                'adminBusVisit': 'goAdminBusVisit',
+                'busMilageReport': 'goBusMilageReport',
                 'adminBus': 'goAdminBus',
                 'viewAdminBus': 'goViewAdminBus',
                 'searchBooking': 'goSearchBooking',
@@ -151,6 +151,7 @@ export class Application extends Marionette.Application {
                 'auditBooking': 'goAuditBooking',
                 'auditPayment': 'goAuditPayment',
                 'auditRefundBooking': 'goAuditRefundBooking',
+                'busCentreReport': 'goBusCentreReport',
                 '*other': 'defaultRoute'
             },
             goUser() {
@@ -196,9 +197,6 @@ export class Application extends Marionette.Application {
             },
             goEditBusVisit() {
                 require(['./Bus/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().Show(); });
-            },
-            goAdminBusVisit() {
-                require(['./Admin/BusMilage/BusMilageCtrl'], (p) => { new p.BusMilageCtrl().SimpleLoad(); });
             },
             goAdminBus() {
                 require(['./Admin/Bus/BusCtrl'], (p) => { new p.BusCtrl().Show(); });
@@ -299,6 +297,12 @@ export class Application extends Marionette.Application {
             },
             goAuditRefundBooking() {
                 require(['./Admin/Reports/Audit/Refund/AuditRefundBookingCtrl'], (p) => { new p.AuditRefundBookingCtrl().Show(); });
+            },
+            goBusCentreReport() {
+            require(['./Admin/Reports/Centre/BusCentreReport/BusCentreReportCtrl'], (p) => { new p.BusCentreReportCtrl().Show(); });
+            },
+            goBusMilageReport() {
+                require(['./Admin/Reports/Bus/BusMilage/BusMilageCtrl'], (p) => { new p.BusMilageCtrl().Show(); });
             },
             defaultRoute() {
                 self.ContainerRegion.reset();

@@ -1,26 +1,24 @@
-﻿/// <reference path="../../../Scripts/typings/require/require.d.ts" />
-/// <reference path="../../../Scripts/typings/marionette/marionette.d.ts" />
+﻿/// <reference path="../../../../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../../../../Scripts/typings/marionette/marionette.d.ts" />
 /// <amd-dependency path="marionette"/>
 /// <amd-dependency path="jquery"/>
 /// <amd-dependency path="jqueryUI"/>
 /// <amd-dependency path="knockout"/>
-/// <amd-dependency path="text!./AdminSearchBookingTmpl.html"/>
+/// <amd-dependency path="text!./BusMilageTmpl.html"/>
 
 var _ = require('underscore');
-import helper = require("../../Helper");
-import searchCtrl = require("./AdminSearchBookingCtrl");
-var templateView = require("text!./AdminSearchBookingTmpl.html");
-import application = require("../../App");
+import helper = require("../../../../Helper");
+import searchCtrl = require("./BusMilageCtrl");
+var templateView = require("text!./BusMilageTmpl.html");
+import application = require("../../../../App");
 var app;
 
-export class SearchViewModel extends helper.ViewModel {
+export class BusMilageViewModel extends helper.ViewModel {
     constructor(model: any, controller: any) {
         super(model, controller);
     }
 }
-
-
-export class SearchView extends helper.Views.MvvmView {
+export class BusMilageView extends helper.Views.MvvmView {
     constructor(options?) {
         this.template = templateView;//templateView.getOuterHTML("#searchFilter");
         //this.events = {
@@ -33,11 +31,10 @@ export class SearchView extends helper.Views.MvvmView {
     }
 
 }
-
-export class SearchCollectionView extends helper.Views.CompositeView {
+export class BusMilageCollectionView extends helper.Views.CompositeView {
     datatable: any;
     constructor(options?) {
-        options.itemView = SearchItemView;
+        options.itemView = BusMilageItemView;
         options.template = templateView.getOuterHTML("#gridTemplate");
         options.itemViewContainer = "#tblSearch tbody";
         this.events = {
@@ -48,7 +45,7 @@ export class SearchCollectionView extends helper.Views.CompositeView {
     }
     Search(e) {
         e.preventDefault();
-        this.trigger("AdminSearchBooking");
+        this.trigger("BusCentreReport");
     }
 
     //initialize() {
@@ -58,15 +55,15 @@ export class SearchCollectionView extends helper.Views.CompositeView {
 
 }
 
-export class SearchItemView extends helper.Views.ItemView {
+export class BusMilageItemView extends helper.Views.ItemView {
     constructor(options?: any) {
         if (!options) options = {};
         options.template = templateView.getOuterHTML("#rowTemplate");
         options.tagName = "tr";
-        //options.className = "jsRowClick";
+        options.className = "jsRowClick";
         options.events = {
             //"mouseover .jsShowDetail": "ShowDetail",
-            "click .jsShowDetail": () => { this.trigger("CentreBusSummary", this.model.get("alkhidmatCentreId"));}
+            // "click .jsShowDetail": "ShowDetail"
         };
         super(options);
     }

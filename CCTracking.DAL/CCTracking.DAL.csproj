@@ -45,6 +45,7 @@
     <Compile Include="AuditRefundBookingDal.cs" />
     <Compile Include="BookingDal.cs" />
     <Compile Include="BusAvailabilityDal.cs" />
+    <Compile Include="BusCentreReportDal.cs" />
     <Compile Include="BusDal.cs" />
     <Compile Include="BusMilageDal.cs" />
     <Compile Include="BusVisitMilageSummaryDal.cs" />

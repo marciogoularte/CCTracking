@@ -1,5 +1,5 @@
-﻿/// <reference path="../../../Scripts/typings/require/require.d.ts" />
-/// <reference path="../../../Scripts/typings/marionette/marionette.d.ts" />
+﻿/// <reference path="../../../../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../../../../Scripts/typings/marionette/marionette.d.ts" />
 
 /// <amd-dependency path="marionette"/>
 /// <amd-dependency path="jquery"/>
@@ -8,9 +8,9 @@
 
 var _ = require('underscore');
 var ko = require("knockout");
-import helper = require("../../Helper");
+import helper = require("../../../../Helper");
 var templateView = require("text!./BusMilageGrid.html");
-import application = require("../../App");
+import application = require("../../../../App");
 var app;
 
 // View Model
