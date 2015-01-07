@@ -25,46 +25,93 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "jqueryUI", "
         //viewModel: ViewModel;
         //bbModel: Backbone.Model;
         function HomeItemView(options) {
-            var _this = this;
-            this.template = templateView;
+            this.template = templateView.getOuterHTML("#Home");
 
             //this.viewModel = new ViewModel(options);
             //this.bbModel = new Backbone.Model();
+            //var model = new helper.ReceiptLayoutDto({
+            //    centreDesc: "Head Office - Noor-ul-Huda Centre, Near Numayesh Chorangi",
+            //    receiptNo: "112345",
+            //    printDateAndTime: helper.FormatDateString(Date.now()),
+            //    bookingId: "140",
+            //    bookingDate: "01/01/2015",
+            //    cashReceivedFrom: "Mr abc",
+            //    totalAmountDue: helper.FormatMoney("2500"),
+            //    userName: "Current logged in user",
+            //});
+            var collection = new Backbone.Collection({
+                centreDesc: "Head Office - Noor-ul-Huda Centre, Near Numayesh Chorangi",
+                receiptNo: "112345",
+                printDateAndTime: helper.FormatDateString(Date.now()),
+                bookingId: "140",
+                bookingDate: "01/01/2015",
+                cashReceivedFrom: "Mr abc",
+                totalAmountDue: helper.FormatMoney("2500"),
+                userName: "Current logged in user"
+            });
+
             this.events = {
                 "submit": "Save",
                 "click .jsCancel": "Cancel",
-                "click .jsExportPdf": function () {
+                "click .jsPrintReceipt": function () {
+                    helper.PrintReceipt(collection);
                     //alert('print');
-                    _this.ExportToPdf();
+                    //this.ExportToPdf();
                 }
             };
             _super.call(this, options);
         }
-        HomeItemView.prototype.ExportToPdf = function () {
-            var pdf = new jsPDF('p', 'pt', 'letter');
-            var source = this.$el.find('#receiptLayout')[0];
-
-            //, specialElementHandlers = {
-            //    '#bypassme': function (element, renderer) {
-            //        return true;
-            //    }
-            //}
-            var margins = {
-                top: 80,
-                bottom: 60,
-                left: 40,
-                width: 522
-            };
-            pdf.fromHTML(source, margins.left, margins.top, {
-                'width': margins.width
-            }, function (dispose) {
-                // dispose: object with X, Y of the last line add to the PDF
-                //          this allow the insertion of new lines after html
-                pdf.save('Test.pdf');
-            }, margins);
-        };
         return HomeItemView;
     })(helper.Views.ItemView);
     exports.HomeItemView = HomeItemView;
+
+    var SearchCollectionView = (function (_super) {
+        __extends(SearchCollectionView, _super);
+        function SearchCollectionView(options) {
+            //debugger;
+            this.itemView = SearchItemView;
+
+            //this.model = new Backbone.Model({ "getPropA": 12345 });
+            this.template = templateView.getOuterHTML("#gridTemplate");
+            this.itemViewContainer = "#tblSearch tbody";
+            this.events = {
+                "click .jsSearch": "Search",
+                "click .jsCancel": "Cancel"
+            };
+            this.templateHelpers = {
+                getTotalAmount: function () {
+                    return "1111";
+                }
+            };
+            _super.call(this, options);
+        }
+        SearchCollectionView.prototype.Search = function (e) {
+            e.preventDefault();
+            //this.trigger("AdminSearchBooking");
+        };
+        return SearchCollectionView;
+    })(helper.Views.CompositeView);
+    exports.SearchCollectionView = SearchCollectionView;
+
+    var SearchItemView = (function (_super) {
+        __extends(SearchItemView, _super);
+        function SearchItemView(options) {
+            //if (!options) options = {};
+            this.template = templateView.getOuterHTML("#rowTemplate");
+            this.tagName = "tr";
+
+            //options.className = "jsRowClick";
+            //this.events = {
+            //"mouseover .jsShowDetail": "ShowDetail",
+            //"click .jsShowDetail": () => { this.trigger("CentreBusSummary", this.model.get("alkhidmatCentreId")); }
+            //};
+            _super.call(this, options);
+        }
+        SearchItemView.prototype.ShowDetail = function () {
+            //this.trigger("ShowDetail");
+        };
+        return SearchItemView;
+    })(helper.Views.ItemView);
+    exports.SearchItemView = SearchItemView;
 });
 //# sourceMappingURL=HomeView.js.map

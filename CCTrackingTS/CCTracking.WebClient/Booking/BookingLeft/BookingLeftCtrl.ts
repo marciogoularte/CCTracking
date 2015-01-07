@@ -5,7 +5,7 @@
 /// <amd-dependency path="jquery"/>
 /// <amd-dependency path="knockout"/>
 /// <amd-dependency path="text!./BookingLeftTmpl.html"/>
-
+/// <amd-dependency path="jsPDF"/>
 
 
 var _ = require("underscore");
@@ -16,7 +16,7 @@ import helper = require("../../Helper");
 import views = require("./BookingLeftView");
 import dto = require("../../Dtos/BookingLeftDto");
 import DAL = require("../../DAL/BookingLeft");
-
+var jsPDF = require('jsPDF');
 
 import bookingCtrl = require("../BookingCtrl");
 
@@ -145,5 +145,69 @@ export class BookingLeftCtrl extends helper.Controller {
         }
         
 
+    }
+
+    PrintReceipt(modelCollection) {
+        //var receiptView = new views.ReceiptLayoutItemView({ model: model });
+        //this.app.SubRegion.show(receiptView);
+        ////this.app.ModalAlertRegion.show(receiptView);
+        //receiptView.ExportToPdf();
+        //var collection = new Backbone.Collection({
+        //    centreDesc: "Head Office - Noor-ul-Huda Centre, Near Numayesh Chorangi",
+        //    receiptNo: "112345",
+        //    printDateAndTime: helper.FormatDateString(Date.now()),
+        //    bookingId: "140",
+        //    bookingDate: "01/01/2015",
+        //    cashReceivedFrom: "Mr abc",
+        //    totalAmountDue: helper.FormatMoney("2500"),
+        //    userName: "Current logged in user",
+        //});
+        
+        var receiptView = new views.ReceiptLayoutCollectionView({ collection: modelCollection });
+        
+        this.app.ModalAlertRegion.show(receiptView);receiptView.on("Event-PrintReceipt", () => {
+            this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
+            this.app.ModalAlertRegion.close();
+        });
+        
+        //this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
+        //this.app.ModalAlertRegion.show(receiptView);
+        //receiptView.ExportToPdf();
+    }
+    ExportToPdf(printSelector) {
+        //debugger;
+        var pdf = new jsPDF('p', 'pt', 'a4');
+        //var source = this.$el.find('#ReceiptLayout')[0];
+        var source = printSelector;
+
+
+        //, specialElementHandlers = {
+
+        //    '#bypassme': function (element, renderer) {
+        //        return true;
+        //    }
+        //}
+
+        var margins = {
+            top: 20,
+            bottom: 60,
+            left: 20,
+            width: 522
+        };
+        pdf.fromHTML(
+            source // HTML string or DOM elem ref.
+            , margins.left // x coord
+            , margins.top // y coord
+            , {
+                'width': margins.width // max width of content on PDF
+                //, 'elementHandlers': specialElementHandlers
+            },
+            function (dispose) {
+                // dispose: object with X, Y of the last line add to the PDF 
+                //          this allow the insertion of new lines after html
+                pdf.save('CCTRacking-Receipt.pdf');
+            },
+            margins
+            );
     }
 }

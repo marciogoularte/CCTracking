@@ -4,21 +4,24 @@
 /// <amd-dependency path="text!CCTracking.WebClient/Common/Templates/ModalPopup.html"/>
 /// <amd-dependency path="text!CCTracking.WebClient/Common/Templates/Progressbar.html"/>
 /// <amd-dependency path="text!CCTracking.WebClient/Common/Templates/BusDetailModalPopup.html"/>
+/// <amd-dependency path="text!CCTracking.WebClient/Common/Templates/ReceiptLayout.html"/>
 /// <amd-dependency path="marionette"/>
+/// <amd-dependency path="jsPDF"/>
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../../App", "../../Helper", "text!CCTracking.WebClient/Booking/BookingLeft/BookingLeftTmpl.html", "text!CCTracking.WebClient/Common/Templates/ModalPopup.html", "text!CCTracking.WebClient/Common/Templates/Progressbar.html", "text!CCTracking.WebClient/Common/Templates/BusDetailModalPopup.html", "marionette"], function(require, exports, APP, helper) {
+define(["require", "exports", "../../App", "../../Helper", "text!CCTracking.WebClient/Booking/BookingLeft/BookingLeftTmpl.html", "text!CCTracking.WebClient/Common/Templates/ModalPopup.html", "text!CCTracking.WebClient/Common/Templates/Progressbar.html", "text!CCTracking.WebClient/Common/Templates/BusDetailModalPopup.html", "text!CCTracking.WebClient/Common/Templates/ReceiptLayout.html", "marionette", "jsPDF"], function(require, exports, APP, helper) {
     var _ = require('underscore');
 
     var templateView = require("text!CCTracking.WebClient/Booking/BookingLeft/BookingLeftTmpl.html");
     var popupView = require("text!CCTracking.WebClient/Common/Templates/ModalPopup.html");
     var pbarView = require("text!CCTracking.WebClient/Common/Templates/Progressbar.html");
     var busDeatilView = require("text!CCTracking.WebClient/Common/Templates/BusDetailModalPopup.html");
-
+    var receiptLayoutView = require("text!CCTracking.WebClient/Common/Templates/ReceiptLayout.html");
+    var jsPDF = require('jsPDF');
     var app;
 
     // View Model
@@ -126,4 +129,39 @@ define(["require", "exports", "../../App", "../../Helper", "text!CCTracking.WebC
         return BusDetailModalPopupView;
     })(helper.Views.ItemView);
     exports.BusDetailModalPopupView = BusDetailModalPopupView;
+
+    var ReceiptLayoutCollectionView = (function (_super) {
+        __extends(ReceiptLayoutCollectionView, _super);
+        function ReceiptLayoutCollectionView(options) {
+            var _this = this;
+            this.itemView = ReceiptLayoutItemView;
+            this.template = receiptLayoutView.getOuterHTML("#ReceiptTemplate");
+            this.itemViewContainer = "#ItemContainer";
+            this.events = {
+                "click .jsPrintReceipt": function () {
+                    _this.trigger("Event-PrintReceipt");
+                }
+            };
+            _super.call(this, options);
+        }
+        return ReceiptLayoutCollectionView;
+    })(helper.Views.CompositeView);
+    exports.ReceiptLayoutCollectionView = ReceiptLayoutCollectionView;
+
+    var ReceiptLayoutItemView = (function (_super) {
+        __extends(ReceiptLayoutItemView, _super);
+        function ReceiptLayoutItemView(options) {
+            //this.template = receiptLayoutView.getOuterHTML("#ReceiptTemplate");
+            this.template = receiptLayoutView.getOuterHTML("#ReceiptContainer");
+
+            //this.events = {
+            //    "click .jsPrintReceipt": () => {
+            //        alert('print');
+            //    }
+            //}
+            _super.call(this, options);
+        }
+        return ReceiptLayoutItemView;
+    })(helper.Views.ItemView);
+    exports.ReceiptLayoutItemView = ReceiptLayoutItemView;
 });

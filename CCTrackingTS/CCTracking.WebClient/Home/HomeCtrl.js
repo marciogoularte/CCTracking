@@ -9,7 +9,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../App", "../Helper", "./HomeView", "../Dtos/HomeDto", "../DAL/Home", "marionette", "jquery", "knockout"], function(require, exports, application, helper, views, dto, DAL) {
+define(["require", "exports", "../App", "../Helper", "./HomeView", "../Dtos/HomeDto", "../DAL/Home", "../DAL/AdminSearch", "marionette", "jquery", "knockout"], function(require, exports, application, helper, views, dto, DAL, AdminDAL) {
     var _ = require("underscore");
     var ko = require("knockout");
     var kb = require("knockback");
@@ -20,6 +20,7 @@ define(["require", "exports", "../App", "../Helper", "./HomeView", "../Dtos/Home
             _super.call(this);
             this.app = application.Application.getInstance();
             this.homeItemView = new views.HomeItemView();
+            //this.backboneCollection = new Backbone.Collection([]);
         }
         HomeCtrl.prototype.Show = function () {
             var _this = this;
@@ -34,7 +35,62 @@ define(["require", "exports", "../App", "../Helper", "./HomeView", "../Dtos/Home
             deffered.done(function (p) {
                 _this.ShowChart(p);
             });
+            this.ShowCentreSummaryReport();
         };
+
+        HomeCtrl.prototype.ShowCentreSummaryReport = function () {
+            var model = new Backbone.Model();
+            var today = new Date();
+            var fromDate = new Date(today.setDate(today.getDate() - 30));
+
+            model.set("fromBookingDate", helper.FormatDateString(fromDate));
+            model.set("toBookingDate", helper.FormatDateString(new Date()));
+            this.GetByCriteria(model);
+        };
+        HomeCtrl.prototype.GetByCriteria = function (bookingSummaryDto) {
+            var _this = this;
+            if (bookingSummaryDto.get("fromBookingDate").trim() != "") {
+                bookingSummaryDto.set("fromBookingDate", helper.FormatDateString(bookingSummaryDto.get("fromBookingDate")));
+            }
+            if (bookingSummaryDto.get("toBookingDate").trim() != "") {
+                bookingSummaryDto.set("toBookingDate", helper.FormatDateString(bookingSummaryDto.get("toBookingDate")));
+            }
+            var deferred = AdminDAL.GetByCriteria(bookingSummaryDto);
+            deferred.done(function (p) {
+                return _this.GetByCriteriaCompleted(p);
+            });
+        };
+
+        HomeCtrl.prototype.GetByCriteriaCompleted = function (bookingSummaryDto) {
+            //TODO:Hack - need rework
+            var result = bookingSummaryDto["bookingSummaryList"];
+            var summary = [];
+            var sumBookingAmount = 0, sumBookingMilage = 0, sumBookings = 0, sumReceivables = 0;
+            for (var i = 0; i < result.length; i++) {
+                summary[i] = {
+                    alkhidmatCentre: result[i].alkhidmatCentre,
+                    alkhidmatCentreId: result[i].alkhidmatCentreId,
+                    bookingAmount: helper.FormatMoney(result[i].bookingAmount),
+                    bookingMilage: result[i].bookingMilage,
+                    bookings: result[i].bookings,
+                    receivables: helper.FormatMoney(result[i].receivables)
+                };
+                sumBookingAmount = sumBookingAmount + parseFloat(result[i].bookingAmount);
+                sumBookingMilage = sumBookingMilage + parseFloat(result[i].bookingMilage);
+                sumBookings = sumBookings + parseInt(result[i].bookings);
+                sumReceivables = sumReceivables + parseFloat(result[i].receivables);
+            }
+            var compositeModel = new Backbone.Model({
+                "totalBookingAmount": helper.FormatMoney(sumBookingAmount),
+                "totalBookingMilage": sumBookingMilage,
+                "totalBookings": sumBookings,
+                "totalReceivables": helper.FormatMoney(sumReceivables)
+            });
+            this.collectionView = new views.SearchCollectionView({ collection: new Backbone.Collection(summary), model: compositeModel });
+            this.app.SubRegion.show(this.collectionView);
+            //this.backboneCollection.reset(summary);
+        };
+
         HomeCtrl.prototype.ShowChart = function (summaryData) {
             var centreName = [];
             var bookingData = [];

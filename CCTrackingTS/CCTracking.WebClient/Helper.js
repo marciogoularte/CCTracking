@@ -9,8 +9,9 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knockback", "marionette", "backbone"], function(require, exports, APP) {
+define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knockback", "marionette", "backbone", "accounting"], function(require, exports, APP) {
     var $ = require("jquery");
+    var accounting = require("accounting");
     var ko = require("knockout");
     var kb = require("knockback");
 
@@ -26,6 +27,24 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
             new p.BookingLeftCtrl().Show();
         });
     });
+
+    /*
+    DEFAULT ACCOUNTING SETTINGS
+    */
+    accounting.settings = {
+        currency: {
+            symbol: "Rs ",
+            format: "%s%v",
+            decimal: ".",
+            thousand: ",",
+            precision: 2
+        },
+        number: {
+            precision: 0,
+            thousand: ",",
+            decimal: "."
+        }
+    };
 
     var Controller = (function () {
         function Controller() {
@@ -43,6 +62,41 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
         return ViewModel;
     })();
     exports.ViewModel = ViewModel;
+
+    var ReceiptLayoutDto = (function (_super) {
+        __extends(ReceiptLayoutDto, _super);
+        function ReceiptLayoutDto() {
+            _super.apply(this, arguments);
+        }
+        ReceiptLayoutDto.prototype.default = function () {
+            return {
+                centreDesc: "",
+                receiptNo: "",
+                printDateAndTime: "",
+                bookingId: "",
+                bookingDate: "",
+                cashReceivedFrom: "",
+                totalAmountDue: "",
+                userName: "",
+                isActive: "",
+                createdBy: "",
+                createdDate: "",
+                modifiedBy: "",
+                modifiedDate: ""
+            };
+        };
+        return ReceiptLayoutDto;
+    })(Backbone.Model);
+    exports.ReceiptLayoutDto = ReceiptLayoutDto;
+    var ReceiptLayoutCollection = (function (_super) {
+        __extends(ReceiptLayoutCollection, _super);
+        function ReceiptLayoutCollection(options) {
+            this.model = ReceiptLayoutDto;
+            _super.call(this, options);
+        }
+        return ReceiptLayoutCollection;
+    })(Backbone.Collection);
+    exports.ReceiptLayoutCollection = ReceiptLayoutCollection;
 
     (function (Views) {
         var CollectionView = (function (_super) {
@@ -101,73 +155,6 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
     })(exports.Views || (exports.Views = {}));
     var Views = exports.Views;
 
-    //var noOfShownModals = 0;
-    //export class ModalRegion extends Marionette.Region {
-    //    el: any;
-    //    onShow(view) {
-    //        var modalDiv = this.$el.closest(".modal");
-    //        if (view.title !== undefined)
-    //            modalDiv.find('.modal-title').text(view.title);
-    //        else
-    //            modalDiv.find('.modal-title').text("");
-    //        if (view.type !== undefined)
-    //            modalDiv.addClass(view.type);
-    //        else
-    //            modalDiv.addClass("gs-modal-edit");
-    //        modalDiv.modal({
-    //            backdrop: 'static',
-    //            keyboard: false
-    //        });
-    //        //noOfShownModals++;
-    //        //var level = "level" + noOfShownModals;
-    //        //modalDiv.data()["bs.modal"].$backdrop.addClass(level);
-    //        //modalDiv.data()["bs.modal"].$element.addClass(level);
-    //        //view.on("close", () => this.onBeforeClose(view));
-    //        //modalDiv.one('hide.bs.modal', () => view.close());
-    //    }
-    //    onBeforeClose(view) {
-    //        var modalDiv = view.$el.closest(".modal");
-    //        if (view.type !== undefined)
-    //            modalDiv.removeClass(view.type);
-    //        else
-    //            modalDiv.removeClass("gs-modal-edit");
-    //        //if (modalDiv.data()["bs.modal"].$backdrop != undefined)
-    //        //    modalDiv.data()["bs.modal"].$backdrop.remove();
-    //        //modalDiv.off('hide.bs.modal');
-    //        //modalDiv.modal('hide');
-    //        //modalDiv.data()["bs.modal"].$element.removeClass("level" + noOfShownModals);
-    //        //noOfShownModals--;
-    //        return true;
-    //    }
-    //};
-    //export class ModalPopupView extends Views.ItemView {
-    //    constructor(options?) {
-    //        //debugger;
-    //        //var modalPopupView = require("text!./Common/Templates/ModalPopup.html");
-    //        var modalPopupView = require("text!/CCTrackingTS/Common/Templates/ModalPopup.html");
-    //        this.template = modalPopupView.getOuterHTML("#Modal");
-    //        super(options);
-    //        //this.model = options.model;
-    //    }
-    //}
-    //export class BusDetailModalPopupCollectionView extends Views.CompositeView {
-    //    constructor(options?) {
-    //        this.itemView = BusDetailModalPopupView;
-    //        var girdTemplate = require("text!./Common/Templates/BusDetailModalPopup.html");
-    //        this.template = girdTemplate.getOuterHTML("#ModalGrid");
-    //        this.itemViewContainer = "#ItemContainer";
-    //        super(options);
-    //    }
-    //}
-    //export class BusDetailModalPopupView extends Views.ItemView {
-    //    constructor(options?) {
-    //        var modalPopupView = require("text!./Common/Templates/BusDetailModalPopup.html");
-    //        this.template = modalPopupView.getOuterHTML("#Modal");
-    //        this.tagName = "table";
-    //        super(options);
-    //        //this.model = options.model;
-    //    }
-    //}
     /*
     type value can be:
     1- default
@@ -199,13 +186,21 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
         });
     }
     exports.HideProgressbar = HideProgressbar;
+    function PrintReceipt(modelCollection) {
+        //var receiptView = new Views.ReceiptLayoutItemView();
+        //receiptView.$el.find(".jsExportPdf").click();
+        require(['./Booking/BookingLeft/BookingLeftCtrl'], function (p) {
+            new p.BookingLeftCtrl().PrintReceipt(modelCollection);
+        });
+    }
+    exports.PrintReceipt = PrintReceipt;
 
     //export function ShowBusDetailModalPopup(busDetialDto, type, title, message) {
     function ShowBusDetailModalPopup(busDetialDto, busDetailCollection) {
         //var alertModel = new Backbone.Model({ type: 'btn-' + type, title: title, message: message });
         //var view = new this.BusDetailModalPopupView({ model: busDetialDto});
+        //debugger;
         var view = null;
-
         require(['./Booking/BookingLeft/BookingLeftView'], function (p) {
             //debugger;
             //alert(p);
@@ -218,22 +213,6 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
     }
     exports.ShowBusDetailModalPopup = ShowBusDetailModalPopup;
 
-    //export class ModalRegion extends Marionette.Region.extend{
-    //    constructor(options?) {
-    //        super();
-    //        Marionette.Region.prototype.constructor.apply(this, arguments);
-    //        this.ensureEl();
-    //        this.$el.on('hidden', { region: this }, function (event) {
-    //            event.data.region.close();
-    //        });
-    //    }
-    //    onShow() {
-    //        this.$el.modal('show');
-    //    }
-    //    onClose() {
-    //        this.$el.modal('hide');
-    //    }
-    //}
     //var app = APP.Application.getInstance();
     /// Adds Authentication Token to each outgoing call if there is an AppGlobalSetting present
     $.ajaxSetup({
@@ -335,6 +314,11 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
         return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
     exports.GetParameterByName = GetParameterByName;
+
+    function FormatMoney(aMoney) {
+        return accounting.formatMoney(aMoney);
+    }
+    exports.FormatMoney = FormatMoney;
 
     (function (VisitTypes) {
         VisitTypes[VisitTypes["PatrolPump"] = 1] = "PatrolPump";

@@ -4,19 +4,23 @@
 /// <amd-dependency path ="text!./Common/Templates/Progressbar.html"/>
 /// <amd-dependency path ="text!./Common/Templates/BusDetailModalPopup.html"/>
 
-
 /// <amd-dependency path="underscore"/>
 /// <amd-dependency path="jquery"/>
 /// <amd-dependency path="knockout"/>
 /// <amd-dependency path="knockback"/>
 /// <amd-dependency path="marionette"/>
 /// <amd-dependency path="backbone"/>
+/// <amd-dependency path="accounting"/>
 
 
 import APP = require("./App");
 var $ = require("jquery");
+var accounting = require("accounting");
 var ko = require("knockout");
 var kb = require("knockback");
+
+
+
 //var pbarView = require("text!./Common/Templates/Progressbar.html");
 
 //var Marionette = require("marionette");
@@ -32,6 +36,26 @@ APP.Application.getInstance().vent.on("Event:UpdateSummary", () => {
     });
 });
 
+/*
+DEFAULT ACCOUNTING SETTINGS
+*/
+
+accounting.settings = {
+    currency: {
+        symbol: "Rs ",   // default currency symbol is '$'
+        format: "%s%v", // controls output: %s = symbol, %v = value/number (can be object: see below)
+        decimal: ".",  // decimal point separator
+        thousand: ",",  // thousands separator
+        precision: 2   // decimal places
+    },
+    number: {
+        precision: 0,  // default precision on numbers is 0
+        thousand: ",",
+        decimal: "."
+    }
+}
+
+
 export class Controller {
     layout: Marionette.Layout;
 }
@@ -46,6 +70,33 @@ export class ViewModel {
         this.controller = controller;
     }
 }
+
+export class ReceiptLayoutDto extends Backbone.Model {
+    default() {
+        return {
+            centreDesc: "",
+            receiptNo: "",
+            printDateAndTime: "",
+            bookingId: "",
+            bookingDate: "",
+            cashReceivedFrom: "",
+            totalAmountDue: "",
+            userName: "",
+            isActive: "",
+            createdBy: "",
+            createdDate: "",
+            modifiedBy: "",
+            modifiedDate: ""
+        };
+    }
+}
+export class ReceiptLayoutCollection extends Backbone.Collection {
+    constructor(options?: any) {
+        this.model = ReceiptLayoutDto;
+        super(options);
+    }
+}
+
 
 export module Views {
     export class CollectionView extends Marionette.CollectionView {
@@ -89,92 +140,10 @@ export module Views {
             ko.cleanNode($(this.el)[0]);
         }
     }
+    
 }
 
-//var noOfShownModals = 0;
-//export class ModalRegion extends Marionette.Region {
-//    el: any;
 
-//    onShow(view) {
-
-//        var modalDiv = this.$el.closest(".modal");
-
-//        if (view.title !== undefined)
-//            modalDiv.find('.modal-title').text(view.title);
-//        else
-//            modalDiv.find('.modal-title').text("");
-
-//        if (view.type !== undefined)
-//            modalDiv.addClass(view.type);
-//        else
-//            modalDiv.addClass("gs-modal-edit");
-
-//        modalDiv.modal({
-//            backdrop: 'static',
-//            keyboard: false
-
-//        });
-//        //noOfShownModals++;
-//        //var level = "level" + noOfShownModals;
-//        //modalDiv.data()["bs.modal"].$backdrop.addClass(level);
-//        //modalDiv.data()["bs.modal"].$element.addClass(level);
-//        //view.on("close", () => this.onBeforeClose(view));
-//        //modalDiv.one('hide.bs.modal', () => view.close());
-
-//    }
-
-//    onBeforeClose(view) {
-//        var modalDiv = view.$el.closest(".modal");
-
-//        if (view.type !== undefined)
-//            modalDiv.removeClass(view.type);
-//        else
-//            modalDiv.removeClass("gs-modal-edit");
-
-
-
-
-//        //if (modalDiv.data()["bs.modal"].$backdrop != undefined)
-//        //    modalDiv.data()["bs.modal"].$backdrop.remove();
-//        //modalDiv.off('hide.bs.modal');
-//        //modalDiv.modal('hide');
-//        //modalDiv.data()["bs.modal"].$element.removeClass("level" + noOfShownModals);
-//        //noOfShownModals--;
-//        return true;
-//    }
-
-//};
-
-//export class ModalPopupView extends Views.ItemView {
-//    constructor(options?) {
-//        //debugger;
-//        //var modalPopupView = require("text!./Common/Templates/ModalPopup.html");
-//        var modalPopupView = require("text!/CCTrackingTS/Common/Templates/ModalPopup.html");
-//        this.template = modalPopupView.getOuterHTML("#Modal");
-//        super(options);
-//        //this.model = options.model;
-//    }
-//}
-
-//export class BusDetailModalPopupCollectionView extends Views.CompositeView {
-//    constructor(options?) {
-//        this.itemView = BusDetailModalPopupView;
-//        var girdTemplate = require("text!./Common/Templates/BusDetailModalPopup.html");
-//        this.template = girdTemplate.getOuterHTML("#ModalGrid");
-//        this.itemViewContainer = "#ItemContainer";
-//        super(options);
-//    }
-//}
-
-//export class BusDetailModalPopupView extends Views.ItemView {
-//    constructor(options?) {
-//        var modalPopupView = require("text!./Common/Templates/BusDetailModalPopup.html");
-//        this.template = modalPopupView.getOuterHTML("#Modal");
-//        this.tagName = "table";
-//        super(options);
-//        //this.model = options.model;
-//    }
-//}
 
 /*
 type value can be:
@@ -204,13 +173,21 @@ export function HideProgressbar() {
         new p.BookingLeftCtrl().HideProgressbar();
     });
 }
+export function PrintReceipt(modelCollection) {
+    
+    //var receiptView = new Views.ReceiptLayoutItemView();
+    //receiptView.$el.find(".jsExportPdf").click();
+    require(['./Booking/BookingLeft/BookingLeftCtrl'], (p) => {
+        new p.BookingLeftCtrl().PrintReceipt(modelCollection);
+    });
+}
 
 //export function ShowBusDetailModalPopup(busDetialDto, type, title, message) {
 export function ShowBusDetailModalPopup(busDetialDto, busDetailCollection) {
     //var alertModel = new Backbone.Model({ type: 'btn-' + type, title: title, message: message });
     //var view = new this.BusDetailModalPopupView({ model: busDetialDto});
+    //debugger;
     var view = null;
-    
     require(['./Booking/BookingLeft/BookingLeftView'], (p) => {
         //debugger;
         //alert(p);
@@ -222,27 +199,6 @@ export function ShowBusDetailModalPopup(busDetialDto, busDetailCollection) {
     //var view = new this.BusDetailModalPopupCollectionView({ collection: busDetailCollection, model: busDetialDto });
     
 }
-
-//export class ModalRegion extends Marionette.Region.extend{
-//    constructor(options?) {
-//        super();
-//        Marionette.Region.prototype.constructor.apply(this, arguments);
-//        this.ensureEl();
-//        this.$el.on('hidden', { region: this }, function (event) {
-//            event.data.region.close();
-//        });
-//    }
-
-//    onShow() {
-//        this.$el.modal('show');
-//    }
-
-//    onClose() {
-//        this.$el.modal('hide');
-//    }
-//}
-
-
 
 //var app = APP.Application.getInstance();
 /// Adds Authentication Token to each outgoing call if there is an AppGlobalSetting present
@@ -349,6 +305,12 @@ export function GetParameterByName(paramName, locationHref) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+export function FormatMoney(aMoney) {
+    return accounting.formatMoney(aMoney);
+}
+
+
+
 export enum VisitTypes {
     PatrolPump = 1,
     Booking = 2,
@@ -378,3 +340,4 @@ ko.bindingHandlers.numeric = {
         });
     }
 };
+

@@ -7,92 +7,27 @@
                     <div class="col-sm-11 col-md-11" id="container">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-2 col-md-2">
-                        <i class="fa fa-3x fa-book" title="Bookings Summary"></i>
-                    </div>
-                    <div class="col-sm-10, col-md-10">
-                        <div class="row">
-                            <div class="col-sm-4 col-md-4 text-info">Total Bookings</div>
-                            <div class="col-sm-6 col-md-6 text-warning">(305)</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-md-4 text-info">Paid Bookings</div>
-                            <div class="col-sm-6 col-md-6 text-warning">(205)</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-md-4 text-info">Unpaid Bookings</div>
-                            <div class="col-sm-6 col-md-6 text-warning">(100)</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-md-4 text-info">Amount Earned</div>
-                            <div class="col-sm-6 col-md-6 text-warning">(Rs 75,000/-)</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-md-4 text-info">Feul Cost</div>
-                            <div class="col-sm-6 col-md-6 text-warning">(Rs 27,000/-)</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-md-4 text-info">Maintenance Charges</div>
-                            <div class="col-sm-6 col-md-6 text-warning">(Rs 11,000/-)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
+                 <div>
                     <hr />
                 </div>
-                <div class="row">
-                    <div class="col-sm-2, col-md-2">
-                        <i class="fa fa-3x fa-bus" title="Bus Visit Summary"></i>
-                    </div>
-                    <div class="col-sm-10 col-md-10" title="Current Months Summary">
-                        <div class="row">
-                            <div class="col-sm-4 col-md-4 text-info">Most Booking Made</div>
-                            <div class="col-sm-6 col-md-6 text-warning">Clifton Centre (36)<br />
-                                Tariq Rd (23)<br />
-                                Landhi 89 (19)</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-md-4 text-info">Most Milage Covered</div>
-                            <div class="col-sm-6 col-md-6 text-warning">Vh-004 (35,000 Km)<br />
-                                Vh-002 (18,000 Km)<br />
-                                Vh-004 (16,000 Km)</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4 col-md-4 text-info">Unpaid Bookings</div>
-                            <div class="col-sm-6 col-md-6 text-warning"><strong>(100)</strong></div>
-                        </div>
-                    </div>
+                 <div class="row">
+                    <div>&nbsp;</div>
                 </div>
                 <div class="row">
-                    <hr />
-                </div>
-                <div class="row">
-                    <div class="col-sm-2, col-md-2">
-                        <i class="fa fa-3x fa-male" title="Driver Summary"></i>
-                    </div>
-                    <div class="col-sm-10, col-md-10">
-                        <div class="row">
-                            <div class="col-sm-4 col-md-4 text-info">Most Bookings By</div>
-                            <div class="col-sm-6 col-md-6 text-warning">Abduallah
-                                <br />
-                                Imaran<br />
-                                Hasan </div>
-                        </div>
+                    <div id="SubRegion" class="col-sm-12 col-md-12">
+                        
                     </div>
                 </div>
-
                 <div>
                     <hr />
                 </div>
 
                 <!-- Start Booking Receipt -->
                 <div>
-                    <button type="button" class="jsExportPdf btn btn-default" >Export to Pdf</button>
+                    <button type="button" class="jsPrintReceipt btn btn-default" >Export to Pdf</button>
 
                 </div>
-                <div id="receiptLayout" class="row" style="border:solid 1px">
+                <!--<div id="receiptLayout" class="row" style="border:solid 1px">
                     <div class="col-sm-12 col-md-12">
 
                         <div class="row text-center">
@@ -150,10 +85,47 @@
                             <div class="col-sm-4 col-md-4 text-right">Signed By_________________</div>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <!-- End Booking Receipt -->
+               
             </div>
         </div>
     </div>
+    
+  
+
 </div>
 
+<div>
+    <script type="text/html" id="gridTemplate">
+        <table id="tblSearch" class="table table-condensed table-bordered table-hover table-striped form-group">
+            <thead>
+                <tr class="active">
+                    <th class="input-sm">Centre Name</th>
+                    <th class="input-sm">Booking Amount</th>
+                    <th class="input-sm">Booking Milage</th>
+                    <th class="input-sm">Bookings</th>
+                    <th class="input-sm">Receivables</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr class="active">
+                    <td >Summary</td>
+                    <td ><%=totalBookingAmount%></td>
+                    <td ><%=totalBookingMilage%></td>
+                    <td ><%=totalBookings%></td>
+                    <td ><%=totalReceivables%></td>
+                </tr>
+            </tfoot>
+        </table>
+    </script>
+    <script type="text/html" id="rowTemplate">
+        <td class="jsShowDetail input-sm" style="cursor: hand; cursor: pointer"><%=alkhidmatCentre%></td>
+        <td class="input-sm"><%=bookingAmount%></td>
+        <td class="input-sm"><%=bookingMilage%></td>
+        <td class="input-sm"><%=bookings%></td>
+        <td class="input-sm"><%=receivables%></td>
+
+    </script>
+</div>

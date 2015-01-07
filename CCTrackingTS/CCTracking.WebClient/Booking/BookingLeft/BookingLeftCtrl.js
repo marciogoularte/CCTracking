@@ -6,14 +6,17 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../../App", "../../Helper", "./BookingLeftView", "../../Dtos/BookingLeftDto", "../../DAL/BookingLeft", "../BookingCtrl", "marionette", "jquery", "knockout", "text!./BookingLeftTmpl.html"], function(require, exports, application, helper, views, dto, DAL, bookingCtrl) {
+define(["require", "exports", "../../App", "../../Helper", "./BookingLeftView", "../../Dtos/BookingLeftDto", "../../DAL/BookingLeft", "../BookingCtrl", "marionette", "jquery", "knockout", "text!./BookingLeftTmpl.html", "jsPDF"], function(require, exports, application, helper, views, dto, DAL, bookingCtrl) {
     /// <amd-dependency path="marionette"/>
     /// <amd-dependency path="jquery"/>
     /// <amd-dependency path="knockout"/>
     /// <amd-dependency path="text!./BookingLeftTmpl.html"/>
+    /// <amd-dependency path="jsPDF"/>
     var _ = require("underscore");
     var ko = require("knockout");
     var kb = require("knockback");
+
+    var jsPDF = require('jsPDF');
 
     var BookingLeftCtrl = (function (_super) {
         __extends(BookingLeftCtrl, _super);
@@ -132,6 +135,60 @@ define(["require", "exports", "../../App", "../../Helper", "./BookingLeftView", 
              {
                 this.app.ModalAlertRegion.show(view);
             }
+        };
+
+        BookingLeftCtrl.prototype.PrintReceipt = function (modelCollection) {
+            //var receiptView = new views.ReceiptLayoutItemView({ model: model });
+            //this.app.SubRegion.show(receiptView);
+            ////this.app.ModalAlertRegion.show(receiptView);
+            //receiptView.ExportToPdf();
+            //var collection = new Backbone.Collection({
+            //    centreDesc: "Head Office - Noor-ul-Huda Centre, Near Numayesh Chorangi",
+            //    receiptNo: "112345",
+            //    printDateAndTime: helper.FormatDateString(Date.now()),
+            //    bookingId: "140",
+            //    bookingDate: "01/01/2015",
+            //    cashReceivedFrom: "Mr abc",
+            //    totalAmountDue: helper.FormatMoney("2500"),
+            //    userName: "Current logged in user",
+            //});
+            var _this = this;
+            var receiptView = new views.ReceiptLayoutCollectionView({ collection: modelCollection });
+
+            this.app.ModalAlertRegion.show(receiptView);
+            receiptView.on("Event-PrintReceipt", function () {
+                _this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
+                _this.app.ModalAlertRegion.close();
+            });
+            //this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
+            //this.app.ModalAlertRegion.show(receiptView);
+            //receiptView.ExportToPdf();
+        };
+        BookingLeftCtrl.prototype.ExportToPdf = function (printSelector) {
+            //debugger;
+            var pdf = new jsPDF('p', 'pt', 'a4');
+
+            //var source = this.$el.find('#ReceiptLayout')[0];
+            var source = printSelector;
+
+            //, specialElementHandlers = {
+            //    '#bypassme': function (element, renderer) {
+            //        return true;
+            //    }
+            //}
+            var margins = {
+                top: 20,
+                bottom: 60,
+                left: 20,
+                width: 522
+            };
+            pdf.fromHTML(source, margins.left, margins.top, {
+                'width': margins.width
+            }, function (dispose) {
+                // dispose: object with X, Y of the last line add to the PDF
+                //          this allow the insertion of new lines after html
+                pdf.save('CCTRacking-Receipt.pdf');
+            }, margins);
         };
         return BookingLeftCtrl;
     })(helper.Controller);

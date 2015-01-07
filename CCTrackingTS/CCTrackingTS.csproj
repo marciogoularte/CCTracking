@@ -120,6 +120,7 @@
     <Content Include="CCTracking.WebClient\Common\Templates\BusDetailModalPopupGrid.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\DAL\AdminSearch.ts" />
     <Content Include="CCTracking.WebClient\Common\Templates\Progressbar.html" />
+    <Content Include="CCTracking.WebClient\Common\Templates\ReceiptLayout.html" />
     <Content Include="CCTracking.WebClient\DAL\BusCentreReport.ts" />
     <Content Include="CCTracking.WebClient\DAL\BusMilage.ts" />
     <Content Include="CCTracking.WebClient\DAL\CauseOfDeath.ts" />
@@ -350,6 +351,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.html" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\AccountingJS\accounting.min.js" />
     <Content Include="Scripts\backbone.js" />
     <Content Include="Scripts\backbone.marionette.js" />
     <Content Include="Scripts\backbone.marionette.min.js" />

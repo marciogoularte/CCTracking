@@ -10,17 +10,23 @@ var kb = require("knockback");
 import application = require("../App");
 import helper = require("../Helper");
 import views = require("./HomeView");
+//import reportView = require("./../Admin/AdminSearchBooking/AdminSearchBookingView");
 
 import dto = require("../Dtos/HomeDto");
 import DAL = require("../DAL/Home");
+import AdminDAL = require("../DAL/AdminSearch");
 
 export class HomeCtrl extends helper.Controller {
     homeItemView: views.HomeItemView;
     app: any;
+    backboneCollection: Backbone.Collection;
+    collectionView:views.SearchCollectionView;
     constructor() {
         super();
         this.app = application.Application.getInstance();
         this.homeItemView = new views.HomeItemView();
+        //this.backboneCollection = new Backbone.Collection([]);
+        
     }
 
     Show() {
@@ -33,7 +39,63 @@ export class HomeCtrl extends helper.Controller {
         model.set("toDate", helper.FormatDateString(new Date()));
         var deffered = DAL.GetByCriteria(model);
         deffered.done((p) => { this.ShowChart(p); });
+        this.ShowCentreSummaryReport();
     }
+
+    ShowCentreSummaryReport() {
+        var model = new Backbone.Model();
+        var today = new Date();
+        var fromDate = new Date(today.setDate(today.getDate() - 30));
+
+        model.set("fromBookingDate", helper.FormatDateString(fromDate));
+        model.set("toBookingDate", helper.FormatDateString(new Date()));
+        this.GetByCriteria(model);
+    }
+    GetByCriteria(bookingSummaryDto: any) {
+
+        if (bookingSummaryDto.get("fromBookingDate").trim() != "") {
+            bookingSummaryDto.set("fromBookingDate", helper.FormatDateString(bookingSummaryDto.get("fromBookingDate")));
+        }
+        if (bookingSummaryDto.get("toBookingDate").trim() != "") {
+            bookingSummaryDto.set("toBookingDate", helper.FormatDateString(bookingSummaryDto.get("toBookingDate")));
+        }
+        var deferred = AdminDAL.GetByCriteria(bookingSummaryDto);
+        deferred.done(p=> this.GetByCriteriaCompleted(p));
+    }
+
+    GetByCriteriaCompleted(bookingSummaryDto: any) {
+        //TODO:Hack - need rework
+        var result = bookingSummaryDto["bookingSummaryList"];
+        var summary = [];
+        var sumBookingAmount = 0, sumBookingMilage = 0, sumBookings = 0, sumReceivables = 0;
+        for (var i = 0; i < result.length; i++) {
+            summary[i] = {
+                alkhidmatCentre: result[i].alkhidmatCentre,
+                alkhidmatCentreId: result[i].alkhidmatCentreId,
+                bookingAmount: helper.FormatMoney(result[i].bookingAmount),
+                bookingMilage: result[i].bookingMilage,
+                bookings: result[i].bookings,
+                receivables:helper.FormatMoney(result[i].receivables)
+            };
+            sumBookingAmount = sumBookingAmount + parseFloat(result[i].bookingAmount);
+            sumBookingMilage = sumBookingMilage + parseFloat(result[i].bookingMilage);
+            sumBookings = sumBookings + parseInt(result[i].bookings);
+            sumReceivables = sumReceivables + parseFloat(result[i].receivables);
+
+        }
+        var compositeModel = new Backbone.Model({
+            "totalBookingAmount": helper.FormatMoney(sumBookingAmount),
+            "totalBookingMilage": sumBookingMilage,
+            "totalBookings": sumBookings,
+            "totalReceivables": helper.FormatMoney(sumReceivables)
+        });
+        this.collectionView = new views.SearchCollectionView({ collection: new Backbone.Collection(summary), model: compositeModel });
+        this.app.SubRegion.show(this.collectionView);
+
+        //this.backboneCollection.reset(summary);
+    }
+
+
     ShowChart(summaryData: any) {
         var centreName = [];
         var bookingData = [];

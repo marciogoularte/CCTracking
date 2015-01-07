@@ -45,7 +45,8 @@ require.config({
         highcharts: 'Scripts/HighCharts/highcharts',
         highcharts3d: 'Scripts/HighCharts/highcharts-3d',
         highchartsExport: 'Scripts/HighCharts/exporting',
-        jsPDF:'Scripts/JSPdf/jspdf.min'
+        jsPDF: 'Scripts/JSPdf/jspdf.min',
+        accounting:'Scripts/AccountingJS/accounting.min'
 
     },
 
@@ -108,7 +109,11 @@ require.config({
         },
         "jsPDF": {
             deps: ["jquery"]
+        },
+        "accounting": {
+            deps: ["jquery"]
         }
+        
         //"bindings": {
         //    deps: ["bootstrap", "jquery", "knockout", "knockoutvalidation"]
         //},
@@ -127,6 +132,7 @@ require([
     "highcharts3d",
     "highchartsExport",
     "jsPDF",
+    "accounting",
 //"bootstrapPopover",
 //"bootstrapTooltip",
 //"datepicker",

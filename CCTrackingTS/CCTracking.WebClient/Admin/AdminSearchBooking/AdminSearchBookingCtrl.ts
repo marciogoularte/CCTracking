@@ -97,8 +97,8 @@ export class AdminSearchBookingCtrl extends helper.Controller {
         for (var i = 0; i < result.length; i++) {
             summary[i] = {
                 alkhidmatCentre: result[i].alkhidmatCentre, alkhidmatCentreId: result[i].alkhidmatCentreId,
-                bookingAmount: result[i].bookingAmount, bookingMilage: result[i].bookingMilage,
-                bookings: result[i].bookings, receivables: result[i].receivables
+                bookingAmount: helper.FormatMoney(result[i].bookingAmount), bookingMilage: result[i].bookingMilage,
+                bookings: result[i].bookings, receivables: helper.FormatMoney(result[i].receivables)
             };
         }
         this.backboneCollection.reset(summary);
