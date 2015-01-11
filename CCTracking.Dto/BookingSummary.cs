@@ -18,7 +18,14 @@ namespace CCTracking.Dto
         public string InTime { get; set; }
         public string TimeTaken { get; set; }
         public string Driver { get; set; }
-
+        public string FuelRate { get; set; }
+        public string FuelQuantity { get; set; }
+        public string CurrentReading { get; set; }
+        public string PreviusReading { get; set; }
+        public string InchargeName { get; set; }
+        public string AverageMilage { get; set; }
+        public string PumpLocation { get; set; }
+        public string FuelingReceipt { get; set; }
 
         public int UnpaidAmount { get; set; }
         public int PaidAmount { get; set; }

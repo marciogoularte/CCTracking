@@ -30,16 +30,35 @@ define(["require", "exports", "../../../../App", "../../../../Helper", "./BusMil
         }
         BusMilageCtrl.prototype.Show = function () {
             var _this = this;
+            var busMilageDto;
+            var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
+
             var model = this.backboneModel;
 
             //debugger;
             //model.set("fromVisitDate", helper.FormatDateString( Date.now()));
             //model.set("toVisitDate", helper.FormatDateString(Date.now()));
             var reportFilter = this.app.request("ReportFilterSetting");
+            model.set("busList", lookupResponse.bus);
 
-            model.set("fromBookingDate", reportFilter.get("fromDate"));
-            model.set("toBookingDate", reportFilter.get("toDate"));
-            model.set("busId", reportFilter.get("busId"));
+            if (reportFilter != undefined) {
+                model.set("fromBookingDate", reportFilter.get("fromDate"));
+                model.set("toBookingDate", reportFilter.get("toDate"));
+                var selectedBus = _.filter(lookupResponse.bus, function (p) {
+                    return p.id == reportFilter.get("busId");
+                });
+
+                model.set("busSelected", selectedBus[0]);
+
+                busMilageDto = new dto.Models.BookingSummaryDto();
+                busMilageDto.set('busSelected', selectedBus[0]);
+                busMilageDto.set('fromBookingDate', reportFilter.get("fromDate"));
+                busMilageDto.set('toBookingDate', reportFilter.get("toDate"));
+            } else {
+                model.set("fromBookingDate", helper.FormatDateString(Date.now()));
+                model.set("toBookingDate", helper.FormatDateString(Date.now()));
+                model.set("busSelected", "");
+            }
 
             this.compositeModel = model;
 
@@ -49,26 +68,36 @@ define(["require", "exports", "../../../../App", "../../../../Helper", "./BusMil
             });
             this.app.MainRegion.show(this.collectionView);
 
+            var currentView = this.collectionView.$el;
+
             var vm = kb.viewModel(this.compositeModel);
 
-            var fromVisitDate = $('#txtFromBookingDate')[0];
+            var fromVisitDate = currentView.find('#txtFromBookingDate')[0];
             ko.cleanNode(fromVisitDate);
             ko.applyBindings(vm, fromVisitDate);
 
-            var toVisitDate = $('#txtToBookingDate')[0];
+            var toVisitDate = currentView.find('#txtToBookingDate')[0];
             ko.cleanNode(toVisitDate);
             ko.applyBindings(vm, toVisitDate);
 
-            var busMilageDto = new dto.Models.BookingSummaryDto();
-            busMilageDto.set('busId', reportFilter.get("busId"));
-            busMilageDto.set('fromBookingDate', reportFilter.get("fromDate"));
-            busMilageDto.set('toBookingDate', reportFilter.get("toDate"));
+            var bus = currentView.find('#ddlBusDetails')[0];
+            ko.cleanNode(bus);
+            ko.applyBindings(vm, bus);
 
-            this.BusMilage(busMilageDto);
+            if (busMilageDto != undefined) {
+                this.BusMilage(busMilageDto);
+            }
         };
 
         BusMilageCtrl.prototype.BusMilage = function (busMilageDto) {
             var _this = this;
+            if (busMilageDto.get("busSelected") != undefined && busMilageDto.get("busSelected").id != undefined) {
+                busMilageDto.set("busId", busMilageDto.get("busSelected").id);
+            } else if (busMilageDto.get("busSelected") != undefined) {
+                busMilageDto.set("busId", busMilageDto.get("busSelected"));
+            }
+
+            this.app.request("ReportFilterSetting", '');
             var deferred = DAL.GetByCriteria(busMilageDto);
             deferred.done(function (p) {
                 return _this.GetByCriteriaCompleted(p);
@@ -92,7 +121,7 @@ define(["require", "exports", "../../../../App", "../../../../Helper", "./BusMil
         };
 
         BusMilageCtrl.prototype.Cancel = function () {
-            window.location.href = "#viewBusMilage";
+            window.location.href = "#busMilageReport";
         };
 
         BusMilageCtrl.prototype.UIBinding = function (model) {

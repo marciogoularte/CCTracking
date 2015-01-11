@@ -67,11 +67,11 @@ namespace CCTracking.DAL
                 }
                 foreach (DataRow item in ds.Tables[2].Rows)
                 {
-                    unionCouncil.Add(new Lookup { Id = Convert.ToInt32(item["id"]), Description = item["description"].ToString() });
+                    unionCouncil.Add(new Lookup { Id = Convert.ToInt32(item["id"]), Description = item["description"].ToString(), ParentId = Convert.ToInt32(item["townid"]) });
                 }
                 foreach (DataRow item in ds.Tables[3].Rows)
                 {
-                    landmark.Add(new Lookup { Id = Convert.ToInt32(item["id"]), Description = item["description"].ToString() });
+                    landmark.Add(new Lookup { Id = Convert.ToInt32(item["id"]), Description = item["description"].ToString(), ParentId = Convert.ToInt32(item["UcId"]) });
                 }
                 foreach (DataRow item in ds.Tables[4].Rows)
                 {

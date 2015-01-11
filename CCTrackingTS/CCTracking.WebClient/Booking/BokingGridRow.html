@@ -1,5 +1,6 @@
 ﻿<div>
     <script type="text/html" id="rowTemplate">
+        <td class="input-sm"><%=id%></td>        
         <td class="jsShowDetail input-sm"><%=contactName %></td>
         <td class="input-sm"><%=contactMobile%></td>
         <td class="input-sm"><%=contactNic%></td>
@@ -9,8 +10,9 @@
             <a href="#editBooking?id=<%=id%>"> <span class="fa fa-edit" title="Edit"></span></a>&nbsp;
             <a href="#payment?id=<%=id%>"><span class="fa fa-briefcase" title="Payment"></span></a>&nbsp;
             <a href="#cancel?id=<%=id%>"><span class="fa fa-remove" title="Cancel"></span></a>&nbsp;
-            <a href="#extraCharge?id=<%=id%>"><span class="fa fa-plus-circle" title="Extra Charges"></span></a>
+            <a href="#extraCharge?id=<%=id%>"><span class="fa fa-plus-circle" title="Extra Charges"></span></a>&nbsp;
+            <a href="javascript:void(0);"><span class="jsExportToPdf fa fa-file-pdf-o" title="Export to Pdf"></span></a>
 
         </td>        
-</script>
+    </script>
 </div>

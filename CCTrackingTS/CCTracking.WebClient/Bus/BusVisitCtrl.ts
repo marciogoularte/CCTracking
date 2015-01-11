@@ -65,7 +65,8 @@ export class BusVisitCtrl extends helper.Controller {
 
         var vm = kb.viewModel(this.compositeModel);
         vm.setOptionDisable = this.collectionView.setOptionDisable;
-        var element = $('#ddlBusDetails')[0];
+        //debugger;
+        var element = $('#ddlBuses')[0];
         ko.cleanNode(element);
         ko.applyBindings(vm, element);
     }
@@ -179,8 +180,10 @@ export class BusVisitCtrl extends helper.Controller {
         this.collectionView.listenTo(this.collectionView, "Event:SearchVisit", (busId) => this.SearchVisit(busId));
         this.app.MainRegion.show(this.collectionView);
 
+        var currentView = this.collectionView.$el;
         var vm = kb.viewModel(this.compositeModel);
-        var element = $('#ddlBusDetails')[0];
+        
+        var element = currentView.find('#ddlBusDetails')[0];
         ko.cleanNode(element);
         ko.applyBindings(vm, element);
     }

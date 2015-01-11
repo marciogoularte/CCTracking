@@ -66,41 +66,44 @@ define(["require", "exports", "../App", "../Helper", "./SearchView", "CCTracking
             this.app.MainRegion.show(this.collectionView);
 
             var vm = kb.viewModel(this.compositeModel);
+            var currentView = this.collectionView.$el;
 
             //vm.setOptionDisable = this.collectionView.setOptionDisable;
-            var element = $('#ddlGraveyard')[0];
+            var element = currentView.find('#ddlGraveyard')[0];
             ko.cleanNode(element);
             ko.applyBindings(vm, element);
-            var centre = $('#ddlCentre')[0];
+            var centre = currentView.find('#ddlCentre')[0];
             ko.cleanNode(centre);
             ko.applyBindings(vm, centre);
-            var bus = $('#ddlBusDetails')[0];
+
+            //debugger;
+            var bus = currentView.find('#ddlBusDetails')[0];
             ko.cleanNode(bus);
             ko.applyBindings(vm, bus);
 
-            var contactInfo = $('#txtContactInfo')[0];
+            var contactInfo = currentView.find('#txtContactInfo')[0];
             ko.cleanNode(contactInfo);
             ko.applyBindings(vm, contactInfo);
 
-            var deseasedInfo = $('#txtDeseasedInfo')[0];
+            var deseasedInfo = currentView.find('#txtDeseasedInfo')[0];
             ko.cleanNode(deseasedInfo);
             ko.applyBindings(vm, deseasedInfo);
 
-            var gender = $('.jsGender')[0];
+            var gender = currentView.find('.jsGender')[0];
             ko.cleanNode(gender);
             ko.applyBindings(vm, gender);
-            gender = $('.jsGender')[1];
+            gender = currentView.find('.jsGender')[1];
             ko.cleanNode(gender);
             ko.applyBindings(vm, gender);
 
-            var paymentStatus = $('.jsPaymentStatus')[0];
+            var paymentStatus = currentView.find('.jsPaymentStatus')[0];
             ko.cleanNode(paymentStatus);
             ko.applyBindings(vm, paymentStatus);
-            paymentStatus = $('.jsPaymentStatus')[1];
+            paymentStatus = currentView.find('.jsPaymentStatus')[1];
             ko.cleanNode(paymentStatus);
             ko.applyBindings(vm, paymentStatus);
 
-            var bookingDate = $('#txtBookingDate')[0];
+            var bookingDate = currentView.find('#txtBookingDate')[0];
             ko.cleanNode(bookingDate);
             ko.applyBindings(vm, bookingDate);
             //this.searchView = new views.SearchView({ viewModel: this.searchViewModel });

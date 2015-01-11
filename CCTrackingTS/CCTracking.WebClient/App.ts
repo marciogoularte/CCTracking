@@ -152,6 +152,7 @@ export class Application extends Marionette.Application {
                 'auditPayment': 'goAuditPayment',
                 'auditRefundBooking': 'goAuditRefundBooking',
                 'busCentreReport': 'goBusCentreReport',
+                'busFuelingReport': 'goBusFuelingReport',
                 '*other': 'defaultRoute'
             },
             goUser() {
@@ -303,6 +304,9 @@ export class Application extends Marionette.Application {
             },
             goBusMilageReport() {
                 require(['./Admin/Reports/Bus/BusMilage/BusMilageCtrl'], (p) => { new p.BusMilageCtrl().Show(); });
+            },
+            goBusFuelingReport() {
+                require(['./Admin/Reports/BusFueling/BusFuelingReportCtrl'], (p) => { new p.BusFuelingReportCtrl().Show(); });
             },
             defaultRoute() {
                 self.ContainerRegion.reset();

@@ -1,0 +1,92 @@
+﻿<div>
+    <div id="gridTemplate">
+        <div class="panel panel-default">
+            <div class="panel-heading header-bold"><span class="fa fa-line-chart"></span>Bus Fueling Report</div>
+            <div class="panel-body">
+                <form id="form1">
+                    <table class="table table-condensed table-hover form-group table-removeTopBorder">
+
+                        <tr>
+                            <td class="col-sm-6 col-md-6">From Date
+                                <input type="text" id="txtFromBookingDate" class="form-control input-sm" data-bind="datepicker: {}, value: fromBookingDate" />
+                            </td>
+                            <td class="col-sm-6 col-md-6">To Date
+                                <input type="text" id="txtToBookingDate" class="form-control input-sm" data-bind="datepicker: {}, value: toBookingDate" />
+                            </td>
+                        </tr>
+
+                        <tr>
+
+                            <td class="col-sm-6 col-md-6">Vehicle No
+                                   <select id="ddlBusDetails" class="form-control input-sm"
+                                       data-bind="options: busList, optionsText:'description', value:busSelected">
+                                   </select>
+                            </td>
+                            <td class="col-sm-6 col-md-6 ">
+                                <span class="pull-right">
+                                    <button type="button" class="jsSearch btn btn-default">Search</button>&nbsp;&nbsp;
+                                    <button type="reset" class="btn btn-default" title="Cancel">Cancel</button>
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <!--<div id="gridTemplate1">-->
+        <div class="panel panel-default">
+            <div class="panel-heading header-bold">
+                <span class="fa fa-bus"></span>View - Search Details
+                    <!--<span class="pull-right"><a href="#addBooking">Add New</a> </span>-->
+            </div>
+            <div class="panel-body">
+                <table id="tblSearch" class="table table-condensed table-bordered table-hover table-striped form-group">
+                    <thead>
+                        <tr class="active">
+                            <th class="input-sm">Bus</th>
+                            <th class="input-sm">Centre Name</th>
+                            <th class="input-sm">Rate</th>
+                            <th class="input-sm">Amount</th>
+                            <th class="input-sm">Liters</th>
+                            <th class="input-sm">Milage</th>
+                            <th class="input-sm">Average</th>
+                            <th class="input-sm">Cur. Reading</th>
+                            <th class="input-sm">Prev. Reading</th>
+                            <th class="input-sm">Location</th>
+                            <th class="input-sm">Receipt</th>
+                            <th class="input-sm">Driver</th>
+                            <th class="input-sm">Out-Time</th>
+                            <th class="input-sm">In-Time</th>
+                            <th class="input-sm">Time Taken</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <tr class="active">
+                            <td colspan="15">&nbsp;</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/html" id="rowTemplate">
+        <td class="jsShowDetail input-sm" style="cursor: hand; cursor: pointer"><%=busNo%></td>
+        <td class="input-sm"><%=alkhidmatCentre%></td>
+        <td class="input-sm"><%=fuelRate%></td>
+        <td class="input-sm"><%=bookingAmount%></td>
+        <td class="input-sm"><%=fuelQuantity%></td>
+        <td class="input-sm"><%=bookingMilage%></td>
+        <td class="input-sm"><%=averageMilage%></td>
+        <td class="input-sm"><%=currentReading%></td>
+        <td class="input-sm"><%=previusReading%></td>
+        <td class="input-sm"><%=pumpLocation%></td>
+        <td class="input-sm"><%=fuelingReceipt%></td>
+        <td class="input-sm"><%=driver%></td>
+        <td class="input-sm"><%=outTime%></td>
+        <td class="input-sm"><%=inTime%></td>
+        <td class="input-sm"><%=timeTaken%></td>
+    </script>
+
+</div>

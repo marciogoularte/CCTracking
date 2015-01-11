@@ -33,7 +33,7 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
     */
     accounting.settings = {
         currency: {
-            symbol: "Rs ",
+            symbol: "",
             format: "%s%v",
             decimal: ".",
             thousand: ",",
@@ -186,11 +186,11 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
         });
     }
     exports.HideProgressbar = HideProgressbar;
-    function PrintReceipt(modelCollection) {
+    function PrintReceipt(id) {
         //var receiptView = new Views.ReceiptLayoutItemView();
         //receiptView.$el.find(".jsExportPdf").click();
         require(['./Booking/BookingLeft/BookingLeftCtrl'], function (p) {
-            new p.BookingLeftCtrl().PrintReceipt(modelCollection);
+            new p.BookingLeftCtrl().PrintReceipt(id);
         });
     }
     exports.PrintReceipt = PrintReceipt;

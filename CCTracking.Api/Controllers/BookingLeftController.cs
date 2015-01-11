@@ -15,5 +15,6 @@ namespace CCTracking.Api.Controllers
             BookingLeftResponse bookingLeftResponse = (BookingLeftResponse)baseModelResponse;
             return bookingLeftResponse;
         }
+      
     }
 }

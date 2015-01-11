@@ -114,9 +114,13 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             model.set("pickupDate", helper.FormatDateString(model.get("pickupDate")));
             this.bookingViewModel = new views.BookingViewModel(model, this);
             this.bookingView = new views.BookingView({ viewModel: this.bookingViewModel });
+
+            //this.bookingView.listenTo(this.bookingView, "ExportToPdf", (id) => { alert('id-' + id); });
+            //this.bookingView.on("ExportToPdf", (id) => { this.ExportToPdf(id); });
             this.layout = app.AppLayout;
             app.MainRegion.show(this.bookingView);
         };
+
         BookingCtrl.prototype.LoadCompleted = function (lookupResponse) {
             var model = new dto.Models.BookingResponse();
 
@@ -174,6 +178,9 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             //});
             this.bookingViewModel = new views.BookingViewModel(model, this);
             this.bookingView = new views.BookingView({ viewModel: this.bookingViewModel });
+
+            //this.bookingView.listenTo(this.bookingView, "ExportToPdf", (id) => { alert('id-' + id); });
+            //this.bookingView.on("ExportToPdf", (id) => { alert(id); });
             this.layout = app.AppLayout;
             app.MainRegion.show(this.bookingView);
         };

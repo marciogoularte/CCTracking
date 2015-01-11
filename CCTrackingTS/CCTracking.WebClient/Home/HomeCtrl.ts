@@ -90,6 +90,7 @@ export class HomeCtrl extends helper.Controller {
             "totalReceivables": helper.FormatMoney(sumReceivables)
         });
         this.collectionView = new views.SearchCollectionView({ collection: new Backbone.Collection(summary), model: compositeModel });
+        this.app.SubRegion.reset();
         this.app.SubRegion.show(this.collectionView);
 
         //this.backboneCollection.reset(summary);
@@ -177,9 +178,9 @@ export class HomeCtrl extends helper.Controller {
                     data: bookingData,
                     stack: 'Booking'
                 }, {
-                    name: 'Expenditure',
+                    name: 'Maintenance',
                     data: expenditureData,
-                    stack: 'Expenditure'
+                    stack: 'Maintenance'
                 }, {
                     name: 'Receivable',
                     data: receivableData,

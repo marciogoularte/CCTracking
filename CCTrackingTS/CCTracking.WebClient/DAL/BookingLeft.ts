@@ -18,7 +18,6 @@ export function GetByCriteria(bookingLeftDto: bookingLeftDto.Models.BookingLeftD
     var o: baseDAL.BaseDto = new BookingLeftDal();
     return o.doAjaxRequest(bookingLeftDto, "POST", "BookingLeft");
 }
-
 //aaa
 
 

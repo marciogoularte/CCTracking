@@ -62,7 +62,9 @@ define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/
 
             var vm = kb.viewModel(this.compositeModel);
             vm.setOptionDisable = this.collectionView.setOptionDisable;
-            var element = $('#ddlBusDetails')[0];
+
+            //debugger;
+            var element = $('#ddlBuses')[0];
             ko.cleanNode(element);
             ko.applyBindings(vm, element);
         };
@@ -187,8 +189,10 @@ define(["require", "exports", "../App", "../Helper", "./BusVisitView", "../Dtos/
             });
             this.app.MainRegion.show(this.collectionView);
 
+            var currentView = this.collectionView.$el;
             var vm = kb.viewModel(this.compositeModel);
-            var element = $('#ddlBusDetails')[0];
+
+            var element = currentView.find('#ddlBusDetails')[0];
             ko.cleanNode(element);
             ko.applyBindings(vm, element);
         };

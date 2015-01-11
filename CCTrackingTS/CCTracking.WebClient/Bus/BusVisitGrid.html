@@ -15,7 +15,7 @@
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
                             Vehicle No  
-                            <select id="ddlBusDetails" class="form-control input-sm"
+                            <select id="ddlBuses" class="form-control input-sm"
                                     data-bind="options: busList, optionsText:'description', value:busSelected, optionsAfterRender:setOptionDisable">
                             </select>
                             <!--,optionsAfterRender: setOptionDisable
@@ -29,6 +29,7 @@
                     <thead>
                         <tr class="active">
                             <th class="input-sm">Bus</th>
+                            <th class="input-sm">Booking Id</th>
                             <th class="input-sm">Visit Type</th>
                             <th class="input-sm">Dates</th>
                             <th class="input-sm">Meter Reading</th>
@@ -49,9 +50,10 @@
 
     <script type="text/html" id="rowTemplate">
         <td class="jsShowDetail input-sm"><a href="#editBusVisit?id=<%=id%>"><%=busDesc %></a></td>        
+        <td class="input-sm"><%=bookingId%></td>
         <td class="input-sm"><%=visitTypeDesc%></td>
         <td class="input-sm"><%=visitDate%> - <%=returnDate%></td>
-        <td class="input-sm"><%=initialReading%> - <%=finalReading%></td>
+        <td class="input-sm"><%=finalReading%> - <%=initialReading%></td>
         
     </script>
 </div>

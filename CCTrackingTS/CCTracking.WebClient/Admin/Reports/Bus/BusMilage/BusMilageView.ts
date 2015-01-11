@@ -18,6 +18,8 @@ export class BusMilageViewModel extends helper.ViewModel {
         super(model, controller);
     }
 }
+
+
 export class BusMilageView extends helper.Views.MvvmView {
     constructor(options?) {
         this.template = templateView;//templateView.getOuterHTML("#searchFilter");
@@ -31,6 +33,7 @@ export class BusMilageView extends helper.Views.MvvmView {
     }
 
 }
+
 export class BusMilageCollectionView extends helper.Views.CompositeView {
     datatable: any;
     constructor(options?) {
@@ -45,7 +48,7 @@ export class BusMilageCollectionView extends helper.Views.CompositeView {
     }
     Search(e) {
         e.preventDefault();
-        this.trigger("BusCentreReport");
+        this.trigger("BusMilage");
     }
 
     //initialize() {

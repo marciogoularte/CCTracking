@@ -42,7 +42,7 @@ DEFAULT ACCOUNTING SETTINGS
 
 accounting.settings = {
     currency: {
-        symbol: "Rs ",   // default currency symbol is '$'
+        symbol: "",   // default currency symbol is '$'
         format: "%s%v", // controls output: %s = symbol, %v = value/number (can be object: see below)
         decimal: ".",  // decimal point separator
         thousand: ",",  // thousands separator
@@ -173,12 +173,11 @@ export function HideProgressbar() {
         new p.BookingLeftCtrl().HideProgressbar();
     });
 }
-export function PrintReceipt(modelCollection) {
-    
+export function PrintReceipt(id) {
     //var receiptView = new Views.ReceiptLayoutItemView();
     //receiptView.$el.find(".jsExportPdf").click();
     require(['./Booking/BookingLeft/BookingLeftCtrl'], (p) => {
-        new p.BookingLeftCtrl().PrintReceipt(modelCollection);
+        new p.BookingLeftCtrl().PrintReceipt(id);
     });
 }
 

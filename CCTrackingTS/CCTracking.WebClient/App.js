@@ -131,6 +131,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     'auditPayment': 'goAuditPayment',
                     'auditRefundBooking': 'goAuditRefundBooking',
                     'busCentreReport': 'goBusCentreReport',
+                    'busFuelingReport': 'goBusFuelingReport',
                     '*other': 'defaultRoute'
                 },
                 goUser: function () {
@@ -374,6 +375,11 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                 goBusMilageReport: function () {
                     require(['./Admin/Reports/Bus/BusMilage/BusMilageCtrl'], function (p) {
                         new p.BusMilageCtrl().Show();
+                    });
+                },
+                goBusFuelingReport: function () {
+                    require(['./Admin/Reports/BusFueling/BusFuelingReportCtrl'], function (p) {
+                        new p.BusFuelingReportCtrl().Show();
                     });
                 },
                 defaultRoute: function () {

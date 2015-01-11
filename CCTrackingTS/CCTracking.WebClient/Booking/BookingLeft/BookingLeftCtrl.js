@@ -6,7 +6,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../../App", "../../Helper", "./BookingLeftView", "../../Dtos/BookingLeftDto", "../../DAL/BookingLeft", "../BookingCtrl", "marionette", "jquery", "knockout", "text!./BookingLeftTmpl.html", "jsPDF"], function(require, exports, application, helper, views, dto, DAL, bookingCtrl) {
+define(["require", "exports", "../../App", "../../Helper", "./BookingLeftView", "../../Dtos/BookingLeftDto", "../../DAL/BookingLeft", "../../DAL/ReceiptContent", "../BookingCtrl", "marionette", "jquery", "knockout", "text!./BookingLeftTmpl.html", "jsPDF"], function(require, exports, application, helper, views, dto, DAL, RDAL, bookingCtrl) {
     /// <amd-dependency path="marionette"/>
     /// <amd-dependency path="jquery"/>
     /// <amd-dependency path="knockout"/>
@@ -137,7 +137,8 @@ define(["require", "exports", "../../App", "../../Helper", "./BookingLeftView", 
             }
         };
 
-        BookingLeftCtrl.prototype.PrintReceipt = function (modelCollection) {
+        BookingLeftCtrl.prototype.PrintReceipt = function (id) {
+            var _this = this;
             //var receiptView = new views.ReceiptLayoutItemView({ model: model });
             //this.app.SubRegion.show(receiptView);
             ////this.app.ModalAlertRegion.show(receiptView);
@@ -152,18 +153,38 @@ define(["require", "exports", "../../App", "../../Helper", "./BookingLeftView", 
             //    totalAmountDue: helper.FormatMoney("2500"),
             //    userName: "Current logged in user",
             //});
-            var _this = this;
-            var receiptView = new views.ReceiptLayoutCollectionView({ collection: modelCollection });
-
-            this.app.ModalAlertRegion.show(receiptView);
-            receiptView.on("Event-PrintReceipt", function () {
-                _this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
-                _this.app.ModalAlertRegion.close();
+            //var id = 148;
+            var deferred = RDAL.GetById(id);
+            deferred.done(function (p) {
+                return _this.GetReceiptContentCompleted(p);
             });
             //this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
             //this.app.ModalAlertRegion.show(receiptView);
             //receiptView.ExportToPdf();
         };
+
+        BookingLeftCtrl.prototype.GetReceiptContentCompleted = function (response) {
+            var _this = this;
+            var collection = _.map(response["receiptContentList"], function (item) {
+                var aDate = new Date(item.printDateTime);
+                var appObj = _this.app.request("AppGlobalSetting");
+
+                item.bookingDate = helper.FormatDateString(item.bookingDate);
+                item.printDateTime = helper.FormatDateString(item.printDateTime) + '    ' + aDate.getHours() + ':' + aDate.getMinutes();
+                item.bookingAmount = helper.FormatMoney(item.bookingAmount);
+                item.userName = appObj.get("FirstName") + ',' + appObj.get("LastName");
+                return item;
+            });
+
+            var list = new Backbone.Collection(collection);
+            var receiptView = new views.ReceiptLayoutCollectionView({ collection: list });
+            this.app.ModalAlertRegion.show(receiptView);
+            receiptView.on("Event-PrintReceipt", function () {
+                _this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
+                _this.app.ModalAlertRegion.close();
+            });
+        };
+
         BookingLeftCtrl.prototype.ExportToPdf = function (printSelector) {
             //debugger;
             var pdf = new jsPDF('p', 'pt', 'a4');

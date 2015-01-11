@@ -16,6 +16,8 @@ import helper = require("../../Helper");
 import views = require("./BookingLeftView");
 import dto = require("../../Dtos/BookingLeftDto");
 import DAL = require("../../DAL/BookingLeft");
+import RDto = require("../../Dtos/ReceiptContentDto");
+import RDAL = require("../../DAL/ReceiptContent");
 var jsPDF = require('jsPDF');
 
 import bookingCtrl = require("../BookingCtrl");
@@ -147,7 +149,7 @@ export class BookingLeftCtrl extends helper.Controller {
 
     }
 
-    PrintReceipt(modelCollection) {
+    PrintReceipt(id) {
         //var receiptView = new views.ReceiptLayoutItemView({ model: model });
         //this.app.SubRegion.show(receiptView);
         ////this.app.ModalAlertRegion.show(receiptView);
@@ -162,18 +164,40 @@ export class BookingLeftCtrl extends helper.Controller {
         //    totalAmountDue: helper.FormatMoney("2500"),
         //    userName: "Current logged in user",
         //});
+        //var id = 148;
+        var deferred= RDAL.GetById(id);
+        deferred.done(p=> this.GetReceiptContentCompleted(p));      
+
         
-        var receiptView = new views.ReceiptLayoutCollectionView({ collection: modelCollection });
         
-        this.app.ModalAlertRegion.show(receiptView);receiptView.on("Event-PrintReceipt", () => {
-            this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
-            this.app.ModalAlertRegion.close();
-        });
         
         //this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
         //this.app.ModalAlertRegion.show(receiptView);
         //receiptView.ExportToPdf();
     }
+
+    GetReceiptContentCompleted(response) {
+        
+        var collection = _.map(response["receiptContentList"], (item) => {
+            var aDate = new Date(item.printDateTime);
+            var appObj = this.app.request("AppGlobalSetting");
+
+            item.bookingDate = helper.FormatDateString(item.bookingDate);
+            item.printDateTime = helper.FormatDateString(item.printDateTime) + '    ' + aDate.getHours() + ':' + aDate.getMinutes();
+            item.bookingAmount = helper.FormatMoney(item.bookingAmount);
+            item.userName = appObj.get("FirstName") + ',' + appObj.get("LastName");
+            return item;
+        });
+        
+        var list = new Backbone.Collection(collection);
+        var receiptView = new views.ReceiptLayoutCollectionView({ collection: list });
+        this.app.ModalAlertRegion.show(receiptView); receiptView.on("Event-PrintReceipt", () => {
+            this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
+            this.app.ModalAlertRegion.close();
+        });
+    }
+
+
     ExportToPdf(printSelector) {
         //debugger;
         var pdf = new jsPDF('p', 'pt', 'a4');

@@ -24,11 +24,12 @@ namespace CCTracking.Api.Controllers
                 {
                     busVisit.ModifiedDate = DateTime.Today;
                 }
-                if ((VisitTypes)busVisit.VisitTypeId != VisitTypes.PatrolPump)
-                {
-                    busVisit.PumpLocation = string.Empty;
-                    busVisit.FuelAmount = busVisit.FuelRate = 0;
-                }
+                //if ((VisitTypes)busVisit.VisitTypeId != VisitTypes.PatrolPump)
+                //{
+                //    busVisit.PumpLocation = string.Empty;
+                //    busVisit.FuelAmount = busVisit.FuelRate = 0;
+                //}
+
                 //used for booking & maintainance
                 if ((VisitTypes)busVisit.VisitTypeId != VisitTypes.Booking && (VisitTypes)busVisit.VisitTypeId != VisitTypes.Maintenance)
                 {

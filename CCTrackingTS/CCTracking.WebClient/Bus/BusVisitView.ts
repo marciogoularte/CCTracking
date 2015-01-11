@@ -51,7 +51,7 @@ export class BusVisitView extends helper.Views.ItemView {
             return false;
         }
         if (this.viewModel.isBookingCompleted() == "1") {
-            if (this.viewModel.returnDate() == undefined || this.viewModel.returnDate()=="") {
+            if (this.viewModel.returnDate() == undefined || this.viewModel.returnDate() == "") {
                 helper.ShowModalPopup("danger", "Bus Visit", "Please enter valid return date to complete the booking.");
                 return false;
             }
@@ -78,6 +78,8 @@ export class BusVisitView extends helper.Views.ItemView {
         this.bbModel.set("fuelRate", this.viewModel.fuelRate());
         this.bbModel.set("fuelQuantity", this.viewModel.fuelQuantity());
         this.bbModel.set("fuelAmount", this.viewModel.fuelAmount());
+        this.bbModel.set("fuelingReceipt", this.viewModel.fuelingReceipt());
+
         this.bbModel.set("isBookingCompleted", this.viewModel.isBookingCompleted());
         this.bbModel.set("description", this.viewModel.description());
         this.bbModel.set("initialReading", this.viewModel.initialReading());
@@ -112,12 +114,13 @@ export class ViewModel {
     visitDate: any;
     outTime: any;
     returnTime: any;
-    returnDate:any;
+    returnDate: any;
     readingWhenFilling: any;
     pumpLocation: any;
     fuelRate: any;
     fuelAmount: any;
     fuelQuantity: any;
+    fuelingReceipt: any;
     isBookingCompleted: any;
     description: any;
     initialReading: any;
@@ -142,8 +145,8 @@ export class ViewModel {
     driverSelected: any;
     alkhidmatCentreSelected: any;
     visitTypeSelected: any;
-    isEdit:any;
-    isValidReading:any;
+    isEdit: any;
+    isValidReading: any;
 
     constructor(model) {
         var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
@@ -175,6 +178,7 @@ export class ViewModel {
             this.fuelRate = ko.observable();
             this.fuelAmount = ko.observable(); //update
             this.fuelQuantity = ko.observable();
+            this.fuelingReceipt = ko.observable();
 
             //for booking only
             this.isBookingCompleted = ko.observable();
@@ -208,7 +212,7 @@ export class ViewModel {
             this.isBooking = ko.computed({
                 owner: this,
                 read: () => {
-                    if (this.visitTypeSelected() != undefined && (helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Booking]  || helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Maintenance])) {
+                    if (this.visitTypeSelected() != undefined && (helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Booking] || helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Maintenance])) {
                         return true;
                     } else {
                         return false;
@@ -241,11 +245,13 @@ export class ViewModel {
             else this.fuelRate = ko.observable(model.get("fuelRate"));
             if (model.get("fuelAmount") != undefined && model.get("fuelAmount") == "0") this.fuelAmount = ko.observable();
             else this.fuelAmount = ko.observable(model.get("fuelAmount"));
-        if (model.get("fuelQuantity") != undefined && model.get("fuelQuantity") == "0") this.fuelQuantity = ko.observable();
-        else this.fuelQuantity = ko.observable(model.get("fuelQuantity"));
+            if (model.get("fuelQuantity") != undefined && model.get("fuelQuantity") == "0") this.fuelQuantity = ko.observable();
+            else this.fuelQuantity = ko.observable(model.get("fuelQuantity"));
+            if (model.get("fuelingReceipt") != undefined && model.get("fuelingReceipt") == "") this.fuelingReceipt = ko.observable();
+            else this.fuelingReceipt = ko.observable(model.get("fuelingReceipt"));
 
             //for booking only
-            
+
             var flag = model.get("isBookingCompleted") == true ? "1" : "0";
             this.isBookingCompleted = ko.observable(flag); //ko.observable(model.get("isBookingCompleted"));
 
@@ -373,7 +379,7 @@ export class BusVisitItemView extends helper.Views.ItemView {
         options.events = {
             "click .jsShowDetail": "ShowDetail"
         };
-        
+
         //this.templateHelpers = () => {
         //    visitDateFormatted: {
         //        if (this.model.get("visitDate") != undefined) {

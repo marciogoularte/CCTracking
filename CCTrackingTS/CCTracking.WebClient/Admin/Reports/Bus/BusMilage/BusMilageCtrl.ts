@@ -35,50 +35,82 @@ export class BusMilageCtrl extends helper.Controller {
     }
 
     Show() {
-       var model = this.backboneModel;
+        var busMilageDto;
+        var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
+
+        var model = this.backboneModel;
         //debugger;
         //model.set("fromVisitDate", helper.FormatDateString( Date.now()));
         //model.set("toVisitDate", helper.FormatDateString(Date.now()));
 
+        
+
+
         var reportFilter = this.app.request("ReportFilterSetting");
+        model.set("busList", lookupResponse.bus);
+        
 
-        model.set("fromBookingDate", reportFilter.get("fromDate"));
-        model.set("toBookingDate", reportFilter.get("toDate"));
-        model.set("busId", reportFilter.get("busId"));
+        if (reportFilter != undefined) {
+            model.set("fromBookingDate", reportFilter.get("fromDate"));
+            model.set("toBookingDate", reportFilter.get("toDate"));
+            var selectedBus = _.filter(lookupResponse.bus, (p) => { return p.id == reportFilter.get("busId"); });
 
+            model.set("busSelected", selectedBus[0]);
+
+            busMilageDto = new dto.Models.BookingSummaryDto();
+            busMilageDto.set('busSelected', selectedBus[0]);
+            busMilageDto.set('fromBookingDate', reportFilter.get("fromDate"));
+            busMilageDto.set('toBookingDate', reportFilter.get("toDate"));
+        }
+        else {
+            model.set("fromBookingDate", helper.FormatDateString(Date.now()));
+            model.set("toBookingDate", helper.FormatDateString(Date.now()));
+            model.set("busSelected", "");
+        }
 
         this.compositeModel = model;
 
         this.collectionView.model = this.compositeModel;
         this.collectionView.listenTo(this.collectionView, "BusMilage", () => this.BusMilage(model));
         this.app.MainRegion.show(this.collectionView);
-        
+
+        var currentView = this.collectionView.$el;
+
         var vm = kb.viewModel(this.compositeModel);
-       
-        var fromVisitDate = $('#txtFromBookingDate')[0];
+
+        var fromVisitDate = currentView.find('#txtFromBookingDate')[0];
         ko.cleanNode(fromVisitDate);
         ko.applyBindings(vm, fromVisitDate);
 
-        var toVisitDate = $('#txtToBookingDate')[0];
+        var toVisitDate = currentView.find('#txtToBookingDate')[0];
         ko.cleanNode(toVisitDate);
         ko.applyBindings(vm, toVisitDate);
 
-        var busMilageDto = new dto.Models.BookingSummaryDto();
-        busMilageDto.set('busId', reportFilter.get("busId"));
-        busMilageDto.set('fromBookingDate', reportFilter.get("fromDate"));
-        busMilageDto.set('toBookingDate', reportFilter.get("toDate"));
+        var bus = currentView.find('#ddlBusDetails')[0];
+        ko.cleanNode(bus);
+        ko.applyBindings(vm, bus);
 
-        this.BusMilage(busMilageDto);
+        if (busMilageDto != undefined) {
+            this.BusMilage(busMilageDto);
+        }
     }
 
     BusMilage(busMilageDto: any) {
-        
+
+        if (busMilageDto.get("busSelected") != undefined && busMilageDto.get("busSelected").id != undefined) {
+            busMilageDto.set("busId", busMilageDto.get("busSelected").id);
+        }
+        else if (busMilageDto.get("busSelected") != undefined) {
+            busMilageDto.set("busId", busMilageDto.get("busSelected"));
+        }
+
+        this.app.request("ReportFilterSetting", '');
         var deferred = DAL.GetByCriteria(busMilageDto);
         deferred.done(p=> this.GetByCriteriaCompleted(p));
     }
-    
+
     GetByCriteriaCompleted(bookingSummaryDto: dto.Models.BookingSummaryCollection) {
-       // debugger;
+        // debugger;
         var result = bookingSummaryDto["bookingSummaryList"];
         var summary = [];
         for (var i = 0; i < result.length; i++) {
@@ -86,7 +118,7 @@ export class BusMilageCtrl extends helper.Controller {
                 alkhidmatCentre: result[i].alkhidmatCentre, alkhidmatCentreId: result[i].alkhidmatCentreId,
                 bookingAmount: result[i].bookingAmount, bookingMilage: result[i].bookingMilage,
                 busNo: result[i].busNo, busId: result[i].busId, visitType: result[i].visitType,
-                visitDate: helper.FormatDateString(result[i].visitDate),outTime: result[i].outTime,
+                visitDate: helper.FormatDateString(result[i].visitDate), outTime: result[i].outTime,
                 inTime: result[i].inTime, timeTaken: result[i].timeTaken, driver: result[i].driver
             };
         }
@@ -94,7 +126,7 @@ export class BusMilageCtrl extends helper.Controller {
     }
 
     Cancel() {
-        window.location.href = "#viewBusMilage";
+        window.location.href = "#busMilageReport";
     }
 
     UIBinding(model: any) {
@@ -102,7 +134,7 @@ export class BusMilageCtrl extends helper.Controller {
         model.set("landmarkList", lookupResponse.landmark);
         var landmark = _.filter(lookupResponse.landmark, (p) => { return p.id == model.get("landmarkId"); });
         model.set("landmarkIdSelected", landmark[0]);
-        
+
         //this.viewModel.bbModel = model;
     }
 

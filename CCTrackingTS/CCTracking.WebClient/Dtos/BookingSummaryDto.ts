@@ -24,6 +24,13 @@ export module Models {
                 inTime: "",
                 timeTaken: "",
                 driver: "",
+                averageMilage:"",
+                currentReading: "",
+                previusReading: "",
+                fuelQuantity: "",
+                fuelRate: "",
+                pumpLocation:"",
+                fuelingReceipt:"",
 
                 createdBy: "",
                 createdDate: "",

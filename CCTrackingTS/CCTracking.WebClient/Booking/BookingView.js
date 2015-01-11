@@ -28,12 +28,13 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto
             var _this = this;
             _super.call(this, model, controller);
             this.model.busPointSelected.subscribe(function () {
-                var list = GetUcList(_this.model.busPointSelected().id);
+                //debugger;
+                var list = GetUcList(_this.model.busPointSelected().parentId);
                 _this.model.unionCouncilList(list);
             });
 
             this.model.unionCouncilIdSelected.subscribe(function () {
-                var list = GetTownList(_this.model.unionCouncilIdSelected().id);
+                var list = GetTownList(_this.model.unionCouncilIdSelected().parentId);
                 _this.model.townList(list);
             });
         }
@@ -75,6 +76,7 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto
         };
 
         BookingView.prototype.GetAllCompleted = function (bookingResponse) {
+            var _this = this;
             //var a = templateGrid;
             app = application.Application.getInstance();
             var bookings = _.map(bookingResponse["bookingList"], function (item) {
@@ -89,9 +91,16 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto
             //var model = new Backbone.Model();
             //model.set("itemCount", bookingCollection.length);
             var collectionView = new BookingCollectionView({ collection: bookingCollection });
+            collectionView.listenTo(collectionView, "itemview:ExportToPdf", function (view, id) {
+                _this.ExportToPdf(id);
+            });
 
             //var bookingGrid = collectionView.$("#tblBooking");
             app.MainRegion.show(collectionView);
+        };
+
+        BookingView.prototype.ExportToPdf = function (id) {
+            helper.PrintReceipt(id);
         };
         return BookingView;
     })(helper.Views.MvvmView);
@@ -113,12 +122,16 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto
     var BookingItemView = (function (_super) {
         __extends(BookingItemView, _super);
         function BookingItemView(options) {
+            var _this = this;
             //if (!options) options = {};
             options.template = templateRow.getOuterHTML("#rowTemplate");
             options.tagName = "tr";
             options.className = "jsRowClick";
             options.events = {
                 "mouseover .jsShowDetail": "ShowDetail",
+                "click .jsExportToPdf": function () {
+                    _this.trigger("ExportToPdf", _this.model.get("id"));
+                },
                 "click .jsShowDetail": "ShowDetail"
             };
 

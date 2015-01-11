@@ -94,10 +94,17 @@ export class BookingCtrl extends helper.Controller {
         model.set("pickupDate", helper.FormatDateString(model.get("pickupDate")));
         this.bookingViewModel = new views.BookingViewModel(model, this);
         this.bookingView = new views.BookingView({ viewModel: this.bookingViewModel });
+        //this.bookingView.listenTo(this.bookingView, "ExportToPdf", (id) => { alert('id-' + id); });
+        //this.bookingView.on("ExportToPdf", (id) => { this.ExportToPdf(id); });
+
+
         this.layout = app.AppLayout;
         app.MainRegion.show(this.bookingView);
 
     }
+
+    
+
     LoadCompleted(lookupResponse) {
         var model = new dto.Models.BookingResponse();
 
@@ -158,6 +165,9 @@ export class BookingCtrl extends helper.Controller {
 
         this.bookingViewModel = new views.BookingViewModel(model, this);
         this.bookingView = new views.BookingView({ viewModel: this.bookingViewModel });
+        //this.bookingView.listenTo(this.bookingView, "ExportToPdf", (id) => { alert('id-' + id); });
+        //this.bookingView.on("ExportToPdf", (id) => { alert(id); });
+
         this.layout = app.AppLayout;
         app.MainRegion.show(this.bookingView);
 

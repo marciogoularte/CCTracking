@@ -26,6 +26,7 @@ define(["require", "exports", "../../../../Helper", "marionette", "jquery", "jqu
         return BusMilageViewModel;
     })(helper.ViewModel);
     exports.BusMilageViewModel = BusMilageViewModel;
+
     var BusMilageView = (function (_super) {
         __extends(BusMilageView, _super);
         function BusMilageView(options) {
@@ -42,6 +43,7 @@ define(["require", "exports", "../../../../Helper", "marionette", "jquery", "jqu
         return BusMilageView;
     })(helper.Views.MvvmView);
     exports.BusMilageView = BusMilageView;
+
     var BusMilageCollectionView = (function (_super) {
         __extends(BusMilageCollectionView, _super);
         function BusMilageCollectionView(options) {
@@ -56,7 +58,7 @@ define(["require", "exports", "../../../../Helper", "marionette", "jquery", "jqu
         }
         BusMilageCollectionView.prototype.Search = function (e) {
             e.preventDefault();
-            this.trigger("BusCentreReport");
+            this.trigger("BusMilage");
         };
         return BusMilageCollectionView;
     })(helper.Views.CompositeView);

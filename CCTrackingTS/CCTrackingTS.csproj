@@ -66,6 +66,10 @@
     <Content Include="CCTracking.WebClient\Admin\Reports\Audit\Refund\AuditRefundBooking.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\Admin\Reports\Audit\Refund\AuditRefundBookingCtrl.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Admin\Reports\Audit\Refund\AuditRefundBookingView.ts" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\BusFueling\BusFuelingReportCtrl.ts" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\BusFueling\BusFuelingReportGrid.html" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\BusFueling\BusFuelingReportTmpl.html" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\BusFueling\BusFuelingReportView.ts" />
     <Content Include="CCTracking.WebClient\Admin\Reports\BusVisit\BusVisitDetail.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\Admin\Reports\BusVisit\BusVisitSummaryCtrl.ts" />
     <Content Include="CCTracking.WebClient\Admin\Reports\BusVisit\BusVisitSummaryTmpl.html" />
@@ -122,6 +126,7 @@
     <Content Include="CCTracking.WebClient\Common\Templates\Progressbar.html" />
     <Content Include="CCTracking.WebClient\Common\Templates\ReceiptLayout.html" />
     <Content Include="CCTracking.WebClient\DAL\BusCentreReport.ts" />
+    <Content Include="CCTracking.WebClient\DAL\BusFuelingReport.ts" />
     <Content Include="CCTracking.WebClient\DAL\BusMilage.ts" />
     <Content Include="CCTracking.WebClient\DAL\CauseOfDeath.ts" />
     <Content Include="CCTracking.WebClient\DAL\BookingLeft.ts" />
@@ -133,6 +138,7 @@
     <TypeScriptCompile Include="CCTracking.WebClient\DAL\Home.ts" />
     <Content Include="CCTracking.WebClient\DAL\Landmark.ts" />
     <Content Include="CCTracking.WebClient\DAL\PaymentType.ts" />
+    <TypeScriptCompile Include="CCTracking.WebClient\DAL\ReceiptContent.ts" />
     <Content Include="CCTracking.WebClient\DAL\RefundType.ts" />
     <Content Include="CCTracking.WebClient\DAL\Town.ts" />
     <Content Include="CCTracking.WebClient\DAL\TrackingDevice.ts" />
@@ -151,6 +157,7 @@
     <Content Include="CCTracking.WebClient\Dtos\LandmarkDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\LoginDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\PaymentTypeDto.ts" />
+    <TypeScriptCompile Include="CCTracking.WebClient\Dtos\ReceiptContentDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\RefundTypeDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\ReportDto.ts" />
     <Content Include="CCTracking.WebClient\Dtos\TownDto.ts" />

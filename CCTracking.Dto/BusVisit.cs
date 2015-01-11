@@ -26,6 +26,8 @@ namespace CCTracking.Dto
         public long InitialReading { get; set; }
         public long FinalReading { get; set; }
         public decimal FuelQuantity { get; set; }
+        public string FuelingReceipt { get; set; }
+        
         public string Description { get; set; }
 
         //Report Related Properties

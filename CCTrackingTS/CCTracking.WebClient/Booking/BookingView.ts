@@ -24,12 +24,13 @@ export class BookingViewModel extends helper.ViewModel {
     constructor(model: any, controller: any) {
         super(model, controller);
         this.model.busPointSelected.subscribe(() => {
-            var list = GetUcList(this.model.busPointSelected().id);
+            //debugger;
+            var list = GetUcList(this.model.busPointSelected().parentId);
             this.model.unionCouncilList(list);
         });
 
         this.model.unionCouncilIdSelected.subscribe(() => {
-            var list = GetTownList(this.model.unionCouncilIdSelected().id);
+            var list = GetTownList(this.model.unionCouncilIdSelected().parentId);
             this.model.townList(list);
         });
 
@@ -83,9 +84,17 @@ export class BookingView extends helper.Views.MvvmView {
         var bookingCollection = new bookingDto.Models.BookingResponseCollection(bookings);
         //var model = new Backbone.Model();
         //model.set("itemCount", bookingCollection.length);
-        var collectionView: BookingCollectionView = new BookingCollectionView({ collection: bookingCollection});
+        var collectionView: BookingCollectionView = new BookingCollectionView({ collection: bookingCollection });
+        collectionView.listenTo(collectionView, "itemview:ExportToPdf", (view, id) => {
+            this.ExportToPdf(id);
+        });
         //var bookingGrid = collectionView.$("#tblBooking");
         app.MainRegion.show(collectionView);
+    }
+
+    ExportToPdf(id) {
+        helper.PrintReceipt(id);
+
     }
 }
 
@@ -136,6 +145,9 @@ export class BookingItemView extends helper.Views.ItemView {
         options.className = "jsRowClick";
         options.events = {
             "mouseover .jsShowDetail": "ShowDetail",
+            "click .jsExportToPdf": () => {
+                this.trigger("ExportToPdf", this.model.get("id")); 
+            },
             "click .jsShowDetail": "ShowDetail"
         };
         

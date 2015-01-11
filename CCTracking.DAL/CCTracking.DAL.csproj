@@ -47,6 +47,7 @@
     <Compile Include="BusAvailabilityDal.cs" />
     <Compile Include="BusCentreReportDal.cs" />
     <Compile Include="BusDal.cs" />
+    <Compile Include="BusFuelingDal.cs" />
     <Compile Include="BusMilageDal.cs" />
     <Compile Include="BusVisitMilageSummaryDal.cs" />
     <Compile Include="BusVisitSummaryDal.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="ExtraChargesDal.cs" />
     <Compile Include="HomeDal.cs" />
     <Compile Include="PaymentTypeDal.cs" />
+    <Compile Include="ReceiptContentDal.cs" />
     <Compile Include="ResetPasswordDal.cs" />
     <Compile Include="UnionCouncilDal.cs" />
     <Compile Include="VisitTypeDal.cs" />
