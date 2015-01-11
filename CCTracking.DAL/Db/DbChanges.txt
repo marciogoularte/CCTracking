@@ -6,6 +6,8 @@ GetAllBooking
 [SaveBusVisit]
 [Audit_BusVisit]
 [dbo].[fn_audit_BusVisit]
+[dbo].[GetNearestCentreById]
+[rptDashboardBookingSummary]
 
 ------------------ CHANGES FROM JAN-08-2015 ----------------------------
 

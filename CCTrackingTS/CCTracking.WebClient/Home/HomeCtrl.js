@@ -65,24 +65,28 @@ define(["require", "exports", "../App", "../Helper", "./HomeView", "../Dtos/Home
             //TODO:Hack - need rework
             var result = bookingSummaryDto["bookingSummaryList"];
             var summary = [];
-            var sumBookingAmount = 0, sumBookingMilage = 0, sumBookings = 0, sumReceivables = 0;
+            var sumBookingAmount = 0, sumBookingMilage = 0, sumBookings = 0, sumReceivables = 0, sumMaintenance = 0;
+
             for (var i = 0; i < result.length; i++) {
                 summary[i] = {
                     alkhidmatCentre: result[i].alkhidmatCentre,
                     alkhidmatCentreId: result[i].alkhidmatCentreId,
                     bookingAmount: helper.FormatMoney(result[i].bookingAmount),
-                    bookingMilage: result[i].bookingMilage,
+                    maintenance: helper.FormatMoney(result[i].maintenance),
+                    bookingMilage: helper.FormatMoney(result[i].bookingMilage),
                     bookings: result[i].bookings,
                     receivables: helper.FormatMoney(result[i].receivables)
                 };
                 sumBookingAmount = sumBookingAmount + parseFloat(result[i].bookingAmount);
+                sumMaintenance = sumMaintenance + parseFloat(result[i].maintenance);
                 sumBookingMilage = sumBookingMilage + parseFloat(result[i].bookingMilage);
                 sumBookings = sumBookings + parseInt(result[i].bookings);
                 sumReceivables = sumReceivables + parseFloat(result[i].receivables);
             }
             var compositeModel = new Backbone.Model({
                 "totalBookingAmount": helper.FormatMoney(sumBookingAmount),
-                "totalBookingMilage": sumBookingMilage,
+                "totalBookingMilage": helper.FormatMoney(sumBookingMilage),
+                "totalMaintenance": helper.FormatMoney(sumMaintenance),
                 "totalBookings": sumBookings,
                 "totalReceivables": helper.FormatMoney(sumReceivables)
             });

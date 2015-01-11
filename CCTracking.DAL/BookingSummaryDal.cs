@@ -1,9 +1,7 @@
 ﻿using CCTracking.Dto;
 using CCTracking.Dto.Response;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 
 
 namespace CCTracking.DAL
@@ -88,7 +86,7 @@ namespace CCTracking.DAL
             bookingSummary.BookingMilage = dr["BookingMilage"].ToString();
             bookingSummary.Receivables = dr["Receivable"].ToString();
             bookingSummary.Bookings = dr["Bookings"].ToString();
-
+            bookingSummary.Maintenance = dr["Maintenance"].ToString();
         }
     }
 }

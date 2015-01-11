@@ -38,29 +38,40 @@ define(["require", "exports", "../../App", "../../Helper", "./NearestCentreSetup
                     return _this.GetByIdCompleted(p);
                 });
             } else {
-                //this.Load();
+                this.Load();
             }
         };
 
-        //Load() {
-        //    var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
-        //    var model = this.backboneModel;
-        //    this.nearestCentreSetupViewModel.bbModel = model;
-        //    this.nearestCentreSetupViewModel.model = kb.viewModel(model);
-        //    // debugger;
-        //    model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
-        //    model.set("alkhidmatCentreSelected", "");
-        //    model.set("nearestCentreSelected", "");
-        //    model.set("nearestLevel", "");
-        //    model.set("isActive", "1");
-        //    this.nearestCentreSetupViewModel = new views.NearestCentreSetupViewModel(model, this);
-        //    this.nearestCentreSetupView = new views.NearestCentreSetupView({ viewModel: this.nearestCentreSetupViewModel });
-        //    this.nearestCentreSetupView.on("SaveNearestCentreSetup", () => this.Save(this.nearestCentreSetupViewModel.bbModel));
-        //    this.nearestCentreSetupView.on("CancelForm", () => this.Cancel());
-        //    //this.layout = app.AppLayout;
-        //    this.app.MainRegion.show(this.nearestCentreSetupView);
-        //    //this.GetAll();
-        //}
+        NearestCentreSetupCtrl.prototype.Load = function () {
+            var _this = this;
+            var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
+            var model = this.backboneModel;
+            this.nearestCentreSetupViewModel.bbModel = model;
+            this.nearestCentreSetupViewModel.model = kb.viewModel(model);
+
+            // debugger;
+            model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
+            model.set("alkhidmatCentreSelected", "");
+            model.set("nearestCentreSelected", "");
+            model.set("nearestLevel", "");
+            model.set("isActive", "1");
+
+            this.nearestCentreSetupViewModel = new views.NearestCentreSetupViewModel(model, this);
+            this.nearestCentreSetupView = new views.NearestCentreSetupView({ viewModel: this.nearestCentreSetupViewModel });
+
+            this.nearestCentreSetupView.on("SaveNearestCentreSetup", function () {
+                return _this.Save(_this.nearestCentreSetupViewModel.bbModel);
+            });
+
+            this.nearestCentreSetupView.on("CancelForm", function () {
+                return _this.Cancel();
+            });
+
+            //this.layout = app.AppLayout;
+            this.app.MainRegion.show(this.nearestCentreSetupView);
+            //this.GetAll();
+        };
+
         NearestCentreSetupCtrl.prototype.GetAll = function () {
             var _this = this;
             var deferred = DAL.GetAll();

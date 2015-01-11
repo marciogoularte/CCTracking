@@ -44,38 +44,38 @@ export class NearestCentreSetupCtrl extends helper.Controller {
             deferredById.done(p=> this.GetByIdCompleted(p));
         }
         else {
-            //this.Load();
+            this.Load();
         }
     }
 
-    //Load() {
+    Load() {
 
-    //    var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
-    //    var model = this.backboneModel;
-    //    this.nearestCentreSetupViewModel.bbModel = model;
-    //    this.nearestCentreSetupViewModel.model = kb.viewModel(model);
+        var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
+        var model = this.backboneModel;
+        this.nearestCentreSetupViewModel.bbModel = model;
+        this.nearestCentreSetupViewModel.model = kb.viewModel(model);
 
        
-    //    // debugger;
+        // debugger;
         
-    //    model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
-    //    model.set("alkhidmatCentreSelected", "");        
-    //    model.set("nearestCentreSelected", "");        
-    //    model.set("nearestLevel", "");   
-    //    model.set("isActive", "1");
+        model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
+        model.set("alkhidmatCentreSelected", "");        
+        model.set("nearestCentreSelected", "");        
+        model.set("nearestLevel", "");   
+        model.set("isActive", "1");
 
-    //    this.nearestCentreSetupViewModel = new views.NearestCentreSetupViewModel(model, this);
-    //    this.nearestCentreSetupView = new views.NearestCentreSetupView({ viewModel: this.nearestCentreSetupViewModel });
+        this.nearestCentreSetupViewModel = new views.NearestCentreSetupViewModel(model, this);
+        this.nearestCentreSetupView = new views.NearestCentreSetupView({ viewModel: this.nearestCentreSetupViewModel });
         
-    //    this.nearestCentreSetupView.on("SaveNearestCentreSetup", () => this.Save(this.nearestCentreSetupViewModel.bbModel));
+        this.nearestCentreSetupView.on("SaveNearestCentreSetup", () => this.Save(this.nearestCentreSetupViewModel.bbModel));
 
       
 
-    //    this.nearestCentreSetupView.on("CancelForm", () => this.Cancel());
-    //    //this.layout = app.AppLayout;
-    //    this.app.MainRegion.show(this.nearestCentreSetupView);
-    //    //this.GetAll();
-    //}
+        this.nearestCentreSetupView.on("CancelForm", () => this.Cancel());
+        //this.layout = app.AppLayout;
+        this.app.MainRegion.show(this.nearestCentreSetupView);
+        //this.GetAll();
+    }
 
     GetAll() {   
 

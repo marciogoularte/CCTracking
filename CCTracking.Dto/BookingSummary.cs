@@ -31,5 +31,6 @@ namespace CCTracking.Dto
         public int PaidAmount { get; set; }
         public int PaidBooking { get; set; }
         public int UnpaidBooking { get; set; }
+        public string Maintenance { get; set; }
     }
 }
