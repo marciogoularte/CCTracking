@@ -90,6 +90,13 @@
                                     <input type="text" class="form-control input-sm" placeholder="Bus Final Reading" data-bind="value:finalReading" />   
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="col-sm-4 col-md-4 input-sm">Amount</td>
+                                <td class="col-sm-8 col-md-8">
+                                    <input type="text" placeholder="Fuel Amount"  class="form-control input-sm" data-bind="value: fuelAmount, enable: isPatrolPump()" 
+                                        required="required" data-role="validate" title="Fuel Amount" data-content="Fuel amount is required"  />   
+                                </td>
+                            </tr>
                             
                              <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Pump Location</td>
@@ -116,13 +123,7 @@
                                         required="required" data-role="validate" title="Fuel Rate" data-content="Fuel rate is required"  />   
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="col-sm-4 col-md-4 input-sm">Fuel Amount</td>
-                                <td class="col-sm-8 col-md-8">
-                                    <input type="text" placeholder="Fuel Amount"  class="form-control input-sm" data-bind="value:fuelAmount, enable:isPatrolPump()" 
-                                        required="required" data-role="validate" title="Fuel Amount" data-content="Fuel amount is required"  />   
-                                </td>
-                            </tr>
+                            
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Fuel Quantity (Liter)</td>
                                 <td class="col-sm-8 col-md-8">

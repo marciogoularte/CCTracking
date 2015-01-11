@@ -67,7 +67,7 @@ define(["require", "exports", "../App", "../Helper", "./BusAvailabilityView", ".
             });
             var busDetailCollection = new Backbone.Collection(list);
             var busDetail = new Backbone.Model();
-            busDetail.set("type", "btn-warning");
+            busDetail.set("type", "btn-primary");
 
             //busDetail.set("title", "BUS DETAIL");
             busDetail.set("message", "");

@@ -140,6 +140,10 @@ export class Application extends Marionette.Application {
 
                 'trackingDevice': 'goTrackingDevice',
                 'viewTrackingDevice': 'goViewTrackingDevice',
+
+                'nearestCentreSetup': 'goNearestCentreSetup',
+                'viewNearestCentreSetup': 'goViewNearestCentreSetup',
+
                 'driverSummary': 'goDriverSummary',
                 'busVisitSummary': 'goBusVisitSummary',
                 'busVisitMilageSummary': 'goBusVisitMilageSummary',
@@ -275,6 +279,14 @@ export class Application extends Marionette.Application {
             goViewTrackingDevice() {
                 require(['./Admin/TrackingDevice/TrackingDeviceCtrl'], (p) => { new p.TrackingDeviceCtrl().GetAll(); });
             },
+
+            goNearestCentreSetup() {
+            require(['./Admin/NearestCentreSetup/NearestCentreSetupCtrl'], (p) => { new p.NearestCentreSetupCtrl().Show(); });
+            },
+            goViewNearestCentreSetup() {
+            require(['./Admin/NearestCentreSetup/NearestCentreSetupCtrl'], (p) => { new p.NearestCentreSetupCtrl().GetAll(); });
+            },
+
             goChangePassword() {
                 require(['./ChangePassword/ChangePasswordCtrl'], (p) => { new p.ChangePasswordCtrl().Load(); });
             },

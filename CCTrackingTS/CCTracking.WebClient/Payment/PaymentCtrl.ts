@@ -221,6 +221,14 @@ export class PaymentCtrl extends helper.Controller {
             helper.ShowModalPopup("danger", "Bus Details", "Please add bus details");
             return;
         }
+        if (payment.get("isReferralBooking"))
+        {
+            if (payment.get("isReferralBookingPaid") && (payment.get("referralPaymentDate") == undefined || payment.get("referralPaymentDate") == ""))
+            {
+                helper.ShowModalPopup("danger", "Bus Details", "Please enter Referral Booking date.");
+                return;
+            }
+        }
         //payment.set("bus", payment.get("busSelected").id);
         //payment.set("driver", payment.get("driverSelected").id);
         //payment.set("alkhidmatCentre", payment.get("alkhidmatCentreSelected").id);

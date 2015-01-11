@@ -17,6 +17,7 @@ namespace CCTracking.Dto
         public byte PaymentStatus { get; set; }
         public string EasyPaisaTranNo { get; set; }
         public List<BusVisit> BusVisits { get; set; }
+        public bool IsReferralBooking { get; set; }
         public bool IsReferralBookingPaid { get; set; }
         public DateTime? ReferralPaymentDate { get; set; }
     }

@@ -9,6 +9,7 @@ export module Models {
     export class NearestCentreDto extends Backbone.Model {
         default() {
             return {
+                id:"",
                 centreId: "",
                 bookingId: "",
                 centreName: "",
@@ -28,6 +29,9 @@ export module Models {
                 centreAddress: "",
                 mobileNo: "",
                 fullName: "",
+                nearestLevel: "",
+                nearestCentreId:"",
+                nearestCentreName:"",
                 isActive: "",
                 createdBy: "",
                 createdDate: "",

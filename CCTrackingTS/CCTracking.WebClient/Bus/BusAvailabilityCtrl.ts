@@ -67,7 +67,7 @@ export class BusAvailabilityCtrl extends helper.Controller {
         });
         var busDetailCollection = new Backbone.Collection(list);
         var busDetail = new Backbone.Model();
-        busDetail.set("type", "btn-warning");
+        busDetail.set("type", "btn-primary");
         //busDetail.set("title", "BUS DETAIL");
         busDetail.set("message", "");
         //busDetail.set("message", "On Booking - Expected Retrun Time is : " + busDetail.get("outTime") + " - " + busDetail.get("returnTime"));

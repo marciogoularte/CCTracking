@@ -148,6 +148,7 @@
     <Compile Include="Controllers\LandmarkController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NearestCentreController.cs" />
+    <Compile Include="Controllers\NearestCentreSetupController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\PaymentTypeController.cs" />
     <Compile Include="Controllers\ReceiptContentController.cs" />

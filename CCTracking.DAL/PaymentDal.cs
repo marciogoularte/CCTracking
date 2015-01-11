@@ -90,9 +90,9 @@ namespace CCTracking.DAL
 
         private void MapValues(Payment payment, IDataReader dr)
         {
-            payment.Id = Convert.ToInt32(dr["Id"]);
-            payment.BookingId = Convert.ToInt32(dr["BookingId"]);
-            payment.PaymentType = Convert.ToByte(dr["PaymentType"]);
+            payment.Id = dr["Id"] == DBNull.Value ? 0 : Convert.ToInt32(dr["Id"]);
+            payment.BookingId = dr["BookingId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["BookingId"]);
+            payment.PaymentType = dr["PaymentType"] == DBNull.Value ? (byte) 0 : Convert.ToByte(dr["PaymentType"]);
             payment.Amount = dr["Amount"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["Amount"]);
             payment.PaymentLocation = dr["PaymentLocation"] == DBNull.Value ? 0 : Convert.ToInt32(dr["PaymentLocation"]);
             payment.OfficerId = dr["OfficerId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["OfficerId"]);
@@ -100,11 +100,12 @@ namespace CCTracking.DAL
             payment.ExtraAmountCharge = dr["ExtraAmountCharge"] == DBNull.Value ? 0 : Convert.ToDecimal(dr["ExtraAmountCharge"]);
             payment.ExtraAmountReason = dr["ExtraAmountReason"].ToString();
             payment.ExtraAmountReceipt = dr["ExtraAmountReceipt"].ToString();
-            payment.PaymentStatus = Convert.ToByte(dr["PaymentStatus"]);
+            payment.PaymentStatus = dr["PaymentStatus"] == DBNull.Value ? (byte)0 : Convert.ToByte(dr["PaymentStatus"]);
             payment.EasyPaisaTranNo = dr["EasyPaisaTranNo"].ToString();
-            payment.CreatedBy = Convert.ToInt32(dr["CreatedBy"]);
-            payment.ModifiedBy = Convert.ToInt32(dr["ModifiedBy"]);
+            payment.CreatedBy = dr["CreatedBy"] == DBNull.Value ? 0 : Convert.ToInt32(dr["CreatedBy"]);
+            payment.ModifiedBy = dr["ModifiedBy"] == DBNull.Value ? 0 : Convert.ToInt32(dr["ModifiedBy"]);
 
+            payment.IsReferralBooking = dr["IsReferralBooking"] == DBNull.Value ? false : Convert.ToBoolean(dr["IsReferralBooking"]);
             payment.IsReferralBookingPaid = dr["IsReferralBookingPaid"] == DBNull.Value ? false : Convert.ToBoolean(dr["IsReferralBookingPaid"]);
             payment.ReferralPaymentDate = dr["ReferralPaymentDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr["ReferralPaymentDate"]);
         }

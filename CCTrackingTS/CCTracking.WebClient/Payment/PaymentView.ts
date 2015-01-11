@@ -82,6 +82,7 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
         this.bbModel.set("extraAmountCharge", this.viewModel.extraAmountCharge());
         this.bbModel.set("extraAmountReason", this.viewModel.extraAmountReason());
         this.bbModel.set("extraAmountReceipt", this.viewModel.extraAmountReceipt());
+        this.bbModel.set("isReferralBooking", this.viewModel.isReferralBooking() == "1" ? true : false);
         this.bbModel.set("isReferralBookingPaid", this.viewModel.isReferralBookingPaid() == "1" ? true : false);
         this.bbModel.set("referralPaymentDate", this.viewModel.referralPaymentDate());
         this.bbModel.set("easyPaisaTranNo", this.viewModel.easyPaisaTranNo());
@@ -131,6 +132,8 @@ export class ViewModel {
     extraAmountCharge: any;
     extraAmountReason: any;
     extraAmountReceipt: any;
+    isReferral :  any;
+    isReferralBooking: any;
     isReferralBookingPaid: any;
     referralPaymentDate: any;
     paymentStatus: any;
@@ -169,10 +172,22 @@ export class ViewModel {
             this.extraAmountCharge = ko.observable();
             this.extraAmountReason = ko.observable();
             this.extraAmountReceipt = ko.observable();
+            this.isReferralBooking = ko.observable();
+            
             this.isReferralBookingPaid = ko.observable();
             this.referralPaymentDate = ko.observable();
             this.paymentStatus = ko.observable();
             
+            this.isReferral = ko.computed({
+                owner: this,
+                read: () => {
+                    if (this.isReferralBooking() == 1 && this.paymentStatus() != 1)
+                        return true;
+                    else
+                        return false;
+                }
+            });
+
             this.easyPaisaTranNo = ko.observable();
 
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
@@ -265,6 +280,7 @@ export class ViewModel {
             this.extraAmountCharge = ko.observable(model.get("extraAmountCharge"));
             this.extraAmountReason = ko.observable(model.get("extraAmountReason"));
             this.extraAmountReceipt = ko.observable(model.get("extraAmountReceipt"));
+            this.isReferralBooking = ko.observable(model.get("isReferralBooking") ? "1" : "0");
             
             this.isReferralBookingPaid = ko.observable(model.get("isReferralBookingPaid") ? "1" : "0");
 
@@ -275,6 +291,17 @@ export class ViewModel {
 
             //this.referralPaymentDate = ko.observable(model.get("referralPaymentDate"));
             this.paymentStatus = ko.observable(model.get("paymentStatus"));
+
+            this.isReferral = ko.computed({
+                owner: this,
+                read: () => {
+                    if (this.isReferralBooking() == 1 && this.paymentStatus() != 1)
+                        return true;
+                    else
+                        return false;
+                }
+            });
+
             this.easyPaisaTranNo = ko.observable(model.get("easyPaisaTranNo"));
 
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));

@@ -26,7 +26,9 @@ namespace CCTracking.Dto
         public string MobileNo { get; set; }
         public string FullName { get; set; }
         public string CenreAddress { get; set; }
-        
 
+        public int NearestLevel { get; set; }
+        public int NearestCentreId { get; set; }
+        public string NearestCentreName { get; set; }
     }
 }

@@ -119,6 +119,8 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     'viewTest': 'goViewTest',
                     'trackingDevice': 'goTrackingDevice',
                     'viewTrackingDevice': 'goViewTrackingDevice',
+                    'nearestCentreSetup': 'goNearestCentreSetup',
+                    'viewNearestCentreSetup': 'goViewNearestCentreSetup',
                     'driverSummary': 'goDriverSummary',
                     'busVisitSummary': 'goBusVisitSummary',
                     'busVisitMilageSummary': 'goBusVisitMilageSummary',
@@ -325,6 +327,16 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                 goViewTrackingDevice: function () {
                     require(['./Admin/TrackingDevice/TrackingDeviceCtrl'], function (p) {
                         new p.TrackingDeviceCtrl().GetAll();
+                    });
+                },
+                goNearestCentreSetup: function () {
+                    require(['./Admin/NearestCentreSetup/NearestCentreSetupCtrl'], function (p) {
+                        new p.NearestCentreSetupCtrl().Show();
+                    });
+                },
+                goViewNearestCentreSetup: function () {
+                    require(['./Admin/NearestCentreSetup/NearestCentreSetupCtrl'], function (p) {
+                        new p.NearestCentreSetupCtrl().GetAll();
                     });
                 },
                 goChangePassword: function () {

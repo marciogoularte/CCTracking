@@ -18,6 +18,7 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
             }
             NearestCentreDto.prototype.default = function () {
                 return {
+                    id: "",
                     centreId: "",
                     bookingId: "",
                     centreName: "",
@@ -37,6 +38,9 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
                     centreAddress: "",
                     mobileNo: "",
                     fullName: "",
+                    nearestLevel: "",
+                    nearestCentreId: "",
+                    nearestCentreName: "",
                     isActive: "",
                     createdBy: "",
                     createdDate: "",

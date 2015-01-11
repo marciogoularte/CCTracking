@@ -137,15 +137,15 @@
                               <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Is Referral Booking Paid</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="radio" name="rbIsReferralBoking" value="1" data-bind="checked: isReferralBookingPaid" />Yes
+                                    <input type="radio" name="rbIsReferralBoking" value="1" data-bind="checked: isReferralBookingPaid,enable:isReferral" />Yes
                                     &nbsp;
-                                    <input type="radio" name="rbIsReferralBoking" value="0" data-bind="checked: isReferralBookingPaid" />No 
+                                    <input type="radio" name="rbIsReferralBoking" value="0" data-bind="checked: isReferralBookingPaid,enable:isReferral" />No 
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Referral Booking Payment Date</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" id="PickupDate" placeholder="mm/dd/yyyy" class="form-control input-sm" data-bind="datepicker: {}, value: referralPaymentDate"
+                                    <input type="text" id="PickupDate" placeholder="mm/dd/yyyy" class="form-control input-sm" data-bind="datepicker: {}, value: referralPaymentDate,enable:isReferral"
                                         data-role="validate" title="Pick-up Date"  />
                                 </td>
                             </tr>

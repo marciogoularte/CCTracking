@@ -29,6 +29,7 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
                     extraAmountReason: "",
                     extraAmountReceipt: "",
                     paymentStatus: "",
+                    isReferralBooking: "",
                     isReferralBookingPaid: "",
                     referralPaymentDate: ""
                 };
@@ -56,6 +57,7 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
                     extraAmountReceipt: "",
                     paymentStatus: "",
                     easyPaisaTranNo: "",
+                    isReferralBooking: "",
                     isReferralBookingPaid: "",
                     referralPaymentDate: ""
                 };
