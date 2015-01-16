@@ -1,6 +1,8 @@
 ﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
 /// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
 /// <reference path="../../Scripts/typings/backbone/backbone.d.ts" />
+/// <amd-dependency path="jquery"/>
+/// <amd-dependency path="backbone"/>
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -8,8 +10,6 @@ var __extends = this.__extends || function (d, b) {
     d.prototype = new __();
 };
 define(["require", "exports", "jquery", "backbone"], function(require, exports) {
-    /// <amd-dependency path="jquery"/>
-    /// <amd-dependency path="backbone"/>
     (function (Models) {
         var BusVisitDto = (function (_super) {
             __extends(BusVisitDto, _super);
@@ -97,6 +97,38 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
             return BusVisitSummaryCollection;
         })(Backbone.Collection);
         Models.BusVisitSummaryCollection = BusVisitSummaryCollection;
+
+        var AuditBusVisit = (function (_super) {
+            __extends(AuditBusVisit, _super);
+            function AuditBusVisit() {
+                _super.apply(this, arguments);
+            }
+            AuditBusVisit.prototype.default = function () {
+                return {
+                    id: "",
+                    bookingId: "",
+                    propertyName: "",
+                    oldValue: "",
+                    newValue: "",
+                    modifiedDate: "",
+                    createdDate: "",
+                    actualModifiedDate: "",
+                    userName: ""
+                };
+            };
+            return AuditBusVisit;
+        })(Backbone.Model);
+        Models.AuditBusVisit = AuditBusVisit;
+
+        var AuditBusVisitResponseCollection = (function (_super) {
+            __extends(AuditBusVisitResponseCollection, _super);
+            function AuditBusVisitResponseCollection(options) {
+                this.model = AuditBusVisit;
+                _super.call(this, options);
+            }
+            return AuditBusVisitResponseCollection;
+        })(Backbone.Collection);
+        Models.AuditBusVisitResponseCollection = AuditBusVisitResponseCollection;
     })(exports.Models || (exports.Models = {}));
     var Models = exports.Models;
 });

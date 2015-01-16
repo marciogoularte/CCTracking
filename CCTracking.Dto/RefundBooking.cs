@@ -29,6 +29,8 @@ namespace CCTracking.Dto
         public string RefundReason { get; set; }
         public string RefundReceipt { get; set; }
         public string RefundOfficer { get; set; }
+        public string BusId { get; set; }
+
 
         //for auditing purpose
         public int RowCounter { get; set; }

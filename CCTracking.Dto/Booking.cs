@@ -64,6 +64,12 @@ namespace CCTracking.Dto
         public string NamazEJanazaLocation { get; set; }
         public string MasjidName { get; set; }
         public string OtherDetail { get; set; }
+
+        public string AlkhidmatCentreId { get; set; }
+        public string IsReferralBooking { get; set; }
+        public string ReferralName { get; set; }
+        public string ReferralDetail { get; set; }
+        
         public string IsActive { get; set; }
         public string ModifiedBy { get; set; }
         public string ModifiedDate { get; set; }

@@ -136,13 +136,26 @@ namespace CCTracking.DAL
             if (dr.IsColumnExists("OtherDetail") && !dr.IsDBNull(dr.GetOrdinal("OtherDetail")))
                 booking.OtherDetail = dr.GetString(dr.GetOrdinal("OtherDetail"));
 
-            if (dr.IsColumnExists("IsActive") && !dr.IsDBNull(dr.GetOrdinal("IsActive")))
-                booking.IsActive = dr.GetString(dr.GetOrdinal("IsActive"));
+            if (dr.IsColumnExists("IsReferralBooking") && !dr.IsDBNull(dr.GetOrdinal("IsReferralBooking")))
+                booking.IsReferralBooking = dr.GetString(dr.GetOrdinal("IsReferralBooking"));
 
-            if (dr.IsColumnExists("ModifiedBy") && !dr.IsDBNull(dr.GetOrdinal("ModifiedBy")))
-                booking.ModifiedBy = dr.GetString(dr.GetOrdinal("ModifiedBy"));
-            if (dr.IsColumnExists("ModifiedDate") && !dr.IsDBNull(dr.GetOrdinal("ModifiedDate")))
-                booking.ModifiedDate = dr.GetString(dr.GetOrdinal("ModifiedDate"));
+            if (dr.IsColumnExists("ReferralName") && !dr.IsDBNull(dr.GetOrdinal("ReferralName")))
+                booking.ReferralName = dr.GetString(dr.GetOrdinal("ReferralName"));
+
+            if (dr.IsColumnExists("ReferralDetail") && !dr.IsDBNull(dr.GetOrdinal("ReferralDetail")))
+                booking.ReferralDetail = dr.GetString(dr.GetOrdinal("ReferralDetail"));
+
+            if (dr.IsColumnExists("AlkhidmatCentreId") && !dr.IsDBNull(dr.GetOrdinal("AlkhidmatCentreId")))
+                booking.AlkhidmatCentreId = dr.GetString(dr.GetOrdinal("AlkhidmatCentreId"));
+
+
+            //if (dr.IsColumnExists("IsActive") && !dr.IsDBNull(dr.GetOrdinal("IsActive")))
+            //    booking.IsActive = dr.GetString(dr.GetOrdinal("IsActive"));
+
+            //if (dr.IsColumnExists("ModifiedBy") && !dr.IsDBNull(dr.GetOrdinal("ModifiedBy")))
+            //    booking.ModifiedBy = dr.GetString(dr.GetOrdinal("ModifiedBy"));
+            //if (dr.IsColumnExists("ModifiedDate") && !dr.IsDBNull(dr.GetOrdinal("ModifiedDate")))
+            //    booking.ModifiedDate = dr.GetString(dr.GetOrdinal("ModifiedDate"));
 
             if (dr.IsColumnExists("ActualModifiedDate") && !dr.IsDBNull(dr.GetOrdinal("ActualModifiedDate")))
                 booking.ActualModifiedDate = dr.GetDateTime(dr.GetOrdinal("ActualModifiedDate"));

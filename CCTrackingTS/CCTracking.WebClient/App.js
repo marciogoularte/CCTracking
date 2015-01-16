@@ -130,6 +130,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     'changePassword': 'goChangePassword',
                     'extraCharge': 'goExtraCharge',
                     'auditBooking': 'goAuditBooking',
+                    'auditBusVisit': 'goAuditBusVisit',
                     'auditPayment': 'goAuditPayment',
                     'auditRefundBooking': 'goAuditRefundBooking',
                     'busCentreReport': 'goBusCentreReport',
@@ -367,6 +368,11 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                 goAuditBooking: function () {
                     require(['./Admin/Reports/Audit/Booking/AuditBookingCtrl'], function (p) {
                         new p.AuditBookingCtrl().Show();
+                    });
+                },
+                goAuditBusVisit: function () {
+                    require(['./Admin/Reports/Audit/BusVisit/AuditBusVisitCtrl'], function (p) {
+                        new p.AuditBusVisitCtrl().Show();
                     });
                 },
                 goAuditPayment: function () {

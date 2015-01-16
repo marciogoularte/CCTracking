@@ -38,9 +38,53 @@ namespace CCTracking.Dto
         public string VehicleNo { get; set; }
         public string OutTimeDesc { get; set; }
         public string ReturnTimeDesc { get; set; }
+    }
+
+    public class AuditBusVisit : BaseModel
+    {
+        public int RowCounter { get; set; }
+        public int BookingId { get; set; }
+
+        public string CentreId { get; set; }
+        public string CentreDesc { get; set; }
+        public string BusId { get; set; }
+        public string BusDesc { get; set; }
+        public string DriverId { get; set; }
+        public string DriverDesc { get; set; }
+        public string VisitTypeId { get; set; }
+        public string VisitTypeDesc { get; set; }
         
-        
-        
+        public string InchargeName { get; set; }
+        public string VisitDate { get; set; }
+        public string OutTime { get; set; }
+        public string ReturnTime { get; set; }
+        public string ReturnDate { get; set; }
+        public string ReadingWhenFilling { get; set; }
+        public string PumpLocation { get; set; }
+        public string FuelRate { get; set; }
+        public string FuelAmount { get; set; }
+        public string IsBookingCompleted { get; set; }
+        public string InitialReading { get; set; }
+        public string FinalReading { get; set; }
+        public string FuelQuantity { get; set; }
+        public string FuelingReceipt { get; set; }
+        public string Description { get; set; }
+        public string Receipt { get; set; }
+        public string BusStatus { get; set; }
+
+        //Report Related Properties
+
+        public string Milage { get; set; }
+        public string VisitCount { get; set; }
+        public string VisitInterval { get; set; }
+        public string VehicleNo { get; set; }
+        public string OutTimeDesc { get; set; }
+        public string ReturnTimeDesc { get; set; }
+
+        //for auditing purpose
+        public int OperationType { get; set; }
+        public DateTime ActualModifiedDate { get; set; }
+        public string UserName { get; set; }
     }
     
 }

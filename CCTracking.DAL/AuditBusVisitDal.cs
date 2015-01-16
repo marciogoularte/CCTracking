@@ -17,16 +17,16 @@ namespace CCTracking.DAL
 
         protected override BaseModelResponse ConvertToList(IDataReader dr)
         {
-            BookingResponse response = new BookingResponse();
-            AuditBooking booking = null;
-            List<AuditBooking> bookings = new List<AuditBooking>();
+            BusVisitResponse response = new BusVisitResponse();
+            AuditBusVisit busVisit = null;
+            List<AuditBusVisit> busVisits = new List<AuditBusVisit>();
             while (dr.Read())
             {
-                booking = new AuditBooking();
-                MapValues(booking, dr);
-                bookings.Add(booking);
+                busVisit = new AuditBusVisit();
+                MapValues(busVisit, dr);
+                busVisits.Add(busVisit);
             }
-            response.AuditBookingList = bookings;
+            response.AuditBusVisitList = busVisits;
             return response;
         }
 
@@ -65,87 +65,87 @@ namespace CCTracking.DAL
         protected virtual void MapValues(BaseModel baseModel, IDataReader dr)
         {
             //base.MapValues(baseModel, dr);
-            AuditBooking booking = baseModel as AuditBooking;
+            AuditBusVisit visit = baseModel as AuditBusVisit;
 
             if (dr.IsColumnExists("opType"))
-                booking.OperationType = dr.GetInt32(dr.GetOrdinal("opType"));
+                visit.OperationType = dr.GetInt32(dr.GetOrdinal("opType"));
 
             if (dr.IsColumnExists("Id"))
-                booking.Id = dr.GetInt32(dr.GetOrdinal("Id"));
+                visit.Id = dr.GetInt32(dr.GetOrdinal("Id"));
 
             if (dr.IsColumnExists("UserName") && !dr.IsDBNull(dr.GetOrdinal("UserName")))
-                booking.UserName = dr.GetString(dr.GetOrdinal("UserName"));
+                visit.UserName = dr.GetString(dr.GetOrdinal("UserName"));
 
-            if (dr.IsColumnExists("ContactName") && !dr.IsDBNull(dr.GetOrdinal("ContactName")))
-                booking.ContactName = dr.GetString(dr.GetOrdinal("ContactName"));
+            if (dr.IsColumnExists("CentreId") && !dr.IsDBNull(dr.GetOrdinal("CentreId")))
+                visit.CentreId = dr.GetString(dr.GetOrdinal("CentreId"));
 
-            if (dr.IsColumnExists("ContactMobile") && !dr.IsDBNull(dr.GetOrdinal("ContactMobile")))
-                booking.ContactMobile = dr.GetString(dr.GetOrdinal("ContactMobile"));
+            if (dr.IsColumnExists("BusId") && !dr.IsDBNull(dr.GetOrdinal("BusId")))
+                visit.BusId = dr.GetString(dr.GetOrdinal("BusId"));
 
-            if (dr.IsColumnExists("ContactNic") && !dr.IsDBNull(dr.GetOrdinal("ContactNic")))
-                booking.ContactNic = dr.GetString(dr.GetOrdinal("ContactNic"));
+            if (dr.IsColumnExists("DriverId") && !dr.IsDBNull(dr.GetOrdinal("DriverId")))
+                visit.DriverId = dr.GetString(dr.GetOrdinal("DriverId"));
 
-            if (dr.IsColumnExists("DeseasedName") && !dr.IsDBNull(dr.GetOrdinal("DeseasedName")))
-                booking.DeseasedName = dr.GetString(dr.GetOrdinal("DeseasedName"));
+            if (dr.IsColumnExists("VisitTypeId") && !dr.IsDBNull(dr.GetOrdinal("VisitTypeId")))
+                visit.VisitTypeId = dr.GetString(dr.GetOrdinal("VisitTypeId"));
 
-            if (dr.IsColumnExists("DeseasedAge") && !dr.IsDBNull(dr.GetOrdinal("DeseasedAge")))
-                booking.DeseasedAge = dr.GetString(dr.GetOrdinal("DeseasedAge"));
+            if (dr.IsColumnExists("BookingId") && !dr.IsDBNull(dr.GetOrdinal("BookingId")))
+                visit.BookingId = dr.GetInt32(dr.GetOrdinal("BookingId"));
 
-            if (dr.IsColumnExists("DeseasedGender") && !dr.IsDBNull(dr.GetOrdinal("DeseasedGender")))
-                booking.DeseasedGender = dr.GetString(dr.GetOrdinal("DeseasedGender"));
+            if (dr.IsColumnExists("InchargeName") && !dr.IsDBNull(dr.GetOrdinal("InchargeName")))
+                visit.InchargeName = dr.GetString(dr.GetOrdinal("InchargeName"));
 
-            if (dr.IsColumnExists("CauseOfDeath") && !dr.IsDBNull(dr.GetOrdinal("CauseOfDeath")))
-                booking.CauseOfDeath = dr.GetString(dr.GetOrdinal("CauseOfDeath"));
+            if (dr.IsColumnExists("VisitDate") && !dr.IsDBNull(dr.GetOrdinal("VisitDate")))
+                visit.VisitDate = dr.GetString(dr.GetOrdinal("VisitDate"));
 
-            if (dr.IsColumnExists("Address") && !dr.IsDBNull(dr.GetOrdinal("Address")))
-                booking.Address = dr.GetString(dr.GetOrdinal("Address"));
-
-            if (dr.IsColumnExists("BusPoint") && !dr.IsDBNull(dr.GetOrdinal("BusPoint")))
-                booking.BusPoint = dr.GetString(dr.GetOrdinal("BusPoint"));
-
-            if (dr.IsColumnExists("LandmarkId") && !dr.IsDBNull(dr.GetOrdinal("LandmarkId")))
-                booking.LandmarkId = dr.GetString(dr.GetOrdinal("LandmarkId"));
-
-            if (dr.IsColumnExists("UnionCouncilId") && !dr.IsDBNull(dr.GetOrdinal("UnionCouncilId")))
-                booking.UnionCouncilId = dr.GetString(dr.GetOrdinal("UnionCouncilId"));
-
-            if (dr.IsColumnExists("TownId") && !dr.IsDBNull(dr.GetOrdinal("TownId")))
-                booking.TownId = dr.GetString(dr.GetOrdinal("TownId"));
-
-            if (dr.IsColumnExists("PickupDate") && !dr.IsDBNull(dr.GetOrdinal("PickupDate")))
-                booking.PickupDate = dr.GetString(dr.GetOrdinal("PickupDate"));
-
-            if (dr.IsColumnExists("PickupTime") && !dr.IsDBNull(dr.GetOrdinal("PickupTime")))
-                booking.PickupTime = dr.GetString(dr.GetOrdinal("PickupTime"));
+            if (dr.IsColumnExists("OutTime") && !dr.IsDBNull(dr.GetOrdinal("OutTime")))
+                visit.OutTime = dr.GetString(dr.GetOrdinal("OutTime"));
 
             if (dr.IsColumnExists("ReturnTime") && !dr.IsDBNull(dr.GetOrdinal("ReturnTime")))
-                booking.ReturnTime = dr.GetString(dr.GetOrdinal("ReturnTime"));
+                visit.ReturnTime = dr.GetString(dr.GetOrdinal("ReturnTime"));
 
-            if (dr.IsColumnExists("GraveyardId") && !dr.IsDBNull(dr.GetOrdinal("GraveyardId")))
-                booking.GraveyardId = dr.GetString(dr.GetOrdinal("GraveyardId"));
+            if (dr.IsColumnExists("ReturnDate") && !dr.IsDBNull(dr.GetOrdinal("ReturnDate")))
+                visit.ReturnDate = dr.GetString(dr.GetOrdinal("ReturnDate"));
 
-            if (dr.IsColumnExists("NamazEJanazaHeldIn") && !dr.IsDBNull(dr.GetOrdinal("NamazEJanazaHeldIn")))
-                booking.NamazEJanazaHeldIn = dr.GetString(dr.GetOrdinal("NamazEJanazaHeldIn"));
+            if (dr.IsColumnExists("ReadingWhenFilling") && !dr.IsDBNull(dr.GetOrdinal("ReadingWhenFilling")))
+                visit.ReadingWhenFilling = dr.GetString(dr.GetOrdinal("ReadingWhenFilling"));
 
-            if (dr.IsColumnExists("NamazEJanazaLocation") && !dr.IsDBNull(dr.GetOrdinal("NamazEJanazaLocation")))
-                booking.NamazEJanazaLocation = dr.GetString(dr.GetOrdinal("NamazEJanazaLocation"));
+            if (dr.IsColumnExists("PumpLocation") && !dr.IsDBNull(dr.GetOrdinal("PumpLocation")))
+                visit.PumpLocation = dr.GetString(dr.GetOrdinal("PumpLocation"));
 
-            if (dr.IsColumnExists("MasjidName") && !dr.IsDBNull(dr.GetOrdinal("MasjidName")))
-                booking.MasjidName = dr.GetString(dr.GetOrdinal("MasjidName"));
+            if (dr.IsColumnExists("FuelRate") && !dr.IsDBNull(dr.GetOrdinal("FuelRate")))
+                visit.FuelRate = dr.GetString(dr.GetOrdinal("FuelRate"));
 
-            if (dr.IsColumnExists("OtherDetail") && !dr.IsDBNull(dr.GetOrdinal("OtherDetail")))
-                booking.OtherDetail = dr.GetString(dr.GetOrdinal("OtherDetail"));
+            if (dr.IsColumnExists("FuelAmount") && !dr.IsDBNull(dr.GetOrdinal("FuelAmount")))
+                visit.FuelAmount = dr.GetString(dr.GetOrdinal("FuelAmount"));
 
-            if (dr.IsColumnExists("IsActive") && !dr.IsDBNull(dr.GetOrdinal("IsActive")))
-                booking.IsActive = dr.GetString(dr.GetOrdinal("IsActive"));
+            if (dr.IsColumnExists("Receipt") && !dr.IsDBNull(dr.GetOrdinal("Receipt")))
+                visit.Receipt = dr.GetString(dr.GetOrdinal("Receipt"));
 
-            if (dr.IsColumnExists("ModifiedBy") && !dr.IsDBNull(dr.GetOrdinal("ModifiedBy")))
-                booking.ModifiedBy = dr.GetString(dr.GetOrdinal("ModifiedBy"));
-            if (dr.IsColumnExists("ModifiedDate") && !dr.IsDBNull(dr.GetOrdinal("ModifiedDate")))
-                booking.ModifiedDate = dr.GetString(dr.GetOrdinal("ModifiedDate"));
+            if (dr.IsColumnExists("IsBookingCompleted") && !dr.IsDBNull(dr.GetOrdinal("IsBookingCompleted")))
+                visit.IsBookingCompleted = dr.GetString(dr.GetOrdinal("IsBookingCompleted"));
+
+            if (dr.IsColumnExists("InitialReading") && !dr.IsDBNull(dr.GetOrdinal("InitialReading")))
+                visit.InitialReading = dr.GetString(dr.GetOrdinal("InitialReading"));
+
+            if (dr.IsColumnExists("FinalReading") && !dr.IsDBNull(dr.GetOrdinal("FinalReading")))
+                visit.FinalReading = dr.GetString(dr.GetOrdinal("FinalReading"));
+
+            if (dr.IsColumnExists("Description") && !dr.IsDBNull(dr.GetOrdinal("Description")))
+                visit.Description = dr.GetString(dr.GetOrdinal("Description"));
+
+            if (dr.IsColumnExists("BusStatus") && !dr.IsDBNull(dr.GetOrdinal("BusStatus")))
+                visit.BusStatus = dr.GetString(dr.GetOrdinal("BusStatus"));
+
+            if (dr.IsColumnExists("FuelQuantity") && !dr.IsDBNull(dr.GetOrdinal("FuelQuantity")))
+                visit.FuelQuantity = dr.GetString(dr.GetOrdinal("FuelQuantity"));
+
+            //if (dr.IsColumnExists("ModifiedBy") && !dr.IsDBNull(dr.GetOrdinal("ModifiedBy")))
+            //    visit.ModifiedBy = dr.GetString(dr.GetOrdinal("ModifiedBy"));
+            //if (dr.IsColumnExists("ModifiedDate") && !dr.IsDBNull(dr.GetOrdinal("ModifiedDate")))
+            //    visit.ModifiedDate = dr.GetString(dr.GetOrdinal("ModifiedDate"));
 
             if (dr.IsColumnExists("ActualModifiedDate") && !dr.IsDBNull(dr.GetOrdinal("ActualModifiedDate")))
-                booking.ActualModifiedDate = dr.GetDateTime(dr.GetOrdinal("ActualModifiedDate"));
+                visit.ActualModifiedDate = dr.GetDateTime(dr.GetOrdinal("ActualModifiedDate"));
         }
     }
 }

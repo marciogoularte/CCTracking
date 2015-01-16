@@ -40,6 +40,9 @@ namespace CCTracking.Dto
         public string ModifiedBy { get; set; }
         public string ModifiedDate { get; set; }
 
+        public string IsReferralBookingPaid { get; set; }
+        public string ReferralPaymentDate { get; set; }
+
         //for auditing purpose
         public int RowCounter { get; set; }
         public int OperationType { get; set; }

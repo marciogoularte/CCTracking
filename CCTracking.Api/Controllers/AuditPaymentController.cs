@@ -49,6 +49,13 @@ namespace CCTracking.Api.Controllers
                     auditList.Add(SetProperty("PaymentStatus", each.PaymentStatus, each));
                 if (!string.IsNullOrEmpty(each.EasyPaisaTranNo))
                     auditList.Add(SetProperty("EasyPaisaTranNo", each.EasyPaisaTranNo, each));
+
+                if (!string.IsNullOrEmpty(each.IsReferralBookingPaid))
+                    auditList.Add(SetProperty("IsReferralBookingPaid", each.IsReferralBookingPaid, each));
+                if (!string.IsNullOrEmpty(each.ReferralPaymentDate))
+                    auditList.Add(SetProperty("ReferralPaymentDate", each.ReferralPaymentDate, each));
+
+
                 if (!string.IsNullOrEmpty(each.IsActive))
                     auditList.Add(SetProperty("IsActive", each.IsActive, each));
                 if (!string.IsNullOrEmpty(each.ModifiedBy))

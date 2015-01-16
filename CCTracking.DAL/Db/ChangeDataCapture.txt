@@ -16,7 +16,12 @@ go
 select * from Booking
 select * from cdc.dbo_booking_Ct
 
+-- code to disbale cdc
+exec sys.sp_cdc_disable_table
+@source_schema=N'dbo',
+@source_name=N'Booking',
+ @capture_instance = N'dbo_Booking'
+go
+
 -- CDC SCRIPT END
-
-
 

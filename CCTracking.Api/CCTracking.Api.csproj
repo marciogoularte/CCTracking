@@ -125,6 +125,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AlkhidmatCentreController.cs" />
     <Compile Include="Controllers\AuditBookingController.cs" />
+    <Compile Include="Controllers\AuditBusVisitController.cs" />
     <Compile Include="Controllers\AuditPaymentController.cs" />
     <Compile Include="Controllers\AuditRefundBookingController.cs" />
     <Compile Include="Controllers\BookingController.cs" />

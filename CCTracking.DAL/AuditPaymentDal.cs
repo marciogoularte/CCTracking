@@ -107,6 +107,13 @@ namespace CCTracking.DAL
             if (dr.IsColumnExists("EasyPaisaTranNo") && !dr.IsDBNull(dr.GetOrdinal("EasyPaisaTranNo")))
                 payment.EasyPaisaTranNo = dr.GetString(dr.GetOrdinal("EasyPaisaTranNo"));
 
+            if (dr.IsColumnExists("IsReferralBookingPaid") && !dr.IsDBNull(dr.GetOrdinal("IsReferralBookingPaid")))
+                payment.IsReferralBookingPaid = dr.GetString(dr.GetOrdinal("IsReferralBookingPaid"));
+
+            if (dr.IsColumnExists("ReferralPaymentDate") && !dr.IsDBNull(dr.GetOrdinal("ReferralPaymentDate")))
+                payment.ReferralPaymentDate = dr.GetString(dr.GetOrdinal("ReferralPaymentDate"));
+
+
             if (dr.IsColumnExists("IsActive") && !dr.IsDBNull(dr.GetOrdinal("IsActive")))
                 payment.IsActive = dr.GetString(dr.GetOrdinal("IsActive"));
 

@@ -52,3 +52,7 @@ export function GetAllMilageDetail(id: number) {
     var o: baseDAL.BaseDto = new BusVisitDal();
     return o.doAjaxRequest(null, "GET", "BusVisitMilageSummary?id=" + id);
 }
+export function GetAllAuditBusVisit(auditRequest) {
+    var o: baseDAL.BaseDto = new BusVisitDal();
+    return o.doAjaxRequest(auditRequest, "POST", "AuditBusVisit");
+}

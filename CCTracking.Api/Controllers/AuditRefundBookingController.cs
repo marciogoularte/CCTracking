@@ -44,6 +44,8 @@ namespace CCTracking.Api.Controllers
                     auditList.Add(SetProperty("RefundReceipt", each.RefundReceipt, each));
                 if (!string.IsNullOrEmpty(each.RefundOfficer))
                     auditList.Add(SetProperty("RefundOfficer", each.RefundOfficer, each));
+                if (!string.IsNullOrEmpty(each.BusId))
+                    auditList.Add(SetProperty("BusId", each.BusId, each));
                 if (!string.IsNullOrEmpty(each.IsActive))
                     auditList.Add(SetProperty("IsActive", each.IsActive, each));
                 if (!string.IsNullOrEmpty(each.ModifiedBy))

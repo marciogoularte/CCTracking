@@ -68,12 +68,22 @@ namespace CCTracking.Api.Controllers
                     auditList.Add(SetProperty("MasjidName", each.MasjidName,each));
                 if (!string.IsNullOrEmpty(each.OtherDetail))
                     auditList.Add(SetProperty("OtherDetail", each.OtherDetail,each));
-                if (!string.IsNullOrEmpty(each.IsActive))
-                    auditList.Add(SetProperty("IsActive", each.IsActive,each));
-                if (!string.IsNullOrEmpty(each.ModifiedBy))
-                    auditList.Add(SetProperty("ModifiedBy", each.ModifiedBy,each));
-                if (!string.IsNullOrEmpty(each.ModifiedDate))
-                    auditList.Add(SetProperty("ModifiedDate", each.ModifiedDate,each));
+
+                if (!string.IsNullOrEmpty(each.IsReferralBooking))
+                    auditList.Add(SetProperty("IsReferralBooking", each.IsReferralBooking, each));
+                if (!string.IsNullOrEmpty(each.ReferralName))
+                    auditList.Add(SetProperty("ReferralName", each.ReferralName, each));
+                if (!string.IsNullOrEmpty(each.ReferralDetail))
+                    auditList.Add(SetProperty("ReferralDetail", each.ReferralDetail, each));
+                if (!string.IsNullOrEmpty(each.AlkhidmatCentreId))
+                    auditList.Add(SetProperty("AlkhidmatCentreId", each.AlkhidmatCentreId, each));
+                
+                //if (!string.IsNullOrEmpty(each.IsActive))
+                //    auditList.Add(SetProperty("IsActive", each.IsActive,each));
+                //if (!string.IsNullOrEmpty(each.ModifiedBy))
+                //    auditList.Add(SetProperty("ModifiedBy", each.ModifiedBy,each));
+                //if (!string.IsNullOrEmpty(each.ModifiedDate))
+                //    auditList.Add(SetProperty("ModifiedDate", each.ModifiedDate,each));
                 
 
             }

@@ -65,5 +65,10 @@ define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "CCTrackin
         return o.doAjaxRequest(null, "GET", "BusVisitMilageSummary?id=" + id);
     }
     exports.GetAllMilageDetail = GetAllMilageDetail;
+    function GetAllAuditBusVisit(auditRequest) {
+        var o = new BusVisitDal();
+        return o.doAjaxRequest(auditRequest, "POST", "AuditBusVisit");
+    }
+    exports.GetAllAuditBusVisit = GetAllAuditBusVisit;
 });
 //# sourceMappingURL=BusVisit.js.map

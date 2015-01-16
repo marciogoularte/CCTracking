@@ -153,6 +153,7 @@ export class Application extends Marionette.Application {
                 'changePassword': 'goChangePassword',
                 'extraCharge': 'goExtraCharge',
                 'auditBooking': 'goAuditBooking',
+                'auditBusVisit': 'goAuditBusVisit',
                 'auditPayment': 'goAuditPayment',
                 'auditRefundBooking': 'goAuditRefundBooking',
                 'busCentreReport': 'goBusCentreReport',
@@ -304,6 +305,9 @@ export class Application extends Marionette.Application {
             },
             goAuditBooking(){
             require(['./Admin/Reports/Audit/Booking/AuditBookingCtrl'], (p) => { new p.AuditBookingCtrl().Show(); });
+            },
+            goAuditBusVisit() {
+                require(['./Admin/Reports/Audit/BusVisit/AuditBusVisitCtrl'], (p) => { new p.AuditBusVisitCtrl().Show(); });
             },
             goAuditPayment() {
                 require(['./Admin/Reports/Audit/Payment/AuditPaymentCtrl'], (p) => { new p.AuditPaymentCtrl().Show(); });

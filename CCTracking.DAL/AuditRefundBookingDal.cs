@@ -99,13 +99,16 @@ namespace CCTracking.DAL
             if (dr.IsColumnExists("RefundOfficer") && !dr.IsDBNull(dr.GetOrdinal("RefundOfficer")))
                 refundBooking.RefundOfficer = dr.GetString(dr.GetOrdinal("RefundOfficer"));
 
-            if (dr.IsColumnExists("IsActive") && !dr.IsDBNull(dr.GetOrdinal("IsActive")))
-                refundBooking.IsActive = dr.GetString(dr.GetOrdinal("IsActive"));
+            if (dr.IsColumnExists("BusId") && !dr.IsDBNull(dr.GetOrdinal("BusId")))
+                refundBooking.BusId = dr.GetString(dr.GetOrdinal("BusId"));
 
-            if (dr.IsColumnExists("ModifiedBy") && !dr.IsDBNull(dr.GetOrdinal("ModifiedBy")))
-                refundBooking.ModifiedBy = dr.GetString(dr.GetOrdinal("ModifiedBy"));
-            if (dr.IsColumnExists("ModifiedDate") && !dr.IsDBNull(dr.GetOrdinal("ModifiedDate")))
-                refundBooking.ModifiedDate = dr.GetString(dr.GetOrdinal("ModifiedDate"));
+            //if (dr.IsColumnExists("IsActive") && !dr.IsDBNull(dr.GetOrdinal("IsActive")))
+            //    refundBooking.IsActive = dr.GetString(dr.GetOrdinal("IsActive"));
+
+            //if (dr.IsColumnExists("ModifiedBy") && !dr.IsDBNull(dr.GetOrdinal("ModifiedBy")))
+            //    refundBooking.ModifiedBy = dr.GetString(dr.GetOrdinal("ModifiedBy"));
+            //if (dr.IsColumnExists("ModifiedDate") && !dr.IsDBNull(dr.GetOrdinal("ModifiedDate")))
+            //    refundBooking.ModifiedDate = dr.GetString(dr.GetOrdinal("ModifiedDate"));
 
             if (dr.IsColumnExists("ActualModifiedDate") && !dr.IsDBNull(dr.GetOrdinal("ActualModifiedDate")))
                 refundBooking.ActualModifiedDate = dr.GetDateTime(dr.GetOrdinal("ActualModifiedDate"));

@@ -64,6 +64,9 @@
     <Content Include="CCTracking.WebClient\Admin\Reports\Audit\Booking\AuditBooking.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\Admin\Reports\Audit\Booking\AuditBookingCtrl.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Admin\Reports\Audit\Booking\AuditBookingView.ts" />
+    <Content Include="CCTracking.WebClient\Admin\Reports\Audit\BusVisit\AuditBusVisit.html" />
+    <TypeScriptCompile Include="CCTracking.WebClient\Admin\Reports\Audit\BusVisit\AuditBusVisitCtrl.ts" />
+    <TypeScriptCompile Include="CCTracking.WebClient\Admin\Reports\Audit\BusVisit\AuditBusVisitView.ts" />
     <Content Include="CCTracking.WebClient\Admin\Reports\Audit\Payment\AuditPayment.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\Admin\Reports\Audit\Payment\AuditPaymentCtrl.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Admin\Reports\Audit\Payment\AuditPaymentView.ts" />
@@ -476,7 +479,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CCTracking.WebClient\Admin\Reports\Audit\BusVisit\" />
     <Folder Include="CCTracking.WebClient\Booking\Views\" />
     <Folder Include="Content\Fontawsome\" />
   </ItemGroup>
