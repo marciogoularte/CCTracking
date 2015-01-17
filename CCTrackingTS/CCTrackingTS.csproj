@@ -343,7 +343,6 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\bus.jpg" />
     <Content Include="Content\Images\progressbar.gif" />
-    <Content Include="Content\Images\spiffygif_54x54.gif" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\Themes\amelia\bootstrap.min.css" />
     <Content Include="Content\Themes\cerulean\bootstrap.min.css" />
