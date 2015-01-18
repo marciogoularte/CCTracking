@@ -43,7 +43,8 @@ require.config({
         highcharts3d: 'Scripts/HighCharts/highcharts-3d',
         highchartsExport: 'Scripts/HighCharts/exporting',
         jsPDF: 'Scripts/JSPdf/jspdf.min',
-        accounting: 'Scripts/AccountingJS/accounting.min'
+        accounting: 'Scripts/AccountingJS/accounting.min',
+        selectize: 'Scripts/Selectize/selectize'
     },
     // Configure the dependencies and exports for older, traditional "browser globals"
     // scripts that do not use define() to declare the dependencies and set a module value.
@@ -102,6 +103,9 @@ require.config({
         },
         "accounting": {
             deps: ["jquery"]
+        },
+        "selectize": {
+            deps: ["jquery"]
         }
     }
 });
@@ -118,6 +122,7 @@ require([
     "highchartsExport",
     "jsPDF",
     "accounting",
+    "selectize",
     "knockoutJqueryuiDatepicker",
     "CCTracking.WebClient/App"
 ], //function ($, Backbone, _, Marionette) {

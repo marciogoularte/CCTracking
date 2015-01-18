@@ -6,13 +6,15 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTracking.WebClient/Dtos/BookingDto", "../DAL/Booking", "marionette", "jquery", "knockout", "text!./BookingTmpl.html"], function(require, exports, application, helper, views, dto, DAL) {
+define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTracking.WebClient/Dtos/BookingDto", "../DAL/Booking", "marionette", "jquery", "knockout", "selectize", "text!./BookingTmpl.html"], function(require, exports, application, helper, views, dto, DAL) {
     /// <amd-dependency path="marionette"/>
     /// <amd-dependency path="jquery"/>
     /// <amd-dependency path="knockout"/>
+    /// <amd-dependency path="selectize"/>
     /// <amd-dependency path="text!./BookingTmpl.html"/>
     var _ = require("underscore");
     var ko = require("knockout");
+    var selectize = require("selectize");
 
     var app;
     var BookingCtrl = (function (_super) {
@@ -114,11 +116,12 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             model.set("pickupDate", helper.FormatDateString(model.get("pickupDate")));
             this.bookingViewModel = new views.BookingViewModel(model, this);
             this.bookingView = new views.BookingView({ viewModel: this.bookingViewModel });
-
-            //this.bookingView.listenTo(this.bookingView, "ExportToPdf", (id) => { alert('id-' + id); });
-            //this.bookingView.on("ExportToPdf", (id) => { this.ExportToPdf(id); });
             this.layout = app.AppLayout;
             app.MainRegion.show(this.bookingView);
+
+            if (busPoint[0] != undefined) {
+                this.bookingView.$el.find("#txtBusPoint").append(busPoint[0].description);
+            }
         };
 
         BookingCtrl.prototype.LoadCompleted = function (lookupResponse) {

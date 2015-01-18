@@ -344,6 +344,7 @@
     <Content Include="Content\Images\bus.jpg" />
     <Content Include="Content\Images\progressbar.gif" />
     <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\selectize.bootstrap3.css" />
     <Content Include="Content\Themes\amelia\bootstrap.min.css" />
     <Content Include="Content\Themes\cerulean\bootstrap.min.css" />
     <Content Include="Content\Themes\cosmo\bootstrap.min.css" />
@@ -453,6 +454,8 @@
     <Content Include="Scripts\lib\triggering.min.js" />
     <Content Include="Scripts\r.js" />
     <Content Include="Scripts\require.js" />
+    <Content Include="Scripts\Selectize\selectize.js" />
+    <Content Include="Scripts\Selectize\selectize.min.js" />
     <Content Include="Scripts\text.js" />
     <Content Include="Scripts\typings\backbone\backbone.d.ts" />
     <Content Include="Scripts\typings\jquery\jquery.d.ts" />
@@ -470,6 +473,9 @@
     <Content Include="Scripts\underscore-min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\Selectize\selectize.min.js.map">
+      <DependentUpon>selectize.js</DependentUpon>
+    </Content>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

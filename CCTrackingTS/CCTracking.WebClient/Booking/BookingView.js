@@ -11,6 +11,7 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto
     /// <amd-dependency path="jquery"/>
     /// <amd-dependency path="jqueryUI"/>
     /// <amd-dependency path="knockout"/>
+    // // <amd-dependency path="selectize"/>
     /// <amd-dependency path="text!./BookingTmpl.html"/>
     /// <amd-dependency path="text!./BookingGrid.html"/>
     /// <amd-dependency path="text!./BokingGridRow.html"/>
@@ -58,15 +59,44 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto
             this.trigger("CancelForm");
         };
         BookingView.prototype.onDomRefresh = function () {
-            //alert("ddd");
-            //this.$el.find("#PickupDate").datepicker();
+            var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
+
+            //var busPoint = _.filter(lookupResponse.landmark, (p) => { return p.id == model.get("busPoint") });
+            var arr = _.map(lookupResponse.landmark, function (item) {
+                return { value: item.id, text: item.description, parentId: item.parentId };
+            });
+            var $select = this.$el.find("#ddlBusPoint")["selectize"]({
+                //options: [
+                //    { text: 'one', value: '1' },
+                //    { text: 'two', value: '2' },
+                //    { text: 'one one', value: '11' },
+                //    { text: 'two two', value: '22' },
+                //    { text: 'one two three', value: '123' }
+                //],
+                options: arr,
+                create: false,
+                sortField: {
+                    field: 'text',
+                    direction: 'asc'
+                },
+                dropdownParent: 'body'
+            });
+            var self = this;
+            this.$el.find("#ddlBusPoint").on("change", function (e) {
+                var busPoint = _.filter(lookupResponse.landmark, function (p) {
+                    return p.id == $select[0].value;
+                });
+
+                //var parentId = self.viewModel.model.busPointSelected().parentId;
+                if (busPoint[0] != undefined) {
+                    self.viewModel.model.busPointSelected(busPoint[0]);
+                    var list = GetUcList(busPoint[0].parentId);
+                    self.viewModel.model.unionCouncilList(list);
+                }
+            });
+            //$select.selectize.setValue(504);
         };
 
-        //onShow() {
-        //    alert('dddd');
-        //    //debugger;
-        //    //this.$el.find("#PickupDate").datepicker();
-        //}
         BookingView.prototype.Save = function (e) {
             e.preventDefault();
 

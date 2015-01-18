@@ -5,12 +5,16 @@
 /// <amd-dependency path="jquery"/>
 /// <amd-dependency path="jqueryUI"/>
 /// <amd-dependency path="knockout"/>
+// // <amd-dependency path="selectize"/>
+
 /// <amd-dependency path="text!./BookingTmpl.html"/>
 /// <amd-dependency path="text!./BookingGrid.html"/>
 /// <amd-dependency path="text!./BokingGridRow.html"/>
 
 
+
 var _ = require('underscore');
+//var Selectize = require("selectize");
 import helper = require("../Helper");
 import bookingDto = require("CCTracking.WebClient/Dtos/BookingDto");
 import bookingCtrl = require("./BookingCtrl");
@@ -52,15 +56,51 @@ export class BookingView extends helper.Views.MvvmView {
         this.trigger("CancelForm");
     }
     onDomRefresh() {
-        //alert("ddd");
-        //this.$el.find("#PickupDate").datepicker();
-    }
-    //onShow() {
-    //    alert('dddd');
-    //    //debugger;
-    //    //this.$el.find("#PickupDate").datepicker();
-    //}
+        var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
+        //var busPoint = _.filter(lookupResponse.landmark, (p) => { return p.id == model.get("busPoint") });
+        
+        var arr = _.map(lookupResponse.landmark, (item) => {
+            return { value: item.id, text: item.description,parentId:item.parentId };
+        });
+       var $select= this.$el.find("#ddlBusPoint")["selectize"]({
+            //options: [
+            //    { text: 'one', value: '1' },
+            //    { text: 'two', value: '2' },
+            //    { text: 'one one', value: '11' },
+            //    { text: 'two two', value: '22' },
+            //    { text: 'one two three', value: '123' }
+            //],
+            options: arr,
+            create: false,
+            sortField: {
+                field: 'text',
+                direction: 'asc'
+            }
+           //,render: {
+           //    option: (item, escape) => {
+           //        //debugger;
+           //        //return '<div>' + escape(item.title) + '</div>';
+           //        return "<div data-value='165' class='item'>GHOUSIA COONY</div>";
+           //    }
+           //}
+            ,dropdownParent: 'body'
+        });
+        var self = this;
+        this.$el.find("#ddlBusPoint").on("change", (e) => {
+            var busPoint = _.filter(lookupResponse.landmark, (p) => { return p.id == $select[0].value; });
+            //var parentId = self.viewModel.model.busPointSelected().parentId;
+            if (busPoint[0] != undefined) {
+                self.viewModel.model.busPointSelected(busPoint[0]);
+                var list = GetUcList(busPoint[0].parentId);
+                self.viewModel.model.unionCouncilList(list);
+            }
+        });
 
+        //$select.selectize.setValue(504);
+
+    }
+
+    
     Save(e) {
         e.preventDefault();
         //alert(this.viewModel.bbModel.get("causeOfDeathSelected").idd);
@@ -109,7 +149,7 @@ export class BookingCollectionView extends helper.Views.CompositeView {
     }
     //onShow() {
 
-    //    this.dataTable = this.$el.find("#tblBooking").dataTable({
+    //    this.dataTable = this.$el.find("#tblBooking")["dataTable"]({
     //        "autoWidth": false,
     //        "info": true,
     //        "processing": true,
@@ -124,8 +164,8 @@ export class BookingCollectionView extends helper.Views.CompositeView {
     //            //"info": "Dispalying page _PAGE_ of _PAGES_",
     //            "infoEmpty": "No record found!",
     //            "zeroRecords": "kuch nahi milla"
-    //        }
-    //        //"pageLength": 50,
+    //        },
+    //        "pageLength": 3
 
     //        //"lengthChange": false
 
