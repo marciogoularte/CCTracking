@@ -29,7 +29,7 @@ namespace CCTracking.Dto
         public string FuelingReceipt { get; set; }
         
         public string Description { get; set; }
-
+        public string BusChangeReason { get; set; }
         //Report Related Properties
 
         public string Milage { get; set; }
@@ -69,6 +69,7 @@ namespace CCTracking.Dto
         public string FuelQuantity { get; set; }
         public string FuelingReceipt { get; set; }
         public string Description { get; set; }
+        public string BusChangeReason { get; set; }
         public string Receipt { get; set; }
         public string BusStatus { get; set; }
 

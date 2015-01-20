@@ -19,10 +19,14 @@
 
 <div>
     <script type="text/html" id="rowTemplate">
-        <td class="input-sm"><%=centreDesc %></td>
+        <td class="input-sm"><%=centreDesc%></td>
         <td class="input-sm"><%=busDesc%></td>
         <td class="input-sm"><%=driverDesc%></td>
         <td class="input-sm"><%=fuelAmount%></td>
-        <td class="input-sm"><a href="javascript:void(0);" class="jsRemoveItem" ><i class="glyphicon glyphicon-remove" title="Remove Item">&nbsp;</i></a></td>
+        <td class="input-sm">
+            <a href="javascript:void(0);" class="jsRemoveItem" ><i class="glyphicon glyphicon-remove" title="Remove Item">&nbsp;</i></a>
+            <a href="javascript:void(0);" class="jsUpdateItem" ><i class="fa fa-edit" title="Update Item">&nbsp;</i></a>
+
+        </td>
     </script>
 </div>

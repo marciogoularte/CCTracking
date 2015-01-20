@@ -8,6 +8,7 @@ export module Models {
     export class BusVisitDto extends Backbone.Model {
         default() {
             return {
+                idAttribute:"busVisitId",
                 id: "",
                 centreId: "",
                 busId: "",
@@ -25,7 +26,8 @@ export module Models {
                 fuelQuantity: "",
                 fuelingReceipt: "",
                 isBookingCompleted: "",
-                description:"",
+                description: "",
+                busChangeReason: "",
                 initialReading: "",
                 finalReading: "",
                 isActive: "",

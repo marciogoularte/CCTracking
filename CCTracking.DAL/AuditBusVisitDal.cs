@@ -139,6 +139,9 @@ namespace CCTracking.DAL
             if (dr.IsColumnExists("FuelQuantity") && !dr.IsDBNull(dr.GetOrdinal("FuelQuantity")))
                 visit.FuelQuantity = dr.GetString(dr.GetOrdinal("FuelQuantity"));
 
+            if (dr.IsColumnExists("BusChangeReason") && !dr.IsDBNull(dr.GetOrdinal("BusChangeReason")))
+                visit.BusChangeReason = dr.GetString(dr.GetOrdinal("BusChangeReason"));
+
             //if (dr.IsColumnExists("ModifiedBy") && !dr.IsDBNull(dr.GetOrdinal("ModifiedBy")))
             //    visit.ModifiedBy = dr.GetString(dr.GetOrdinal("ModifiedBy"));
             //if (dr.IsColumnExists("ModifiedDate") && !dr.IsDBNull(dr.GetOrdinal("ModifiedDate")))

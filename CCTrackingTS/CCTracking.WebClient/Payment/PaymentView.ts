@@ -1,7 +1,6 @@
 ﻿/// <reference path="../../Scripts/typings/knockout/knockout.d.ts" />
 /// <reference path="../../Scripts/typings/require/require.d.ts" />
 /// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
-
 /// <amd-dependency path="marionette"/>
 /// <amd-dependency path="jquery"/>
 /// <amd-dependency path="knockout"/>
@@ -49,12 +48,11 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
         this.bbModel = new Backbone.Model();
         this.events = {
             "submit": "Save",
-            "click .jsAddMore": "AddMore"
+            "click .jsAddMore": "AddMore",
+            "click .jsUpdateMore": "UpdateMore"
         }
         super(options);
     }
-    
-    
 
     AddMore() {
         //var a = this.$el.find("#ddlCentre")        
@@ -64,6 +62,20 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
             this.viewModel.driverSelected(),
             this.viewModel.busSelected(),
             this.viewModel.fuelAmount()
+            );
+        ////app.vent.trigger("BusVisitItem:Add", this.busVisitCollection);
+    }
+
+    UpdateMore() {
+        //var a = this.$el.find("#ddlCentre")        
+        this.trigger("BusVisitUpdateItem",
+            this.viewModel.bookingId(),
+            this.viewModel.alkhidmatCentreSelected(),
+            this.viewModel.driverSelected(),
+            this.viewModel.busSelected(),
+            this.viewModel.fuelAmount(),
+            this.viewModel.busChangeReason()
+
             );
         ////app.vent.trigger("BusVisitItem:Add", this.busVisitCollection);
     }
@@ -94,6 +106,7 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
         this.bbModel.set("officerId", this.viewModel.cashierSelected().id);
         this.bbModel.set("paymentType", this.viewModel.paymentTypeSelected().id);
         this.bbModel.set("fuelAmount", this.viewModel.fuelAmount());
+        this.bbModel.set("busChangeReason", this.viewModel.busChangeReason());
 
 
         this.trigger("PaymentSave", this.bbModel);
@@ -113,6 +126,7 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
     }
     onShow() {
         ko.applyBindings(this.viewModel, this.el);
+        this.$el.find("#lnkUpdate").hide();
     }
 
     onClose() {
@@ -140,7 +154,8 @@ export class ViewModel {
     easyPaisaTranNo: any;
 
     busList: any;
-    fuelAmount :any;
+    fuelAmount: any;
+    busChangeReason:any;
     busSelected: any;
     driverList: any;
     driverSelected: any;
@@ -194,6 +209,7 @@ export class ViewModel {
 
             this.busList = ko.observableArray(busLsit);
             this.fuelAmount = ko.observable();
+            this.busChangeReason = ko.observable();
             this.busSelected = ko.observable();
             this.driverList = ko.observableArray(lookupResponse.driver);
             this.driverSelected = ko.observable();
@@ -308,6 +324,7 @@ export class ViewModel {
 
             this.busList = ko.observableArray(busLsit);
             this.fuelAmount = ko.observable(model.get("fuelAmoun"));
+            this.busChangeReason = ko.observable(model.get("busChangeReason"));
             this.busSelected = ko.observable();
             this.driverList = ko.observableArray(lookupResponse.driver);
             this.driverSelected = ko.observable();
@@ -442,7 +459,8 @@ export class BusVisitItemView extends helper.Views.ItemView {
         options.events = {
             "mouseover .jsShowDetail": "ShowDetail",
             "click .jsShowDetail": "ShowDetail",
-            "click .jsRemoveItem": () => this.RemoveItem()
+            "click .jsRemoveItem": () => this.RemoveItem(),
+            "click .jsUpdateItem": () => this.UpdateItem()
         };
         super(options);
     }
@@ -450,6 +468,10 @@ export class BusVisitItemView extends helper.Views.ItemView {
         this.trigger("BusVisitRemoveItem", this.model.get("busId"), this.model.get("centreId"), this.model.get("driverId"));
         //this.trigger("BusVisitRemoveItem", this.model.get("busVisitId"));
     }
+    UpdateItem() {
+        this.trigger("UpdateBusVisitItem", this.model);
+    }
+
     ShowDetail() {
         //new userCtrl.UserCtrl().ShowDetail(this.model);
     }

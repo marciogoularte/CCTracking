@@ -171,6 +171,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     require(['./Booking/BookingCtrl'], function (p) {
                         new p.BookingCtrl().GetAll(1);
                     });
+                    //this.appRoute.navigate("viewBooking", true);
                 },
                 goPayment: function () {
                     require(['./Payment/PaymentCtrl'], function (p) {

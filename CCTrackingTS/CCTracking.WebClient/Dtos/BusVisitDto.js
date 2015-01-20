@@ -18,6 +18,7 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
             }
             BusVisitDto.prototype.default = function () {
                 return {
+                    idAttribute: "busVisitId",
                     id: "",
                     centreId: "",
                     busId: "",
@@ -36,6 +37,7 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
                     fuelingReceipt: "",
                     isBookingCompleted: "",
                     description: "",
+                    busChangeReason: "",
                     initialReading: "",
                     finalReading: "",
                     isActive: "",

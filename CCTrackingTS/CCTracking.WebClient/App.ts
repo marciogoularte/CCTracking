@@ -179,7 +179,8 @@ export class Application extends Marionette.Application {
                 require(['./Home/HomeCtrl'], (p) => { new p.HomeCtrl().Show(); });
             },
             goViewBooking() {
-                require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });
+            require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });
+                //this.appRoute.navigate("viewBooking", true);
             },
             goPayment() {
                 require(['./Payment/PaymentCtrl'], (p) => { new p.PaymentCtrl().Show(); });

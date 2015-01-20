@@ -57,8 +57,8 @@ namespace CCTracking.DAL
             dictionary.Add("@FinalReading", busVisit.FinalReading);
             dictionary.Add("@FuelQuantity", busVisit.FuelQuantity);
             dictionary.Add("@FuelingReceipt", busVisit.FuelingReceipt);
-            
             dictionary.Add("@Description", busVisit.Description);
+            dictionary.Add("@BusChangeReason", busVisit.BusChangeReason);
             base.ExecuteSql(busVisit, dictionary);
             return "dbo.SaveBusVisit";
         }
@@ -153,6 +153,8 @@ namespace CCTracking.DAL
                 busVisit.FinalReading = dr.GetInt64(dr.GetOrdinal("FinalReading"));
             if (!dr.IsDBNull(dr.GetOrdinal("Description")))
                 busVisit.Description = dr.GetString(dr.GetOrdinal("Description"));
+            if (!dr.IsDBNull(dr.GetOrdinal("BusChangeReason")))
+                busVisit.BusChangeReason = dr.GetString(dr.GetOrdinal("BusChangeReason"));
             if (!dr.IsDBNull(dr.GetOrdinal("visitType")))
                 busVisit.VisitTypeDesc = dr.GetString(dr.GetOrdinal("visitType"));
             if (!dr.IsDBNull(dr.GetOrdinal("busDesc")))

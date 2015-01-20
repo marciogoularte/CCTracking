@@ -71,6 +71,8 @@ namespace CCTracking.Api.Controllers
                     auditList.Add(SetProperty("FuelingReceipt", each.FuelingReceipt, each));
                 if (!string.IsNullOrEmpty(each.Description))
                     auditList.Add(SetProperty("Description", each.Description, each));
+                if (!string.IsNullOrEmpty(each.BusChangeReason))
+                    auditList.Add(SetProperty("BusChangeReason", each.BusChangeReason, each));
                 if (!string.IsNullOrEmpty(each.Receipt))
                     auditList.Add(SetProperty("Receipt", each.Receipt, each));
                 if (!string.IsNullOrEmpty(each.BusStatus))
