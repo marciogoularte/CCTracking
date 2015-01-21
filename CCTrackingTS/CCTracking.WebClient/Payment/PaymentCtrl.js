@@ -37,7 +37,12 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
                 return _this.RemoveBusVisitItem(busId, centreId, driverId);
             });
             this.busVisitCollectionView.on("itemview:UpdateBusVisitItem", function (currentView, model) {
-                return _this.UpdateBusVisitItem(model);
+                _this.UpdateBusVisitItem(model);
+                var selectedBus = _this.paymentView.viewModel.busList();
+                var bus = _.filter(selectedBus, function (p) {
+                    return p.id == model.get("busId");
+                });
+                _this.paymentView.viewModel.busSelected(bus[0]);
             });
 
             //this.paymentViewModel = new views.PaymentViewModel(new Backbone.Model(), this);
@@ -113,7 +118,12 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
                 return _this.RemoveBusVisitItem(busId, centreId, driverId);
             });
             this.busVisitCollectionView.on("itemview:UpdateBusVisitItem", function (currentView, model) {
-                return _this.UpdateBusVisitItem(model);
+                _this.UpdateBusVisitItem(model);
+                var selectedBus = _this.paymentView.viewModel.busList();
+                var bus = _.filter(selectedBus, function (p) {
+                    return p.id == model.get("busId");
+                });
+                _this.paymentView.viewModel.busSelected(bus[0]);
             });
 
             app.MainRegion.show(this.paymentView);
@@ -188,10 +198,14 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
         //    app.SubRegion.show(this.busVisitCollectionView);
         //}
         PaymentCtrl.prototype.AddBusVisitItem = function (bookingId, alkhidmatCentre, driver, bus, fuelAmount) {
-            if (fuelAmount == "" || fuelAmount == undefined || fuelAmount === 0) {
+            if (bus == undefined || bus.length <= 0) {
+                helper.ShowModalPopup("danger", "Bus Info", "Please enter valid  vehicle no.!");
+                return;
+            } else if (fuelAmount == "" || fuelAmount == undefined || fuelAmount === 0) {
                 helper.ShowModalPopup("danger", "Bus Info", "Please enter valid amount!");
                 return;
             }
+
             var counter = this.idCounter++;
             var busExist = this.backboneCollection.findWhere({ busId: bus.id });
             var driverExist = this.backboneCollection.findWhere({ driverId: driver.id });
@@ -221,7 +235,10 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
         };
 
         PaymentCtrl.prototype.ModifyBusVisitItem = function (bookingId, alkhidmatCentre, driver, bus, fuelAmount, busChangeReason) {
-            if (fuelAmount == "" || fuelAmount == undefined || fuelAmount === 0) {
+            if (bus == undefined || bus.length <= 0) {
+                helper.ShowModalPopup("danger", "Bus Info", "Please enter valid  vehicle no.!");
+                return;
+            } else if (fuelAmount == "" || fuelAmount == undefined || fuelAmount === 0) {
                 helper.ShowModalPopup("danger", "Bus Info", "Please enter valid amount!");
                 return;
             }
@@ -280,6 +297,7 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
             currentView.find("#ddlBusDetails").prop("disabled", false);
             currentView.find("#lnkAdd").show();
             currentView.find("#lnkUpdate").hide();
+            this.paymentView.viewModel.busChangeReason("");
         };
         PaymentCtrl.prototype.RemoveBusVisitItem = function (busId, centreId, driverId) {
             this.backboneCollection.remove(this.backboneCollection.findWhere({ busId: busId, centreId: centreId, driverId: driverId }));
@@ -303,16 +321,16 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
             var driver = _.filter(selectedDriver, function (p) {
                 return p.id == model.get("driverId");
             });
-            var bus = _.filter(selectedBus, function (p) {
-                return p.id == model.get("busId");
-            });
 
             //var a = this.paymentView.viewModel.alkhidmatCentreSelected().id;
             this.paymentView.viewModel.fuelAmount(model.get("fuelAmount"));
             this.paymentView.viewModel.busChangeReason(model.get("busChangeReason"));
-            this.paymentView.viewModel.alkhidmatCentreSelected(centre[0]);
             this.paymentView.viewModel.driverSelected(driver[0]);
-            this.paymentView.viewModel.busSelected(bus[0]);
+            this.paymentView.viewModel.alkhidmatCentreSelected(centre[0]);
+
+            //setTimeout(() => {
+            //    this.paymentView.viewModel.busSelected(bus[0]);
+            //}, 1000);
             var currentView = this.paymentView.$el;
             currentView.find("#ddlCentre").prop("disabled", true);
             currentView.find("#ddlBusDetails").prop("disabled", true);

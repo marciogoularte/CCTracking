@@ -55,6 +55,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
             this.SubRegion = this.AppLayout.SubRegion;
             this.BusAvailabilityRegion = this.AppLayout.BusAvailabilityRegion;
 
+            //this.applyRouting(this);
             //start history...
             if (Backbone.history) {
                 Backbone.history.start();
@@ -76,8 +77,16 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                 new p.LoginCtrl().Load();
             });
 
-            var self = this;
-            var routes = Backbone.Router.extend({
+            //var self = this;
+            this.applyRouting(this, layout);
+            //this.AppRoutes.on("route:viewBooking", () => {
+            //    require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });
+            //});
+            //Backbone.history.start();
+        };
+
+        Application.prototype.applyRouting = function (self, layout) {
+            var router = Backbone.Router.extend({
                 routes: {
                     'user': 'goUser',
                     'viewUser': 'goViewUser',
@@ -85,7 +94,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     'addBooking': 'goAddBooking',
                     'editBooking': 'goEditBooking',
                     'viewHome': 'goViewHome',
-                    'viewBooking': 'goViewBooking',
+                    'viewBooking': this.goViewBooking,
                     'payment': 'goPayment',
                     'alkhidmatCentre': 'goStation',
                     'viewAlkhidmatCentre': 'goViewStation',
@@ -167,12 +176,11 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                         new p.HomeCtrl().Show();
                     });
                 },
-                goViewBooking: function () {
-                    require(['./Booking/BookingCtrl'], function (p) {
-                        new p.BookingCtrl().GetAll(1);
-                    });
-                    //this.appRoute.navigate("viewBooking", true);
-                },
+                //goViewBooking() {
+                //require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });
+                ////this.appRoute.navigate("viewBooking");
+                //routes.navigate("viewBooking");
+                //},
                 goPayment: function () {
                     require(['./Payment/PaymentCtrl'], function (p) {
                         new p.PaymentCtrl().Show();
@@ -409,8 +417,16 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     });
                 }
             });
-            this.AppRoutes = new routes();
-            //Backbone.history.start();
+
+            //debugger;
+            this.AppRoutes = new router();
+        };
+
+        Application.prototype.goViewBooking = function () {
+            require(['./Booking/BookingCtrl'], function (p) {
+                new p.BookingCtrl().GetAll(1);
+            });
+            this.AppRoutes.navigate("viewBooking");
         };
 
         Application.prototype.initalizeLocalStorage = function () {

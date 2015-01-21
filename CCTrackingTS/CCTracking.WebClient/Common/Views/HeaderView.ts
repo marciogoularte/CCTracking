@@ -18,6 +18,13 @@ export class HeaderItemView extends Marionette.ItemView {
                     return app.request("AppGlobalSetting").get("IsAdmin");
                 }
             }
+        },
+        this.events = {
+            "click #nav-booking": () => {
+                //alert("dddd");
+                app.goViewBooking();
+                //app.AppRoutes.navigate("viewBooking");
+            }
         }
         super(options);
     }

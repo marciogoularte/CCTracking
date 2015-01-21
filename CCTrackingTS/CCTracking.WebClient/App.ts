@@ -69,6 +69,7 @@ export class Application extends Marionette.Application {
         this.SubRegion = this.AppLayout.SubRegion;
         this.BusAvailabilityRegion = this.AppLayout.BusAvailabilityRegion;
 
+        //this.applyRouting(this);
         //start history...
         if (Backbone.history) {
             Backbone.history.start();
@@ -88,8 +89,18 @@ export class Application extends Marionette.Application {
         //loginCtrl.Load();
         require(['./Login/LoginCtrl'], (p) => { new p.LoginCtrl().Load(); });
 
-        var self = this;
-        var routes = Backbone.Router.extend({
+        //var self = this;
+
+        this.applyRouting(this,layout);
+
+        //this.AppRoutes.on("route:viewBooking", () => {
+        //    require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });        
+        //});
+        //Backbone.history.start();
+    }
+
+    applyRouting(self, layout) {
+        var router = Backbone.Router.extend({
             routes: {
                 'user': 'goUser',
                 'viewUser': 'goViewUser',
@@ -97,7 +108,7 @@ export class Application extends Marionette.Application {
                 'addBooking': 'goAddBooking',
                 'editBooking': 'goEditBooking',
                 'viewHome': 'goViewHome',
-                'viewBooking': 'goViewBooking',
+                'viewBooking': this.goViewBooking,
                 'payment': 'goPayment',
                 'alkhidmatCentre': 'goStation',
                 'viewAlkhidmatCentre': 'goViewStation',
@@ -178,10 +189,11 @@ export class Application extends Marionette.Application {
             goViewHome() {
                 require(['./Home/HomeCtrl'], (p) => { new p.HomeCtrl().Show(); });
             },
-            goViewBooking() {
-            require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });
-                //this.appRoute.navigate("viewBooking", true);
-            },
+            //goViewBooking() {
+            //require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });
+            ////this.appRoute.navigate("viewBooking");
+            //routes.navigate("viewBooking");
+            //},
             goPayment() {
                 require(['./Payment/PaymentCtrl'], (p) => { new p.PaymentCtrl().Show(); });
             },
@@ -283,29 +295,29 @@ export class Application extends Marionette.Application {
             },
 
             goNearestCentreSetup() {
-            require(['./Admin/NearestCentreSetup/NearestCentreSetupCtrl'], (p) => { new p.NearestCentreSetupCtrl().Show(); });
+                require(['./Admin/NearestCentreSetup/NearestCentreSetupCtrl'], (p) => { new p.NearestCentreSetupCtrl().Show(); });
             },
             goViewNearestCentreSetup() {
-            require(['./Admin/NearestCentreSetup/NearestCentreSetupCtrl'], (p) => { new p.NearestCentreSetupCtrl().GetAll(); });
+                require(['./Admin/NearestCentreSetup/NearestCentreSetupCtrl'], (p) => { new p.NearestCentreSetupCtrl().GetAll(); });
             },
 
             goChangePassword() {
                 require(['./ChangePassword/ChangePasswordCtrl'], (p) => { new p.ChangePasswordCtrl().Load(); });
             },
             goExtraCharge() {
-            require(['./ExtraCharge/ExtraChargeCtrl'], (p) => { new p.ExtraChargeCtrl().Show(); });
+                require(['./ExtraCharge/ExtraChargeCtrl'], (p) => { new p.ExtraChargeCtrl().Show(); });
             },
             goDriverSummary() {
                 require(['./Admin/Reports/Driver/DriverSummaryCtrl'], (p) => { new p.DriverSummaryCtrl().Show(); });
             },
             goBusVisitSummary() {
-            require(['./Admin/Reports/BusVisit/BusVisitSummaryCtrl'], (p) => { new p.BusVisitSummaryCtrl().ShowVisit(); });
+                require(['./Admin/Reports/BusVisit/BusVisitSummaryCtrl'], (p) => { new p.BusVisitSummaryCtrl().ShowVisit(); });
             },
             goBusVisitMilageSummary() {
-                require(['./Admin/Reports/BusVisit/BusVisitSummaryCtrl'],(p) => { new p.BusVisitSummaryCtrl().ShowMilage(); });
+                require(['./Admin/Reports/BusVisit/BusVisitSummaryCtrl'], (p) => { new p.BusVisitSummaryCtrl().ShowMilage(); });
             },
-            goAuditBooking(){
-            require(['./Admin/Reports/Audit/Booking/AuditBookingCtrl'], (p) => { new p.AuditBookingCtrl().Show(); });
+            goAuditBooking() {
+                require(['./Admin/Reports/Audit/Booking/AuditBookingCtrl'], (p) => { new p.AuditBookingCtrl().Show(); });
             },
             goAuditBusVisit() {
                 require(['./Admin/Reports/Audit/BusVisit/AuditBusVisitCtrl'], (p) => { new p.AuditBusVisitCtrl().Show(); });
@@ -317,7 +329,7 @@ export class Application extends Marionette.Application {
                 require(['./Admin/Reports/Audit/Refund/AuditRefundBookingCtrl'], (p) => { new p.AuditRefundBookingCtrl().Show(); });
             },
             goBusCentreReport() {
-            require(['./Admin/Reports/Centre/BusCentreReport/BusCentreReportCtrl'], (p) => { new p.BusCentreReportCtrl().Show(); });
+                require(['./Admin/Reports/Centre/BusCentreReport/BusCentreReportCtrl'], (p) => { new p.BusCentreReportCtrl().Show(); });
             },
             goBusMilageReport() {
                 require(['./Admin/Reports/Bus/BusMilage/BusMilageCtrl'], (p) => { new p.BusMilageCtrl().Show(); });
@@ -331,8 +343,14 @@ export class Application extends Marionette.Application {
                 require(['./Login/LoginCtrl'], (p) => { new p.LoginCtrl().Load(); });
             }
         });
-        this.AppRoutes = new routes();
-        //Backbone.history.start();
+        //debugger;
+        this.AppRoutes = new router();
+
+    }
+
+    goViewBooking() {
+        require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });
+        this.AppRoutes.navigate("viewBooking");
     }
 
     initalizeLocalStorage() {

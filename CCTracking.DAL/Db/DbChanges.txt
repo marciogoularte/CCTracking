@@ -7,5 +7,7 @@
 Audit_BusVisit
 [fn_audit_BusVisit]
 - enable audit trial on busvisit
+-[Lookup]
+-GetBusAvailabilityByBookingId
 
 

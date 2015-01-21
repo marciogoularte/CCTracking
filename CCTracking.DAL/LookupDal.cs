@@ -76,7 +76,7 @@ namespace CCTracking.DAL
                 }
                 foreach (DataRow item in ds.Tables[5].Rows)
                 {
-                    bus.Add(new Lookup { Id = Convert.ToInt32(item["id"]), Description = item["description"].ToString(), OtherDetail = item["IsOnMaintainance"].ToString() });
+                    bus.Add(new Lookup { Id = Convert.ToInt32(item["id"]), Description = item["description"].ToString(), OtherDetail = item["IsOnMaintainance"].ToString(), ParentId = Convert.ToInt32(item["centreId"]) });
                 }
                 foreach (DataRow item in ds.Tables[6].Rows)
                 {

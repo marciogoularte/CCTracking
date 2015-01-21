@@ -397,29 +397,12 @@ export class ViewModel {
                     }
                 }
             });
-            //this.amount = ko.computed({
-            //    owner: this,
-            //    read: () => {
-            //        if (model != undefined && model.get("busVisits") != undefined && model.get("busVisits").length>0) {
-            //            var sum = _.reduce(model.get("busVisits"), (memo, item) => memo + item.fuelAmount, 0);
-            //            return sum;
-            //        } else {
-            //            return 0;
-            //        }
-            //    },
-            //    write: (a) => {
-            //        this.amount = a;
-            //        //return a;
-            //        //debugger;
-            //        //if (model != undefined && model.get("busVisits") != undefined && model.get("busVisits").length > 0) {
-            //        //    var sum = _.reduce(model.get("busVisits"), (memo, item) => memo + item.fuelAmount, 0);
-            //        //    return sum;
-            //        //} else {
-            //        //    return 0;
-            //        //}
-            //    }
-            //});
 
+            this.alkhidmatCentreSelected.subscribe(() => {
+                var filterBuses = _.filter(busLsit, (item) => { return item.centreId == this.alkhidmatCentreSelected().id; });
+                this.busList(filterBuses);
+                
+            });
         }
     }
 

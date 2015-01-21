@@ -38,7 +38,12 @@ export class PaymentCtrl extends helper.Controller {
         this.backboneCollection = this.busVisitCollection;
         this.busVisitCollectionView = new views.BusVisitCollectionView({ collection: this.backboneCollection });
         this.busVisitCollectionView.on("itemview:BusVisitRemoveItem", (currentView, busId, centreId, driverId) => this.RemoveBusVisitItem(busId, centreId, driverId));
-        this.busVisitCollectionView.on("itemview:UpdateBusVisitItem", (currentView, model) => this.UpdateBusVisitItem(model));
+        this.busVisitCollectionView.on("itemview:UpdateBusVisitItem", (currentView, model) => {
+            this.UpdateBusVisitItem(model);
+            var selectedBus = this.paymentView.viewModel.busList();
+            var bus = _.filter(selectedBus, (p) => { return p.id == model.get("busId"); });
+            this.paymentView.viewModel.busSelected(bus[0]);
+        });
         //this.paymentViewModel = new views.PaymentViewModel(new Backbone.Model(), this);
         this.idCounter = 1;
     }
@@ -98,7 +103,12 @@ export class PaymentCtrl extends helper.Controller {
         this.backboneCollection = new Backbone.Collection(model.get("busVisits"));
         this.busVisitCollectionView = new views.BusVisitCollectionView({ collection: this.backboneCollection });
         this.busVisitCollectionView.on("itemview:BusVisitRemoveItem", (currentView, busId, centreId, driverId) => this.RemoveBusVisitItem(busId, centreId, driverId));
-        this.busVisitCollectionView.on("itemview:UpdateBusVisitItem", (currentView, model) => this.UpdateBusVisitItem(model));
+        this.busVisitCollectionView.on("itemview:UpdateBusVisitItem", (currentView, model) => {
+            this.UpdateBusVisitItem(model);
+            var selectedBus = this.paymentView.viewModel.busList();
+            var bus = _.filter(selectedBus, (p) => { return p.id == model.get("busId"); });
+            this.paymentView.viewModel.busSelected(bus[0]);
+        });
 
         app.MainRegion.show(this.paymentView);
         app.SubRegion.reset();
@@ -172,10 +182,15 @@ export class PaymentCtrl extends helper.Controller {
     //}
 
     AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus, fuelAmount) {
-        if (fuelAmount == "" || fuelAmount == undefined || fuelAmount === 0) {
+        if (bus == undefined || bus.length <= 0) {
+            helper.ShowModalPopup("danger", "Bus Info", "Please enter valid  vehicle no.!");
+            return;
+        }
+        else if (fuelAmount == "" || fuelAmount == undefined || fuelAmount === 0) {
             helper.ShowModalPopup("danger", "Bus Info", "Please enter valid amount!");
             return;
         }
+        
         var counter = this.idCounter++;
         var busExist = this.backboneCollection.findWhere({ busId: bus.id });
         var driverExist = this.backboneCollection.findWhere({ driverId: driver.id });
@@ -207,7 +222,11 @@ export class PaymentCtrl extends helper.Controller {
     }
 
     ModifyBusVisitItem(bookingId, alkhidmatCentre, driver, bus, fuelAmount, busChangeReason) {
-        if (fuelAmount == "" || fuelAmount == undefined || fuelAmount === 0) {
+        if (bus == undefined || bus.length <= 0) {
+            helper.ShowModalPopup("danger", "Bus Info", "Please enter valid  vehicle no.!");
+            return;
+        }
+        else if (fuelAmount == "" || fuelAmount == undefined || fuelAmount === 0) {
             helper.ShowModalPopup("danger", "Bus Info", "Please enter valid amount!");
             return;
         }
@@ -265,6 +284,7 @@ export class PaymentCtrl extends helper.Controller {
         currentView.find("#ddlBusDetails").prop("disabled", false);
         currentView.find("#lnkAdd").show();
         currentView.find("#lnkUpdate").hide();
+        this.paymentView.viewModel.busChangeReason("");
 
 
     }
@@ -284,14 +304,16 @@ export class PaymentCtrl extends helper.Controller {
         var selectedBus = this.paymentView.viewModel.busList();
         var centre = _.filter(selectedCentre, (p) => { return p.id == model.get("centreId"); });
         var driver = _.filter(selectedDriver, (p) => { return p.id == model.get("driverId"); });
-        var bus = _.filter(selectedBus, (p) => { return p.id == model.get("busId"); });
+        
 
         //var a = this.paymentView.viewModel.alkhidmatCentreSelected().id;
         this.paymentView.viewModel.fuelAmount(model.get("fuelAmount"));
         this.paymentView.viewModel.busChangeReason(model.get("busChangeReason"));
-        this.paymentView.viewModel.alkhidmatCentreSelected(centre[0]);
         this.paymentView.viewModel.driverSelected(driver[0]);
-        this.paymentView.viewModel.busSelected(bus[0]);
+        this.paymentView.viewModel.alkhidmatCentreSelected(centre[0]);
+        //setTimeout(() => {
+        //    this.paymentView.viewModel.busSelected(bus[0]);
+        //}, 1000);
         var currentView = this.paymentView.$el;
         currentView.find("#ddlCentre").prop("disabled", true);
         currentView.find("#ddlBusDetails").prop("disabled", true);

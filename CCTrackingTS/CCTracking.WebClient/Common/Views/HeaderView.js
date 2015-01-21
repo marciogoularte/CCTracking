@@ -25,6 +25,12 @@ define(["require", "exports", "../../App", "marionette", "text!CCTracking.WebCli
                         return app.request("AppGlobalSetting").get("IsAdmin");
                     }
                 };
+            }, this.events = {
+                "click #nav-booking": function () {
+                    //alert("dddd");
+                    app.goViewBooking();
+                    //app.AppRoutes.navigate("viewBooking");
+                }
             };
             _super.call(this, options);
         }
