@@ -1,68 +1,122 @@
 ﻿.table-borderless td, .table-borderless th {
     border: 0 !important;
 }
+
 .table-removeTopBorder td, .table-removeTopBorder th {
-    border-top:none!important;
+    border-top: none!important;
 }
+
 .inputTime {
-    width:153px;
+    width: 153px;
 }
+
 .sub-heading {
     color: #31708f;
-    font-weight:bold;
+    font-weight: bold;
 }
+
 .sub-header-bg {
-    background-color:#31708f;
-    font-weight:bold;
-    color:white;
+    background-color: #31708f;
+    font-weight: bold;
+    color: white;
 }
+
 .sub-heading-summary {
     color: #31708f;
-    font-weight:bold;
-    font-size:x-small;
+    font-weight: bold;
+    font-size: x-small;
 }
+
 .sub-header-bg-summary {
-    background-color:#31708f;
-    font-weight:bold;
-    color:white;
-    font-size:x-small;
+    background-color: #31708f;
+    font-weight: bold;
+    color: white;
+    font-size: x-small;
 }
+
 .div-borders {
-    border:1px solid #31708f;
+    border: 1px solid #31708f;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 .left-menu-size {
-    font-size:x-small;
-    font-weight:bold;
+    font-size: x-small;
+    font-weight: bold;
 }
+
 .left-menu-badge-color {
-    color:white;
+    color: white;
 }
+
 .header-menu-bgColor {
-    background-color:#ccc;
+    background-color: #ccc;
 }
+
 .header-bold {
-    font-weight:bold;
+    font-weight: bold;
 }
+
 .dashboard-fontSize {
     font-size: small;
 }
+
 #Progressbar {
-  width: 700px ;
-  margin-left: auto ;
-  margin-right: auto ;
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 .no-space [class*="span"] {
     margin-left: 0;
 }
+
 .header-menu-font-size {
     font-size: small;
-    font-weight:bold;
+    font-weight: bold;
 }
+
 .softwarecare-footer {
     font-size: 26px;
     font-weight: bold;
     font-family: "Chiller";
 }
+
+/*.page-footer {
+position: relative;
+bottom: 0;
+width: 100%;
+text-align: center;
+}*/
+
+/** {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -4em;
+}
+
+.footer, .push {
+    height: 4em;
+}*/
+
+
+footer.navbar-default.navbar-fixed-bottom
+ {
+      /*/background:red;*/
+      color:white;
+      padding:1em 0;
+ }
+ footer.navbar-default.navbar-fixed-bottom p
+ {
+      margin:0;
+ }

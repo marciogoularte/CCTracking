@@ -36,6 +36,19 @@ APP.Application.getInstance().vent.on("Event:UpdateSummary", () => {
     });
 });
 
+$.extend(true, $.fn.dataTable.defaults, {
+    "sDom":
+    "<'row'<'col-md-12 hidden'l><'col-xs-12 col-md-12 text-center'f>r>" +
+    "t" +
+    "<'row'<'col-md-12'i><'col-xs-12 col-md-12 text-center'p>>",
+    "language": {
+        "search": "Filter: "
+    },
+
+});
+
+
+
 /*
 DEFAULT ACCOUNTING SETTINGS
 */

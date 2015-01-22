@@ -145,6 +145,26 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto
 
             _super.call(this, options);
         }
+        BookingCollectionView.prototype.onShow = function () {
+            this.dataTable = this.$el.find("#tblBooking")["dataTable"]({
+                "autoWidth": false,
+                "info": true,
+                "processing": true,
+                //"scrollY": "500px",
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "language": {
+                    "paginate": {
+                        "next": "Next",
+                        "previous": "Prev"
+                    },
+                    "emptyTable": "No record found!",
+                    //"info": "Dispalying page _PAGE_ of _PAGES_",
+                    "infoEmpty": "No record found!",
+                    "zeroRecords": "kuch nahi milla"
+                },
+                "pageLength": 3
+            });
+        };
         return BookingCollectionView;
     })(helper.Views.CompositeView);
     exports.BookingCollectionView = BookingCollectionView;
