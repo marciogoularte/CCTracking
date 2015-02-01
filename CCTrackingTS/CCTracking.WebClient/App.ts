@@ -108,7 +108,7 @@ export class Application extends Marionette.Application {
                 'addBooking': 'goAddBooking',
                 'editBooking': 'goEditBooking',
                 'viewHome': 'goViewHome',
-                'viewBooking': this.goViewBooking,
+                'viewBooking': 'goViewBooking', 
                 'payment': 'goPayment',
                 'alkhidmatCentre': 'goStation',
                 'viewAlkhidmatCentre': 'goViewStation',
@@ -189,11 +189,11 @@ export class Application extends Marionette.Application {
             goViewHome() {
                 require(['./Home/HomeCtrl'], (p) => { new p.HomeCtrl().Show(); });
             },
-            //goViewBooking() {
-            //require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });
-            ////this.appRoute.navigate("viewBooking");
+            goViewBooking() {
+                require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });
+            //this.appRoute.navigate("viewBooking");
             //routes.navigate("viewBooking");
-            //},
+            },
             goPayment() {
                 require(['./Payment/PaymentCtrl'], (p) => { new p.PaymentCtrl().Show(); });
             },

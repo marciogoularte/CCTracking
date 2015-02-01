@@ -162,7 +162,7 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto
                     "infoEmpty": "No record found!",
                     "zeroRecords": "kuch nahi milla"
                 },
-                "pageLength": 3
+                "pageLength": helper.GetPageSize()
             });
         };
         return BookingCollectionView;

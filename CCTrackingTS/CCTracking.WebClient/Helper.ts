@@ -38,7 +38,7 @@ APP.Application.getInstance().vent.on("Event:UpdateSummary", () => {
 
 $.extend(true, $.fn.dataTable.defaults, {
     "sDom":
-    "<'row'<'col-md-12 hidden'l><'col-xs-12 col-md-12 text-center'f>r>" +
+    "<'row'<'col-md-12 hidden'l><'col-xs-12 col-md-12 text-right'f>r>" +
     "t" +
     "<'row'<'col-md-12'i><'col-xs-12 col-md-12 text-center'p>>",
     "language": {
@@ -321,6 +321,9 @@ export function FormatMoney(aMoney) {
     return accounting.formatMoney(aMoney);
 }
 
+export function GetPageSize() {
+    return 5;
+}
 
 
 export enum VisitTypes {

@@ -94,7 +94,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     'addBooking': 'goAddBooking',
                     'editBooking': 'goEditBooking',
                     'viewHome': 'goViewHome',
-                    'viewBooking': this.goViewBooking,
+                    'viewBooking': 'goViewBooking',
                     'payment': 'goPayment',
                     'alkhidmatCentre': 'goStation',
                     'viewAlkhidmatCentre': 'goViewStation',
@@ -176,11 +176,13 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                         new p.HomeCtrl().Show();
                     });
                 },
-                //goViewBooking() {
-                //require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });
-                ////this.appRoute.navigate("viewBooking");
-                //routes.navigate("viewBooking");
-                //},
+                goViewBooking: function () {
+                    require(['./Booking/BookingCtrl'], function (p) {
+                        new p.BookingCtrl().GetAll(1);
+                    });
+                    //this.appRoute.navigate("viewBooking");
+                    //routes.navigate("viewBooking");
+                },
                 goPayment: function () {
                     require(['./Payment/PaymentCtrl'], function (p) {
                         new p.PaymentCtrl().Show();
