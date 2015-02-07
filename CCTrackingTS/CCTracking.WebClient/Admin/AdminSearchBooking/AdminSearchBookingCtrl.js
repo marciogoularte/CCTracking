@@ -1,15 +1,10 @@
-﻿/// <reference path="../../../Scripts/typings/require/require.d.ts" />
-/// <reference path="../../../Scripts/typings/marionette/marionette.d.ts" />
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
 define(["require", "exports", "../../App", "../../Helper", "./AdminSearchBookingView", "../../Dtos/BookingSummaryDto", "../../Dtos/ReportDto", "../../DAL/AdminSearch", "marionette", "jquery", "knockout"], function(require, exports, application, helper, views, dto, reportDto, DAL) {
-    /// <amd-dependency path="marionette"/>
-    /// <amd-dependency path="jquery"/>
-    /// <amd-dependency path="knockout"/>
     var _ = require("underscore");
     var ko = require("knockout");
     var kb = require("knockback");
@@ -24,7 +19,6 @@ define(["require", "exports", "../../App", "../../Helper", "./AdminSearchBooking
             this.backboneModel = new dto.Models.BookingSummaryDto();
             this.searchViewModel = new views.SearchViewModel(this.backboneModel, this);
 
-            //this.searchView = new views.SearchView({ viewModel: this.searchViewModel });
             this.compositeModel = new Backbone.Model();
             this.backboneCollection = new Backbone.Collection([]);
             this.collectionView = new views.SearchCollectionView({ collection: this.backboneCollection, model: this.compositeModel });
@@ -65,7 +59,6 @@ define(["require", "exports", "../../App", "../../Helper", "./AdminSearchBooking
             ko.applyBindings(vm, toBookingDate);
         };
         AdminSearchBookingCtrl.prototype.ShowCentreBusSummary = function (id, searchModel) {
-            //alert(searchModel.get("fromBookingDate"));
             var dto = new reportDto.Models.ReportDto();
             dto.set("fromDate", searchModel.get("fromBookingDate"));
             dto.set("toDate", searchModel.get("toBookingDate"));
@@ -91,7 +84,6 @@ define(["require", "exports", "../../App", "../../Helper", "./AdminSearchBooking
         };
 
         AdminSearchBookingCtrl.prototype.GetByCriteriaCompleted = function (bookingSummaryDto) {
-            //TODO:Hack - need rework
             var result = bookingSummaryDto["bookingSummaryList"];
             var summary = [];
             for (var i = 0; i < result.length; i++) {
@@ -111,4 +103,3 @@ define(["require", "exports", "../../App", "../../Helper", "./AdminSearchBooking
     })(helper.Controller);
     exports.AdminSearchBookingCtrl = AdminSearchBookingCtrl;
 });
-//# sourceMappingURL=AdminSearchBookingCtrl.js.map

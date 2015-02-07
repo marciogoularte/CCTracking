@@ -131,6 +131,7 @@ export class ViewModel {
     driverDesc: any;
     visitTypeDesc: any;
     isPatrolPump: any;
+    isMaintenance: any;
     isBooking: any;
 
     outTimeSlotList: any;
@@ -209,10 +210,21 @@ export class ViewModel {
                     }
                 }
             });
+            this.isMaintenance = ko.computed({
+                owner: this,
+                read: () => {
+                    if (this.visitTypeSelected() != undefined && helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Maintenance]) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            });
             this.isBooking = ko.computed({
                 owner: this,
                 read: () => {
-                    if (this.visitTypeSelected() != undefined && (helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Booking] || helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Maintenance])) {
+                    //if (this.visitTypeSelected() != undefined && (helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Booking] || helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Maintenance])) {
+                    if (this.visitTypeSelected() != undefined && (helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Booking] )) {
                         return true;
                     } else {
                         return false;
@@ -276,8 +288,6 @@ export class ViewModel {
             this.driverSelected = ko.observable(driver[0]);
             this.alkhidmatCentreSelected = ko.observable(centre[0]);
             this.visitTypeSelected = ko.observable(visitType[0]);
-
-
             this.isPatrolPump = ko.computed({
                 owner: this,
                 read: () => {
@@ -288,10 +298,21 @@ export class ViewModel {
                     }
                 }
             });
+            this.isMaintenance = ko.computed({
+                owner: this,
+                read: () => {
+                    if (this.visitTypeSelected() != undefined && helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Maintenance]) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            });
             this.isBooking = ko.computed({
                 owner: this,
                 read: () => {
-                    if (this.visitTypeSelected() != undefined && (helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Booking] || helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Maintenance])) {
+                    //if (this.visitTypeSelected() != undefined && (helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Booking] || helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Maintenance])) {
+                    if (this.visitTypeSelected() != undefined && (helper.VisitTypes[this.visitTypeSelected().id] == helper.VisitTypes[helper.VisitTypes.Booking] )) {
                         return true;
                     } else {
                         return false;
@@ -337,6 +358,7 @@ export class BusVisitCollectionView extends helper.Views.CompositeView {
     }
 
     setOptionDisable(option, item) {
+        //debugger;
         //if (item.otherDetail.toLowerCase()==="true") {
         //    ko.applyBindingsToNode(option, { disable: true, text: item.description + ' - Maintenance' }, item);
         //}

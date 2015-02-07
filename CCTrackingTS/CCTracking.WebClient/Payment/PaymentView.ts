@@ -99,9 +99,9 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
         this.bbModel.set("referralPaymentDate", this.viewModel.referralPaymentDate());
         this.bbModel.set("easyPaisaTranNo", this.viewModel.easyPaisaTranNo());
 
-        this.bbModel.set("bus", this.viewModel.busSelected().id);
-        this.bbModel.set("driver", this.viewModel.driverSelected().id);
-        this.bbModel.set("alkhidmatCentre", this.viewModel.alkhidmatCentreSelected().id);
+        //this.bbModel.set("bus", this.viewModel.busSelected().id);
+        //this.bbModel.set("driver", this.viewModel.driverSelected().id);
+        //this.bbModel.set("alkhidmatCentre", this.viewModel.alkhidmatCentreSelected().id);
         this.bbModel.set("paymentLocation", this.viewModel.paymentLocationSelected().id);
         this.bbModel.set("officerId", this.viewModel.cashierSelected().id);
         this.bbModel.set("paymentType", this.viewModel.paymentTypeSelected().id);
@@ -399,14 +399,25 @@ export class ViewModel {
             });
 
             this.alkhidmatCentreSelected.subscribe(() => {
-                var filterBuses = _.filter(busLsit, (item) => { return item.centreId == this.alkhidmatCentreSelected().id; });
+                var filterBuses = _.filter(busLsit, (item) => {
+                    
+                    return item.centreId == this.alkhidmatCentreSelected().id;
+                });
                 this.busList(filterBuses);
                 
+                //alert('subscribe');
+                //if (filterBuses.length > 0) {
+                //    debugger;
+                //    var option = '<option value>' + filterBuses[0].description + '</option>';
+                //    this.setOptionDisable(option, filterBuses);
+                //}
             });
         }
     }
 
     setOptionDisable(option, item) {
+        //alert('after render');
+        //debugger;
         var modifiedDesc = item.description;
         if (item.description.indexOf('Booked - Paid') >= 0 || item.description.indexOf('Booked - Unpaid') >= 0) {
             modifiedDesc = item.description;

@@ -218,6 +218,13 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             booking.set("namazEJanazaHeldIn", booking.get("prayersSelected").id);
 
             booking.set("alkhidmatCentreId", booking.get("alkhidmatCentreSelected").id);
+
+            if (booking.get("isReferralBooking") == "1") {
+                if (booking.get("referralName").trim().length == 0) {
+                    helper.ShowModalPopup("danger", "Booking", "Please enter referral name.");
+                    return;
+                }
+            }
             booking.set("isReferralBooking", booking.get("isReferralBooking") == "1" ? true : false);
 
             //booking.set("busDetailId", booking.get("busDetailIdSelected").id);

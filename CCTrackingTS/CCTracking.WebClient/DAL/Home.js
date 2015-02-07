@@ -47,5 +47,3 @@ define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "../Dtos/H
     }
     exports.GetByCriteria = GetByCriteria;
 });
-//aaa
-//# sourceMappingURL=Home.js.map

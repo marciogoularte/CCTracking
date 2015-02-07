@@ -1,8 +1,4 @@
-﻿/// <reference path="../Scripts/typings/require/require.d.ts" />
-/// <reference path="../Scripts/typings/marionette/marionette.d.ts" />
-/// <amd-dependency path="marionette"/>
-/// <amd-dependency path="datatablesBootstrap"/>
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -28,7 +24,6 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                 ModalAlertRegion: "#ModalAlertPopup"
             });
 
-            //alert('constructor');
             var layout = Marionette.Layout.extend({
                 template: "#AppLayout",
                 regions: {
@@ -55,34 +50,23 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
             this.SubRegion = this.AppLayout.SubRegion;
             this.BusAvailabilityRegion = this.AppLayout.BusAvailabilityRegion;
 
-            //this.applyRouting(this);
-            //start history...
             if (Backbone.history) {
                 Backbone.history.start();
             }
         }
         Application.prototype.initializeAfter = function () {
-            //console.log('Initalize after called..');
             this.ContainerRegion.reset();
             this.initalizeLocalStorage();
 
-            //var loginView = new login.LoginItemView();
             var layout = this.AppLayout;
 
             this.ContainerRegion.show(layout);
 
-            //var loginCtrl = new loginController.LoginCtrl();
-            //loginCtrl.Load();
             require(['./Login/LoginCtrl'], function (p) {
                 new p.LoginCtrl().Load();
             });
 
-            //var self = this;
             this.applyRouting(this, layout);
-            //this.AppRoutes.on("route:viewBooking", () => {
-            //    require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });
-            //});
-            //Backbone.history.start();
         };
 
         Application.prototype.applyRouting = function (self, layout) {
@@ -180,8 +164,6 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     require(['./Booking/BookingCtrl'], function (p) {
                         new p.BookingCtrl().GetAll(1);
                     });
-                    //this.appRoute.navigate("viewBooking");
-                    //routes.navigate("viewBooking");
                 },
                 goPayment: function () {
                     require(['./Payment/PaymentCtrl'], function (p) {
@@ -329,7 +311,6 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     });
                 },
                 goViewTest: function () {
-                    // new koBindingController.KoBindingCtrl().Show();
                 },
                 goTrackingDevice: function () {
                     require(['./Admin/TrackingDevice/TrackingDeviceCtrl'], function (p) {
@@ -420,7 +401,6 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                 }
             });
 
-            //debugger;
             this.AppRoutes = new router();
         };
 
@@ -444,7 +424,6 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
         };
         Application.getInstance = function () {
             if (Application._instance === null) {
-                //alert("new instance");
                 Application._instance = new Application();
             }
             return Application._instance;
@@ -454,20 +433,14 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
     })(Marionette.Application);
     exports.Application = Application;
 
-    //on load call initialize application
     $(function () {
         var app = Application.getInstance();
         app.start();
 
-        //var rgnModal = modalHelper.GetModalRegion();
         var rgnModal = new modalHelper.ModalRegion({ el: '#ModalPopup' });
         var rgnModalAlert = new modalHelper.ModalRegion({ el: '#ModalAlertPopup' });
 
-        //var modal = new rgnModal({ el: '#ModalPopup' });
-        //app.ModalRegion = modal;
         app.ModalRegion = rgnModal;
         app.ModalAlertRegion = rgnModalAlert;
     });
 });
-//aaa
-//# sourceMappingURL=App.js.map

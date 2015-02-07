@@ -163,7 +163,7 @@ export class BookingCollectionView extends helper.Views.CompositeView {
                 "emptyTable": "No record found!",
                 //"info": "Dispalying page _PAGE_ of _PAGES_",
                 "infoEmpty": "No record found!",
-                "zeroRecords": "kuch nahi milla"
+                "zeroRecords": "No record found!"
             },
             "pageLength": helper.GetPageSize()
 

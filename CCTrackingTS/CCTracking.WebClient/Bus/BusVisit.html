@@ -93,8 +93,8 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Amount</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" placeholder="Fuel Amount"  class="form-control input-sm" data-bind="value: fuelAmount, enable: isPatrolPump()" 
-                                        required="required" data-role="validate" title="Fuel Amount" data-content="Fuel amount is required"  />   
+                                    <input type="text" placeholder="Amount"  class="form-control input-sm" data-bind="value: fuelAmount, enable: !isBooking()" 
+                                        required="required" data-role="validate" title="Amount" data-content="Amount is required"  />   
                                 </td>
                             </tr>
                             
@@ -147,8 +147,8 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Booking Completed</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="radio" name="rbCurrentBooking" value="1" data-bind="checked:isBookingCompleted, enable:isBooking()" />Yes
-                                    <input type="radio" name="rbCurrentBooking" value="0" data-bind="checked:isBookingCompleted, enable:isBooking()" />No
+                                    <input type="radio" name="rbCurrentBooking" value="1" data-bind="checked:isBookingCompleted, enable:isBooking() || isMaintenance()" />Yes
+                                    <input type="radio" name="rbCurrentBooking" value="0" data-bind="checked: isBookingCompleted, enable: isBooking() || isMaintenance()" />No
                                 </td>
                             </tr>
                            

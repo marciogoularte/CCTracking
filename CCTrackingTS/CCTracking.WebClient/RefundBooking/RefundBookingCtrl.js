@@ -1,15 +1,10 @@
-﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
-/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
 define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../Dtos/RefundBookingDto", "../DAL/RefundBooking", "marionette", "jquery", "knockout"], function(require, exports, application, helper, views, dto, DAL) {
-    /// <amd-dependency path="marionette"/>
-    /// <amd-dependency path="jquery"/>
-    /// <amd-dependency path="knockout"/>
     var _ = require("underscore");
     var ko = require("knockout");
     var kb = require("knockback");
@@ -19,17 +14,13 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
         function RefundBookingCtrl() {
             _super.call(this);
 
-            //alert("constructor");
             this.app = application.Application.getInstance();
             this.backboneModel = new dto.Models.RefundBookingDto();
-            //this.viewModel = new views.RefundBookingViewModel(this.backboneModel, this);
-            //this.view = new views.RefundBookingView({ viewModel: this.viewModel });
         }
         RefundBookingCtrl.prototype.Show = function () {
             var _this = this;
             var url = window.location.href;
             if (url.indexOf("id=") > -1) {
-                //alert(url.substring(url.indexOf("id=") + 3, url.length));
                 var id = (url.substring(url.indexOf("id=") + 3, url.length));
                 var deferredById = DAL.GetById(id);
                 deferredById.done(function (p) {
@@ -44,7 +35,6 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
             var _this = this;
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
 
-            //var model = new dto.Models.StationDto();
             var refundModel = this.backboneModel;
             this.viewModel.bbModel = refundModel;
             this.viewModel.model = kb.viewModel(refundModel);
@@ -67,19 +57,11 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
                 return _this.Cancel();
             });
 
-            //this.layout = app.AppLayout;
             this.app.MainRegion.show(this.view);
-            //this.GetAll();
         };
 
-        //GetAll() {
-        //    var deferred = DAL.GetAll();
-        //    deferred.done(p=> this.GetAllCompleted(p));
-        //}
         RefundBookingCtrl.prototype.GetByIdCompleted = function (refundDto) {
             var _this = this;
-            //alert("GetByIdCompleted..");
-            //debugger;
             this.collection = refundDto["refundBookingList"];
             this.backboneModel = new Backbone.Model(refundDto["refundBookingList"][0]);
             var refundModel = this.backboneModel;
@@ -94,11 +76,7 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
                 return _this.Cancel();
             });
 
-            //this.stationView.trigger("TestEvent");
-            //app = application.Application.getInstance();
             this.app.MainRegion.show(this.view);
-            //this.GetAll();
-            //this.GetAllCompletedNew(this.collection);
         };
 
         RefundBookingCtrl.prototype.Save = function (refund) {
@@ -129,7 +107,6 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
             }
             refund.set("isActive", refund.get("isActive") == "1" ? true : false);
 
-            //alert($("#hdnRefundId").val());
             refund.set("id", $("#hdnRefundId").val());
             var deferred = DAL.Save(refund);
             deferred.done(function (p) {
@@ -142,7 +119,6 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
             if (result.get("errorMessage") != undefined && result.get("errorMessage").trim() != "") {
                 helper.ShowModalPopup("danger", "Booking", "Due to some technical reason booking payment have not been saved successfully!<br> Pelase try later");
             } else {
-                //alert("Record has been saved successfully with ID : " + refundDto["id"]);
                 helper.ShowModalPopup("success", "Booking", "Record has been saved successfully with ID : " + refundDto["id"]);
                 this.Cancel();
             }
@@ -176,8 +152,6 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
             });
             refundModel.set("refundTypeSelected", refundType[0]);
 
-            //var bus = _.filter(refundModel.get("busList"), (p) => { return p.id == refundModel.get("busId") });
-            //refundModel.set("busId", bus[0].id);
             if (refundType.length > 0) {
                 refundModel.set("refundTypeSelectedDesc", refundType[0].description);
             } else {
@@ -201,4 +175,3 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
     })(helper.Controller);
     exports.RefundBookingCtrl = RefundBookingCtrl;
 });
-//# sourceMappingURL=RefundBookingCtrl.js.map

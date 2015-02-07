@@ -1,15 +1,10 @@
-﻿/// <reference path="../../../../../Scripts/typings/require/require.d.ts" />
-/// <reference path="../../../../../Scripts/typings/marionette/marionette.d.ts" />
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
 define(["require", "exports", "../../../../App", "../../../../Helper", "./AuditBusVisitView", "../../../../Dtos/BusVisitDto", "../../../../DAL/BusVisit", "marionette", "jquery", "knockout"], function(require, exports, application, helper, views, dto, DAL) {
-    /// <amd-dependency path="marionette"/>
-    /// <amd-dependency path="jquery"/>
-    /// <amd-dependency path="knockout"/>
     var _ = require("underscore");
     var ko = require("knockout");
     var kb = require("knockback");
@@ -33,8 +28,6 @@ define(["require", "exports", "../../../../App", "../../../../Helper", "./AuditB
             this.compositeModel = model;
             this.collectionView.model = model;
 
-            //var deferred = DAL.GetAllAuditBusVisit(null);
-            //deferred.done(p=> this.AuditBusVisitCompleted(p));
             this.app.MainRegion.show(this.collectionView);
             this.collectionView.listenTo(this.collectionView, "Event:AuditBusVisit", function (auditRequest) {
                 return _this.GetAuditBusVisitDetial(auditRequest);
@@ -64,7 +57,6 @@ define(["require", "exports", "../../../../App", "../../../../Helper", "./AuditB
             });
         };
         AuditBusVisitCtrl.prototype.AuditBusVisitCompleted = function (auditDto) {
-            //TODO:Hack - need rework
             var result = auditDto["auditBusVisitDisplayList"];
             var summary = [];
             for (var i = 0; i < result.length; i++) {
@@ -76,4 +68,3 @@ define(["require", "exports", "../../../../App", "../../../../Helper", "./AuditB
     })(helper.Controller);
     exports.AuditBusVisitCtrl = AuditBusVisitCtrl;
 });
-//# sourceMappingURL=AuditBusVisitCtrl.js.map

@@ -103,10 +103,10 @@ export class PaymentCtrl extends helper.Controller {
         this.backboneCollection = new Backbone.Collection(model.get("busVisits"));
         this.busVisitCollectionView = new views.BusVisitCollectionView({ collection: this.backboneCollection });
         this.busVisitCollectionView.on("itemview:BusVisitRemoveItem", (currentView, busId, centreId, driverId) => this.RemoveBusVisitItem(busId, centreId, driverId));
-        this.busVisitCollectionView.on("itemview:UpdateBusVisitItem", (currentView, model) => {
-            this.UpdateBusVisitItem(model);
+        this.busVisitCollectionView.on("itemview:UpdateBusVisitItem", (currentView, amodel) => {
+            this.UpdateBusVisitItem(amodel);
             var selectedBus = this.paymentView.viewModel.busList();
-            var bus = _.filter(selectedBus, (p) => { return p.id == model.get("busId"); });
+            var bus = _.filter(selectedBus, (p) => { return p.id == amodel.get("busId"); });
             this.paymentView.viewModel.busSelected(bus[0]);
         });
 

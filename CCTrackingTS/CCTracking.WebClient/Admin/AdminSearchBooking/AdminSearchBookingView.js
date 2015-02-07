@@ -1,11 +1,4 @@
-﻿/// <reference path="../../../Scripts/typings/require/require.d.ts" />
-/// <reference path="../../../Scripts/typings/marionette/marionette.d.ts" />
-/// <amd-dependency path="marionette"/>
-/// <amd-dependency path="jquery"/>
-/// <amd-dependency path="jqueryUI"/>
-/// <amd-dependency path="knockout"/>
-/// <amd-dependency path="text!./AdminSearchBookingTmpl.html"/>
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -30,12 +23,8 @@ define(["require", "exports", "../../Helper", "marionette", "jquery", "jqueryUI"
     var SearchView = (function (_super) {
         __extends(SearchView, _super);
         function SearchView(options) {
-            this.template = templateView; //templateView.getOuterHTML("#searchFilter");
+            this.template = templateView;
 
-            //this.events = {
-            //    "click .jsSearch": "Search",
-            //    "click .jsCancel": "Cancel"
-            //}
             _super.call(this, options);
         }
         SearchView.prototype.onDomRefresh = function () {
@@ -73,9 +62,7 @@ define(["require", "exports", "../../Helper", "marionette", "jquery", "jqueryUI"
             options.template = templateView.getOuterHTML("#rowTemplate");
             options.tagName = "tr";
 
-            //options.className = "jsRowClick";
             options.events = {
-                //"mouseover .jsShowDetail": "ShowDetail",
                 "click .jsShowDetail": function () {
                     _this.trigger("CentreBusSummary", _this.model.get("alkhidmatCentreId"));
                 }
@@ -83,10 +70,8 @@ define(["require", "exports", "../../Helper", "marionette", "jquery", "jqueryUI"
             _super.call(this, options);
         }
         SearchItemView.prototype.ShowDetail = function () {
-            //this.trigger("ShowDetail");
         };
         return SearchItemView;
     })(helper.Views.ItemView);
     exports.SearchItemView = SearchItemView;
 });
-//# sourceMappingURL=AdminSearchBookingView.js.map

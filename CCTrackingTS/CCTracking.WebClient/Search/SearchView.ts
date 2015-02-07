@@ -33,16 +33,16 @@ export class SearchView extends helper.Views.MvvmView {
         //}
         super(options);
     }
-    onDomRefresh() {
-        //alert("ddd");
-        //debugger;
-        //this.$el.find("#txtBookingDate").datepicker();
-    }
+    //onDomRefresh() {
+    //    //alert("ddd");
+    //    //debugger;
+    //    //this.$el.find("#txtBookingDate").datepicker();
+    //}
 
 }
 
 export class SearchCollectionView extends helper.Views.CompositeView {
-    datatable: any;
+    dataTable: any;
     constructor(options?) {
         options.itemView = SearchItemView;
         options.template = templateView.getOuterHTML("#gridTemplate");
@@ -61,11 +61,32 @@ export class SearchCollectionView extends helper.Views.CompositeView {
         e.preventDefault();
         this.trigger("CancelForm");
     }
-    onDomRefresh() {
-        //alert("ddd");
-        //debugger;
-        //this.$el.find("#txtBookingDate").datepicker();
-    }
+    //onShow() {
+
+    //    this.dataTable = this.$el.find("#tblSearch")["dataTable"]({
+    //        "autoWidth": false,
+    //        "info": true,
+    //        "processing": true,
+    //        //"scrollY": "500px",
+    //        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+    //        "language": {
+    //            "paginate": {
+    //                "next": "Next",
+    //                "previous": "Prev"
+    //            },
+    //            "emptyTable": "No record found!",
+    //            //"info": "Dispalying page _PAGE_ of _PAGES_",
+    //            "infoEmpty": "No record found!",
+    //            "zeroRecords": "No record found!"
+    //        },
+    //        "pageLength":3
+
+    //        //"lengthChange": false
+
+    //        //"lengthMenu": [[5, 10, 15, 20], [5, 10, 15, 20]]
+
+    //    });
+    //}
 
 }
 
