@@ -13,14 +13,14 @@
                             <td colspan="2" class="header-bold">Contact Details</td>
                         </tr>
                         <tr>
-                            <td class="col-sm-4 col-md-4 input-sm">Name</td>
+                            <td class="col-sm-4 col-md-4 input-sm">Name *</td>
                             <td class="col-sm-8 col-md-8">
                                 <input type="text" id="txtName" class="form-control input-sm" data-bind="value: model.contactName" placeholder="Contact Name"
                                     required="required" data-role="validate" title="Contact Name" maxlength="200" data-content="Contact name is required" />
                             </td>
                         </tr>
                         <tr>
-                            <td class="col-sm-4 col-md-4 input-sm">Mobile</td>
+                            <td class="col-sm-4 col-md-4 input-sm">Mobile *</td>
                             <td class="col-sm-8 col-md-8">
                                 <input type="text" id="txtMobile" class="form-control input-sm" data-bind="value: model.contactMobile" placeholder="Contact Mobile"
                                     required="required" data-role="validate" title="Contact Mobile" maxlength="200" data-content="Contact mobile is required" />
@@ -33,7 +33,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" class="header-bold">Deseased Info</td>
+                            <td colspan="2" class="header-bold">Deceased Info</td>
                         </tr>
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Name</td>
@@ -116,14 +116,14 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="col-sm-4 col-md-4 input-sm">Pick-up Date</td>
+                            <td class="col-sm-4 col-md-4 input-sm">Pick-up Date *</td>
                             <td class="col-sm-8 col-md-8">
                                 <input type="text" id="PickupDate" placeholder="mm/dd/yyyy" class="form-control input-sm" data-bind="datepicker: {}, value: model.pickupDate"
                                     required="required" data-role="validate" title="Pick-up Date" data-content="Pickup Date is required" />
                             </td>
                         </tr>
                         <tr>
-                            <td class="col-sm-4 col-md-4 input-sm">Pick-up Time</td>
+                            <td class="col-sm-4 col-md-4 input-sm">Pick-up Time *</td>
                             <td class="col-sm-8 col-md-8">
                                 <!--<input type="text" title="Pick-up Time"  pattern="[0-2][0-9]:[0-5][0-9] ((am)|(pm))"  id="PickupTime" class="form-control input-sm"  />-->
                                 <select id="ddlPickupTime" class="form-control input-sm"
@@ -132,7 +132,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="col-sm-4 col-md-4 input-sm">Return Time</td>
+                            <td class="col-sm-4 col-md-4 input-sm">Return Time *</td>
                             <td class="col-sm-8 col-md-8">
                                 <select id="ddlReturnTime" class="form-control input-sm"
                                     data-bind="options: model.returnTimeSlotList, optionsText: 'description', value: model.returnTimeSlotSelected">
@@ -140,7 +140,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="col-sm-4 col-md-4 input-sm">Graveyard</td>
+                            <td class="col-sm-4 col-md-4 input-sm">Graveyard *</td>
                             <td class="col-sm-8 col-md-8">
                                 <select id="ddlGraveyard" class="form-control input-sm"
                                     data-bind="options: model.graveyardList, optionsText: 'description', value: model.graveyardIdSelected">
@@ -148,7 +148,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="col-sm-4 col-md-4 input-sm">Funeral Prayer</td>
+                            <td class="col-sm-4 col-md-4 input-sm">Funeral Prayer *</td>
                             <td class="col-sm-8 col-md-8">
                                 <select id="Select2" class="form-control input-sm"
                                     data-bind="options: model.prayersList, optionsText: 'description', value: model.prayersSelected">

@@ -115,32 +115,57 @@ namespace CCTracking.DAL
         private void MapValues(Booking booking, IDataReader dr)
         {
             booking.Id = Convert.ToInt32(dr["Id"]);
-            booking.ContactName = dr["ContactName"].ToString();
-            booking.ContactMobile = dr["ContactMobile"].ToString();
-            booking.ContactNic = dr["ContactNic"].ToString();
-            booking.DeseasedName = dr["DeseasedName"].ToString();
-            booking.DeseasedAge = Convert.ToByte(dr["DeseasedAge"]);
-            booking.DeseasedGender = Convert.ToByte(dr["DeseasedGender"]);
-            booking.CauseOfDeath = Convert.ToByte(dr["CauseOfDeath"]);
-            booking.Address = dr["Address"].ToString();
-            booking.BusPoint = dr["BusPoint"] == DBNull.Value ? 0 : Convert.ToInt32(dr["BusPoint"]);
+            if (dr.IsColumnExists("ContactName") && !dr.IsDBNull(dr.GetOrdinal("ContactName")))
+                booking.ContactName = dr["ContactName"].ToString();
 
-            booking.AlkhidmatCentreId = dr["AlkhidmatCentre"] == DBNull.Value ? 0 : Convert.ToInt32(dr["AlkhidmatCentre"]);
-            booking.LandmarkId = dr["LandmarkId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["LandmarkId"]);
-            booking.UnionCouncilId = dr["UnionCouncilId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["UnionCouncilId"]);
-            booking.TownId = dr["TownId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["TownId"]);
-            booking.PickupDate = dr["PickupDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr["PickupDate"]);
-            booking.PickupTime = dr["PickupTime"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dr["PickupTime"]);
-            booking.ReturnTime = dr["ReturnTime"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dr["ReturnTime"]);
-            booking.GraveyardId = dr["GraveyardId"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dr["GraveyardId"]);
-            booking.NamazEJanazaHeldIn = dr["NamazEJanazaHeldIn"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dr["NamazEJanazaHeldIn"]);
-            booking.NamazEJanazaLocation = dr["NamazEJanazaLocation"] == DBNull.Value ? "" : dr["NamazEJanazaLocation"].ToString();
-            booking.MasjidName = dr["MasjidName"] == DBNull.Value ? "" : dr["MasjidName"].ToString();
-            booking.OtherDetail = dr["OtherDetail"].ToString();
 
-            booking.IsReferralBooking = dr["IsReferralBooking"] == DBNull.Value ? false : Convert.ToBoolean(dr["IsReferralBooking"]);
-            booking.ReferralName = dr["ReferralName"] == DBNull.Value ? "" : dr["ReferralName"].ToString();
-            booking.ReferralDetail = dr["ReferralDetail"] == DBNull.Value ? "" : dr["ReferralDetail"].ToString();
+            if (dr.IsColumnExists("ContactMobile") && !dr.IsDBNull(dr.GetOrdinal("ContactMobile")))
+                booking.ContactMobile = dr["ContactMobile"].ToString();
+            if (dr.IsColumnExists("ContactNic") && !dr.IsDBNull(dr.GetOrdinal("ContactNic")))
+                booking.ContactNic = dr["ContactNic"].ToString();
+
+            if (dr.IsColumnExists("DeseasedName") && !dr.IsDBNull(dr.GetOrdinal("DeseasedName")))
+                booking.DeseasedName = dr["DeseasedName"].ToString();
+            if (dr.IsColumnExists("DeseasedAge") && !dr.IsDBNull(dr.GetOrdinal("DeseasedAge")))
+                booking.DeseasedAge = Convert.ToByte(dr["DeseasedAge"]);
+            if (dr.IsColumnExists("DeseasedGender") && !dr.IsDBNull(dr.GetOrdinal("DeseasedGender")))
+                booking.DeseasedGender = Convert.ToByte(dr["DeseasedGender"]);
+            if (dr.IsColumnExists("CauseOfDeath") && !dr.IsDBNull(dr.GetOrdinal("CauseOfDeath")))
+                booking.CauseOfDeath = Convert.ToByte(dr["CauseOfDeath"]);
+            if (dr.IsColumnExists("Address") && !dr.IsDBNull(dr.GetOrdinal("Address")))
+                booking.Address = dr["Address"].ToString();
+            if (dr.IsColumnExists("BusPoint") && !dr.IsDBNull(dr.GetOrdinal("BusPoint")))
+                booking.BusPoint = dr["BusPoint"] == DBNull.Value ? 0 : Convert.ToInt32(dr["BusPoint"]);
+            if (dr.IsColumnExists("AlkhidmatCentre") && !dr.IsDBNull(dr.GetOrdinal("AlkhidmatCentre")))
+                booking.AlkhidmatCentreId = dr["AlkhidmatCentre"] == DBNull.Value ? 0 : Convert.ToInt32(dr["AlkhidmatCentre"]);
+            if (dr.IsColumnExists("LandmarkId") && !dr.IsDBNull(dr.GetOrdinal("LandmarkId")))
+                booking.LandmarkId = dr["LandmarkId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["LandmarkId"]);
+            if (dr.IsColumnExists("UnionCouncilId") && !dr.IsDBNull(dr.GetOrdinal("UnionCouncilId")))
+                booking.UnionCouncilId = dr["UnionCouncilId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["UnionCouncilId"]);
+            if (dr.IsColumnExists("TownId") && !dr.IsDBNull(dr.GetOrdinal("TownId")))
+                booking.TownId = dr["TownId"] == DBNull.Value ? 0 : Convert.ToInt32(dr["TownId"]);
+            if (dr.IsColumnExists("PickupDate") && !dr.IsDBNull(dr.GetOrdinal("PickupDate")))
+                booking.PickupDate = dr["PickupDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr["PickupDate"]);
+            if (dr.IsColumnExists("PickupTime") && !dr.IsDBNull(dr.GetOrdinal("PickupTime")))
+                booking.PickupTime = dr["PickupTime"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dr["PickupTime"]);
+            if (dr.IsColumnExists("ReturnTime") && !dr.IsDBNull(dr.GetOrdinal("ReturnTime")))
+                booking.ReturnTime = dr["ReturnTime"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dr["ReturnTime"]);
+            if (dr.IsColumnExists("GraveyardId") && !dr.IsDBNull(dr.GetOrdinal("GraveyardId")))
+                booking.GraveyardId = dr["GraveyardId"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dr["GraveyardId"]);
+            if (dr.IsColumnExists("NamazEJanazaHeldIn") && !dr.IsDBNull(dr.GetOrdinal("NamazEJanazaHeldIn")))
+                booking.NamazEJanazaHeldIn = dr["NamazEJanazaHeldIn"] == DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dr["NamazEJanazaHeldIn"]);
+            if (dr.IsColumnExists("NamazEJanazaLocation") && !dr.IsDBNull(dr.GetOrdinal("NamazEJanazaLocation")))
+                booking.NamazEJanazaLocation = dr["NamazEJanazaLocation"] == DBNull.Value ? "" : dr["NamazEJanazaLocation"].ToString();
+            if (dr.IsColumnExists("MasjidName") && !dr.IsDBNull(dr.GetOrdinal("MasjidName")))
+                booking.MasjidName = dr["MasjidName"] == DBNull.Value ? "" : dr["MasjidName"].ToString();
+            if (dr.IsColumnExists("OtherDetail") && !dr.IsDBNull(dr.GetOrdinal("OtherDetail")))
+                booking.OtherDetail = dr["OtherDetail"].ToString();
+            if (dr.IsColumnExists("IsReferralBooking") && !dr.IsDBNull(dr.GetOrdinal("IsReferralBooking")))
+                booking.IsReferralBooking = dr["IsReferralBooking"] == DBNull.Value ? false : Convert.ToBoolean(dr["IsReferralBooking"]);
+            if (dr.IsColumnExists("ReferralName") && !dr.IsDBNull(dr.GetOrdinal("ReferralName")))
+                booking.ReferralName = dr["ReferralName"] == DBNull.Value ? "" : dr["ReferralName"].ToString();
+            if (dr.IsColumnExists("ReferralDetail") && !dr.IsDBNull(dr.GetOrdinal("ReferralDetail")))
+                booking.ReferralDetail = dr["ReferralDetail"] == DBNull.Value ? "" : dr["ReferralDetail"].ToString();
 
         }
     }

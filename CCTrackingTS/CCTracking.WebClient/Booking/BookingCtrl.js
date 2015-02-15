@@ -44,6 +44,7 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
         };
 
         BookingCtrl.prototype.GetByIdCompleted = function (bookingResponse) {
+            var _this = this;
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
             var model = new Backbone.Model(bookingResponse["bookingModel"]);
 
@@ -116,6 +117,9 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             model.set("pickupDate", helper.FormatDateString(model.get("pickupDate")));
             this.bookingViewModel = new views.BookingViewModel(model, this);
             this.bookingView = new views.BookingView({ viewModel: this.bookingViewModel });
+            this.bookingView.on("SaveBooking", function () {
+                return _this.Save(_this.bookingViewModel.bbModel);
+            });
             this.layout = app.AppLayout;
             app.MainRegion.show(this.bookingView);
 
@@ -125,6 +129,7 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
         };
 
         BookingCtrl.prototype.LoadCompleted = function (lookupResponse) {
+            var _this = this;
             var model = new dto.Models.BookingResponse();
 
             model.set("contactName", "");
@@ -181,6 +186,9 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             //});
             this.bookingViewModel = new views.BookingViewModel(model, this);
             this.bookingView = new views.BookingView({ viewModel: this.bookingViewModel });
+            this.bookingView.on("SaveBooking", function () {
+                return _this.Save(_this.bookingViewModel.bbModel);
+            });
 
             //this.bookingView.listenTo(this.bookingView, "ExportToPdf", (id) => { alert('id-' + id); });
             //this.bookingView.on("ExportToPdf", (id) => { alert(id); });
@@ -201,6 +209,7 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
         //Add(booking: dto.Models.BookingRequest) {
         BookingCtrl.prototype.Save = function (booking) {
             var _this = this;
+            //console.log("Save::Start " + new Date());
             var appObj = app.request("AppGlobalSetting");
             booking.set("modifiedBy", appObj.get("Id"));
 
@@ -227,14 +236,53 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             }
             booking.set("isReferralBooking", booking.get("isReferralBooking") == "1" ? true : false);
 
-            //booking.set("busDetailId", booking.get("busDetailIdSelected").id);
-            var deferred = DAL.Save(booking);
+            var deferred = DAL.Save(this.GetMinimalRequest(booking));
 
             //TODO: call controller from here...
             deferred.done(function (p) {
-                return _this.SaveCompleted(p);
+                _this.SaveCompleted(p);
             });
             //setTimeout(() => { alert('then'); }, 1000);
+        };
+
+        BookingCtrl.prototype.GetMinimalRequest = function (booking) {
+            var request = new dto.Models.BookingRequest();
+            request.set("alkhidmatCentreId", booking.get("alkhidmatCentreId"));
+            request.set("address", booking.get("address"));
+            request.set("busPoint", booking.get("busPoint"));
+            request.set("causeOfDeath", booking.get("causeOfDeath"));
+            request.set("contactMobile", booking.get("contactMobile"));
+            request.set("contactName", booking.get("contactName"));
+            request.set("contactNic", booking.get("contactNic"));
+            request.set("createdBy", booking.get("createdBy"));
+            request.set("createdDate", booking.get("createdDate"));
+            request.set("deseasedAge", booking.get("deseasedAge"));
+            request.set("deseasedGender", booking.get("deseasedGender"));
+            request.set("deseasedName", booking.get("deseasedName"));
+
+            //request.set("entityType", booking.get("entityType"));
+            //request.set("errorMessage", booking.get("errorMessage"));
+            request.set("graveyardId", booking.get("graveyardId"));
+            request.set("id", booking.get("id"));
+            request.set("isActive", booking.get("isActive"));
+            request.set("isReferralBooking", booking.get("isReferralBooking"));
+            request.set("landmarkId", booking.get("landmarkId"));
+            request.set("masjidName", booking.get("masjidName"));
+            request.set("modifiedBy", booking.get("modifiedBy"));
+            request.set("modifiedDate", booking.get("modifiedDate"));
+            request.set("namazEJanazaHeldIn", booking.get("namazEJanazaHeldIn"));
+            request.set("namazEJanazaLocation", booking.get("namazEJanazaLocation"));
+            request.set("operationType", booking.get("operationType"));
+            request.set("otherDetail", booking.get("otherDetail"));
+            request.set("pickupDate", booking.get("pickupDate"));
+            request.set("pickupTime", booking.get("pickupTime"));
+            request.set("referralDetail", booking.get("referralDetail"));
+            request.set("referralName", booking.get("referralName"));
+            request.set("returnTime", booking.get("returnTime"));
+            request.set("townId", booking.get("townId"));
+            request.set("unionCouncilId", booking.get("unionCouncilId"));
+
+            return request;
         };
 
         BookingCtrl.prototype.SaveCompleted = function (bookingResponse) {

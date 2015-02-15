@@ -138,48 +138,7 @@ export class PaymentCtrl extends helper.Controller {
         app.SubRegion.show(this.busVisitCollectionView);
     }
 
-    //LoadCompleted1() {
-    //    var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'))
-    //    var model = new dto.Models.PaymentResponse();
-    //    //var a = _.filter(lookupResponse.unionCouncil, (p)=> { return p.id==1});
-    //    model.set("bookingId", "");
-    //    model.set("paymentType", "");
-    //    model.set("pricing", "");
-    //    model.set("amount", "");
-    //    model.set("paymentLocation", "");
-    //    model.set("officerId", "");
-
-    //    model.set("receiptNo","");
-    //    model.set("extraAmountCharge", "");
-
-    //    model.set("extraAmountReason", "");
-    //    model.set("extraAmountReceipt", "");
-    //    model.set("paymentStatus", "");
-    //    //helper.SubscribeApplicationEventListener();
-
-    //    model.set("busList", lookupResponse.bus);
-    //    model.set("busSelected", "");
-    //    model.set("driverList", lookupResponse.driver);
-    //    model.set("driverSelected", "");
-    //    model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
-    //    model.set("alkhidmatCentreSelected", "");
-
-    //    model.set("paymentLocationList", lookupResponse.alkhidmatCentre);
-    //    model.set("paymentLocationSelected", "");
-    //    model.set("cashierList", lookupResponse.cashier);
-    //    model.set("cashierSelected", "");
-    //    model.set("paymentTypeList", lookupResponse.paymentType);
-    //    model.set("paymentTypeSelected", "");
-
-    //    this.layout = app.AppLayout;
-    //    this.paymentViewModel = new views.PaymentViewModel(model, this);
-    //    this.paymentView = new views.PaymentView({ viewModel: this.paymentViewModel });        
-    //    this.paymentView.on("BusVisitAddItem", (bookingId, alkhidmatCentre, driver, bus) => this.AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus));
-    //    this.paymentView.on("PaymentSave", (bbmodel) => this.Save(bbmodel));
-    //    app.MainRegion.show(this.paymentView);    
-    //    app.SubRegion.reset();
-    //    app.SubRegion.show(this.busVisitCollectionView);
-    //}
+    
 
     AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus, fuelAmount) {
         if (bus == undefined || bus.length <= 0) {
@@ -240,19 +199,7 @@ export class PaymentCtrl extends helper.Controller {
         
 
         if (busExist != undefined && driverExist != undefined) {
-            //this.backboneCollection["set"](new busVisitDto.Models.BusVisitDto({
-            //    busVisitId: counter,
-            //    centreId: alkhidmatCentre.id, centreDesc: alkhidmatCentre.description,
-            //    busId: bus.id, busDesc: bus.description,
-            //    driverId: driver.id, driverDesc: driver.description,
-            //    visitTypeId: "2",
-            //    //isAvailableForBooking: false,
-            //    //isAvailableForFutureBooking: false,
-            //    bookingId: bookingId,
-            //    fuelAmount: fuelAmount
-            //}));
-
-            var arr = _.map(this.backboneCollection.models, (item) => {
+           var arr = _.map(this.backboneCollection.models, (item) => {
                 if (item.get("busId") == bus.id && item.get("driverId") == driver.id) {
                     item.set("centreId",alkhidmatCentre.id);
                     item.set("centreDesc",alkhidmatCentre.description);
@@ -296,7 +243,7 @@ export class PaymentCtrl extends helper.Controller {
 
     UpdateBusVisitItem(model) {
         
-        var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
+        //var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
         //debugger;
         //var centre = _.filter(lookupResponse.alkhidmatCentre, (p) => { return p.id == model.get("centreId"); });
         var selectedCentre = this.paymentView.viewModel.alkhidmatCentreList();
@@ -322,11 +269,7 @@ export class PaymentCtrl extends helper.Controller {
         //this.paymentView.viewModel.alkhidmatCentreSelected(this.paymentView.viewModel.alkhidmatCentreList()[3]);
     }
 
-    //GetAll() {
-    //    var deferred = DAL.GetAll();
-    //    deferred.done(p=> new views.PaymentView().GetAllCompleted(p));
-    //}
-    //Add(booking: dto.Models.BookingRequest) {
+  
     Save(payment: any) {
         //reset actual id - match with DAL object's properties
         if (this.backboneCollection.length < 1) {
@@ -341,19 +284,31 @@ export class PaymentCtrl extends helper.Controller {
                 return;
             }
         }
-        //payment.set("bus", payment.get("busSelected").id);
-        //payment.set("driver", payment.get("driverSelected").id);
-        //payment.set("alkhidmatCentre", payment.get("alkhidmatCentreSelected").id);
-        //payment.set("paymentLocation", payment.get("paymentLocationSelected").id);
-        //payment.set("officerId", payment.get("cashierSelected").id);
-        //payment.set("paymentType", payment.get("paymentTypeSelected").id);
         var appObj = app.request("AppGlobalSetting");
         payment.set("modifiedBy", appObj.get("Id"));
 
         payment.set("busVisits", this.backboneCollection.toJSON());
+        //payment.set("busVisits", this.GetMinimalRequest());
         var deferred = DAL.Save(payment);
 
         //TODO: call controller from here...
         deferred.done(p=> new views.PaymentView(null).SaveCompleted(p));
+    }
+
+    GetMinimalRequest() {
+        //var visits = this.backboneCollection.toJSON();
+        var visits = [];
+        for(var i=0;i<this.backboneCollection.length;i++) {
+            var visit = {
+                centreId: this.backboneCollection.models[i].get("centreId"), 
+                busId: this.backboneCollection.models[i].get("busId"), 
+                driverId: this.backboneCollection.models[i].get("driverId"), 
+                visitTypeId: this.backboneCollection.models[i].get("visitTypeId"), 
+                bookingId: this.backboneCollection.models[i].get("bookingId"), 
+                fuelAmount: this.backboneCollection.models[i].get("fuelAmount")
+            };
+            visits.push(visit);
+        }
+        return visits;
     }
 }

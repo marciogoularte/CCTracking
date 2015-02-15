@@ -6,7 +6,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto", "./BookingCtrl", "../App", "marionette", "jquery", "jqueryUI", "knockout", "text!./BookingTmpl.html", "text!./BookingGrid.html", "text!./BokingGridRow.html"], function(require, exports, helper, bookingDto, bookingCtrl, application) {
+define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto", "../App", "marionette", "jquery", "jqueryUI", "knockout", "text!./BookingTmpl.html", "text!./BookingGrid.html", "text!./BokingGridRow.html"], function(require, exports, helper, bookingDto, application) {
     /// <amd-dependency path="marionette"/>
     /// <amd-dependency path="jquery"/>
     /// <amd-dependency path="jqueryUI"/>
@@ -102,7 +102,8 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto
 
             //alert(this.viewModel.bbModel.get("causeOfDeathSelected").idd);
             //alert(this.viewModel.bbModel.get("contactName"));
-            new bookingCtrl.BookingCtrl().Save(this.viewModel.bbModel);
+            //new bookingCtrl.BookingCtrl().Save(this.viewModel.bbModel);
+            this.trigger("SaveBooking");
         };
 
         BookingView.prototype.GetAllCompleted = function (bookingResponse) {

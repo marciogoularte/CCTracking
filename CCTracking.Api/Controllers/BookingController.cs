@@ -22,6 +22,8 @@ namespace CCTracking.Api.Controllers
         [HttpPost]
         public Booking SaveBooking(Booking booking)
         {
+            
+            //Logger.WriteLog("Save booking started at: " + DateTime.Now);
             if (booking != null)
             {
                 if (booking.Id <= 0)
@@ -47,6 +49,7 @@ namespace CCTracking.Api.Controllers
             }
             //get rid of alerts from each file, a generic implementation is done on helper
             booking.EntityType = "Booking";
+            //Logger.WriteLog("Save booking end at: " + DateTime.Now);
             return booking;
         }
 

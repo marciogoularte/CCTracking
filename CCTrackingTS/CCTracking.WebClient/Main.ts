@@ -17,13 +17,13 @@ require.config({
         // JavaScript folders
 
         // Libraries
-        jquery: "Scripts/jquery-2.1.1",
+        jquery: "Scripts/jquery-2.1.1.min",
         jqueryUI: "Scripts/jquery-ui",
-        underscore: "Scripts/underscore",
-        backbone: "Scripts/backbone",
+        underscore: "Scripts/underscore-min",
+        backbone: "Scripts/backbone.min",
         //router: "Vendor/gladstone/backbonerouter",
-        marionette: "Scripts/backbone.marionette",
-        bootstrap: "Scripts/bootstrap",
+        marionette: "Scripts/backbone.marionette.min",
+        bootstrap: "Scripts/bootstrap.min",
         bootstrapPopover: "Scripts/bootstrap-popover",
         bootstrapTooltip: "Scripts/bootstrap-tooltip",
         //datepicker: "Scripts/bootstrap-datepicker",
@@ -34,11 +34,11 @@ require.config({
         //bindings: "Vendor/Gladstone/KnockoutBindings",
         // Require plugins
         text: "Scripts/text",
-        datatables: "Scripts/DataTables/jquery.dataTables",
+        datatables: "Scripts/DataTables/jquery.dataTables.min",
         datatablesBootstrap: "Scripts/DataTables/dataTables.bootstrap",
-        jqueryValidate: "Scripts/jquery.validate",
-        jqueryUnobtrusive: "Scripts/jquery.validate.unobtrusive",
-        jqueryUnobtrusiveAjax: "Scripts/jquery.unobtrusive-ajax",
+        jqueryValidate: "Scripts/jquery.validate.min",
+        jqueryUnobtrusive: "Scripts/jquery.validate.unobtrusive.min",
+        jqueryUnobtrusiveAjax: "Scripts/jquery.unobtrusive-ajax.min",
         //knockoutJqueryuiUtils: 'Scripts/KnockoutJqueryUI/utils',
         //knockoutJqueryuiHandler: 'Scripts/KnockoutJqueryUI/bindingHandler',
         knockoutJqueryuiDatepicker: 'Scripts/KnockoutJqueryUI/datepicker',
@@ -47,7 +47,7 @@ require.config({
         highchartsExport: 'Scripts/HighCharts/exporting',
         jsPDF: 'Scripts/JSPdf/jspdf.min',
         accounting: 'Scripts/AccountingJS/accounting.min',
-        selectize:'Scripts/Selectize/selectize'
+        selectize:'Scripts/Selectize/selectize.min'
 
     },
 

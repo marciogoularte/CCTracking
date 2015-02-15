@@ -63,7 +63,7 @@ namespace CCTracking.DAL
 
         public DbDataReader ExecuteReader(string query)
         {
-            this.dbDataReader = databaseHelper.ExecuteReader(query);
+            this.dbDataReader = databaseHelper.ExecuteReader(query, DatabaseConnectionState.CloseOnExit);
             return this.dbDataReader;
         }
 
@@ -123,9 +123,10 @@ namespace CCTracking.DAL
             return this.dataSet;
         }
 
-        public int ExecuteNonQuery(string query, CommandType commandtype)
+
+        public DataSet ExecuteDataSet(string query, CommandType commandtype, DatabaseConnectionState databaseConnectionState)
         {
-            return databaseHelper.ExecuteNonQuery(query, commandtype);
+            return databaseHelper.ExecuteDataSet(query, commandtype, databaseConnectionState);
         }
 
         public int ExecuteNonQuery(string query, CommandType commandtype, DatabaseConnectionState databaseConnectionState)

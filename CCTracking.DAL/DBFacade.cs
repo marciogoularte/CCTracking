@@ -8,7 +8,7 @@ namespace CCTracking.DAL
 {
     public abstract class DBFacade
     {
-        string ConnectionString { get; set; }
+       string ConnectionString { get; set; }
         protected abstract BaseModelResponse ConvertToModel(IDataReader dr);
         protected abstract BaseModelResponse ConvertToList(IDataReader dr);
         protected abstract BaseModelResponse ConvertToList(DataSet ds);
@@ -56,7 +56,7 @@ namespace CCTracking.DAL
                     dbManager.AddParameter(item.Key, item.Value);
                 }
 
-                dr = dbManager.ExecuteReader(sql, CommandType.StoredProcedure);
+                dr = dbManager.ExecuteReader(sql, CommandType.StoredProcedure, DatabaseConnectionState.CloseOnExit);
                 baseModelResponse = ConvertToModel(dr);
 
             }
@@ -96,7 +96,7 @@ namespace CCTracking.DAL
                 {
                     dbManager.AddParameter(item.Key, item.Value);
                 }
-                dr = dbManager.ExecuteReader(sql, CommandType.StoredProcedure);
+                dr = dbManager.ExecuteReader(sql, CommandType.StoredProcedure, DatabaseConnectionState.CloseOnExit);
                 baseModelResponse = ConvertToList(dr);
 
             }
@@ -132,7 +132,7 @@ namespace CCTracking.DAL
                 {
                     dbManager.AddParameter(item.Key, item.Value);
                 }
-                dr = dbManager.ExecuteReader(sql, CommandType.StoredProcedure);
+                dr = dbManager.ExecuteReader(sql, CommandType.StoredProcedure, DatabaseConnectionState.CloseOnExit);
                 baseModelResponse = ConvertToList(dr);
 
             }
@@ -168,8 +168,10 @@ namespace CCTracking.DAL
                 {
                     dbManager.AddParameter(item.Key, item.Value);
                 }
+                //Logger.WriteLog("Save booking proc started at: " + DateTime.Now);
+                dr = dbManager.ExecuteReader(sql, CommandType.StoredProcedure, DatabaseConnectionState.CloseOnExit);
+                //Logger.WriteLog("Save booking proc end at: " + DateTime.Now);
 
-                dr = dbManager.ExecuteReader(sql, CommandType.StoredProcedure);
                 baseModelResponse = ConvertToModel(dr);
 
             }
@@ -207,7 +209,7 @@ namespace CCTracking.DAL
                     dbManager.AddParameter(item.Key, item.Value);
                 }
 
-                ds = dbManager.ExecuteDataSet(sql, CommandType.StoredProcedure);
+                ds = dbManager.ExecuteDataSet(sql, CommandType.StoredProcedure, DatabaseConnectionState.CloseOnExit);
                 baseModelResponse = ConvertToList(ds);
 
             }
@@ -239,7 +241,7 @@ namespace CCTracking.DAL
                 {
                     dbManager.AddParameter(item.Key, item.Value);
                 }
-                dr = dbManager.ExecuteReader(sql, CommandType.StoredProcedure);
+                dr = dbManager.ExecuteReader(sql, CommandType.StoredProcedure, DatabaseConnectionState.CloseOnExit);
                 //baseModelResponse = ConvertToModel(dr);
                 deleteFlag = true;
             }
@@ -272,7 +274,7 @@ namespace CCTracking.DAL
                 //{
                 //    dbManager.AddParameter(item.Key, item.Value);
                 //}
-                resultCount = dbManager.ExecuteScalar(sql, CommandType.StoredProcedure);
+                resultCount = dbManager.ExecuteScalar(sql, CommandType.StoredProcedure, DatabaseConnectionState.CloseOnExit);
 
             }
             catch (Exception e)

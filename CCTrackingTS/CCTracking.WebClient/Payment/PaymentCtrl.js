@@ -232,8 +232,6 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
         };
 
         PaymentCtrl.prototype.UpdateBusVisitItem = function (model) {
-            var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
-
             var selectedCentre = this.paymentView.viewModel.alkhidmatCentreList();
             var selectedDriver = this.paymentView.viewModel.driverList();
             var selectedBus = this.paymentView.viewModel.busList();
@@ -267,16 +265,32 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
                     return;
                 }
             }
-
             var appObj = app.request("AppGlobalSetting");
             payment.set("modifiedBy", appObj.get("Id"));
 
             payment.set("busVisits", this.backboneCollection.toJSON());
+
             var deferred = DAL.Save(payment);
 
             deferred.done(function (p) {
                 return new views.PaymentView(null).SaveCompleted(p);
             });
+        };
+
+        PaymentCtrl.prototype.GetMinimalRequest = function () {
+            var visits = [];
+            for (var i = 0; i < this.backboneCollection.length; i++) {
+                var visit = {
+                    centreId: this.backboneCollection.models[i].get("centreId"),
+                    busId: this.backboneCollection.models[i].get("busId"),
+                    driverId: this.backboneCollection.models[i].get("driverId"),
+                    visitTypeId: this.backboneCollection.models[i].get("visitTypeId"),
+                    bookingId: this.backboneCollection.models[i].get("bookingId"),
+                    fuelAmount: this.backboneCollection.models[i].get("fuelAmount")
+                };
+                visits.push(visit);
+            }
+            return visits;
         };
         return PaymentCtrl;
     })(helper.Controller);

@@ -105,7 +105,9 @@ export class BookingView extends helper.Views.MvvmView {
         e.preventDefault();
         //alert(this.viewModel.bbModel.get("causeOfDeathSelected").idd);
         //alert(this.viewModel.bbModel.get("contactName"));
-        new bookingCtrl.BookingCtrl().Save(this.viewModel.bbModel);
+        //new bookingCtrl.BookingCtrl().Save(this.viewModel.bbModel);
+        this.trigger("SaveBooking");
+
     }
 
 

@@ -322,7 +322,7 @@ export function FormatMoney(aMoney) {
 }
 
 export function GetPageSize() {
-    return 5;
+    return 50;
 }
 
 

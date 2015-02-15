@@ -54,6 +54,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="ExtraCharges.cs" />
     <Compile Include="Home.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="PaymentType.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="Graveyard.cs" />

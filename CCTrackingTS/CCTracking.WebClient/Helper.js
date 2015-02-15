@@ -246,7 +246,7 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
     exports.FormatMoney = FormatMoney;
 
     function GetPageSize() {
-        return 5;
+        return 50;
     }
     exports.GetPageSize = GetPageSize;
 
