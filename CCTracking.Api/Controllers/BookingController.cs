@@ -56,23 +56,22 @@ namespace CCTracking.Api.Controllers
         [HttpGet]
         public LookupResponse BookingDefault()
         {
-            DBFacade facade = new CCTracking.DAL.LookupDal();
+            DBFacade facade = new LookupDal();
             BaseModelResponse baseModelResponse = facade.ExecuteDs(null);
             LookupResponse lookupResponse = (LookupResponse)baseModelResponse;
             return lookupResponse;
         }
         [HttpGet]
-        public BookingResponse GetAll(int a)
+        public BaseModelResponse GetAll(int a)
         {
-            DBFacade facade = new CCTracking.DAL.BookingDal();
-            BaseModelResponse baseModelResponse = facade.GetAll(a);
-            BookingResponse bookingResponse = (BookingResponse)baseModelResponse;
-            return bookingResponse;
+            DBFacade facade = new BookingDal();
+            BaseModelResponse baseModelResponse = facade.GetAllGrid(a);
+            return baseModelResponse;
         }
         [HttpGet]
         public BookingResponse GetById(int id)
         {
-            DBFacade facade = new CCTracking.DAL.BookingDal();
+            DBFacade facade = new BookingDal();
             BaseModelResponse baseModelResponse = facade.GetById(id);
             BookingResponse bookingResponse = (BookingResponse)baseModelResponse;
             return bookingResponse;

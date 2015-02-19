@@ -1,4 +1,11 @@
-﻿var __extends = this.__extends || function (d, b) {
+﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+/// <amd-dependency path="marionette"/>
+/// <amd-dependency path="jquery"/>
+/// <amd-dependency path="jqueryUI"/>
+/// <amd-dependency path="knockout"/>
+/// <amd-dependency path="text!./ExtraCharge.html"/>
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -12,6 +19,7 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "jq
 
     var app;
 
+    // View Model
     var ExtraChargeViewModel = (function (_super) {
         __extends(ExtraChargeViewModel, _super);
         function ExtraChargeViewModel(model, controller) {
@@ -21,6 +29,7 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "jq
     })(helper.ViewModel);
     exports.ExtraChargeViewModel = ExtraChargeViewModel;
 
+    // View
     var ExtraChargeView = (function (_super) {
         __extends(ExtraChargeView, _super);
         function ExtraChargeView(options) {
@@ -53,14 +62,17 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "jq
             } else {
                 helper.ShowModalPopup("success", "Extra Charge", "Record has been saved successfully with Payment ID : " + extraChargeResponse["id"]);
 
+                //alert("Record has been saved successfully with Payment ID : " + paymentResponse["id"]);
                 location.href = "#viewBooking";
             }
+            //app.vent.trigger("Event:UpdateSummary");
         };
         ExtraChargeView.prototype.onShow = function () {
             ko.applyBindings(this.viewModel, this.el);
         };
 
         ExtraChargeView.prototype.onClose = function () {
+            //app.vent.off("Event:UpdateSummary");
         };
         return ExtraChargeView;
     })(helper.Views.ItemView);
@@ -107,3 +119,4 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "jq
         self.Id(model.id);
     }
 });
+//# sourceMappingURL=ExtraChargeView.js.map

@@ -110,5 +110,10 @@ namespace CCTracking.DAL
             payment.ReferralPaymentDate = dr["ReferralPaymentDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr["ReferralPaymentDate"]);
         }
 
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

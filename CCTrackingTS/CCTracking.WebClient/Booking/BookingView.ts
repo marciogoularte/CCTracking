@@ -5,7 +5,6 @@
 /// <amd-dependency path="jquery"/>
 /// <amd-dependency path="jqueryUI"/>
 /// <amd-dependency path="knockout"/>
-// // <amd-dependency path="selectize"/>
 
 /// <amd-dependency path="text!./BookingTmpl.html"/>
 /// <amd-dependency path="text!./BookingGrid.html"/>
@@ -103,36 +102,11 @@ export class BookingView extends helper.Views.MvvmView {
     
     Save(e) {
         e.preventDefault();
-        //alert(this.viewModel.bbModel.get("causeOfDeathSelected").idd);
-        //alert(this.viewModel.bbModel.get("contactName"));
-        //new bookingCtrl.BookingCtrl().Save(this.viewModel.bbModel);
         this.trigger("SaveBooking");
-
     }
 
 
 
-    GetAllCompleted(bookingResponse: bookingDto.Models.BookingResponseCollection) {
-        
-        //var a = templateGrid;
-        app = application.Application.getInstance();
-        var bookings = _.map(bookingResponse["bookingList"], (item) => {
-            if (item.pickupDate != "0001-01-01T00:00:00")
-                item.pickupDate = helper.FormatDateString(item.pickupDate);
-            else
-                item.pickupDate = "";
-            return item;
-        });
-        var bookingCollection = new bookingDto.Models.BookingResponseCollection(bookings);
-        //var model = new Backbone.Model();
-        //model.set("itemCount", bookingCollection.length);
-        var collectionView: BookingCollectionView = new BookingCollectionView({ collection: bookingCollection });
-        collectionView.listenTo(collectionView, "itemview:ExportToPdf", (view, id) => {
-            this.ExportToPdf(id);
-        });
-        //var bookingGrid = collectionView.$("#tblBooking");
-        app.MainRegion.show(collectionView);
-    }
 
     ExportToPdf(id) {
         helper.PrintReceipt(id);

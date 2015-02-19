@@ -118,5 +118,10 @@ namespace CCTracking.DAL
                 refundBooking.RefundOfficer = dr.GetInt32(dr.GetOrdinal("RefundOfficer"));
 
         }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

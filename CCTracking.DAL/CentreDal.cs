@@ -100,5 +100,10 @@ namespace CCTracking.DAL
             if (!dr.IsDBNull(dr.GetOrdinal("IsCoPartner")))
                 centre.IsCoPartner = dr.GetBoolean(dr.GetOrdinal("IsCoPartner"));
         }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

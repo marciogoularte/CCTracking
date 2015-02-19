@@ -6,12 +6,11 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto", "../App", "marionette", "jquery", "jqueryUI", "knockout", "text!./BookingTmpl.html", "text!./BookingGrid.html", "text!./BokingGridRow.html"], function(require, exports, helper, bookingDto, application) {
+define(["require", "exports", "../Helper", "marionette", "jquery", "jqueryUI", "knockout", "text!./BookingTmpl.html", "text!./BookingGrid.html", "text!./BokingGridRow.html"], function(require, exports, helper) {
     /// <amd-dependency path="marionette"/>
     /// <amd-dependency path="jquery"/>
     /// <amd-dependency path="jqueryUI"/>
     /// <amd-dependency path="knockout"/>
-    // // <amd-dependency path="selectize"/>
     /// <amd-dependency path="text!./BookingTmpl.html"/>
     /// <amd-dependency path="text!./BookingGrid.html"/>
     /// <amd-dependency path="text!./BokingGridRow.html"/>
@@ -99,35 +98,7 @@ define(["require", "exports", "../Helper", "CCTracking.WebClient/Dtos/BookingDto
 
         BookingView.prototype.Save = function (e) {
             e.preventDefault();
-
-            //alert(this.viewModel.bbModel.get("causeOfDeathSelected").idd);
-            //alert(this.viewModel.bbModel.get("contactName"));
-            //new bookingCtrl.BookingCtrl().Save(this.viewModel.bbModel);
             this.trigger("SaveBooking");
-        };
-
-        BookingView.prototype.GetAllCompleted = function (bookingResponse) {
-            var _this = this;
-            //var a = templateGrid;
-            app = application.Application.getInstance();
-            var bookings = _.map(bookingResponse["bookingList"], function (item) {
-                if (item.pickupDate != "0001-01-01T00:00:00")
-                    item.pickupDate = helper.FormatDateString(item.pickupDate);
-                else
-                    item.pickupDate = "";
-                return item;
-            });
-            var bookingCollection = new bookingDto.Models.BookingResponseCollection(bookings);
-
-            //var model = new Backbone.Model();
-            //model.set("itemCount", bookingCollection.length);
-            var collectionView = new BookingCollectionView({ collection: bookingCollection });
-            collectionView.listenTo(collectionView, "itemview:ExportToPdf", function (view, id) {
-                _this.ExportToPdf(id);
-            });
-
-            //var bookingGrid = collectionView.$("#tblBooking");
-            app.MainRegion.show(collectionView);
         };
 
         BookingView.prototype.ExportToPdf = function (id) {

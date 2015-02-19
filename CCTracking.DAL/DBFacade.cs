@@ -1,4 +1,5 @@
-﻿using CCTracking.Dto;
+﻿using System.Configuration;
+using CCTracking.Dto;
 using CCTracking.Dto.Response;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,11 @@ namespace CCTracking.DAL
 {
     public abstract class DBFacade
     {
-       string ConnectionString { get; set; }
+        public bool IsGridDisplay = false;
+        string ConnectionString { get; set; }
         protected abstract BaseModelResponse ConvertToModel(IDataReader dr);
         protected abstract BaseModelResponse ConvertToList(IDataReader dr);
+        protected abstract BaseModelResponse ConvertToListGrid(IDataReader dr);
         protected abstract BaseModelResponse ConvertToList(DataSet ds);
         protected abstract string GetByIdSql(int id, Dictionary<string, object> dictionary);
         protected abstract string DelByIdSql(int id, Dictionary<string, object> dictionary);
@@ -32,7 +35,7 @@ namespace CCTracking.DAL
         /// </summary>
         public DBFacade()
         {
-            this.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CCTConnectionString"].ConnectionString;
+            ConnectionString = ConfigurationManager.ConnectionStrings["CCTConnectionString"].ConnectionString;
         }
 
         /// <summary>
@@ -46,12 +49,12 @@ namespace CCTracking.DAL
             String sql = GetByIdSql(id, arrParam);
             BaseModelResponse baseModelResponse = new BaseModelResponse();
             DBManager dbManager = new DBManager();
-            dbManager.ConnectionString = this.ConnectionString;
+            dbManager.ConnectionString = ConnectionString;
             IDataReader dr = null;
             try
             {
                 dbManager.OpenConnection(dbManager.ConnectionString);
-                foreach (System.Collections.Generic.KeyValuePair<string, object> item in arrParam)
+                foreach (KeyValuePair<string, object> item in arrParam)
                 {
                     dbManager.AddParameter(item.Key, item.Value);
                 }
@@ -83,7 +86,7 @@ namespace CCTracking.DAL
             String sql = GetAllSql();
             BaseModelResponse baseModelResponse = new BaseModelResponse();
             DBManager dbManager = new DBManager();
-            dbManager.ConnectionString = this.ConnectionString;
+            dbManager.ConnectionString = ConnectionString;
             IDataReader dr = null;
             try
             {
@@ -92,12 +95,47 @@ namespace CCTracking.DAL
                     arrParam.Add("@Id", id);
                 }
                 dbManager.OpenConnection(dbManager.ConnectionString);
-                foreach (System.Collections.Generic.KeyValuePair<string, object> item in arrParam)
+                foreach (KeyValuePair<string, object> item in arrParam)
                 {
                     dbManager.AddParameter(item.Key, item.Value);
                 }
                 dr = dbManager.ExecuteReader(sql, CommandType.StoredProcedure, DatabaseConnectionState.CloseOnExit);
                 baseModelResponse = ConvertToList(dr);
+
+            }
+            catch (Exception e)
+            {
+                baseModelResponse.ErrorMessage = e.Message;
+            }
+            finally
+            {
+                dr.Close();
+                dbManager.CloseConnection();
+            }
+            return baseModelResponse;
+        }
+
+        public BaseModelResponse GetAllGrid(int id = 0)
+        {
+            Dictionary<string, object> arrParam = new Dictionary<string, object>();
+            String sql = GetAllSql();
+            BaseModelResponse baseModelResponse = new BaseModelResponse();
+            DBManager dbManager = new DBManager();
+            dbManager.ConnectionString = ConnectionString;
+            IDataReader dr = null;
+            try
+            {
+                if (id != 0)
+                {
+                    arrParam.Add("@Id", id);
+                }
+                dbManager.OpenConnection(dbManager.ConnectionString);
+                foreach (KeyValuePair<string, object> item in arrParam)
+                {
+                    dbManager.AddParameter(item.Key, item.Value);
+                }
+                dr = dbManager.ExecuteReader(sql, CommandType.StoredProcedure, DatabaseConnectionState.CloseOnExit);
+                baseModelResponse = ConvertToListGrid(dr);
 
             }
             catch (Exception e)
@@ -123,12 +161,12 @@ namespace CCTracking.DAL
             String sql = GetByCriteriaSql(baseModel, arrParam);
             BaseModelResponse baseModelResponse = new BaseModelResponse();
             DBManager dbManager = new DBManager();
-            dbManager.ConnectionString = this.ConnectionString;
+            dbManager.ConnectionString = ConnectionString;
             IDataReader dr = null;
             try
             {
                 dbManager.OpenConnection(dbManager.ConnectionString);
-                foreach (System.Collections.Generic.KeyValuePair<string, object> item in arrParam)
+                foreach (KeyValuePair<string, object> item in arrParam)
                 {
                     dbManager.AddParameter(item.Key, item.Value);
                 }
@@ -159,12 +197,12 @@ namespace CCTracking.DAL
             String sql = ExecuteSql(baseModel, arrParam);
             BaseModelResponse baseModelResponse = new BaseModelResponse();
             DBManager dbManager = new DBManager();
-            dbManager.ConnectionString = this.ConnectionString;
+            dbManager.ConnectionString = ConnectionString;
             IDataReader dr = null;
             try
             {
                 dbManager.OpenConnection(dbManager.ConnectionString);
-                foreach (System.Collections.Generic.KeyValuePair<string, object> item in arrParam)
+                foreach (KeyValuePair<string, object> item in arrParam)
                 {
                     dbManager.AddParameter(item.Key, item.Value);
                 }
@@ -199,12 +237,12 @@ namespace CCTracking.DAL
             String sql = ExecuteSql(baseModel, arrParam);
             BaseModelResponse baseModelResponse = new BaseModelResponse();
             DBManager dbManager = new DBManager();
-            dbManager.ConnectionString = this.ConnectionString;
+            dbManager.ConnectionString = ConnectionString;
             DataSet ds = new DataSet();
             try
             {
                 dbManager.OpenConnection(dbManager.ConnectionString);
-                foreach (System.Collections.Generic.KeyValuePair<string, object> item in arrParam)
+                foreach (KeyValuePair<string, object> item in arrParam)
                 {
                     dbManager.AddParameter(item.Key, item.Value);
                 }
@@ -232,12 +270,12 @@ namespace CCTracking.DAL
             String sql = DelByIdSql(id, arrParam);
             BaseModelResponse baseModelResponse = new BaseModelResponse();
             DBManager dbManager = new DBManager();
-            dbManager.ConnectionString = this.ConnectionString;
+            dbManager.ConnectionString = ConnectionString;
             IDataReader dr = null;
             try
             {
                 dbManager.OpenConnection(dbManager.ConnectionString);
-                foreach (System.Collections.Generic.KeyValuePair<string, object> item in arrParam)
+                foreach (KeyValuePair<string, object> item in arrParam)
                 {
                     dbManager.AddParameter(item.Key, item.Value);
                 }
@@ -265,7 +303,7 @@ namespace CCTracking.DAL
             String sql = GetCountSql();
             BaseModelResponse baseModelResponse = new BaseModelResponse();
             DBManager dbManager = new DBManager();
-            dbManager.ConnectionString = this.ConnectionString;
+            dbManager.ConnectionString = ConnectionString;
             //IDataReader dr = null;
             try
             {

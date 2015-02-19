@@ -156,5 +156,10 @@ namespace CCTracking.DAL
                 nearestCentre.MobileNo = dr.GetString(dr.GetOrdinal("MobileNo"));
         }
 
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

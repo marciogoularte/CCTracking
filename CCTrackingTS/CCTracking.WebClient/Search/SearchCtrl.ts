@@ -22,7 +22,7 @@ export class SearchCtrl extends helper.Controller {
     searchViewModel: views.SearchViewModel;
     //searchView: views.SearchView;
     backboneModel: Backbone.Model;
-    collection: dto.Models.SearchCollection;
+    collection: dto.Models.SearchDtoResponseCollection;
     collectionView: views.SearchCollectionView;
     compositeModel: Backbone.Model;
     constructor() {
@@ -32,7 +32,8 @@ export class SearchCtrl extends helper.Controller {
         this.searchViewModel = new views.SearchViewModel(this.backboneModel, this);
         //this.searchView = new views.SearchView({ viewModel: this.searchViewModel });
         this.compositeModel = new Backbone.Model();
-        this.collection = new dto.Models.SearchCollection({ id: "", contactName: "", contactMobile: "", contactNic: "", deseasedName: "", address: "", status: "" });
+        //this.collection = new dto.Models.SearchDtoResponse({ id: "", contactName: "", contactMobile: "", contactNic: "", deseasedName: "", pickupDate: "", status: "" });
+        this.collection = new dto.Models.SearchDtoResponseCollection();
         this.collectionView = new views.SearchCollectionView({ collection: this.collection, model: this.compositeModel });
 
     }
@@ -120,18 +121,6 @@ export class SearchCtrl extends helper.Controller {
     }
 
     GetByCriteria(searchDto: any) {
-        //alert('ctrl');
-        //var searchRequest = new dto.Models.SearchDto();
-        ////searchRequest.set("contactInfo", )
-        ////searchRequest.set("deseasedInfo", )
-        //searchRequest.set("gender", searchDto.get("gender").toString());
-        //searchRequest.set("paymentStatus", searchDto.get("paymentStatus").toString());
-        //searchRequest.set("bookingDate", Date.now());
-        //searchRequest.set("greveyard", searchDto.get("graveyardIdSelected").id);
-        //searchRequest.set("centre", searchDto.get("alkhidmatCentreSelected").id);
-        //searchRequest.set("bus", searchDto.get("busSelected").id);
-
-
         searchDto.set("genderId", searchDto.get("genderId").toString());
         searchDto.set("paymentStatusId", searchDto.get("paymentStatusId").toString());
         if (searchDto.get("bookingDate").trim() != "") {
@@ -146,25 +135,40 @@ export class SearchCtrl extends helper.Controller {
         if (searchDto.get("busSelected") != undefined) {
             searchDto.set("busId", searchDto.get("busSelected").id);
         }
-        var deferred = DAL.GetByCriteria(searchDto);
+        var deferred = DAL.GetByCriteria(this.GetMinimalRequest(searchDto));
         deferred.done(p=> this.GetByCriteriaCompleted(p));
     }
 
+    GetMinimalRequest(searchDto:any) {
+        var request = new dto.Models.SearchDto();
+        request.set("bookingDate", searchDto.get("bookingDate"));
+        request.set("busId", searchDto.get("busId"));
+        request.set("centreId", searchDto.get("centreId"));
+        request.set("contactInfo", searchDto.get("contactInfo"));
+        request.set("deseasedInfo", searchDto.get("deseasedInfo"));
+        request.set("genderId", searchDto.get("genderId"));
+        request.set("greveyardId", searchDto.get("greveyardId"));
+        request.set("paymentStatusId", searchDto.get("paymentStatusId"));
+        return request;
+    }
+
     GetByCriteriaCompleted(searchDto: dto.Models.SearchDto) {
-        //this.collection.reset();
-        //this.collectionView.collection.reset();
-        this.collection.reset(searchDto["bookingList"]);
-
-
-        //this.collectionView = new views.SearchCollectionView({ collection: this.collection });
-
-        //this.app.MainRegion.show(this.collectionView);
+        var list = _.map(searchDto["bookingList"], (item) => {
+            if (item.pickupDate != "0001-01-01T00:00:00")
+                item.pickupDate = helper.FormatDateString(item.pickupDate);
+            else
+                item.pickupDate = "";
+            if (item.status) {
+                item.status = "Paid";
+            } else {
+                item.status = "Unpaid";
+            }
+            return item;
+        });
+        this.collection.reset(list);
     }
 
     Cancel() {
         this.Load();
-        //this.backboneModel = new dto.Models.SearchDto();
-        //this.searchViewModel = new views.SearchViewModel(this.backboneModel, this);
-        //window.location.href = "#searchBooking";
     }
 }

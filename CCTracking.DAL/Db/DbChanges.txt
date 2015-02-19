@@ -1,13 +1,4 @@
-﻿-----------------------------CHANGES FROM JAN-19-2015 after final demo ----------------------------
-- [SaveBusVisit]
-- BusChangeReason added in busvisit table
-[GetBusVisitById]
-[SaveBusVisit]
+﻿-----------------------------CHANGES FROM FEB-17-2015 after optimization fix---------------------------
+[dbo].[GetAllBooking] 
 [GetAllBusVisit]
-Audit_BusVisit
-[fn_audit_BusVisit]
-- enable audit trial on busvisit
--[Lookup]
--GetBusAvailabilityByBookingId
-
 

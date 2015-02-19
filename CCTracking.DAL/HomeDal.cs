@@ -90,5 +90,10 @@ namespace CCTracking.DAL
             if (!dr.IsDBNull(dr.GetOrdinal("Profit")))
                 home.Profit = dr.GetDecimal(dr.GetOrdinal("Profit"));
         }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -98,6 +98,11 @@ namespace CCTracking.DAL
                 nearestCentre.NearestCentreName = dr.GetString(dr.GetOrdinal("NearestCentreName"));
             if (!dr.IsDBNull(dr.GetOrdinal("NearestLevel")))
                 nearestCentre.NearestLevel = dr.GetInt32(dr.GetOrdinal("NearestLevel"));
-        }       
+        }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

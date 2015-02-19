@@ -115,5 +115,10 @@ namespace CCTracking.DAL
             if (!dr.IsDBNull(dr.GetOrdinal("CenterDesc")))
                 user.CenterDesc = dr.GetString(dr.GetOrdinal("CenterDesc"));
         }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CCTracking.Dto;
+﻿using System;
+using CCTracking.Dto;
 using CCTracking.Dto.Response;
 using System.Collections.Generic;
 using System.Data;
@@ -46,6 +47,10 @@ namespace CCTracking.DAL
                 bookingSummaryResponse.BookingSummaryModel = bookingSummary;
             }
             return bookingSummaryResponse;
+        }
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new NotImplementedException();
         }
 
         protected override BaseModelResponse ConvertToList(IDataReader dr)

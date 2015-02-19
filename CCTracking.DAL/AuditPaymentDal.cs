@@ -33,6 +33,10 @@ namespace CCTracking.DAL
         {
             throw new NotImplementedException();
         }
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new NotImplementedException();
+        }
 
         protected override string GetByIdSql(int id, Dictionary<string, object> dictionary)
         {

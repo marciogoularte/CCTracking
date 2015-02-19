@@ -1,10 +1,16 @@
-﻿var __extends = this.__extends || function (d, b) {
+﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
 define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "text!./RefundBookingTmpl.html"], function(require, exports, helper) {
+    /// <amd-dependency path="marionette"/>
+    /// <amd-dependency path="jquery"/>
+    /// <amd-dependency path="knockout"/>
+    /// <amd-dependency path="text!./RefundBookingTmpl.html"/>
     var _ = require('underscore');
 
     var templateView = require("text!./RefundBookingTmpl.html");
@@ -85,5 +91,7 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
         }
 
         self.model.id(refundModel.id);
+        //self.bbModel = new Backbone.Model(refundModel);
     }
 });
+//# sourceMappingURL=RefundBookingView.js.map

@@ -10,4 +10,9 @@ namespace CCTracking.Dto.Response
         public List<AuditDisplay> AuditBusVisitDisplayList { get; set; }
         public List<AuditBusVisit> AuditBusVisitList { get; set; }
     }
+
+    public class BusVisitGridResponse : BaseModelResponse
+    {
+        public List<BusVisitGrid> BusVisitList { get; set; }
+    }
 }

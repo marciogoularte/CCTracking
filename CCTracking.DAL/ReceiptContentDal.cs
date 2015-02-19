@@ -77,5 +77,10 @@ namespace CCTracking.DAL
                 receiptContent.CentreDesc = dr.GetString(dr.GetOrdinal("CentreDesc"));
             receiptContent.PrintDateTime = DateTime.Now;
         }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

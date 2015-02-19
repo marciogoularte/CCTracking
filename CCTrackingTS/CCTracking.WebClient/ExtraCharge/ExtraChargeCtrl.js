@@ -1,4 +1,9 @@
-﻿var __extends = this.__extends || function (d, b) {
+﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+/// <amd-dependency path="marionette"/>
+/// <amd-dependency path="jquery"/>
+/// <amd-dependency path="knockout"/>
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -21,6 +26,7 @@ define(["require", "exports", "../App", "../Helper", "./ExtraChargeView", "../DA
             var url = window.location.href;
             var id = "0";
 
+            //update payment
             if (url.indexOf("id=") > -1) {
                 id = (url.substring(url.indexOf("id=") + 3, url.length));
             }
@@ -28,6 +34,7 @@ define(["require", "exports", "../App", "../Helper", "./ExtraChargeView", "../DA
             deferred.done(function (p) {
                 _this.GetByIdCompleted(p);
             });
+            //this.GetByIdCompleted(null);
         };
 
         ExtraChargeCtrl.prototype.GetByIdCompleted = function (extraChargeDto) {
@@ -43,6 +50,7 @@ define(["require", "exports", "../App", "../Helper", "./ExtraChargeView", "../DA
             }
             model.set("bookingId", id);
 
+            //model.set("actualBookingAmount", id);
             model.set("busList", model.get("busList"));
             model.set("busSelected", "");
 
@@ -63,8 +71,15 @@ define(["require", "exports", "../App", "../Helper", "./ExtraChargeView", "../DA
             var appObj = app.request("AppGlobalSetting");
             extraCharges.set("modifiedBy", appObj.get("Id"));
 
+            //if (extraCharges.get("busSelected") == undefined) {
+            //    extraCharges.set("busId", extraCharges.get("busId"));
+            //}
+            //else {
+            //    extraCharges.set("busId", extraCharges.get("busSelected").id);
+            //}
             extraCharges.set("id", $("#hdnExtraChargeId").val());
 
+            //alert($("#hdnExtraChargeId").val());
             var deferred = DAL.Save(extraCharges);
             deferred.done(function (p) {
                 return _this.SaveCompleted(p);
@@ -78,8 +93,10 @@ define(["require", "exports", "../App", "../Helper", "./ExtraChargeView", "../DA
                 helper.ShowModalPopup("success", "Extra Charge", "Record has been saved successfully with Extra Charge ID : " + extraChargeResponse["id"]);
                 location.href = "#viewBooking";
             }
+            //app.vent.trigger("Event:UpdateSummary");
         };
         return ExtraChargeCtrl;
     })(helper.Controller);
     exports.ExtraChargeCtrl = ExtraChargeCtrl;
 });
+//# sourceMappingURL=ExtraChargeCtrl.js.map

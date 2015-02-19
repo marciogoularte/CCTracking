@@ -94,5 +94,10 @@ namespace CCTracking.DAL
             bookingSummary.TimeTaken = dr["visitInterval"].ToString();
             bookingSummary.Driver = dr["driver"].ToString();
         }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

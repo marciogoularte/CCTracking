@@ -96,5 +96,10 @@ namespace CCTracking.DAL
             if (!dr.IsDBNull(dr.GetOrdinal("BookingAmount")))
                 charges.ActualBookingAmount = dr.GetDecimal(dr.GetOrdinal("BookingAmount"));
         }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

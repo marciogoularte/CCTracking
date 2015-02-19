@@ -1,0 +1,18 @@
+﻿declare @icounter int
+set @icounter=0
+while (@icounter<3000)
+begin
+	declare @name varchar(100)
+	declare @dname varchar(100)
+	declare @newid int
+	
+	set @icounter=@icounter + 1
+	set @name='cname' + CONVERT(varchar, @icounter)
+	set @dname='dname' + CONVERT(varchar, @icounter)
+	--print @name
+
+	exec dbo.SaveBooking @ContactName=@name,@ContactMobile=N'0300-1234567',@ContactNic=N'42281-1234567-8',@DeseasedName=@dname,@DeseasedAge=72,@DeseasedGender=1,@CauseOfDeath=3,@Address=N'very long long address',@BusPoint=447,@LandmarkId=0,@UnionCouncilId=65,@TownId=8,@PickupDate='2015-02-16 00:00:00',@PickupTime=1,@ReturnTime=1,@GraveyardId=1,@NamazEJanazaHeldIn=3,@NamazEJanazaLocation=N'funeral locaiton',@MasjidName=N'Jamma Masjid',@IsReferralBooking=0,@ReferralName=default,@ReferralDetail=default,@OtherDetail=default,@AlkhidmatCentre=10,@Id=0,@IsActive=0,@CreatedBy=10,@ModifiedBy=10,@ModifiedDate='2015-02-17 00:00:00'	
+	set @newid=@@IDENTITY
+	exec dbo.SaveBusVisit @CentreId=2,@BusId=3,@DriverId=5,@VisitTypeId=2,@BookingId=@newid,@InchargeName=default,@VisitDate=default,@OutTime=0,@ReturnTime=0,@ReturnDate=default,@ReadingWhenFilling=0,@PumpLocation=default,@FuelRate=0,@FuelAmount=2500,@IsBookingCompleted=0,@InitialReading=0,@FinalReading=0,@FuelQuantity=0,@FuelingReceipt=default,@Description=default,@BusChangeReason=default,@Id=0,@IsActive=0,@CreatedBy=10,@ModifiedBy=10,@ModifiedDate='2015-02-17 00:00:00'
+	exec SavePayment @Id=0,@BookingId=@newid,@PaymentType=1,@Amount=2500,@PaymentLocation=10,@OfficerId=4,@ReceiptNo=N'1234567',@PaymentStatus=1,@EasyPaisaTranNo=default,@IsReferralBookingPaid=0,@ReferralPaymentDate=default,@CreatedBy=10,@ModifiedBy=10,@ModifiedDate='2015-02-17 00:00:00'
+end

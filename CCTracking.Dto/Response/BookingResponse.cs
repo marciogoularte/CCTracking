@@ -10,4 +10,9 @@ namespace CCTracking.Dto.Response
         public List<AuditDisplay> AuditBookingDisplayList { get; set; }
         public List<AuditBooking> AuditBookingList { get; set; }
     }
+
+    public class BookingGridResponse : BaseModelResponse
+    {
+        public List<BookingGrid> BookingList { get; set; }
+    }
 }

@@ -23,3 +23,4 @@ define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "CCTrackin
     }
     exports.GetById = GetById;
 });
+//# sourceMappingURL=ReceiptContent.js.map

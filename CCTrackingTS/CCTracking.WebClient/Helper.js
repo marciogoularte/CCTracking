@@ -1,4 +1,9 @@
-﻿var __extends = this.__extends || function (d, b) {
+﻿/// <reference path="../Scripts/typings/require/require.d.ts" />
+/// <reference path="../Scripts/typings/marionette/marionette.d.ts" />
+/// <amd-dependency path ="text!./Common/Templates/ModalPopup.html"/>
+/// <amd-dependency path ="text!./Common/Templates/Progressbar.html"/>
+/// <amd-dependency path ="text!./Common/Templates/BusDetailModalPopup.html"/>
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -10,6 +15,9 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
     var ko = require("knockout");
     var kb = require("knockback");
 
+    //var pbarView = require("text!./Common/Templates/Progressbar.html");
+    //var Marionette = require("marionette");
+    //var Backbone = require("backbone");
     String.prototype["getOuterHTML"] = function (selector) {
         return $(this.toString()).find(selector)[0].outerHTML;
     };
@@ -27,6 +35,9 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
         }
     });
 
+    /*
+    DEFAULT ACCOUNTING SETTINGS
+    */
     accounting.settings = {
         currency: {
             symbol: "",
@@ -109,7 +120,9 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
                 if (!options)
                     options = {};
 
+                //options.template = "#navBarCollectionViewTemplate";
                 _super.call(this, options);
+                //this.itemView = NavBarItemView;
             }
             return CompositeView;
         })(Marionette.CompositeView);
@@ -126,7 +139,9 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
         Views.ItemView = ItemView;
         var MvvmView = (function (_super) {
             __extends(MvvmView, _super);
+            //template: string;
             function MvvmView(options) {
+                //if (!options) options = {};
                 _super.call(this, options);
             }
             MvvmView.prototype.initialize = function (options) {
@@ -147,7 +162,20 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
     })(exports.Views || (exports.Views = {}));
     var Views = exports.Views;
 
+    /*
+    type value can be:
+    1- default
+    2- primary
+    3- success
+    4- info
+    5- warning
+    6- danger
+    */
     function ShowModalPopup(type, title, message) {
+        //var alertModel = new Backbone.Model({ type: 'btn-' + type, title: title, message: message });
+        //var view = new this.ModalPopupView({ model: alertModel });
+        //var app = APP.Application.getInstance();
+        //app.ModalRegion.show(view);
         require(['./Booking/BookingLeft/BookingLeftCtrl'], function (p) {
             new p.BookingLeftCtrl().ShowModalPopup(type, title, message);
         });
@@ -166,22 +194,34 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
     }
     exports.HideProgressbar = HideProgressbar;
     function PrintReceipt(id) {
+        //var receiptView = new Views.ReceiptLayoutItemView();
+        //receiptView.$el.find(".jsExportPdf").click();
         require(['./Booking/BookingLeft/BookingLeftCtrl'], function (p) {
             new p.BookingLeftCtrl().PrintReceipt(id);
         });
     }
     exports.PrintReceipt = PrintReceipt;
 
+    //export function ShowBusDetailModalPopup(busDetialDto, type, title, message) {
     function ShowBusDetailModalPopup(busDetialDto, busDetailCollection) {
+        //var alertModel = new Backbone.Model({ type: 'btn-' + type, title: title, message: message });
+        //var view = new this.BusDetailModalPopupView({ model: busDetialDto});
+        //debugger;
         var view = null;
         require(['./Booking/BookingLeft/BookingLeftView'], function (p) {
+            //debugger;
+            //alert(p);
             view = new p.BusDetailModalPopupCollectionView({ collection: busDetailCollection, model: busDetialDto });
             var app = APP.Application.getInstance();
             app.ModalAlertRegion.show(view);
         });
+        //debugger;
+        //var view = new this.BusDetailModalPopupCollectionView({ collection: busDetailCollection, model: busDetialDto });
     }
     exports.ShowBusDetailModalPopup = ShowBusDetailModalPopup;
 
+    //var app = APP.Application.getInstance();
+    /// Adds Authentication Token to each outgoing call if there is an AppGlobalSetting present
     $.ajaxSetup({
         'beforeSend': function (xhr) {
             exports.ShowProgressbar();
@@ -195,6 +235,37 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
         }
     });
 
+    //$(document).ajaxComplete((xhr, response) => {
+    //    //debugger;
+    //    var title, msgSuccess, msgFailure;
+    //    var isBooking = false;
+    //    if (response != undefined && response.responseJSON != null && response.responseJSON.entityType == "Booking") {
+    //        isBooking = true;
+    //    }
+    //    //isBooking = xhr.currentTarget.URL.indexOf("#payment?id") > 0;
+    //    if (isBooking) {
+    //        title = "Booking";
+    //        msgSuccess = "Record has been saved successfully with Booking ID : ";
+    //        msgFailure = "Due to some technical reason booking have not been saved successfully!<br> Pelase try later";
+    //    }
+    //    if (response.errorMessage != null && response.errorMessage.trim()!="") {
+    //        ShowModalPopup("danger", title, msgFailure);
+    //    }
+    //    else if (isBooking && response.status == 200) {
+    //        ShowModalPopup("success", title, msgSuccess + response.responseJSON.id);
+    //        location.href = "#payment?id=" + response.responseJSON.id;
+    //    }
+    ////    alert('donee');
+    //});
+    /// Handles all error scenarios coming from the server
+    //$(document).ajaxError((event, jqXHR, ajaxSettings, thrownError) => {
+    //    if (ajaxSettings["consumeError"] != null && ajaxSettings["consumeError"] == true)
+    //        return;
+    //    if (jqXHR.status == 403) {
+    //        app.vent.trigger("BackToLogin");
+    //    }
+    //    ShowError(jqXHR.responseText == "" ? thrownError : jqXHR.responseText);
+    //});
     function ValidationUtility() {
         var validationElements = $('[data-role="validate"]'), elementCount = 0;
         validationElements.popover({ placement: 'bottom' });
@@ -210,20 +281,31 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
         });
 
         var validate = function (formSelector) {
+            //debugger;
             elementCount = 0;
             if (formSelector.indexOf('#') === -1) {
                 formSelector = '#' + formSelector;
             }
 
+            //$(formSelector)[0][0].setCustomValidity('ssss');
+            //debugger;
             return $(formSelector)[0].checkValidity();
         };
         return { validate: validate };
     }
     exports.ValidationUtility = ValidationUtility;
 
+    //export function SubscribeApplicationEventListener() {
+    //    var app = APP.Application.getInstance();
+    //    app.vent.on("BusVisitItem:Add", (busVisitCollection) => AddItem(busVisitCollection));
+    //    app.vent.on("BusVisitItem:Remove", RemoveItem);
+    //}
     function AddItem(busVisitCollection) {
+        //alert('added');
         var app = APP.Application.getInstance();
         busVisitCollection.push({ centreId: 'center-d', busId: 'bus-d', driverId: 'driver-d' });
+        //var collectionView = new BusVisitCollectionView({ collection: items });
+        //app.SubRegion.show(collectionView);
     }
     function RemoveItem() {
         alert('remove');
@@ -260,9 +342,12 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
     ko.bindingHandlers.numeric = {
         init: function (element, valueAccessor) {
             $(element).on("keydown", function (event) {
+                // Allow: backspace, delete, tab, escape, and enter
                 if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 || (event.keyCode == 65 && event.ctrlKey === true) || (event.keyCode == 188 || event.keyCode == 190 || event.keyCode == 110) || (event.keyCode >= 35 && event.keyCode <= 39)) {
+                    // let it happen, don't do anything
                     return;
                 } else {
+                    // Ensure that it is a number and stop the keypress
                     if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
                         event.preventDefault();
                     }
@@ -271,3 +356,4 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
         }
     };
 });
+//# sourceMappingURL=Helper.js.map

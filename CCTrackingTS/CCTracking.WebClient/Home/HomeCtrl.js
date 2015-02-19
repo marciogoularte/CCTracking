@@ -1,4 +1,9 @@
-﻿var __extends = this.__extends || function (d, b) {
+﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+/// <amd-dependency path="marionette"/>
+/// <amd-dependency path="jquery"/>
+/// <amd-dependency path="knockout"/>
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -15,6 +20,7 @@ define(["require", "exports", "../App", "../Helper", "./HomeView", "../Dtos/Home
             _super.call(this);
             this.app = application.Application.getInstance();
             this.homeItemView = new views.HomeItemView();
+            //this.backboneCollection = new Backbone.Collection([]);
         }
         HomeCtrl.prototype.Show = function () {
             var _this = this;
@@ -56,6 +62,7 @@ define(["require", "exports", "../App", "../Helper", "./HomeView", "../Dtos/Home
         };
 
         HomeCtrl.prototype.GetByCriteriaCompleted = function (bookingSummaryDto) {
+            //TODO:Hack - need rework
             var result = bookingSummaryDto["bookingSummaryList"];
             var summary = [];
             var sumBookingAmount = 0, sumBookingMilage = 0, sumBookings = 0, sumReceivables = 0, sumMaintenance = 0;
@@ -86,6 +93,7 @@ define(["require", "exports", "../App", "../Helper", "./HomeView", "../Dtos/Home
             this.collectionView = new views.SearchCollectionView({ collection: new Backbone.Collection(summary), model: compositeModel });
             this.app.SubRegion.reset();
             this.app.SubRegion.show(this.collectionView);
+            //this.backboneCollection.reset(summary);
         };
 
         HomeCtrl.prototype.ShowChart = function (summaryData) {
@@ -95,6 +103,7 @@ define(["require", "exports", "../App", "../Helper", "./HomeView", "../Dtos/Home
             var receivableData = [];
             var profitData = [];
             _.map(summaryData["homeList"], function (item) {
+                //debugger
                 centreName.push(item.centreDesc);
                 bookingData.push(item.bookingAmount);
                 expenditureData.push(item.maintenance);
@@ -103,6 +112,12 @@ define(["require", "exports", "../App", "../Helper", "./HomeView", "../Dtos/Home
                 return item;
             });
 
+            //var centreName = ['Tariq Rd', 'Nomayesh', 'Joher', 'Korangi', 'Landhi'];
+            //var bookingData = [18500, 11300, 13700, 22400, 6200];
+            //var expenditureData = [9000, 5700, 6500, 10200, 3000];
+            //var receivableData = [3350, 2500, 4000, 6500, 2000];
+            //var profitData = [9500, 5600, 7200, 12200, 3200];
+            //this.homeItemView.$el.find("#container").highcharts({
             this.homeItemView.$el.find("#container")["highcharts"]({
                 chart: {
                     type: 'column',
@@ -127,6 +142,7 @@ define(["require", "exports", "../App", "../Helper", "./HomeView", "../Dtos/Home
                     categories: centreName
                 },
                 legend: {
+                    //layout: 'horizontal',
                     itemStyle: {
                         color: 'grey'
                     }
@@ -177,3 +193,4 @@ define(["require", "exports", "../App", "../Helper", "./HomeView", "../Dtos/Home
     })(helper.Controller);
     exports.HomeCtrl = HomeCtrl;
 });
+//# sourceMappingURL=HomeCtrl.js.map

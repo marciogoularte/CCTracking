@@ -107,7 +107,7 @@ namespace CCTracking.DAL
             return "GetBusVisitCount";
         }
 
-        protected override void MapValues(BaseModel baseModel, IDataReader dr)
+        private void MapValues(BaseModel baseModel, IDataReader dr)
         {
             base.MapValues(baseModel, dr);
             BusVisit busVisit = baseModel as BusVisit;
@@ -163,6 +163,45 @@ namespace CCTracking.DAL
                 busVisit.DriverDesc = dr.GetString(dr.GetOrdinal("driverDesc"));
             if (!dr.IsDBNull(dr.GetOrdinal("centreDesc")))
                 busVisit.CentreDesc = dr.GetString(dr.GetOrdinal("centreDesc"));
+        }
+
+        private void MapValuesGrid(BaseModelGrid baseModel, IDataReader dr)
+        {
+            //base.MapValues(baseModel, dr);
+            BusVisitGrid busVisit = baseModel as BusVisitGrid;
+
+            if (!dr.IsDBNull(dr.GetOrdinal("Id")))
+                busVisit.Id = dr.GetInt32(dr.GetOrdinal("Id"));
+            if (!dr.IsDBNull(dr.GetOrdinal("BookingId")))
+                busVisit.BookingId = dr.GetInt32(dr.GetOrdinal("BookingId"));
+            if (!dr.IsDBNull(dr.GetOrdinal("VisitDate")))
+                busVisit.VisitDate = dr.GetDateTime(dr.GetOrdinal("VisitDate"));
+            if (!dr.IsDBNull(dr.GetOrdinal("ReturnDate")))
+                busVisit.ReturnDate = dr.GetDateTime(dr.GetOrdinal("ReturnDate"));
+            if (!dr.IsDBNull(dr.GetOrdinal("InitialReading")))
+                busVisit.InitialReading = dr.GetInt64(dr.GetOrdinal("InitialReading"));
+            if (!dr.IsDBNull(dr.GetOrdinal("FinalReading")))
+                busVisit.FinalReading = dr.GetInt64(dr.GetOrdinal("FinalReading"));
+            if (!dr.IsDBNull(dr.GetOrdinal("visitType")))
+                busVisit.VisitTypeDesc = dr.GetString(dr.GetOrdinal("visitType"));
+            if (!dr.IsDBNull(dr.GetOrdinal("busDesc")))
+                busVisit.BusDesc = dr.GetString(dr.GetOrdinal("busDesc"));
+        }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            BusVisitGridResponse response = new BusVisitGridResponse();
+            BusVisitGrid busVisit = null;
+            List<BusVisitGrid> busVisits = new List<BusVisitGrid>();
+            while (dr.Read())
+            {
+                busVisit = new BusVisitGrid();
+                MapValuesGrid(busVisit, dr);
+                busVisits.Add(busVisit);
+            }
+            response.BusVisitList = busVisits;
+            return response;
+
         }
     }
 }

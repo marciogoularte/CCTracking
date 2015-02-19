@@ -32,10 +32,30 @@ export module Models {
             }
         }
     }
+    export class SearchDtoResponse extends Backbone.Model {
+        default() {
+            return {
+                id: "",
+                contactName: "",
+                contactMobile: "",
+                contactNic: "",
+                deseasedName: "",
+                deseasedAge: "",
+                status: "",
+                pickupDate: ""
+            }
+        }
+    }
 
     export class SearchCollection extends Backbone.Collection {
         constructor(options?: any) {
             this.model = SearchDto;
+            super(options);
+        }
+    }
+    export class SearchDtoResponseCollection extends Backbone.Collection {
+        constructor(options?: any) {
+            this.model = SearchDtoResponse;
             super(options);
         }
     }

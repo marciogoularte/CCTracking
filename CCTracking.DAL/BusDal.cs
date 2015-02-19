@@ -108,5 +108,10 @@ namespace CCTracking.DAL
             if (!dr.IsDBNull(dr.GetOrdinal("InitialReading")))
                 bus.InitialReading = dr.GetInt64(dr.GetOrdinal("InitialReading"));
         }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -14,4 +14,9 @@ namespace CCTracking.Dto
         public string EntityType { get; set; }
 
     }
+
+    public class BaseModelGrid
+    {
+
+    }
 }

@@ -84,5 +84,10 @@ namespace CCTracking.DAL
             if (!dr.IsDBNull(dr.GetOrdinal("Name")))
                 refundType.Name = dr.GetString(dr.GetOrdinal("Name"));
         }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -278,5 +278,10 @@ namespace CCTracking.DAL
 
             return busSlot;
         }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

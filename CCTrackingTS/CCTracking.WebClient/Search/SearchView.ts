@@ -46,23 +46,15 @@ export class SearchCollectionView extends helper.Views.CompositeView {
     constructor(options?) {
         options.itemView = SearchItemView;
         options.template = templateView.getOuterHTML("#gridTemplate");
-        options.itemViewContainer = "#tblSearch tbody";
+        options.itemViewContainer ="#tblSearch tbody";
         this.events = {
             "click .jsSearch": "Search",
             "click .jsCancel": "Cancel"
         }
         super(options);
     }
-    Search(e) {
-        e.preventDefault();
-        this.trigger("SearchBooking");
-    }
-    Cancel(e) {
-        e.preventDefault();
-        this.trigger("CancelForm");
-    }
     //onShow() {
-
+    //    debugger;
     //    this.dataTable = this.$el.find("#tblSearch")["dataTable"]({
     //        "autoWidth": false,
     //        "info": true,
@@ -79,7 +71,7 @@ export class SearchCollectionView extends helper.Views.CompositeView {
     //            "infoEmpty": "No record found!",
     //            "zeroRecords": "No record found!"
     //        },
-    //        "pageLength":3
+    //        "pageLength": helper.GetPageSize()
 
     //        //"lengthChange": false
 
@@ -87,6 +79,15 @@ export class SearchCollectionView extends helper.Views.CompositeView {
 
     //    });
     //}
+    Search(e) {
+        e.preventDefault();
+        this.trigger("SearchBooking");
+    }
+    Cancel(e) {
+        e.preventDefault();
+        this.trigger("CancelForm");
+    }
+   
 
 }
 

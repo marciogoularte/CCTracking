@@ -86,21 +86,46 @@ namespace CCTracking.DAL
         }
         protected override BaseModelResponse ConvertToList(IDataReader dr)
         {
-            BookingResponse bookingResponse = new BookingResponse();
-            List<Booking> bookings = new List<Booking>();
-            Booking booking = null;
+            if (IsGridDisplay)
+            {
+                return ConvertToListGrid(dr);
+            }
+            else
+            {
+                return ConvertToSimpleList(dr);
+            }
+            //BookingResponse bookingResponse = new BookingResponse();
+            //List<Booking> bookings = new List<Booking>();
+            //Booking booking = null;
+            //while (dr.Read())
+            //{
+            //    booking = new Booking();
+                
+            //    MapValues(booking, dr);
+            //    bookings.Add(booking);
+            //}
+            //bookingResponse.BookingList = bookings;
+            //return bookingResponse;
+        }
+
+        protected override BaseModelResponse ConvertToList(DataSet ds)
+        {
+            return null;
+        }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            BookingGridResponse bookingResponse = new BookingGridResponse();
+            List<BookingGrid> bookings = new List<BookingGrid>();
+            BookingGrid booking = null;
             while (dr.Read())
             {
-                booking = new Booking();
-                MapValues(booking, dr);
+                booking = new BookingGrid();
+                MapValuesGrid(booking, dr);
                 bookings.Add(booking);
             }
             bookingResponse.BookingList = bookings;
             return bookingResponse;
-        }
-        protected override BaseModelResponse ConvertToList(DataSet ds)
-        {
-            return null;
         }
 
         protected override string DelByIdSql(int id, Dictionary<string, object> dictionary)
@@ -112,6 +137,23 @@ namespace CCTracking.DAL
         {
             return string.Empty;
         }
+
+        private BookingResponse ConvertToSimpleList(IDataReader dr)
+        {
+            BookingResponse bookingResponse = new BookingResponse();
+            List<Booking> bookings = new List<Booking>();
+            Booking booking = null;
+            while (dr.Read())
+            {
+                booking = new Booking();
+
+                MapValues(booking, dr);
+                bookings.Add(booking);
+            }
+            bookingResponse.BookingList = bookings;
+            return bookingResponse;
+        }
+      
         private void MapValues(Booking booking, IDataReader dr)
         {
             booking.Id = Convert.ToInt32(dr["Id"]);
@@ -168,5 +210,24 @@ namespace CCTracking.DAL
                 booking.ReferralDetail = dr["ReferralDetail"] == DBNull.Value ? "" : dr["ReferralDetail"].ToString();
 
         }
+        
+        private void MapValuesGrid(BookingGrid booking, IDataReader dr)
+        {
+            booking.Id = Convert.ToInt32(dr["Id"]);
+            if (dr.IsColumnExists("ContactName") && !dr.IsDBNull(dr.GetOrdinal("ContactName")))
+                booking.ContactName = dr["ContactName"].ToString();
+            if (dr.IsColumnExists("ContactMobile") && !dr.IsDBNull(dr.GetOrdinal("ContactMobile")))
+                booking.ContactMobile = dr["ContactMobile"].ToString();
+            if (dr.IsColumnExists("ContactNic") && !dr.IsDBNull(dr.GetOrdinal("ContactNic")))
+                booking.ContactNic = dr["ContactNic"].ToString();
+            if (dr.IsColumnExists("DeseasedName") && !dr.IsDBNull(dr.GetOrdinal("DeseasedName")))
+                booking.DeseasedName = dr["DeseasedName"].ToString();
+            if (dr.IsColumnExists("PickupDate") && !dr.IsDBNull(dr.GetOrdinal("PickupDate")))
+                booking.PickupDate = dr["PickupDate"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(dr["PickupDate"]);
+            if (dr.IsColumnExists("Status") && !dr.IsDBNull(dr.GetOrdinal("Status")))
+                booking.Status = Convert.ToBoolean(dr["Status"]);
+
+        }
+        
     }
 }

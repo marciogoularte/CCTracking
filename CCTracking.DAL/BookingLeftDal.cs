@@ -1,4 +1,5 @@
-﻿using CCTracking.Dto;
+﻿using System;
+using CCTracking.Dto;
 using CCTracking.Dto.Response;
 using System.Collections.Generic;
 using System.Data;
@@ -60,6 +61,10 @@ namespace CCTracking.DAL
         protected override BaseModelResponse ConvertToList(DataSet ds)
         {
             return null;
+        }
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new NotImplementedException();
         }
 
         protected override string DelByIdSql(int id, Dictionary<string, object> dictionary)

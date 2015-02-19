@@ -96,5 +96,10 @@ namespace CCTracking.DAL
 
 
         }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

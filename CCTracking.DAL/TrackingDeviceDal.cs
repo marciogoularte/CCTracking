@@ -83,5 +83,10 @@ namespace CCTracking.DAL
             if (!dr.IsDBNull(dr.GetOrdinal("TrackingNo")))
                 trackingDevice.TrackingNo = dr.GetString(dr.GetOrdinal("TrackingNo"));
         }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

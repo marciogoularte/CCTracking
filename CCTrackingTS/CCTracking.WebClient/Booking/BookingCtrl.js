@@ -176,14 +176,6 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             model.set("referralName", "");
             model.set("referralDetail", "");
 
-            //model.set("busDetailsList", lookupResponse.bus);
-            //model.set("busDetailIdSelected", "");
-            //model.set("initialReading", "");
-            //model.set("finalReading", "");
-            //model.set("distanceConvered", "");
-            //var c = ko.computed(function () {
-            //    alert(model.get("address"));
-            //});
             this.bookingViewModel = new views.BookingViewModel(model, this);
             this.bookingView = new views.BookingView({ viewModel: this.bookingViewModel });
             this.bookingView.on("SaveBooking", function () {
@@ -197,13 +189,33 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
         };
 
         BookingCtrl.prototype.GetAll = function (bookingFilterType) {
+            var _this = this;
             if (typeof bookingFilterType === "undefined") { bookingFilterType = 1; }
             if (bookingFilterType == undefined)
                 bookingFilterType = 1; //  allbooking
             var deferred = DAL.GetAll(bookingFilterType);
+
+            //deferred.done(p=> new views.BookingView().GetAllCompleted(p));
             deferred.done(function (p) {
-                return new views.BookingView().GetAllCompleted(p);
+                return _this.GetAllCompleted(p);
             });
+        };
+
+        BookingCtrl.prototype.GetAllCompleted = function (bookingResponse) {
+            app = application.Application.getInstance();
+            var bookings = _.map(bookingResponse["bookingList"], function (item) {
+                if (item.pickupDate != "0001-01-01T00:00:00")
+                    item.pickupDate = helper.FormatDateString(item.pickupDate);
+                else
+                    item.pickupDate = "";
+                return item;
+            });
+            var bookingCollection = new dto.Models.BookingResponseCollection(bookings);
+            var collectionView = new views.BookingCollectionView({ collection: bookingCollection });
+            collectionView.listenTo(collectionView, "itemview:ExportToPdf", function (view, id) {
+                helper.PrintReceipt(id);
+            });
+            app.MainRegion.show(collectionView);
         };
 
         //Add(booking: dto.Models.BookingRequest) {

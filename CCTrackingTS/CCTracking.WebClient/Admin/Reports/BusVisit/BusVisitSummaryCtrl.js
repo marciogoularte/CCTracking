@@ -1,10 +1,15 @@
-﻿var __extends = this.__extends || function (d, b) {
+﻿/// <reference path="../../../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../../../Scripts/typings/marionette/marionette.d.ts" />
+var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
 define(["require", "exports", "../../../App", "../../../Helper", "./BusVisitSummaryView", "../../../Dtos/BusVisitDto", "../../../DAL/BusVisit", "marionette", "jquery", "knockout"], function(require, exports, application, helper, views, dto, DAL) {
+    /// <amd-dependency path="marionette"/>
+    /// <amd-dependency path="jquery"/>
+    /// <amd-dependency path="knockout"/>
     var _ = require("underscore");
     var ko = require("knockout");
     var kb = require("knockback");
@@ -53,6 +58,7 @@ define(["require", "exports", "../../../App", "../../../Helper", "./BusVisitSumm
             deferred.done(function (p) {
                 return _this.GetBusVisitDetailCompleted(p);
             });
+            //history.pushState(id,'title' + id);
         };
 
         BusVisitSummaryCtrl.prototype.GetBusVisitMilageDetial = function (id) {
@@ -61,6 +67,7 @@ define(["require", "exports", "../../../App", "../../../Helper", "./BusVisitSumm
             deferred.done(function (p) {
                 return _this.GetBusVisitDetailCompleted(p);
             });
+            //history.pushState(id,'title' + id);
         };
 
         BusVisitSummaryCtrl.prototype.GetBusVisitDetailCompleted = function (busVisitDetailDto) {
@@ -81,12 +88,14 @@ define(["require", "exports", "../../../App", "../../../Helper", "./BusVisitSumm
         };
 
         BusVisitSummaryCtrl.prototype.GetBusVisitSummaryCompleted = function (busVisitSummaryDto) {
+            //TODO:Hack - need rework
             var result = busVisitSummaryDto["busVisitList"];
             var summary = [];
             for (var i = 0; i < result.length; i++) {
                 summary[i] = { busId: result[i].busId, driverDesc: result[i].driverDesc, milage: result[i].milage, visitCount: result[i].visitCount, vehicleNo: result[i].vehicleNo };
             }
             this.backboneCollection.reset(summary);
+            //history.pushState(result[0].driverId, 'title' + result[0].driverId);
         };
 
         BusVisitSummaryCtrl.prototype.Cancel = function () {
@@ -100,3 +109,4 @@ define(["require", "exports", "../../../App", "../../../Helper", "./BusVisitSumm
     })(helper.Controller);
     exports.BusVisitSummaryCtrl = BusVisitSummaryCtrl;
 });
+//# sourceMappingURL=BusVisitSummaryCtrl.js.map

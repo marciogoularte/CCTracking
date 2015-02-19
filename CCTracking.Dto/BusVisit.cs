@@ -87,5 +87,16 @@ namespace CCTracking.Dto
         public DateTime ActualModifiedDate { get; set; }
         public string UserName { get; set; }
     }
-    
+
+    public class BusVisitGrid : BaseModelGrid
+    {
+        public int Id { get; set; }
+        public string BusDesc { get; set; }
+        public string VisitTypeDesc { get; set; }
+        public int BookingId { get; set; }
+        public DateTime? VisitDate { get; set; }
+        public DateTime? ReturnDate { get; set; }
+        public long InitialReading { get; set; }
+        public long FinalReading { get; set; }
+    }
 }

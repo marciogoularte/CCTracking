@@ -100,5 +100,10 @@ namespace CCTracking.DAL
             bookingSummary.Driver = dr["driver"].ToString();
             bookingSummary.FuelingReceipt = dr["FuelingReceipt"].ToString();
         }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

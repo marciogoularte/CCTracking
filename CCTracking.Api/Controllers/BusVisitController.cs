@@ -51,12 +51,12 @@ namespace CCTracking.Api.Controllers
         }
 
         [HttpGet]
-        public BusVisitResponse GetAll(int idAll)
+        public BaseModelResponse GetAll(int idAll)
         {
             DBFacade facade = new BusVisitDal();
-            BaseModelResponse baseModelResponse = facade.GetAll(idAll);
-            BusVisitResponse response = (BusVisitResponse)baseModelResponse;
-            return response;
+            BaseModelResponse baseModelResponse = facade.GetAllGrid(idAll);
+            //BusVisitResponse response = (BusVisitResponse)baseModelResponse;
+            return baseModelResponse;
         }
 
         [HttpGet]

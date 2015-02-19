@@ -81,4 +81,16 @@ namespace CCTracking.Dto
 
 
     }
+
+    public class BookingGrid : BaseModelGrid
+    {
+        public int Id { get; set; }
+        public string ContactName { get; set; }
+        public string ContactMobile { get; set; }
+        public string ContactNic { get; set; }
+        public string DeseasedName { get; set; }
+        public byte DeseasedAge { get; set; }
+        public bool Status { get; set; }
+        public DateTime PickupDate { get; set; }
+    }
 }

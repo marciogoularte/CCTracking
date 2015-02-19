@@ -101,5 +101,10 @@ namespace CCTracking.DAL
             if (!dr.IsDBNull(dr.GetOrdinal("CNIC")))
                 driver.Cnic = dr.GetString(dr.GetOrdinal("CNIC"));
         }
+
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
