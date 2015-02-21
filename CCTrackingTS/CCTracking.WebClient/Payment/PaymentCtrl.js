@@ -112,7 +112,13 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
                 return _this.Save(bbmodel);
             });
 
-            this.backboneCollection = new Backbone.Collection(model.get("busVisits"));
+            //var visits = model.get("busVisits");
+            var visits = _.map(model.get("busVisits"), function (item) {
+                item.fuelAmount = helper.FormatMoney(item.fuelAmount);
+                return item;
+            });
+            this.backboneCollection = new Backbone.Collection(visits);
+
             this.busVisitCollectionView = new views.BusVisitCollectionView({ collection: this.backboneCollection });
             this.busVisitCollectionView.on("itemview:BusVisitRemoveItem", function (currentView, busId, centreId, driverId) {
                 return _this.RemoveBusVisitItem(busId, centreId, driverId);
@@ -183,15 +189,15 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
                     //isAvailableForBooking: false,
                     //isAvailableForFutureBooking: false,
                     bookingId: bookingId,
-                    fuelAmount: fuelAmount
+                    fuelAmount: fuelAmount.replace(",", "")
                 }));
 
                 this.busVisitCollectionView.collection = this.backboneCollection;
 
                 var sum = _.reduce(this.backboneCollection.models, function (memo, item) {
-                    return memo + parseFloat(item.get("fuelAmount"));
+                    return memo + parseFloat(item.get("fuelAmount").replace(",", ""));
                 }, 0);
-                this.paymentView.viewModel.amount(sum);
+                this.paymentView.viewModel.amount(helper.FormatMoney(sum));
             } else {
                 helper.ShowModalPopup("danger", "Bus Info", "Entry already exists!");
             }
@@ -227,7 +233,7 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
                         //isAvailableForBooking: false,
                         //isAvailableForFutureBooking: false,
                         item.set("bookingId", bookingId);
-                        item.set("fuelAmount", fuelAmount);
+                        item.set("fuelAmount", fuelAmount.replace(",", ""));
                         item.set("busChangeReason", busChangeReason);
                     }
                     return item;
@@ -238,9 +244,9 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
                 this.busVisitCollectionView.collection = this.backboneCollection;
 
                 var sum = _.reduce(this.backboneCollection.models, function (memo, item) {
-                    return memo + parseFloat(item.get("fuelAmount"));
+                    return memo + parseFloat(item.get("fuelAmount").replace(",", ""));
                 }, 0);
-                this.paymentView.viewModel.amount(sum);
+                this.paymentView.viewModel.amount(helper.FormatMoney(sum));
             } else {
                 helper.ShowModalPopup("danger", "Bus Info", "You cannot modify centre & bus info");
             }
@@ -254,9 +260,9 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
         PaymentCtrl.prototype.RemoveBusVisitItem = function (busId, centreId, driverId) {
             this.backboneCollection.remove(this.backboneCollection.findWhere({ busId: busId, centreId: centreId, driverId: driverId }));
             var sum = _.reduce(this.backboneCollection.models, function (memo, item) {
-                return memo + parseFloat(item.get("fuelAmount"));
+                return memo + parseFloat(item.get("fuelAmount").replace(",", ""));
             }, 0);
-            this.paymentView.viewModel.amount(sum);
+            this.paymentView.viewModel.amount(helper.FormatMoney(sum));
         };
 
         PaymentCtrl.prototype.UpdateBusVisitItem = function (model) {
@@ -305,6 +311,10 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
             var appObj = app.request("AppGlobalSetting");
             payment.set("modifiedBy", appObj.get("Id"));
 
+            //remove formatting from amount
+            payment.set("amount", payment.get("amount").replace(",", ""));
+
+            //payment.set("fuelAmount", payment.get("fuelAmount").replace(",", ""));
             payment.set("busVisits", this.backboneCollection.toJSON());
 
             //payment.set("busVisits", this.GetMinimalRequest());

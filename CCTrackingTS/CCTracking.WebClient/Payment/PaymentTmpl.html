@@ -42,7 +42,7 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Booking Amount</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtAmount" type="text" class="form-control input-sm" data-bind="value: fuelAmount, numeric: 1, valueUpdate: 'afterkeydown'" 
+                                    <input id="txtAmount" type="text" class="form-control input-sm" data-bind="value: fuelAmount, numeric: 1, valueUpdate: 'afterkeydown', event: { blur: FormatMoneyValue(fuelAmount) }" 
                                      data-role="validate" title="Amount" data-content="Amount is required" />
                                 </td>
                             </tr>

@@ -237,7 +237,7 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                 this.bookingId = ko.observable(model.get("bookingId"));
                 this.paymentType = ko.observable();
                 this.pricing = ko.observable();
-                this.amount = ko.observable(model.get("amount"));
+                this.amount = ko.observable(helper.FormatMoney(model.get("amount")));
                 this.paymentLocation = ko.observable();
                 this.officerId = ko.observable();
                 this.receiptNo = ko.observable(model.get("receiptNo"));
@@ -366,6 +366,16 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
                 });
             }
         }
+        ViewModel.prototype.FormatMoneyValue = function (anObservable) {
+            if (anObservable() != undefined && anObservable() != "") {
+                anObservable(helper.FormatMoney(anObservable()));
+            }
+            //alert(val);
+            //if (this.fuelAmount() != undefined && this.fuelAmount()!="") {
+            //    this.fuelAmount(helper.FormatMoney(this.fuelAmount()));
+            //}
+        };
+
         ViewModel.prototype.setOptionDisable = function (option, item) {
             //alert('after render');
             //debugger;

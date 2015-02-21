@@ -99,8 +99,13 @@ export class PaymentCtrl extends helper.Controller {
         this.paymentView.on("BusVisitAddItem", (bookingId, alkhidmatCentre, driver, bus, fuelAmount) => this.AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus, fuelAmount));
         this.paymentView.on("BusVisitUpdateItem", (bookingId, alkhidmatCentre, driver, bus, fuelAmount, busChangeReason) => this.ModifyBusVisitItem(bookingId, alkhidmatCentre, driver, bus, fuelAmount, busChangeReason));
         this.paymentView.on("PaymentSave", (bbmodel) => this.Save(bbmodel));
+        //var visits = model.get("busVisits");
+        var visits = _.map(model.get("busVisits"), (item) => {
+            item.fuelAmount = helper.FormatMoney(item.fuelAmount);
+            return item;
+        });
+        this.backboneCollection = new Backbone.Collection(visits);
 
-        this.backboneCollection = new Backbone.Collection(model.get("busVisits"));
         this.busVisitCollectionView = new views.BusVisitCollectionView({ collection: this.backboneCollection });
         this.busVisitCollectionView.on("itemview:BusVisitRemoveItem", (currentView, busId, centreId, driverId) => this.RemoveBusVisitItem(busId, centreId, driverId));
         this.busVisitCollectionView.on("itemview:UpdateBusVisitItem", (currentView, amodel) => {
@@ -166,13 +171,13 @@ export class PaymentCtrl extends helper.Controller {
                 //isAvailableForBooking: false,
                 //isAvailableForFutureBooking: false,
                 bookingId: bookingId,
-                fuelAmount: fuelAmount
+                fuelAmount: fuelAmount.replace(",","")
             }));
             
             this.busVisitCollectionView.collection = this.backboneCollection;
 
-            var sum = _.reduce(this.backboneCollection.models, (memo, item) => memo + parseFloat(item.get("fuelAmount")), 0);
-            this.paymentView.viewModel.amount(sum);
+            var sum = _.reduce(this.backboneCollection.models, (memo, item) => memo + parseFloat(item.get("fuelAmount").replace(",","")), 0);
+            this.paymentView.viewModel.amount(helper.FormatMoney(sum));
         }
         else {
             helper.ShowModalPopup("danger", "Bus Info", "Entry already exists!");
@@ -211,7 +216,7 @@ export class PaymentCtrl extends helper.Controller {
                     //isAvailableForBooking: false,
                     //isAvailableForFutureBooking: false,
                     item.set("bookingId",bookingId);
-                    item.set("fuelAmount", fuelAmount);
+                    item.set("fuelAmount", fuelAmount.replace(",", ""));
                     item.set("busChangeReason", busChangeReason);
                 }
                 return item;
@@ -220,8 +225,8 @@ export class PaymentCtrl extends helper.Controller {
             this.backboneCollection.reset(arr);
             this.busVisitCollectionView.collection = this.backboneCollection;
 
-            var sum = _.reduce(this.backboneCollection.models, (memo, item) => memo + parseFloat(item.get("fuelAmount")), 0);
-            this.paymentView.viewModel.amount(sum);
+            var sum = _.reduce(this.backboneCollection.models, (memo, item) => memo + parseFloat(item.get("fuelAmount").replace(",","")), 0);
+            this.paymentView.viewModel.amount(helper.FormatMoney(sum));
         }
         else {
             helper.ShowModalPopup("danger", "Bus Info", "You cannot modify centre & bus info");
@@ -237,8 +242,8 @@ export class PaymentCtrl extends helper.Controller {
     }
     RemoveBusVisitItem(busId, centreId, driverId) {
         this.backboneCollection.remove(this.backboneCollection.findWhere({ busId: busId, centreId: centreId, driverId: driverId }));
-        var sum = _.reduce(this.backboneCollection.models, (memo, item) => memo + parseFloat(item.get("fuelAmount")), 0);
-        this.paymentView.viewModel.amount(sum);
+        var sum = _.reduce(this.backboneCollection.models, (memo, item) => memo + parseFloat(item.get("fuelAmount").replace(",","")), 0);
+        this.paymentView.viewModel.amount(helper.FormatMoney(sum));
     }
 
     UpdateBusVisitItem(model) {
@@ -287,6 +292,9 @@ export class PaymentCtrl extends helper.Controller {
         var appObj = app.request("AppGlobalSetting");
         payment.set("modifiedBy", appObj.get("Id"));
 
+        //remove formatting from amount
+        payment.set("amount", payment.get("amount").replace(",", ""));
+        //payment.set("fuelAmount", payment.get("fuelAmount").replace(",", ""));
         payment.set("busVisits", this.backboneCollection.toJSON());
         //payment.set("busVisits", this.GetMinimalRequest());
         var deferred = DAL.Save(payment);

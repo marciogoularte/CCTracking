@@ -1,4 +1,5 @@
 ﻿-----------------------------CHANGES FROM FEB-17-2015 after optimization fix---------------------------
 [dbo].[GetAllBooking] 
 [GetAllBusVisit]
+[GetBookingByCriteria]
 
