@@ -119,12 +119,12 @@
     <TypeScriptCompile Include="CCTracking.WebClient\Bus\BusAvailabilityView.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\Bus\BusAvailabilityCtrl.ts" />
     <Content Include="CCTracking.WebClient\Bus\BusAvailabilityGrid.html" />
-    <Content Include="CCTracking.WebClient\Bus\BusVisit.html" />
-    <TypeScriptCompile Include="CCTracking.WebClient\Bus\BusVisitView.ts" />
-    <TypeScriptCompile Include="CCTracking.WebClient\Bus\BusVisitCtrl.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\DAL\BusVisit.ts" />
-    <Content Include="CCTracking.WebClient\Bus\BusVisitGrid.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\DAL\BusAvailability.ts" />
+    <Content Include="CCTracking.WebClient\Bus\BusVisit\BusVisit.html" />
+    <TypeScriptCompile Include="CCTracking.WebClient\Bus\BusVisit\BusVisitCtrl.ts" />
+    <Content Include="CCTracking.WebClient\Bus\BusVisit\BusVisitGrid.html" />
+    <TypeScriptCompile Include="CCTracking.WebClient\Bus\BusVisit\BusVisitView.ts" />
     <Content Include="CCTracking.WebClient\Common\Templates\BusDetailModalPopup.html" />
     <Content Include="CCTracking.WebClient\Common\Templates\BusDetailModalPopupGrid.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\DAL\AdminSearch.ts" />

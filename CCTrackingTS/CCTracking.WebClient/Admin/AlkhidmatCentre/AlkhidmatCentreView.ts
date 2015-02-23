@@ -62,32 +62,32 @@ export class StationCollectionView extends helper.Views.CompositeView {
         options.itemViewContainer = "tbody";
         super(options);
     }
-    //onShow() {
+    onShow() {
 
-    //    this.dataTable = this.$el.find("#tblBooking").dataTable({
-    //        "autoWidth": false,
-    //        "info": true,
-    //        "processing": true,
-    //        //"scrollY": "500px",
-    //        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-    //        "language": {
-    //            "paginate": {
-    //                "next": "Next",
-    //                "previous": "Prev"
-    //            },
-    //            "emptyTable": "No record found!",
-    //            //"info": "Dispalying page _PAGE_ of _PAGES_",
-    //            "infoEmpty": "No record found!",
-    //            "zeroRecords": "kuch nahi milla"
-    //        }
-    //        //"pageLength": 50,
+        this.dataTable = this.$el.find("#tblStation")["dataTable"]({
+            "autoWidth": false,
+            "info": true,
+            "processing": true,
+            //"scrollY": "500px",
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "language": {
+                "paginate": {
+                    "next": "Next",
+                    "previous": "Prev"
+                },
+                "emptyTable": "No record found!",
+                //"info": "Dispalying page _PAGE_ of _PAGES_",
+                "infoEmpty": "No record found!",
+                "zeroRecords": "No record found!"
+            },
+            "pageLength": helper.GetPageSize()
 
-    //        //"lengthChange": false
+            //"lengthChange": false
 
-    //        //"lengthMenu": [[5, 10, 15, 20], [5, 10, 15, 20]]
+            //"lengthMenu": [[5, 10, 15, 20], [5, 10, 15, 20]]
 
-    //    });
-    //}
+        });
+    }
 }
 
 export class StationItemView extends helper.Views.ItemView {

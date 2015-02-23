@@ -204,19 +204,15 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     });
                 },
                 goViewBusVisit: function () {
-                    require(['./Bus/BusVisitCtrl'], function (p) {
+                    require(['./Bus/BusVisit/BusVisitCtrl'], function (p) {
                         new p.BusVisitCtrl().SimpleLoad();
                     });
                 },
                 gobusVisit: function () {
-                    require(['./Bus/BusVisitCtrl'], function (p) {
-                        new p.BusVisitCtrl().Show();
-                    });
+                    //require(['./Bus/BusVisit/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().Show(); });
                 },
                 goEditBusVisit: function () {
-                    require(['./Bus/BusVisitCtrl'], function (p) {
-                        new p.BusVisitCtrl().Show();
-                    });
+                    //require(['./Bus/BusVisit/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().Show(); });
                 },
                 goAdminBus: function () {
                     require(['./Admin/Bus/BusCtrl'], function (p) {

@@ -69,6 +69,26 @@ define(["require", "exports", "../../Helper", "marionette", "jquery", "knockout"
             options.itemViewContainer = "tbody";
             _super.call(this, options);
         }
+        StationCollectionView.prototype.onShow = function () {
+            this.dataTable = this.$el.find("#tblStation")["dataTable"]({
+                "autoWidth": false,
+                "info": true,
+                "processing": true,
+                //"scrollY": "500px",
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "language": {
+                    "paginate": {
+                        "next": "Next",
+                        "previous": "Prev"
+                    },
+                    "emptyTable": "No record found!",
+                    //"info": "Dispalying page _PAGE_ of _PAGES_",
+                    "infoEmpty": "No record found!",
+                    "zeroRecords": "No record found!"
+                },
+                "pageLength": helper.GetPageSize()
+            });
+        };
         return StationCollectionView;
     })(helper.Views.CompositeView);
     exports.StationCollectionView = StationCollectionView;

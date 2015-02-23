@@ -109,7 +109,10 @@ html, body {
     height: 4em;
 }*/
 
-
+.edit-action {
+    cursor: pointer;
+    cursor: hand;
+}
 footer.navbar-default.navbar-fixed-bottom
  {
       /*/background:red;*/

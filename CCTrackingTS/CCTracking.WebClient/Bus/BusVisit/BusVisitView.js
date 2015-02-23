@@ -1,12 +1,12 @@
-﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
-/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+﻿/// <reference path="../../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../../Scripts/typings/marionette/marionette.d.ts" />
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "text!./BusVisit.html", "text!./BusVisitGrid.html"], function(require, exports, helper) {
+define(["require", "exports", "../../Helper", "marionette", "jquery", "knockout", "text!./BusVisit.html", "text!./BusVisitGrid.html"], function(require, exports, helper) {
     /// <amd-dependency path="marionette"/>
     /// <amd-dependency path="jquery"/>
     /// <amd-dependency path="knockout"/>
@@ -18,19 +18,107 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
     var templateView = require("text!./BusVisit.html");
     var templateGrid = require("text!./BusVisitGrid.html");
 
-    var app;
-
-    // View Model
-    var BusVisitViewModel = (function (_super) {
-        __extends(BusVisitViewModel, _super);
-        function BusVisitViewModel(model, controller) {
-            _super.call(this, model, controller);
+    var SearchBusVisitLayoutView = (function (_super) {
+        __extends(SearchBusVisitLayoutView, _super);
+        function SearchBusVisitLayoutView(options) {
+            this.template = templateGrid.getOuterHTML("#BusVisitLayout");
+            this.regions = {
+                SearchRegion: {
+                    selector: ".rgnSearch"
+                },
+                ContentRegion: {
+                    selector: ".rgnContent"
+                }
+            };
+            _super.call(this, options);
         }
-        return BusVisitViewModel;
-    })(helper.ViewModel);
-    exports.BusVisitViewModel = BusVisitViewModel;
+        return SearchBusVisitLayoutView;
+    })(Marionette.Layout);
+    exports.SearchBusVisitLayoutView = SearchBusVisitLayoutView;
 
-    // View
+    var BusVisitCollectionView = (function (_super) {
+        __extends(BusVisitCollectionView, _super);
+        function BusVisitCollectionView(options) {
+            this.itemView = BusVisitItemView;
+            this.template = templateGrid.getOuterHTML("#gridTemplate");
+            this.itemViewContainer = "tbody";
+            _super.call(this, options);
+        }
+        //setOptionDisable(option, item) {
+        //    //debugger;
+        //    //if (item.otherDetail.toLowerCase()==="true") {
+        //    //    ko.applyBindingsToNode(option, { disable: true, text: item.description + ' - Maintenance' }, item);
+        //    //}
+        //}
+        BusVisitCollectionView.prototype.onShow = function () {
+            this.dataTable = this.$el.find("#tblStation")["dataTable"]({
+                "autoWidth": false,
+                "info": true,
+                "processing": true,
+                //"scrollY": "500px",
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "language": {
+                    "paginate": {
+                        "next": "Next",
+                        "previous": "Prev"
+                    },
+                    "emptyTable": "",
+                    //"info": "Dispalying page _PAGE_ of _PAGES_",
+                    "infoEmpty": "",
+                    "zeroRecords": "No record found!"
+                },
+                "pageLength": helper.GetPageSize()
+            });
+        };
+        return BusVisitCollectionView;
+    })(helper.Views.CompositeView);
+    exports.BusVisitCollectionView = BusVisitCollectionView;
+
+    var BusVisitItemView = (function (_super) {
+        __extends(BusVisitItemView, _super);
+        function BusVisitItemView(options) {
+            if (!options)
+                options = {};
+            options.template = templateGrid.getOuterHTML("#rowTemplate");
+            options.tagName = "tr";
+            options.className = "jsRowClick";
+            options.events = {
+                "click .jsShowDetail": "EditBusVisit"
+            };
+
+            _super.call(this, options);
+        }
+        BusVisitItemView.prototype.EditBusVisit = function () {
+            window.location.href = "#editBusVisit";
+            this.trigger("Event:EditForm", this.model.get("id"));
+        };
+        return BusVisitItemView;
+    })(helper.Views.ItemView);
+    exports.BusVisitItemView = BusVisitItemView;
+
+    var BusVisitSearchItemView = (function (_super) {
+        __extends(BusVisitSearchItemView, _super);
+        function BusVisitSearchItemView(options) {
+            this.template = templateGrid.getOuterHTML("#SearchPanel");
+
+            //this.tagName = "tr";
+            //this.className = "jsRowClick";
+            this.events = {
+                "click .jsSearchVisit": "SearchVisit"
+            };
+            _super.call(this, options);
+        }
+        BusVisitSearchItemView.prototype.SearchVisit = function (e) {
+            e.preventDefault();
+
+            //alert(this.model.get("busSelected").id);
+            this.trigger("Event:SearchVisit", this.model.get("busSelected").id);
+        };
+        return BusVisitSearchItemView;
+    })(helper.Views.ItemView);
+    exports.BusVisitSearchItemView = BusVisitSearchItemView;
+
+    //BusVisit Edit View
     var BusVisitView = (function (_super) {
         __extends(BusVisitView, _super);
         function BusVisitView(options) {
@@ -44,9 +132,6 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
             _super.call(this, options);
         }
         BusVisitView.prototype.close = function () {
-            //alert("closeing this view");
-            //this.off("Event:SaveForm");
-            //this.off("Event:CancelForm");
         };
         BusVisitView.prototype.Cancel = function () {
             this.trigger("Event:CancelForm");
@@ -327,62 +412,5 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "knockout", "
         return ViewModel;
     })();
     exports.ViewModel = ViewModel;
-
-    var BusVisitCollectionView = (function (_super) {
-        __extends(BusVisitCollectionView, _super);
-        function BusVisitCollectionView(options) {
-            options.itemView = BusVisitItemView;
-            options.template = templateGrid.getOuterHTML("#gridTemplate");
-            options.itemViewContainer = "tbody";
-            options.events = {
-                "click .jsSearchVisit": "SearchVisit"
-            };
-            _super.call(this, options);
-        }
-        BusVisitCollectionView.prototype.SearchVisit = function (e) {
-            e.preventDefault();
-            this.trigger("Event:SearchVisit", this.model.get("busSelected").id);
-        };
-
-        BusVisitCollectionView.prototype.setOptionDisable = function (option, item) {
-            //debugger;
-            //if (item.otherDetail.toLowerCase()==="true") {
-            //    ko.applyBindingsToNode(option, { disable: true, text: item.description + ' - Maintenance' }, item);
-            //}
-        };
-        return BusVisitCollectionView;
-    })(helper.Views.CompositeView);
-    exports.BusVisitCollectionView = BusVisitCollectionView;
-
-    var BusVisitItemView = (function (_super) {
-        __extends(BusVisitItemView, _super);
-        function BusVisitItemView(options) {
-            if (!options)
-                options = {};
-            options.template = templateGrid.getOuterHTML("#rowTemplate");
-            options.tagName = "tr";
-            options.className = "jsRowClick";
-            options.events = {
-                "click .jsShowDetail": "ShowDetail"
-            };
-
-            //this.templateHelpers = () => {
-            //    visitDateFormatted: {
-            //        if (this.model.get("visitDate") != undefined) {
-            //            this.model.set("visitDate", helper.FormatDateString(this.model.get("visitDate")));
-            //        }
-            //    }
-            //}
-            _super.call(this, options);
-        }
-        BusVisitItemView.prototype.ShowDetail = function () {
-            this.trigger("ShowDetail");
-        };
-        return BusVisitItemView;
-    })(helper.Views.ItemView);
-    exports.BusVisitItemView = BusVisitItemView;
 });
-//export function setOptionDisable(option, item) {
-//    alert("dddddd");
-//}
 //# sourceMappingURL=BusVisitView.js.map

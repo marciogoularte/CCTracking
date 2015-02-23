@@ -209,13 +209,15 @@ export class Application extends Marionette.Application {
                 require(['./RefundBooking/RefundBookingCtrl'], (p) => { new p.RefundBookingCtrl().Show(); });
             },
             goViewBusVisit() {
-                require(['./Bus/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().SimpleLoad(); });
+                
+                require(['./Bus/BusVisit/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().SimpleLoad(); });
             },
             gobusVisit() {
-                require(['./Bus/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().Show(); });
+                //require(['./Bus/BusVisit/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().Show(); });
             },
             goEditBusVisit() {
-                require(['./Bus/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().Show(); });
+                
+                //require(['./Bus/BusVisit/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().Show(); });
             },
             goAdminBus() {
                 require(['./Admin/Bus/BusCtrl'], (p) => { new p.BusCtrl().Show(); });
