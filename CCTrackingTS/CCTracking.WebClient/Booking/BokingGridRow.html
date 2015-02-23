@@ -6,13 +6,12 @@
         <td class="input-sm"><%=contactNic%></td>
         <td class="input-sm"><%=deseasedName%></td>
         <td class="input-sm"><%=pickupDate%></td>        
-        <td class="input-sm">
-            <a href="#editBooking?id=<%=id%>"> <span class="fa fa-edit" title="Edit"></span></a>&nbsp;
-            <a href="#payment?id=<%=id%>"><span class="fa fa-briefcase" title="Payment"></span></a>&nbsp;
-            <a href="#cancel?id=<%=id%>"><span class="fa fa-remove" title="Cancel"></span></a>&nbsp;
-            <a href="#extraCharge?id=<%=id%>"><span class="fa fa-plus-circle" title="Extra Charges"></span></a>&nbsp;
+        <td class="input-sm">            
+            <span class="jsEditBooking edit-action fa fa-edit" title="Edit"></span>&nbsp;            
+            <span class="jsEditPayment edit-action fa fa-briefcase" title="Payment"></span>&nbsp;            
+            <span class="jsEditRefund edit-action fa fa-remove" title="Refund Booking"></span>&nbsp;            
+            <span class="jsEditExtraCharge edit-action fa fa-plus-circle" title="Extra Charges"></span>&nbsp;
             <a href="javascript:void(0);"><span class="jsExportToPdf fa fa-file-pdf-o" title="Export to Pdf"></span></a>
-
         </td>        
     </script>
 </div>

@@ -32,18 +32,22 @@ export class RefundBookingCtrl extends helper.Controller {
         //this.view = new views.RefundBookingView({ viewModel: this.viewModel });
     }
 
-    Show() {
-        var url = window.location.href;
-        if (url.indexOf("id=") > -1) {
-            //alert(url.substring(url.indexOf("id=") + 3, url.length));
-            var id = (url.substring(url.indexOf("id=") + 3, url.length));
-            var deferredById = DAL.GetById(id);
-            deferredById.done(p=> this.GetByIdCompleted(p));
+    //Show() {
+    //    var url = window.location.href;
+    //    if (url.indexOf("id=") > -1) {
+    //        //alert(url.substring(url.indexOf("id=") + 3, url.length));
+    //        var id = (url.substring(url.indexOf("id=") + 3, url.length));
+    //        var deferredById = DAL.GetById(id);
+    //        deferredById.done(p=> this.GetByIdCompleted(p));
+    //    }
+    //    else {
+    //        this.Load();
+    //    }
+    //}
 
-        }
-        else {
-            this.Load();
-        }
+    EditRefund(id: number) {
+        var deferredById = DAL.GetById(id);
+        deferredById.done(p => this.GetByIdCompleted(p));
     }
 
     Load() {

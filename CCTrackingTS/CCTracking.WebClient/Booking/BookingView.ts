@@ -164,11 +164,40 @@ export class BookingItemView extends helper.Views.ItemView {
             "click .jsExportToPdf": () => {
                 this.trigger("ExportToPdf", this.model.get("id")); 
             },
-            "click .jsShowDetail": "ShowDetail"
+            "click .jsShowDetail": "ShowDetail",
+            "click .jsEditBooking": "EditBooking",
+            "click .jsEditPayment": "EditPayment",
+            "click .jsEditRefund": "EditRefund",
+            "click .jsEditExtraCharge": "EditExtraCharge"
+
         };
         
         super(options);
     }
+
+    EditBooking(e) {
+        e.preventDefault();
+        window.location.href = "#editBooking";
+        this.trigger("Event:EditBooking", this.model.get("id"));
+    }
+
+    EditPayment(e) {
+        e.preventDefault();
+        window.location.href = "#editPayment";
+        this.trigger("Event:EditPayment", this.model.get("id"));
+    }
+    EditRefund(e) {
+        e.preventDefault();
+        window.location.href = "#editRefund";
+        this.trigger("Event:EditRefund", this.model.get("id"));
+    }
+    EditExtraCharge(e) {
+        e.preventDefault();
+        window.location.href = "#editExtraCharge";
+        this.trigger("Event:EditExtraCharge", this.model.get("id"));
+    }
+
+
     ShowDetail() {
         //new userCtrl.UserCtrl().ShowDetail(this.model);
     }

@@ -24,24 +24,33 @@ export class BookingCtrl extends helper.Controller {
         app = application.Application.getInstance();
         super();
     }
-    Show() {
-        //TODO: model fill from server..        
-        //if localStorage is empty then call from db        
-        //var a = localStorage.getItem('lookupResponse');
+    //Show() {
+    //    //TODO: model fill from server..        
+    //    //if localStorage is empty then call from db        
+    //    //var a = localStorage.getItem('lookupResponse');
         
-        var url = window.location.href;
-        //update booking
-        if (url.indexOf("id=") > -1) {
-            //alert(url.substring(url.indexOf("id=") + 3, url.length));
-            var id = (url.substring(url.indexOf("id=") + 3, url.length));
-            var deferredById = DAL.GetById(id);
-            deferredById.done(p=> this.GetByIdCompleted(p));
+    //    var url = window.location.href;
+    //    //update booking
+    //    if (url.indexOf("id=") > -1) {
+    //        //alert(url.substring(url.indexOf("id=") + 3, url.length));
+    //        var id = (url.substring(url.indexOf("id=") + 3, url.length));
+    //        var deferredById = DAL.GetById(id);
+    //        deferredById.done(p=> this.GetByIdCompleted(p));
 
-        }
-        //add booking
-        else {
-            this.LoadCompleted(JSON.parse(localStorage.getItem('lookupResponse')));
-        }
+    //    }
+    //    //add booking
+    //    else {
+    //        this.LoadCompleted(JSON.parse(localStorage.getItem('lookupResponse')));
+    //    }
+    //}
+
+    Show() {
+        this.LoadCompleted(JSON.parse(localStorage.getItem('lookupResponse')));
+    }
+
+    EditBooking(id) {
+        var deferredById = DAL.GetById(id);
+        deferredById.done(p=> this.GetByIdCompleted(p));
     }
 
     GetByIdCompleted(bookingResponse: dto.Models.BookingResponse) {
@@ -190,6 +199,19 @@ export class BookingCtrl extends helper.Controller {
         collectionView.listenTo(collectionView, "itemview:ExportToPdf", (view, id) => {
             helper.PrintReceipt(id);
         });
+        collectionView.listenTo(collectionView, "itemview:Event:EditBooking", (views, id) => {
+            this.EditBooking(id);
+        });
+        collectionView.listenTo(collectionView, "itemview:Event:EditPayment", (views, id) => {
+            require(['./../Payment/PaymentCtrl'], (p) => { new p.PaymentCtrl().EditPayment(id); });
+        });
+        collectionView.listenTo(collectionView, "itemview:Event:EditRefund", (views, id) => {
+            require(['./../RefundBooking/RefundBookingCtrl'], (p) => { new p.RefundBookingCtrl().EditRefund(id); });
+        });
+        collectionView.listenTo(collectionView, "itemview:Event:EditExtraCharge", (views, id) => {
+            require(['./../ExtraCharge/ExtraChargeCtrl'], (p) => { new p.ExtraChargeCtrl().EditExtraCharge(id); });
+        });
+        
         app.MainRegion.show(collectionView);
     }
 
@@ -277,7 +299,8 @@ export class BookingCtrl extends helper.Controller {
         }
         else {
             helper.ShowModalPopup("success", "Booking", "Record has been saved successfully with Booking ID : " + bookingResponse["id"]);
-            location.href = "#payment?id=" + result.get("id");
+            //location.href = "#payment?id=" + result.get("id");
+            require(['./../Payment/PaymentCtrl'], (p) => { new p.PaymentCtrl().EditPayment(result.get("id")); });
         }
     }
 }

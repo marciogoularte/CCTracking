@@ -154,11 +154,37 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "jqueryUI", "
                 "click .jsExportToPdf": function () {
                     _this.trigger("ExportToPdf", _this.model.get("id"));
                 },
-                "click .jsShowDetail": "ShowDetail"
+                "click .jsShowDetail": "ShowDetail",
+                "click .jsEditBooking": "EditBooking",
+                "click .jsEditPayment": "EditPayment",
+                "click .jsEditRefund": "EditRefund",
+                "click .jsEditExtraCharge": "EditExtraCharge"
             };
 
             _super.call(this, options);
         }
+        BookingItemView.prototype.EditBooking = function (e) {
+            e.preventDefault();
+            window.location.href = "#editBooking";
+            this.trigger("Event:EditBooking", this.model.get("id"));
+        };
+
+        BookingItemView.prototype.EditPayment = function (e) {
+            e.preventDefault();
+            window.location.href = "#editPayment";
+            this.trigger("Event:EditPayment", this.model.get("id"));
+        };
+        BookingItemView.prototype.EditRefund = function (e) {
+            e.preventDefault();
+            window.location.href = "#editRefund";
+            this.trigger("Event:EditRefund", this.model.get("id"));
+        };
+        BookingItemView.prototype.EditExtraCharge = function (e) {
+            e.preventDefault();
+            window.location.href = "#editExtraCharge";
+            this.trigger("Event:EditExtraCharge", this.model.get("id"));
+        };
+
         BookingItemView.prototype.ShowDetail = function () {
             //new userCtrl.UserCtrl().ShowDetail(this.model);
         };

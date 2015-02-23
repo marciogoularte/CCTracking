@@ -48,27 +48,33 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
             //this.paymentViewModel = new views.PaymentViewModel(new Backbone.Model(), this);
             this.idCounter = 1;
         }
-        PaymentCtrl.prototype.Show = function () {
+        //Show() {
+        //    var url = window.location.href;
+        //    var id = "0";
+        //    //update payment
+        //    if (url.indexOf("id=") > -1) {
+        //        //alert(url.substring(url.indexOf("id=") + 3, url.length));
+        //        id = (url.substring(url.indexOf("id=") + 3, url.length));
+        //    }
+        //    var deferredBusAvailability = DAL.GetBusAvialability(id);
+        //    deferredBusAvailability.done(p => {
+        //        this.FillBusAvailability(p, id);
+        //    });
+        //    //add payment
+        //    //else {
+        //    //    var deferredBusAvailability = DAL.GetBusAvialability(0);
+        //    //    deferredBusAvailability.done(p => {
+        //    //        this.LoadCompleted();
+        //    //    });
+        //    //}
+        //}
+        PaymentCtrl.prototype.EditPayment = function (id) {
             var _this = this;
-            var url = window.location.href;
-            var id = "0";
-
-            //update payment
-            if (url.indexOf("id=") > -1) {
-                //alert(url.substring(url.indexOf("id=") + 3, url.length));
-                id = (url.substring(url.indexOf("id=") + 3, url.length));
-            }
+            //alert("aaa" + id);
             var deferredBusAvailability = DAL.GetBusAvialability(id);
             deferredBusAvailability.done(function (p) {
                 _this.FillBusAvailability(p, id);
             });
-            //add payment
-            //else {
-            //    var deferredBusAvailability = DAL.GetBusAvialability(0);
-            //    deferredBusAvailability.done(p => {
-            //        this.LoadCompleted();
-            //    });
-            //}
         };
 
         PaymentCtrl.prototype.FillBusAvailability = function (busList, id) {
@@ -87,21 +93,20 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
         //GetByIdCompleted(paymentResponse: dto.Models.PaymentResponse) {
         PaymentCtrl.prototype.GetByIdCompleted = function (paymentResponse, busList) {
             var _this = this;
-            var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
+            //var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
             var model = new Backbone.Model(paymentResponse["paymentModel"]);
 
             //booking id
-            var url = window.location.href;
-            var id = (url.substring(url.indexOf("id=") + 3, url.length));
-            if (model.get("id") === undefined || model.get("id") === 0) {
-                this.InitalizeKoBinding(model);
-            }
-
-            model.set("bookingId", id);
+            //var url = window.location.href;
+            //var id = (url.substring(url.indexOf("id=") + 3, url.length));
+            //if (model.get("id") === undefined || model.get("id") === 0) {
+            //    this.InitalizeKoBinding(model);
+            //}
+            model.set("bookingId", model.get("bookingId"));
             this.layout = app.AppLayout;
             this.paymentView = new views.PaymentView(busList, model);
-            var vm = this.paymentView.viewModel;
 
+            //var vm = this.paymentView.viewModel;
             this.paymentView.on("BusVisitAddItem", function (bookingId, alkhidmatCentre, driver, bus, fuelAmount) {
                 return _this.AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus, fuelAmount);
             });
@@ -297,6 +302,7 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
         };
 
         PaymentCtrl.prototype.Save = function (payment) {
+            var _this = this;
             //reset actual id - match with DAL object's properties
             if (this.backboneCollection.length < 1) {
                 helper.ShowModalPopup("danger", "Bus Details", "Please add bus details");
@@ -315,15 +321,43 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
             payment.set("amount", payment.get("amount").replace(",", ""));
 
             //payment.set("fuelAmount", payment.get("fuelAmount").replace(",", ""));
-            payment.set("busVisits", this.backboneCollection.toJSON());
+            var visitCollection = this.RemoveAmountFormatting(this.backboneCollection.toJSON());
 
+            payment.set("busVisits", visitCollection);
+
+            //payment.set("busVisits", this.backboneCollection.toJSON());
             //payment.set("busVisits", this.GetMinimalRequest());
             var deferred = DAL.Save(payment);
 
             //TODO: call controller from here...
+            //deferred.done(p=> new views.PaymentView(null).SaveCompleted(p));
             deferred.done(function (p) {
-                return new views.PaymentView(null).SaveCompleted(p);
+                return _this.SaveCompleted(p);
             });
+        };
+
+        PaymentCtrl.prototype.SaveCompleted = function (paymentResponse) {
+            var result = new Backbone.Model(paymentResponse);
+            if (result.get("errorMessage") != undefined && result.get("errorMessage").trim() != "") {
+                helper.ShowModalPopup("danger", "Payment", "Due to some technical reason payment have not been saved successfully!<br> Pelase try later");
+            } else {
+                helper.ShowModalPopup("success", "Payment", "Record has been saved successfully with Payment ID : " + paymentResponse["id"]);
+
+                //alert("Record has been saved successfully with Payment ID : " + paymentResponse["id"]);
+                location.href = "#viewBooking";
+            }
+            //app.vent.trigger("Event:UpdateSummary");
+        };
+
+        PaymentCtrl.prototype.RemoveAmountFormatting = function (aCollection) {
+            var visits = null;
+            if (aCollection != undefined) {
+                visits = _.map(aCollection, function (item) {
+                    item.fuelAmount = item.fuelAmount.replace(",", "");
+                    return item;
+                });
+            }
+            return visits;
         };
 
         PaymentCtrl.prototype.GetMinimalRequest = function () {

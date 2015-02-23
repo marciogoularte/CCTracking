@@ -23,18 +23,23 @@ export class ExtraChargeCtrl extends helper.Controller {
         app = application.Application.getInstance();
         super();
     }
-    Show() {
-        var url = window.location.href;
-        var id = "0";
-        //update payment
-        if (url.indexOf("id=") > -1) {
-            id = (url.substring(url.indexOf("id=") + 3, url.length));
-        }
+    //Show() {
+    //    var url = window.location.href;
+    //    var id = "0";
+    //    //update payment
+    //    if (url.indexOf("id=") > -1) {
+    //        id = (url.substring(url.indexOf("id=") + 3, url.length));
+    //    }
+    //    var deferred = DAL.GetById(id);
+    //    deferred.done(p => {
+    //        this.GetByIdCompleted(p);
+    //    });
+    //    //this.GetByIdCompleted(null);
+    //}
+
+    EditExtraCharge(id: number) {
         var deferred = DAL.GetById(id);
-        deferred.done(p => {
-            this.GetByIdCompleted(p);
-        });
-        //this.GetByIdCompleted(null);
+        deferred.done(p => { this.GetByIdCompleted(p); });
     }
 
     GetByIdCompleted(extraChargeDto: any) {

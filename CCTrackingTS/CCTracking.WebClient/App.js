@@ -95,10 +95,10 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     'editBooking': 'goEditBooking',
                     'viewHome': 'goViewHome',
                     'viewBooking': 'goViewBooking',
-                    'payment': 'goPayment',
+                    'editPayment': 'goPayment',
                     'alkhidmatCentre': 'goStation',
                     'viewAlkhidmatCentre': 'goViewStation',
-                    'cancel': 'goCancel',
+                    'editRefund': 'goCancel',
                     'busVisit': 'gobusVisit',
                     'editBusVisit': 'goEditBusVisit',
                     'viewBusVisit': 'goViewBusVisit',
@@ -137,7 +137,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     'busVisitDetail': '',
                     'busVisitMilageDetail': '',
                     'changePassword': 'goChangePassword',
-                    'extraCharge': 'goExtraCharge',
+                    'editExtraCharge': 'goExtraCharge',
                     'auditBooking': 'goAuditBooking',
                     'auditBusVisit': 'goAuditBusVisit',
                     'auditPayment': 'goAuditPayment',
@@ -167,9 +167,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     });
                 },
                 goEditBooking: function () {
-                    require(['./Booking/BookingCtrl'], function (p) {
-                        new p.BookingCtrl().Show();
-                    });
+                    //require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().Show(); });
                 },
                 goViewHome: function () {
                     require(['./Home/HomeCtrl'], function (p) {
@@ -184,9 +182,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     //routes.navigate("viewBooking");
                 },
                 goPayment: function () {
-                    require(['./Payment/PaymentCtrl'], function (p) {
-                        new p.PaymentCtrl().Show();
-                    });
+                    //require(['./Payment/PaymentCtrl'], (p) => { new p.PaymentCtrl().Show(); });
                 },
                 goStation: function () {
                     require(['./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl'], function (p) {
@@ -199,9 +195,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     });
                 },
                 goCancel: function () {
-                    require(['./RefundBooking/RefundBookingCtrl'], function (p) {
-                        new p.RefundBookingCtrl().Show();
-                    });
+                    //require(['./RefundBooking/RefundBookingCtrl'], (p) => { new p.RefundBookingCtrl().Show(); });
                 },
                 goViewBusVisit: function () {
                     require(['./Bus/BusVisit/BusVisitCtrl'], function (p) {
@@ -353,9 +347,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     });
                 },
                 goExtraCharge: function () {
-                    require(['./ExtraCharge/ExtraChargeCtrl'], function (p) {
-                        new p.ExtraChargeCtrl().Show();
-                    });
+                    //require(['./ExtraCharge/ExtraChargeCtrl'], (p) => { new p.ExtraChargeCtrl().Show(); });
                 },
                 goDriverSummary: function () {
                     require(['./Admin/Reports/Driver/DriverSummaryCtrl'], function (p) {

@@ -109,10 +109,10 @@ export class Application extends Marionette.Application {
                 'editBooking': 'goEditBooking',
                 'viewHome': 'goViewHome',
                 'viewBooking': 'goViewBooking', 
-                'payment': 'goPayment',
+                'editPayment': 'goPayment',
                 'alkhidmatCentre': 'goStation',
                 'viewAlkhidmatCentre': 'goViewStation',
-                'cancel': 'goCancel',
+                'editRefund': 'goCancel',
                 'busVisit': 'gobusVisit',
                 'editBusVisit': 'goEditBusVisit',
                 'viewBusVisit': 'goViewBusVisit',
@@ -162,7 +162,7 @@ export class Application extends Marionette.Application {
                 'busVisitDetail': '',
                 'busVisitMilageDetail': '',
                 'changePassword': 'goChangePassword',
-                'extraCharge': 'goExtraCharge',
+                'editExtraCharge': 'goExtraCharge',
                 'auditBooking': 'goAuditBooking',
                 'auditBusVisit': 'goAuditBusVisit',
                 'auditPayment': 'goAuditPayment',
@@ -184,7 +184,7 @@ export class Application extends Marionette.Application {
                 require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().Show(); });
             },
             goEditBooking() {
-                require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().Show(); });
+                //require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().Show(); });
             },
             goViewHome() {
                 require(['./Home/HomeCtrl'], (p) => { new p.HomeCtrl().Show(); });
@@ -195,7 +195,7 @@ export class Application extends Marionette.Application {
             //routes.navigate("viewBooking");
             },
             goPayment() {
-                require(['./Payment/PaymentCtrl'], (p) => { new p.PaymentCtrl().Show(); });
+                //require(['./Payment/PaymentCtrl'], (p) => { new p.PaymentCtrl().Show(); });
             },
             goStation()
             {
@@ -206,7 +206,7 @@ export class Application extends Marionette.Application {
                 require(['./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl'], (p) => { new p.StationCtrl().GetAll(); });
             },
             goCancel() {
-                require(['./RefundBooking/RefundBookingCtrl'], (p) => { new p.RefundBookingCtrl().Show(); });
+                //require(['./RefundBooking/RefundBookingCtrl'], (p) => { new p.RefundBookingCtrl().Show(); });
             },
             goViewBusVisit() {
                 
@@ -307,7 +307,7 @@ export class Application extends Marionette.Application {
                 require(['./ChangePassword/ChangePasswordCtrl'], (p) => { new p.ChangePasswordCtrl().Load(); });
             },
             goExtraCharge() {
-                require(['./ExtraCharge/ExtraChargeCtrl'], (p) => { new p.ExtraChargeCtrl().Show(); });
+                //require(['./ExtraCharge/ExtraChargeCtrl'], (p) => { new p.ExtraChargeCtrl().Show(); });
             },
             goDriverSummary() {
                 require(['./Admin/Reports/Driver/DriverSummaryCtrl'], (p) => { new p.DriverSummaryCtrl().Show(); });

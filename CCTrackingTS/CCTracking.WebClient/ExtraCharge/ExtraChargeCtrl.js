@@ -21,20 +21,25 @@ define(["require", "exports", "../App", "../Helper", "./ExtraChargeView", "../DA
             app = application.Application.getInstance();
             _super.call(this);
         }
-        ExtraChargeCtrl.prototype.Show = function () {
+        //Show() {
+        //    var url = window.location.href;
+        //    var id = "0";
+        //    //update payment
+        //    if (url.indexOf("id=") > -1) {
+        //        id = (url.substring(url.indexOf("id=") + 3, url.length));
+        //    }
+        //    var deferred = DAL.GetById(id);
+        //    deferred.done(p => {
+        //        this.GetByIdCompleted(p);
+        //    });
+        //    //this.GetByIdCompleted(null);
+        //}
+        ExtraChargeCtrl.prototype.EditExtraCharge = function (id) {
             var _this = this;
-            var url = window.location.href;
-            var id = "0";
-
-            //update payment
-            if (url.indexOf("id=") > -1) {
-                id = (url.substring(url.indexOf("id=") + 3, url.length));
-            }
             var deferred = DAL.GetById(id);
             deferred.done(function (p) {
                 _this.GetByIdCompleted(p);
             });
-            //this.GetByIdCompleted(null);
         };
 
         ExtraChargeCtrl.prototype.GetByIdCompleted = function (extraChargeDto) {

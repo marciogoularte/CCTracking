@@ -23,24 +23,33 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             app = application.Application.getInstance();
             _super.call(this);
         }
+        //Show() {
+        //    //TODO: model fill from server..
+        //    //if localStorage is empty then call from db
+        //    //var a = localStorage.getItem('lookupResponse');
+        //    var url = window.location.href;
+        //    //update booking
+        //    if (url.indexOf("id=") > -1) {
+        //        //alert(url.substring(url.indexOf("id=") + 3, url.length));
+        //        var id = (url.substring(url.indexOf("id=") + 3, url.length));
+        //        var deferredById = DAL.GetById(id);
+        //        deferredById.done(p=> this.GetByIdCompleted(p));
+        //    }
+        //    //add booking
+        //    else {
+        //        this.LoadCompleted(JSON.parse(localStorage.getItem('lookupResponse')));
+        //    }
+        //}
         BookingCtrl.prototype.Show = function () {
-            //TODO: model fill from server..
-            //if localStorage is empty then call from db
-            //var a = localStorage.getItem('lookupResponse');
-            var _this = this;
-            var url = window.location.href;
+            this.LoadCompleted(JSON.parse(localStorage.getItem('lookupResponse')));
+        };
 
-            //update booking
-            if (url.indexOf("id=") > -1) {
-                //alert(url.substring(url.indexOf("id=") + 3, url.length));
-                var id = (url.substring(url.indexOf("id=") + 3, url.length));
-                var deferredById = DAL.GetById(id);
-                deferredById.done(function (p) {
-                    return _this.GetByIdCompleted(p);
-                });
-            } else {
-                this.LoadCompleted(JSON.parse(localStorage.getItem('lookupResponse')));
-            }
+        BookingCtrl.prototype.EditBooking = function (id) {
+            var _this = this;
+            var deferredById = DAL.GetById(id);
+            deferredById.done(function (p) {
+                return _this.GetByIdCompleted(p);
+            });
         };
 
         BookingCtrl.prototype.GetByIdCompleted = function (bookingResponse) {
@@ -202,6 +211,7 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
         };
 
         BookingCtrl.prototype.GetAllCompleted = function (bookingResponse) {
+            var _this = this;
             app = application.Application.getInstance();
             var bookings = _.map(bookingResponse["bookingList"], function (item) {
                 if (item.pickupDate != "0001-01-01T00:00:00")
@@ -215,6 +225,25 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
             collectionView.listenTo(collectionView, "itemview:ExportToPdf", function (view, id) {
                 helper.PrintReceipt(id);
             });
+            collectionView.listenTo(collectionView, "itemview:Event:EditBooking", function (views, id) {
+                _this.EditBooking(id);
+            });
+            collectionView.listenTo(collectionView, "itemview:Event:EditPayment", function (views, id) {
+                require(['./../Payment/PaymentCtrl'], function (p) {
+                    new p.PaymentCtrl().EditPayment(id);
+                });
+            });
+            collectionView.listenTo(collectionView, "itemview:Event:EditRefund", function (views, id) {
+                require(['./../RefundBooking/RefundBookingCtrl'], function (p) {
+                    new p.RefundBookingCtrl().EditRefund(id);
+                });
+            });
+            collectionView.listenTo(collectionView, "itemview:Event:EditExtraCharge", function (views, id) {
+                require(['./../ExtraCharge/ExtraChargeCtrl'], function (p) {
+                    new p.ExtraChargeCtrl().EditExtraCharge(id);
+                });
+            });
+
             app.MainRegion.show(collectionView);
         };
 
@@ -303,7 +332,11 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
                 helper.ShowModalPopup("danger", "Booking", "Due to some technical reason booking have not been saved successfully!<br> Pelase try later");
             } else {
                 helper.ShowModalPopup("success", "Booking", "Record has been saved successfully with Booking ID : " + bookingResponse["id"]);
-                location.href = "#payment?id=" + result.get("id");
+
+                //location.href = "#payment?id=" + result.get("id");
+                require(['./../Payment/PaymentCtrl'], function (p) {
+                    new p.PaymentCtrl().EditPayment(result.get("id"));
+                });
             }
         };
         return BookingCtrl;

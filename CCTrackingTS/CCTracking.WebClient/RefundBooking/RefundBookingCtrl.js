@@ -25,19 +25,24 @@ define(["require", "exports", "../App", "../Helper", "./RefundBookingView", "../
             //this.viewModel = new views.RefundBookingViewModel(this.backboneModel, this);
             //this.view = new views.RefundBookingView({ viewModel: this.viewModel });
         }
-        RefundBookingCtrl.prototype.Show = function () {
+        //Show() {
+        //    var url = window.location.href;
+        //    if (url.indexOf("id=") > -1) {
+        //        //alert(url.substring(url.indexOf("id=") + 3, url.length));
+        //        var id = (url.substring(url.indexOf("id=") + 3, url.length));
+        //        var deferredById = DAL.GetById(id);
+        //        deferredById.done(p=> this.GetByIdCompleted(p));
+        //    }
+        //    else {
+        //        this.Load();
+        //    }
+        //}
+        RefundBookingCtrl.prototype.EditRefund = function (id) {
             var _this = this;
-            var url = window.location.href;
-            if (url.indexOf("id=") > -1) {
-                //alert(url.substring(url.indexOf("id=") + 3, url.length));
-                var id = (url.substring(url.indexOf("id=") + 3, url.length));
-                var deferredById = DAL.GetById(id);
-                deferredById.done(function (p) {
-                    return _this.GetByIdCompleted(p);
-                });
-            } else {
-                this.Load();
-            }
+            var deferredById = DAL.GetById(id);
+            deferredById.done(function (p) {
+                return _this.GetByIdCompleted(p);
+            });
         };
 
         RefundBookingCtrl.prototype.Load = function () {

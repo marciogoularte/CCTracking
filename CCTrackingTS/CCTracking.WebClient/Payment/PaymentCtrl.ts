@@ -47,29 +47,36 @@ export class PaymentCtrl extends helper.Controller {
         //this.paymentViewModel = new views.PaymentViewModel(new Backbone.Model(), this);
         this.idCounter = 1;
     }
-    Show() {
-        var url = window.location.href;
-        var id = "0";
-        //update payment
-        if (url.indexOf("id=") > -1) {
-            //alert(url.substring(url.indexOf("id=") + 3, url.length));
-            id = (url.substring(url.indexOf("id=") + 3, url.length));
-        }
-        var deferredBusAvailability = DAL.GetBusAvialability(id);
-        deferredBusAvailability.done(p => {
-            this.FillBusAvailability(p, id);
-        });
-        //add payment
-        //else {
-        //    var deferredBusAvailability = DAL.GetBusAvialability(0);
-        //    deferredBusAvailability.done(p => {
-        //        this.LoadCompleted();    
-        //    });
+
+    //Show() {
+    //    var url = window.location.href;
+    //    var id = "0";
+    //    //update payment
+    //    if (url.indexOf("id=") > -1) {
+    //        //alert(url.substring(url.indexOf("id=") + 3, url.length));
+    //        id = (url.substring(url.indexOf("id=") + 3, url.length));
+    //    }
+    //    var deferredBusAvailability = DAL.GetBusAvialability(id);
+    //    deferredBusAvailability.done(p => {
+    //        this.FillBusAvailability(p, id);
+    //    });
+    //    //add payment
+    //    //else {
+    //    //    var deferredBusAvailability = DAL.GetBusAvialability(0);
+    //    //    deferredBusAvailability.done(p => {
+    //    //        this.LoadCompleted();    
+    //    //    });
             
-        //}
+    //    //}
+    //}
+
+    EditPayment(id: number) {
+        //alert("aaa" + id);
+        var deferredBusAvailability = DAL.GetBusAvialability(id);
+        deferredBusAvailability.done(p => { this.FillBusAvailability(p, id); });
     }
 
-    FillBusAvailability(busList: any,id) {
+    FillBusAvailability(busList: any, id) {
         var busAvailability = busList["busAvailabilityList"];
         if (id > 0) {
             var deferred = DAL.GetById(id);
@@ -82,19 +89,20 @@ export class PaymentCtrl extends helper.Controller {
 
 //GetByIdCompleted(paymentResponse: dto.Models.PaymentResponse) {
     GetByIdCompleted(paymentResponse: any,busList) {
-        var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
+        //var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
         var model = new Backbone.Model(paymentResponse["paymentModel"]);
         //booking id
-        var url = window.location.href;
-        var id = (url.substring(url.indexOf("id=") + 3, url.length));
-        if (model.get("id") === undefined || model.get("id") === 0) {
-            this.InitalizeKoBinding(model);
-        }
+        
+        //var url = window.location.href;
+        //var id = (url.substring(url.indexOf("id=") + 3, url.length));
+        //if (model.get("id") === undefined || model.get("id") === 0) {
+        //    this.InitalizeKoBinding(model);
+        //}
 
-        model.set("bookingId", id);
+        model.set("bookingId", model.get("bookingId"));
         this.layout = app.AppLayout;
         this.paymentView = new views.PaymentView(busList,model);
-        var vm = this.paymentView.viewModel;
+        //var vm = this.paymentView.viewModel;
 
         this.paymentView.on("BusVisitAddItem", (bookingId, alkhidmatCentre, driver, bus, fuelAmount) => this.AddBusVisitItem(bookingId, alkhidmatCentre, driver, bus, fuelAmount));
         this.paymentView.on("BusVisitUpdateItem", (bookingId, alkhidmatCentre, driver, bus, fuelAmount, busChangeReason) => this.ModifyBusVisitItem(bookingId, alkhidmatCentre, driver, bus, fuelAmount, busChangeReason));
@@ -276,6 +284,7 @@ export class PaymentCtrl extends helper.Controller {
 
   
     Save(payment: any) {
+        
         //reset actual id - match with DAL object's properties
         if (this.backboneCollection.length < 1) {
             helper.ShowModalPopup("danger", "Bus Details", "Please add bus details");
@@ -295,13 +304,44 @@ export class PaymentCtrl extends helper.Controller {
         //remove formatting from amount
         payment.set("amount", payment.get("amount").replace(",", ""));
         //payment.set("fuelAmount", payment.get("fuelAmount").replace(",", ""));
-        payment.set("busVisits", this.backboneCollection.toJSON());
+        var visitCollection = this.RemoveAmountFormatting(this.backboneCollection.toJSON());
+        
+
+        payment.set("busVisits", visitCollection);
+        //payment.set("busVisits", this.backboneCollection.toJSON());
         //payment.set("busVisits", this.GetMinimalRequest());
+        
         var deferred = DAL.Save(payment);
 
         //TODO: call controller from here...
-        deferred.done(p=> new views.PaymentView(null).SaveCompleted(p));
+        //deferred.done(p=> new views.PaymentView(null).SaveCompleted(p));
+        deferred.done(p=> this.SaveCompleted(p));
     }
+
+    SaveCompleted(paymentResponse: any) {
+        var result = new Backbone.Model(paymentResponse);
+        if (result.get("errorMessage") != undefined && result.get("errorMessage").trim() != "") {
+            helper.ShowModalPopup("danger", "Payment", "Due to some technical reason payment have not been saved successfully!<br> Pelase try later");
+        }
+        else {
+            helper.ShowModalPopup("success", "Payment", "Record has been saved successfully with Payment ID : " + paymentResponse["id"]);
+            //alert("Record has been saved successfully with Payment ID : " + paymentResponse["id"]);
+            location.href = "#viewBooking";
+        }
+        //app.vent.trigger("Event:UpdateSummary");
+    }
+
+    RemoveAmountFormatting(aCollection) {
+        var visits = null;
+        if (aCollection != undefined) {
+            visits = _.map(aCollection, (item) => {
+                item.fuelAmount = item.fuelAmount.replace(",", "");
+                return item;
+            });
+        }
+        return visits;
+    }
+
 
     GetMinimalRequest() {
         //var visits = this.backboneCollection.toJSON();
