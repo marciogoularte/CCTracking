@@ -130,6 +130,9 @@
     <TypeScriptCompile Include="CCTracking.WebClient\DAL\AdminSearch.ts" />
     <Content Include="CCTracking.WebClient\Common\Templates\Progressbar.html" />
     <Content Include="CCTracking.WebClient\Common\Templates\ReceiptLayout.html" />
+    <TypeScriptCompile Include="CCTracking.WebClient\Search\SearchCtrl.ts" />
+    <Content Include="CCTracking.WebClient\Search\SearchTmpl.html" />
+    <TypeScriptCompile Include="CCTracking.WebClient\Search\SearchView.ts" />
     <Content Include="CCTracking.WebClient\DAL\BusCentreReport.ts" />
     <Content Include="CCTracking.WebClient\DAL\BusFuelingReport.ts" />
     <Content Include="CCTracking.WebClient\DAL\BusMilage.ts" />
@@ -219,10 +222,6 @@
     <Content Include="CCTracking.WebClient\Payment\PaymentGrid.html" />
     <Content Include="CCTracking.WebClient\Payment\PaymentTmpl.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\Payment\PaymentView.ts" />
-    <TypeScriptCompile Include="CCTracking.WebClient\Search\SearchCtrl.ts" />
-    <Content Include="CCTracking.WebClient\Search\SearchGrid.html" />
-    <Content Include="CCTracking.WebClient\Search\SearchTmpl.html" />
-    <TypeScriptCompile Include="CCTracking.WebClient\Search\SearchView.ts" />
     <Content Include="CCTracking.WebClient\User\SuccessModal.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\User\UserCtrl.ts" />
     <Content Include="CCTracking.WebClient\User\UserGrid.html" />

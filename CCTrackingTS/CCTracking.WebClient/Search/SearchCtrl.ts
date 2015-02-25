@@ -15,27 +15,20 @@ import views = require("./SearchView");
 import dto = require("CCTracking.WebClient/Dtos/SearchDto");
 import DAL = require("../DAL/Search");
 
-var app;
-
 export class SearchCtrl extends helper.Controller {
     app: any;
     searchViewModel: views.SearchViewModel;
-    //searchView: views.SearchView;
     backboneModel: Backbone.Model;
-    collection: dto.Models.SearchDtoResponseCollection;
-    collectionView: views.SearchCollectionView;
-    compositeModel: Backbone.Model;
+    searchFromLayout: views.SearchFormLayoutView;
+    searchFormView: views.SearchFormItemView;
+    searchModel:Backbone.Model;
     constructor() {
         super();
         this.app = application.Application.getInstance();
-        this.backboneModel = new dto.Models.SearchDto();
+        this.searchFromLayout = new views.SearchFormLayoutView;
+        this.searchModel = new dto.Models.SearchDto();
+        this.searchFormView = new views.SearchFormItemView();
         this.searchViewModel = new views.SearchViewModel(this.backboneModel, this);
-        //this.searchView = new views.SearchView({ viewModel: this.searchViewModel });
-        this.compositeModel = new Backbone.Model();
-        //this.collection = new dto.Models.SearchDtoResponse({ id: "", contactName: "", contactMobile: "", contactNic: "", deseasedName: "", pickupDate: "", status: "" });
-        this.collection = new dto.Models.SearchDtoResponseCollection();
-        this.collectionView = new views.SearchCollectionView({ collection: this.collection, model: this.compositeModel });
-
     }
 
     Show() {
@@ -43,8 +36,9 @@ export class SearchCtrl extends helper.Controller {
     }
 
     Load() {
+
         var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));
-        var model = this.backboneModel;
+        var model = this.searchModel;
         model.set("graveyardList", lookupResponse.graveyard);
         model.set("graveyardIdSelected", "");
         model.set("alkhidmatCentreList", lookupResponse.alkhidmatCentre);
@@ -56,69 +50,18 @@ export class SearchCtrl extends helper.Controller {
         model.set("deseasedInfo", "");
         model.set("paymentStatusId", "");
         model.set("bookingDate", "");
-        this.compositeModel = model;
-
-        //this.searchViewModel = new views.SearchViewModel(this.compositeModel, this);
-        //this.collectionView = new views.SearchCollectionView({ viewModel: this.searchViewModel, collection: null, model: this.compositeModel });
-
-        //this.collectionView.collection = this.collection;
-        //this.collectionView.model = this.compositeModel;
-
-        //this.collectionView.on("SearchBooking", () => this.GetByCriteria(this.searchViewModel.bbModel));
-        this.collectionView.listenTo(this.collectionView, "SearchBooking", () => this.GetByCriteria(this.searchViewModel.bbModel));
-
-        this.collectionView.on("CancelForm", () => this.Cancel());
-        this.app.MainRegion.show(this.collectionView);
-
-        var vm = kb.viewModel(this.compositeModel);
-        var currentView = this.collectionView.$el;
-        //vm.setOptionDisable = this.collectionView.setOptionDisable;
-        var element = currentView.find('#ddlGraveyard')[0];
-        ko.cleanNode(element);
-        ko.applyBindings(vm, element);
-        var centre = currentView.find('#ddlCentre')[0];
-        ko.cleanNode(centre);
-        ko.applyBindings(vm, centre);
-        //debugger;
-        var bus = currentView.find('#ddlBusDetails')[0];
-        ko.cleanNode(bus);
-        ko.applyBindings(vm, bus);
-
-        var contactInfo = currentView.find('#txtContactInfo')[0];
-        ko.cleanNode(contactInfo);
-        ko.applyBindings(vm, contactInfo);
-
-        var deseasedInfo = currentView.find('#txtDeseasedInfo')[0];
-        ko.cleanNode(deseasedInfo);
-        ko.applyBindings(vm, deseasedInfo);
-
-        var gender = currentView.find('.jsGender')[0];
-        ko.cleanNode(gender);
-        ko.applyBindings(vm, gender);
-        gender = currentView.find('.jsGender')[1];
-        ko.cleanNode(gender);
-        ko.applyBindings(vm, gender);
-
-        var paymentStatus = currentView.find('.jsPaymentStatus')[0];
-        ko.cleanNode(paymentStatus);
-        ko.applyBindings(vm, paymentStatus);
-        paymentStatus = currentView.find('.jsPaymentStatus')[1];
-        ko.cleanNode(paymentStatus);
-        ko.applyBindings(vm, paymentStatus);
-
-        var bookingDate = currentView.find('#txtBookingDate')[0];
-        ko.cleanNode(bookingDate);
-        ko.applyBindings(vm, bookingDate);
 
 
+        this.searchFormView.listenTo(this.searchFormView, "SearchBooking", () => this.GetByCriteria(model));
+        this.searchFormView.on("CancelForm", () => this.Cancel());
+        
 
-        //this.searchView = new views.SearchView({ viewModel: this.searchViewModel });
-        //this.searchView.on("SearchBooking", () => this.GetByCriteria(this.searchViewModel.bbModel));
-        //this.searchView.on("CancelForm", () => this.Cancel());
-        //this.app.MainRegion.show(this.searchView);
+        this.app.MainRegion.show(this.searchFromLayout);
+        this.searchFromLayout.SearchRegion.show(this.searchFormView);
 
-
+        this.KOBinding(model);
     }
+
 
     GetByCriteria(searchDto: any) {
         searchDto.set("genderId", searchDto.get("genderId").toString());
@@ -165,10 +108,64 @@ export class SearchCtrl extends helper.Controller {
             }
             return item;
         });
-        this.collection.reset(list);
+        var searchCollection = new Backbone.Collection(list);
+        var collectionView = new views.SearchCollectionView({ collection: searchCollection });
+        this.searchFromLayout.ContentRegion.show(collectionView);
+        //this.collection.reset(list);
+
+    }
+
+    KOBinding(model) {
+        var vm = kb.viewModel(model);
+        var currentView = this.searchFormView.$el;
+
+        var element = currentView.find('#ddlGraveyard')[0];
+        ko.cleanNode(element);
+        ko.applyBindings(vm, element);
+        var centre = currentView.find('#ddlCentre')[0];
+        ko.cleanNode(centre);
+        ko.applyBindings(vm, centre);
+        //debugger;
+        var bus = currentView.find('#ddlBusDetails')[0];
+        ko.cleanNode(bus);
+        ko.applyBindings(vm, bus);
+
+        var contactInfo = currentView.find('#txtContactInfo')[0];
+        ko.cleanNode(contactInfo);
+        ko.applyBindings(vm, contactInfo);
+
+        var deseasedInfo = currentView.find('#txtDeseasedInfo')[0];
+        ko.cleanNode(deseasedInfo);
+        ko.applyBindings(vm, deseasedInfo);
+
+        var gender = currentView.find('.jsGender')[0];
+        ko.cleanNode(gender);
+        ko.applyBindings(vm, gender);
+        gender = currentView.find('.jsGender')[1];
+        ko.cleanNode(gender);
+        ko.applyBindings(vm, gender);
+
+        var paymentStatus = currentView.find('.jsPaymentStatus')[0];
+        ko.cleanNode(paymentStatus);
+        ko.applyBindings(vm, paymentStatus);
+        paymentStatus = currentView.find('.jsPaymentStatus')[1];
+        ko.cleanNode(paymentStatus);
+        ko.applyBindings(vm, paymentStatus);
+
+        var bookingDate = currentView.find('#txtBookingDate')[0];
+        ko.cleanNode(bookingDate);
+        ko.applyBindings(vm, bookingDate);
     }
 
     Cancel() {
-        this.Load();
+        var model = this.searchModel;
+        model.set("graveyardIdSelected", "");
+        model.set("alkhidmatCentreSelected", "");
+        model.set("busSelected", "");
+        model.set("genderId", "");
+        model.set("contactInfo", "");
+        model.set("deseasedInfo", "");
+        model.set("paymentStatusId", "");
+        model.set("bookingDate", "");
     }
 }

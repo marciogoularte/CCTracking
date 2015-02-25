@@ -11,34 +11,12 @@ import helper = require("../Helper");
 //import searchDto = require("CCTracking.WebClient/Dtos/searchDto");
 import searchCtrl = require("./SearchCtrl");
 var templateView = require("text!./SearchTmpl.html");
-//var templateRow = require("text!./BokingGridRow.html");
 import application = require("../App");
-var app;
-
-
-
 
 export class SearchViewModel extends helper.ViewModel {
     constructor(model: any, controller: any) {
         super(model, controller);
     }
-}
-
-export class SearchView extends helper.Views.MvvmView {
-    constructor(options?) {
-        this.template = templateView;//templateView.getOuterHTML("#searchFilter");
-        //this.events = {
-        //    "click .jsSearch": "Search",
-        //    "click .jsCancel": "Cancel"
-        //}
-        super(options);
-    }
-    //onDomRefresh() {
-    //    //alert("ddd");
-    //    //debugger;
-    //    //this.$el.find("#txtBookingDate").datepicker();
-    //}
-
 }
 
 export class SearchCollectionView extends helper.Views.CompositeView {
@@ -47,48 +25,34 @@ export class SearchCollectionView extends helper.Views.CompositeView {
         options.itemView = SearchItemView;
         options.template = templateView.getOuterHTML("#gridTemplate");
         options.itemViewContainer ="#tblSearch tbody";
-        this.events = {
-            "click .jsSearch": "Search",
-            "click .jsCancel": "Cancel"
-        }
         super(options);
     }
-    //onShow() {
-    //    debugger;
-    //    this.dataTable = this.$el.find("#tblSearch")["dataTable"]({
-    //        "autoWidth": false,
-    //        "info": true,
-    //        "processing": true,
-    //        //"scrollY": "500px",
-    //        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-    //        "language": {
-    //            "paginate": {
-    //                "next": "Next",
-    //                "previous": "Prev"
-    //            },
-    //            "emptyTable": "No record found!",
-    //            //"info": "Dispalying page _PAGE_ of _PAGES_",
-    //            "infoEmpty": "No record found!",
-    //            "zeroRecords": "No record found!"
-    //        },
-    //        "pageLength": helper.GetPageSize()
+    onShow() {
 
-    //        //"lengthChange": false
+        this.dataTable = this.$el.find("#tblSearch")["dataTable"]({
+            "autoWidth": false,
+            "info": true,
+            "processing": true,
+            //"scrollY": "500px",
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "language": {
+                "paginate": {
+                    "next": "Next",
+                    "previous": "Prev"
+                },
+                "emptyTable": "",
+                //"info": "Dispalying page _PAGE_ of _PAGES_",
+                "infoEmpty": "",
+                "zeroRecords": "No record found!"
+            },
+            "pageLength": helper.GetPageSize()
 
-    //        //"lengthMenu": [[5, 10, 15, 20], [5, 10, 15, 20]]
+            //"lengthChange": false
 
-    //    });
-    //}
-    Search(e) {
-        e.preventDefault();
-        this.trigger("SearchBooking");
+            //"lengthMenu": [[5, 10, 15, 20], [5, 10, 15, 20]]
+
+        });
     }
-    Cancel(e) {
-        e.preventDefault();
-        this.trigger("CancelForm");
-    }
-   
-
 }
 
 export class SearchItemView extends helper.Views.ItemView {
@@ -98,12 +62,51 @@ export class SearchItemView extends helper.Views.ItemView {
         options.tagName = "tr";
         options.className = "jsRowClick";
         options.events = {
-            "mouseover .jsShowDetail": "ShowDetail",
+            //"mouseover .jsShowDetail": "ShowDetail",
             "click .jsShowDetail": "ShowDetail"
         };
         super(options);
     }
     ShowDetail() {
-        //new userCtrl.UserCtrl().ShowDetail(this.model);
+        window.location.href = "#editBooking";
+        require(['../Booking/BookingCtrl'], (p) => { new p.BookingCtrl().EditBooking(this.model.get("id")); });
     }
+}
+
+
+export class SearchFormLayoutView extends Marionette.Layout {
+    SearchRegion: Marionette.Region;
+    ContentRegion:Marionette.Region;
+    constructor(options?) {
+        this.template = templateView.getOuterHTML("#SearchFromLayout");
+        this.regions= {
+            SearchRegion: {
+                selector:".rgnSearch"
+            },
+            ContentRegion: {
+                selector: ".rgnContent"
+            }
+        }
+        super(options);
+    }
+}
+
+export class SearchFormItemView extends helper.Views.ItemView {
+    constructor(options?: any) {
+        this.template = templateView.getOuterHTML("#searchForm");
+        this.events = {
+            "click .jsSearch": "Search",
+            "click .jsCancel": "Cancel"
+        }
+        super(options);
+    }
+    Search(e) {
+        e.preventDefault();
+        this.trigger("SearchBooking");
+    }
+    Cancel(e) {
+        e.preventDefault();
+        this.trigger("CancelForm");
+    }
+   
 }

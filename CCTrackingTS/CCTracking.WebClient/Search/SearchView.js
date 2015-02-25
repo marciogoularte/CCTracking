@@ -16,8 +16,6 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "jqueryUI", "
 
     var templateView = require("text!./SearchTmpl.html");
 
-    var app;
-
     var SearchViewModel = (function (_super) {
         __extends(SearchViewModel, _super);
         function SearchViewModel(model, controller) {
@@ -27,63 +25,33 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "jqueryUI", "
     })(helper.ViewModel);
     exports.SearchViewModel = SearchViewModel;
 
-    var SearchView = (function (_super) {
-        __extends(SearchView, _super);
-        function SearchView(options) {
-            this.template = templateView; //templateView.getOuterHTML("#searchFilter");
-
-            //this.events = {
-            //    "click .jsSearch": "Search",
-            //    "click .jsCancel": "Cancel"
-            //}
-            _super.call(this, options);
-        }
-        return SearchView;
-    })(helper.Views.MvvmView);
-    exports.SearchView = SearchView;
-
     var SearchCollectionView = (function (_super) {
         __extends(SearchCollectionView, _super);
         function SearchCollectionView(options) {
             options.itemView = SearchItemView;
             options.template = templateView.getOuterHTML("#gridTemplate");
             options.itemViewContainer = "#tblSearch tbody";
-            this.events = {
-                "click .jsSearch": "Search",
-                "click .jsCancel": "Cancel"
-            };
             _super.call(this, options);
         }
-        //onShow() {
-        //    debugger;
-        //    this.dataTable = this.$el.find("#tblSearch")["dataTable"]({
-        //        "autoWidth": false,
-        //        "info": true,
-        //        "processing": true,
-        //        //"scrollY": "500px",
-        //        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-        //        "language": {
-        //            "paginate": {
-        //                "next": "Next",
-        //                "previous": "Prev"
-        //            },
-        //            "emptyTable": "No record found!",
-        //            //"info": "Dispalying page _PAGE_ of _PAGES_",
-        //            "infoEmpty": "No record found!",
-        //            "zeroRecords": "No record found!"
-        //        },
-        //        "pageLength": helper.GetPageSize()
-        //        //"lengthChange": false
-        //        //"lengthMenu": [[5, 10, 15, 20], [5, 10, 15, 20]]
-        //    });
-        //}
-        SearchCollectionView.prototype.Search = function (e) {
-            e.preventDefault();
-            this.trigger("SearchBooking");
-        };
-        SearchCollectionView.prototype.Cancel = function (e) {
-            e.preventDefault();
-            this.trigger("CancelForm");
+        SearchCollectionView.prototype.onShow = function () {
+            this.dataTable = this.$el.find("#tblSearch")["dataTable"]({
+                "autoWidth": false,
+                "info": true,
+                "processing": true,
+                //"scrollY": "500px",
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "language": {
+                    "paginate": {
+                        "next": "Next",
+                        "previous": "Prev"
+                    },
+                    "emptyTable": "",
+                    //"info": "Dispalying page _PAGE_ of _PAGES_",
+                    "infoEmpty": "",
+                    "zeroRecords": "No record found!"
+                },
+                "pageLength": helper.GetPageSize()
+            });
         };
         return SearchCollectionView;
     })(helper.Views.CompositeView);
@@ -98,16 +66,60 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "jqueryUI", "
             options.tagName = "tr";
             options.className = "jsRowClick";
             options.events = {
-                "mouseover .jsShowDetail": "ShowDetail",
+                //"mouseover .jsShowDetail": "ShowDetail",
                 "click .jsShowDetail": "ShowDetail"
             };
             _super.call(this, options);
         }
         SearchItemView.prototype.ShowDetail = function () {
-            //new userCtrl.UserCtrl().ShowDetail(this.model);
+            var _this = this;
+            window.location.href = "#editBooking";
+            require(['../Booking/BookingCtrl'], function (p) {
+                new p.BookingCtrl().EditBooking(_this.model.get("id"));
+            });
         };
         return SearchItemView;
     })(helper.Views.ItemView);
     exports.SearchItemView = SearchItemView;
+
+    var SearchFormLayoutView = (function (_super) {
+        __extends(SearchFormLayoutView, _super);
+        function SearchFormLayoutView(options) {
+            this.template = templateView.getOuterHTML("#SearchFromLayout");
+            this.regions = {
+                SearchRegion: {
+                    selector: ".rgnSearch"
+                },
+                ContentRegion: {
+                    selector: ".rgnContent"
+                }
+            };
+            _super.call(this, options);
+        }
+        return SearchFormLayoutView;
+    })(Marionette.Layout);
+    exports.SearchFormLayoutView = SearchFormLayoutView;
+
+    var SearchFormItemView = (function (_super) {
+        __extends(SearchFormItemView, _super);
+        function SearchFormItemView(options) {
+            this.template = templateView.getOuterHTML("#searchForm");
+            this.events = {
+                "click .jsSearch": "Search",
+                "click .jsCancel": "Cancel"
+            };
+            _super.call(this, options);
+        }
+        SearchFormItemView.prototype.Search = function (e) {
+            e.preventDefault();
+            this.trigger("SearchBooking");
+        };
+        SearchFormItemView.prototype.Cancel = function (e) {
+            e.preventDefault();
+            this.trigger("CancelForm");
+        };
+        return SearchFormItemView;
+    })(helper.Views.ItemView);
+    exports.SearchFormItemView = SearchFormItemView;
 });
 //# sourceMappingURL=SearchView.js.map
