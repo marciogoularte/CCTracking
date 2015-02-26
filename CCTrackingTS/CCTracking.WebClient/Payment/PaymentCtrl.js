@@ -339,6 +339,7 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
         PaymentCtrl.prototype.SaveCompleted = function (paymentResponse) {
             var result = new Backbone.Model(paymentResponse);
             if (result.get("errorMessage") != undefined && result.get("errorMessage").trim() != "") {
+                console.log(result.get("errorMessage"));
                 helper.ShowModalPopup("danger", "Payment", "Due to some technical reason payment have not been saved successfully!<br> Pelase try later");
             } else {
                 helper.ShowModalPopup("success", "Payment", "Record has been saved successfully with Payment ID : " + paymentResponse["id"]);

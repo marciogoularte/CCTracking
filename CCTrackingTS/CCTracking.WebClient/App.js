@@ -76,13 +76,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
             require(['./Login/LoginCtrl'], function (p) {
                 new p.LoginCtrl().Load();
             });
-
-            //var self = this;
-            this.applyRouting(this, layout);
-            //this.AppRoutes.on("route:viewBooking", () => {
-            //    require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });
-            //});
-            //Backbone.history.start();
+            //this.applyRouting(this,layout);
         };
 
         Application.prototype.applyRouting = function (self, layout) {
@@ -203,7 +197,294 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     });
                 },
                 gobusVisit: function () {
+                    require(['./Bus/BusVisit/BusVisitCtrl'], function (p) {
+                        new p.BusVisitCtrl().Load();
+                    });
+                },
+                goEditBusVisit: function () {
                     //require(['./Bus/BusVisit/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().Show(); });
+                },
+                goAdminBus: function () {
+                    require(['./Admin/Bus/BusCtrl'], function (p) {
+                        new p.BusCtrl().Show();
+                    });
+                },
+                goViewAdminBus: function () {
+                    require(['./Admin/Bus/BusCtrl'], function (p) {
+                        new p.BusCtrl().GetAll();
+                    });
+                },
+                goSearchBooking: function () {
+                    require(['./Search/SearchCtrl'], function (p) {
+                        new p.SearchCtrl().Show();
+                    });
+                },
+                goAdminSearchBooking: function () {
+                    require(['./Admin/AdminSearchBooking/AdminSearchBookingCtrl'], function (p) {
+                        new p.AdminSearchBookingCtrl().Show();
+                    });
+                },
+                goDriver: function () {
+                    require(['./Admin/Driver/DriverCtrl'], function (p) {
+                        new p.DriverCtrl().Show();
+                    });
+                },
+                goViewDriver: function () {
+                    require(['./Admin/Driver/DriverCtrl'], function (p) {
+                        new p.DriverCtrl().GetAll();
+                    });
+                },
+                goGraveyard: function () {
+                    require(['./Admin/Graveyard/GraveyardCtrl'], function (p) {
+                        new p.GraveyardCtrl().Show();
+                    });
+                },
+                goViewGraveyard: function () {
+                    require(['./Admin/Graveyard/GraveyardCtrl'], function (p) {
+                        new p.GraveyardCtrl().GetAll();
+                    });
+                },
+                goTown: function () {
+                    require(['./Admin/Town/TownCtrl'], function (p) {
+                        new p.TownCtrl().Show();
+                    });
+                },
+                goViewTown: function () {
+                    require(['./Admin/Town/TownCtrl'], function (p) {
+                        new p.TownCtrl().GetAll();
+                    });
+                },
+                goUnionCouncil: function () {
+                    require(['./Admin/UnionCouncil/UnionCouncilCtrl'], function (p) {
+                        new p.UnionCouncilCtrl().Show();
+                    });
+                },
+                goViewUnionCouncil: function () {
+                    require(['./Admin/UnionCouncil/UnionCouncilCtrl'], function (p) {
+                        new p.UnionCouncilCtrl().GetAll();
+                    });
+                },
+                goLandmark: function () {
+                    require(['./Admin/Landmark/LandmarkCtrl'], function (p) {
+                        new p.LandmarkCtrl().Show();
+                    });
+                },
+                goViewLandmark: function () {
+                    require(['./Admin/Landmark/LandmarkCtrl'], function (p) {
+                        new p.LandmarkCtrl().GetAll();
+                    });
+                },
+                goPaymentType: function () {
+                    require(['./Admin/PaymentType/PaymentTypeCtrl'], function (p) {
+                        new p.PaymentTypeCtrl().Show();
+                    });
+                },
+                goViewPaymentType: function () {
+                    require(['./Admin/PaymentType/PaymentTypeCtrl'], function (p) {
+                        new p.PaymentTypeCtrl().GetAll();
+                    });
+                },
+                goRefundType: function () {
+                    require(['./Admin/RefundType/RefundTypeCtrl'], function (p) {
+                        new p.RefundTypeCtrl().Show();
+                    });
+                },
+                goViewRefundType: function () {
+                    require(['./Admin/RefundType/RefundTypeCtrl'], function (p) {
+                        new p.RefundTypeCtrl().GetAll();
+                    });
+                },
+                goVisitType: function () {
+                    require(['./Admin/VisitType/VisitTypeCtrl'], function (p) {
+                        new p.VisitTypeCtrl().Show();
+                    });
+                },
+                goViewVisitType: function () {
+                    require(['./Admin/VisitType/VisitTypeCtrl'], function (p) {
+                        new p.VisitTypeCtrl().GetAll();
+                    });
+                },
+                goCauseOfDeath: function () {
+                    require(['./Admin/CauseOfDeath/CauseOfDeathCtrl'], function (p) {
+                        new p.CauseOfDeathCtrl().Show();
+                    });
+                },
+                goViewCauseOfDeath: function () {
+                    require(['./Admin/CauseOfDeath/CauseOfDeathCtrl'], function (p) {
+                        new p.CauseOfDeathCtrl().GetAll();
+                    });
+                },
+                goViewTest: function () {
+                    // new koBindingController.KoBindingCtrl().Show();
+                },
+                goTrackingDevice: function () {
+                    require(['./Admin/TrackingDevice/TrackingDeviceCtrl'], function (p) {
+                        new p.TrackingDeviceCtrl().Show();
+                    });
+                },
+                goViewTrackingDevice: function () {
+                    require(['./Admin/TrackingDevice/TrackingDeviceCtrl'], function (p) {
+                        new p.TrackingDeviceCtrl().GetAll();
+                    });
+                },
+                goNearestCentreSetup: function () {
+                    require(['./Admin/NearestCentreSetup/NearestCentreSetupCtrl'], function (p) {
+                        new p.NearestCentreSetupCtrl().Show();
+                    });
+                },
+                goViewNearestCentreSetup: function () {
+                    require(['./Admin/NearestCentreSetup/NearestCentreSetupCtrl'], function (p) {
+                        new p.NearestCentreSetupCtrl().GetAll();
+                    });
+                },
+                goChangePassword: function () {
+                    require(['./ChangePassword/ChangePasswordCtrl'], function (p) {
+                        new p.ChangePasswordCtrl().Load();
+                    });
+                },
+                goExtraCharge: function () {
+                    //require(['./ExtraCharge/ExtraChargeCtrl'], (p) => { new p.ExtraChargeCtrl().Show(); });
+                },
+                goDriverSummary: function () {
+                    require(['./Admin/Reports/Driver/DriverSummaryCtrl'], function (p) {
+                        new p.DriverSummaryCtrl().Show();
+                    });
+                },
+                goBusVisitSummary: function () {
+                    require(['./Admin/Reports/BusVisit/BusVisitSummaryCtrl'], function (p) {
+                        new p.BusVisitSummaryCtrl().ShowVisit();
+                    });
+                },
+                goBusVisitMilageSummary: function () {
+                    require(['./Admin/Reports/BusVisit/BusVisitSummaryCtrl'], function (p) {
+                        new p.BusVisitSummaryCtrl().ShowMilage();
+                    });
+                },
+                goAuditBooking: function () {
+                    require(['./Admin/Reports/Audit/Booking/AuditBookingCtrl'], function (p) {
+                        new p.AuditBookingCtrl().Show();
+                    });
+                },
+                goAuditBusVisit: function () {
+                    require(['./Admin/Reports/Audit/BusVisit/AuditBusVisitCtrl'], function (p) {
+                        new p.AuditBusVisitCtrl().Show();
+                    });
+                },
+                goAuditPayment: function () {
+                    require(['./Admin/Reports/Audit/Payment/AuditPaymentCtrl'], function (p) {
+                        new p.AuditPaymentCtrl().Show();
+                    });
+                },
+                goAuditRefundBooking: function () {
+                    require(['./Admin/Reports/Audit/Refund/AuditRefundBookingCtrl'], function (p) {
+                        new p.AuditRefundBookingCtrl().Show();
+                    });
+                },
+                goBusCentreReport: function () {
+                    require(['./Admin/Reports/Centre/BusCentreReport/BusCentreReportCtrl'], function (p) {
+                        new p.BusCentreReportCtrl().Show();
+                    });
+                },
+                goBusMilageReport: function () {
+                    require(['./Admin/Reports/Bus/BusMilage/BusMilageCtrl'], function (p) {
+                        new p.BusMilageCtrl().Show();
+                    });
+                },
+                goBusFuelingReport: function () {
+                    require(['./Admin/Reports/BusFueling/BusFuelingReportCtrl'], function (p) {
+                        new p.BusFuelingReportCtrl().Show();
+                    });
+                },
+                defaultRoute: function () {
+                    self.ContainerRegion.reset();
+                    self.ContainerRegion.show(layout);
+                    require(['./Login/LoginCtrl'], function (p) {
+                        new p.LoginCtrl().Load();
+                    });
+                }
+            });
+
+            //debugger;
+            this.AppRoutes = new router();
+        };
+
+        Application.prototype.applyRoutingForOperator = function (self, layout) {
+            var router = Backbone.Router.extend({
+                routes: {
+                    'addBooking': 'goAddBooking',
+                    'editBooking': 'goEditBooking',
+                    'viewBooking': 'goViewBooking',
+                    'editPayment': 'goPayment',
+                    'alkhidmatCentre': 'goStation',
+                    'editRefund': 'goCancel',
+                    'busVisit': 'gobusVisit',
+                    'editBusVisit': 'goEditBusVisit',
+                    'viewBusVisit': 'goViewBusVisit',
+                    'searchBooking': 'goSearchBooking',
+                    'changePassword': 'goChangePassword',
+                    'editExtraCharge': 'goExtraCharge',
+                    '*other': 'defaultRoute'
+                },
+                goUser: function () {
+                    require(['./User/UserCtrl'], function (p) {
+                        new p.UserCtrl().Show();
+                    });
+                },
+                goViewUser: function () {
+                    require(['./User/UserCtrl'], function (p) {
+                        new p.UserCtrl().GetAll();
+                    });
+                },
+                goBus: function () {
+                    require(['./Bus/BusCtrl'], function (p) {
+                        new p.BusCtrl().Show();
+                    });
+                },
+                goAddBooking: function () {
+                    require(['./Booking/BookingCtrl'], function (p) {
+                        new p.BookingCtrl().Show();
+                    });
+                },
+                goEditBooking: function () {
+                    //require(['./Booking/BookingCtrl'], (p) => { new p.BookingCtrl().Show(); });
+                },
+                goViewHome: function () {
+                    require(['./Home/HomeCtrl'], function (p) {
+                        new p.HomeCtrl().Show();
+                    });
+                },
+                goViewBooking: function () {
+                    require(['./Booking/BookingCtrl'], function (p) {
+                        new p.BookingCtrl().GetAll(1);
+                    });
+                    //this.appRoute.navigate("viewBooking");
+                    //routes.navigate("viewBooking");
+                },
+                goPayment: function () {
+                    //require(['./Payment/PaymentCtrl'], (p) => { new p.PaymentCtrl().Show(); });
+                },
+                goStation: function () {
+                    require(['./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl'], function (p) {
+                        new p.StationCtrl().Show();
+                    });
+                },
+                goViewStation: function () {
+                    require(['./Admin/AlkhidmatCentre/AlkhidmatCentreCtrl'], function (p) {
+                        new p.StationCtrl().GetAll();
+                    });
+                },
+                goCancel: function () {
+                    //require(['./RefundBooking/RefundBookingCtrl'], (p) => { new p.RefundBookingCtrl().Show(); });
+                },
+                goViewBusVisit: function () {
+                    require(['./Bus/BusVisit/BusVisitCtrl'], function (p) {
+                        new p.BusVisitCtrl().SimpleLoad();
+                    });
+                },
+                gobusVisit: function () {
+                    require(['./Bus/BusVisit/BusVisitCtrl'], function (p) {
+                        new p.BusVisitCtrl().Load();
+                    });
                 },
                 goEditBusVisit: function () {
                     //require(['./Bus/BusVisit/BusVisitCtrl'], (p) => { new p.BusVisitCtrl().Show(); });

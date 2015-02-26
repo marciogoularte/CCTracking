@@ -329,6 +329,7 @@ define(["require", "exports", "../App", "../Helper", "./BookingView", "CCTrackin
         BookingCtrl.prototype.SaveCompleted = function (bookingResponse) {
             var result = new Backbone.Model(bookingResponse);
             if (result.get("errorMessage") != undefined && result.get("errorMessage").trim() != "") {
+                console.log(result.get("errorMessage"));
                 helper.ShowModalPopup("danger", "Booking", "Due to some technical reason booking have not been saved successfully!<br> Pelase try later");
             } else {
                 helper.ShowModalPopup("success", "Booking", "Record has been saved successfully with Booking ID : " + bookingResponse["id"]);

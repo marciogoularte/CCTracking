@@ -321,6 +321,7 @@ export class PaymentCtrl extends helper.Controller {
     SaveCompleted(paymentResponse: any) {
         var result = new Backbone.Model(paymentResponse);
         if (result.get("errorMessage") != undefined && result.get("errorMessage").trim() != "") {
+            console.log(result.get("errorMessage"));
             helper.ShowModalPopup("danger", "Payment", "Due to some technical reason payment have not been saved successfully!<br> Pelase try later");
         }
         else {

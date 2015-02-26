@@ -103,28 +103,26 @@ export class LoginCtrl extends helper.Controller {
             });
 
             this.app.HeaderRegion.show(headerView);
-            if (loginDto["isAdmin"]) {
-                //admin view
-                this.app.AdminLeftRegion.show(new adminLeft.AdminLeftItemView());
 
-                //var ctrl = new uc.UserCtrl();
-                //ctrl.GetAll();
-                //var vm = ctrl.userViewModel.model;
-
-            }
-            new bookingLeftCtrl.BookingLeftCtrl().Show();
+            //if (loginDto["isAdmin"]) {
+            //    //admin view
+            //    this.app.AdminLeftRegion.show(new adminLeft.AdminLeftItemView());
+            //}
+            //new bookingLeftCtrl.BookingLeftCtrl().Show();
             new busAvailabilityCtrl.BusAvailabilityCtrl().Show();
-            var home = new homeCtrl.HomeCtrl();
-            home.Show();
-            //var ctrlBooking = new bookingCtrl.BookingCtrl();
-            //ctrlBooking.Show();
 
 
+            if (appObj.get("IsAdmin")) {
+                var home = new homeCtrl.HomeCtrl();
+                home.Show();
+                this.app.applyRouting(this.app, this.app.AppLayout);
+            }
+            else {
+                require(['../Booking/BookingCtrl'], (p) => { new p.BookingCtrl().GetAll(1); });
+                this.app.applyRoutingForOperator(this.app, this.app.AppLayout);
+            }
         }
     }
-
-
-
     Cancel() {
         window.location.href = "#viewLogin";
     }
