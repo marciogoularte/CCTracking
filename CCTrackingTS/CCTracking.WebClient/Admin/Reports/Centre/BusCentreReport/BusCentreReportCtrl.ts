@@ -98,9 +98,18 @@ export class BusCentreReportCtrl extends helper.Controller {
         if (bookingSummaryDto.get("toBookingDate").trim() != "") {
             bookingSummaryDto.set("toBookingDate", helper.FormatDateString(bookingSummaryDto.get("toBookingDate")));
         }
-        var deferred = DAL.GetByCriteria(bookingSummaryDto);
+        var deferred = DAL.GetByCriteria(this.GetMinimalRequest(bookingSummaryDto));
         deferred.done(p=> this.GetByCriteriaCompleted(p));
     }
+
+    GetMinimalRequest(model) {
+        var request = new dto.Models.BookingSummaryDto();
+        request.set("busId", model.get("busId"));
+        request.set("fromBookingDate", model.get("fromBookingDate"));
+        request.set("toBookingDate", model.get("toBookingDate"));
+        return request;
+    }
+
 
     GetByCriteriaCompleted(bookingSummaryDto: dto.Models.BookingSummaryCollection) {
         //TODO:Hack - need rework

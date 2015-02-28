@@ -112,8 +112,26 @@ export class DriverCtrl extends helper.Controller {
         driver.set("modifiedBy", appObj.get("Id"));
         driver.set("centreId", driver.get("alkhidmatCentreSelected").id);
         driver.set("isActive", driver.get("isActive") == "1" ? true : false);
-        var deferred = DAL.Save(driver);
+        var deferred = DAL.Save(this.GetMinimalRequest(driver));
         deferred.done(p=> this.SaveCompleted(p));
+    }
+
+    GetMinimalRequest(model) {
+        var request = new dto.Models.DriverDto();
+        request.set("id", model.get("id"));
+        request.set("stationId", model.get("stationId"));
+        request.set("firstName", model.get("firstName"));
+        request.set("lastName", model.get("lastName"));
+        request.set("cnic", model.get("cnic"));
+        request.set("mobile", model.get("mobile"));
+        request.set("address", model.get("address"));
+        request.set("city", model.get("city"));
+        request.set("isActive", model.get("isActive"));
+        request.set("createdBy", model.get("createdBy"));
+        request.set("createdDate", model.get("createdDate"));
+        request.set("modifiedBy", model.get("modifiedBy"));
+        request.set("modifiedDate", model.get("modifiedDate"));
+        return request;
     }
 
     GetAllCompleted(driver: dto.Models.DriverDto) {

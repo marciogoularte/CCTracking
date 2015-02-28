@@ -114,10 +114,23 @@ define(["require", "exports", "../../App", "../../Helper", "./LandmarkView", "..
             landmark.set("modifiedBy", appObj.get("Id"));
             landmark.set("ucId", landmark.get("unionCouncilIdSelected").id);
             landmark.set("isActive", landmark.get("isActive") == "1" ? true : false);
-            var deferred = DAL.Save(landmark);
+            var deferred = DAL.Save(this.GetMinimalRequest(landmark));
             deferred.done(function (p) {
                 return _this.SaveCompleted(p);
             });
+        };
+
+        LandmarkCtrl.prototype.GetMinimalRequest = function (model) {
+            var request = new dto.Models.LandmarkDto();
+            request.set("id", model.get("id"));
+            request.set("UcId", model.get("UcId"));
+            request.set("name", model.get("name"));
+            request.set("isActive", model.get("isActive"));
+            request.set("createdBy", model.get("createdBy"));
+            request.set("createdDate", model.get("createdDate"));
+            request.set("modifiedBy", model.get("modifiedBy"));
+            request.set("modifiedDate", model.get("modifiedDate"));
+            return request;
         };
 
         LandmarkCtrl.prototype.GetAllCompleted = function (landmark) {

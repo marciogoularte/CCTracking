@@ -60,6 +60,7 @@
     <Compile Include="ChangePasswordDal.cs" />
     <Compile Include="DalService.cs" />
     <Compile Include="DriverSummaryDal.cs" />
+    <Compile Include="Extension\Extensions.cs" />
     <Compile Include="ExtraChargesDal.cs" />
     <Compile Include="HomeDal.cs" />
     <Compile Include="NearestCentreSetupDal.cs" />

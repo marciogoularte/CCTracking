@@ -7,4 +7,9 @@ namespace CCTracking.Dto.Response
         public CauseofDeath CauseofDeathModel { get; set; }
         public List<CauseofDeath> CauseofDeathList { get; set; }
     }
+
+    public class CauseofDeathGridResponse : BaseModelResponse
+    {
+        public List<CauseofDeathGrid> CauseofDeathList { get; set; }
+    }
 }

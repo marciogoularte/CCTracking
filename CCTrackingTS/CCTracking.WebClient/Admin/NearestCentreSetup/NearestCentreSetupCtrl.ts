@@ -140,9 +140,23 @@ export class NearestCentreSetupCtrl extends helper.Controller {
         nearestCentreSetup.set("centreId", nearestCentreSetup.get("alkhidmatCentreSelected").id);
         nearestCentreSetup.set("nearestCentreId", nearestCentreSetup.get("nearestCentreSelected").id);
         nearestCentreSetup.set("isActive", nearestCentreSetup.get("isActive") == "1" ? true : false);
-        var deferred = DAL.Save(nearestCentreSetup);
+        var deferred = DAL.Save(this.GetMinimalRequest(nearestCentreSetup));
         deferred.done(p=> this.SaveCompleted(p));
     }
+
+    GetMinimalRequest(model) {
+        var request = new dto.Models.NearestCentreDto();
+        request.set("id", model.get("id"));
+        request.set("centreId", model.get("centreId"));
+        request.set("nearestCentreId", model.get("nearestCentreId"));
+        request.set("isActive", model.get("isActive"));
+        request.set("createdBy", model.get("createdBy"));
+        request.set("createdDate", model.get("createdDate"));
+        request.set("modifiedBy", model.get("modifiedBy"));
+        request.set("modifiedDate", model.get("modifiedDate"));
+        return request;
+    }
+
 
     SaveCompleted(nearestCentreSetupDto: dto.Models.NearestCentreDto) {
          var result = new Backbone.Model(nearestCentreSetupDto);

@@ -109,9 +109,28 @@ namespace CCTracking.DAL
                 bus.InitialReading = dr.GetInt64(dr.GetOrdinal("InitialReading"));
         }
 
+        private void MapValuesGrid(BusGrid bus, IDataReader dr)
+        {
+            bus.Id = dr.GetDataReaderInt32("Id");
+            bus.CentreDesc = dr.GetDataReaderString("CentreDesc");
+            bus.VehicleNo = dr.GetDataReaderString("VehicleNo");
+            bus.ModelNo = dr.GetDataReaderString("ModelNo");
+            bus.Description = dr.GetDataReaderString("Description");
+        }
+
         protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
         {
-            throw new NotImplementedException();
+            BusGridResponse response = new BusGridResponse();
+            List<BusGrid> items = new List<BusGrid>();
+            BusGrid item = null;
+            while (dr.Read())
+            {
+                item = new BusGrid();
+                MapValuesGrid(item, dr);
+                items.Add(item);
+            }
+            response.BusList = items;
+            return response;
         }
     }
 }

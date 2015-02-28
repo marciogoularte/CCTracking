@@ -139,10 +139,23 @@ define(["require", "exports", "../../App", "../../Helper", "./NearestCentreSetup
             nearestCentreSetup.set("centreId", nearestCentreSetup.get("alkhidmatCentreSelected").id);
             nearestCentreSetup.set("nearestCentreId", nearestCentreSetup.get("nearestCentreSelected").id);
             nearestCentreSetup.set("isActive", nearestCentreSetup.get("isActive") == "1" ? true : false);
-            var deferred = DAL.Save(nearestCentreSetup);
+            var deferred = DAL.Save(this.GetMinimalRequest(nearestCentreSetup));
             deferred.done(function (p) {
                 return _this.SaveCompleted(p);
             });
+        };
+
+        NearestCentreSetupCtrl.prototype.GetMinimalRequest = function (model) {
+            var request = new dto.Models.NearestCentreDto();
+            request.set("id", model.get("id"));
+            request.set("centreId", model.get("centreId"));
+            request.set("nearestCentreId", model.get("nearestCentreId"));
+            request.set("isActive", model.get("isActive"));
+            request.set("createdBy", model.get("createdBy"));
+            request.set("createdDate", model.get("createdDate"));
+            request.set("modifiedBy", model.get("modifiedBy"));
+            request.set("modifiedDate", model.get("modifiedDate"));
+            return request;
         };
 
         NearestCentreSetupCtrl.prototype.SaveCompleted = function (nearestCentreSetupDto) {

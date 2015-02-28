@@ -87,7 +87,23 @@ namespace CCTracking.DAL
 
         protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
         {
-            throw new System.NotImplementedException();
+            CauseofDeathGridResponse response = new CauseofDeathGridResponse();
+            List<CauseofDeathGrid> items = new List<CauseofDeathGrid>();
+            CauseofDeathGrid item = null;
+            while (dr.Read())
+            {
+                item = new CauseofDeathGrid();
+                MapValuesGrid(item, dr);
+                items.Add(item);
+            }
+            response.CauseofDeathList = items;
+            return response;
+        }
+
+        private void MapValuesGrid(CauseofDeathGrid item, IDataReader dr)
+        {
+            item.Id = dr.GetDataReaderInt32("Id");
+            item.Name = dr.GetDataReaderString("Name");
         }
     }
 }

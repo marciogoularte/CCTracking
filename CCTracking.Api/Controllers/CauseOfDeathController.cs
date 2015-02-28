@@ -40,11 +40,11 @@ namespace CCTracking.Api.Controllers
         }
 
         [HttpGet]
-        public CauseofDeathResponse GetAll(string a)
+        public CauseofDeathGridResponse GetAll(string a)
         {
             DBFacade facade = new CauseofDeathDal();
-            BaseModelResponse baseModelResponse = facade.GetAll();
-            CauseofDeathResponse causeOfDeathResponse = (CauseofDeathResponse)baseModelResponse;
+            BaseModelResponse baseModelResponse = facade.GetAllGrid();
+            CauseofDeathGridResponse causeOfDeathResponse = (CauseofDeathGridResponse)baseModelResponse;
             return causeOfDeathResponse;
         }
         

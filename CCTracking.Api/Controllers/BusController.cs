@@ -11,7 +11,7 @@ namespace CCTracking.Api.Controllers
         static int rowCounter = 1;
 
         [HttpPost]
-        public CCTracking.Dto.Bus SaveAlkhidmatCentre(CCTracking.Dto.Bus bus)
+        public CCTracking.Dto.Bus SaveBus(CCTracking.Dto.Bus bus)
         {
             if (bus != null)
             {
@@ -44,11 +44,11 @@ namespace CCTracking.Api.Controllers
         }
 
         [HttpGet]
-        public BusResponse GetAll(string a)
+        public BusGridResponse GetAll(string a)
         {
             DBFacade facade = new BusDal();
-            BaseModelResponse baseModelResponse = facade.GetAll();
-            BusResponse busResponse = (BusResponse)baseModelResponse;
+            BaseModelResponse baseModelResponse = facade.GetAllGrid();
+            BusGridResponse busResponse = (BusGridResponse)baseModelResponse;
             return busResponse;
         }
         

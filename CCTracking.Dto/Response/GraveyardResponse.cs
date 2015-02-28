@@ -7,4 +7,9 @@ namespace CCTracking.Dto.Response
         public Graveyard GraveyardModel { get; set; }
         public List<Graveyard> GraveyardList { get; set; }
     }
+
+    public class GraveyardGridResponse : BaseModelResponse
+    {
+        public List<GraveyardGrid> GraveyardList { get; set; }
+    }
 }

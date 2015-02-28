@@ -110,10 +110,28 @@ export class StationCtrl extends helper.Controller {
         station.set("landmarkId", station.get("landmarkIdSelected").id);
         station.set("isActive", station.get("isActive") == "1" ? true : false);
         station.set("isCoPartner", station.get("isCoPartner") == "1" ? true : false);
-        var deferred = DAL.Save(station);
+        var deferred = DAL.Save(this.GetMinimalRequest(station));
         deferred.done(p=> this.SaveCompleted(p));
     }
 
+    GetMinimalRequest(station) {
+        var request = new dto.Models.StationDto();
+        request.set("id", station.get("id"));
+        request.set("name", station.get("name"));
+        request.set("landmarkId", station.get("landmarkId"));
+        request.set("address", station.get("address"));
+        request.set("contactNo1", station.get("contactNo1"));
+        request.set("contactNo2", station.get("contactNo2"));
+        request.set("isCoPartner", station.get("isCoPartner"));
+        request.set("isActive", station.get("isActive"));
+        request.set("createdBy", station.get("createdBy"));
+        request.set("createdDate", station.get("createdDate"));
+        request.set("modifiedBy", station.get("modifiedBy"));
+        request.set("modifiedDate", station.get("modifiedDate"));
+
+        return request;
+
+    }
     GetAllCompleted(station: dto.Models.StationDto) {
         //app = application.Application.getInstance();
         this.collection.reset(station["centreList"]);

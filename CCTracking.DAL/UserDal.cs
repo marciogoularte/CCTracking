@@ -74,6 +74,21 @@ namespace CCTracking.DAL
             return response;
         }
 
+        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        {
+            UserGridResponse userResponse = new UserGridResponse();
+            List<UserGrid> users = new List<UserGrid>();
+            UserGrid user = null;
+            while (dr.Read())
+            {
+                user = new UserGrid();
+                MapValuesGrid(user, dr);
+                users.Add(user);
+            }
+            userResponse.UserList = users;
+            return userResponse;
+        }
+
         protected override BaseModelResponse ConvertToList(DataSet ds)
         {
             return null;
@@ -116,9 +131,21 @@ namespace CCTracking.DAL
                 user.CenterDesc = dr.GetString(dr.GetOrdinal("CenterDesc"));
         }
 
-        protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
+        private void MapValuesGrid(UserGrid user, IDataReader dr)
         {
-            throw new System.NotImplementedException();
+            user.Id = dr.GetDataReaderInt32("Id");
+
+            user.UserName = dr.GetDataReaderString("UserName");
+
+            user.FirstName = dr.GetDataReaderString("FirstName");
+
+            user.LastName = dr.GetDataReaderString("LastName");
+
+            user.Cnic = dr.GetDataReaderString("Cnic");
+
+            user.Mobile = dr.GetDataReaderString("Mobile");
+
+            user.Email = dr.GetDataReaderString("Email");
         }
     }
 }

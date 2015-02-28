@@ -15,4 +15,14 @@
         public byte BookForPrayer { get; set; }
         public bool IsOnMaintainance { get; set; }
     }
+
+    public class BusGrid : BaseModelGrid
+    {
+        public int Id { get; set; }
+        public int CentreId { get; set; }
+        public string CentreDesc { get; set; }
+        public string VehicleNo { get; set; }
+        public string ModelNo { get; set; }
+        public string Description { get; set; }
+    }
 }

@@ -26,14 +26,14 @@ namespace CCTracking.Api.Controllers
 
 		}
 		[HttpGet]
-		public List<User> GetAll()
+		public List<UserGrid> GetAll()
 		{
 			//check if authentication token is invalid throw an exception
 			IsValidAuthenticationToken();
 			DBFacade facade = new UserDal();
-			BaseModelResponse baseModelResponse = facade.GetAll();
-			UserResponse userResponse = baseModelResponse as UserResponse;
-			return userResponse.UserList;
+			BaseModelResponse baseModelResponse = facade.GetAllGrid();
+            UserGridResponse userResponse = baseModelResponse as UserGridResponse;
+            return userResponse.UserList;
 
 		}
 		private bool IsValidAuthenticationToken()

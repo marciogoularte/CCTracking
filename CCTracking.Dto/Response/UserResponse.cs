@@ -7,4 +7,9 @@ namespace CCTracking.Dto.Response
         public User UserModel { get; set; }
         public List<User> UserList { get; set; }
     }
+
+    public class UserGridResponse : BaseModelResponse
+    {        
+        public List<UserGrid> UserList { get; set; }
+    }
 }

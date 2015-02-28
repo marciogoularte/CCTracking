@@ -98,10 +98,19 @@ define(["require", "exports", "../../../../App", "../../../../Helper", "./BusMil
             }
 
             this.app.request("ReportFilterSetting", '');
-            var deferred = DAL.GetByCriteria(busMilageDto);
+            var deferred = DAL.GetByCriteria(this.GetMinimalRequest(busMilageDto));
             deferred.done(function (p) {
                 return _this.GetByCriteriaCompleted(p);
             });
+        };
+
+        BusMilageCtrl.prototype.GetMinimalRequest = function (model) {
+            var request = new dto.Models.BookingSummaryDto();
+            request.set("fromBookingDate", model.get("fromBookingDate"));
+            request.set("toBookingDate", model.get("toBookingDate"));
+            request.set("busSelected", model.get("busSelected"));
+            request.set("busId", model.get("busId"));
+            return request;
         };
 
         BusMilageCtrl.prototype.GetByCriteriaCompleted = function (bookingSummaryDto) {

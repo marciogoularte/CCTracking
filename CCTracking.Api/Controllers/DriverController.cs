@@ -44,11 +44,11 @@ namespace CCTracking.Api.Controllers
         }
 
         [HttpGet]
-        public DriverResponse GetAll(string a)
+        public DriverGridResponse GetAll(string a)
         {
             DBFacade facade = new DriverDal();
-            BaseModelResponse baseModelResponse = facade.GetAll();
-            DriverResponse driverResponse = (DriverResponse)baseModelResponse;
+            BaseModelResponse baseModelResponse = facade.GetAllGrid();
+            DriverGridResponse driverResponse = (DriverGridResponse)baseModelResponse;
             return driverResponse;
         }
         

@@ -92,7 +92,20 @@ namespace CCTracking.DAL
 
         protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
         {
-            throw new System.NotImplementedException();
+            GraveyardGridResponse response = new GraveyardGridResponse();
+            List<GraveyardGrid> items = new List<GraveyardGrid>();
+            GraveyardGrid item = null;
+            while (dr.Read())
+            {
+                item = new GraveyardGrid();
+                MapValuesGrid(item, dr);
+                items.Add(item);
+            }
+            response.GraveyardList = items;
+            return response;
+        }
+        private void MapValuesGrid(GraveyardGrid graveyard, IDataReader dr)
+        {
         }
     }
 }

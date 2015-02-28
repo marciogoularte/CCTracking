@@ -100,10 +100,18 @@ define(["require", "exports", "../../../../App", "../../../../Helper", "./BusCen
             if (bookingSummaryDto.get("toBookingDate").trim() != "") {
                 bookingSummaryDto.set("toBookingDate", helper.FormatDateString(bookingSummaryDto.get("toBookingDate")));
             }
-            var deferred = DAL.GetByCriteria(bookingSummaryDto);
+            var deferred = DAL.GetByCriteria(this.GetMinimalRequest(bookingSummaryDto));
             deferred.done(function (p) {
                 return _this.GetByCriteriaCompleted(p);
             });
+        };
+
+        BusCentreReportCtrl.prototype.GetMinimalRequest = function (model) {
+            var request = new dto.Models.BookingSummaryDto();
+            request.set("busId", model.get("busId"));
+            request.set("fromBookingDate", model.get("fromBookingDate"));
+            request.set("toBookingDate", model.get("toBookingDate"));
+            return request;
         };
 
         BusCentreReportCtrl.prototype.GetByCriteriaCompleted = function (bookingSummaryDto) {

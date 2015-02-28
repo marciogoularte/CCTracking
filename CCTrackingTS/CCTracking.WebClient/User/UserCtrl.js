@@ -110,10 +110,33 @@ define(["require", "exports", "../App", "../Helper", "./UserView", "../Dtos/User
             user.set("centreId", user.get("alkhidmatCentreSelected").id);
             user.set("roleId", user.get("roleSelected").id);
             user.set("isActive", user.get("isActive") == "1" ? true : false);
-            var deferred = DAL.Save(user);
+            var deferred = DAL.Save(this.GetMinimalRequest(user));
             deferred.done(function (p) {
                 return _this.SaveCompleted(p);
             });
+        };
+
+        UserCtrl.prototype.GetMinimalRequest = function (model) {
+            var request = new dto.Models.UserDto();
+            request.set("id", model.get("id"));
+            request.set("firstName", model.get("firstName"));
+            request.set("lastName", model.get("lastName"));
+            request.set("email", model.get("email"));
+            request.set("mobile", model.get("mobile"));
+            request.set("cnic", model.get("cnic"));
+            request.set("address", model.get("address"));
+            request.set("city", model.get("city"));
+            request.set("userName", model.get("userName"));
+            request.set("password", model.get("password"));
+            request.set("centreId", model.get("centreId"));
+            request.set("roleId", model.get("roleId"));
+            request.set("isAdmin", model.get("isAdmin"));
+            request.set("isActive", model.get("isActive"));
+            request.set("createdBy", model.get("createdBy"));
+            request.set("createdDate", model.get("createdDate"));
+            request.set("modifiedBy", model.get("modifiedBy"));
+            request.set("modifiedDate", model.get("modifiedDate"));
+            return request;
         };
 
         UserCtrl.prototype.GetAllCompleted = function (user) {

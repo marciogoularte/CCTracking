@@ -120,6 +120,19 @@ define(["require", "exports", "../../App", "../../Helper", "./UnionCouncilView",
             });
         };
 
+        UnionCouncilCtrl.prototype.GetMinimalRequest = function (model) {
+            var request = new dto.Models.UnionCouncilDto();
+            request.set("id", model.get("id"));
+            request.set("townId", model.get("townId"));
+            request.set("name", model.get("name"));
+            request.set("isActive", model.get("isActive"));
+            request.set("createdBy", model.get("createdBy"));
+            request.set("createdDate", model.get("createdDate"));
+            request.set("modifiedBy", model.get("modifiedBy"));
+            request.set("modifiedDate", model.get("modifiedDate"));
+            return request;
+        };
+
         UnionCouncilCtrl.prototype.GetAllCompleted = function (unionCouncil) {
             var _this = this;
             //app = application.Application.getInstance();

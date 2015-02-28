@@ -20,7 +20,17 @@ namespace CCTracking.Dto
         public string City { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+    }
 
+    public class UserGrid : BaseModelGrid
+    {
+        public int Id { get; set; }
+        public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Cnic { get; set; }
+        public string Mobile { get; set; }
+        public string Email { get; set; }
     }
 
     public enum Roles

@@ -104,7 +104,28 @@ namespace CCTracking.DAL
 
         protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
         {
-            throw new System.NotImplementedException();
+            DriverGridResponse response = new DriverGridResponse();
+            List<DriverGrid> items = new List<DriverGrid>();
+            DriverGrid item = null;
+            while (dr.Read())
+            {
+                item = new DriverGrid();
+                MapValuesGrid(item, dr);
+                items.Add(item);
+            }
+            response.DriverList = items;
+            return response;
+        }
+
+        private void MapValuesGrid(DriverGrid driver, IDataReader dr)
+        {
+            driver.Id = dr.GetDataReaderInt32("Id");
+            driver.FirstName = dr.GetDataReaderString("FirstName");
+            driver.LastName = dr.GetDataReaderString("LastName");
+            driver.Mobile = dr.GetDataReaderString("Mobile");
+            driver.Cnic = dr.GetDataReaderString("Cnic");
+            driver.Address = dr.GetDataReaderString("Address");
+            driver.CentreDesc = dr.GetDataReaderString("CentreDesc");
         }
     }
 }

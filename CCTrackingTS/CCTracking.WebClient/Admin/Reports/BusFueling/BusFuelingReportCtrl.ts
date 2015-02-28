@@ -112,8 +112,17 @@ export class BusFuelingReportCtrl extends helper.Controller {
         if (bookingSummaryDto.get("busSelected") != undefined) {
             bookingSummaryDto.set("busId", bookingSummaryDto.get("busSelected").id);
         }
-        var deferred = DAL.GetByCriteria(bookingSummaryDto);
+        var deferred = DAL.GetByCriteria(this.GetMinimalRequest(bookingSummaryDto));
         deferred.done(p=> this.GetByCriteriaCompleted(p));
+    }
+
+    GetMinimalRequest(model) {
+        var request = new dto.Models.BookingSummaryDto();
+        request.set("fromBookingDate", model.get("fromBookingDate"));
+        request.set("toBookingDate", model.get("toBookingDate"));
+        request.set("busSelected", model.get("busSelected"));
+        request.set("busId", model.get("busId"));
+        return request;
     }
 
     GetByCriteriaCompleted(bookingSummaryDto: dto.Models.BookingSummaryCollection) {

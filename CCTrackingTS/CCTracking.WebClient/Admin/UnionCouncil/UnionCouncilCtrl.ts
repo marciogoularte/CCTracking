@@ -112,6 +112,20 @@ export class UnionCouncilCtrl extends helper.Controller {
         deferred.done(p=> this.SaveCompleted(p));
     }
 
+    GetMinimalRequest(model) {
+        var request = new dto.Models.UnionCouncilDto();
+        request.set("id", model.get("id"));
+        request.set("townId", model.get("townId"));
+        request.set("name", model.get("name"));
+        request.set("isActive", model.get("isActive"));
+        request.set("createdBy", model.get("createdBy"));
+        request.set("createdDate", model.get("createdDate"));
+        request.set("modifiedBy", model.get("modifiedBy"));
+        request.set("modifiedDate", model.get("modifiedDate"));
+        return request;
+    }
+
+
     GetAllCompleted(unionCouncil: dto.Models.UnionCouncilDto) {
         //app = application.Application.getInstance();
        //  debugger;

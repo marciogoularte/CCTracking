@@ -122,10 +122,29 @@ define(["require", "exports", "../../App", "../../Helper", "./BusView", "../../D
             bus.set("centreId", bus.get("alkhidmatCentreSelected").id);
             bus.set("modelNo", bus.get("busModelSelected").id);
             bus.set("isActive", bus.get("isActive") == "1" ? true : false);
-            var deferred = DAL.Save(bus);
+            var deferred = DAL.Save(this.GetMinimalRequest(bus));
             deferred.done(function (p) {
                 return _this.SaveCompleted(p);
             });
+        };
+
+        BusCtrl.prototype.GetMinimalRequest = function (model) {
+            var request = new dto.Models.BusDto();
+            request.set("id", model.get("id"));
+            request.set("stationId", model.get("stationId"));
+            request.set("trackingDeviceId", model.get("trackingDeviceId"));
+            request.set("vehicleNo", model.get("vehicleNo"));
+            request.set("alkhidmatBusNo", model.get("alkhidmatBusNo"));
+            request.set("no", model.get("no"));
+            request.set("modelNo", model.get("modelNo"));
+            request.set("description", model.get("description"));
+            request.set("initialReading", model.get("initialReading"));
+            request.set("isActive", model.get("isActive"));
+            request.set("createdBy", model.get("createdBy"));
+            request.set("createdDate", model.get("createdDate"));
+            request.set("modifiedBy", model.get("modifiedBy"));
+            request.set("modifiedDate", model.get("modifiedDate"));
+            return request;
         };
 
         BusCtrl.prototype.GetAllCompleted = function (bus) {

@@ -43,11 +43,11 @@ namespace CCTracking.Api.Controllers
         }
 
         [HttpGet]
-        public GraveyardResponse GetAll(string a)
+        public GraveyardGridResponse GetAll(string a)
         {
             DBFacade facade = new GraveyardDal();
-            BaseModelResponse baseModelResponse = facade.GetAll();
-            GraveyardResponse graveyardResponse = (GraveyardResponse)baseModelResponse;
+            BaseModelResponse baseModelResponse = facade.GetAllGrid();
+            GraveyardGridResponse graveyardResponse = (GraveyardGridResponse)baseModelResponse;
             return graveyardResponse;
         }
         
