@@ -55,7 +55,7 @@ define(["require", "exports", "../Helper", "marionette", "jquery", "jqueryUI", "
             _super.call(this, options);
         }
         BookingView.prototype.Cancel = function () {
-            this.trigger("CancelForm");
+            window.location.href = "#viewBooking";
         };
         BookingView.prototype.onDomRefresh = function () {
             var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));

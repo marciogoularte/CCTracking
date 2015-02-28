@@ -138,8 +138,12 @@ define(["require", "exports", "../../App", "../../Helper", "text!CCTracking.WebC
             this.template = receiptLayoutView.getOuterHTML("#ReceiptTemplate");
             this.itemViewContainer = "#ItemContainer";
             this.events = {
-                "click .jsPrintReceipt": function () {
-                    _this.trigger("Event-PrintReceipt");
+                "click .jsPrintDocument": function () {
+                    helper.PrintDocument();
+                    _this.close();
+                },
+                "click .jsPDFReceipt": function () {
+                    _this.trigger("Event-PrintPDFReceipt");
                 }
             };
             _super.call(this, options);

@@ -52,7 +52,7 @@ export class BookingView extends helper.Views.MvvmView {
         super(options);
     }
     Cancel() {
-        this.trigger("CancelForm");
+        window.location.href = "#viewBooking";
     }
     onDomRefresh() {
         var lookupResponse = JSON.parse(localStorage.getItem('lookupResponse'));

@@ -1,4 +1,7 @@
-﻿<div>
+﻿
+
+<div>
+
     <script type="text/html" id="ReceiptTemplate">
 
         <div>
@@ -14,7 +17,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="jsPrintReceipt btn btn-default">Export to Pdf</button>
+                    <button type="button" class="jsPrintDocument btn btn-default">Print</button>
+                    <button type="button" class="jsPDFReceipt btn btn-default" style="display: none">Export to Pdf</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -26,7 +30,7 @@
 
     <!-- Starts Booking Receipt Layout-->
     <script type="text/html" id="ReceiptContainer">
-        <div id="ReceiptLayout" class="row">
+        <div id="ReceiptLayout" class="PrintArea row">
             
             <!-- <table class="table table-condensed table-removeTopBorder table-hover form-group" style="width: 595px;">
                 
@@ -44,19 +48,16 @@
 
                  </table>-->
 
-            <!--<table class="table table-condensed table-removeTopBorder table-hover form-group">
+            <table class="table table-condensed table-removeTopBorder table-hover form-group">
+                   
                     <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                        <td colspan="2" class="input-sm text-center input-lg">AKWS Coffin Carrier Tracking System</td>                    
                     </tr>
                     <tr>
-                        <td colspan="2" class="input-sm text-center">AKWS Coffin Carrier Tracking System</td>                    
+                        <td colspan="2" class="input-sm text-center" >Head Office - Noor-ul-Huda Centre, Near Numayesh Chorangi</td>
                     </tr>
                     <tr>
-                        <td colspan="2" class="input-sm text-center" > centre name</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="input-sm text-center">Cash Receipt</td>
+                        <td colspan="2" class="input-sm text-center input-md">Cash Receipt</td>
                     </tr>
                     <tr>
                         <td class="input-sm">Cash Receipt #: <%=bookingReceipt%></td>
@@ -67,29 +68,34 @@
                         <td class="text-right input-sm">Booking Date: <%=bookingDate%></td>
                     </tr>
                     <tr>
-                        <td class="input-sm col-sm-8">Cash Received From _____________________________________</td>
-                        <td class="input-sm text-right col-sm-4">of Rs.________________</td>
+                        <td class="input-sm col-sm-8">Cash Received From ________________________________________</td>
+                        <td class="input-sm text-right col-sm-4">of Rs.______________</td>
                     </tr>
                     <tr>
-                        <td colspan="2" class="input-sm">For_________________________________________________________________________________</td>
+                        <td colspan="2" class="input-sm">For_________________________________________________________________________</td>
                     </tr>
                     <tr>
                         <td colspan="2" class="input-sm text-right">
                             <table class="table table-condensed table-bordered">
                                 <tr>
-                                    <td class="col-sm-4 col-md-4">Particulars</td>
-                                    <td class="col-sm-4 col-md-4">Amount</td>
+                                    <td class="col-sm-4 col-md-4 text-center">Particulars</td>
+                                    <td class="col-sm-4 col-md-4 text-center">Details</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="col-sm-4 col-md-4 text-left">Cash Received From</td>
+                                    <td class="col-sm-4 col-md-4 text-left"><%=contactName%></td>
                                 </tr>
                                 <tr>
-                                    <td class="col-sm-4 col-md-4">Total Amount Due</td>
-                                    <td class="col-sm-4 col-md-4"><%=bookingAmount%></td>
+                                    <td class="col-sm-4 col-md-4 text-left">Total Amount Due</td>
+                                    <td class="col-sm-4 col-md-4 text-left"><%=bookingAmount%></td>
                                 </tr>
                                 <tr>
-                                    <td>Amount Received</td>
+                                    <td class="text-left">Amount Received</td>
                                     <td>&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td>Balance Due</td>
+                                    <td class="text-left">Balance Due</td>
                                     <td>&nbsp;</td>
                                 </tr>
                             </table>
@@ -100,7 +106,7 @@
                         <td class="text-right input-sm">Signed By___________</td>
                     </tr>
 
-                </table>-->
+                </table>
 
             <!--<div class="col-sm-12 col-md-12">
 
@@ -169,78 +175,7 @@
                     </div>
                 </div>-->
             
-            <div class="col-sm-12 col-md-12">
-
-                <div class="row text-center  input-lg">
-                    AKWS Coffin Carrier Tracking System
-                </div>
-                <div class="row text-center input-sm">
-                    Head Office - Noor-ul-Huda Centre, Near Numayesh Chorangi
-                </div>
-                <!--<div class="row">&nbsp;</div>-->
-                <div class="row text-center input-md">
-                    <div class="col-sm-12 col-md-12">Cash Receipt</div>
-                </div>
-                <div class="row input-sm">
-                    <div class="col-sm-4 col-md-4">Cash Receipt #: <%=bookingReceipt%></div>
-                    <div class="col-sm-8 col-md-8 text-right">Date & Time: <%=printDateTime%></div>
-                </div>
-                <!--<div class="row">&nbsp;</div>-->
-                <div class="row input-sm">
-                    <div class="col-sm-4 col-md-4">
-                        Booking Id: <%=bookingId%> 
-                    </div> 
-                    <div class="col-sm-8 col-md-8 text-right">
-                        Booking Date: <%=bookingDate%>
-                    </div>
-                </div>
-               
-                <!--<div class="row">&nbsp;</div>-->
-                
-                <!--<div class="row input-sm">
-                    <div class="col-sm-12 col-sm-12">
-                        Cash Received From <u><%=contactName%></u>  <span class="pull-right">of Rs.<%=bookingAmount%> </span>
-                    </div>                    
-                </div>-->
-
-               
-                <div class="row">&nbsp;</div>
-                <div class="row input-sm">
-                    <div class="col-sm-12 col-md-12">For__________________________________________________________________________</div>
-                </div>
-                <div class="row">&nbsp;</div>
-                <div class="row">
-                    <div class="col-sm-4 col-md-4">&nbsp;</div>
-                    <div class="col-sm-8 col-md-8">
-                        <table class="table table-condensed table-bordered">
-                            <tr class="input-sm">
-                                <td class="col-sm-4 col-md-4">Particulars</td>
-                                <td class="col-sm-4 col-md-4">Details</td>
-                            </tr>
-                             <tr class="input-sm">
-                                <td class="col-sm-4 col-md-4">Cash Received From</td>
-                                <td class="col-sm-4 col-md-4"><%=contactName%></td>
-                            </tr>
-                            <tr class="input-sm">
-                                <td class="col-sm-4 col-md-4">Total Amount Due</td>
-                                <td class="col-sm-4 col-md-4"><%=bookingAmount%></td>
-                            </tr>
-                            <tr class="input-sm">
-                                <td>Amount Received</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr class="input-sm">
-                                <td>Balance Due</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="row input-sm">
-                    <div class="col-sm-8 col-md-8">Generated By: <%=userName%></div>
-                    <div class="col-sm-4 col-md-4 text-right">Signed By___________</div>
-                </div>
-            </div>
+         
 
         </div>
     </script>

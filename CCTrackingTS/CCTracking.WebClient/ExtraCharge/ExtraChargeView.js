@@ -39,10 +39,15 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "jq
             this.bbModel = new Backbone.Model();
             this.events = {
                 "submit": "Save",
+                "click .jsCancel": "Cancel",
                 "click .jsAddMore": "AddMore"
             };
             _super.call(this, options);
         }
+        ExtraChargeView.prototype.Cancel = function () {
+            window.location.href = "#viewBooking";
+        };
+
         ExtraChargeView.prototype.Save = function (e) {
             e.preventDefault();
             this.bbModel.set("id", this.viewModel.Id());

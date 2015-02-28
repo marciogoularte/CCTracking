@@ -10,6 +10,7 @@ namespace CCTracking.DAL
     public abstract class DBFacade
     {
         public bool IsGridDisplay = false;
+        public int NoOfDaysSetting = Convert.ToInt32(ConfigurationManager.AppSettings["NoOfDaysConfiguration"]);
         string ConnectionString { get; set; }
         protected abstract BaseModelResponse ConvertToModel(IDataReader dr);
         protected abstract BaseModelResponse ConvertToList(IDataReader dr);
@@ -215,6 +216,7 @@ namespace CCTracking.DAL
             }
             catch (Exception e)
             {
+                Logger.WriteLogError(e.Message);
                 baseModelResponse.ErrorMessage = e.Message;
             }
             finally
@@ -334,6 +336,11 @@ namespace CCTracking.DAL
             basemodel.CreatedDate = dr.GetDateTime(dr.GetOrdinal("CreatedDate"));
             basemodel.ModifiedBy = dr.GetInt32(dr.GetOrdinal("ModifiedBy"));
             basemodel.ModifiedDate = dr.GetDateTime(dr.GetOrdinal("ModifiedDate"));
+        }
+
+        public DateTime GetStartDate()
+        {
+            return DateTime.Today.Add(new TimeSpan(-NoOfDaysSetting, 0, 0, 0));
         }
     }
 

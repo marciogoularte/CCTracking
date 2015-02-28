@@ -6,6 +6,7 @@
 /// <amd-dependency path="knockout"/>
 /// <amd-dependency path="text!./BookingLeftTmpl.html"/>
 /// <amd-dependency path="jsPDF"/>
+/// <amd-dependency path="printArea"/>
 
 
 var _ = require("underscore");
@@ -19,6 +20,7 @@ import DAL = require("../../DAL/BookingLeft");
 import RDto = require("../../Dtos/ReceiptContentDto");
 import RDAL = require("../../DAL/ReceiptContent");
 var jsPDF = require('jsPDF');
+var printArea = require('printArea');
 
 import bookingCtrl = require("../BookingCtrl");
 
@@ -191,12 +193,14 @@ export class BookingLeftCtrl extends helper.Controller {
         
         var list = new Backbone.Collection(collection);
         var receiptView = new views.ReceiptLayoutCollectionView({ collection: list });
-        this.app.ModalAlertRegion.show(receiptView); receiptView.on("Event-PrintReceipt", () => {
+        this.app.ModalAlertRegion.show(receiptView);
+       
+
+        this.app.ModalAlertRegion.show(receiptView); receiptView.on("Event-PrintPDFReceipt", () => {
             this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
             this.app.ModalAlertRegion.close();
         });
-    }
-
+    }  
 
     ExportToPdf(printSelector) {
         //debugger;

@@ -6,17 +6,19 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../../App", "../../Helper", "./BookingLeftView", "../../Dtos/BookingLeftDto", "../../DAL/BookingLeft", "../../DAL/ReceiptContent", "../BookingCtrl", "marionette", "jquery", "knockout", "text!./BookingLeftTmpl.html", "jsPDF"], function(require, exports, application, helper, views, dto, DAL, RDAL, bookingCtrl) {
+define(["require", "exports", "../../App", "../../Helper", "./BookingLeftView", "../../Dtos/BookingLeftDto", "../../DAL/BookingLeft", "../../DAL/ReceiptContent", "../BookingCtrl", "marionette", "jquery", "knockout", "text!./BookingLeftTmpl.html", "jsPDF", "printArea"], function(require, exports, application, helper, views, dto, DAL, RDAL, bookingCtrl) {
     /// <amd-dependency path="marionette"/>
     /// <amd-dependency path="jquery"/>
     /// <amd-dependency path="knockout"/>
     /// <amd-dependency path="text!./BookingLeftTmpl.html"/>
     /// <amd-dependency path="jsPDF"/>
+    /// <amd-dependency path="printArea"/>
     var _ = require("underscore");
     var ko = require("knockout");
     var kb = require("knockback");
 
     var jsPDF = require('jsPDF');
+    var printArea = require('printArea');
 
     var BookingLeftCtrl = (function (_super) {
         __extends(BookingLeftCtrl, _super);
@@ -179,7 +181,9 @@ define(["require", "exports", "../../App", "../../Helper", "./BookingLeftView", 
             var list = new Backbone.Collection(collection);
             var receiptView = new views.ReceiptLayoutCollectionView({ collection: list });
             this.app.ModalAlertRegion.show(receiptView);
-            receiptView.on("Event-PrintReceipt", function () {
+
+            this.app.ModalAlertRegion.show(receiptView);
+            receiptView.on("Event-PrintPDFReceipt", function () {
                 _this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
                 _this.app.ModalAlertRegion.close();
             });

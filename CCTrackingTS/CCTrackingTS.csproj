@@ -342,6 +342,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\bus.jpg" />
     <Content Include="Content\Images\progressbar.gif" />
+    <Content Include="Content\jquery-PrintArea.css" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\selectize.bootstrap3.css" />
     <Content Include="Content\Themes\amelia\bootstrap.min.css" />
@@ -426,6 +427,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jqueryUI\core.js" />
+    <Content Include="Scripts\jqueryUI\datepicker.js" />
+    <Content Include="Scripts\jqueryUI\widget.js" />
     <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\JSPdf\jspdf.min.js" />
@@ -466,6 +470,7 @@
     <Content Include="Scripts\lib\statistics.min.js" />
     <Content Include="Scripts\lib\triggering.js" />
     <Content Include="Scripts\lib\triggering.min.js" />
+    <Content Include="Scripts\PrintArea\jquery.PrintArea.js" />
     <Content Include="Scripts\r.js" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\Selectize\selectize.js" />

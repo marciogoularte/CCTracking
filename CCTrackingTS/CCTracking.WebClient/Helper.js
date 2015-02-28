@@ -14,6 +14,7 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
     var accounting = require("accounting");
     var ko = require("knockout");
     var kb = require("knockback");
+    var appInstance = APP.Application.getInstance();
 
     //var pbarView = require("text!./Common/Templates/Progressbar.html");
     //var Marionette = require("marionette");
@@ -22,10 +23,14 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
         return $(this.toString()).find(selector)[0].outerHTML;
     };
 
-    APP.Application.getInstance().vent.on("Event:UpdateSummary", function () {
+    appInstance.vent.on("Event:UpdateSummary", function () {
         require(['./Booking/BookingLeft/BookingLeftCtrl'], function (p) {
             new p.BookingLeftCtrl().Show();
         });
+    });
+
+    appInstance.vent.on("Event-PrintDocument", function () {
+        PrintDocumentHandler();
     });
 
     $.extend(true, $.fn.dataTable.defaults, {
@@ -212,8 +217,9 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
             //debugger;
             //alert(p);
             view = new p.BusDetailModalPopupCollectionView({ collection: busDetailCollection, model: busDetialDto });
-            var app = APP.Application.getInstance();
-            app.ModalAlertRegion.show(view);
+
+            //var app = APP.Application.getInstance();
+            appInstance.ModalAlertRegion.show(view);
         });
         //debugger;
         //var view = new this.BusDetailModalPopupCollectionView({ collection: busDetailCollection, model: busDetialDto });
@@ -225,9 +231,10 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
     $.ajaxSetup({
         'beforeSend': function (xhr) {
             exports.ShowProgressbar();
-            var app = APP.Application.getInstance();
-            if (app.reqres.hasHandler("AppGlobalSetting")) {
-                xhr.setRequestHeader("AuthenticationToken", app.request("AppGlobalSetting").get("AuthenticationToken"));
+
+            //var app = APP.Application.getInstance();
+            if (appInstance.reqres.hasHandler("AppGlobalSetting")) {
+                xhr.setRequestHeader("AuthenticationToken", appInstance.request("AppGlobalSetting").get("AuthenticationToken"));
             }
         },
         'complete': function (xhr, status) {
@@ -302,7 +309,7 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
     //}
     function AddItem(busVisitCollection) {
         //alert('added');
-        var app = APP.Application.getInstance();
+        //var app = APP.Application.getInstance();
         busVisitCollection.push({ centreId: 'center-d', busId: 'bus-d', driverId: 'driver-d' });
         //var collectionView = new BusVisitCollectionView({ collection: items });
         //app.SubRegion.show(collectionView);
@@ -332,6 +339,11 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
     }
     exports.GetPageSize = GetPageSize;
 
+    function GetNoOfDaysConfiguration() {
+        return 60;
+    }
+    exports.GetNoOfDaysConfiguration = GetNoOfDaysConfiguration;
+
     (function (VisitTypes) {
         VisitTypes[VisitTypes["PatrolPump"] = 1] = "PatrolPump";
         VisitTypes[VisitTypes["Booking"] = 2] = "Booking";
@@ -355,5 +367,25 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
             });
         }
     };
+
+    function PrintDocument() {
+        appInstance.vent.trigger("Event-PrintDocument");
+    }
+    exports.PrintDocument = PrintDocument;
+
+    function PrintDocumentHandler() {
+        var keepAttr = [];
+        var print = $(".PrintArea");
+        var mode = "popup";
+        var close = mode == "popup" && true;
+        var extraCss = "";
+        keepAttr:
+        ["class", "id", "style", "on"];
+        var headElements = '<meta charset="utf-8" />,<meta http-equiv="X - UA - Compatible" content="IE = edge"/>';
+
+        var options = { mode: mode, popClose: close, extraCss: extraCss, retainAttr: keepAttr, extraHead: headElements };
+
+        $(print)["printArea"](options);
+    }
 });
 //# sourceMappingURL=Helper.js.map

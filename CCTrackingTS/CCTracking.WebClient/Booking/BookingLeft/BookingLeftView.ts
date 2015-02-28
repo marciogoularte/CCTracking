@@ -115,8 +115,12 @@ export class ReceiptLayoutCollectionView extends helper.Views.CompositeView {
         this.template = receiptLayoutView.getOuterHTML("#ReceiptTemplate");
         this.itemViewContainer = "#ItemContainer";
         this.events = {
-            "click .jsPrintReceipt": () => {
-                this.trigger("Event-PrintReceipt");
+            "click .jsPrintDocument": () => {                
+                helper.PrintDocument();
+                this.close();
+            },
+            "click .jsPDFReceipt": () => {
+                this.trigger("Event-PrintPDFReceipt");
             }
         }
         super(options);

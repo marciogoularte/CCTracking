@@ -34,9 +34,13 @@ export class ExtraChargeView extends helper.Views.ItemView {
         this.bbModel = new Backbone.Model();
         this.events = {
             "submit": "Save",
+            "click .jsCancel": "Cancel",
             "click .jsAddMore": "AddMore"
         }
         super(options);
+    }
+    Cancel() {
+        window.location.href = "#viewBooking";
     }
 
     Save(e) {

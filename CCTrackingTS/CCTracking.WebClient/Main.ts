@@ -47,7 +47,8 @@ require.config({
         highchartsExport: 'Scripts/HighCharts/exporting',
         jsPDF: 'Scripts/JSPdf/jspdf.min',
         accounting: 'Scripts/AccountingJS/accounting.min',
-        selectize:'Scripts/Selectize/selectize.min'
+        selectize: 'Scripts/Selectize/selectize.min',
+        printArea: 'Scripts/PrintArea/jquery.PrintArea'
 
     },
 
@@ -100,13 +101,13 @@ require.config({
         },
         "highcharts": {
             deps: ["jquery"],
-            exports:"highcharts"
+            exports: "highcharts"
         },
         "highcharts3d": {
-            deps: ["jquery","highcharts"]
+            deps: ["jquery", "highcharts"]
         },
         "highchartsExport": {
-            deps: ["jquery","highcharts"]
+            deps: ["jquery", "highcharts"]
         },
         "jsPDF": {
             deps: ["jquery"]
@@ -116,6 +117,9 @@ require.config({
         },
         "selectize": {
             deps: ["jquery"]
+        },
+        "printArea": {
+            deps: ["jquery","jqueryUI"]
         }
         
         //"bindings": {
@@ -138,6 +142,7 @@ require([
     "jsPDF",
     "accounting",
     "selectize",
+    "printArea",
 //"bootstrapPopover",
 //"bootstrapTooltip",
 //"datepicker",

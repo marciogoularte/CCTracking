@@ -44,7 +44,8 @@ require.config({
         highchartsExport: 'Scripts/HighCharts/exporting',
         jsPDF: 'Scripts/JSPdf/jspdf.min',
         accounting: 'Scripts/AccountingJS/accounting.min',
-        selectize: 'Scripts/Selectize/selectize.min'
+        selectize: 'Scripts/Selectize/selectize.min',
+        printArea: 'Scripts/PrintArea/jquery.PrintArea'
     },
     // Configure the dependencies and exports for older, traditional "browser globals"
     // scripts that do not use define() to declare the dependencies and set a module value.
@@ -106,6 +107,9 @@ require.config({
         },
         "selectize": {
             deps: ["jquery"]
+        },
+        "printArea": {
+            deps: ["jquery", "jqueryUI"]
         }
     }
 });
@@ -123,6 +127,7 @@ require([
     "jsPDF",
     "accounting",
     "selectize",
+    "printArea",
     "knockoutJqueryuiDatepicker",
     "CCTracking.WebClient/App"
 ], //function ($, Backbone, _, Marionette) {

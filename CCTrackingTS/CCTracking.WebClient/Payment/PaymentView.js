@@ -51,11 +51,16 @@ define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "kn
             this.bbModel = new Backbone.Model();
             this.events = {
                 "submit": "Save",
+                "click .jsCancel": "Cancel",
                 "click .jsAddMore": "AddMore",
                 "click .jsUpdateMore": "UpdateMore"
             };
             _super.call(this, options);
         }
+        PaymentView.prototype.Cancel = function () {
+            window.location.href = "#viewBooking";
+        };
+
         PaymentView.prototype.AddMore = function () {
             //var a = this.$el.find("#ddlCentre")
             this.trigger("BusVisitAddItem", this.viewModel.bookingId(), this.viewModel.alkhidmatCentreSelected(), this.viewModel.driverSelected(), this.viewModel.busSelected(), this.viewModel.fuelAmount());

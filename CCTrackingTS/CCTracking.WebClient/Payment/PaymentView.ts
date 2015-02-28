@@ -48,10 +48,14 @@ export class PaymentView extends helper.Views.ItemView { //helper.Views.MvvmView
         this.bbModel = new Backbone.Model();
         this.events = {
             "submit": "Save",
+            "click .jsCancel" : "Cancel",
             "click .jsAddMore": "AddMore",
             "click .jsUpdateMore": "UpdateMore"
         }
         super(options);
+    }
+    Cancel() {
+        window.location.href = "#viewBooking";
     }
 
     AddMore() {

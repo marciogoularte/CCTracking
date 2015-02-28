@@ -577,6 +577,7 @@ export class Application extends Marionette.Application {
 $(function () {
     var app = Application.getInstance();
     app.start();
+    
 
     //var rgnModal = modalHelper.GetModalRegion();
     var rgnModal = new modalHelper.ModalRegion({ el: '#ModalPopup' });
