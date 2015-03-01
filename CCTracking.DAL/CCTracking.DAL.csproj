@@ -100,6 +100,7 @@
   <ItemGroup>
     <Content Include="Db\CDC-ChangesOnly.txt" />
     <Content Include="Db\ChangeDataCapture.txt" />
+    <Content Include="Db\IndexScript.txt" />
     <Content Include="Db\NewDbCreationScript.txt" />
     <Content Include="Db\ScrumbleDataQuery.txt" />
     <Content Include="Db\DbChanges.txt" />

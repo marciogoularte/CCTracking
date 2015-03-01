@@ -1,5 +1,13 @@
 ﻿-----------------------------CHANGES FROM FEB-17-2015 after optimization fix---------------------------
+--CCTrackingDemo db
 [dbo].[GetAllBooking] 
 [GetAllBusVisit]
 [GetBookingByCriteria]
+[dbo].[GetAllBusVisit] 
+[dbo].[fn_GetPreviousBusMeterReading]
 
+Booking table field length increased:
+--------------------------------------
+Address	varchar(500)	Checked
+NamazEJanazaLocation	nvarchar(500)	Checked
+OtherDetail	nvarchar(300)	Checked

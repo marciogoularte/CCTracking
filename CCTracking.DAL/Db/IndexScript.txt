@@ -1,0 +1,49 @@
+﻿--TUNING ANALYZER RECOMMENDATIONS
+CREATE NONCLUSTERED INDEX [_dta_index_Booking] ON [dbo].[Booking] 
+(
+	[Id] ASC
+)
+INCLUDE ( [ContactName],
+[ContactMobile],
+[ContactNic],
+[DeseasedName],
+[PickupDate]) WITH (SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF) ON [PRIMARY]
+
+GO
+CREATE STATISTICS [_dta_stat_BusVisit_IV] ON [dbo].[BusVisit]([IsActive], [VisitTypeId])
+GO
+CREATE STATISTICS [_dta_stat_BusVisit_VB] ON [dbo].[BusVisit]([VisitTypeId], [BusId])
+GO
+CREATE STATISTICS [_dta_stat_BusVisit_BI] ON [dbo].[BusVisit]([Id], [BusId], [IsActive])
+GO
+CREATE NONCLUSTERED INDEX [_dta_index_BusVisit_B] ON [dbo].[BusVisit] 
+(
+	[BookingId] ASC
+)
+INCLUDE ( [CentreId],
+[BusId]) WITH (SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [_dta_index_BusVisit_BIVI] ON [dbo].[BusVisit] 
+(
+	[BusId] ASC,
+	[IsActive] ASC,
+	[VisitTypeId] ASC,
+	[Id] ASC
+)
+INCLUDE ( [BookingId],
+[VisitDate],
+[ReturnDate],
+[FinalReading]) WITH (SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [_dta_index_Payment_B] ON [dbo].[Payment] 
+(
+	[BookingId] ASC
+)WITH (SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF) ON [PRIMARY]
+GO
+CREATE NONCLUSTERED INDEX [_dta_index_Payment_BP] ON [dbo].[Payment] 
+(
+	[BookingId] ASC
+)
+INCLUDE ( [PaymentStatus]) WITH (SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF) ON [PRIMARY]
+GO
+
