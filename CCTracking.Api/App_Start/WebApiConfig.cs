@@ -18,6 +18,8 @@ namespace CCTracking.Api
             var settings = jsonFormatter.SerializerSettings;
             settings.Formatting = Formatting.Indented;
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            //ETAG Caching Implementation
+            //config.MessageHandlers.Add(new CacheCow.Server.CachingHandler(config));
 
         }
     }

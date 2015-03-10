@@ -1,0 +1,62 @@
+﻿<div>
+    <div id="BusVisitLayout">
+        <div class="rgnSearch"></div>
+        <div class="rgnContent"></div>
+    </div>
+
+    <div id="gridTemplate">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table id="tblStation" class="table table-condensed table-bordered table-hover table-striped">
+                    <thead>
+                        <tr class="active">
+                            <th class="input-sm">Bus</th>
+                            <th class="input-sm">Booking Id</th>
+                            <th class="input-sm">Visit Type</th>
+                            <th class="input-sm">Dates</th>
+                            <th class="input-sm">Meter Reading</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <tr class="active">
+                            <td colspan="5">&nbsp;</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="SearchPanel">
+        <div class="panel panel-default">
+            <div class="panel-heading header-bold">
+                <span class="glyphicon glyphicon-time"></span>View - Bus Visit List
+                <span class="pull-right"><a href="#busVisit">Add New</a></span>
+            </div>
+            <div class="panel-body">
+                <div class="pull-right">
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            Vehicle No  
+                            <select id="ddlBuses" class="form-control input-sm"
+                                    data-bind="options: busList, optionsText: 'description', value: busSelected">
+                            </select>
+                        </div>
+                        <button type="button" class="jsSearchVisit btn btn-default">Search</button>
+                    </form>
+                    </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/html" id="rowTemplate">
+        <td class="jsShowDetail edit-action input-sm " ><%=busDesc%></td>
+        <td class="input-sm"><%=bookingId%></td>
+        <td class="input-sm"><%=visitTypeDesc%></td>
+        <td class="input-sm"><%=visitDate%> - <%=returnDate%></td>
+        <td class="input-sm"><%=initialReading%> - <%=finalReading%></td>
+
+    </script>
+</div>

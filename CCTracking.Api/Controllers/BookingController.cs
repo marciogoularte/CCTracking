@@ -62,6 +62,7 @@ namespace CCTracking.Api.Controllers
             return lookupResponse;
         }
         [HttpGet]
+        //[WebApiOutputCache(120,60,false)]
         public BaseModelResponse GetAll(int a)
         {
             DBFacade facade = new BookingDal();

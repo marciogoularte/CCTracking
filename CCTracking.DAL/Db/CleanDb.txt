@@ -8,3 +8,8 @@ delete from cdc.dbo_booking_CT
 delete from cdc.dbo_Payment_CT
 delete from cdc.dbo_BusVisit_CT
 delete from cdc.dbo_RefundBooking_CT
+
+
+delete from Payment where BookingId in( 284,285,286,287,288)
+delete from BusVisit where BookingId in( 284,285,286,287,288)
+delete from Booking where id in( 284,285,286,287,288)

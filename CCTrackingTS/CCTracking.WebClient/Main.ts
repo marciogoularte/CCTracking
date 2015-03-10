@@ -40,7 +40,7 @@ require.config({
         jqueryUnobtrusive: "Scripts/jquery.validate.unobtrusive.min",
         jqueryUnobtrusiveAjax: "Scripts/jquery.unobtrusive-ajax.min",
         //knockoutJqueryuiUtils: 'Scripts/KnockoutJqueryUI/utils',
-        //knockoutJqueryuiHandler: 'Scripts/KnockoutJqueryUI/bindingHandler',
+        //knockoutJqueryuiHandler: 'Scripts/KnockoutJqueryUI/bindingHandler',z
         knockoutJqueryuiDatepicker: 'Scripts/KnockoutJqueryUI/datepicker',
         highcharts: 'Scripts/HighCharts/highcharts',
         highcharts3d: 'Scripts/HighCharts/highcharts-3d',

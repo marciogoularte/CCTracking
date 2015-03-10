@@ -235,6 +235,7 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
             //var app = APP.Application.getInstance();
             if (appInstance.reqres.hasHandler("AppGlobalSetting")) {
                 xhr.setRequestHeader("AuthenticationToken", appInstance.request("AppGlobalSetting").get("AuthenticationToken"));
+                //xhr.setRequestHeader("If-None-Match", "W/\"fe0fb066ec674d1dac7a9b6588828807\"");
             }
         },
         'complete': function (xhr, status) {

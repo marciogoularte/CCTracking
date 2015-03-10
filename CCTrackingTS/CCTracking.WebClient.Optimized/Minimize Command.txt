@@ -1,0 +1,5 @@
+﻿run from command prompt from following location:
+C:\LiveProjects\SourceCode\CCTrackingTS\CCTrackingTS
+
+Command:
+node CCTracking.WebClient.Optimized/r.js -o app.build.js

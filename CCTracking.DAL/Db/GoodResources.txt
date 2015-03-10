@@ -1,0 +1,2 @@
+﻿Webapi Output Cache - Implementation
+http://www.strathweb.com/2012/05/output-caching-in-asp-net-web-api/

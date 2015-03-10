@@ -1,0 +1,37 @@
+﻿<div>
+<div id="BusAvailabilityPanel">
+    
+    <div class="panel panel-default">
+        <div class="panel-heading header-bold"><i class="fa fa-search">&nbsp;</i>&nbsp;CHECK BUS AVAILABILITY</div>
+        <div class="panel-body">
+            <table class="table table-condensed form-group">
+                <tr>
+                    <td class="col-sm-4 col-md-4 input-sm">Centres/Parnters</td>
+                    <td class="col-sm-8 col-md-8">
+                            <select id="ddlCentre" class="form-control input-sm"
+                                            data-bind="options: model.alkhidmatCentreList, optionsText:'description', value:model.alkhidmatCentreSelected">
+                                    </select></td>
+                </tr>
+                <tr>
+                    <td class="col-sm-4 col-md-4 input-sm">Buses</td>
+                    <td class="col-sm-8 col-md-8">
+                         <select id="ddlBusDetails" class="form-control input-sm"
+                                        data-bind="options: model.busList, optionsText:'description', value:model.busSelected">
+                                    </select></td>
+                </tr>
+                <tr>
+                    <td class="col-sm-4 col-md-4 input-sm"></td>
+                    <td class="col-sm-8 col-md-8 input-sm">
+                        <button id="btnAvailability" class="jsAvailability btn btn-default">Avialability</button>&nbsp;
+                        <button id="btnLocation" class="btn btn-default">Location</button>&nbsp;
+                    </td>
+                </tr>
+            </table>
+            <div id="BusAvailabilityRegion"></div>
+<!--            <div id="AdminLeftRegion"></div>
+            <div id="LeftRegion"></div>-->
+        </div>
+    </div>
+    
+</div>
+</div>

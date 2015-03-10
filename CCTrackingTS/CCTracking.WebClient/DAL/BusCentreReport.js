@@ -51,4 +51,3 @@ define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "CCTrackin
     }
     exports.GetByCriteria = GetByCriteria;
 });
-//# sourceMappingURL=BusCentreReport.js.map

@@ -1,0 +1,79 @@
+﻿<div>
+    <!--<div id="ModalGrid1">
+            <div></div>
+        </div>-->
+
+    <div id="ModalGrid">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header <%=type%>">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="myModalLabel">BUS STATUS</h4>
+                </div>
+                <div class="modal-body modalBody" id="ModalBody">
+                    <div id="ItemContainer"></div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/html" id="Modal">    
+        <div class="row">
+            <div ><hr/></div>
+        </div>
+         <div class="row input-sm">
+            <div class="col-sm-3 text-right">Booking Id</div>
+            <div class="col-sm-6"><%=bookingId%></div>
+        </div>
+        <div class="row input-sm">
+            <div class="col-sm-3 text-right">Driver Name</div>
+            <div class="col-sm-6"><%=fullName%></div>
+        </div>
+        <div class="row input-sm">
+            <div class="col-sm-3 text-right">Driver Contact</div>
+            <div class="col-sm-6 text-danger"><strong><%=mobileNo%></strong> </div>
+        </div>
+        <div class="row input-sm">
+            <div class="col-sm-3 text-right">Vehicle</div>
+            <div class="col-sm-6"> <%=vehicleNo%></div>
+        </div>
+        <div class="row input-sm">
+            <div class="col-sm-3 text-right">Pickup Date</div>
+            <div class="col-sm-6"> <%=pickupDate%></div>
+        </div>
+        <div class="row input-sm">
+            <div class="col-sm-3 text-right">Time Slot</div>
+            <div class="col-sm-6 text-danger"><strong><%=pickupTime%> - <%=returnTime%></strong> </div>
+        </div>
+        <div class="row input-sm">
+            <div class="col-sm-3 text-right">Bus Point</div>
+            <div class="col-sm-6"><%=busPoint%></div>
+        </div>
+        <div class="row input-sm">
+            <div class="col-sm-3 text-right">Graveyard</div>
+            <div class="col-sm-6"><%=graveyard%></div>
+        </div>
+        <div class="row input-sm">
+            <div class="col-sm-3 text-right">Masjid Name</div>
+            <div class="col-sm-6"><%=masjidName%></div>
+        </div>
+        <div class="row input-sm">
+            <div class="col-sm-3 text-right">Funeral Prayer</div>
+              <div class="col-sm-6 text-danger"><strong><%=namazEJanazaHeldIn%></strong> </div>
+        </div>
+        <div class="row input-sm">
+            <div class="col-sm-3 text-right">Funeral Location</div>
+            <div class="col-sm-6"><%=namazEJanazaLocation%></div>
+        </div>
+        <div class="row input-sm">
+            <div class="col-sm-3 text-right">Other Details</div>
+            <div class="col-sm-6"><%=otherDetail%></div>
+        </div>
+       
+    </script>
+
+</div>
