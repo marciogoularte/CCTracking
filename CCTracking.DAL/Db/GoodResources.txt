@@ -1,2 +1,6 @@
-﻿Webapi Output Cache - Implementation
+﻿***Webapi Output Cache - Implementation
 http://www.strathweb.com/2012/05/output-caching-in-asp-net-web-api/
+
+***Very good article on Output Caching
+http://www.iis.net/learn/manage/managing-performance-settings/configure-iis-7-output-caching
+
