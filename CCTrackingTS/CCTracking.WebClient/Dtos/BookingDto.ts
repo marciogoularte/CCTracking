@@ -53,7 +53,8 @@ export module Models {
                 address: "",                
                 busPoint: "",
                 landmarkId: "",
-                
+                receiptNo: "",
+
                 unionCouncilId: "",
                 
                 townId: "",

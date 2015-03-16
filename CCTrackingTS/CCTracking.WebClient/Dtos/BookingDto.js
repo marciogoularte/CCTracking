@@ -67,6 +67,7 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
                     address: "",
                     busPoint: "",
                     landmarkId: "",
+                    receiptNo: "",
                     unionCouncilId: "",
                     townId: "",
                     pickupDate: "",

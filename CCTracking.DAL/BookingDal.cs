@@ -218,8 +218,10 @@ namespace CCTracking.DAL
                 booking.ContactName = dr["ContactName"].ToString();
             if (dr.IsColumnExists("ContactMobile") && !dr.IsDBNull(dr.GetOrdinal("ContactMobile")))
                 booking.ContactMobile = dr["ContactMobile"].ToString();
-            if (dr.IsColumnExists("ContactNic") && !dr.IsDBNull(dr.GetOrdinal("ContactNic")))
-                booking.ContactNic = dr["ContactNic"].ToString();
+            //if (dr.IsColumnExists("ContactNic") && !dr.IsDBNull(dr.GetOrdinal("ContactNic")))
+            //    booking.ContactNic = dr["ContactNic"].ToString();
+            if (dr.IsColumnExists("ReceiptNo") && !dr.IsDBNull(dr.GetOrdinal("ReceiptNo")))
+                booking.ReceiptNo = dr["ReceiptNo"].ToString();
             if (dr.IsColumnExists("DeseasedName") && !dr.IsDBNull(dr.GetOrdinal("DeseasedName")))
                 booking.DeseasedName = dr["DeseasedName"].ToString();
             if (dr.IsColumnExists("PickupDate") && !dr.IsDBNull(dr.GetOrdinal("PickupDate")))
