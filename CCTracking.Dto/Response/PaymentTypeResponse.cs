@@ -7,4 +7,9 @@ namespace CCTracking.Dto.Response
         public PaymentType PaymentTypeModel { get; set; }
         public List<PaymentType> PaymentTypeList { get; set; }
     }
+
+    public class PaymentTypeGridResponse : BaseModelResponse
+    {
+        public List<PaymentTypeGrid> PaymentTypeList { get; set; }
+    }
 }

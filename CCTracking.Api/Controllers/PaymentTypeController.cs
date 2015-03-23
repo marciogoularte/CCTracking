@@ -40,11 +40,11 @@ namespace CCTracking.Api.Controllers
         }
 
         [HttpGet]
-        public PaymentTypeResponse GetAll(string a)
+        public PaymentTypeGridResponse GetAll(string a)
         {
             DBFacade facade = new PaymentTypeDal();
-            BaseModelResponse baseModelResponse = facade.GetAll();
-            PaymentTypeResponse paymentTypeResponse = (PaymentTypeResponse)baseModelResponse;
+            BaseModelResponse baseModelResponse = facade.GetAllGrid();
+            PaymentTypeGridResponse paymentTypeResponse = (PaymentTypeGridResponse)baseModelResponse;
             return paymentTypeResponse;
         }
         

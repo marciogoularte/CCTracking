@@ -5,6 +5,9 @@
 [GetBookingByCriteria]
 [dbo].[GetAllBusVisit] 
 [dbo].[fn_GetPreviousBusMeterReading]
+[dbo].[Lookup]
+[dbo].[GetAllBus]  
+
 
 Booking table field length increased:
 --------------------------------------

@@ -40,11 +40,11 @@ namespace CCTracking.Api.Controllers
         }
 
         [HttpGet]
-        public TrackingDeviceResponse GetAll(string a)
+        public TrackingDeviceGridResponse GetAll(string a)
         {
             DBFacade facade = new TrackingDeviceDal();
-            BaseModelResponse baseModelResponse = facade.GetAll();
-            TrackingDeviceResponse trackingDeviceResponse = (TrackingDeviceResponse)baseModelResponse;
+            BaseModelResponse baseModelResponse = facade.GetAllGrid();
+            TrackingDeviceGridResponse trackingDeviceResponse = (TrackingDeviceGridResponse)baseModelResponse;
             return trackingDeviceResponse;
         }
         

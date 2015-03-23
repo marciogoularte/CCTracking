@@ -40,11 +40,11 @@ namespace CCTracking.Api.Controllers
         }
 
         [HttpGet]
-        public VisitTypeResponse GetAll(string a)
+        public VisitTypeGridResponse GetAll(string a)
         {
             DBFacade facade = new VisitTypeDal();
-            BaseModelResponse baseModelResponse = facade.GetAll();
-            VisitTypeResponse visitTypeResponse = (VisitTypeResponse)baseModelResponse;
+            BaseModelResponse baseModelResponse = facade.GetAllGrid();
+            VisitTypeGridResponse visitTypeResponse = (VisitTypeGridResponse)baseModelResponse;
             return visitTypeResponse;
         }
         

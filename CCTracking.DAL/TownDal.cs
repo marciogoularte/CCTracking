@@ -28,7 +28,7 @@ namespace CCTracking.DAL
         protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
             Town town = baseModel as Town;
-            dictionary.Add("@Name", town.Name);            
+            dictionary.Add("@Name", town.Name);
             base.ExecuteSql(town, dictionary);
             return "dbo.SaveTown";
         }
@@ -84,9 +84,25 @@ namespace CCTracking.DAL
                 town.Name = dr.GetString(dr.GetOrdinal("Name"));
         }
 
+        private void MapValuesGrid(TownGrid town, IDataReader dr)
+        {
+            town.Id = dr.GetDataReaderInt32("Id");
+            town.Name = dr.GetDataReaderString("Name");
+        }
+
         protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
         {
-            throw new System.NotImplementedException();
+            TownGridResponse response = new TownGridResponse();
+            TownGrid town = null;
+            List<TownGrid> townes = new List<TownGrid>();
+            while (dr.Read())
+            {
+                town = new TownGrid();
+                MapValuesGrid(town, dr);
+                townes.Add(town);
+            }
+            response.TownList = townes;
+            return response;
         }
     }
 }

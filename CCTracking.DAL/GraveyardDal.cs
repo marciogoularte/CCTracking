@@ -106,6 +106,9 @@ namespace CCTracking.DAL
         }
         private void MapValuesGrid(GraveyardGrid graveyard, IDataReader dr)
         {
+            graveyard.Id = dr.GetDataReaderInt32("Id");
+            graveyard.LandmarkDesc = dr.GetDataReaderString("LandmarkDesc");
+            graveyard.Name = dr.GetDataReaderString("Name");
         }
     }
 }

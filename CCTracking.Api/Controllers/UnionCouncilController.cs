@@ -43,11 +43,11 @@ namespace CCTracking.Api.Controllers
         }
 
         [HttpGet]
-        public UnionCouncilResponse GetAll(string a)
+        public UnionCouncilGridResponse GetAll(string a)
         {
             DBFacade facade = new UnionCouncilDal();
-            BaseModelResponse baseModelResponse = facade.GetAll();
-            UnionCouncilResponse unionCouncilResponse = (UnionCouncilResponse)baseModelResponse;
+            BaseModelResponse baseModelResponse = facade.GetAllGrid();
+            UnionCouncilGridResponse unionCouncilResponse = (UnionCouncilGridResponse)baseModelResponse;
             return unionCouncilResponse;
         }
         

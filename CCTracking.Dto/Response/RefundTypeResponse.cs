@@ -7,4 +7,9 @@ namespace CCTracking.Dto.Response
         public RefundType RefundTypeModel { get; set; }
         public List<RefundType> RefundTypeList { get; set; }
     }
+
+    public class RefundTypeGridResponse : BaseModelResponse
+    {
+        public List<RefundTypeGrid> RefundTypeList { get; set; }
+    }
 }

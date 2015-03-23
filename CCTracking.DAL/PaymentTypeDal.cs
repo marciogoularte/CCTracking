@@ -84,9 +84,25 @@ namespace CCTracking.DAL
                 visitType.Name = dr.GetString(dr.GetOrdinal("Name"));
         }
 
+        private void MapValuesGrid(PaymentTypeGrid paymentType, IDataReader dr)
+        {
+            paymentType.Id = dr.GetDataReaderInt32("Id");
+            paymentType.Name = dr.GetDataReaderString("Name");
+        }
+
         protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
         {
-            throw new System.NotImplementedException();
+            PaymentTypeGridResponse response = new PaymentTypeGridResponse();
+            PaymentTypeGrid visitType = null;
+            List<PaymentTypeGrid> visitTypees = new List<PaymentTypeGrid>();
+            while (dr.Read())
+            {
+                visitType = new PaymentTypeGrid();
+                MapValuesGrid(visitType, dr);
+                visitTypees.Add(visitType);
+            }
+            response.PaymentTypeList = visitTypees;
+            return response;
         }
     }
 }

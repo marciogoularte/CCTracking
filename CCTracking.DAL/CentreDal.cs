@@ -25,7 +25,7 @@ namespace CCTracking.DAL
             return "GetCentreByCriteria";
         }
 
-        protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary) 
+        protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
             AlkhidmatCentre centre = baseModel as AlkhidmatCentre;
             //dictionary.Add("@Id", centre.Id);
@@ -103,7 +103,28 @@ namespace CCTracking.DAL
 
         protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
         {
-            throw new System.NotImplementedException();
+            CentreGridResponse response = new CentreGridResponse();
+            AlkhidmatCentreGrid centre = null;
+            List<AlkhidmatCentreGrid> centres = new List<AlkhidmatCentreGrid>();
+            while (dr.Read())
+            {
+                centre = new AlkhidmatCentreGrid();
+                MapValuesGrid(centre, dr);
+                centres.Add(centre);
+            }
+            response.CentreList = centres;
+            return response;
         }
+
+        private void MapValuesGrid(AlkhidmatCentreGrid centre, IDataReader dr)
+        {
+            centre.Id = dr.GetDataReaderInt32("Id"); ;
+            centre.Name = dr.GetDataReaderString("Name");
+            centre.Address = dr.GetDataReaderString("Address");
+            centre.ContactNo1 = dr.GetDataReaderString("ContactNo1");
+            centre.ContactNo2 = dr.GetDataReaderString("ContactNo2");
+            centre.IsCoPartner = dr.GetDataReaderBoolean("IsCoPartner");
+        }
+
     }
 }

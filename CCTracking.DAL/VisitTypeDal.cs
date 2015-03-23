@@ -28,7 +28,7 @@ namespace CCTracking.DAL
         protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
             VisitType visitType = baseModel as VisitType;
-            dictionary.Add("@Name", visitType.Name);            
+            dictionary.Add("@Name", visitType.Name);
             base.ExecuteSql(visitType, dictionary);
             return "dbo.SaveVisitType";
         }
@@ -84,9 +84,26 @@ namespace CCTracking.DAL
                 visitType.Name = dr.GetString(dr.GetOrdinal("Name"));
         }
 
+        private void MapValuesGrid(VisitTypeGrid visitType, IDataReader dr)
+        {
+
+            visitType.Id = dr.GetDataReaderInt32("Id");
+            visitType.Name = dr.GetDataReaderString("Name");
+        }
+
         protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
         {
-            throw new System.NotImplementedException();
+            VisitTypeGridResponse response = new VisitTypeGridResponse();
+            VisitTypeGrid visitType = null;
+            List<VisitTypeGrid> visitTypees = new List<VisitTypeGrid>();
+            while (dr.Read())
+            {
+                visitType = new VisitTypeGrid();
+                MapValuesGrid(visitType, dr);
+                visitTypees.Add(visitType);
+            }
+            response.VisitTypeList = visitTypees;
+            return response;
         }
     }
 }

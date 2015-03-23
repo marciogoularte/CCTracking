@@ -7,4 +7,9 @@ namespace CCTracking.Dto.Response
         public Role RoleModel { get; set; }
         public List<Role> RoleList { get; set; }
     }
+
+    public class RoleGridResponse : BaseModelResponse
+    {
+        public List<RoleGrid> RoleList { get; set; }
+    }
 }

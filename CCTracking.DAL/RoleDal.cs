@@ -84,9 +84,25 @@ namespace CCTracking.DAL
                 role.Name = dr.GetString(dr.GetOrdinal("Name"));
         }
 
+        private void MapValuesGrid(RoleGrid role, IDataReader dr)
+        {
+            role.Id = dr.GetDataReaderInt32("Id");    
+            role.Name = dr.GetDataReaderString("Name");
+        }
+
         protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
         {
-            throw new System.NotImplementedException();
+            RoleGridResponse response = new RoleGridResponse();
+            RoleGrid role = null;
+            List<RoleGrid> rolees = new List<RoleGrid>();
+            while (dr.Read())
+            {
+                role = new RoleGrid();
+                MapValuesGrid(role, dr);
+                rolees.Add(role);
+            }
+            response.RoleList = rolees;
+            return response;
         }
     }
 }

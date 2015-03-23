@@ -31,4 +31,12 @@ namespace CCTracking.Dto
         public int NearestCentreId { get; set; }
         public string NearestCentreName { get; set; }
     }
+
+    public class NearestCentreGrid : BaseModelGrid
+    {
+        public int Id { get; set; }
+        public string CentreName { get; set; }
+        public int NearestLevel { get; set; }
+        public string NearestCentreName { get; set; }
+    }
 }

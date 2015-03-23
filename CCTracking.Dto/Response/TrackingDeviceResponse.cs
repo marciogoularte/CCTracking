@@ -7,4 +7,9 @@ namespace CCTracking.Dto.Response
         public TrackingDevice TrackingDeviceModel { get; set; }
         public List<TrackingDevice> TrackingDeviceList { get; set; }
     }
+
+    public class TrackingDeviceGridResponse : BaseModelResponse
+    {
+        public List<TrackingDeviceGrid> TrackingDeviceList { get; set; }
+    }
 }

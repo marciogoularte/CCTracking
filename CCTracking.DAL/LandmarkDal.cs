@@ -92,7 +92,23 @@ namespace CCTracking.DAL
 
         protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
         {
-            throw new System.NotImplementedException();
+            LandmarkGridResponse response = new LandmarkGridResponse();
+            List<LandmarkGrid> items = new List<LandmarkGrid>();
+            LandmarkGrid item = null;
+            while (dr.Read())
+            {
+                item = new LandmarkGrid();
+                MapValuesGrid(item, dr);
+                items.Add(item);
+            }
+            response.LandmarkList = items;
+            return response;
+        }
+        private void MapValuesGrid(LandmarkGrid landmark, IDataReader dr)
+        {
+            landmark.Id = dr.GetDataReaderInt32("Id");
+            landmark.Name = dr.GetDataReaderString("Name");
+            landmark.UcDesc = dr.GetDataReaderString("UcDesc");
         }
     }
 }

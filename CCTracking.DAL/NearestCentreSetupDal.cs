@@ -10,7 +10,7 @@ namespace CCTracking.DAL
         private string mapMethod = string.Empty;
         public NearestCentreSetupDal()
         {
-            
+
         }
         protected override string GetByIdSql(int id, Dictionary<string, object> dictionary)
         {
@@ -26,11 +26,11 @@ namespace CCTracking.DAL
 
         protected override string GetByCriteriaSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
-            
+
             return "";
         }
 
-        protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary) 
+        protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
             NearestCentre nearestCentre = baseModel as NearestCentre;
             dictionary.Add("@CentreId", nearestCentre.CentreId);
@@ -102,7 +102,25 @@ namespace CCTracking.DAL
 
         protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
         {
-            throw new System.NotImplementedException();
+            NearestCentreGridResponse response = new NearestCentreGridResponse();
+            List<NearestCentreGrid> items = new List<NearestCentreGrid>();
+            NearestCentreGrid item = null;
+            while (dr.Read())
+            {
+                item = new NearestCentreGrid();
+                MapValuesGrid(item, dr);
+                items.Add(item);
+            }
+            response.NearestCentreList = items;
+            return response;
+        }
+
+        private void MapValuesGrid(NearestCentreGrid nearestCentre, IDataReader dr)
+        {
+            nearestCentre.Id = dr.GetDataReaderInt32("Id");
+            nearestCentre.CentreName = dr.GetDataReaderString("CentreName");
+            nearestCentre.NearestCentreName = dr.GetDataReaderString("NearestCentreName");
+            nearestCentre.NearestLevel = dr.GetDataReaderInt32("NearestLevel");
         }
     }
 }

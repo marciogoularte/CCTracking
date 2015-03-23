@@ -4,4 +4,10 @@
     {
         public string TrackingNo { get; set; }
     }
+
+    public class TrackingDeviceGrid : BaseModelGrid
+    {
+        public int Id { get; set; }
+        public string TrackingNo { get; set; }
+    }
 }

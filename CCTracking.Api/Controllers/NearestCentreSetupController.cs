@@ -31,11 +31,11 @@ namespace CCTracking.Api.Controllers
 
 
         [HttpGet]
-        public NearestCentreResponse GetAll(string idAll)
+        public NearestCentreGridResponse GetAll(string idAll)
         {
             DBFacade facade = new NearestCentreSetupDal();
-            BaseModelResponse baseModelResponse = facade.GetAll();
-            NearestCentreResponse response = (NearestCentreResponse)baseModelResponse;
+            BaseModelResponse baseModelResponse = facade.GetAllGrid();
+            NearestCentreGridResponse response = (NearestCentreGridResponse)baseModelResponse;
             return response;
         }
 

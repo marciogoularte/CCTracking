@@ -44,11 +44,11 @@ namespace CCTracking.Api.Controllers
         }
 
         [HttpGet]
-        public CentreResponse GetAll(string a)
+        public CentreGridResponse GetAll(string a)
         {
             DBFacade facade = new CCTracking.DAL.CentreDal();
-            BaseModelResponse baseModelResponse = facade.GetAll();
-            CentreResponse centreResponse = (CentreResponse)baseModelResponse;
+            BaseModelResponse baseModelResponse = facade.GetAllGrid();
+            CentreGridResponse centreResponse = (CentreGridResponse)baseModelResponse;
             return centreResponse;
         }
         

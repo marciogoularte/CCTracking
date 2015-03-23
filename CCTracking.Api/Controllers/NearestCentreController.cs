@@ -7,36 +7,7 @@ namespace CCTracking.Api.Controllers
 {
     public class NearestCentreController : ApiController
     {
-        //[HttpPost]
-        //public Dto.BusVisit SaveBusVisit(Dto.BusVisit busVisit)
-        //{
-        //    if (busVisit != null)
-        //    {
-        //        DBFacade facade = new NearestCentreDal();
-        //        if (busVisit.Id <= 0)
-        //        {
-        //            busVisit.CreatedDate = busVisit.ModifiedDate = DateTime.Today;
-        //            busVisit.CreatedBy = busVisit.ModifiedBy;
-        //        }
-        //        else
-        //        {
-        //            busVisit.ModifiedDate = DateTime.Today;
-        //        }
-        //        BaseModelResponse response = facade.Execute(busVisit);
-        //        busVisit = ((NearestCentreResponse)response).BusVisitModel;
-        //    }
-        //    return busVisit;
-        //}
-
-
-        //[HttpGet]
-        //public LookupResponse BusVisitDefault()
-        //{
-        //    DBFacade facade = new LookupDal();
-        //    BaseModelResponse baseModelResponse = facade.ExecuteDs(null);
-        //    LookupResponse lookupResponse = (LookupResponse)baseModelResponse;
-        //    return lookupResponse;
-        //}
+       
 
         [HttpGet]
         public NearestCentreResponse GetAll(int idAll)

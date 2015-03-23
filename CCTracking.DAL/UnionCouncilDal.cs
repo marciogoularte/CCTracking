@@ -90,9 +90,26 @@ namespace CCTracking.DAL
                 unionCouncil.Name = dr.GetString(dr.GetOrdinal("Name"));
         }
 
+        private void MapValuesGrid(UnionCouncilGrid unionCouncil, IDataReader dr)
+        {
+            unionCouncil.Id = dr.GetDataReaderInt32("Id");
+            unionCouncil.TownDesc = dr.GetDataReaderString("TownDesc");
+            unionCouncil.Name = dr.GetDataReaderString("Name");
+        }
+
         protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
         {
-            throw new System.NotImplementedException();
+            UnionCouncilGridResponse response = new UnionCouncilGridResponse();
+            UnionCouncilGrid unionCouncil = null;
+            List<UnionCouncilGrid> unionCounciles = new List<UnionCouncilGrid>();
+            while (dr.Read())
+            {
+                unionCouncil = new UnionCouncilGrid();
+                MapValuesGrid(unionCouncil, dr);
+                unionCounciles.Add(unionCouncil);
+            }
+            response.UnionCouncilList = unionCounciles;
+            return response;
         }
     }
 }

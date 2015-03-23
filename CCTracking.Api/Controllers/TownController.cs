@@ -40,11 +40,11 @@ namespace CCTracking.Api.Controllers
         }
 
         [HttpGet]
-        public TownResponse GetAll(string a)
+        public TownGridResponse GetAll(string a)
         {
             DBFacade facade = new TownDal();
-            BaseModelResponse baseModelResponse = facade.GetAll();
-            TownResponse townResponse = (TownResponse)baseModelResponse;
+            BaseModelResponse baseModelResponse = facade.GetAllGrid();
+            TownGridResponse townResponse = (TownGridResponse)baseModelResponse;
             return townResponse;
         }
         

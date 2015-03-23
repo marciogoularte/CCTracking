@@ -7,4 +7,9 @@ namespace CCTracking.Dto.Response
         public Landmark LandmarkModel { get; set; }
         public List<Landmark> LandmarkList { get; set; }
     }
+
+    public class LandmarkGridResponse : BaseModelResponse
+    {
+        public List<LandmarkGrid> LandmarkList { get; set; }
+    }
 }

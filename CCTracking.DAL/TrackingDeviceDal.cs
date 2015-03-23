@@ -28,7 +28,7 @@ namespace CCTracking.DAL
         protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
             TrackingDevice trackingDevice = baseModel as TrackingDevice;
-            dictionary.Add("@TrackingNo", trackingDevice.TrackingNo);            
+            dictionary.Add("@TrackingNo", trackingDevice.TrackingNo);
             base.ExecuteSql(trackingDevice, dictionary);
             return "dbo.SaveTrackingDevice";
         }
@@ -84,9 +84,25 @@ namespace CCTracking.DAL
                 trackingDevice.TrackingNo = dr.GetString(dr.GetOrdinal("TrackingNo"));
         }
 
+        private void MapValuesGrid(TrackingDeviceGrid trackingDevice, IDataReader dr)
+        {
+            trackingDevice.Id = dr.GetDataReaderInt32("Id");
+            trackingDevice.TrackingNo = dr.GetDataReaderString("TrackingNo");
+        }
+
         protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
         {
-            throw new System.NotImplementedException();
+            TrackingDeviceGridResponse response = new TrackingDeviceGridResponse();
+            TrackingDeviceGrid trackingDevice = null;
+            List<TrackingDeviceGrid> trackingDevicees = new List<TrackingDeviceGrid>();
+            while (dr.Read())
+            {
+                trackingDevice = new TrackingDeviceGrid();
+                MapValuesGrid(trackingDevice, dr);
+                trackingDevicees.Add(trackingDevice);
+            }
+            response.TrackingDeviceList = trackingDevicees;
+            return response;
         }
     }
 }

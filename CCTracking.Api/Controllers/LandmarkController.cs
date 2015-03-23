@@ -43,11 +43,11 @@ namespace CCTracking.Api.Controllers
         }
 
         [HttpGet]
-        public LandmarkResponse GetAll(string a)
+        public LandmarkGridResponse GetAll(string a)
         {
             DBFacade facade = new LandmarkDal();
-            BaseModelResponse baseModelResponse = facade.GetAll();
-            LandmarkResponse landmarkResponse = (LandmarkResponse)baseModelResponse;
+            BaseModelResponse baseModelResponse = facade.GetAllGrid();
+            LandmarkGridResponse landmarkResponse = (LandmarkGridResponse)baseModelResponse;
             return landmarkResponse;
         }
         

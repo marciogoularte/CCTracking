@@ -85,9 +85,26 @@ namespace CCTracking.DAL
                 refundType.Name = dr.GetString(dr.GetOrdinal("Name"));
         }
 
+        private void MapValuesGrid(RefundTypeGrid refundType, IDataReader dr)
+        {
+            refundType.Id = dr.GetDataReaderInt32("Id");
+            refundType.Name = dr.GetDataReaderString("Name");
+        }
+
         protected override BaseModelResponse ConvertToListGrid(IDataReader dr)
         {
-            throw new System.NotImplementedException();
+            RefundTypeGridResponse response = new RefundTypeGridResponse();
+            RefundTypeGrid refundType = null;
+            List<RefundTypeGrid> refundTypees = new List<RefundTypeGrid>();
+            while (dr.Read())
+            {
+                refundType = new RefundTypeGrid();
+                MapValuesGrid(refundType, dr);
+                refundTypees.Add(refundType);
+            }
+            response.RefundTypeList = refundTypees;
+            return response;
+
         }
     }
 }

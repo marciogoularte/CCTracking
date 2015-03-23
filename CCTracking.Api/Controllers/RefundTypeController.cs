@@ -40,11 +40,11 @@ namespace CCTracking.Api.Controllers
         }
 
         [HttpGet]
-        public RefundTypeResponse GetAll(string a)
+        public RefundTypeGridResponse GetAll(string a)
         {
             DBFacade facade = new RefundTypeDal();
-            BaseModelResponse baseModelResponse = facade.GetAll();
-            RefundTypeResponse refundTypeResponse = (RefundTypeResponse)baseModelResponse;
+            BaseModelResponse baseModelResponse = facade.GetAllGrid();
+            RefundTypeGridResponse refundTypeResponse = (RefundTypeGridResponse)baseModelResponse;
             return refundTypeResponse;
         }
         
