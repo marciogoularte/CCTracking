@@ -24,6 +24,10 @@ export class BusVisitSummaryCollectionView extends helper.Views.CompositeView {
         options.itemViewContainer = "#tblSearch tbody";
         this.events = {
             "click .jsSearch": "Search",
+            "click .jsPrintDocument": () => {
+                helper.PrintDocument();
+                //this.close();
+            },
             "click .jsCancel": "Cancel"
         }
         
@@ -57,6 +61,10 @@ export class BusVisitDetailCollectionView extends helper.Views.CompositeView {
         options.itemViewContainer = "#tblBusVisitDetail tbody";
         this.events = {
             "click .jsSearch": "Search",
+            "click .jsPrintDocument": () => {
+                helper.PrintDocument();
+                //this.close();
+            },
             "click .jsCancel": "Cancel"
         }
         super(options);

@@ -52,6 +52,10 @@ define(["require", "exports", "../../../Helper", "marionette", "jquery", "jquery
             options.itemViewContainer = "#tblSearch tbody";
             this.events = {
                 "click .jsSearch": "Search",
+                "click .jsPrintDocument": function () {
+                    helper.PrintDocument();
+                    //this.close();
+                },
                 "click .jsCancel": "Cancel"
             };
             _super.call(this, options);
