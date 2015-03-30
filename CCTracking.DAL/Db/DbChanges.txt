@@ -7,6 +7,8 @@
 [dbo].[fn_GetPreviousBusMeterReading]
 [dbo].[Lookup]
 [dbo].[GetAllBus]  
+[dbo].[DelBusVisitById] ,
+[AdminSummary_View]
 
 
 Booking table field length increased:
