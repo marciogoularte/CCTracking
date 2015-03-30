@@ -15,21 +15,21 @@
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Name *</td>
                             <td class="col-sm-8 col-md-8">
-                                <input type="text" id="txtName" class="form-control input-sm" data-bind="value: model.contactName" placeholder="Contact Name"
+                                <input type="text" id="txtName" maxlength="50" class="form-control input-sm" data-bind="value: model.contactName" placeholder="Contact Name"
                                     required="required" data-role="validate" title="Contact Name" maxlength="200" data-content="Contact name is required" />
                             </td>
                         </tr>
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Mobile *</td>
                             <td class="col-sm-8 col-md-8">
-                                <input type="text" id="txtMobile" class="form-control input-sm" data-bind="value: model.contactMobile" placeholder="Contact Mobile"
+                                <input type="text" id="txtMobile" maxlength="15" class="form-control input-sm" data-bind="value: model.contactMobile" placeholder="Contact Mobile"
                                     required="required" data-role="validate" title="Contact Mobile" maxlength="200" data-content="Contact mobile is required" />
                             </td>
                         </tr>
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Nic</td>
                             <td class="col-sm-8 col-md-8">
-                                <input type="text" id="txtNic" class="form-control input-sm" placeholder="CNIC" data-bind="value: model.contactNic" />
+                                <input type="text" id="txtNic" maxlength="15" class="form-control input-sm" placeholder="CNIC" data-bind="value: model.contactNic" />
                             </td>
                         </tr>
                         <tr>
@@ -38,13 +38,13 @@
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Name</td>
                             <td class="col-sm-8 col-md-8">
-                                <input type="text" id="txtDeseasedName" class="form-control input-sm" placeholder="Deceased Name" data-bind="value: model.deseasedName" />
+                                <input type="text" id="txtDeseasedName" maxlength="50" class="form-control input-sm" placeholder="Deceased Name" data-bind="value: model.deseasedName" />
                             </td>
                         </tr>
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Age</td>
                             <td class="col-sm-8 col-md-8">
-                                <input type="text" id="txtAge" class="form-control input-sm" placeholder="Deceased Age" data-bind="value: model.deseasedAge" />
+                                <input type="text" id="txtAge" maxlength="3" class="form-control input-sm" placeholder="Deceased Age" data-bind="value: model.deseasedAge" />
                             </td>
                         </tr>
                         <tr>
@@ -65,7 +65,7 @@
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Address</td>
                             <td class="col-sm-8 col-md-8">
-                                <textarea id="txtAddress" class="form-control input-sm" data-bind="value: model.address"></textarea>
+                                <textarea id="txtAddress" maxlength="500" class="form-control input-sm" data-bind="value: model.address"></textarea>
                             </td>
                         </tr>
                         <!--<tr>
@@ -158,13 +158,13 @@
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Funeral Location</td>
                             <td class="col-sm-8 col-md-8">
-                                <input type="text" id="Text1" class="form-control input-sm" placeholder="Funeral Location" data-bind="value: model.namazEJanazaLocation" />
+                                <input type="text" id="Text1" maxlength="500" class="form-control input-sm" placeholder="Funeral Location" data-bind="value: model.namazEJanazaLocation" />
                             </td>
                         </tr>
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Masjid Name</td>
                             <td class="col-sm-8 col-md-8">
-                                <input type="text" id="Text2" class="form-control input-sm" placeholder="Masjid Name" data-bind="value: model.masjidName" />
+                                <input type="text" id="Text2" maxlength="50" class="form-control input-sm" placeholder="Masjid Name" data-bind="value: model.masjidName" />
                             </td>
                         </tr>
                         <!-- 
@@ -212,20 +212,20 @@
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Referral Name</td>
                             <td class="col-sm-8 col-md-8">
-                                <input type="text" id="txtReferralName" class="form-control input-sm" placeholder="Referral Name" data-bind="value: model.referralName" />
+                                <input type="text" id="txtReferralName" maxlength="100" class="form-control input-sm" placeholder="Referral Name" data-bind="value: model.referralName" />
                             </td>
                         </tr>
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Referral Details</td>
                             <td class="col-sm-8 col-md-8">
-                                <textarea id="txtReferralDetails" class="form-control input-sm" placeholder="Referral Details" data-bind="value: model.referralDetail"></textarea>
+                                <textarea id="txtReferralDetails" maxlength="500" class="form-control input-sm" placeholder="Referral Details" data-bind="value: model.referralDetail"></textarea>
                             </td>
                         </tr>
 
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Other Details</td>
                             <td class="col-sm-8 col-md-8">
-                                <textarea id="txtOtherDetails" class="form-control input-sm" placeholder="Other Details" data-bind="value: model.otherDetail"></textarea>
+                                <textarea id="txtOtherDetails" maxlength="500" class="form-control input-sm" placeholder="Other Details" data-bind="value: model.otherDetail"></textarea>
                             </td>
                         </tr>
                         <tr>
@@ -238,10 +238,8 @@
                         </tr>
                     </table>
                 </form>
-            </div>
-        
+            </div>        
     </div>
-
     <script type="text/javascript">
         $(function () {
             //var trackingApp = new TrackingApp();

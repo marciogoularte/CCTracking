@@ -138,6 +138,8 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     'auditRefundBooking': 'goAuditRefundBooking',
                     'busCentreReport': 'goBusCentreReport',
                     'busFuelingReport': 'goBusFuelingReport',
+                    'login': 'defaultRoute',
+                    'logout': 'goLogout',
                     '*other': 'defaultRoute'
                 },
                 goUser: function () {
@@ -394,6 +396,10 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     require(['./Admin/Reports/BusFueling/BusFuelingReportCtrl'], function (p) {
                         new p.BusFuelingReportCtrl().Show();
                     });
+                },
+                goLogout: function () {
+                    var appInstance = Application.getInstance();
+                    appInstance.vent.trigger("Event-BackToLogin", false);
                 },
                 defaultRoute: function () {
                     self.ContainerRegion.reset();
@@ -423,6 +429,8 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                     'searchBooking': 'goSearchBooking',
                     'changePassword': 'goChangePassword',
                     'editExtraCharge': 'goExtraCharge',
+                    'login': 'defaultRoute',
+                    'logout': 'goLogout',
                     '*other': 'defaultRoute'
                 },
                 goUser: function () {
@@ -680,6 +688,10 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                         new p.BusFuelingReportCtrl().Show();
                     });
                 },
+                goLogout: function () {
+                    var appInstance = Application.getInstance();
+                    appInstance.vent.trigger("Event-BackToLogin", false);
+                },
                 defaultRoute: function () {
                     self.ContainerRegion.reset();
                     self.ContainerRegion.show(layout);
@@ -704,7 +716,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
             if (localStorage.getItem('lookupResponse') != null) {
                 localStorage.removeItem('lookupResponse');
             }
-            require(['./DAL/Booking'], function (p) {
+            require(['./DAL/Lookup'], function (p) {
                 var deferred = p.Load();
                 deferred.done(function (p) {
                     localStorage.setItem('lookupResponse', JSON.stringify(p));

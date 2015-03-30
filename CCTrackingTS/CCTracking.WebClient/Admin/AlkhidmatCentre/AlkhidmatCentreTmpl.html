@@ -14,32 +14,30 @@
                                     <select id="ddlPaymentType" class="form-control input-sm"
                                         data-bind="options: model.landmarkList, optionsText:'description', value:model.landmarkIdSelected" >
                                     </select></td>
-                            </tr>
-
-                           
+                            </tr>                         
 
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Centre Name</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtCentre" type="text" class="form-control input-sm" data-bind="value: model.name" 
+                                    <input id="txtCentre" type="text" maxlength="50" class="form-control input-sm" data-bind="value: model.name" 
                                         required="required" data-role="validate" title="Centre Name" data-content="Centre name is required"/></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Address</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtAddress" type="text" class="form-control input-sm" data-bind="value: model.address" 
+                                    <input id="txtAddress" type="text" maxlength="500" class="form-control input-sm" data-bind="value: model.address" 
                                         required="required" data-role="validate" title="Centre Address" data-content="Contact Address is required"/></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Phone 1</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtPhone1" type="text" class="form-control input-sm" data-bind="value: model.contactNo1" 
+                                    <input id="txtPhone1" type="text" maxlength="15" class="form-control input-sm" data-bind="value: model.contactNo1" 
                                         required="required" data-role="validate" title="Centre Phone" data-content="Centre Phone is required"/></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Phone 2</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtPhone2" type="text" class="form-control input-sm" data-bind="value: model.contactNo2" /></td>
+                                    <input id="txtPhone2" type="text" maxlength="15" class="form-control input-sm" data-bind="value: model.contactNo2" /></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Is Co-Partner</td>

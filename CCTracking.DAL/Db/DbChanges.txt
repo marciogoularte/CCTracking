@@ -16,3 +16,15 @@ Booking table field length increased:
 Address	varchar(500)	Checked
 NamazEJanazaLocation	nvarchar(500)	Checked
 OtherDetail	nvarchar(300)	Checked
+
+----------------------------------------------
+AdminSummary_View
+GetAllBusVisit
+[GetBusVisitById]
+[GetAllBooking]
+[dbo].[rptCentreReport]    
+rptDashboardBookingSummary
+rptBusWiseCentreReport
+[RptBusDetailReport]
+[RptBusFuelingReport]
+

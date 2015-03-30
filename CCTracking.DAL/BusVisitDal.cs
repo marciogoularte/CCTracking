@@ -20,19 +20,21 @@ namespace CCTracking.DAL
 
         protected override string GetByCriteriaSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
-            BusVisit busVisit = baseModel as BusVisit;
-
-            //dictionary.Add("@CentreId", busVisit.CentreId);
-            //dictionary.Add("@BusId", busVisit.BusId);
-            //dictionary.Add("@BookingId", busVisit.BookingId);
-            //dictionary.Add("@VisitTypeId", busVisit.VisitTypeId);
-            //dictionary.Add("@DriverId", busVisit.DriverId);
-            //dictionary.Add("@IsAvailableForBooking", busVisit.IsAvailableForBooking);
-            //dictionary.Add("@IsAvailableForFutureBooking", busVisit.IsAvailableForFutureBooking);
-            //return "GetBusVisitByCriteria";
-
-            dictionary.Add("@BookingId", busVisit.BookingId);
-            return "GetBusVisitByCriteria";
+            if (baseModel is BusVisit)
+            {
+                BusVisit busVisit = (BusVisit)baseModel;
+                dictionary.Add("@BookingId", busVisit.BookingId);
+                return "GetBusVisitByCriteria";
+            }
+            else
+            {
+                SearchCriteria searchCriteria = (SearchCriteria)baseModel;
+                dictionary.Add("@Id", searchCriteria.Id);
+                dictionary.Add("@FromBookingDate", searchCriteria.FromBookingDate);
+                dictionary.Add("@ToBookingDate", searchCriteria.ToBookingDate);
+                //return "GetBusVisitByCriteria";
+                return "GetAllBusVisit";
+            }
         }
 
         protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary)
@@ -76,7 +78,7 @@ namespace CCTracking.DAL
             return response;
         }
 
-        protected override BaseModelResponse ConvertToList(IDataReader dr)
+        private BaseModelResponse ConvertToSimpleList(IDataReader dr)
         {
             BusVisitResponse response = new BusVisitResponse();
             BusVisit busVisit = null;
@@ -89,6 +91,18 @@ namespace CCTracking.DAL
             }
             response.BusVisitList = busVisits;
             return response;
+        }
+
+        protected override BaseModelResponse ConvertToList(IDataReader dr)
+        {
+            if (IsGridDisplay)
+            {
+                return ConvertToListGrid(dr);
+            }
+            else
+            {
+                return ConvertToSimpleList(dr);
+            }
         }
 
         protected override BaseModelResponse ConvertToList(DataSet ds)

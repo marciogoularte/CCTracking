@@ -135,6 +135,7 @@
     <Content Include="CCTracking.WebClient\Common\Templates\ReceiptLayout.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\Search\SearchCtrl.ts" />
     <TypeScriptCompile Include="CCTracking.WebClient\MainOptimizeConfig.ts" />
+    <Content Include="CCTracking.WebClient\DAL\Lookup.ts" />
     <Content Include="CCTracking.WebClient\Search\SearchTmpl.html" />
     <TypeScriptCompile Include="CCTracking.WebClient\Search\SearchView.ts" />
     <Content Include="CCTracking.WebClient\DAL\BusCentreReport.ts" />

@@ -108,7 +108,7 @@ define(["require", "exports", "../../../../App", "../../../../Helper", "./BusCen
 
         BusCentreReportCtrl.prototype.GetMinimalRequest = function (model) {
             var request = new dto.Models.BookingSummaryDto();
-            request.set("busId", model.get("busId"));
+            request.set("centreId", model.get("centreId"));
             request.set("fromBookingDate", model.get("fromBookingDate"));
             request.set("toBookingDate", model.get("toBookingDate"));
             return request;

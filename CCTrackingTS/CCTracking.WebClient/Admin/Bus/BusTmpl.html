@@ -14,24 +14,22 @@
                                     <select id="ddlCentre" class="form-control input-sm"
                                         data-bind="options: model.alkhidmatCentreList, optionsText:'description', value:model.alkhidmatCentreSelected" >
                                     </select></td>
-                            </tr>
-
-                          
+                            </tr>                          
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Tracking Device</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtTrackingDeviceId" type="text" class="form-control input-sm" data-bind="value: model.trackingDeviceId" /></td>
+                                    <input id="txtTrackingDeviceId" type="text"  maxlength="50" class="form-control input-sm" data-bind="value: model.trackingDeviceId" /></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Alkhidmat Bus No.</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtAlkhidmatBusNo" type="text" class="form-control input-sm" data-bind="value: model.alkhidmatBusNo" 
+                                    <input id="txtAlkhidmatBusNo" type="text" maxlength="5" class="form-control input-sm" data-bind="value: model.alkhidmatBusNo" 
                                         required="required" data-role="validate" title="Alkhidmat Bus No" data-content="Alkhidmat Bus No is required"/></td>
                             </tr>
                              <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Vehical No</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="Text2" type="text" class="form-control input-sm" data-bind="value: model.vehicleNo" 
+                                    <input id="Text2" type="text" maxlength="50" class="form-control input-sm" data-bind="value: model.vehicleNo" 
                                         required="required" data-role="validate" title="Vehicle No" data-content="Vehicle No is required"/></td>
                             </tr>
 
@@ -53,13 +51,13 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Initial Reading</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="Text1" type="text" class="form-control input-sm" data-bind="value: model.initialReading" 
+                                    <input id="Text1" type="text" maxlength="15" class="form-control input-sm" data-bind="value: model.initialReading" 
                                         required="required" data-role="validate" title="Initial Reading" data-content="Initial reading is required"/></td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Description</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtDescription" type="text" class="form-control input-sm" data-bind="value: model.description" /></td>
+                                    <input id="txtDescription" type="text" maxlength="200" class="form-control input-sm" data-bind="value: model.description" /></td>
 
                             </tr>
                             <tr>
@@ -69,7 +67,6 @@
                                     &nbsp;
                                     <input type="radio" name="rbIsActive" value="0" data-bind="checked: model.isActive" />No </td>
                             </tr>
-
                             <tr>
                                 <td class="col-sm-4 col-md-4"></td>
                                 <td class="col-sm-8 col-md-8">

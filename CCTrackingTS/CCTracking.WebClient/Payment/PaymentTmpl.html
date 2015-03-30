@@ -42,7 +42,7 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Booking Amount</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input id="txtAmount" type="text" class="form-control input-sm" data-bind="value: fuelAmount, numeric: 1, valueUpdate: 'afterkeydown', event: { blur: FormatMoneyValue(fuelAmount) }" 
+                                    <input id="txtAmount" type="text" maxlength="10" class="form-control input-sm" data-bind="value: fuelAmount, numeric: 1, valueUpdate: 'afterkeydown', event: { blur: FormatMoneyValue(fuelAmount) }" 
                                      data-role="validate" title="Amount" data-content="Amount is required" />
                                 </td>
                             </tr>
@@ -50,7 +50,7 @@
                             <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Reason for Bus Change</td>
                             <td class="col-sm-8 col-md-8">
-                                <input id="Text2" type="text" class="form-control input-sm" data-bind="value: busChangeReason" />
+                                <input id="Text2" type="text"  maxlength="500" class="form-control input-sm" data-bind="value: busChangeReason" />
                                 <a href="javascript:void(0);" id="lnkUpdate" class="jsUpdateMore pull-right input-sm" title="Update More Items" ><i class="fa fa-edit"></i>Update</a>
                                 <a href="javascript:void(0);" id="lnkAdd" class="jsAddMore pull-right input-sm" title="Add More Items" ><i class="glyphicon glyphicon-plus"></i>Add</a>
                             </td>
@@ -86,7 +86,7 @@
                         <tr>
                             <td class="col-sm-4 col-md-4 input-sm">Amount</td>
                             <td class="col-sm-8 col-md-8">
-                                <input id="txtAmount" type="text" class="form-control input-sm" data-bind="value: amount, numeric: 1, valueUpdate: 'afterkeydown'" disabled/></td>
+                                <input id="txtAmount" type="text" maxlength="10" class="form-control input-sm" data-bind="value: amount, numeric: 1, valueUpdate: 'afterkeydown'" disabled/></td>
                         </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Office/Payment Location</td>
@@ -107,14 +107,14 @@
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">Receipt</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" id="txtReceipt" class="form-control input-sm" data-bind="value:receiptNo, disable:isPaid,numeric: 1, valueUpdate: 'afterkeydown'" 
+                                    <input type="text" id="txtReceipt" maxlength="50" class="form-control input-sm" data-bind="value:receiptNo, disable:isPaid,numeric: 1, valueUpdate: 'afterkeydown'" 
                                         required="required" data-role="validate" title="Receipt" data-content="Receipt is required" />
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-sm-4 col-md-4 input-sm">EasyPaisa Transaction No.</td>
                                 <td class="col-sm-8 col-md-8">
-                                    <input type="text" id="txtEasyPaisaTranNo" class="form-control input-sm" data-bind="value:easyPaisaTranNo, enable:isEasyPaisa" />
+                                    <input type="text" id="txtEasyPaisaTranNo" maxlength="30" class="form-control input-sm" data-bind="value:easyPaisaTranNo, enable:isEasyPaisa" />
                                     <!--<span data-bind="text:isPaid"></span> -->
                                 </td>
                             </tr>

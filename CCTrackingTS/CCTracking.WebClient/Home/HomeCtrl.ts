@@ -33,7 +33,7 @@ export class HomeCtrl extends helper.Controller {
         this.app.MainRegion.show(this.homeItemView);
         var model = new dto.Models.HomeDto();
         var today = new Date();
-        var fromDate = new Date(today.setDate(today.getDate() - 30));
+        var fromDate = new Date(today.setDate(today.getDate() - helper.GetNoOfDaysConfiguration()));
 
         model.set("fromDate", helper.FormatDateString(fromDate));
         model.set("toDate", helper.FormatDateString(new Date()));
@@ -45,7 +45,7 @@ export class HomeCtrl extends helper.Controller {
     ShowCentreSummaryReport() {
         var model = new Backbone.Model();
         var today = new Date();
-        var fromDate = new Date(today.setDate(today.getDate() - 30));
+        var fromDate = new Date(today.setDate(today.getDate() - helper.GetNoOfDaysConfiguration()));
 
         model.set("fromBookingDate", helper.FormatDateString(fromDate));
         model.set("toBookingDate", helper.FormatDateString(new Date()));

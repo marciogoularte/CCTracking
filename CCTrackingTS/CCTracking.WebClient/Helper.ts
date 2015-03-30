@@ -41,6 +41,22 @@ appInstance.vent.on("Event-PrintDocument", () => {
     PrintDocumentHandler();
 });
 
+appInstance.vent.on("Event-BackToLogin", (showError) => {
+    if (appInstance.reqres.hasHandler("AppGlobalSetting")) {
+        appInstance.reqres.setHandler("AppGlobalSetting", null, null);
+        appInstance.reqres.removeHandler("AppGlobalSetting");
+    } 
+
+    if (showError) {
+        ShowModalPopup("danger", "Un-Authorize Access", "You are not authorize to access the page.");
+        setTimeout(function () {
+            window.location.href = "";
+        }, 3000);
+    }
+    else {
+        window.location.href = "";
+    }
+});
 
 $.extend(true, $.fn.dataTable.defaults, {
     "sDom":
@@ -52,8 +68,6 @@ $.extend(true, $.fn.dataTable.defaults, {
     },
 
 });
-
-
 
 /*
 DEFAULT ACCOUNTING SETTINGS
@@ -225,7 +239,9 @@ $.ajaxSetup({
         ShowProgressbar();
         //var app = APP.Application.getInstance();
         if (appInstance.reqres.hasHandler("AppGlobalSetting")) {
+            
             xhr.setRequestHeader("AuthenticationToken", appInstance.request("AppGlobalSetting").get("AuthenticationToken"));
+            //xhr.setRequestHeader("AuthenticationToken", "V1pXQm50MC9ZVENRVm55c3dSSzR1a0RpbGxMMVJneURmOGJwOG84ZXRJellnd3ZlVXRQQTR3PT787801");
             //xhr.setRequestHeader("If-None-Match", "W/\"fe0fb066ec674d1dac7a9b6588828807\"");
         }
     },
@@ -259,15 +275,22 @@ $.ajaxSetup({
 ////    alert('donee');
 //});
 /// Handles all error scenarios coming from the server
-//$(document).ajaxError((event, jqXHR, ajaxSettings, thrownError) => {
-//    if (ajaxSettings["consumeError"] != null && ajaxSettings["consumeError"] == true)
-//        return;
-//    if (jqXHR.status == 403) {
-//        app.vent.trigger("BackToLogin");
-//    }
-//    ShowError(jqXHR.responseText == "" ? thrownError : jqXHR.responseText);
+$(document).ajaxError((event, jqXHR, ajaxSettings, thrownError) => {
+    //if (ajaxSettings["consumeError"] != null && ajaxSettings["consumeError"] == true)
+    //    return;
+    //if (jqXHR.status == 403) {
+    //    app.vent.trigger("BackToLogin");
+    //}
+    //ShowError(jqXHR.responseText == "" ? thrownError : jqXHR.responseText);
 
-//});
+    if (jqXHR.status == 401)
+    {
+        appInstance.vent.trigger("Event-BackToLogin", true);
+        //ShowModalPopup("danger", "Un-Authorize Access", "You are not authorize to access the page.");        
+    }
+
+    //alert('hello');
+});
 
 
 export function ValidationUtility() {

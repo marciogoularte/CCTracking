@@ -7,10 +7,12 @@ using System.Web.Http;
 using CCTracking.DAL;
 using CCTracking.Dto.Response;
 using CCTracking.Dto;
+using CCTracking.Api.App_Start;
 
 
 namespace CCTracking.Api.Controllers
 {
+    [BasicHttpAuthorize]
 	public class UserController : ApiController
 	{
 		//UserStore _userStore = new UserStore();

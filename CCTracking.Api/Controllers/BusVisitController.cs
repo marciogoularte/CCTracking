@@ -1,4 +1,5 @@
-﻿using CCTracking.DAL;
+﻿using CCTracking.Api.App_Start;
+using CCTracking.DAL;
 using CCTracking.Dto;
 using CCTracking.Dto.Response;
 using System;
@@ -6,6 +7,7 @@ using System.Web.Http;
 
 namespace CCTracking.Api.Controllers
 {
+    [BasicHttpAuthorize]
     public class BusVisitController : ApiController
     {
         [HttpPost]
@@ -54,7 +56,11 @@ namespace CCTracking.Api.Controllers
         public BaseModelResponse GetAll(int idAll)
         {
             DBFacade facade = new BusVisitDal();
-            BaseModelResponse baseModelResponse = facade.GetAllGrid(idAll);
+
+            facade.IsGridDisplay = true;
+            SearchCriteria criteria = new SearchCriteria { Id = idAll, FromBookingDate = facade.GetStartDate(), ToBookingDate = DateTime.Today };
+            BaseModelResponse baseModelResponse = facade.GetByCriteria(criteria);
+//            BaseModelResponse baseModelResponse = facade.GetAllGrid(idAll);
             //BusVisitResponse response = (BusVisitResponse)baseModelResponse;
             return baseModelResponse;
         }

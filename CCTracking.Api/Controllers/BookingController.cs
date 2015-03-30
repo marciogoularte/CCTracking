@@ -11,18 +11,13 @@ using System.Web.Http;
 
 namespace CCTracking.Api.Controllers
 {
-    //[AuthorizationFilter]
+    [BasicHttpAuthorize]
     public class BookingController : ApiController
-    {
-        //BookingStore _bookingStore = new BookingStore();        
+    {       
         static int rowCounter = 1;
-
-
-
         [HttpPost]
         public Booking SaveBooking(Booking booking)
-        {
-            
+        {            
             //Logger.WriteLog("Save booking started at: " + DateTime.Now);
             if (booking != null)
             {
@@ -66,7 +61,9 @@ namespace CCTracking.Api.Controllers
         public BaseModelResponse GetAll(int a)
         {
             DBFacade facade = new BookingDal();
-            BaseModelResponse baseModelResponse = facade.GetAllGrid(a);
+            facade.IsGridDisplay = true;
+            SearchCriteria criteria = new SearchCriteria { Id = a, FromBookingDate = facade.GetStartDate(), ToBookingDate = DateTime.Today };
+            BaseModelResponse baseModelResponse = facade.GetByCriteria(criteria);
             return baseModelResponse;
         }
         [HttpGet]

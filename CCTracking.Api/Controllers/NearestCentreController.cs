@@ -1,10 +1,12 @@
-﻿using CCTracking.DAL;
+﻿using CCTracking.Api.App_Start;
+using CCTracking.DAL;
 using CCTracking.Dto;
 using CCTracking.Dto.Response;
 using System.Web.Http;
 
 namespace CCTracking.Api.Controllers
 {
+    [BasicHttpAuthorize]
     public class NearestCentreController : ApiController
     {
        

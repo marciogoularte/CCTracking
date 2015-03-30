@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AuthorizationFilterAttribute.cs" />
+    <Compile Include="App_Start\BasicHttpAuthorizeAttribute.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LandmarkController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LookupController.cs" />
     <Compile Include="Controllers\NearestCentreController.cs" />
     <Compile Include="Controllers\NearestCentreSetupController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />

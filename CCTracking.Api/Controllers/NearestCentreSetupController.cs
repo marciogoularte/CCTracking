@@ -3,9 +3,11 @@ using CCTracking.Dto;
 using CCTracking.Dto.Response;
 using System.Web.Http;
 using System;
+using CCTracking.Api.App_Start;
 
 namespace CCTracking.Api.Controllers
 {
+    [BasicHttpAuthorize]
     public class NearestCentreSetupController : ApiController
     {
         [HttpPost]

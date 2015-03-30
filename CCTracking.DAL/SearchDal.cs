@@ -5,63 +5,36 @@ using System.Collections.Generic;
 using System.Data;
 
 
-namespace CCTracking.DAL
+namespace CCTracking.DAL 
 {
-    public class BookingDal : DBFacade
+    public class SearchDal : DBFacade
     {
         protected override string GetByIdSql(int id, Dictionary<string, object> dictionary)
-        {
-            dictionary.Add("Id", id);
-            return "GetBookingById";
+        {            
+            return "";
         }
         protected override string GetAllSql()
         {
-            return "GetAllBooking";
+            return "";
         }
         protected override string GetByCriteriaSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
             SearchCriteria searchCriteria = (SearchCriteria)baseModel;
-            dictionary.Add("@Id", searchCriteria.Id);
-            dictionary.Add("@FromBookingDate", searchCriteria.FromBookingDate);
-            dictionary.Add("@ToBookingDate", searchCriteria.ToBookingDate);
-            return "GetAllBooking";
+            var contactInfo = string.IsNullOrEmpty(searchCriteria.ContactInfo) ? null : searchCriteria.ContactInfo;
+            var deseasedInfo = string.IsNullOrEmpty(searchCriteria.DeseasedInfo) ? null : searchCriteria.DeseasedInfo;
+            //var genderId = searchCriteria.GenderId == 0 ? null : searchCriteria.GenderId;
+            dictionary.Add("@ContactInfo", "%" + contactInfo + "%");
+            dictionary.Add("@DeseasedInfo", "%" + deseasedInfo + "%");
+            dictionary.Add("@GenderId", searchCriteria.GenderId);
+            dictionary.Add("@PaymentStatusId", searchCriteria.PaymentStatusId);
+            dictionary.Add("@GreveyardId", searchCriteria.GreveyardId);
+            dictionary.Add("@CentreId", searchCriteria.CentreId);
+            dictionary.Add("@BusId", searchCriteria.BusId);
+            return "GetBookingByCriteria";
         }
         protected override string ExecuteSql(BaseModel baseModel, Dictionary<string, object> dictionary)
         {
-            Booking booking = (Booking)baseModel;
-            //if (booking.Id == null) dictionary.Add("Id", 0);
-            //dictionary.Add("Id", booking.Id);
-            dictionary.Add("ContactName", booking.ContactName);
-            dictionary.Add("ContactMobile", booking.ContactMobile);
-            dictionary.Add("ContactNic", booking.ContactNic);
-            dictionary.Add("DeseasedName", booking.DeseasedName);
-            dictionary.Add("DeseasedAge", booking.DeseasedAge);
-            dictionary.Add("DeseasedGender", booking.DeseasedGender);
-            dictionary.Add("CauseOfDeath", booking.CauseOfDeath);
-            dictionary.Add("Address", booking.Address);
-            dictionary.Add("BusPoint", booking.BusPoint);
-            dictionary.Add("LandmarkId", booking.LandmarkId);
-            dictionary.Add("UnionCouncilId", booking.UnionCouncilId);
-            dictionary.Add("TownId", booking.TownId);
-            dictionary.Add("PickupDate", booking.PickupDate);
-            dictionary.Add("PickupTime", booking.PickupTime);
-            dictionary.Add("ReturnTime", booking.ReturnTime);
-            dictionary.Add("GraveyardId", booking.GraveyardId);
-            dictionary.Add("NamazEJanazaHeldIn", booking.NamazEJanazaHeldIn);
-            dictionary.Add("NamazEJanazaLocation", booking.NamazEJanazaLocation);
-            dictionary.Add("MasjidName", booking.MasjidName);
-            dictionary.Add("IsReferralBooking", booking.IsReferralBooking);
-            dictionary.Add("ReferralName", booking.ReferralName);
-            dictionary.Add("ReferralDetail", booking.ReferralDetail);
-            dictionary.Add("OtherDetail", booking.OtherDetail);
-            dictionary.Add("AlkhidmatCentre", booking.AlkhidmatCentreId);
-            
-            base.ExecuteSql(booking, dictionary);
-
-
-            //insert/update query and return updated boject
-            //return "update Booking set ContactName=@ContactName where Id=@Id";
-            return "dbo.SaveBooking";
+           return "";
         }
 
         protected override BaseModelResponse ConvertToModel(IDataReader dr)
@@ -86,18 +59,6 @@ namespace CCTracking.DAL
             {
                 return ConvertToSimpleList(dr);
             }
-            //BookingResponse bookingResponse = new BookingResponse();
-            //List<Booking> bookings = new List<Booking>();
-            //Booking booking = null;
-            //while (dr.Read())
-            //{
-            //    booking = new Booking();
-                
-            //    MapValues(booking, dr);
-            //    bookings.Add(booking);
-            //}
-            //bookingResponse.BookingList = bookings;
-            //return bookingResponse;
         }
 
         protected override BaseModelResponse ConvertToList(DataSet ds)
@@ -151,7 +112,6 @@ namespace CCTracking.DAL
             booking.Id = Convert.ToInt32(dr["Id"]);
             if (dr.IsColumnExists("ContactName") && !dr.IsDBNull(dr.GetOrdinal("ContactName")))
                 booking.ContactName = dr["ContactName"].ToString();
-
 
             if (dr.IsColumnExists("ContactMobile") && !dr.IsDBNull(dr.GetOrdinal("ContactMobile")))
                 booking.ContactMobile = dr["ContactMobile"].ToString();
@@ -222,6 +182,5 @@ namespace CCTracking.DAL
                 booking.Status = Convert.ToBoolean(dr["Status"]);
 
         }
-        
     }
 }

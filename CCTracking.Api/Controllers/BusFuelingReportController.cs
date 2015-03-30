@@ -2,9 +2,11 @@
 using CCTracking.DAL;
 using CCTracking.Dto;
 using CCTracking.Dto.Response;
+using CCTracking.Api.App_Start;
 
 namespace CCTracking.Api.Controllers
 {
+    [BasicHttpAuthorize]
     public class BusFuelingReportController : ApiController
     {
         [HttpPost]

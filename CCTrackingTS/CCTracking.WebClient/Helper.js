@@ -33,6 +33,22 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
         PrintDocumentHandler();
     });
 
+    appInstance.vent.on("Event-BackToLogin", function (showError) {
+        if (appInstance.reqres.hasHandler("AppGlobalSetting")) {
+            appInstance.reqres.setHandler("AppGlobalSetting", null, null);
+            appInstance.reqres.removeHandler("AppGlobalSetting");
+        }
+
+        if (showError) {
+            exports.ShowModalPopup("danger", "Un-Authorize Access", "You are not authorize to access the page.");
+            setTimeout(function () {
+                window.location.href = "";
+            }, 3000);
+        } else {
+            window.location.href = "";
+        }
+    });
+
     $.extend(true, $.fn.dataTable.defaults, {
         "sDom": "<'row'<'col-xs-12 col-sm-12 col-md-12 hidden'l><'col-xs-12 col-sm-12 col-md-12 text-right'f>r>" + "t" + "<'row'<'col-xs-12 col-sm-12 col-md-12'i><'col-xs-12 col-sm-12 col-md-12 text-center'p>>",
         "language": {
@@ -235,6 +251,7 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
             //var app = APP.Application.getInstance();
             if (appInstance.reqres.hasHandler("AppGlobalSetting")) {
                 xhr.setRequestHeader("AuthenticationToken", appInstance.request("AppGlobalSetting").get("AuthenticationToken"));
+                //xhr.setRequestHeader("AuthenticationToken", "V1pXQm50MC9ZVENRVm55c3dSSzR1a0RpbGxMMVJneURmOGJwOG84ZXRJellnd3ZlVXRQQTR3PT787801");
                 //xhr.setRequestHeader("If-None-Match", "W/\"fe0fb066ec674d1dac7a9b6588828807\"");
             }
         },
@@ -266,14 +283,20 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
     ////    alert('donee');
     //});
     /// Handles all error scenarios coming from the server
-    //$(document).ajaxError((event, jqXHR, ajaxSettings, thrownError) => {
-    //    if (ajaxSettings["consumeError"] != null && ajaxSettings["consumeError"] == true)
-    //        return;
-    //    if (jqXHR.status == 403) {
-    //        app.vent.trigger("BackToLogin");
-    //    }
-    //    ShowError(jqXHR.responseText == "" ? thrownError : jqXHR.responseText);
-    //});
+    $(document).ajaxError(function (event, jqXHR, ajaxSettings, thrownError) {
+        //if (ajaxSettings["consumeError"] != null && ajaxSettings["consumeError"] == true)
+        //    return;
+        //if (jqXHR.status == 403) {
+        //    app.vent.trigger("BackToLogin");
+        //}
+        //ShowError(jqXHR.responseText == "" ? thrownError : jqXHR.responseText);
+        if (jqXHR.status == 401) {
+            appInstance.vent.trigger("Event-BackToLogin", true);
+            //ShowModalPopup("danger", "Un-Authorize Access", "You are not authorize to access the page.");
+        }
+        //alert('hello');
+    });
+
     function ValidationUtility() {
         var validationElements = $('[data-role="validate"]'), elementCount = 0;
         validationElements.popover({ placement: 'bottom' });

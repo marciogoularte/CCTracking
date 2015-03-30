@@ -67,6 +67,7 @@
     <Compile Include="PaymentTypeDal.cs" />
     <Compile Include="ReceiptContentDal.cs" />
     <Compile Include="ResetPasswordDal.cs" />
+    <Compile Include="SearchDal.cs" />
     <Compile Include="UnionCouncilDal.cs" />
     <Compile Include="VisitTypeDal.cs" />
     <Compile Include="TrackingDeviceDal.cs" />

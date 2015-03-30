@@ -1,10 +1,12 @@
-﻿using CCTracking.DAL;
+﻿using CCTracking.Api.App_Start;
+using CCTracking.DAL;
 using CCTracking.Dto.Response;
 using System;
 using System.Web.Http;
 
 namespace CCTracking.Api.Controllers
 {
+    [BasicHttpAuthorize]
     public class LandmarkController : ApiController
     {        
         static int rowCounter = 1;

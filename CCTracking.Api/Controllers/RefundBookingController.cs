@@ -4,9 +4,11 @@ using CCTracking.Dto;
 using CCTracking.Dto.Response;
 using System;
 using System.Web.Http;
+using CCTracking.Api.App_Start;
 
 namespace CCTracking.Api.Controllers
 {
+    [BasicHttpAuthorize]
     public class RefundBookingController : ApiController
     {
         [HttpPost]
