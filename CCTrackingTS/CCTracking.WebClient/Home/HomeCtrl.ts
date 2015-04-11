@@ -94,12 +94,27 @@ export class HomeCtrl extends helper.Controller {
             "totalReceivables": helper.FormatMoney(sumReceivables)
         });
         this.collectionView = new views.SearchCollectionView({ collection: new Backbone.Collection(summary), model: compositeModel });
+        this.collectionView.on("Event:PrintReport", (p) => {
+            //helper.PrintReport(this.GetHeaderList());
+            helper.PrintReport(new Backbone.Collection(summary), this.GetHeaderList(),"Centre Specific Summary Report","Dashboard");
+        });
         this.app.SubRegion.reset();
         this.app.SubRegion.show(this.collectionView);
 
         //this.backboneCollection.reset(summary);
     }
 
+    GetHeaderList() {
+        var headerList = new Backbone.Collection([
+            { columnHeader: "Centre Name" },
+            { columnHeader: "Booking Amount" },
+            { columnHeader: "Maintenance" },
+            { columnHeader: "Booking Milage" },
+            { columnHeader: "Bookings" },
+            { columnHeader: "Receivables" }
+        ]);
+        return headerList;
+    }
 
     ShowChart(summaryData: any) {
         var centreName = [];

@@ -55,7 +55,10 @@ export class BusCentreReportCtrl extends helper.Controller {
 
         this.compositeModel = model;
 
-       this.collectionView.listenTo(this.collectionView, "BusCentreReport", () => this.GetByCriteria(this.searchViewModel.bbModel));
+        this.collectionView.listenTo(this.collectionView, "BusCentreReport", () => this.GetByCriteria(this.searchViewModel.bbModel));
+        this.collectionView.listenTo(this.collectionView, "Event:PrintReport", (p) => {
+            helper.PrintReport(this.backboneCollection, this.GetHeaderList(), "Centre Specific Bus Details","Mileage");
+        });
         this.collectionView.listenTo(this.collectionView, "itemview:BusVisitDetails", (view, id) => { this.ShowBusVisitDetails(id, model); });
 
         this.collectionView.on("CancelForm", () => this.Cancel());
@@ -78,6 +81,18 @@ export class BusCentreReportCtrl extends helper.Controller {
 
         var deferred = DAL.GetByCriteria(bookingSumaryDto);
         deferred.done(p=> this.GetByCriteriaCompleted(p));
+    }
+
+    GetHeaderList() {
+        var headerList = new Backbone.Collection([
+            { columnHeader: "Centre Name" },
+            { columnHeader: "Bus No" },
+            { columnHeader: "Booking Amount" },
+            { columnHeader: "Booking Milage" },
+            { columnHeader: "Bookings" },
+            { columnHeader: "Receivables" }
+        ]);
+        return headerList;
     }
 
     ShowBusVisitDetails(id, searchModel) {

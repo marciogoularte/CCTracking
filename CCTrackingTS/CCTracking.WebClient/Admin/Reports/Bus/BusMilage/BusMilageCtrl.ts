@@ -72,6 +72,9 @@ export class BusMilageCtrl extends helper.Controller {
 
         this.collectionView.model = this.compositeModel;
         this.collectionView.listenTo(this.collectionView, "BusMilage", () => this.BusMilage(model));
+        this.collectionView.on("Event:PrintReport", () => {
+            helper.PrintReport(this.backboneCollection, this.GetHeaderList(), "Bus Milage Report", "BusVisit");
+        });
         this.app.MainRegion.show(this.collectionView);
 
         var currentView = this.collectionView.$el;
@@ -93,6 +96,22 @@ export class BusMilageCtrl extends helper.Controller {
         if (busMilageDto != undefined) {
             this.BusMilage(busMilageDto);
         }
+    }
+
+    GetHeaderList() {
+        var headerList = new Backbone.Collection([
+            { columnHeader: "Bus No" },
+            { columnHeader: "Visit Date" },
+            { columnHeader: "Visit Type" },
+            { columnHeader: "Amount" },
+            { columnHeader: "Mileage" },
+            { columnHeader: "Out Time" },
+            { columnHeader: "In Time" },
+            { columnHeader: "Time Taken" },
+            { columnHeader: "Driver" },
+            { columnHeader: "Booking Centre" }
+        ]);
+        return headerList;
     }
 
     BusMilage(busMilageDto: any) {

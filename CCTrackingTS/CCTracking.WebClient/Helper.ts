@@ -393,6 +393,15 @@ export function PrintDocument()
 {
     appInstance.vent.trigger("Event-PrintDocument");
 }
+export function PrintReport(itemList, headerList, reportTitle,reportName) {
+    //todo: replace with above method once dev done;
+    //appInstance.vent.trigger("Event-PrintDocument");
+    require(['./Print/PrintCtrl'], (p) => {
+        var ctrl = new p.PrintCtrl();
+        appInstance.ModalRegion.show(ctrl.getPrintReportView(itemList, headerList, reportTitle, reportName));
+    });
+}
+
 
 function PrintDocumentHandler()
     {
@@ -402,10 +411,10 @@ function PrintDocumentHandler()
     var close = mode == "popup" && true;
     var extraCss = "";
     keepAttr: ["class", "id", "style", "on"];
-    var headElements = '<meta charset="utf-8" />,<meta http-equiv="X - UA - Compatible" content="IE = edge"/>'
-
+        var headElements = '<meta charset="utf-8" />,<meta http-equiv="X - UA - Compatible" content="IE = edge"/>';
         var options = { mode: mode, popClose: close, extraCss: extraCss, retainAttr: keepAttr, extraHead: headElements };
 
     $(print)["printArea"](options);
 }
+
 

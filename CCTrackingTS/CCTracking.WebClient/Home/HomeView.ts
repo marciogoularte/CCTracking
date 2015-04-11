@@ -11,6 +11,7 @@ var _ = require('underscore');
 var jsPDF = require('jsPDF');
 import helper = require("../Helper");
 import homeCtrl = require("./HomeCtrl");
+import printCtrl = require("../Print/PrintCtrl");
 var templateView = require("text!./Home.html");
 import application = require("../App");
 var app;
@@ -101,7 +102,8 @@ export class SearchCollectionView extends helper.Views.CompositeView {
         this.itemViewContainer = "#tblSearch tbody";
         this.events = {
             "click .jsSearch": "Search",
-            "click .jsCancel": "Cancel"
+            "click .jsCancel": "Cancel",
+            "click .jsPrintDocument": "PrintDoc"
         }
         this.templateHelpers = {
             getTotalAmount: () => {
@@ -111,7 +113,11 @@ export class SearchCollectionView extends helper.Views.CompositeView {
         super(options);
     }
 
-  
+    PrintDoc() {
+        //helper.PrintDocumentNew();
+        this.trigger("Event:PrintReport");
+    }
+
 
     Search(e) {
         e.preventDefault();

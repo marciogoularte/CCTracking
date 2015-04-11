@@ -260,6 +260,7 @@ declare module Marionette {
         constructor(options?: any);
 
         itemView: any;
+        itemViewOptions:any;
         itemViewContainer: string;
         template: any;
         render(): CompositeView;

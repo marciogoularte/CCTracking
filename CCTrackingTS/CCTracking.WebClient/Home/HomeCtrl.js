@@ -62,6 +62,7 @@ define(["require", "exports", "../App", "../Helper", "./HomeView", "../Dtos/Home
         };
 
         HomeCtrl.prototype.GetByCriteriaCompleted = function (bookingSummaryDto) {
+            var _this = this;
             //TODO:Hack - need rework
             var result = bookingSummaryDto["bookingSummaryList"];
             var summary = [];
@@ -91,9 +92,25 @@ define(["require", "exports", "../App", "../Helper", "./HomeView", "../Dtos/Home
                 "totalReceivables": helper.FormatMoney(sumReceivables)
             });
             this.collectionView = new views.SearchCollectionView({ collection: new Backbone.Collection(summary), model: compositeModel });
+            this.collectionView.on("Event:PrintReport", function (p) {
+                //helper.PrintReport(this.GetHeaderList());
+                helper.PrintReport(new Backbone.Collection(summary), _this.GetHeaderList(), "Centre Specific Summary Report", "Dashboard");
+            });
             this.app.SubRegion.reset();
             this.app.SubRegion.show(this.collectionView);
             //this.backboneCollection.reset(summary);
+        };
+
+        HomeCtrl.prototype.GetHeaderList = function () {
+            var headerList = new Backbone.Collection([
+                { columnHeader: "Centre Name" },
+                { columnHeader: "Booking Amount" },
+                { columnHeader: "Maintenance" },
+                { columnHeader: "Booking Milage" },
+                { columnHeader: "Bookings" },
+                { columnHeader: "Receivables" }
+            ]);
+            return headerList;
         };
 
         HomeCtrl.prototype.ShowChart = function (summaryData) {

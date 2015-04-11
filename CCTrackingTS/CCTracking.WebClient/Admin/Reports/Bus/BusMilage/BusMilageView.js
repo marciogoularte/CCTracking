@@ -47,13 +47,14 @@ define(["require", "exports", "../../../../Helper", "marionette", "jquery", "jqu
     var BusMilageCollectionView = (function (_super) {
         __extends(BusMilageCollectionView, _super);
         function BusMilageCollectionView(options) {
+            var _this = this;
             options.itemView = BusMilageItemView;
             options.template = templateView.getOuterHTML("#gridTemplate");
             options.itemViewContainer = "#tblSearch tbody";
             this.events = {
                 "click .jsSearch": "Search",
                 "click .jsPrintDocument": function () {
-                    helper.PrintDocument();
+                    _this.trigger("Event:PrintReport");
                     //this.close();
                 },
                 "click .jsCancel": "Cancel"

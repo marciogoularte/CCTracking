@@ -52,10 +52,15 @@ define(["require", "exports", "../../Helper", "marionette", "jquery", "jqueryUI"
             options.itemViewContainer = "#tblSearch tbody";
             this.events = {
                 "click .jsSearch": "Search",
-                "click .jsCancel": "Cancel"
+                "click .jsCancel": "Cancel",
+                "click .jsPrintDocument": "PrintDocument"
             };
             _super.call(this, options);
         }
+        SearchCollectionView.prototype.PrintDocument = function () {
+            this.trigger("Event:PrintReport");
+        };
+
         SearchCollectionView.prototype.Search = function (e) {
             e.preventDefault();
             this.trigger("AdminSearchBooking");

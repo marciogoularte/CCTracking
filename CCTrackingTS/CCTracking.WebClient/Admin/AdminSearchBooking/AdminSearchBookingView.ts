@@ -42,10 +42,16 @@ export class SearchCollectionView extends helper.Views.CompositeView {
         options.itemViewContainer = "#tblSearch tbody";
         this.events = {
             "click .jsSearch": "Search",
-            "click .jsCancel": "Cancel"
+            "click .jsCancel": "Cancel",
+            "click .jsPrintDocument": "PrintDocument"
         }
         super(options);
     }
+
+    PrintDocument() {
+        this.trigger("Event:PrintReport");
+    }
+
     Search(e) {
         e.preventDefault();
         this.trigger("AdminSearchBooking");

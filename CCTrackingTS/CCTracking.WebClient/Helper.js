@@ -396,6 +396,15 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
         appInstance.vent.trigger("Event-PrintDocument");
     }
     exports.PrintDocument = PrintDocument;
+    function PrintReport(itemList, headerList, reportTitle, reportName) {
+        //todo: replace with above method once dev done;
+        //appInstance.vent.trigger("Event-PrintDocument");
+        require(['./Print/PrintCtrl'], function (p) {
+            var ctrl = new p.PrintCtrl();
+            appInstance.ModalRegion.show(ctrl.getPrintReportView(itemList, headerList, reportTitle, reportName));
+        });
+    }
+    exports.PrintReport = PrintReport;
 
     function PrintDocumentHandler() {
         var keepAttr = [];
@@ -406,7 +415,6 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
         keepAttr:
         ["class", "id", "style", "on"];
         var headElements = '<meta charset="utf-8" />,<meta http-equiv="X - UA - Compatible" content="IE = edge"/>';
-
         var options = { mode: mode, popClose: close, extraCss: extraCss, retainAttr: keepAttr, extraHead: headElements };
 
         $(print)["printArea"](options);

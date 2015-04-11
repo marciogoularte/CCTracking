@@ -43,7 +43,7 @@ export class BusMilageCollectionView extends helper.Views.CompositeView {
         this.events = {
             "click .jsSearch": "Search",
             "click .jsPrintDocument": () => {
-                helper.PrintDocument();
+                this.trigger("Event:PrintReport");
                 //this.close();
             },
             "click .jsCancel": "Cancel"

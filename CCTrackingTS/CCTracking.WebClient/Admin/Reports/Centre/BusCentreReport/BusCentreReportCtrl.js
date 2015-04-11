@@ -50,6 +50,9 @@ define(["require", "exports", "../../../../App", "../../../../Helper", "./BusCen
             this.collectionView.listenTo(this.collectionView, "BusCentreReport", function () {
                 return _this.GetByCriteria(_this.searchViewModel.bbModel);
             });
+            this.collectionView.listenTo(this.collectionView, "Event:PrintReport", function (p) {
+                helper.PrintReport(_this.backboneCollection, _this.GetHeaderList(), "Centre Specific Bus Details", "Mileage");
+            });
             this.collectionView.listenTo(this.collectionView, "itemview:BusVisitDetails", function (view, id) {
                 _this.ShowBusVisitDetails(id, model);
             });
@@ -78,6 +81,18 @@ define(["require", "exports", "../../../../App", "../../../../Helper", "./BusCen
             deferred.done(function (p) {
                 return _this.GetByCriteriaCompleted(p);
             });
+        };
+
+        BusCentreReportCtrl.prototype.GetHeaderList = function () {
+            var headerList = new Backbone.Collection([
+                { columnHeader: "Centre Name" },
+                { columnHeader: "Bus No" },
+                { columnHeader: "Booking Amount" },
+                { columnHeader: "Booking Milage" },
+                { columnHeader: "Bookings" },
+                { columnHeader: "Receivables" }
+            ]);
+            return headerList;
         };
 
         BusCentreReportCtrl.prototype.ShowBusVisitDetails = function (id, searchModel) {

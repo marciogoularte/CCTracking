@@ -50,8 +50,11 @@ export class AdminSearchBookingCtrl extends helper.Controller {
         model.set("toBookingDate", helper.FormatDateString(Date.now()));
         this.compositeModel = model;
 
-       this.collectionView.listenTo(this.collectionView, "AdminSearchBooking", () => this.GetByCriteria(this.searchViewModel.bbModel));
-       this.collectionView.listenTo(this.collectionView, "itemview:CentreBusSummary", (view, id) => { this.ShowCentreBusSummary(id,model); });
+        this.collectionView.listenTo(this.collectionView, "AdminSearchBooking", () => this.GetByCriteria(this.searchViewModel.bbModel));
+        this.collectionView.listenTo(this.collectionView, "Event:PrintReport", (p) => {
+            helper.PrintReport(this.backboneCollection, this.GetHeaderList(), "Centre Specific Summary Report","Booking");
+        });
+        this.collectionView.listenTo(this.collectionView, "itemview:CentreBusSummary", (view, id) => { this.ShowCentreBusSummary(id,model); });
 
         this.collectionView.on("CancelForm", () => this.Cancel());
         this.app.MainRegion.show(this.collectionView);
@@ -68,6 +71,18 @@ export class AdminSearchBookingCtrl extends helper.Controller {
         ko.applyBindings(vm, toBookingDate);
 
     }
+
+    GetHeaderList() {
+        var headerList = new Backbone.Collection([
+            { columnHeader: "Centre Name" },
+            { columnHeader: "Booking Amount" },
+            { columnHeader: "Booking Mileage" },
+            { columnHeader: "Bookings" },
+            { columnHeader: "Receivables" }
+        ]);
+        return headerList;
+    }
+
     ShowCentreBusSummary(id, searchModel) {
         //alert(searchModel.get("fromBookingDate"));
         var dto = new reportDto.Models.ReportDto(); //set object with parameters

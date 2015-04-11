@@ -45,6 +45,9 @@ define(["require", "exports", "../../App", "../../Helper", "./AdminSearchBooking
             this.collectionView.listenTo(this.collectionView, "AdminSearchBooking", function () {
                 return _this.GetByCriteria(_this.searchViewModel.bbModel);
             });
+            this.collectionView.listenTo(this.collectionView, "Event:PrintReport", function (p) {
+                helper.PrintReport(_this.backboneCollection, _this.GetHeaderList(), "Centre Specific Summary Report", "Booking");
+            });
             this.collectionView.listenTo(this.collectionView, "itemview:CentreBusSummary", function (view, id) {
                 _this.ShowCentreBusSummary(id, model);
             });
@@ -64,6 +67,18 @@ define(["require", "exports", "../../App", "../../Helper", "./AdminSearchBooking
             ko.cleanNode(toBookingDate);
             ko.applyBindings(vm, toBookingDate);
         };
+
+        AdminSearchBookingCtrl.prototype.GetHeaderList = function () {
+            var headerList = new Backbone.Collection([
+                { columnHeader: "Centre Name" },
+                { columnHeader: "Booking Amount" },
+                { columnHeader: "Booking Mileage" },
+                { columnHeader: "Bookings" },
+                { columnHeader: "Receivables" }
+            ]);
+            return headerList;
+        };
+
         AdminSearchBookingCtrl.prototype.ShowCentreBusSummary = function (id, searchModel) {
             //alert(searchModel.get("fromBookingDate"));
             var dto = new reportDto.Models.ReportDto();

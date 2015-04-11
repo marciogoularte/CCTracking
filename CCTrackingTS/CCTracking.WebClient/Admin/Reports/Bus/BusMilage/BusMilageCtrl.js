@@ -66,6 +66,9 @@ define(["require", "exports", "../../../../App", "../../../../Helper", "./BusMil
             this.collectionView.listenTo(this.collectionView, "BusMilage", function () {
                 return _this.BusMilage(model);
             });
+            this.collectionView.on("Event:PrintReport", function () {
+                helper.PrintReport(_this.backboneCollection, _this.GetHeaderList(), "Bus Milage Report", "BusVisit");
+            });
             this.app.MainRegion.show(this.collectionView);
 
             var currentView = this.collectionView.$el;
@@ -87,6 +90,22 @@ define(["require", "exports", "../../../../App", "../../../../Helper", "./BusMil
             if (busMilageDto != undefined) {
                 this.BusMilage(busMilageDto);
             }
+        };
+
+        BusMilageCtrl.prototype.GetHeaderList = function () {
+            var headerList = new Backbone.Collection([
+                { columnHeader: "Bus No" },
+                { columnHeader: "Visit Date" },
+                { columnHeader: "Visit Type" },
+                { columnHeader: "Amount" },
+                { columnHeader: "Mileage" },
+                { columnHeader: "Out Time" },
+                { columnHeader: "In Time" },
+                { columnHeader: "Time Taken" },
+                { columnHeader: "Driver" },
+                { columnHeader: "Booking Centre" }
+            ]);
+            return headerList;
         };
 
         BusMilageCtrl.prototype.BusMilage = function (busMilageDto) {
