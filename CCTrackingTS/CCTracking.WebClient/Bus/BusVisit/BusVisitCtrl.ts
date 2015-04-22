@@ -84,9 +84,9 @@ export class BusVisitCtrl extends helper.Controller {
 
     GetAllCompleted(model: dto.Models.BusVisitDto) {
         var busVisits = _.map(model["busVisitList"], (item) => {
-            item.visitDate = helper.FormatDateString(item.visitDate);
+            item.visitDate = helper.FormatDateTimeString(item.visitDate);
             if (item.returnDate != undefined)
-                item.returnDate = helper.FormatDateString(item.returnDate);
+                item.returnDate = helper.FormatDateTimeString(item.returnDate);
             return item;
         });
 

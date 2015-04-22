@@ -340,6 +340,10 @@ function RemoveItem() {
 export function FormatDateString(aDate) {
     return new Date(aDate).toLocaleDateString();
 }
+export function FormatDateTimeString(aDate) {
+    aDate = aDate.replace(/T/g, ' ')
+    return new Date(aDate).toLocaleDateString() + ' ' + new Date(aDate).toLocaleTimeString();
+}
 export function GetParameterByName(paramName, locationHref) {
     paramName = paramName.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + paramName + "=([^&#]*)"),

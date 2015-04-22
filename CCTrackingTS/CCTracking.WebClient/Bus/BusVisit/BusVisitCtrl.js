@@ -85,9 +85,9 @@ define(["require", "exports", "../../App", "../../Helper", "./BusVisitView", "..
         BusVisitCtrl.prototype.GetAllCompleted = function (model) {
             var _this = this;
             var busVisits = _.map(model["busVisitList"], function (item) {
-                item.visitDate = helper.FormatDateString(item.visitDate);
+                item.visitDate = helper.FormatDateTimeString(item.visitDate);
                 if (item.returnDate != undefined)
-                    item.returnDate = helper.FormatDateString(item.returnDate);
+                    item.returnDate = helper.FormatDateTimeString(item.returnDate);
                 return item;
             });
 

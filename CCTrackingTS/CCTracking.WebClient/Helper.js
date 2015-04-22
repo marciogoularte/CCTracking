@@ -346,6 +346,11 @@ define(["require", "exports", "./App", "underscore", "jquery", "knockout", "knoc
         return new Date(aDate).toLocaleDateString();
     }
     exports.FormatDateString = FormatDateString;
+    function FormatDateTimeString(aDate) {
+        aDate = aDate.replace(/T/g, ' ');
+        return new Date(aDate).toLocaleDateString() + ' ' + new Date(aDate).toLocaleTimeString();
+    }
+    exports.FormatDateTimeString = FormatDateTimeString;
     function GetParameterByName(paramName, locationHref) {
         paramName = paramName.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
         var regex = new RegExp("[\\?&]" + paramName + "=([^&#]*)"), results = regex.exec(locationHref);
