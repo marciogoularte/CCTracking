@@ -4,6 +4,7 @@ require.config({
     enforceDefine: false,
     //By default load  any module IDs from js/lib
     baseUrl: './',
+    waitSeconds: 0,
     //urlArgs: "bust=" + "V3",
     // If no baseUrl is explicitly set in the configuration, the default value
     // will be the location of the HTML page that loads require.js.
