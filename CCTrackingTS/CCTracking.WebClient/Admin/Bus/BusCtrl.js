@@ -116,12 +116,12 @@ define(["require", "exports", "../../App", "../../Helper", "./BusView", "../../D
 
         BusCtrl.prototype.Save = function (bus) {
             var _this = this;
-            //debugger;
             var appObj = this.app.request("AppGlobalSetting");
             bus.set("modifiedBy", appObj.get("Id"));
             bus.set("centreId", bus.get("alkhidmatCentreSelected").id);
             bus.set("modelNo", bus.get("busModelSelected").id);
             bus.set("isActive", bus.get("isActive") == "1" ? true : false);
+
             var deferred = DAL.Save(this.GetMinimalRequest(bus));
             deferred.done(function (p) {
                 return _this.SaveCompleted(p);
@@ -131,7 +131,7 @@ define(["require", "exports", "../../App", "../../Helper", "./BusView", "../../D
         BusCtrl.prototype.GetMinimalRequest = function (model) {
             var request = new dto.Models.BusDto();
             request.set("id", model.get("id"));
-            request.set("stationId", model.get("stationId"));
+            request.set("centreId", model.get("centreId"));
             request.set("trackingDeviceId", model.get("trackingDeviceId"));
             request.set("vehicleNo", model.get("vehicleNo"));
             request.set("alkhidmatBusNo", model.get("alkhidmatBusNo"));

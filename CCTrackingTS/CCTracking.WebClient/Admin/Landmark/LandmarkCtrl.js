@@ -123,7 +123,7 @@ define(["require", "exports", "../../App", "../../Helper", "./LandmarkView", "..
         LandmarkCtrl.prototype.GetMinimalRequest = function (model) {
             var request = new dto.Models.LandmarkDto();
             request.set("id", model.get("id"));
-            request.set("UcId", model.get("UcId"));
+            request.set("ucId", model.get("ucId"));
             request.set("name", model.get("name"));
             request.set("isActive", model.get("isActive"));
             request.set("createdBy", model.get("createdBy"));

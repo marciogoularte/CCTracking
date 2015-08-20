@@ -11,7 +11,7 @@ using System.Web.Http;
 
 namespace CCTracking.Api.Controllers
 {
-    [BasicHttpAuthorize]
+    //[BasicHttpAuthorize]
     public class BookingController : ApiController
     {       
         static int rowCounter = 1;
