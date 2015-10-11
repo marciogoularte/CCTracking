@@ -17,7 +17,7 @@ require.config({
         // JavaScript folders
         // Libraries
         jquery: "Scripts/jquery-2.1.1.min",
-        jqueryUI: "Scripts/jquery-ui",
+        jqueryUI: "Scripts/jquery-ui.min",
         underscore: "Scripts/underscore-min",
         backbone: "Scripts/backbone.min",
         //router: "Vendor/gladstone/backbonerouter",
@@ -40,9 +40,9 @@ require.config({
         //knockoutJqueryuiUtils: 'Scripts/KnockoutJqueryUI/utils',
         //knockoutJqueryuiHandler: 'Scripts/KnockoutJqueryUI/bindingHandler',z
         knockoutJqueryuiDatepicker: 'Scripts/KnockoutJqueryUI/datepicker',
-        highcharts: 'Scripts/HighCharts/highcharts',
-        highcharts3d: 'Scripts/HighCharts/highcharts-3d',
-        highchartsExport: 'Scripts/HighCharts/exporting',
+        highcharts: 'Scripts/HighCharts/highcharts.min',
+        highcharts3d: 'Scripts/HighCharts/highcharts-3d.min',
+        highchartsExport: 'Scripts/HighCharts/exporting.min',
         jsPDF: 'Scripts/JSPdf/jspdf.min',
         accounting: 'Scripts/AccountingJS/accounting.min',
         selectize: 'Scripts/Selectize/selectize.min',

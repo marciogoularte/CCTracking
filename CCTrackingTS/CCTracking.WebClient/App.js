@@ -64,8 +64,8 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
         Application.prototype.initializeAfter = function () {
             //console.log('Initalize after called..');
             this.ContainerRegion.reset();
-            this.initalizeLocalStorage();
 
+            //this.initalizeLocalStorage();
             //var loginView = new login.LoginItemView();
             var layout = this.AppLayout;
 
@@ -73,9 +73,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
 
             //var loginCtrl = new loginController.LoginCtrl();
             //loginCtrl.Load();
-            require(['./Login/LoginCtrl'], function (p) {
-                new p.LoginCtrl().Load();
-            });
+            this.initalizeLocalStorage();
             //this.applyRouting(this,layout);
         };
 
@@ -713,6 +711,26 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
         };
 
         Application.prototype.initalizeLocalStorage = function () {
+            var deferred = $.Deferred();
+            if (localStorage.getItem('lookupResponse') == null || localStorage.getItem('lookupResponse') == "undefined") {
+                require(['./DAL/Lookup'], function (p) {
+                    deferred = p.Load();
+                    deferred.done(function (p) {
+                        localStorage.setItem('lookupResponse', JSON.stringify(p));
+                        require(['./Login/LoginCtrl'], function (p) {
+                            new p.LoginCtrl().Load();
+                        });
+                    });
+                    return deferred;
+                });
+            } else {
+                require(['./Login/LoginCtrl'], function (p) {
+                    new p.LoginCtrl().Load();
+                });
+            }
+        };
+
+        Application.prototype.initalizeLocalStorage1 = function () {
             if (localStorage.getItem('lookupResponse') != null) {
                 localStorage.removeItem('lookupResponse');
             }
@@ -723,6 +741,7 @@ define(["require", "exports", "./ModalHelper", "marionette", "datatablesBootstra
                 });
             });
         };
+
         Application.getInstance = function () {
             if (Application._instance === null) {
                 //alert("new instance");

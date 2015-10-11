@@ -22,6 +22,7 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
             //alert(this.ajaxRequest.getResponse());
             var webApiUrl = '/CCTracking.Api/api/' + actionUrl;
 
+            //var webApiUrl = '/CCTracking/Api/api/' + actionUrl;
             var deferred = $.Deferred();
             var postData = null;
             if (request != null) {
@@ -42,10 +43,14 @@ define(["require", "exports", "jquery", "backbone"], function(require, exports) 
                     response = loginResponse;
                 }
                 deferred.resolve(response);
-            }).fail(function (e) {
-                var response = _this.ajaxRequest.getResponse();
-                response.AuthenticationErrorMessage = e.responseText.toString();
-                deferred.resolve(response);
+            }).fail(function (xhr, status, error) {
+                if (status === "timeout" || status === "error") {
+                    alert("Server is not responding at the moment, please contact your administrator");
+                } else {
+                    var response = _this.ajaxRequest.getResponse();
+                    response.AuthenticationErrorMessage = error.responseText.toString();
+                    deferred.resolve(response);
+                }
             });
             return deferred.promise();
         };

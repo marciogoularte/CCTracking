@@ -1,4 +1,45 @@
-﻿/// <reference path="../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../Scripts/typings/backbone/backbone.d.ts" />
+/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+/// <amd-dependency path="backbone"/>
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+define(["require", "exports", "backbone"], function(require, exports) {
+    (function (Models) {
+        var LoginDto = (function (_super) {
+            __extends(LoginDto, _super);
+            function LoginDto() {
+                _super.apply(this, arguments);
+            }
+            LoginDto.prototype.default = function () {
+                return {
+                    id: "",
+                    firstName: "",
+                    lastName: "",
+                    email: "",
+                    mobile: "",
+                    nic: "",
+                    userName: "",
+                    password: "",
+                    resetPassword: "",
+                    isAdmin: false,
+                    authenticationToken: "",
+                    errorMessage: ""
+                };
+            };
+            return LoginDto;
+        })(Backbone.Model);
+        Models.LoginDto = LoginDto;
+    })(exports.Models || (exports.Models = {}));
+    var Models = exports.Models;
+});
+//# sourceMappingURL=LoginDto.js.map
+
+/// <reference path="../../Scripts/typings/require/require.d.ts" />
 /// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -6,7 +47,91 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../App", "../Helper", "../Dtos/AppObjectDto", "../DAL/AjaxRequest", "marionette", "jquery", "knockout", "text!./Login.html"], function(require, exports, application, helper, appObjectDto, baseDAL) {
+define(["require", "exports", "CCTracking.WebClient/DAL/AjaxRequest", "CCTracking.WebClient/Dtos/LoginDto"], function(require, exports, baseDAL, loginDto) {
+    var LoginDal = (function (_super) {
+        __extends(LoginDal, _super);
+        function LoginDal() {
+            _super.call(this, this);
+        }
+        LoginDal.prototype.getResponse = function () {
+            return new loginDto.Models.LoginDto();
+        };
+        return LoginDal;
+    })(baseDAL.BaseDto);
+    exports.LoginDal = LoginDal;
+
+    function Login(loginDto) {
+        var o = new LoginDal();
+        return o.doAjaxRequest(loginDto, "POST", "Login");
+    }
+    exports.Login = Login;
+
+    function ChangePasswrd(loginDto) {
+        var o = new LoginDal();
+        return o.doAjaxRequest(loginDto, "POST", "ChangePassword");
+    }
+    exports.ChangePasswrd = ChangePasswrd;
+});
+//# sourceMappingURL=Login.js.map
+
+/// <reference path="../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+define(["require", "exports", "../Helper", "../App", "marionette", "jquery", "knockout", "text!./Login.html"], function(require, exports, helper, APP) {
+    /// <amd-dependency path="marionette"/>
+    /// <amd-dependency path="jquery"/>
+    /// <amd-dependency path="knockout"/>
+    /// <amd-dependency path="text!./Login.html"/>
+    var _ = require('underscore');
+
+    var templateView = require("text!./Login.html");
+
+    // View Model
+    var LoginViewModel = (function (_super) {
+        __extends(LoginViewModel, _super);
+        function LoginViewModel(model, controller) {
+            _super.call(this, model, controller);
+        }
+        return LoginViewModel;
+    })(helper.ViewModel);
+    exports.LoginViewModel = LoginViewModel;
+
+    var LoginView = (function (_super) {
+        __extends(LoginView, _super);
+        function LoginView(options) {
+            this.template = templateView;
+            this.events = {
+                "submit": "Login"
+            };
+            this.App = APP.Application.getInstance();
+
+            //this.App.vent.on("LoginCallback", this.Authenticated1);
+            //this.App.reqres.setHandler("AppGlobalSetting", this.ConfigureGlobalSetting);
+            _super.call(this, options);
+        }
+        LoginView.prototype.Login = function (e) {
+            e.preventDefault();
+            this.trigger("LoginUser");
+        };
+        return LoginView;
+    })(helper.Views.MvvmView);
+    exports.LoginView = LoginView;
+});
+
+/// <reference path="../../Scripts/typings/require/require.d.ts" />
+/// <reference path="../../Scripts/typings/marionette/marionette.d.ts" />
+var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+define(["require", "exports", "../App", "../Helper", "../Common/Views/HeaderView", "../Dtos/AppObjectDto", "../DAL/AjaxRequest", "marionette", "jquery", "knockout", "text!./Login.html"], function(require, exports, application, helper, menu, appObjectDto, baseDAL) {
     /// <amd-dependency path="marionette"/>
     /// <amd-dependency path="jquery"/>
     /// <amd-dependency path="knockout"/>
@@ -54,7 +179,6 @@ define(["require", "exports", "../App", "../Helper", "../Dtos/AppObjectDto", "..
 
         //TODO: this method should be inside controller
         LoginCtrl.prototype.Authenticated = function (loginDto) {
-            var _this = this;
             //console.log(loginResponse);
             var lblLoginMessage = $("#lblLoginMessage");
             if (loginDto == undefined) {
@@ -83,27 +207,26 @@ define(["require", "exports", "../App", "../Helper", "../Dtos/AppObjectDto", "..
                 var appObj = this.app.request("AppGlobalSetting");
                 var headerModel = new Backbone.Model({ firstName: appObj.get("FirstName"), lastName: appObj.get("LastName"), userName: appObj.get("UserName") });
 
-                require(["../Common/Views/HeaderView"], function (p) {
-                    var headerView = new p.HeaderItemView({
-                        model: headerModel
-                    });
-                    _this.app.HeaderRegion.show(headerView);
+                var headerView = new menu.HeaderItemView({
+                    model: headerModel
                 });
+
+                this.app.HeaderRegion.show(headerView);
 
                 //if (loginDto["isAdmin"]) {
                 //    //admin view
                 //    this.app.AdminLeftRegion.show(new adminLeft.AdminLeftItemView());
                 //}
                 //new bookingLeftCtrl.BookingLeftCtrl().Show();
-                require(['../Bus/BusAvailabilityCtrl'], function (p) {
-                    new p.BusAvailabilityCtrl().Show();
-                });
+                require(["../Bus/BusAvailabilityCtrl"], (function (p) {
+                    p.BusAvailabilityCtrl().Show();
+                }));
 
                 //new busAvailabilityCtrl.BusAvailabilityCtrl().Show();
                 if (appObj.get("IsAdmin")) {
-                    require(["../Home/HomeCtrl"], function (p) {
-                        new p.HomeCtrl().Show();
-                    });
+                    require(["../Home/HomeCtrl"], (function (p) {
+                        p.HomeCtrl().Show();
+                    }));
 
                     //var home = new homeCtrl.HomeCtrl();
                     //home.Show();

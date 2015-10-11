@@ -114,7 +114,6 @@ define(["require", "exports", "../../App", "../../Helper", "./DriverView", "../.
 
         DriverCtrl.prototype.Save = function (driver) {
             var _this = this;
-            //debugger;
             var appObj = this.app.request("AppGlobalSetting");
             driver.set("modifiedBy", appObj.get("Id"));
             driver.set("centreId", driver.get("alkhidmatCentreSelected").id);
@@ -128,7 +127,7 @@ define(["require", "exports", "../../App", "../../Helper", "./DriverView", "../.
         DriverCtrl.prototype.GetMinimalRequest = function (model) {
             var request = new dto.Models.DriverDto();
             request.set("id", model.get("id"));
-            request.set("stationId", model.get("stationId"));
+            request.set("centreId", model.get("centreId"));
             request.set("firstName", model.get("firstName"));
             request.set("lastName", model.get("lastName"));
             request.set("cnic", model.get("cnic"));

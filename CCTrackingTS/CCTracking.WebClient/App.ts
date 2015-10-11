@@ -80,7 +80,7 @@ export class Application extends Marionette.Application {
     initializeAfter() {
         //console.log('Initalize after called..');
         this.ContainerRegion.reset();
-        this.initalizeLocalStorage();
+        //this.initalizeLocalStorage();
         //var loginView = new login.LoginItemView();
 
         var layout = this.AppLayout;
@@ -88,8 +88,9 @@ export class Application extends Marionette.Application {
         this.ContainerRegion.show(layout);
         //var loginCtrl = new loginController.LoginCtrl();
         //loginCtrl.Load();
-        require(['./Login/LoginCtrl'], (p) => { new p.LoginCtrl().Load(); });
 
+
+        this.initalizeLocalStorage();
 
 
         //this.applyRouting(this,layout);
@@ -564,6 +565,23 @@ export class Application extends Marionette.Application {
     }
 
     initalizeLocalStorage() {
+        var deferred = $.Deferred();
+        if (localStorage.getItem('lookupResponse') == null || localStorage.getItem('lookupResponse') == "undefined") {
+            require(['./DAL/Lookup'], (p) => {
+                deferred = p.Load();
+                deferred.done(p => {
+                        localStorage.setItem('lookupResponse', JSON.stringify(p));
+                        require(['./Login/LoginCtrl'], (p) => { new p.LoginCtrl().Load(); });
+                    }
+                );
+                return deferred;
+            });
+        } else {
+            require(['./Login/LoginCtrl'], (p) => { new p.LoginCtrl().Load(); });
+        }
+    }
+
+    initalizeLocalStorage1() {
         if (localStorage.getItem('lookupResponse') != null) {
             localStorage.removeItem('lookupResponse');
         }
@@ -575,6 +593,7 @@ export class Application extends Marionette.Application {
                 );
         });
     }
+
     public static getInstance(): Application {
 
         if (Application._instance === null) {

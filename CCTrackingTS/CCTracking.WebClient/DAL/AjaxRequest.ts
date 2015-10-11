@@ -15,8 +15,9 @@ export class BaseDto extends Backbone.Model {
     doAjaxRequest(request: any, requestType: string, actionUrl: string) {
         //alert(this.ajaxRequest.getResponse());        
         var webApiUrl = '/CCTracking.Api/api/' + actionUrl;
+        //var webApiUrl = '/CCTracking/Api/api/' + actionUrl;
 
-        var deferred =$.Deferred();
+        var deferred = $.Deferred();
         var postData = null;
         if (request != null) {
             postData = request.toJSON();
@@ -28,7 +29,7 @@ export class BaseDto extends Backbone.Model {
             //data: { userName: loginRequest.get("userName"), password: loginRequest.get("password") }
             data: postData
         })
-            .done(loginResponse=> {                
+            .done(loginResponse=> {
                 var response = loginResponse;
                 if (loginResponse == undefined) {
                     deferred.resolve(null);
@@ -39,10 +40,15 @@ export class BaseDto extends Backbone.Model {
                 }
                 deferred.resolve(response);
             })
-            .fail(e=> {
-                var response = this.ajaxRequest.getResponse();
-                response.AuthenticationErrorMessage = e.responseText.toString();                
-                deferred.resolve(response);
+            .fail((xhr, status, error) => {
+                if (status === "timeout" || status === "error") {
+                    alert("Server is not responding at the moment, please contact your administrator");
+                } else {
+                    var response = this.ajaxRequest.getResponse();
+                    response.AuthenticationErrorMessage = error.responseText.toString();
+                    deferred.resolve(response);
+                }
+
             });
         return deferred.promise();
     }

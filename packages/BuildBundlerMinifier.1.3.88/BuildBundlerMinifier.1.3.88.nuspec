@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>BuildBundlerMinifier</id>
+    <version>1.3.88</version>
+    <title>Bundler &amp; Minifier</title>
+    <authors>Mads Kristensen</authors>
+    <owners>Mads Kristensen</owners>
+    <projectUrl>https://github.com/madskristensen/BundlerMinifier</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Bundles and minifies CSS, JS and HTML files</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>concat bundle minify minification css js html</tags>
+  </metadata>
+</package>

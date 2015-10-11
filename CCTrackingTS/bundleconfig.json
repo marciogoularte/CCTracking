@@ -1,0 +1,32 @@
+﻿[
+  {
+    "outputFileName": "output/bundle.css",
+    "inputFiles": [
+      "Content/bootstrap.min.css", 
+	  "Content/Themes/slate/bootstrap.min.css",
+	  "Content/font-awesome.min.css",
+	  "Content/App.css",
+	  "Content/jquery-ui.css",
+	  "Content/selectize.bootstrap3.css",
+	  "Content/jquery-PrintArea.css"
+    ],
+    "minify": {
+        "enabled": true,
+        "commentMode": "all"
+    }
+  },
+   {
+    "outputFileName": "output/js/Login/LoginCtrl.js",
+    "inputFiles": [
+      "CCTracking.WebClient/Dtos/LoginDto.js", 	  
+      "CCTracking.WebClient/Dal/Login.js", 	  
+      "CCTracking.WebClient/Login/LoginView.js", 	  
+      "CCTracking.WebClient/Login/LoginCtrl.js"
+    ],
+    "minify": {
+        "enabled": false,
+        "commentMode": "all"
+    }
+  }
+  
+]

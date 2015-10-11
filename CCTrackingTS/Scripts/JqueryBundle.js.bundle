@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bundle minify="true" runOnBuild="true" output="JqueryBundle.js">
+  <!--The order of the <file> elements determines the order of them when bundled.-->
+  <file>/Scripts/jquery-2.1.1.min.js</file>
+  <file>/Scripts/jquery-ui.js</file>
+  <file>/Scripts/jquery.validate.min.js</file>
+  <file>/Scripts/jquery.validate.unobtrusive.min.js</file>
+  <file>/Scripts/jquery.unobtrusive-ajax.min.js</file>
+</bundle>

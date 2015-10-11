@@ -107,7 +107,6 @@ export class DriverCtrl extends helper.Controller {
 
     Save(driver: any) {
 
-        //debugger;
         var appObj = this.app.request("AppGlobalSetting");
         driver.set("modifiedBy", appObj.get("Id"));
         driver.set("centreId", driver.get("alkhidmatCentreSelected").id);
@@ -119,7 +118,7 @@ export class DriverCtrl extends helper.Controller {
     GetMinimalRequest(model) {
         var request = new dto.Models.DriverDto();
         request.set("id", model.get("id"));
-        request.set("stationId", model.get("stationId"));
+        request.set("centreId", model.get("centreId"));
         request.set("firstName", model.get("firstName"));
         request.set("lastName", model.get("lastName"));
         request.set("cnic", model.get("cnic"));
