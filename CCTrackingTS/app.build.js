@@ -1,85 +1,104 @@
-﻿({
-    appDir: "CCTracking.WebClient",
+﻿//confiugration-1 single file for 3rd parties
+//({
+    
+//    baseUrl: "./",
+//    mainConfigFile: "CCTracking.WebClient/Main.js",
+//    name: "CCTracking.WebClient/Main",
+//    out: "Build/app.min.js",
+//    preserveLicenseComments: false,
+//    //optimize: "none",
+//    wrapShim: true,
+//    paths: {
+//        requireLib: "Scripts/require"
+//    },
+//    include: "requireLib"
+
+//})
+
+
+//confiugration-2 multiple modules
+
+({
+
     baseUrl: "./",
-
-    dir: "CCTrackingMinified",
-    paths: {
-        jquery: "../Scripts/jquery-2.1.1.min",
-        jqueryUI: "../Scripts/jquery-ui",
-        underscore: "../Scripts/underscore-min",
-        backbone: "../Scripts/backbone.min",
-        //router: "Vendor/gladstone/backbonerouter",
-        marionette: "../Scripts/backbone.marionette.min",
-        bootstrap: "../Scripts/bootstrap.min",
-        bootstrapPopover: "../Scripts/bootstrap-popover",
-        bootstrapTooltip: "../Scripts/bootstrap-tooltip",
-        //datepicker: "../Scripts/bootstrap-datepicker",
-
-        knockout: "../Scripts/knockout-3.1.0",
-        //knockoutvalidation: "../Scripts/knockout.validation",
-        knockback: "../Scripts/knockback.min",
-        //bindings: "Vendor/Gladstone/KnockoutBindings",
-        // Require plugins
-        text: "../Scripts/text",
-        datatables: "../Scripts/DataTables/jquery.dataTables.min",
-        datatablesBootstrap: "../Scripts/DataTables/dataTables.bootstrap",
-        jqueryValidate: "../Scripts/jquery.validate.min",
-        jqueryUnobtrusive: "../Scripts/jquery.validate.unobtrusive.min",
-        jqueryUnobtrusiveAjax: "../Scripts/jquery.unobtrusive-ajax.min",
-        //knockoutJqueryuiDatepicker: "../Scripts/KnockoutJqueryUI/datepicker",
-        
-        highcharts: "../Scripts/HighCharts/highcharts",
-        highcharts3d: "../Scripts/HighCharts/highcharts-3d",
-        highchartsExport: "../Scripts/HighCharts/exporting",
-        jsPDF: "../Scripts/JSPdf/jspdf.min",
-        accounting: "../Scripts/AccountingJS/accounting.min",
-        selectize: "../Scripts/Selectize/selectize.min",
-        printArea: "../Scripts/PrintArea/jquery.PrintArea",
-
-        //new additions
-        //jqueryUIWidget: "../Scripts/jquery-ui/widget",
-    },
-    modules: [
-    {
-        name: "MainOptimizeConfig",
-        include: [
-            "jquery",
-            "jqueryUI",
-            "underscore",
-            "backbone",
-            "marionette",
-            "bootstrap",
-            "bootstrapPopover",
-            "bootstrapTooltip",
-            "knockout",
-            "knockback",
-            "text",
-            "datatables",
-            "datatablesBootstrap",
-            "jqueryValidate",
-            "jqueryUnobtrusive",
-            "jqueryUnobtrusiveAjax",
-            //"knockoutJqueryuiDatepicker",
-            "highcharts",
-            "highcharts3d",
-            "highchartsExport",
-            "jsPDF",
-            "accounting",
-            "selectize",
-            "printArea",
-
-            //"jqueryUIWidget",
-
-
-
-        ]
-    }],
+    mainConfigFile: "CCTracking.WebClient/Main.js",
+    //name: "CCTracking.WebClient/Main",
+    dir: "Build/app-release",
     preserveLicenseComments: false,
-    optimize: "uglify2",
-    //closure: {
-    //    CompilerOptions: {},
-    //    CompilationLevel: 'SIMPLE_OPTIMIZATIONS',
-    //    loggingLevel: 'WARNING'
+    //optimize: "none",
+    wrapShim: true,
+    //paths: {
+    //    requireLib: "Scripts/require"
     //},
+    //include: "requireLib"
+    modules: [
+        {
+            name: "CCTracking.WebClient/Main",
+            include: [
+                "Scripts/require",
+                //"Scripts/HighCharts/highcharts",
+                //"Scripts/HighCharts/highcharts-3d",
+                //"Scripts/HighCharts/exporting",
+                "CCTracking.WebClient/App",
+                "CCTracking.WebClient/Helper",
+                "CCTracking.WebClient/Login/LoginCtrl"
+            ]
+            
+        },
+        {
+            name: "CCTracking.WebClient/appMain",
+            include: [
+                "CCTracking.WebClient/Home/HomeCtrl",
+                "CCTracking.WebClient/Booking/BookingCtrl",
+                "CCTracking.WebClient/Common/Views/HeaderView",
+                "CCTracking.WebClient/Bus/BusAvailabilityCtrl",
+                "CCTracking.WebClient/DAL/AdminSearch",
+                "CCTracking.WebClient/Booking/BookingLeft/BookingLeftCtrl",
+                "CCTracking.WebClient/Bus/BusVisit/BusVisitCtrl",
+                "CCTracking.WebClient/Search/SearchCtrl",
+                "CCTracking.WebClient/Payment/PaymentCtrl",
+                "CCTracking.WebClient/RefundBooking/RefundBookingCtrl",
+                "CCTracking.WebClient/ExtraCharge/ExtraChargeCtrl",
+                "CCTracking.WebClient/User/UserCtrl",
+                "CCTracking.WebClient/ChangePassword/ChangePasswordCtrl",
+
+            ],
+            exclude: [
+                "CCTracking.WebClient/Main"
+            ]
+
+        },
+        {
+            name: "CCTracking.WebClient/appAdmin",
+            include: [
+              "CCTracking.WebClient/Admin/AlkhidmatCentre/AlkhidmatCentreCtrl",
+              "CCTracking.WebClient/Admin/Bus/BusCtrl",
+              "CCTracking.WebClient/Admin/CauseOfDeath/CauseOfDeathCtrl",
+              "CCTracking.WebClient/Admin/Driver/DriverCtrl",
+              "CCTracking.WebClient/Admin/Graveyard/GraveyardCtrl",
+              "CCTracking.WebClient/Admin/Landmark/LandmarkCtrl",
+              "CCTracking.WebClient/Admin/PaymentType/PaymentTypeCtrl",
+              "CCTracking.WebClient/Admin/RefundType/RefundTypeCtrl",
+              "CCTracking.WebClient/Admin/TrackingDevice/TrackingDeviceCtrl",
+              "CCTracking.WebClient/Admin/VisitType/VisitTypeCtrl",
+              "CCTracking.WebClient/Admin/NearestCentreSetup/NearestCentreSetupCtrl",
+              "CCTracking.WebClient/Admin/AdminSearchBooking/AdminSearchBookingCtrl",
+              "CCTracking.WebClient/Admin/Reports/Centre/BusCentreReport/BusCentreReportCtrl",
+              "CCTracking.WebClient/Admin/Reports/Bus/BusMilage/BusMilageCtrl",
+              "CCTracking.WebClient/Admin/Reports/BusFueling/BusFuelingReportCtrl",
+              "CCTracking.WebClient/Admin/Reports/Driver/DriverSummaryCtrl",
+              "CCTracking.WebClient/Admin/Reports/Audit/Booking/AuditBookingCtrl",
+              "CCTracking.WebClient/Admin/Reports/Audit/BusVisit/AuditBusVisitCtrl",
+              "CCTracking.WebClient/Admin/Reports/Audit/Payment/AuditPaymentCtrl",
+              "CCTracking.WebClient/Admin/Reports/Audit/Refund/AuditRefundBookingCtrl"
+            ],
+            exclude: [
+                "CCTracking.WebClient/Main",
+            ]
+
+        }
+    ]
+    
 
 })
+

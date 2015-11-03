@@ -1,0 +1,40 @@
+﻿<div>
+    <script type="text/html" id="gridTemplate">
+        
+        <div>
+            <button type="button" class="jsPrintReport btn btn-default col-xs-12 col-md-12">Press to Print the Document</button>
+        </div>
+
+        <div class="panel panel-default PrintArea">
+            <div class="panel-heading header-bold">
+                <span class="fa fa-bus"></span>&nbsp;<%=reportTitle%>
+                <!--<span class="pull-right"><a href="#addBooking">Add New</a> </span>-->
+            </div>
+            <div class="panel-body ">
+                <table id="tblPrint" class="table table-condensed table-bordered table-hover table-striped">
+                    <thead>
+                        <tr class="active">
+                            <%_.each(headerList.models,function(item){%>
+                            <th class="input-sm"><%=item.get("columnHeader")%></th>
+                            <%});%>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </script>
+    <script type="text/html" id="headerTemplate">
+        <th class="input-sm"><%=columnHeader%></th>
+    </script>
+    <script type="text/html" id="valueTemplate">
+        <td class="input-sm"><%=columnValue%></td>
+    </script>
+
+    <script type="text/html" id="rowTemplate">       
+        
+    </script>
+
+
+
+</div>

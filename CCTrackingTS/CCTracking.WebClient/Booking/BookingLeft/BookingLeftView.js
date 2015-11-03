@@ -6,14 +6,13 @@
 /// <amd-dependency path="text!CCTracking.WebClient/Common/Templates/BusDetailModalPopup.html"/>
 /// <amd-dependency path="text!CCTracking.WebClient/Common/Templates/ReceiptLayout.html"/>
 /// <amd-dependency path="marionette"/>
-/// <amd-dependency path="jsPDF"/>
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../../App", "../../Helper", "text!CCTracking.WebClient/Booking/BookingLeft/BookingLeftTmpl.html", "text!CCTracking.WebClient/Common/Templates/ModalPopup.html", "text!CCTracking.WebClient/Common/Templates/Progressbar.html", "text!CCTracking.WebClient/Common/Templates/BusDetailModalPopup.html", "text!CCTracking.WebClient/Common/Templates/ReceiptLayout.html", "marionette", "jsPDF"], function(require, exports, APP, helper) {
+define(["require", "exports", "../../App", "../../Helper", "text!CCTracking.WebClient/Booking/BookingLeft/BookingLeftTmpl.html", "text!CCTracking.WebClient/Common/Templates/ModalPopup.html", "text!CCTracking.WebClient/Common/Templates/Progressbar.html", "text!CCTracking.WebClient/Common/Templates/BusDetailModalPopup.html", "text!CCTracking.WebClient/Common/Templates/ReceiptLayout.html", "marionette"], function(require, exports, APP, helper) {
     var _ = require('underscore');
 
     var templateView = require("text!CCTracking.WebClient/Booking/BookingLeft/BookingLeftTmpl.html");
@@ -21,7 +20,7 @@ define(["require", "exports", "../../App", "../../Helper", "text!CCTracking.WebC
     var pbarView = require("text!CCTracking.WebClient/Common/Templates/Progressbar.html");
     var busDeatilView = require("text!CCTracking.WebClient/Common/Templates/BusDetailModalPopup.html");
     var receiptLayoutView = require("text!CCTracking.WebClient/Common/Templates/ReceiptLayout.html");
-    var jsPDF = require('jsPDF');
+
     var app;
 
     // View Model

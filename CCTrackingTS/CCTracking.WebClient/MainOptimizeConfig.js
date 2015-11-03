@@ -18,7 +18,9 @@ require.config({
         jquery: "Scripts/jquery-2.1.1.min",
         jqueryUI: "Scripts/jquery-ui",
         underscore: "Scripts/underscore-min",
-        backbone: "Scripts/backbone.min",
+        //backbone: "Scripts/backbone.min",
+        backbone: "Scripts/backboneamd",
+        //backboneValidation: "Scripts/backbone-validation-amd-min",
         //router: "Vendor/gladstone/backbonerouter",
         marionette: "Scripts/backbone.marionette.min",
         bootstrap: "Scripts/bootstrap.min",
@@ -42,7 +44,6 @@ require.config({
         highcharts: 'Scripts/HighCharts/highcharts',
         highcharts3d: 'Scripts/HighCharts/highcharts-3d',
         highchartsExport: 'Scripts/HighCharts/exporting',
-        jsPDF: 'Scripts/JSPdf/jspdf.min',
         accounting: 'Scripts/AccountingJS/accounting.min',
         selectize: 'Scripts/Selectize/selectize.min',
         printArea: 'Scripts/PrintArea/jquery.PrintArea'
@@ -53,12 +54,16 @@ require.config({
         "underscore": {
             exports: "_"
         },
-        "backbone": {
-            // These script dependencies should be loaded before loading backbone.js
-            deps: ["underscore", "jquery"],
-            // Once loaded, use the global "Backbone" as the module value.
-            exports: "Backbone"
-        },
+        //"backbone": {
+        //    // These script dependencies should be loaded before loading backbone.js
+        //    deps: ["underscore", "jquery"],
+        //    // Once loaded, use the global "Backbone" as the module value.
+        //    exports: "Backbone"
+        //},
+        //'backboneValidation': {
+        //    deps: ['backbone'],
+        //    exports: 'Backbone'
+        //},
         "marionette": {
             deps: ["underscore", "jquery", "backbone"],
             exports: "Marionette"
@@ -99,9 +104,6 @@ require.config({
         "highchartsExport": {
             deps: ["jquery", "highcharts"]
         },
-        "jsPDF": {
-            deps: ["jquery"]
-        },
         "accounting": {
             deps: ["jquery"]
         },
@@ -116,15 +118,14 @@ require.config({
 
 require([
     "jquery",
-    "backbone",
     "underscore",
+    "backbone",
     "marionette",
     "bootstrap",
     "jqueryUI",
     "highcharts",
     "highcharts3d",
     "highchartsExport",
-    "jsPDF",
     "accounting",
     "selectize",
     "printArea"

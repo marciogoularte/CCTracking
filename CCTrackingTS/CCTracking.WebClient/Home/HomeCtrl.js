@@ -10,9 +10,11 @@ var __extends = this.__extends || function (d, b) {
     d.prototype = new __();
 };
 define(["require", "exports", "../App", "../Helper", "./HomeView", "../Dtos/HomeDto", "../DAL/Home", "../DAL/AdminSearch", "marionette", "jquery", "knockout"], function(require, exports, application, helper, views, dto, DAL, AdminDAL) {
+    ///// <amd-dependency path="highcharts"/>
+    ///// <amd-dependency path="highcharts3d"/>
+    ///// <amd-dependency path="highchartsExport"/>
     var _ = require("underscore");
     var ko = require("knockout");
-    var kb = require("knockback");
 
     var HomeCtrl = (function (_super) {
         __extends(HomeCtrl, _super);

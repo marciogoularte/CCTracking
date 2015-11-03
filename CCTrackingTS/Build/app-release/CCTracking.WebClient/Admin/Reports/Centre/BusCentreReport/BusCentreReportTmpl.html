@@ -1,0 +1,72 @@
+﻿<div>
+    <div id="gridTemplate">
+        <div class="panel panel-default">
+            <div class="panel-heading header-bold"><span class="fa fa-line-chart"></span>&nbsp;Centre Specific Bus Details</div>
+            <div class="panel-body">
+                <form id="form1">
+                    <table class="table table-condensed table-hover form-group table-removeTopBorder">
+                       
+                        <tr> 
+                            <td class="col-sm-6 col-md-6">
+                                From Date <input type="text" id="txtFromBookingDate" class="form-control input-sm"  data-bind="datepicker: {}, value: fromBookingDate"/>
+                            </td>
+                            <td class="col-sm-6 col-md-6">
+                               To Date <input type="text" id="txtToBookingDate" class="form-control input-sm"  data-bind="datepicker: {}, value: toBookingDate"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-sm-6 col-md-6">&nbsp;
+                            </td>
+                            <td class="col-sm-6 col-md-6 ">
+                                <span class="pull-right">
+                                    <button type="button" class="jsSearch btn btn-default">Search</button>&nbsp;&nbsp;                                   
+                                    <button type="button" class="jsPrintDocument btn btn-default">Print</button>&nbsp;&nbsp;
+                                    <button type="reset" class="btn btn-default" title="Cancel">Cancel</button>
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <!--<div id="gridTemplate1">-->
+            <div class="panel panel-default">
+                <div class="panel-heading header-bold">
+                    <span class="fa fa-bus"></span>&nbsp;View - Search Details
+                    <!--<span class="pull-right"><a href="#addBooking">Add New</a> </span>-->
+                </div>
+                <div class="panel-body ">
+                    <table id="tblSearch" class="table table-condensed table-bordered table-hover table-striped form-group">
+                        <thead>
+                            <tr class="active">
+                                <th class="input-sm">Centre Name</th>
+                                <th class="input-sm">Bus No</th>
+                                <th class="input-sm">Booking Amount</th>
+                                <th class="input-sm">Booking Milage</th>
+                                <th class="input-sm">Bookings</th>
+                                <th class="input-sm">Receivables</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr class="active">
+                                <td colspan="6">&nbsp;</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+    </div>
+    
+    <script type="text/html" id="rowTemplate">
+        <td class="input-sm"><%=alkhidmatCentre%></td>
+        <td class="jsShowDetail input-sm" style="cursor: hand; cursor: pointer"><%=busNo%></td>
+        <td class="input-sm"><%=bookingAmount%></td>
+        <td class="input-sm"><%=bookingMilage%></td>
+        <td class="input-sm"><%=bookings%></td>
+        <td class="input-sm"><%=receivables%></td>
+
+    </script>
+
+</div>

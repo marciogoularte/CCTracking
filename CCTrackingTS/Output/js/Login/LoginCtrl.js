@@ -131,7 +131,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../App", "../Helper", "../Common/Views/HeaderView", "../Dtos/AppObjectDto", "../DAL/AjaxRequest", "marionette", "jquery", "knockout", "text!./Login.html"], function(require, exports, application, helper, menu, appObjectDto, baseDAL) {
+define(["require", "exports", "../App", "../Helper", "../Dtos/AppObjectDto", "../DAL/AjaxRequest", "marionette", "jquery", "knockout", "text!./Login.html"], function(require, exports, application, helper, appObjectDto, baseDAL) {
     /// <amd-dependency path="marionette"/>
     /// <amd-dependency path="jquery"/>
     /// <amd-dependency path="knockout"/>
@@ -179,6 +179,7 @@ define(["require", "exports", "../App", "../Helper", "../Common/Views/HeaderView
 
         //TODO: this method should be inside controller
         LoginCtrl.prototype.Authenticated = function (loginDto) {
+            var _this = this;
             //console.log(loginResponse);
             var lblLoginMessage = $("#lblLoginMessage");
             if (loginDto == undefined) {
@@ -207,26 +208,27 @@ define(["require", "exports", "../App", "../Helper", "../Common/Views/HeaderView
                 var appObj = this.app.request("AppGlobalSetting");
                 var headerModel = new Backbone.Model({ firstName: appObj.get("FirstName"), lastName: appObj.get("LastName"), userName: appObj.get("UserName") });
 
-                var headerView = new menu.HeaderItemView({
-                    model: headerModel
+                require(["../Common/Views/HeaderView"], function (p) {
+                    var headerView = new p.HeaderItemView({
+                        model: headerModel
+                    });
+                    _this.app.HeaderRegion.show(headerView);
                 });
-
-                this.app.HeaderRegion.show(headerView);
 
                 //if (loginDto["isAdmin"]) {
                 //    //admin view
                 //    this.app.AdminLeftRegion.show(new adminLeft.AdminLeftItemView());
                 //}
                 //new bookingLeftCtrl.BookingLeftCtrl().Show();
-                require(["../Bus/BusAvailabilityCtrl"], (function (p) {
-                    p.BusAvailabilityCtrl().Show();
-                }));
+                require(['../Bus/BusAvailabilityCtrl'], function (p) {
+                    new p.BusAvailabilityCtrl().Show();
+                });
 
                 //new busAvailabilityCtrl.BusAvailabilityCtrl().Show();
                 if (appObj.get("IsAdmin")) {
-                    require(["../Home/HomeCtrl"], (function (p) {
-                        p.HomeCtrl().Show();
-                    }));
+                    require(["../Home/HomeCtrl"], function (p) {
+                        new p.HomeCtrl().Show();
+                    });
 
                     //var home = new homeCtrl.HomeCtrl();
                     //home.Show();

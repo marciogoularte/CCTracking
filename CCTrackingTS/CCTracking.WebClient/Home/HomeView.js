@@ -4,7 +4,6 @@
 /// <amd-dependency path="jquery"/>
 /// <amd-dependency path="jqueryUI"/>
 /// <amd-dependency path="knockout"/>
-/// <amd-dependency path="jsPDF"/>
 /// <amd-dependency path="text!./Home.html"/>
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -12,9 +11,8 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../Helper", "marionette", "jquery", "jqueryUI", "knockout", "jsPDF", "text!./Home.html"], function(require, exports, helper) {
+define(["require", "exports", "../Helper", "marionette", "jquery", "jqueryUI", "knockout", "text!./Home.html"], function(require, exports, helper) {
     var _ = require('underscore');
-    var jsPDF = require('jsPDF');
 
     var templateView = require("text!./Home.html");
 

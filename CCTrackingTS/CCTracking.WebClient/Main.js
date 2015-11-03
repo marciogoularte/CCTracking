@@ -40,10 +40,9 @@ require.config({
         //knockoutJqueryuiUtils: 'Scripts/KnockoutJqueryUI/utils',
         //knockoutJqueryuiHandler: 'Scripts/KnockoutJqueryUI/bindingHandler',z
         knockoutJqueryuiDatepicker: 'Scripts/KnockoutJqueryUI/datepicker',
-        highcharts: 'Scripts/HighCharts/highcharts.min',
-        highcharts3d: 'Scripts/HighCharts/highcharts-3d.min',
-        highchartsExport: 'Scripts/HighCharts/exporting.min',
-        jsPDF: 'Scripts/JSPdf/jspdf.min',
+        highcharts: 'Scripts/HighCharts/highcharts',
+        highcharts3d: 'Scripts/HighCharts/highcharts3d',
+        highchartsExport: 'Scripts/HighCharts/highchartsExport',
         accounting: 'Scripts/AccountingJS/accounting.min',
         selectize: 'Scripts/Selectize/selectize.min',
         printArea: 'Scripts/PrintArea/jquery.PrintArea'
@@ -55,9 +54,7 @@ require.config({
             exports: "_"
         },
         "backbone": {
-            // These script dependencies should be loaded before loading backbone.js
             deps: ["underscore", "jquery"],
-            // Once loaded, use the global "Backbone" as the module value.
             exports: "Backbone"
         },
         "marionette": {
@@ -92,16 +89,13 @@ require.config({
         },
         "highcharts": {
             deps: ["jquery"],
-            exports: "highcharts"
+            exports: "Highcharts"
         },
         "highcharts3d": {
             deps: ["jquery", "highcharts"]
         },
         "highchartsExport": {
             deps: ["jquery", "highcharts"]
-        },
-        "jsPDF": {
-            deps: ["jquery"]
         },
         "accounting": {
             deps: ["jquery"]
@@ -117,19 +111,20 @@ require.config({
 
 require([
     "jquery",
-    "backbone",
     "underscore",
+    "backbone",
     "marionette",
     "bootstrap",
     "jqueryUI",
     "highcharts",
     "highcharts3d",
     "highchartsExport",
-    "jsPDF",
     "accounting",
     "selectize",
     "printArea",
     "knockoutJqueryuiDatepicker",
+    "knockback",
+    "text",
     "CCTracking.WebClient/App"
 ], //function ($, Backbone, _, Marionette) {
 //    //console.log('ddddd');

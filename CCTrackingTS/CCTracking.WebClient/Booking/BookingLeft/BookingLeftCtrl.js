@@ -6,18 +6,16 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "../../App", "../../Helper", "./BookingLeftView", "../../Dtos/BookingLeftDto", "../../DAL/BookingLeft", "../../DAL/ReceiptContent", "../BookingCtrl", "marionette", "jquery", "knockout", "text!./BookingLeftTmpl.html", "jsPDF", "printArea"], function(require, exports, application, helper, views, dto, DAL, RDAL, bookingCtrl) {
+define(["require", "exports", "../../App", "../../Helper", "./BookingLeftView", "../../Dtos/BookingLeftDto", "../../DAL/BookingLeft", "../../DAL/ReceiptContent", "../BookingCtrl", "marionette", "jquery", "knockout", "text!./BookingLeftTmpl.html", "printArea"], function(require, exports, application, helper, views, dto, DAL, RDAL, bookingCtrl) {
     /// <amd-dependency path="marionette"/>
     /// <amd-dependency path="jquery"/>
     /// <amd-dependency path="knockout"/>
     /// <amd-dependency path="text!./BookingLeftTmpl.html"/>
-    /// <amd-dependency path="jsPDF"/>
     /// <amd-dependency path="printArea"/>
     var _ = require("underscore");
     var ko = require("knockout");
     var kb = require("knockback");
 
-    var jsPDF = require('jsPDF');
     var printArea = require('printArea');
 
     var BookingLeftCtrl = (function (_super) {
@@ -187,33 +185,6 @@ define(["require", "exports", "../../App", "../../Helper", "./BookingLeftView", 
                 _this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
                 _this.app.ModalAlertRegion.close();
             });
-        };
-
-        BookingLeftCtrl.prototype.ExportToPdf = function (printSelector) {
-            //debugger;
-            var pdf = new jsPDF('p', 'pt', 'a4');
-
-            //var source = this.$el.find('#ReceiptLayout')[0];
-            var source = printSelector;
-
-            //, specialElementHandlers = {
-            //    '#bypassme': function (element, renderer) {
-            //        return true;
-            //    }
-            //}
-            var margins = {
-                top: 20,
-                bottom: 60,
-                left: 20,
-                width: 522
-            };
-            pdf.fromHTML(source, margins.left, margins.top, {
-                'width': margins.width
-            }, function (dispose) {
-                // dispose: object with X, Y of the last line add to the PDF
-                //          this allow the insertion of new lines after html
-                pdf.save('CCTRacking-Receipt.pdf');
-            }, margins);
         };
         return BookingLeftCtrl;
     })(helper.Controller);
