@@ -7,3 +7,18 @@ node CCTracking.WebClient.Optimized/r.js -o app.build.js
 
 node ../CCTracking.WebClient.Optimized/r.js -o name=main out=main-built.js baseUrl=./
 
+
+
+Optimized file can be found in following location;
+1- 
+C:\LiveProjects\SourceCode\CCTrackingTS\CCTrackingTS\Build\app-release\CCTracking.WebClient
+appAdmin.js ====app.admin.js
+appMain.js======app.main.js
+Main.js=====app.common.js
+
+2- copy above files into Build Folder
+
+
+
+
+

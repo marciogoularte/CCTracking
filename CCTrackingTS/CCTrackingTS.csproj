@@ -355,6 +355,7 @@
     <Content Include="Content\DataTables-1.10.0\swf\copy_csv_xls_pdf.swf" />
     <Content Include="Content\datepicker.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Images\AkwsLogo.png" />
     <Content Include="Content\Images\bus.jpg" />
     <Content Include="Content\Images\progressbar.gif" />
     <Content Include="Content\jquery-PrintArea.css" />
