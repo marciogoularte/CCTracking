@@ -168,9 +168,12 @@ define(["require", "exports", "../../App", "../../Helper", "./BookingLeftView", 
             var collection = _.map(response["receiptContentList"], function (item) {
                 var aDate = new Date(item.printDateTime);
                 var appObj = _this.app.request("AppGlobalSetting");
-
+                var currentHours = aDate.getHours().toString();
+                var currentMinutes = aDate.getMinutes().toString();
+                currentHours = ("0" + currentHours).slice(-2);
+                currentMinutes = ("0" + currentMinutes).slice(-2);
                 item.bookingDate = helper.FormatDateString(item.bookingDate);
-                item.printDateTime = helper.FormatDateString(item.printDateTime) + '    ' + aDate.getHours() + ':' + aDate.getMinutes();
+                item.printDateTime = helper.FormatDateString(item.printDateTime) + '    ' + currentHours + ':' + currentMinutes;
                 item.bookingAmount = helper.FormatMoney(item.bookingAmount);
                 item.userName = appObj.get("FirstName") + ',' + appObj.get("LastName");
                 return item;
@@ -182,7 +185,7 @@ define(["require", "exports", "../../App", "../../Helper", "./BookingLeftView", 
 
             this.app.ModalAlertRegion.show(receiptView);
             receiptView.on("Event-PrintPDFReceipt", function () {
-                _this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
+                //this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
                 _this.app.ModalAlertRegion.close();
             });
         };

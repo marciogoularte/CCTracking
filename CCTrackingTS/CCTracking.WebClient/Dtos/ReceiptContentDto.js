@@ -24,7 +24,23 @@ define(["require", "exports", "backbone"], function(require, exports) {
                     bookingDate: "",
                     bookingAmount: "",
                     userName: "",
-                    printDateTime: ""
+                    printDateTime: "",
+                    contactMobile: "",
+                    contactCnic: "",
+                    deseasedName: "",
+                    deseasedAge: "",
+                    causeOfDeath: "",
+                    address: "",
+                    busPoint: "",
+                    pickupTime: "",
+                    driverName: "",
+                    driverContact: "",
+                    referralDetail: "",
+                    bookingCentre: "",
+                    namazEJanazaHeldIn: "",
+                    initialReading: "",
+                    finalReading: "",
+                    graveyard: ""
                 };
             };
             return ReceiptContentDto;

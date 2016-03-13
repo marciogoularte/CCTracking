@@ -1,29 +1,28 @@
-﻿
-
-<div>
+﻿<div>
 
     <script type="text/html" id="ReceiptTemplate">
+        
+            <div>
+                <button id="btnExportPdf" type="button" class="jsExportPdf btn btn-default" style="display: none">Export to Pdf</button>
+            </div>
 
-        <div>
-            <button id="btnExportPdf" type="button" class="jsExportPdf btn btn-default" style="display: none">Export to Pdf</button></div>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header btn-primary">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-file-pdf-o">&nbsp;</i> PRINT RECEIPT LAYOUT</h4>
-                </div>
-                <div class="modal-body modalBody" id="ModalBody">
-                    <div id="ItemContainer"></div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="jsPrintDocument btn btn-default" title="Print Receipt">Print</button>
-                    <button type="button" class="jsPDFReceipt btn btn-default" style="display: none">Export to Pdf</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal" title="Close">Close</button>
+            <div class="modal-dialog receipt-dialog">
+                <div class="modal-content">
+                    <div class="modal-header btn-primary">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-file-pdf-o">&nbsp;</i> PRINT RECEIPT LAYOUT</h4>
+                    </div>
+                    <div class="modal-body modalBody " id="ModalBody">
+                        <div id="ItemContainer"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="jsPrintDocument btn btn-default" title="Print Receipt">Print</button>
+                        <button type="button" class="jsPDFReceipt btn btn-default" style="display: none">Export to Pdf</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" title="Close">Close</button>
+                    </div>
                 </div>
             </div>
-        </div>
-
+       
 
 
     </script>
@@ -31,29 +30,124 @@
     <!-- Starts Booking Receipt Layout-->
     <script type="text/html" id="ReceiptContainer">
         <div id="ReceiptLayout" class="PrintArea row">
-            
+
             <table class="table table-condensed table-removeTopBorder table-hover form-group">
                 <tr>
-                    <td colspan="2">
+                    <td>
                         <table class="table table-condensed table-removeTopBorder form-group">
                             <tr>
-                                <td colspan="2"> <img src="Content/Images/AkwsLogo.png" alt="Alkhidmat Logo" title="ALKHIDMAT KARACHI" height="96px" width="80px" /></td>
-                                <td colspan="2" class="input-sm text-center input-lg">Al-Khidmat Coffin Carrier Tracking System<br/>
-                                    <span class="input-sm text-center" >Head Office – 30/1 C-1 Area Liaquatabad, Karachi</span> 
-                                </td>                    
-                        </tr>
-                    </table>
-                    </td>
-                </tr>   
+                                <td class="col-sm-2">
+                                    <img src="Content/Images/AkwsLogo.png" alt="Alkhidmat Logo" title="ALKHIDMAT KARACHI" height="96px" width="80px" /></td>
+                                <td class="input-sm col-sm-10 text-center input-lg">Al-Khidmat Coffin Carrier Tracking System<br />
+                                    <span class="input-sm text-center">Head Office – 30/1 C-1 Area Liaquatabad, Karachi</span>
+                                    <br />
+                                    <span class="input-sm text-center">Contact: 021-34897878, 0331-1334758</span>
 
-                <!--<tr>
-                    <td colspan="2">  <img src="Content/Images/AkwsLogo.png" alt="Alkhidmat Logo" height="16px" width="16px" /></td>
-                    <td colspan="2" class="input-sm text-center input-lg">Al-Khidmat Coffin Carrier Tracking System</td>                    
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="input-sm text-center" >Head Office – 30/1 C-1 Area Liaquatabad, Karachi</td>
-                </tr>-->
-                <tr>
+                    <td>
+                        <table class="table table-condensed table-removeTopBorder table-hover form-group">
+                            <tr>
+                                <td class="input-sm col-sm-2">Receipt No</td>
+                                <td class=" input-sm col-sm-3"><%=bookingReceipt%></td>
+                                <td class=" input-sm col-sm-1">&nbsp;</td>
+                                <td class=" input-sm col-sm-1">&nbsp;</td>
+                                <td class="input-sm col-sm-2">Date</td>
+                                <td class="input-sm col-sm-3"><%=printDateTime%></td>
+                            </tr>
+                            <tr>
+                                <td class="input-sm col-sm-2">Centre</td>
+                                <td class="input-sm col-sm-3"><%=bookingCentre%></td>
+                                <td class=" input-sm col-sm-1">&nbsp;</td>
+                                <td class=" input-sm col-sm-2">&nbsp;</td>
+                                <td class="input-sm col-sm-2">Booking Date</td>
+                                <td class=" input-sm col-sm-2"><%=bookingDate%></td>
+                            </tr>
+                            <tr>
+                                <td class="input-sm col-sm-2">Driver Name </td>
+                                <td class="input-sm col-sm-6" colspan="2"><%=driverName%> (<%=driverContact%>)</td>
+                                <td class="input-sm col-sm-1">Graveyard</td>
+                                <td class="input-sm col-sm-3" colspan="2"><%=graveyard%></td>
+                            </tr>
+                            <tr>
+                                <td class="input-sm col-sm-2">Bus Point</td>
+                                <td class="input-sm col-sm-10" colspan="5"><%=namazEJanazaLocation%></td>
+                            </tr>
+                            <tr>
+                                <td class="input-sm col-sm-2">Pick Up Time  </td>
+                                <td class="input-sm col-sm-2"><%=pickupTime%></td>
+                                <td class="input-sm col-sm-2">Prayer</td>
+                                <td class="input-sm col-sm-2"><%=namazEJanazaHeldIn%></td>
+                                <td class="input-sm col-sm-2">Readings</td>
+                                <td class="input-sm col-sm-2" colspan="2"><%=initialReading%> - <%=finalReading%> Km</td>
+                            </tr>
+                            <tr>
+                                <td class="input-sm col-sm-12" colspan="6"><hr/></td>
+                            </tr>
+                            <tr>
+                                <td class="input-sm col-sm-2">Name</td>
+                                <td class="input-sm col-sm-10" colspan="5"><%=contactName%></td>                                
+                            </tr>
+                            <tr>
+                                <td class="input-sm col-sm-2">Cell No</td>
+                                <td class="input-sm col-sm-4" colspan="2"><%=contactMobile%></td>
+                                <td class="input-sm col-sm-2">CNIC</td>
+                                <td class="input-sm col-sm-4" colspan="2"><%=contactCnic%></td>
+                            </tr>
+                            <tr>
+                                <td class="input-sm col-sm-12" colspan="6"><hr/></td>
+                            </tr>
+                            <tr>
+                                <td class="input-sm col-sm-2">Deceased</td>
+                                <td class="input-sm col-sm-5" colspan="3"><%=deseasedName%></td>                                
+                                <td class="input-sm col-sm-2">Death Cause</td>
+                                <td class="input-sm col-sm-3"><%=causeOfDeath%></td>
+                            </tr>
+                            <tr>
+                                <td class="input-sm col-sm-2">H/No</td>
+                                <td class="input-sm col-sm-7" colspan="3"><%=address%></td>
+                                <td class="input-sm col-sm-1">Age</td>
+                                <td class="input-sm col-sm-2" colspan="2"><%=deseasedAge%> year(s)</td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="input-sm col-sm-2">Referral Details</td>
+                                <td class="input-sm col-sm-3" colspan="5"><%=referralName%><br/><%=referralDetail%></td>
+                            </tr>
+                            <tr>
+                                <td class="input-sm col-sm-2">Other Details</td>
+                                <td class="input-sm col-sm-3" colspan="5"><%=otherDetail%></td>
+                            </tr>
+                            <tr>
+                                <td class="input-sm col-sm-12" colspan="6"><hr/></td>
+                            </tr>
+                            <tr>
+                                
+                                <td class="input-sm col-sm-2">Total Amount</td>
+                                <td class="input-sm col-sm-2"><%=bookingAmount%></td>
+                                <td class="input-sm col-sm-4" colspan="2">Amount Received __________________________</td>
+                                <td class="input-sm col-sm-4" colspan="2">Balance Due __________________________</td>
+                                
+
+                            </tr>
+                            <tr>
+                                <td class="input-sm col-sm-2">Generated By</td>
+                                <td class="input-sm col-sm-3"><%=userName%></td>
+                                <td class=" input-sm col-sm-1">&nbsp;</td>
+                                <td class=" input-sm col-sm-2">&nbsp;</td>
+                                <td class="input-sm col-sm-4" colspan="2">Signature     _____________________________</td>
+                                
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+
+                <!--                <tr>
                     <td colspan="2" class="input-sm text-center input-md">Cash Receipt</td>
                 </tr>
                 <tr>
@@ -105,10 +199,10 @@
                 <tr>
                     <td class="input-sm">Generated By: <%=userName%></td>
                     <td class="text-right input-sm">Signed By___________</td>
-                </tr>
+                </tr>-->
 
 
-                </table>
+            </table>
 
         </div>
     </script>

@@ -342,6 +342,18 @@ namespace CCTracking.DAL
         {
             return DateTime.Today.Add(new TimeSpan(-NoOfDaysSetting, 0, 0, 0));
         }
+
+        public bool ColumnExists(IDataReader reader, string columnName)
+        {
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                if (reader.GetName(i) == columnName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     public static class DataReaderExt

@@ -610,7 +610,7 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>node $(ProjectDir)CCTracking.WebClient.Optimized/r.js -o $(ProjectDir)app.build.js
+    <PostBuildEvent>
 
 </PostBuildEvent>
   </PropertyGroup>

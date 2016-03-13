@@ -154,14 +154,7 @@ define(["require", "exports", "../../App", "../../Helper", "text!CCTracking.WebC
     var ReceiptLayoutItemView = (function (_super) {
         __extends(ReceiptLayoutItemView, _super);
         function ReceiptLayoutItemView(options) {
-            //this.template = receiptLayoutView.getOuterHTML("#ReceiptTemplate");
             this.template = receiptLayoutView.getOuterHTML("#ReceiptContainer");
-
-            //this.events = {
-            //    "click .jsPrintReceipt": () => {
-            //        alert('print');
-            //    }
-            //}
             _super.call(this, options);
         }
         return ReceiptLayoutItemView;

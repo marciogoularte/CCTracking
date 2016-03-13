@@ -130,15 +130,10 @@ export class ReceiptLayoutCollectionView extends helper.Views.CompositeView {
 
 export class ReceiptLayoutItemView extends helper.Views.ItemView {
     constructor(options?) {
-        //this.template = receiptLayoutView.getOuterHTML("#ReceiptTemplate");
         this.template = receiptLayoutView.getOuterHTML("#ReceiptContainer");
-        //this.events = {
-        //    "click .jsPrintReceipt": () => {
-        //        alert('print');
-        //    }
-        //}
         super(options);
     }
+    
     //ExportToPdf() {
     //    var pdf = new jsPDF('p', 'pt', 'letter');
     //    var source = this.$el.find('#ReceiptLayout')[0];

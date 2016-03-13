@@ -179,13 +179,15 @@ export class BookingLeftCtrl extends helper.Controller {
     }
 
     GetReceiptContentCompleted(response) {
-        
         var collection = _.map(response["receiptContentList"], (item) => {
             var aDate = new Date(item.printDateTime);
             var appObj = this.app.request("AppGlobalSetting");
-
+            var currentHours = aDate.getHours().toString();
+            var currentMinutes = aDate.getMinutes().toString();
+            currentHours = ("0" + currentHours).slice(-2);
+            currentMinutes = ("0" + currentMinutes).slice(-2);
             item.bookingDate = helper.FormatDateString(item.bookingDate);
-            item.printDateTime = helper.FormatDateString(item.printDateTime) + '    ' + aDate.getHours() + ':' + aDate.getMinutes();
+            item.printDateTime = helper.FormatDateString(item.printDateTime) + '    ' + currentHours + ':' + currentMinutes;
             item.bookingAmount = helper.FormatMoney(item.bookingAmount);
             item.userName = appObj.get("FirstName") + ',' + appObj.get("LastName");
             return item;
@@ -197,7 +199,7 @@ export class BookingLeftCtrl extends helper.Controller {
        
 
         this.app.ModalAlertRegion.show(receiptView); receiptView.on("Event-PrintPDFReceipt", () => {
-            this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
+            //this.ExportToPdf(receiptView.$el.find('#ReceiptLayout')[0]);
             this.app.ModalAlertRegion.close();
         });
     }  

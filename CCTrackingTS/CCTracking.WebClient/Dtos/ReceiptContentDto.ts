@@ -8,14 +8,29 @@ export module Models {
         default() {
             return {
                 bookingId: "",
-                centreDesc:"",
+                centreDesc: "",
                 contactName: "",
                 bookingReceipt: "",
                 bookingDate: "",
                 bookingAmount: "",
                 userName: "",
-                printDateTime: ""
-
+                printDateTime: "",
+                contactMobile: "",
+                contactCnic: "",
+                deseasedName: "",
+                deseasedAge: "",
+                causeOfDeath: "",
+                address: "",
+                busPoint: "",
+                pickupTime: "",
+                driverName: "",
+                driverContact: "",
+                referralDetail: "",
+                bookingCentre: "",
+				namazEJanazaHeldIn : "",
+				initialReading:"",
+				finalReading:"",
+				graveyard:""
             };
         }
     }
