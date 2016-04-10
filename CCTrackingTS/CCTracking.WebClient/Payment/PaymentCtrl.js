@@ -224,9 +224,11 @@ define(["require", "exports", "../App", "../Helper", "./PaymentView", "CCTrackin
             var busExist = this.backboneCollection.findWhere({ busId: bus.id });
             var driverExist = this.backboneCollection.findWhere({ driverId: driver.id });
 
-            if (busExist != undefined && driverExist != undefined) {
+            //if (busExist != undefined && driverExist != undefined) {
+            if (busExist != undefined) {
                 var arr = _.map(this.backboneCollection.models, function (item) {
-                    if (item.get("busId") == bus.id && item.get("driverId") == driver.id) {
+                    //if (item.get("busId") == bus.id && item.get("driverId") == driver.id) {
+                    if (item.get("busId") == bus.id) {
                         item.set("centreId", alkhidmatCentre.id);
                         item.set("centreDesc", alkhidmatCentre.description);
                         item.set("busId", bus.id);

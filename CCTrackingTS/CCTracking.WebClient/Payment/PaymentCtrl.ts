@@ -211,9 +211,11 @@ export class PaymentCtrl extends helper.Controller {
         var driverExist = this.backboneCollection.findWhere({ driverId: driver.id });
         
 
-        if (busExist != undefined && driverExist != undefined) {
+        //if (busExist != undefined && driverExist != undefined) {
+        if (busExist != undefined ) {
            var arr = _.map(this.backboneCollection.models, (item) => {
-                if (item.get("busId") == bus.id && item.get("driverId") == driver.id) {
+                //if (item.get("busId") == bus.id && item.get("driverId") == driver.id) {
+               if (item.get("busId") == bus.id ) {
                     item.set("centreId",alkhidmatCentre.id);
                     item.set("centreDesc",alkhidmatCentre.description);
                     item.set("busId", bus.id);
